@@ -6,7 +6,7 @@
 \alias{tiltIndicatorAfter-package}
 \title{tiltIndicatorAfter: Create user facing outputs of tiltIndicators}
 \description{
-Create user facing outputs of tiltIndicators
+Create user facing outputs of tiltIndicators.
 }
 \author{
 \strong{Maintainer}: Kalash Singhal \email{kalash@2degrees-investing.org} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})

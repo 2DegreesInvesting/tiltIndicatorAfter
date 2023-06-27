@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Kalash", "Singhal", , "kalash@2degrees-investing.org", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Create user facing outputs of tiltIndicators
+Description: Create user facing outputs of tiltIndicators.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
