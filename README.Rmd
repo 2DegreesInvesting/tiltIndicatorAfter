@@ -1,8 +1,5 @@
 ---
-title: "README"
-author: "Kalash"
-date: "2023-06-27"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +24,5 @@ devtools::install_github("2DegreesInvesting/tiltIndicatorAfter")
 ## Example
 
 ```{r}
-library(tiltIndicatorAfter)
-
-packageVersion("tiltIndicatorAfter")
+## Example
 ```
