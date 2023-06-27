@@ -1,0 +1,31 @@
+companies_id,grouped_by,risk_category,clustered,activity_uuid_product_uuid,co2_footprint
+id1,all,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,311.594551549007
+id1,isic_sec,medium,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,311.594551549007
+id1,tilt_sec,low,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,311.594551549007
+id1,unit,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,311.594551549007
+id1,unit_isic_sec,medium,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,311.594551549007
+id1,unit_tilt_sec,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,311.594551549007
+id1,all,medium,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,4.52566290571962
+id1,isic_sec,medium,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,4.52566290571962
+id1,tilt_sec,medium,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,4.52566290571962
+id1,unit,high,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,4.52566290571962
+id1,unit_isic_sec,medium,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,4.52566290571962
+id1,unit_tilt_sec,medium,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,4.52566290571962
+id2,all,low,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,0.0241561238326305
+id2,isic_sec,high,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,0.0241561238326305
+id2,tilt_sec,low,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,0.0241561238326305
+id2,unit,medium,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,0.0241561238326305
+id2,unit_isic_sec,high,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,0.0241561238326305
+id2,unit_tilt_sec,medium,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,0.0241561238326305
+id2,all,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,16.7647948449248
+id2,isic_sec,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,16.7647948449248
+id2,tilt_sec,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,16.7647948449248
+id2,unit,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,16.7647948449248
+id2,unit_isic_sec,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,16.7647948449248
+id2,unit_tilt_sec,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,16.7647948449248
+id3,all,NA,NA,NA,NA
+id3,isic_sec,NA,NA,NA,NA
+id3,tilt_sec,NA,NA,NA,NA
+id3,unit,NA,NA,NA,NA
+id3,unit_isic_sec,NA,NA,NA,NA
+id3,unit_tilt_sec,NA,NA,NA,NA

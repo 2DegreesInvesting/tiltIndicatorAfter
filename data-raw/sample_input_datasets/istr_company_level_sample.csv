@@ -1,0 +1,37 @@
+companies_id,type,scenario,year,risk_category,value
+id1,ipr,1.5c rps,2030,high,0.2195121951219512
+id1,ipr,1.5c rps,2030,medium,0.7804878048780491
+id1,ipr,1.5c rps,2030,low,0
+id1,ipr,1.5c rps,2050,high,1.0000000000000004
+id1,ipr,1.5c rps,2050,medium,0
+id1,ipr,1.5c rps,2050,low,0
+id1,weo,nz 2050,2030,high,1.0000000000000004
+id1,weo,nz 2050,2030,medium,0
+id1,weo,nz 2050,2030,low,0
+id1,weo,nz 2050,2050,high,1.0000000000000004
+id1,weo,nz 2050,2050,medium,0
+id1,weo,nz 2050,2050,low,0
+id2,ipr,1.5c rps,2030,high,0
+id2,ipr,1.5c rps,2030,medium,0.1724137931034483
+id2,ipr,1.5c rps,2030,low,0.8275862068965515
+id2,ipr,1.5c rps,2050,high,0.9999999999999996
+id2,ipr,1.5c rps,2050,medium,0
+id2,ipr,1.5c rps,2050,low,0
+id2,weo,nz 2050,2030,high,0
+id2,weo,nz 2050,2030,medium,0.9999999999999996
+id2,weo,nz 2050,2030,low,0
+id2,weo,nz 2050,2050,high,0.9999999999999996
+id2,weo,nz 2050,2050,medium,0
+id2,weo,nz 2050,2050,low,0
+id2,NA,NA,NA,high,NA
+id2,NA,NA,NA,medium,NA
+id2,NA,NA,NA,low,NA
+id2,NA,NA,NA,high,NA
+id2,NA,NA,NA,medium,NA
+id2,NA,NA,NA,low,NA
+id3,NA,NA,NA,high,NA
+id3,NA,NA,NA,medium,NA
+id3,NA,NA,NA,low,NA
+id3,NA,NA,NA,high,NA
+id3,NA,NA,NA,medium,NA
+id3,NA,NA,NA,low,NA

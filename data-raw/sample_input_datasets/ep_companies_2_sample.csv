@@ -1,0 +1,229 @@
+companies_id,company_name,country,company_city,postcode,address,main_activity,group,sector,subsector,clustered
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,raw materials
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,"storage of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,"collection of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,waste treatment machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,waste recycling machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,waste treatment installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,waste recycling installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,container
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,business_services,environment,chemical_waste_collection_and_recycling,structural work
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,oenology_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,restaurant_equipment,restaurant equipment
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,machining
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,surface treatment
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,surface coating
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,hardware
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,building construction
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,industrial hardware
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,locks
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,bolt
+id1,company A,germany,frankfurt,60316,wittelsbacherallee 37 | 60316 frankfurt,manufacturer/ producer,metallurgy_metalworking,steel_metal_transformation,boring_steels_and_metals,keys
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,raw materials
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,"storage of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,"collection of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,waste treatment machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,waste recycling machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,waste treatment installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,waste recycling installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,container
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,construction_public_works,public_works,NA,structural work
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,raw materials
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,"storage of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,"collection of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,waste treatment machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,waste recycling machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,waste treatment installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,waste recycling installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,container
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,energy_raw_materials,raw_materials_for_construction_and_public_works,NA,structural work
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,raw materials
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,"storage of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,"collection of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,waste treatment machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,waste recycling machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,waste treatment installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,waste recycling installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,container
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,glass_construction_materials,construction_materials,NA,structural work
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,raw materials
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,"storage of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,"collection of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,waste treatment machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,waste recycling machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,waste treatment installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,waste recycling installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,container
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,mechanical_engineering_industry_equipment,waste_treatment_and_recycling_machines_and_installations,NA,structural work
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,raw materials
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,"storage of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,"collection of waste, equipment"
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,waste treatment machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,waste recycling machines
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,waste treatment installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,waste recycling installations
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,container
+id3,company C,austria,voitsberg,8570,ruhmannstrasse 1 | 8570 voitsberg,service provider,vehicles_transport_equipment,containers,NA,structural work
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,beekeeping_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,harvesting_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,agriculture_machines_equipment,milking_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,butchery_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,cafes_and_bars_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,catering_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,mechanical_engineering_industry_equipment,food_industry_machines_equipment,confectionery_machinery_and_equipment,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,NA,restaurant equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,"drinks, soft"
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,refrigeration plant
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,refrigeration equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,refridgerated display units
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,refridgerated display windows
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,hotels machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,hotel equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,bars machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,bar equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,cafés machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,cafés equipment
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,restaurants machinery
+id2,company B,germany,berlin,13353,sprengelstrasse 15 | 13353 berlin,distributor,food_related_products,drinks,soft_drinks,restaurant equipment

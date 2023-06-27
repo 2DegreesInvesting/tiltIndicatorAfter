@@ -17,4 +17,7 @@ Imports:
     tiltIndicator,
     utils
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat
+VignetteBuilder: knitr

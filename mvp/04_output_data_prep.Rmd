@@ -1,0 +1,860 @@
+---
+title: "04_output_data_prep"
+author: "Tilman"
+date: "2023-05-10"
+output: html_document
+---
+
+# Overview
+Inputs from "output_tiltIndicator" + "input_data_clean" and outputs in "04_final_outputs".
+Description: 
+This script uses as input data the output of tiltIndicator (https://2degreesinvesting.github.io/tiltIndicator/). For sample data, you can install the package and run the indicators to obtain a smaller test dataset. 
+The output this script produces are the final result dataframes of the 4 indicators (PSTR, ISTR, PCTR, ICTR). How the final dataframes are required to look, is documented here (tabs: 02-06):https://docs.google.com/spreadsheets/d/1K1thTMRg-k4DSdJy-G1RFY0islOQk70ToU3zmCKmvHM/edit#gid=1258737772 
+The following things are done to transform in- to output: 
+1. Join meta info on company (country, street, main activity, etc.) by matching with ep_companies via companies_id. 
+2. Add additional info from Ecoinvent via activity_uuid_product_uuid.
+3. Add certainty of matches via mapper_ep_ei. 
+4. Remove NA rows but keep companies_id without results with one row. This script contains these steps completely for PCTR & ICTR. For the XSTR-family, there is an additional script from Mauro that does most of the steps separately for XSTR. https://github.com/2DegreesInvesting/tiltIndicator/blob/396_Fix-xstr-outputs/data-raw/396_fix-xstr-outputs.md
+
+
+# Setup
+```{r}
+library(tidyr)
+library(here)
+library(readr)
+library(dplyr)
+
+```
+
+# Load data
+Note: run data prep for each indicator separately, otherwise it takes too much storage
+```{r}
+# required for all indicators
+ei_activities_overview_2 <- read.csv(here("input_data_clean/ei_activities_overview_2.csv"))
+ep_companies_2 <- read_csv(here("input_data_clean/ep_companies_2.csv"))
+mapper_ep_ei <- read_csv(here("input_data_clean/mapper_ep_ei.csv"))
+ei_input_data_2 <- read_csv(here("input_data_clean/ei_input_data_2.csv"))
+
+# XCTR: indicator output from tiltIndicator package
+ pctr_product_level <- read_csv(here("output_tiltIndicator/pctr_results_product_level_v2.csv"))
+ pctr_company_level <- read_csv(here("output_tiltIndicator/pctr_results_company_level_v2.csv"))
+ ictr_product_level <- read_csv(here("output_tiltIndicator/ictr_results_product_level_v2.csv"))
+ ictr_company_level <- read_csv(here("output_tiltIndicator/ictr_results_company_level_v2.csv"))
+
+# XSTR: indicator output from tiltIndicator package, after modifications with this script: https://github.com/2DegreesInvesting/tiltIndicator/blob/396_Fix-xstr-outputs/data-raw/396_fix-xstr-outputs.md 
+  # load cleaned PSTR results from: https://github.com/2DegreesInvesting/tiltIndicator/pull/397
+  pstr_product_level <- read_csv(here("output_tiltIndicator/pstr_product_level_v2_fixed.csv"))
+  pstr_company_level <- read_csv(here("output_tiltIndicator/pstr_company_level_v2_fixed.csv"))
+  istr_product_level <- read_csv(here("output_tiltIndicator/istr_product_level.csv"))
+  istr_company_level <- read_csv(here("output_tiltIndicator/istr_company_level.csv"))
+```
+
+# Prepare mapper_ep_ei for multiple matches
+The mapper indicates multiple matches with multi_match == TRUE. That means that for every combination of country, main_activity, and clustered, there are multiple matches, i.e. multiple rows. We will now aggregate these multiple rows together. 
+```{r}
+# first join activity_name, reference_product_name, and unit to mapper
+mapper_ep_ei <- mapper_ep_ei |> 
+  left_join(select(ei_activities_overview_2, activity_uuid_product_uuid, activity_name, 
+                   reference_product_name, unit), by = "activity_uuid_product_uuid")
+
+# now aggregate for multiple matches of country, main_activity, clustered
+mapper_ep_ei <- mapper_ep_ei |> 
+ group_by(country, main_activity, clustered) |> 
+  summarise(across(everything(), ~ paste0(na.omit(unique(.)), collapse = "; "))) |>
+  ungroup() |> 
+  distinct()
+
+# replace empty cells with FALSE
+mapper_ep_ei$multi_match[mapper_ep_ei$multi_match==""] <- FALSE
+
+unique(mapper_ep_ei$multi_match)
+
+# assure that "completion" column is not aggregated wrongly and still shows "low", "medium", "high"
+unique(mapper_ep_ei$completion)
+
+mapper_ep_ei |> distinct(activity_uuid_product_uuid)
+
+```
+
+
+# 1. PCTR product-level preparation
+## Joining relevant datasets
+Join via companies_id
+- postcode
+- street_name
+- country
+- main_activity
+Join via activity_uuid_product_uuid 
+- matched_activity_name
+- matched_reference_product
+Join via mapper_ep_ei
+- matching certainty
+```{r}
+# Get c("postcode", "street_name", "country", "main_activity") via "companies_id". 
+pctr_product_level_2 <- pctr_product_level |> 
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category, co2_footprint) |> 
+  distinct() 
+
+rm(pctr_product_level)
+
+# get isic_sectors (can potentially be skipped as we get most info via mapper_ep_ei in the next step)
+pctr_product_level_3 <- pctr_product_level_2 |> 
+  left_join(select(ei_activities_overview_2, activity_uuid_product_uuid, isic_4digit, 
+                   isic_4digit_name_ecoinvent, isic_section), by = "activity_uuid_product_uuid")
+
+rm(pctr_product_level_2)
+
+# get matching certainty + activity_name + reference_product_name + unit
+pctr_product_level_4 <- pctr_product_level_3 |> 
+  left_join(select(mapper_ep_ei, c(
+    "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion", "activity_name", "reference_product_name", "unit")), 
+            by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |> 
+  rename(matching_certainty = completion) |>
+  mutate(matching_certainty_num = case_when(
+    matching_certainty == "low" ~ 0, 
+    matching_certainty == "medium" ~ 0.5, 
+    matching_certainty == "high" ~ 1, 
+  ))
+
+rm(pctr_product_level_3)
+
+# create new column with company-level averages for matching_certainty
+pctr_product_level_5 <- pctr_product_level_4 |> 
+  group_by(companies_id) |>
+  mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE)) |> 
+  ungroup()
+
+rm(pctr_product_level_4)
+
+# create column with "low", "medium", "high" values for company averages
+pctr_product_level_6 <- pctr_product_level_5 |> 
+    mutate(avg_matching_certainty = ifelse(
+    avg_matching_certainty_num > 2/3, "high",
+    ifelse(avg_matching_certainty_num > 1/3, "medium", "low")
+  ))  
+
+rm(pctr_product_level_5)
+
+```
+
+## Final product-level dataframe
+```{r}
+# final order & names
+pctr_product_level_7 <- pctr_product_level_6 |> 
+  relocate(companies_id, company_name, country, risk_category, grouped_by, clustered, activity_name, reference_product_name, 
+           unit, multi_match, matching_certainty, avg_matching_certainty, 
+           co2_footprint, company_city, postcode, address, main_activity, 
+            activity_uuid_product_uuid) |>
+  rename(
+    matched_activity_name = activity_name,
+    matched_reference_product = reference_product_name,
+    matching_certainty_company_average = avg_matching_certainty, 
+    benchmark = grouped_by, 
+    PCTR_risk_category = risk_category) |> 
+  select(-isic_4digit, -isic_4digit_name_ecoinvent, -isic_section, -matching_certainty_num, -avg_matching_certainty_num, -co2_footprint) |>
+  distinct()
+
+# for companies without values in all PCTR_risk_category, delete every row except the first one
+pctr_product_level_8 <- pctr_product_level_7 |> 
+  group_by(companies_id) |>
+  mutate(has_na = all(is.na(PCTR_risk_category)), row_number = row_number()) |>
+  ungroup() |>
+  mutate(benchmark = ifelse(has_na & row_number != 1, NA, benchmark)) |>
+  select(-has_na, -row_number) |> 
+  filter(!is.na(benchmark))
+
+# now remove values in "benchmark" when "PCTR_risk_category" is NA
+pctr_product_level_final <- pctr_product_level_8 |> 
+  group_by(companies_id) |>
+  mutate(benchmark = ifelse(is.na(PCTR_risk_category), NA, benchmark)) |> 
+  ungroup() |> 
+  distinct() |> 
+  arrange(country)
+
+pctr_product_level_final <- pctr_product_level_final |> 
+  rename(ep_product = clustered)
+
+pctr_product_level_final |> filter(is.na(multi_match))
+
+#write_csv(pctr_product_level_final, here("04_final_outputs/pctr_product_level_final_v4.csv"))
+#pctr_product_level_final <- read_csv(here("04_final_outputs/pctr_product_level_final_v2.csv"))
+
+```
+
+# 2. PCTR company-level preparation
+## Joining relevant datasets
+Join column "matching_certainty" via 
+```{r}
+# create dataset containing c("companies_id", "avg_matching_certainty")
+pctr_company_avg_match_cert <- pctr_product_level_6 |> 
+  select("companies_id","company_name","company_city","country","postcode","address", "main_activity", "avg_matching_certainty") |> 
+  distinct()
+
+# join "avg_matching_certainty" to pctr_company_level via "companies_id"
+pctr_company_level_2 <- pctr_company_level |> 
+  left_join(pctr_company_avg_match_cert, by = "companies_id")
+
+```
+
+## Final company-level results
+Aligning with names & structure from: https://docs.google.com/spreadsheets/d/1K1thTMRg-k4DSdJy-G1RFY0islOQk70ToU3zmCKmvHM/edit#gid=1258737772
+```{r}
+pctr_company_level_3 <- pctr_company_level_2 |> 
+  rename(PCTR_risk_category = risk_category, 
+         benchmark = grouped_by, 
+         PCTR_share = value, 
+         matching_certainty_company_average = avg_matching_certainty) |> 
+  relocate(companies_id, company_name, company_city, country, postcode, address, main_activity, PCTR_risk_category, benchmark, PCTR_share, matching_certainty_company_average) |> 
+  distinct()
+
+# for companies without values in all ICTR_risk_category, delete every row except the first one
+pctr_company_level_4 <- pctr_company_level_3 |> 
+  group_by(companies_id) |>
+  mutate(has_na = all(is.na(PCTR_share)), row_number = row_number()) |>
+  ungroup() |>
+  mutate(benchmark = ifelse(has_na & row_number != 1, NA, benchmark)) |>
+  select(-has_na, -row_number) |> 
+  filter(!is.na(benchmark))
+
+# now remove values in "benchmark" & "PCTR_risk_category" when "PCTR_share" is NA
+pctr_company_level_5 <- pctr_company_level_4 |> 
+  group_by(companies_id) |>
+  mutate(benchmark = ifelse(all(is.na(matching_certainty_company_average)), NA, benchmark)) |>
+  mutate(PCTR_risk_category = ifelse(all(is.na(matching_certainty_company_average)), NA, PCTR_risk_category)) |>
+  ungroup() |> 
+  distinct()
+
+pctr_company_level_5 <- pctr_company_level_4 |> 
+  mutate(PCTR_risk_category = ifelse(is.na(matching_certainty_company_average), NA, PCTR_risk_category),
+         benchmark = ifelse(is.na(matching_certainty_company_average), NA, benchmark))
+
+# test: does every companies_id either appear 1 or 18 times? 
+test <- pctr_company_level_5 |> 
+  group_by(companies_id) |> 
+  filter(n() > 1 & n() < 18) |> 
+  select(companies_id)
+
+# re-order columns
+pctr_company_level_final <- pctr_company_level_5 |> 
+  relocate(companies_id, company_name, country, PCTR_share, PCTR_risk_category, 
+           benchmark, matching_certainty_company_average, company_city, postcode, 
+           address, main_activity) |> 
+  arrange(companies_id)
+
+#write_csv(pctr_company_level_final, here("04_final_outputs/pctr_company_level_final_v4.csv"))
+
+```
+
+##########################################################################################################
+
+# 3. ICTR product-level preparation
+## Joining relevant datasets
+Join via companies_id
+- postcode
+- street_name
+- country
+- main_activity
+Join via activity_uuid_product_uuid 
+- matched_activity_name
+- matched_reference_product
+Join via mapper_ep_ei
+- matching certainty
+```{r}
+# prep of smaller inputs table for join
+ei_inputs_small <- ei_input_data_2 |> 
+  select(input_activity_uuid_product_uuid, exchange_name, exchange_unit_name) |> 
+  distinct()
+
+# # get c("activity_name", "unit") for inputs
+ictr_product_level_2 <- ictr_product_level |> 
+  left_join(select(ei_inputs_small, input_activity_uuid_product_uuid, exchange_name, exchange_unit_name), by = "input_activity_uuid_product_uuid")|>
+  distinct()
+
+rm(ei_input_data_2)
+
+# remove "input_activity_uuid_product_uuid" and remove duplicates to reduce size
+ictr_product_level_3 <- ictr_product_level_2 |> 
+  select(-input_activity_uuid_product_uuid, -input_co2_footprint) |> 
+  distinct()
+
+rm(ictr_product_level)
+rm(ictr_product_level_2)
+
+```
+
+## join with ep_companies_2 in chunks
+```{r}
+chunks <- 4
+chunked <- ictr_product_level_3 %>% mutate(chunk = as.integer(cut(row_number(), chunks)))
+
+chunk_1 <- filter(chunked, chunk == 1)
+chunk_2 <- filter(chunked, chunk == 2)
+chunk_3 <- filter(chunked, chunk == 3)
+chunk_4 <- filter(chunked, chunk == 4)
+
+# Get c("postcode", "street_name", "country", "main_activity") via "companies_id". 
+ictr_product_level_4.1 <- chunk_1 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(ictr_product_level_4.1, here("04_final_outputs/temp/ictr_product_level_4.1.csv"))
+
+
+ictr_product_level_4.2 <- chunk_2 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(ictr_product_level_4.2, here("04_final_outputs/temp/ictr_product_level_4.2.csv"))
+
+
+ictr_product_level_4.3 <- chunk_3 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(ictr_product_level_4.3, here("04_final_outputs/temp/ictr_product_level_4.3.csv"))
+
+
+ictr_product_level_4.4 <- chunk_4 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(ictr_product_level_4.4, here("04_final_outputs/temp/ictr_product_level_4.4.csv"))
+
+```
+
+
+# ANCHOR point: bind datasets together
+```{r}
+ictr_product_level_4.1 <- read_csv(here("04_final_outputs/temp/ictr_product_level_4.1.csv"))
+ictr_product_level_4.2 <- read_csv(here("04_final_outputs/temp/ictr_product_level_4.2.csv"))
+ictr_product_level_4.3 <- read_csv(here("04_final_outputs/temp/ictr_product_level_4.3.csv"))
+ictr_product_level_4.4 <- read_csv(here("04_final_outputs/temp/ictr_product_level_4.4.csv"))
+
+ictr_product_level_4 <- bind_rows(ictr_product_level_4.1, ictr_product_level_4.2, ictr_product_level_4.3, ictr_product_level_4.4)
+
+
+rm(ictr_product_level_3)
+rm(ictr_product_level_4.1)
+rm(ictr_product_level_4.2)
+rm(ictr_product_level_4.3)
+rm(ictr_product_level_4.4)
+rm(chunk_1)
+rm(chunk_2)
+rm(chunk_3)
+rm(chunk_4)
+rm(chunked)
+```
+
+
+## additional joins
+```{r}
+# get c("matched_activity_name", "unit", sectors) for matched products
+ictr_product_level_5 <- ictr_product_level_4 |> 
+  left_join(ei_activities_overview_2, by = "activity_uuid_product_uuid") 
+
+rm(ictr_product_level_4)
+
+ictr_product_level_6 <- ictr_product_level_5 |> 
+  left_join(select(mapper_ep_ei, c(
+    "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")), 
+            by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |> 
+  rename(matching_certainty = completion) |>
+  mutate(matching_certainty_num = case_when(
+    matching_certainty == "low" ~ 0, 
+    matching_certainty == "medium" ~ 0.5, 
+    matching_certainty == "high" ~ 1, 
+  )) |> 
+  distinct()
+
+rm(ictr_product_level_5)
+
+# create new column with company-level averages for matching_certainty
+ictr_product_level_7 <- ictr_product_level_6 |> 
+  group_by(companies_id) |>
+  mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE)) |> 
+  ungroup()
+
+rm(ictr_product_level_6)
+
+# create column with "low", "medium", "high" values for company averages
+ictr_product_level_8 <- ictr_product_level_7 |> 
+    mutate(avg_matching_certainty = ifelse(
+    avg_matching_certainty_num > 2/3, "high",
+    ifelse(avg_matching_certainty_num > 1/3, "medium", "low")
+  ))
+
+rm(ictr_product_level_7)
+
+
+```
+
+## Final product-level dataframe
+```{r}
+
+ictr_product_level_9 <- ictr_product_level_8 |> 
+  relocate(companies_id, company_name, country, risk_category, grouped_by, clustered, activity_name, 
+           reference_product_name , unit, multi_match, matching_certainty, 
+           avg_matching_certainty, exchange_name, exchange_unit_name, company_city, postcode, address, 
+           main_activity, activity_uuid_product_uuid) |>
+  rename(
+    matched_activity_name = activity_name, 
+    matched_reference_product = reference_product_name, 
+    matching_certainty_company_average = avg_matching_certainty, 
+    benchmark = grouped_by, 
+    ICTR_risk_category = risk_category, 
+    input_name = exchange_name, 
+    input_unit = exchange_unit_name) |> 
+  select(-isic_4digit, -isic_4digit_name_ecoinvent, -isic_section, -matching_certainty_num, -avg_matching_certainty_num) |>
+  distinct() |> 
+  arrange(country)
+
+# for companies without values in all ICTR_risk_category, delete every row except the first one
+ictr_product_level_10 <- ictr_product_level_9 |> 
+  group_by(companies_id) |>
+  mutate(has_na = all(is.na(ICTR_risk_category)), row_number = row_number()) |>
+  ungroup() |>
+  mutate(benchmark = ifelse(has_na & row_number != 1, NA, benchmark)) |>
+  select(-has_na, -row_number) |> 
+  filter(!is.na(benchmark))
+
+# now remove values in "benchmark" when "ICTR_risk_category" is NA
+ictr_product_level_final <- ictr_product_level_10 |> 
+  group_by(companies_id) |>
+  mutate(benchmark = ifelse(is.na(ICTR_risk_category), NA, benchmark)) |> 
+  distinct() 
+
+ictr_product_level_final <- ictr_product_level_final |> 
+  rename(ep_product = clustered) |> 
+  select(-chunk)
+
+
+#write_csv(ictr_product_level_final, here("04_final_outputs/ictr_product_level_final_v4.csv"))
+#ictr_product_level_final <- read_csv(here("04_final_outputs/ictr_product_level_final_v4.csv"))
+
+rm(ictr_product_level_8)
+rm(ictr_product_level_9)
+rm(ictr_product_level_10)
+
+```
+
+# 4. ICTR company-level preparation
+## Joining relevant datasets
+Join column "matching_certainty" via 
+```{r}
+# create dataset containing c("companies_id", "avg_matching_certainty")
+ictr_companies_avg_match_cert <- ictr_product_level_final |> 
+  select("companies_id","company_name","company_city","country","postcode",
+         "address", "main_activity", "matching_certainty_company_average") |> 
+  distinct()
+
+# join "avg_matching_certainty" to ictr_company_level via "companies_id"
+ictr_company_level_2 <- ictr_company_level |> 
+  left_join(ictr_companies_avg_match_cert, by = "companies_id")
+
+```
+
+## Final company-level results
+Aligning with names & structure from: https://docs.google.com/spreadsheets/d/1K1thTMRg-k4DSdJy-G1RFY0islOQk70ToU3zmCKmvHM/edit#gid=1258737772
+```{r}
+ictr_company_level_3 <- ictr_company_level_2 |> 
+  rename(ICTR_risk_category = risk_category, 
+         benchmark = grouped_by, ICTR_share = value) |> 
+  relocate(companies_id, company_name, company_city, country, ICTR_share, 
+           ICTR_risk_category, benchmark, matching_certainty_company_average, 
+           postcode, address, main_activity)|>
+  distinct()
+
+# for companies without values in all ICTR_risk_category, delete every row except the first one
+ictr_company_level_4 <- ictr_company_level_3 |> 
+  group_by(companies_id) |>
+  mutate(has_na = all(is.na(ICTR_share)), row_number = row_number()) |>
+  ungroup() |>
+  mutate(benchmark = ifelse(has_na & row_number != 1, NA, benchmark)) |>
+  select(-has_na, -row_number) |> 
+  filter(!is.na(benchmark))
+
+# now remove values in "benchmark" when "ICTR_risk_category" is NA
+ictr_company_level_final <- ictr_company_level_4 |> 
+  mutate(benchmark = ifelse(is.na(ICTR_share), NA, benchmark)) |>
+  mutate(ICTR_risk_category = ifelse(is.na(ICTR_share), NA, ICTR_risk_category)) |>
+  distinct()
+
+#write_csv(ictr_company_level_final, here("04_final_outputs/ictr_company_level_final_v4.csv"))
+
+```
+
+# 5. PSTR product-level results
+## cleaning from NAs
+```{r}
+no_NAs <- pstr_product_level |>
+  filter(!is.na(risk_category)) 
+
+# select company ids where all `risk_category` is only `NA`
+ids <- pstr_product_level |>
+  group_by(companies_id) |>
+  filter(all(is.na(risk_category))) |>
+  distinct(companies_id)
+
+pstr_product_level <- bind_rows(no_NAs, ids)
+```
+
+## Joining relevant datasets
+Join via companies_id
+- postcode
+- street_name
+- country
+- main_activity
+Join via activity_uuid_product_uuid 
+- matched_activity_name
+- matched_reference_product
+Join via mapper_ep_ei
+- matching certainty
+```{r}
+# Get c("postcode", "street_name", "country", "main_activity") via "companies_id". 
+pstr_product_level_2 <- pstr_product_level |> 
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+rm(pstr_product_level)
+
+# get isic_sectors (can potentially be skipped as we get most info via mapper_ep_ei in the next step)
+pstr_product_level_3 <- pstr_product_level_2 |> 
+  left_join(select(ei_activities_overview_2, activity_uuid_product_uuid, activity_name, reference_product_name, isic_4digit, 
+                   isic_4digit_name_ecoinvent, isic_section, unit), by = "activity_uuid_product_uuid")
+
+rm(pstr_product_level_2)
+
+# get matching certainty + activity_name + reference_product_name + unit
+pstr_product_level_4 <- pstr_product_level_3 |> 
+  left_join(select(mapper_ep_ei, c(
+    "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")), 
+            by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |> 
+  rename(matching_certainty = completion) |>
+  mutate(matching_certainty_num = case_when(
+    matching_certainty == "low" ~ 0, 
+    matching_certainty == "medium" ~ 0.5, 
+    matching_certainty == "high" ~ 1, 
+  ))
+
+rm(pstr_product_level_3)
+
+# create new column with company-level averages for matching_certainty
+pstr_product_level_5 <- pstr_product_level_4 |> 
+  group_by(companies_id) |>
+  mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE)) |> 
+  ungroup()
+
+rm(pstr_product_level_4)
+
+# create column with "low", "medium", "high" values for company averages
+pstr_product_level_6 <- pstr_product_level_5 |> 
+    mutate(avg_matching_certainty = ifelse(
+    avg_matching_certainty_num > 2/3, "high",
+    ifelse(avg_matching_certainty_num > 1/3, "medium", "low")
+  ))  
+
+rm(pstr_product_level_5)
+
+```
+
+## Final product-level dataframe
+```{r}
+# final order & names
+pstr_product_level_final <- pstr_product_level_6 |> 
+  relocate(companies_id, company_name, country, risk_category, scenario, year, clustered, activity_name, reference_product_name, 
+           unit, tilt_sector, tilt_subsector, multi_match, matching_certainty, avg_matching_certainty, company_city, postcode, address, main_activity, 
+            activity_uuid_product_uuid) |>
+  rename(
+    matched_activity_name = activity_name,
+    matched_reference_product = reference_product_name,
+    matching_certainty_company_average = avg_matching_certainty, 
+    PSTR_risk_category = risk_category, 
+    ep_product = clustered) |> 
+  select(-isic_4digit, -isic_4digit_name_ecoinvent, -isic_section, 
+         -matching_certainty_num, -avg_matching_certainty_num, -grouped_by, -type) |> 
+  mutate(scenario = ifelse(scenario == "1.5c rps", "IPR 1.5c RPS", scenario)) |> 
+  mutate(scenario = ifelse(scenario == "nz 2050", "WEO NZ 2050", scenario)) |>
+  distinct()
+
+#write_csv(pstr_product_level_final, here("04_final_outputs/pstr_product_level_final.csv"))
+#pstr_product_level_final <- read_csv(here("04_final_outputs/pstr_product_level_final.csv"))
+
+```
+
+# 6. PSTR company-level results
+## Joining relevant datasets
+Join column "matching_certainty" via 
+```{r}
+# create dataset containing c("companies_id", "avg_matching_certainty")
+pstr_company_avg_match_cert <- pstr_product_level_6 |> 
+  select("companies_id","company_name","company_city","country","postcode","address", "main_activity", "avg_matching_certainty") |>
+  distinct()
+
+# join "avg_matching_certainty" to pctr_company_level via "companies_id"
+pstr_company_level_2 <- pstr_company_level |> 
+  left_join(pstr_company_avg_match_cert, by = "companies_id") |> 
+  distinct()
+
+```
+
+## Final company-level results
+Aligning with names & structure from: https://docs.google.com/spreadsheets/d/1K1thTMRg-k4DSdJy-G1RFY0islOQk70ToU3zmCKmvHM/edit#gid=1258737772
+```{r}
+# rename and relocate
+pstr_company_level_3 <- pstr_company_level_2 |> 
+  rename(PSTR_risk_category = risk_category, 
+         PSTR_share = value, 
+         matching_certainty_company_average = avg_matching_certainty) |> 
+  mutate(scenario = ifelse(scenario == "1.5c rps", "IPR 1.5c RPS", scenario)) |> 
+  mutate(scenario = ifelse(scenario == "nz 2050", "WEO NZ 2050", scenario)) |> 
+  select(-type) |>
+  distinct()
+
+# re-order columns
+pstr_company_level_final <- pstr_company_level_3 |> 
+  relocate(companies_id, company_name, country, PSTR_share, PSTR_risk_category, 
+           scenario, year, matching_certainty_company_average, company_city, postcode, 
+           address, main_activity) |> 
+  arrange(companies_id)
+
+#write_csv(pstr_company_level_final, here("04_final_outputs/pstr_company_level_final.csv"))
+
+```
+
+# 7. ISTR product-level results
+## Joining relevant datasets
+Join via companies_id
+- postcode
+- street_name
+- country
+- main_activity
+Join via activity_uuid_product_uuid 
+- matched_activity_name
+- matched_reference_product
+Join via mapper_ep_ei
+- matching certainty
+```{r}
+# prep of smaller inputs table for join
+ei_inputs_small <- ei_input_data_2 |> 
+  select(input_activity_uuid_product_uuid, exchange_name, exchange_unit_name) |> 
+  distinct()
+
+# # get c("activity_name", "unit") for inputs
+istr_product_level_2 <- istr_product_level |> 
+  left_join(select(ei_inputs_small, input_activity_uuid_product_uuid, exchange_name, exchange_unit_name), by = "input_activity_uuid_product_uuid")|>
+  distinct()
+
+rm(ei_input_data_2)
+
+# remove "input_activity_uuid_product_uuid" and remove duplicates to reduce size
+istr_product_level_3 <- istr_product_level_2 |> 
+  select(-input_activity_uuid_product_uuid) |> 
+  distinct()
+
+rm(istr_product_level)
+rm(istr_product_level_2)
+
+```
+
+## join with ep_companies_2 in chunks
+```{r}
+chunks <- 4
+chunked <- istr_product_level_3 %>% mutate(chunk = as.integer(cut(row_number(), chunks)))
+
+chunk_1 <- filter(chunked, chunk == 1)
+chunk_2 <- filter(chunked, chunk == 2)
+chunk_3 <- filter(chunked, chunk == 3)
+chunk_4 <- filter(chunked, chunk == 4)
+
+# Get c("postcode", "street_name", "country", "main_activity") via "companies_id". 
+istr_product_level_4.1 <- chunk_1 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(istr_product_level_4.1, here("04_final_outputs/temp/istr_product_level_4.1.csv"))
+
+
+istr_product_level_4.2 <- chunk_2 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(istr_product_level_4.2, here("04_final_outputs/temp/istr_product_level_4.2.csv"))
+
+
+istr_product_level_4.3 <- chunk_3 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(istr_product_level_4.3, here("04_final_outputs/temp/istr_product_level_4.3.csv"))
+
+
+istr_product_level_4.4 <- chunk_4 |>
+  left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
+                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+  relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
+           activity_uuid_product_uuid, grouped_by, risk_category) |> 
+  distinct() 
+
+write_csv(istr_product_level_4.4, here("04_final_outputs/temp/istr_product_level_4.4.csv"))
+
+```
+
+
+# ANCHOR point: bind datasets together
+```{r}
+istr_product_level_4.1 <- read_csv(here("04_final_outputs/temp/istr_product_level_4.1.csv"))
+istr_product_level_4.2 <- read_csv(here("04_final_outputs/temp/istr_product_level_4.2.csv"))
+istr_product_level_4.3 <- read_csv(here("04_final_outputs/temp/istr_product_level_4.3.csv"))
+istr_product_level_4.4 <- read_csv(here("04_final_outputs/temp/istr_product_level_4.4.csv"))
+
+istr_product_level_4 <- bind_rows(istr_product_level_4.1, istr_product_level_4.2, istr_product_level_4.3, istr_product_level_4.4)
+
+
+rm(istr_product_level_3)
+rm(istr_product_level_4.1)
+rm(istr_product_level_4.2)
+rm(istr_product_level_4.3)
+rm(istr_product_level_4.4)
+rm(chunk_1)
+rm(chunk_2)
+rm(chunk_3)
+rm(chunk_4)
+rm(chunked)
+```
+
+
+## additional joins
+```{r}
+# get c("matched_activity_name", "unit", sectors) for matched products
+istr_product_level_5 <- istr_product_level_4 |> 
+  left_join(ei_activities_overview_2, by = "activity_uuid_product_uuid") 
+
+rm(istr_product_level_4)
+
+istr_product_level_6 <- istr_product_level_5 |> 
+  left_join(select(mapper_ep_ei, c(
+    "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")), 
+            by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |> 
+  rename(matching_certainty = completion) |>
+  mutate(matching_certainty_num = case_when(
+    matching_certainty == "low" ~ 0, 
+    matching_certainty == "medium" ~ 0.5, 
+    matching_certainty == "high" ~ 1, 
+  )) |> 
+  distinct()
+
+rm(istr_product_level_5)
+
+# create new column with company-level averages for matching_certainty
+istr_product_level_7 <- istr_product_level_6 |> 
+  group_by(companies_id) |>
+  mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE)) |> 
+  ungroup()
+
+rm(istr_product_level_6)
+
+# create column with "low", "medium", "high" values for company averages
+istr_product_level_8 <- istr_product_level_7 |> 
+    mutate(avg_matching_certainty = ifelse(
+    avg_matching_certainty_num > 2/3, "high",
+    ifelse(avg_matching_certainty_num > 1/3, "medium", "low")
+  ))
+
+rm(istr_product_level_7)
+
+
+```
+
+## Final product-level dataframe
+```{r}
+
+istr_product_level_9 <- istr_product_level_8 |> 
+  relocate(companies_id, company_name, country, risk_category, scenario, year, clustered, activity_name, 
+           reference_product_name , unit, tilt_sector, multi_match, matching_certainty, 
+           avg_matching_certainty, exchange_name, exchange_unit_name, input_tilt_sector, input_tilt_subsector, company_city, postcode, address, 
+           main_activity, activity_uuid_product_uuid, grouped_by) |>
+  rename(
+    matched_activity_name = activity_name, 
+    matched_reference_product = reference_product_name, 
+    matching_certainty_company_average = avg_matching_certainty, 
+    benchmark = grouped_by, 
+    ISTR_risk_category = risk_category, 
+    input_name = exchange_name, 
+    input_unit = exchange_unit_name) |> 
+  select(-isic_4digit, -isic_4digit_name_ecoinvent, -isic_section, -matching_certainty_num, -avg_matching_certainty_num) |>
+  distinct() |> 
+  arrange(country)
+
+# final dataset
+istr_product_level_final <- istr_product_level_9 |> 
+  relocate()
+  rename(ep_product = clustered) |> 
+  select(-chunk, -grouped_by)
+
+
+# write_csv(istr_product_level_final, here("04_final_outputs/istr_product_level_final.csv"))
+# istr_product_level_final <- read_csv(here("04_final_outputs/istr_product_level_final_v4.csv"))
+
+rm(istr_product_level_8)
+rm(istr_product_level_9)
+
+```
+
+# 8. ISTR company-level results
+## Joining relevant datasets
+Join column "matching_certainty" via 
+```{r}
+# create dataset containing c("companies_id", "avg_matching_certainty")
+istr_companies_avg_match_cert <- istr_product_level_final |> 
+  select("companies_id","company_name","company_city","country","postcode",
+         "address", "main_activity", "matching_certainty_company_average") |> 
+  distinct()
+
+# join "avg_matching_certainty" to istr_company_level via "companies_id"
+istr_company_level_2 <- istr_company_level |> 
+  left_join(istr_companies_avg_match_cert, by = "companies_id")
+
+```
+
+## Final company-level results
+Aligning with names & structure from: https://docs.google.com/spreadsheets/d/1K1thTMRg-k4DSdJy-G1RFY0islOQk70ToU3zmCKmvHM/edit#gid=1258737772
+```{r}
+istr_company_level_3 <- istr_company_level_2 |> 
+  rename(ISTR_risk_category = risk_category, 
+         benchmark = grouped_by, ISTR_share = value) |> 
+  relocate(companies_id, company_name, company_city, country, ISTR_share, 
+           ISTR_risk_category, scenario, year, matching_certainty_company_average, 
+           postcode, address, main_activity)|>
+  distinct()
+
+
+#write_csv(ictr_company_level_final, here("04_final_outputs/ictr_company_level_final_v4.csv"))
+
+```

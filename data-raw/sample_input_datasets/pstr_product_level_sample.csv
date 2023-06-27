@@ -1,0 +1,20 @@
+companies_id,grouped_by,risk_category,clustered,activity_uuid_product_uuid,tilt_sector,scenario,year,type,tilt_subsector
+id1,ipr_1.5c rps_2030,medium,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,construction industry,1.5c rps,2030,ipr,construction buildings
+id1,weo_nz 2050_2030,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,construction industry,nz 2050,2030,weo,construction buildings
+id1,ipr_1.5c rps_2030,high,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,steel and metals,1.5c rps,2030,ipr,steel
+id1,weo_nz 2050_2030,high,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,steel and metals,nz 2050,2030,weo,steel
+id1,ipr_1.5c rps_2050,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,construction industry,1.5c rps,2050,ipr,construction buildings
+id1,weo_nz 2050_2050,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,construction industry,nz 2050,2050,weo,construction buildings
+id1,ipr_1.5c rps_2050,high,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,steel and metals,1.5c rps,2050,ipr,steel
+id1,weo_nz 2050_2050,high,machining,6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3,steel and metals,nz 2050,2050,weo,steel
+id2,ipr_1.5c rps_2030,low,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,non-metallic minerals; steel and metals,1.5c rps,2030,ipr,other; raw minerals; other metals
+id2,weo_nz 2050_2030,medium,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,non-metallic minerals; steel and metals,nz 2050,2030,weo,other; raw minerals; other metals
+id2,ipr_1.5c rps_2030,medium,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,non-metallic minerals,1.5c rps,2030,ipr,chemicals
+id2,weo_nz 2050_2030,medium,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,non-metallic minerals,nz 2050,2030,weo,chemicals
+id2,ipr_1.5c rps_2030,high,NA,NA,other; land use,1.5c rps,2030,ipr,other
+id2,ipr_1.5c rps_2050,high,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,non-metallic minerals; steel and metals,1.5c rps,2050,ipr,other; raw minerals; other metals
+id2,weo_nz 2050_2050,high,"drinks, soft",09516d9a-bf2d-558a-b403-ce7f089dee13_1fa64d0c-afd7-46ab-b95c-3a54e0902dd0,non-metallic minerals; steel and metals,nz 2050,2050,weo,other; raw minerals; other metals
+id2,ipr_1.5c rps_2050,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,non-metallic minerals,1.5c rps,2050,ipr,chemicals
+id2,weo_nz 2050_2050,high,refrigeration plant,9649930d-2cc8-510f-8826-ca87c96e4f35_8a309022-83ff-455f-a0bd-17edef16b064,non-metallic minerals,nz 2050,2050,weo,chemicals
+id2,ipr_1.5c rps_2050,high,NA,NA,other; land use,1.5c rps,2050,ipr,other
+id3,ipr_NA_NA,NA,NA,NA,energy; construction industry; transportation,NA,NA,ipr,bioenergy and waste; construction buildings; transportation
