@@ -30,23 +30,23 @@ library(dplyr)
 Note: run data prep for each indicator separately, otherwise it takes too much storage
 ```{r}
 # required for all indicators
-ei_activities_overview_2 <- read.csv(here("input_data_clean/ei_activities_overview_2.csv"))
-ep_companies_2 <- read_csv(here("input_data_clean/ep_companies_2.csv"))
-mapper_ep_ei <- read_csv(here("input_data_clean/mapper_ep_ei.csv"))
-ei_input_data_2 <- read_csv(here("input_data_clean/ei_input_data_2.csv"))
+ei_activities_overview_2 <- read.csv(here("data-raw/ei_activities_overview_2.csv"))
+ep_companies_2 <- read_csv(here("data-raw/sample_input_datasets/ep_companies_2_sample.csv"))
+mapper_ep_ei <- read_csv(here("data-raw/mapper_ep_ei.csv"))
+ei_input_data_2 <- read_csv(here("data-raw/ei_input_data_2.csv"))
 
 # XCTR: indicator output from tiltIndicator package
- pctr_product_level <- read_csv(here("output_tiltIndicator/pctr_results_product_level_v2.csv"))
- pctr_company_level <- read_csv(here("output_tiltIndicator/pctr_results_company_level_v2.csv"))
- ictr_product_level <- read_csv(here("output_tiltIndicator/ictr_results_product_level_v2.csv"))
- ictr_company_level <- read_csv(here("output_tiltIndicator/ictr_results_company_level_v2.csv"))
+ pctr_product_level <- read_csv(here("data-raw/sample_input_datasets/pctr_product_level_sample.csv"))
+ pctr_company_level <- read_csv(here("data-raw/sample_input_datasets/pctr_company_level_sample.csv"))
+ ictr_product_level <- read_csv(here("data-raw/sample_input_datasets/ictr_product_level_sample.csv"))
+ ictr_company_level <- read_csv(here("data-raw/sample_input_datasets/ictr_company_level_sample.csv"))
 
 # XSTR: indicator output from tiltIndicator package, after modifications with this script: https://github.com/2DegreesInvesting/tiltIndicator/blob/396_Fix-xstr-outputs/data-raw/396_fix-xstr-outputs.md 
   # load cleaned PSTR results from: https://github.com/2DegreesInvesting/tiltIndicator/pull/397
-  pstr_product_level <- read_csv(here("output_tiltIndicator/pstr_product_level_v2_fixed.csv"))
-  pstr_company_level <- read_csv(here("output_tiltIndicator/pstr_company_level_v2_fixed.csv"))
-  istr_product_level <- read_csv(here("output_tiltIndicator/istr_product_level.csv"))
-  istr_company_level <- read_csv(here("output_tiltIndicator/istr_company_level.csv"))
+  pstr_product_level <- read_csv(here("data-raw/sample_input_datasets/pstr_product_level_sample.csv"))
+  pstr_company_level <- read_csv(here("data-raw/sample_input_datasets/pstr_company_level_sample.csv"))
+  istr_product_level <- read_csv(here("data-raw/sample_input_datasets/istr_product_level_sample.csv"))
+  istr_company_level <- read_csv(here("data-raw/sample_input_datasets/istr_company_level_sample.csv"))
 ```
 
 # Prepare mapper_ep_ei for multiple matches

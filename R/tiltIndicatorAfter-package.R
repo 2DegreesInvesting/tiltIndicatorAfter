@@ -5,5 +5,6 @@
 #' @importFrom dplyr distinct
 #' @importFrom tiltIndicator xstr_polish_output_at_company_level
 #' @importFrom tiltIndicator unnest_company
+#' @importFrom dplyr select
 ## usethis namespace: end
 NULL
