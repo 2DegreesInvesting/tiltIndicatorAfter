@@ -3,6 +3,14 @@
 
 ## usethis namespace: start
 #' @importFrom dplyr distinct
+#' @importFrom dplyr mutate
+#' @importFrom dplyr ungroup
+#' @importFrom dplyr summarise
+#' @importFrom dplyr group_by
+#' @importFrom dplyr left_join
+#' @importFrom dplyr case_when
+#' @importFrom dplyr across
+#' @importFrom dplyr everything
 #' @importFrom tiltIndicator xstr_polish_output_at_company_level
 #' @importFrom tiltIndicator unnest_company
 #' @importFrom dplyr select

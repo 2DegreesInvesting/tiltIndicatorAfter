@@ -65,7 +65,11 @@ mapper_ep_ei <- mapper_ep_ei |>
   distinct()
 
 # replace empty cells with FALSE
-mapper_ep_ei$multi_match[mapper_ep_ei$multi_match==""] <- FALSE
+mapper_ep_ei <- mutate(mapper_ep_ei, multi_match = case_when(
+  multi_match == "" ~ "FALSE", 
+  TRUE   ~ multi_match 
+))
+#mapper_ep_ei$multi_match[mapper_ep_ei$multi_match==""] <- FALSE
 
 unique(mapper_ep_ei$multi_match)
 
