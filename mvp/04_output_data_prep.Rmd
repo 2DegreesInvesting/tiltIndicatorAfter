@@ -97,10 +97,17 @@ Join via mapper_ep_ei
 # Get c("postcode", "street_name", "country", "main_activity") via "companies_id". 
 pctr_product_level_2 <- pctr_product_level |> 
   left_join(select(ep_companies_2, c("company_name","country", "company_city", "postcode", 
-                                     "address","main_activity", "companies_id")), by = "companies_id") |> 
+                                     "address","main_activity", "companies_id")), by = "companies_id", relationship = "many-to-many") |> 
   relocate(companies_id, company_name, country, company_city, postcode, address, main_activity, clustered, 
            activity_uuid_product_uuid, grouped_by, risk_category, co2_footprint) |> 
   distinct() 
+
+# ep_companies_2 <- ep_companies_2 |> select("company_name","country", "company_city", "postcode", 
+#                                      "address","main_activity", "companies_id") |>
+#   distinct()
+# pctr_product_level_3 <- pctr_product_level |> 
+#   left_join(ep_companies_2, by = "companies_id") 
+
 
 rm(pctr_product_level)
 
@@ -224,12 +231,12 @@ pctr_company_level_4 <- pctr_company_level_3 |>
   filter(!is.na(benchmark))
 
 # now remove values in "benchmark" & "PCTR_risk_category" when "PCTR_share" is NA
-pctr_company_level_5 <- pctr_company_level_4 |> 
-  group_by(companies_id) |>
-  mutate(benchmark = ifelse(all(is.na(matching_certainty_company_average)), NA, benchmark)) |>
-  mutate(PCTR_risk_category = ifelse(all(is.na(matching_certainty_company_average)), NA, PCTR_risk_category)) |>
-  ungroup() |> 
-  distinct()
+# pctr_company_level_5 <- pctr_company_level_4 |> 
+#   group_by(companies_id) |>
+#   mutate(benchmark = ifelse(all(is.na(matching_certainty_company_average)), NA, benchmark)) |>
+#   mutate(PCTR_risk_category = ifelse(all(is.na(matching_certainty_company_average)), NA, PCTR_risk_category)) |>
+#   ungroup() |> 
+#   distinct()
 
 pctr_company_level_5 <- pctr_company_level_4 |> 
   mutate(PCTR_risk_category = ifelse(is.na(matching_certainty_company_average), NA, PCTR_risk_category),

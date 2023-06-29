@@ -23,8 +23,7 @@ prepare_matches_mapper <- function(mapper, activities) {
 
   mapper <- mapper |>
     left_join(activities, by = "activity_uuid_product_uuid") |>
-    group_by("country", "main_activity", "clustered") |>
-    summarise(across(everything(), ~ paste0(na.omit(unique(.)), collapse = "; "))) |>
+    summarise(across(everything(), ~ paste0(na.omit(unique(.)), collapse = "; ")), .by = c("country", "main_activity", "clustered")) |>
     ungroup() |>
     distinct() |>
     mutate(multi_match = case_when(

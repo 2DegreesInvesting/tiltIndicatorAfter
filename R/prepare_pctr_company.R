@@ -1,0 +1,46 @@
+#' Creates final output of pctr company level results
+#'
+#' @param match_mapper A dataframe like [matches_mapper]
+#' @param eco_activities A dataframe like [ecoinvent_activities]
+#' @param pctr_prod A dataframe like [pctr_product]
+#' @param comp A dataframe like [companies]
+#' @param pctr_comp A dataframe like [pctr_company]
+#'
+#' @return A dataframe that prepares the final output of pctr_company
+#'
+#' @export
+#'
+#' @examples
+#' matches_mapper <- matches_mapper
+#' ecoinvent_activities <- ecoinvent_activities
+#' pctr_product <- pctr_product
+#' companies <- companies
+#' pctr_company <- pctr_company
+#'
+#' pctr_company <- prepare_pctr_company(pctr_company, pctr_product, companies, ecoinvent_activities, matches_mapper)
+#' pctr_company
+prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper) {
+  inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
+    select("companies_id","company_name","company_city","country","postcode","address", "main_activity", "avg_matching_certainty") |>
+    distinct()
+
+  pctr_company_level <- pctr_comp |>
+    left_join(inter_result, by = "companies_id") |>
+    rename(PCTR_risk_category = risk_category,
+           benchmark = grouped_by,
+           PCTR_share = value,
+           matching_certainty_company_average = avg_matching_certainty) |>
+    relocate(companies_id, company_name, company_city, country, postcode, address, main_activity, PCTR_risk_category, benchmark, PCTR_share, matching_certainty_company_average) |>
+    distinct() |>
+    mutate(has_na = all(is.na(PCTR_share)), row_number = row_number(), .by = c("companies_id")) |>
+    ungroup() |>
+    mutate(benchmark = ifelse(has_na & row_number != 1, NA, benchmark)) |>
+    select(-has_na, -row_number) |>
+    filter(!is.na(benchmark)) |>
+    mutate(PCTR_risk_category = ifelse(is.na(matching_certainty_company_average), NA, PCTR_risk_category),
+           benchmark = ifelse(is.na(matching_certainty_company_average), NA, benchmark)) |>
+    relocate(companies_id, company_name, country, PCTR_share, PCTR_risk_category,
+             benchmark, matching_certainty_company_average, company_city, postcode,
+             address, main_activity) |>
+    arrange(companies_id)
+}
