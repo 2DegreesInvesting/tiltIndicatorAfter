@@ -2,7 +2,7 @@
 #'
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
-#' @param pctr_prod A dataframe like [pctr_product]
+#' @param ictr_prod A dataframe like [ictr_product]
 #' @param comp A dataframe like [companies]
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
 #'

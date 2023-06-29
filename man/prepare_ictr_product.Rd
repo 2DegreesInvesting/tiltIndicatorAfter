@@ -7,6 +7,8 @@
 prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs)
 }
 \arguments{
+\item{ictr_prod}{A dataframe like \link{ictr_product}}
+
 \item{comp}{A dataframe like \link{companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
@@ -14,8 +16,6 @@ prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs)
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
-
-\item{pctr_prod}{A dataframe like \link{pctr_product}}
 }
 \value{
 A dataframe that prepares the final output of ictr_product
