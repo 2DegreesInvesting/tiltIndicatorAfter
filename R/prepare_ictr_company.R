@@ -19,7 +19,7 @@
 #' ictr_company <- ictr_company
 #' ecoinvent_inputs <- ecoinvent_inputs
 #'
-#' pctr_company_final <- prepare_pctr_company(
+#' ictr_company_final <- prepare_ictr_company(
 #'   ictr_company,
 #'   ictr_product,
 #'   companies,
@@ -28,8 +28,8 @@
 #'   eco_inputs
 #' )
 #'
-#' pctr_company_final
-prepare_pctr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
+#' ictr_company_final
+prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
 
   inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
     # TODO: matching_certainty_company_average is used instead of avg_matching_certainty
