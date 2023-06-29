@@ -30,6 +30,6 @@ pctr_product <- pctr_product
 companies <- companies
 pctr_company <- pctr_company
 
-pctr_company <- prepare_pctr_company(pctr_company, pctr_product, companies, ecoinvent_activities, matches_mapper)
-pctr_company
+pctr_company_final <- prepare_pctr_company(pctr_company, pctr_product, companies, ecoinvent_activities, matches_mapper)
+pctr_company_final
 }

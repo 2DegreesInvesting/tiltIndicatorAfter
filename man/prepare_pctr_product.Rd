@@ -27,6 +27,6 @@ ecoinvent_activities <- ecoinvent_activities
 pctr_product <- pctr_product
 companies <- companies
 
-pctr_product <- prepare_pctr_product(pctr_product, companies, ecoinvent_activities, matches_mapper)
-pctr_product
+pctr_product_final <- prepare_pctr_product(pctr_product, companies, ecoinvent_activities, matches_mapper)
+pctr_product_final
 }

@@ -17,8 +17,8 @@
 #' companies <- companies
 #' pctr_company <- pctr_company
 #'
-#' pctr_company <- prepare_pctr_company(pctr_company, pctr_product, companies, ecoinvent_activities, matches_mapper)
-#' pctr_company
+#' pctr_company_final <- prepare_pctr_company(pctr_company, pctr_product, companies, ecoinvent_activities, matches_mapper)
+#' pctr_company_final
 prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper) {
   inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
     select("companies_id","company_name","company_city","country","postcode","address", "main_activity", "avg_matching_certainty") |>
