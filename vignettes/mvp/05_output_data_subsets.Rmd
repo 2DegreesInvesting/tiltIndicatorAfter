@@ -1,0 +1,84 @@
+---
+title: "05_output_data_subsets"
+author: "Tilman"
+date: "2023-05-15"
+output: html_document
+---
+
+# Overview
+This script creates subsets of the final dataframes from "04_output_data_prep" for specific banks and / or countries. Inputs come from 04_final_outputs, outputs are saved in the same folder. 
+
+# Setup
+```{r}
+library(tidyr)
+library(here)
+library(readr)
+library(dplyr)
+library(vroom)
+
+```
+
+# Load data
+```{r}
+pctr_company <- read_csv(here("04_final_outputs/pctr_company_level_final_v4.csv"))
+pctr_product <- read_csv(here("04_final_outputs/pctr_product_level_final_v4.csv"))
+ictr_company <- read_csv(here("04_final_outputs/ictr_company_level_final_v4.csv"))
+ictr_product <- read_csv(here("04_final_outputs/ictr_product_level_final_v4.csv"))
+
+pstr_product <- read_csv(here("04_final_outputs/pstr_product_level_final.csv"))
+pstr_company <- read_csv(here("04_final_outputs/pstr_company_level_final.csv"))
+
+bil_companies <- read_csv(here("04_final_outputs/subset_BIL/Sample companies to send to 2Dii.csv")) |> 
+  filter(!is.na(id_tilt)) |> 
+  rename(companies_id = id_tilt)
+
+```
+
+
+# creating subsets for BIL
+```{r}
+bil_companies_list <- bil_companies$companies_id
+
+pctr_product_level_BIL <- pctr_product |> filter(companies_id %in% bil_companies_list)
+pctr_company_level_BIL <- pctr_company |> filter(companies_id %in% bil_companies_list)
+
+ictr_product_level_BIL <- ictr_product |> filter(companies_id %in% bil_companies_list)
+ictr_company_level_BIL <- ictr_company |> filter(companies_id %in% bil_companies_list)
+
+pstr_product_level_BIL <- pstr_product |> filter(companies_id %in% bil_companies_list)
+pstr_company_level_BIL <- pstr_company |> filter(companies_id %in% bil_companies_list)
+
+
+write_csv(pctr_product_level_BIL, here("04_final_outputs/subset_BIL/pctr_product_level_BIL.csv"))
+write_csv(pctr_company_level_BIL, here("04_final_outputs/subset_BIL/pctr_company_level_BIL.csv"))
+write_csv(ictr_product_level_BIL, here("04_final_outputs/subset_BIL/ictr_product_level_BIL.csv"))
+write_csv(ictr_company_level_BIL, here("04_final_outputs/subset_BIL/ictr_company_level_BIL.csv"))
+
+write_csv(pstr_product_level_BIL, here("04_final_outputs/subset_BIL/pstr_product_level_BIL.csv"))
+write_csv(pstr_company_level_BIL, here("04_final_outputs/subset_BIL/pstr_company_level_BIL.csv"))
+
+
+```
+
+# creating subsets for ING (NL)
+```{r}
+
+pctr_product_level_NL <- pctr_product |> filter(country == "netherlands")
+pctr_company_level_NL <- pctr_company |> filter(country == "netherlands")
+
+ictr_product_level_NL <- ictr_product |> filter(country == "netherlands")
+ictr_company_level_NL <- ictr_company |> filter(country == "netherlands")
+
+pstr_product_level_NL <- pstr_product |> filter(country == "netherlands")
+pstr_company_level_NL <- pstr_company |> filter(country == "netherlands")
+
+
+write_csv(pctr_product_level_NL, here("04_final_outputs/subset_NL/pctr_product_level_NL.csv"))
+write_csv(pctr_company_level_NL, here("04_final_outputs/subset_NL/pctr_company_level_NL.csv"))
+write_csv(ictr_product_level_NL, here("04_final_outputs/subset_NL/ictr_product_level_NL.csv"))
+write_csv(ictr_company_level_NL, here("04_final_outputs/subset_NL/ictr_company_level_NL.csv"))
+
+write_csv(pstr_product_level_NL, here("04_final_outputs/subset_NL/pstr_product_level_NL.csv"))
+write_csv(pstr_company_level_NL, here("04_final_outputs/subset_NL/pstr_company_level_NL.csv"))
+
+```
