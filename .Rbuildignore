@@ -4,3 +4,6 @@
 ^README\.Rmd$
 ^data-raw$
 ^mvp$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
