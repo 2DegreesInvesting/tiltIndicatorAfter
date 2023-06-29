@@ -17,8 +17,8 @@
 #' companies <- companies
 #' ecoinvent_inputs <- ecoinvent_inputs
 #'
-#' ictr_product <- prepare_ictr_product(ictr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
-#' ictr_product
+#' ictr_product_final <- prepare_ictr_product(ictr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
+#' ictr_product_final
 prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
   eco_inputs <- eco_inputs |>
     select("input_activity_uuid_product_uuid", "exchange_name", "exchange_unit_name") |>
