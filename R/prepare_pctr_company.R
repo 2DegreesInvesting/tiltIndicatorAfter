@@ -26,21 +26,17 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
 
   pctr_company_level <- pctr_comp |>
     left_join(inter_result, by = "companies_id") |>
-    rename(PCTR_risk_category = risk_category,
-           benchmark = grouped_by,
-           PCTR_share = value,
-           matching_certainty_company_average = avg_matching_certainty) |>
-    relocate(companies_id, company_name, company_city, country, postcode, address, main_activity, PCTR_risk_category, benchmark, PCTR_share, matching_certainty_company_average) |>
+    rename(PCTR_risk_category = "risk_category",
+           benchmark = "grouped_by",
+           PCTR_share = "value",
+           matching_certainty_company_average = "avg_matching_certainty") |>
     distinct() |>
-    mutate(has_na = all(is.na(PCTR_share)), row_number = row_number(), .by = c("companies_id")) |>
-    ungroup() |>
-    mutate(benchmark = ifelse(has_na & row_number != 1, NA, benchmark)) |>
-    select(-has_na, -row_number) |>
-    filter(!is.na(benchmark)) |>
+    keep_first_row("PCTR_share") |>
     mutate(PCTR_risk_category = ifelse(is.na(matching_certainty_company_average), NA, PCTR_risk_category),
            benchmark = ifelse(is.na(matching_certainty_company_average), NA, benchmark)) |>
-    relocate(companies_id, company_name, country, PCTR_share, PCTR_risk_category,
-             benchmark, matching_certainty_company_average, company_city, postcode,
-             address, main_activity) |>
+    relocate("companies_id", "company_name", "country", "PCTR_share", "PCTR_risk_category",
+             "benchmark", "matching_certainty_company_average", "company_city", "postcode",
+             "address", "main_activity") |>
+    select(-c("has_na", "row_number")) |>
     arrange(companies_id)
 }
