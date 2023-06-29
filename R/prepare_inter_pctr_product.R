@@ -31,15 +31,25 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
     left_join(activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     rename(matching_certainty = completion) |>
-    mutate(matching_certainty_num = case_when(
-      matching_certainty == "low" ~ 0,
-      matching_certainty == "medium" ~ 0.5,
-      matching_certainty == "high" ~ 1,
-    )) |>
+    mutate(matching_certainty_num = categorize_matching_certainity(matching_certainty)) |>
     mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
-    mutate(avg_matching_certainty = case_when(
-      avg_matching_certainty_num > 2/3 ~ "high",
-      avg_matching_certainty_num <= 2/3 & avg_matching_certainty_num > 1/3 ~ "medium",
-      avg_matching_certainty_num <= 1/3 ~ "low"
-    ))
+    mutate(avg_matching_certainty = categorize_avg_matching_certainity(avg_matching_certainty_num))
+}
+
+categorize_avg_matching_certainity <- function(x, ...) {
+  case_when(
+    x > 2/3 ~ "high",
+    x > 1/3 & x <= 2/3 ~ "medium",
+    x <= 1/3 ~ "low",
+    ...
+  )
+}
+
+categorize_matching_certainity <- function(x, ...) {
+  case_when(
+    x == "high" ~ 1,
+    x == "medium" ~ 0.5,
+    x == "low" ~ 0,
+    ...
+  )
 }
