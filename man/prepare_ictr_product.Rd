@@ -30,6 +30,6 @@ ictr_product <- ictr_product
 companies <- companies
 ecoinvent_inputs <- ecoinvent_inputs
 
-ictr_product <- prepare_ictr_product(ictr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
-ictr_product
+ictr_product_final <- prepare_ictr_product(ictr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
+ictr_product_final
 }
