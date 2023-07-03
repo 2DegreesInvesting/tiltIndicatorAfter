@@ -8,6 +8,7 @@
 #' @importFrom dplyr case_when
 #' @importFrom dplyr distinct
 #' @importFrom dplyr everything
+#' @importFrom dplyr n
 #' @importFrom dplyr filter
 #' @importFrom dplyr group_by
 #' @importFrom dplyr left_join
