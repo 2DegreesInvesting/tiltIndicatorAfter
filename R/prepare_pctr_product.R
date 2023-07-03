@@ -32,11 +32,11 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
       PCTR_risk_category = "risk_category",
       ep_product = "clustered") |>
     keep_first_row("PCTR_risk_category") |>
-    mutate(benchmark = ifelse(is.na(PCTR_risk_category), NA, benchmark), .by = c("companies_id")) |>
+    mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c("has_na", "row_number", "isic_4digit", "isic_4digit_name_ecoinvent",
               "isic_section", "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint")) |>
     distinct() |>
-    arrange(country)
+    arrange(.data$country)
 }
 
 keep_first_row <- function(data, col) {
