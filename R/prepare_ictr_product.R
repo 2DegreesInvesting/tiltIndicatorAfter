@@ -47,6 +47,17 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
              "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
              "company_city", "postcode", "address", "main_activity",
              "activity_uuid_product_uuid") |>
+    rename_ictr_product() |>
+    keep_first_row("ICTR_risk_category") |>
+    mutate(benchmark = ifelse(is.na(ICTR_risk_category), NA, benchmark), .by = c("companies_id")) |>
+    select(-c("has_na", "row_number", "isic_4digit", "isic_4digit_name_ecoinvent",
+              "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
+    distinct() |>
+    arrange(country)
+}
+
+rename_ictr_product <- function(data) {
+  data |>
     rename(
       matched_activity_name = "activity_name",
       matched_reference_product = "reference_product_name",
@@ -55,11 +66,6 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
       ep_product = "clustered",
       ICTR_risk_category = "risk_category",
       input_name = "exchange_name",
-      input_unit = "exchange_unit_name") |>
-    keep_first_row("ICTR_risk_category") |>
-    mutate(benchmark = ifelse(is.na(ICTR_risk_category), NA, benchmark), .by = c("companies_id")) |>
-    select(-c("has_na", "row_number", "isic_4digit", "isic_4digit_name_ecoinvent",
-              "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
-    distinct() |>
-    arrange(country)
+      input_unit = "exchange_unit_name"
+    )
 }

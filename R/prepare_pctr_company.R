@@ -33,13 +33,8 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
 
   pctr_company_level <- pctr_comp |>
     left_join(inter_result, by = "companies_id") |>
-    rename(
-      PCTR_risk_category = "risk_category",
-      benchmark = "grouped_by",
-      PCTR_share = "value",
-      matching_certainty_company_average = "avg_matching_certainty"
-    ) |>
     distinct() |>
+    rename_pctr_company() |>
     keep_first_row("PCTR_share") |>
     mutate(
       PCTR_risk_category = ifelse(is.na(.data$matching_certainty_company_average), NA, PCTR_risk_category),
@@ -52,4 +47,13 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
     ) |>
     select(-c("has_na", "row_number")) |>
     arrange(companies_id)
+}
+
+rename_pctr_company <- function(data) {
+  data |>
+    rename(PCTR_risk_category = "risk_category",
+           benchmark = "grouped_by",
+           PCTR_share = "value",
+           matching_certainty_company_average = "avg_matching_certainty"
+    )
 }

@@ -32,19 +32,14 @@
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
 
   inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
-    # TODO: matching_certainty_company_average is used instead of avg_matching_certainty
     select("companies_id", "company_name", "company_city", "country", "postcode",
            "address", "main_activity", "matching_certainty_company_average") |>
     distinct()
 
   ictr_company_level <- ictr_comp |>
     left_join(inter_result, by = "companies_id") |>
-    rename(
-      ICTR_risk_category = "risk_category",
-      benchmark = "grouped_by",
-      ICTR_share = "value"
-    ) |>
     distinct() |>
+    rename_ictr_company() |>
     keep_first_row("ICTR_share") |>
     # Error: here is ICTR_share used instead of matching_certainty_company_average
     mutate(benchmark = ifelse(is.na(.data$ICTR_share), NA, benchmark)) |>
@@ -56,4 +51,13 @@ prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, mat
     ) |>
     select(-c("has_na", "row_number")) |>
     arrange(companies_id)
+}
+
+rename_ictr_company <- function(data) {
+  data |>
+    rename(
+      ICTR_risk_category = "risk_category",
+      benchmark = "grouped_by",
+      ICTR_share = "value"
+    )
 }

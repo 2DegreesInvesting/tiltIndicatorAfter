@@ -39,15 +39,20 @@ prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, mat
 
   istr_company_level <- istr_comp |>
     left_join(inter_result, by = "companies_id") |>
-    rename(
-      ISTR_risk_category = "risk_category",
-      ISTR_share = "value"
-    ) |>
     distinct() |>
+    rename_istr_company() |>
     relocate(
       "companies_id", "company_name", "company_city", "country", "ISTR_share",
       "ISTR_risk_category", "scenario", "year", "matching_certainty_company_average",
       "postcode", "address", "main_activity"
     ) |>
     arrange(companies_id)
+}
+
+rename_istr_company <- function(data) {
+  data |>
+    rename(
+      ISTR_risk_category = "risk_category",
+      ISTR_share = "value"
+    )
 }

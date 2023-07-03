@@ -48,6 +48,15 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
              "exchange_name", "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector",
              "company_city", "postcode", "address", "main_activity",
              "activity_uuid_product_uuid", "grouped_by") |>
+    rename_istr_product() |>
+    select(-c("isic_4digit", "isic_4digit_name_ecoinvent",
+              "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
+    distinct() |>
+    arrange(country)
+}
+
+rename_istr_product <- function(data) {
+  data |>
     rename(
       matched_activity_name = "activity_name",
       matched_reference_product = "reference_product_name",
@@ -56,9 +65,6 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
       ep_product = "clustered",
       ISTR_risk_category = "risk_category",
       input_name = "exchange_name",
-      input_unit = "exchange_unit_name") |>
-    select(-c("isic_4digit", "isic_4digit_name_ecoinvent",
-              "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
-    distinct() |>
-    arrange(country)
+      input_unit = "exchange_unit_name"
+    )
 }

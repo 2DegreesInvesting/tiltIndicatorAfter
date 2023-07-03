@@ -24,13 +24,7 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
              "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
              "co2_footprint", "company_city", "postcode", "address", "main_activity",
              "activity_uuid_product_uuid") |>
-    rename(
-      matched_activity_name = "activity_name",
-      matched_reference_product = "reference_product_name",
-      matching_certainty_company_average = "avg_matching_certainty",
-      benchmark = "grouped_by",
-      PCTR_risk_category = "risk_category",
-      ep_product = "clustered") |>
+    rename_pctr_product() |>
     keep_first_row("PCTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c("has_na", "row_number", "isic_4digit", "isic_4digit_name_ecoinvent",
@@ -44,4 +38,14 @@ keep_first_row <- function(data, col) {
     mutate(has_na = all(is.na(.data[[col]])), row_number = row_number(), .by = c("companies_id")) |>
     mutate(benchmark = ifelse(.data$has_na & .data$row_number != 1, NA, .data$benchmark)) |>
     filter(!is.na(.data$benchmark))
+}
+
+rename_pctr_product <- function(data) {
+  data |>
+    rename(matched_activity_name = "activity_name",
+          matched_reference_product = "reference_product_name",
+          matching_certainty_company_average = "avg_matching_certainty",
+          benchmark = "grouped_by",
+          PCTR_risk_category = "risk_category",
+          ep_product = "clustered")
 }
