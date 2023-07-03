@@ -58,7 +58,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
       input_name = "exchange_name",
       input_unit = "exchange_unit_name") |>
     select(-c("isic_4digit", "isic_4digit_name_ecoinvent",
-              "isic_section", "matching_certainty_num", "avg_matching_certainty_num", "grouped_by")) |>
+              "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
     distinct() |>
     arrange(country)
 }

@@ -40,8 +40,7 @@ prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, mat
   istr_company_level <- istr_comp |>
     left_join(inter_result, by = "companies_id") |>
     rename(
-      ICTR_risk_category = "risk_category",
-      benchmark = "grouped_by",
+      ISTR_risk_category = "risk_category",
       ISTR_share = "value"
     ) |>
     distinct() |>
