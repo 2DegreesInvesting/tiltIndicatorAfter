@@ -4,6 +4,7 @@
 ## usethis namespace: start
 #' @importFrom dplyr across
 #' @importFrom dplyr arrange
+#' @importFrom dplyr bind_rows
 #' @importFrom dplyr case_when
 #' @importFrom dplyr distinct
 #' @importFrom dplyr everything

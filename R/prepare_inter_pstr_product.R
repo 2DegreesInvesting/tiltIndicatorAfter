@@ -37,7 +37,7 @@ prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_ma
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
   # different for PSTR due to activity_name and unit
   activities <- eco_activities |>
-    select("activity_uuid_product_uuid", "isic_4digit", "isic_4digit_name_ecoinvent", "isic_section", "activity_name", "unit")
+    select("activity_uuid_product_uuid", "isic_4digit", "reference_product_name", "isic_4digit_name_ecoinvent", "isic_section", "activity_name", "unit")
 
   pstr_prod_level <- pstr_prod_level |>
     left_join(comp, by = "companies_id") |>
