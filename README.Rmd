@@ -2,8 +2,12 @@
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%")
 ```
 
 # tiltIndicatorAfter
@@ -40,11 +44,13 @@ ecoinvent_inputs
 
 pctr_product
 
-pctr_product |>
+pctr_product_final <- pctr_product |>
   prepare_pctr_product(companies, ecoinvent_activities, matches_mapper)
+pctr_product_final
 
 pctr_company
 
-pctr_company |> 
+pctr_company_final <- pctr_company |> 
   prepare_pctr_company(pctr_product, companies, ecoinvent_activities, matches_mapper)
+pctr_company_final
 ```
