@@ -24,5 +24,27 @@ devtools::install_github("2DegreesInvesting/tiltIndicatorAfter")
 ## Example
 
 ```{r}
-## Example
+library(tiltIndicatorAfter)
+
+packageVersion("tiltIndicatorAfter")
+
+companies
+
+matches_mapper
+
+ecoinvent_activities
+
+ecoinvent_inputs
+
+# PCTR
+
+pctr_product
+
+pctr_product |>
+  prepare_pctr_product(companies, ecoinvent_activities, matches_mapper)
+
+pctr_company
+
+pctr_company |> 
+  prepare_pctr_company(pctr_product, companies, ecoinvent_activities, matches_mapper)
 ```
