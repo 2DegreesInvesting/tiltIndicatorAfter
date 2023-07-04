@@ -18,7 +18,6 @@
 #' pstr_product_final <- prepare_pstr_product(pstr_product, companies, ecoinvent_activities, matches_mapper)
 #' pstr_product_final
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-
   final_result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     relocate_pstr_product() |>
     rename_pstr_product() |>

@@ -18,7 +18,6 @@
 #' pstr_product_inter <- prepare_inter_pstr_product(pstr_product, companies, ecoinvent_activities, matches_mapper)
 #' pstr_product_inter
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-
   pstr_prod_level <- exclude_rows(pstr_prod)
   # different for PSTR due to some missing column names
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
@@ -38,6 +37,7 @@ prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_ma
 }
 
 # excluding rows with `risk_category` as NA without excluding any company which contain NAs
+# PLEASE NOTE: chunks should be created based on `companies_id` for this code to accurately work
 exclude_rows <- function(data) {
   ids <- data |>
     filter(all(is.na(.data$risk_category)), .by = c("companies_id")) |>
