@@ -39,11 +39,7 @@ prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, mat
     mutate(scenario = ifelse(scenario == "1.5c rps", "IPR 1.5c RPS", scenario)) |>
     mutate(scenario = ifelse(scenario == "nz 2050", "WEO NZ 2050", scenario)) |>
     select(-c("type")) |>
-    relocate(
-      "companies_id", "company_name", "country", "PSTR_share", "PSTR_risk_category",
-      "scenario", "year", "matching_certainty_company_average", "company_city", "postcode",
-      "address", "main_activity"
-    ) |>
+    relocate_pstr_company() |>
     arrange(companies_id)
 }
 
@@ -53,5 +49,14 @@ rename_pstr_company <- function(data) {
       PSTR_risk_category = "risk_category",
       PSTR_share = "value",
       matching_certainty_company_average = "avg_matching_certainty"
+    )
+}
+
+relocate_pstr_company <- function(data) {
+  data |>
+    relocate(
+      "companies_id", "company_name", "country", "PSTR_share", "PSTR_risk_category",
+      "scenario", "year", "matching_certainty_company_average", "company_city", "postcode",
+      "address", "main_activity"
     )
 }

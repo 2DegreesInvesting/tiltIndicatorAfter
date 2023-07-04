@@ -20,12 +20,7 @@
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
 
   final_result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
-    # Different for PSTR than PCTR
-    relocate("companies_id", "company_name", "country", "risk_category", "scenario", "year",
-             "clustered", "activity_name", "reference_product_name",
-             "unit", "tilt_sector", "tilt_subsector", "multi_match", "matching_certainty", "avg_matching_certainty",
-             "company_city", "postcode", "address", "main_activity",
-             "activity_uuid_product_uuid") |>
+    relocate_pstr_product() |>
     rename_pstr_product() |>
     mutate(scenario = ifelse(scenario == "1.5c rps", "IPR 1.5c RPS", scenario)) |>
     mutate(scenario = ifelse(scenario == "nz 2050", "WEO NZ 2050", scenario)) |>
@@ -43,4 +38,13 @@ rename_pstr_product <- function(data) {
       PSTR_risk_category = "risk_category",
       ep_product = "clustered"
     )
+}
+
+relocate_pstr_product <- function(data) {
+  data |>
+    relocate("companies_id", "company_name", "country", "risk_category", "scenario", "year",
+             "clustered", "activity_name", "reference_product_name",
+             "unit", "tilt_sector", "tilt_subsector", "multi_match", "matching_certainty", "avg_matching_certainty",
+             "company_city", "postcode", "address", "main_activity",
+             "activity_uuid_product_uuid")
 }

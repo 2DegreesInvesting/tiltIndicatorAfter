@@ -42,11 +42,7 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     mutate(matching_certainty_num = categorize_matching_certainity(matching_certainty)) |>
     mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
     mutate(avg_matching_certainty = categorize_avg_matching_certainity(avg_matching_certainty_num)) |>
-    relocate("companies_id", "company_name", "country", "risk_category", "grouped_by",
-             "clustered", "activity_name", "reference_product_name",
-             "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
-             "company_city", "postcode", "address", "main_activity",
-             "activity_uuid_product_uuid") |>
+    relocate_ictr_product() |>
     rename_ictr_product() |>
     keep_first_row("ICTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(ICTR_risk_category), NA, benchmark), .by = c("companies_id")) |>
@@ -68,4 +64,13 @@ rename_ictr_product <- function(data) {
       input_name = "exchange_name",
       input_unit = "exchange_unit_name"
     )
+}
+
+relocate_ictr_product <- function(data) {
+  data |>
+    relocate("companies_id", "company_name", "country", "risk_category", "grouped_by",
+             "clustered", "activity_name", "reference_product_name",
+             "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
+             "company_city", "postcode", "address", "main_activity",
+             "activity_uuid_product_uuid")
 }

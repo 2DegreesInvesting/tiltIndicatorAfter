@@ -32,7 +32,6 @@
 prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
 
   inter_result <- prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
-    # TODO: matching_certainty_company_average is used instead of avg_matching_certainty
     select("companies_id", "company_name", "company_city", "country", "postcode",
            "address", "main_activity", "matching_certainty_company_average") |>
     distinct()
@@ -41,11 +40,7 @@ prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, mat
     left_join(inter_result, by = "companies_id") |>
     distinct() |>
     rename_istr_company() |>
-    relocate(
-      "companies_id", "company_name", "company_city", "country", "ISTR_share",
-      "ISTR_risk_category", "scenario", "year", "matching_certainty_company_average",
-      "postcode", "address", "main_activity"
-    ) |>
+    relocate_istr_company() |>
     arrange(companies_id)
 }
 
@@ -54,5 +49,14 @@ rename_istr_company <- function(data) {
     rename(
       ISTR_risk_category = "risk_category",
       ISTR_share = "value"
+    )
+}
+
+relocate_istr_company <- function(data) {
+  data |>
+    relocate(
+      "companies_id", "company_name", "company_city", "country", "ISTR_share",
+      "ISTR_risk_category", "scenario", "year", "matching_certainty_company_average",
+      "postcode", "address", "main_activity"
     )
 }

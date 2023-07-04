@@ -19,11 +19,7 @@
 #' pctr_product_final
 prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) {
   final_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
-    relocate("companies_id", "company_name", "country", "risk_category", "grouped_by",
-             "clustered", "activity_name", "reference_product_name",
-             "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
-             "co2_footprint", "company_city", "postcode", "address", "main_activity",
-             "activity_uuid_product_uuid") |>
+    relocate_pctr_product() |>
     rename_pctr_product() |>
     keep_first_row("PCTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
@@ -48,4 +44,13 @@ rename_pctr_product <- function(data) {
           benchmark = "grouped_by",
           PCTR_risk_category = "risk_category",
           ep_product = "clustered")
+}
+
+relocate_pctr_product <- function(data) {
+  data |>
+    relocate("companies_id", "company_name", "country", "risk_category", "grouped_by",
+             "clustered", "activity_name", "reference_product_name",
+             "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
+             "co2_footprint", "company_city", "postcode", "address", "main_activity",
+             "activity_uuid_product_uuid")
 }

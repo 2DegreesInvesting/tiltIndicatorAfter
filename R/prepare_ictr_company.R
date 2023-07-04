@@ -44,11 +44,7 @@ prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, mat
     # Error: here is ICTR_share used instead of matching_certainty_company_average
     mutate(benchmark = ifelse(is.na(.data$ICTR_share), NA, benchmark)) |>
     mutate(ICTR_risk_category = ifelse(is.na(.data$ICTR_share), NA, ICTR_risk_category)) |>
-    relocate(
-      "companies_id", "company_name", "company_city", "country", "ICTR_share",
-      "ICTR_risk_category", "benchmark", "matching_certainty_company_average",
-      "postcode", "address", "main_activity"
-    ) |>
+    relocate_ictr_company() |>
     select(-c("has_na", "row_number")) |>
     arrange(companies_id)
 }
@@ -59,5 +55,14 @@ rename_ictr_company <- function(data) {
       ICTR_risk_category = "risk_category",
       benchmark = "grouped_by",
       ICTR_share = "value"
+    )
+}
+
+relocate_ictr_company <- function(data) {
+  data |>
+    relocate(
+      "companies_id", "company_name", "company_city", "country", "ICTR_share",
+      "ICTR_risk_category", "benchmark", "matching_certainty_company_average",
+      "postcode", "address", "main_activity"
     )
 }

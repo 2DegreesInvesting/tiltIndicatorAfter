@@ -40,11 +40,7 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
       PCTR_risk_category = ifelse(is.na(.data$matching_certainty_company_average), NA, PCTR_risk_category),
       benchmark = ifelse(is.na(.data$matching_certainty_company_average), NA, benchmark)
     ) |>
-    relocate(
-      "companies_id", "company_name", "country", "PCTR_share", "PCTR_risk_category",
-      "benchmark", "matching_certainty_company_average", "company_city", "postcode",
-      "address", "main_activity"
-    ) |>
+    relocate_pctr_company() |>
     select(-c("has_na", "row_number")) |>
     arrange(companies_id)
 }
@@ -55,5 +51,14 @@ rename_pctr_company <- function(data) {
            benchmark = "grouped_by",
            PCTR_share = "value",
            matching_certainty_company_average = "avg_matching_certainty"
+    )
+}
+
+relocate_pctr_company <- function(data) {
+  data |>
+    relocate(
+      "companies_id", "company_name", "country", "PCTR_share", "PCTR_risk_category",
+      "benchmark", "matching_certainty_company_average", "company_city", "postcode",
+      "address", "main_activity"
     )
 }
