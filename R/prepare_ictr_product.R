@@ -20,12 +20,6 @@
 #' ictr_product_final <- prepare_ictr_product(ictr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
 #' ictr_product_final
 prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  eco_inputs <- eco_inputs |>
-    select("input_activity_uuid_product_uuid", "exchange_name", "exchange_unit_name") |>
-    distinct()
-  comp <- comp |>
-    select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
-    distinct()
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     # Different for ICTR
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
@@ -38,7 +32,7 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
     # same as in PCTR
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
-    rename(matching_certainty = completion) |>
+    rename(matching_certainty = "completion") |>
     mutate(matching_certainty_num = categorize_matching_certainity(matching_certainty)) |>
     mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
     mutate(avg_matching_certainty = categorize_avg_matching_certainity(avg_matching_certainty_num)) |>

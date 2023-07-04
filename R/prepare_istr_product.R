@@ -20,12 +20,6 @@
 #' istr_product_final <- prepare_istr_product(istr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
 #' istr_product_final
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  eco_inputs <- eco_inputs |>
-    select("input_activity_uuid_product_uuid", "exchange_name", "exchange_unit_name") |>
-    distinct()
-  comp <- comp |>
-    select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
-    distinct()
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     # Different for ISTR
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
