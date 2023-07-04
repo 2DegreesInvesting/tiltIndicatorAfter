@@ -33,17 +33,17 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     # same as in PCTR
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     rename(matching_certainty = "completion") |>
-    mutate(matching_certainty_num = categorize_matching_certainity(matching_certainty)) |>
-    mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
-    mutate(avg_matching_certainty = categorize_avg_matching_certainity(avg_matching_certainty_num)) |>
+    mutate(matching_certainty_num = categorize_matching_certainity(.data$matching_certainty)) |>
+    mutate(avg_matching_certainty_num = mean(.data$matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
+    mutate(avg_matching_certainty = categorize_avg_matching_certainity(.data$avg_matching_certainty_num)) |>
     relocate_ictr_product() |>
     rename_ictr_product() |>
     keep_first_row("ICTR_risk_category") |>
-    mutate(benchmark = ifelse(is.na(ICTR_risk_category), NA, benchmark), .by = c("companies_id")) |>
+    mutate(benchmark = ifelse(is.na(.data$ICTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c("has_na", "row_number", "isic_4digit", "isic_4digit_name_ecoinvent",
               "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
     distinct() |>
-    arrange(country)
+    arrange(.data$country)
 }
 
 rename_ictr_product <- function(data) {

@@ -37,12 +37,12 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
     rename_pctr_company() |>
     keep_first_row("PCTR_share") |>
     mutate(
-      PCTR_risk_category = ifelse(is.na(.data$matching_certainty_company_average), NA, PCTR_risk_category),
-      benchmark = ifelse(is.na(.data$matching_certainty_company_average), NA, benchmark)
+      PCTR_risk_category = ifelse(is.na(.data$matching_certainty_company_average), NA, .data$PCTR_risk_category),
+      benchmark = ifelse(is.na(.data$matching_certainty_company_average), NA, .data$benchmark)
     ) |>
     relocate_pctr_company() |>
     select(-c("has_na", "row_number")) |>
-    arrange(companies_id)
+    arrange(.data$companies_id)
 }
 
 rename_pctr_company <- function(data) {

@@ -33,9 +33,9 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     # same as in PSTR
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     rename(matching_certainty = "completion") |>
-    mutate(matching_certainty_num = categorize_matching_certainity(matching_certainty)) |>
-    mutate(avg_matching_certainty_num = mean(matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
-    mutate(avg_matching_certainty = categorize_avg_matching_certainity(avg_matching_certainty_num)) |>
+    mutate(matching_certainty_num = categorize_matching_certainity(.data$matching_certainty)) |>
+    mutate(avg_matching_certainty_num = mean(.data$matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
+    mutate(avg_matching_certainty = categorize_avg_matching_certainity(.data$avg_matching_certainty_num)) |>
     relocate_istr_product() |>
     rename_istr_product() |>
     select(-c("isic_4digit", "isic_4digit_name_ecoinvent",

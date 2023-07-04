@@ -42,11 +42,11 @@ prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, mat
     rename_ictr_company() |>
     keep_first_row("ICTR_share") |>
     # Error: here is ICTR_share used instead of matching_certainty_company_average
-    mutate(benchmark = ifelse(is.na(.data$ICTR_share), NA, benchmark)) |>
-    mutate(ICTR_risk_category = ifelse(is.na(.data$ICTR_share), NA, ICTR_risk_category)) |>
+    mutate(benchmark = ifelse(is.na(.data$ICTR_share), NA, .data$benchmark)) |>
+    mutate(ICTR_risk_category = ifelse(is.na(.data$ICTR_share), NA, .data$ICTR_risk_category)) |>
     relocate_ictr_company() |>
     select(-c("has_na", "row_number")) |>
-    arrange(companies_id)
+    arrange(.data$companies_id)
 }
 
 rename_ictr_company <- function(data) {

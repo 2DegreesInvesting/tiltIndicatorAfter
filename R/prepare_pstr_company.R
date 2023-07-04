@@ -36,11 +36,11 @@ prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, mat
     left_join(inter_result, by = "companies_id") |>
     distinct() |>
     rename_pstr_company() |>
-    mutate(scenario = ifelse(scenario == "1.5c rps", "IPR 1.5c RPS", scenario)) |>
-    mutate(scenario = ifelse(scenario == "nz 2050", "WEO NZ 2050", scenario)) |>
+    mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
+    mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
     select(-c("type")) |>
     relocate_pstr_company() |>
-    arrange(companies_id)
+    arrange(.data$companies_id)
 }
 
 rename_pstr_company <- function(data) {

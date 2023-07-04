@@ -41,7 +41,7 @@ prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, mat
     distinct() |>
     rename_istr_company() |>
     relocate_istr_company() |>
-    arrange(companies_id)
+    arrange(.data$companies_id)
 }
 
 rename_istr_company <- function(data) {
