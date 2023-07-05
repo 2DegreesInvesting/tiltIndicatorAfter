@@ -19,7 +19,8 @@
 #' pctr_product_inter
 prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) {
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
-    select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion", "activity_name", "reference_product_name", "unit")
+    select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match"
+           , "completion", "activity_name", "reference_product_name", "unit")
   activities <- eco_activities |>
     select("activity_uuid_product_uuid", "isic_4digit", "isic_4digit_name_ecoinvent", "isic_section")
 
