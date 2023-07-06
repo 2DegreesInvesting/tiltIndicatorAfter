@@ -33,7 +33,7 @@ Note: run data prep for each indicator separately, otherwise it takes too much s
 ei_activities_overview_2 <- read.csv(here("data-raw/ei_activities_overview_2.csv"))
 ep_companies_2 <- read_csv(here("data-raw/sample_input_datasets/ep_companies_2_sample.csv"))
 mapper_ep_ei <- read_csv(here("data-raw/mapper_ep_ei.csv"))
-ei_input_data_2 <- read_csv(here("data-raw/ei_input_data_2.csv"))
+ei_input_data_2 <- read_csv(here("data-raw/sample_input_datasets/ei_input_data_2_sample.csv"))
 
 # XCTR: indicator output from tiltIndicator package
  pctr_product_level <- read_csv(here("data-raw/sample_input_datasets/pctr_product_level_sample.csv"))
@@ -670,6 +670,18 @@ Join via activity_uuid_product_uuid
 Join via mapper_ep_ei
 - matching certainty
 ```{r}
+# TODO: to be applied in ISTR as well
+# no_NAs <- pstr_product_level |>
+#   filter(!is.na(risk_category)) 
+# 
+# # select company ids where all `risk_category` is only `NA`
+# ids <- pstr_product_level |>
+#   group_by(companies_id) |>
+#   filter(all(is.na(risk_category))) |>
+#   distinct(companies_id)
+# 
+# pstr_product_level <- bind_rows(no_NAs, ids)
+
 # prep of smaller inputs table for join
 ei_inputs_small <- ei_input_data_2 |> 
   select(input_activity_uuid_product_uuid, exchange_name, exchange_unit_name) |> 
@@ -680,15 +692,15 @@ istr_product_level_2 <- istr_product_level |>
   left_join(select(ei_inputs_small, input_activity_uuid_product_uuid, exchange_name, exchange_unit_name), by = "input_activity_uuid_product_uuid")|>
   distinct()
 
-rm(ei_input_data_2)
+#rm(ei_input_data_2)
 
 # remove "input_activity_uuid_product_uuid" and remove duplicates to reduce size
 istr_product_level_3 <- istr_product_level_2 |> 
   select(-input_activity_uuid_product_uuid) |> 
   distinct()
 
-rm(istr_product_level)
-rm(istr_product_level_2)
+#rm(istr_product_level)
+#rm(istr_product_level_2)
 
 ```
 
@@ -841,9 +853,10 @@ istr_product_level_9 <- istr_product_level_8 |>
 # final dataset
 istr_product_level_final <- istr_product_level_9 |> 
   #Error: why relocation is done again?
-  relocate()
+  # relocate()
   rename(ep_product = clustered) |> 
-  select(-grouped_by)
+  # `group_by` is already renamed hence it can't be selected
+  # select(-grouped_by)
 # -chunk, 
 
 # write_csv(istr_product_level_final, here("04_final_outputs/istr_product_level_final.csv"))
@@ -875,7 +888,10 @@ Aligning with names & structure from: https://docs.google.com/spreadsheets/d/1K1
 ```{r}
 istr_company_level_3 <- istr_company_level_2 |> 
   rename(ISTR_risk_category = risk_category, 
-         benchmark = grouped_by, ISTR_share = value) |> 
+         ISTR_share = value) |> 
+  # to be done for ISTR as well
+  # mutate(scenario = ifelse(scenario == "1.5c rps", "IPR 1.5c RPS", scenario)) |> 
+  # mutate(scenario = ifelse(scenario == "nz 2050", "WEO NZ 2050", scenario)) |>
   relocate(companies_id, company_name, company_city, country, ISTR_share, 
            ISTR_risk_category, scenario, year, matching_certainty_company_average, 
            postcode, address, main_activity)|>
