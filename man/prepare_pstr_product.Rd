@@ -9,7 +9,7 @@ prepare_pstr_product(pstr_prod, comp, eco_activities, match_mapper)
 \arguments{
 \item{pstr_prod}{A dataframe like \link{pstr_product}}
 
-\item{comp}{A dataframe like \link{companies}}
+\item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
@@ -25,8 +25,8 @@ Creates final output of pstr product level results
 matches_mapper <- matches_mapper
 ecoinvent_activities <- ecoinvent_activities
 pstr_product <- pstr_product
-companies <- companies
+ep_companies <- ep_companies
 
-pstr_product_final <- prepare_pstr_product(pstr_product, companies, ecoinvent_activities, matches_mapper)
+pstr_product_final <- prepare_pstr_product(pstr_product, ep_companies, ecoinvent_activities, matches_mapper)
 pstr_product_final
 }

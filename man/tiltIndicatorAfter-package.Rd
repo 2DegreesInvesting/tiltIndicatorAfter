@@ -8,6 +8,13 @@
 \description{
 Create user facing outputs of tiltIndicators.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://2degreesinvesting.github.io/tiltIndicatorAfter/}
+}
+
+}
 \author{
 \strong{Maintainer}: Kalash Singhal \email{kalash@2degrees-investing.org} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 

@@ -5,7 +5,7 @@ devtools::load_all()
 
 # Source:
 
-companies <- read_csv(here("data-raw", "sample_input_datasets", "ep_companies_2_sample.csv")) |>
+ep_companies <- read_csv(here("data-raw", "sample_input_datasets", "ep_companies_2_sample.csv")) |>
   select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
   distinct()
 
@@ -17,7 +17,7 @@ matches_mapper <- read_csv(here("data-raw", "mapper_ep_ei.csv"))
 
 ecoinvent_activities <- read_csv(here("data-raw", "ei_activities_overview_2.csv"))
 
-use_data(companies, overwrite = TRUE)
+use_data(ep_companies, overwrite = TRUE)
 use_data(matches_mapper, overwrite = TRUE)
 use_data(ecoinvent_activities, overwrite = TRUE)
 use_data(ecoinvent_inputs, overwrite = TRUE)

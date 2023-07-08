@@ -23,8 +23,6 @@
 #' @importFrom rlang .data
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
-#' @importFrom tiltIndicator unnest_company
-#' @importFrom tiltIndicator xstr_polish_output_at_company_level
 #' @importFrom utils hasName
 ## usethis namespace: end
 NULL

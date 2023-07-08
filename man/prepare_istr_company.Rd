@@ -18,7 +18,7 @@ prepare_istr_company(
 
 \item{istr_prod}{A dataframe like \link{istr_product}}
 
-\item{comp}{A dataframe like \link{companies}}
+\item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
@@ -36,14 +36,14 @@ Creates final output of istr company level results
 matches_mapper <- matches_mapper
 ecoinvent_activities <- ecoinvent_activities
 istr_product <- istr_product
-companies <- companies
+ep_companies <- ep_companies
 istr_company <- istr_company
 ecoinvent_inputs <- ecoinvent_inputs
 
 istr_company_final <- prepare_istr_company(
   istr_company,
   istr_product,
-  companies,
+  ep_companies,
   ecoinvent_activities,
   matches_mapper,
   ecoinvent_inputs
