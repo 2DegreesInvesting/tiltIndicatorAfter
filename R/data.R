@@ -79,5 +79,5 @@
 #' @author Kalash Singhal.
 #'
 #' @examples
-#' companies
-"companies"
+#' ep_companies
+"ep_companies"

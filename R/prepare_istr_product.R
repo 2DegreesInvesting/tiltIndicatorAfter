@@ -3,7 +3,7 @@
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param istr_prod A dataframe like [istr_product]
-#' @param comp A dataframe like [companies]
+#' @param comp A dataframe like [ep_companies]
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
 #'
 #' @return A dataframe that prepares the final output of istr_product
@@ -14,10 +14,10 @@
 #' matches_mapper <- matches_mapper
 #' ecoinvent_activities <- ecoinvent_activities
 #' istr_product <- istr_product
-#' companies <- companies
+#' ep_companies <- ep_companies
 #' ecoinvent_inputs <- ecoinvent_inputs
 #'
-#' istr_product_final <- prepare_istr_product(istr_product, companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
+#' istr_product_final <- prepare_istr_product(istr_product, ep_companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
 #' istr_product_final
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
   istr_prod_level <- exclude_rows(istr_prod)

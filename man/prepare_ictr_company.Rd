@@ -18,7 +18,7 @@ prepare_ictr_company(
 
 \item{ictr_prod}{A dataframe like \link{ictr_product}}
 
-\item{comp}{A dataframe like \link{companies}}
+\item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
@@ -36,14 +36,14 @@ Creates final output of ictr company level results
 matches_mapper <- matches_mapper
 ecoinvent_activities <- ecoinvent_activities
 ictr_product <- ictr_product
-companies <- companies
+ep_companies <- ep_companies
 ictr_company <- ictr_company
 ecoinvent_inputs <- ecoinvent_inputs
 
 ictr_company_final <- prepare_ictr_company(
   ictr_company,
   ictr_product,
-  companies,
+  ep_companies,
   ecoinvent_activities,
   matches_mapper,
   ecoinvent_inputs

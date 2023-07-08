@@ -3,7 +3,7 @@
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pstr_prod A dataframe like [pstr_product]
-#' @param comp A dataframe like [companies]
+#' @param comp A dataframe like [ep_companies]
 #' @param pstr_comp A dataframe like [pstr_company]
 #'
 #' @return A dataframe that prepares the final output of pstr_company
@@ -14,13 +14,13 @@
 #' matches_mapper <- matches_mapper
 #' ecoinvent_activities <- ecoinvent_activities
 #' pstr_product <- pstr_product
-#' companies <- companies
+#' ep_companies <- ep_companies
 #' pstr_company <- pstr_company
 #'
 #' pstr_company_final <- prepare_pstr_company(
 #'   pstr_company,
 #'   pstr_product,
-#'   companies,
+#'   ep_companies,
 #'   ecoinvent_activities,
 #'   matches_mapper
 #' )

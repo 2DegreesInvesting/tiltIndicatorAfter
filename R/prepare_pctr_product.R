@@ -3,7 +3,7 @@
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pctr_prod A dataframe like [pctr_product]
-#' @param comp A dataframe like [companies]
+#' @param comp A dataframe like [ep_companies]
 #'
 #' @return A dataframe that prepares the final output of pctr_product
 #'
@@ -13,9 +13,9 @@
 #' matches_mapper <- matches_mapper
 #' ecoinvent_activities <- ecoinvent_activities
 #' pctr_product <- pctr_product
-#' companies <- companies
+#' ep_companies <- ep_companies
 #'
-#' pctr_product_final <- prepare_pctr_product(pctr_product, companies, ecoinvent_activities, matches_mapper)
+#' pctr_product_final <- prepare_pctr_product(pctr_product, ep_companies, ecoinvent_activities, matches_mapper)
 #' pctr_product_final
 prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) {
   final_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>

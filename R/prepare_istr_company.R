@@ -3,7 +3,7 @@
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param istr_prod A dataframe like [istr_product]
-#' @param comp A dataframe like [companies]
+#' @param comp A dataframe like [ep_companies]
 #' @param istr_comp A dataframe like [istr_company]
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
 #'
@@ -15,14 +15,14 @@
 #' matches_mapper <- matches_mapper
 #' ecoinvent_activities <- ecoinvent_activities
 #' istr_product <- istr_product
-#' companies <- companies
+#' ep_companies <- ep_companies
 #' istr_company <- istr_company
 #' ecoinvent_inputs <- ecoinvent_inputs
 #'
 #' istr_company_final <- prepare_istr_company(
 #'   istr_company,
 #'   istr_product,
-#'   companies,
+#'   ep_companies,
 #'   ecoinvent_activities,
 #'   matches_mapper,
 #'   ecoinvent_inputs

@@ -11,7 +11,7 @@ prepare_pctr_company(pctr_comp, pctr_prod, comp, eco_activities, match_mapper)
 
 \item{pctr_prod}{A dataframe like \link{pctr_product}}
 
-\item{comp}{A dataframe like \link{companies}}
+\item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
@@ -27,13 +27,13 @@ Creates final output of pctr company level results
 matches_mapper <- matches_mapper
 ecoinvent_activities <- ecoinvent_activities
 pctr_product <- pctr_product
-companies <- companies
+ep_companies <- ep_companies
 pctr_company <- pctr_company
 
 pctr_company_final <- prepare_pctr_company(
   pctr_company,
   pctr_product,
-  companies,
+  ep_companies,
   ecoinvent_activities,
   matches_mapper
 )

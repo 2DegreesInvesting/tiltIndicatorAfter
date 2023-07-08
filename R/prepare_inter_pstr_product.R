@@ -3,7 +3,7 @@
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pstr_prod A dataframe like [pstr_product]
-#' @param comp A dataframe like [companies]
+#' @param comp A dataframe like [ep_companies]
 #'
 #' @return A dataframe that prepares the intermediate output of pstr_product
 #'
@@ -13,9 +13,9 @@
 #' matches_mapper <- matches_mapper
 #' ecoinvent_activities <- ecoinvent_activities
 #' pstr_product <- pstr_product
-#' companies <- companies
+#' ep_companies <- ep_companies
 #'
-#' pstr_product_inter <- prepare_inter_pstr_product(pstr_product, companies, ecoinvent_activities, matches_mapper)
+#' pstr_product_inter <- prepare_inter_pstr_product(pstr_product, ep_companies, ecoinvent_activities, matches_mapper)
 #' pstr_product_inter
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
   pstr_prod_level <- exclude_rows(pstr_prod)
