@@ -53,7 +53,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="tiltindicatorafter">tiltIndicatorAfter<a class="anchor" aria-label="anchor" href="#tiltindicatorafter"></a>
 </h1></div>
-<p>The goal of tiltIndicatorAfter is to conduct post-processing of four indicators created from the tiltIndicator package. The post-processing process cleans the data, adds additional columns, and creates subsets for Netherlands and 20 sample companies. The processed output from the tiltIndicatorAfter package is the final output for the user.</p>
+<p>The goal of tiltIndicatorAfter is to conduct post-processing of four indicators created from the tiltIndicator package. The post-processing process cleans the useless data and adds additional columns. The processed output from the tiltIndicatorAfter package is the final output for the user.</p>
 <p>This repository hosts only public code and may only show only fake data.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -72,23 +72,13 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"tiltIndicatorAfter"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] '0.0.0.9000'</span></span>
 <span></span>
-<span><span class="va">companies</span></span>
-<span><span class="co">#&gt; # A tibble: 228 × 11</span></span>
-<span><span class="co">#&gt;    companies_id company_name country company_city postcode address main_activity</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        </span></span>
-<span><span class="co">#&gt;  1 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  2 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  3 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  4 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  5 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  6 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  7 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  8 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt;  9 id3          company C    austria voitsberg        8570 ruhman… service prov…</span></span>
-<span><span class="co">#&gt; 10 id2          company B    germany berlin          13353 spreng… distributor  </span></span>
-<span><span class="co">#&gt; # ℹ 218 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 4 more variables: group &lt;chr&gt;, sector &lt;chr&gt;, subsector &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   clustered &lt;chr&gt;</span></span>
+<span><span class="va">ep_companies</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 7</span></span>
+<span><span class="co">#&gt;   company_name country company_city postcode address  main_activity companies_id</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;       </span></span>
+<span><span class="co">#&gt; 1 company C    austria voitsberg        8570 ruhmann… service prov… id3         </span></span>
+<span><span class="co">#&gt; 2 company B    germany berlin          13353 sprenge… distributor   id2         </span></span>
+<span><span class="co">#&gt; 3 company A    germany frankfurt       60316 wittels… manufacturer… id1</span></span>
 <span></span>
 <span><span class="va">matches_mapper</span></span>
 <span><span class="co">#&gt; # A tibble: 23,270 × 8</span></span>
@@ -127,24 +117,20 @@
 <span><span class="co">#&gt; #   isic_section &lt;chr&gt;, unit &lt;chr&gt;</span></span>
 <span></span>
 <span><span class="va">ecoinvent_inputs</span></span>
-<span><span class="co">#&gt; # A tibble: 246,004 × 8</span></span>
-<span><span class="co">#&gt;    activity_uuid_produc…¹ activity_name product_geography input_activity_uuid_…²</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;         &lt;chr&gt;             &lt;chr&gt;                 </span></span>
-<span><span class="co">#&gt;  1 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               b1649f21-88de-53a4-a5…</span></span>
-<span><span class="co">#&gt;  2 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               9f850d21-3a8f-5954-ba…</span></span>
-<span><span class="co">#&gt;  3 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               b114b449-7b44-539d-b5…</span></span>
-<span><span class="co">#&gt;  4 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               023ad034-21ce-56b0-b6…</span></span>
-<span><span class="co">#&gt;  5 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               9158a1e6-3c02-5113-bf…</span></span>
-<span><span class="co">#&gt;  6 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               7ac71fd7-a65b-5f2c-92…</span></span>
-<span><span class="co">#&gt;  7 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               41123892-ac9f-50d9-95…</span></span>
-<span><span class="co">#&gt;  8 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               9f7ffd08-aa89-59a3-aa…</span></span>
-<span><span class="co">#&gt;  9 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               d5039cfa-00d8-5663-b1…</span></span>
-<span><span class="co">#&gt; 10 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               40b6e556-9ee6-57c5-92…</span></span>
-<span><span class="co">#&gt; # ℹ 245,994 more rows</span></span>
-<span><span class="co">#&gt; # ℹ abbreviated names: ¹​activity_uuid_product_uuid,</span></span>
-<span><span class="co">#&gt; #   ²​input_activity_uuid_product_uuid</span></span>
-<span><span class="co">#&gt; # ℹ 4 more variables: exchange_name &lt;chr&gt;, input_geography &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   exchange_unit_name &lt;chr&gt;, exchange_amount &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; # A tibble: 52 × 3</span></span>
+<span><span class="co">#&gt;    input_activity_uuid_product_uuid             exchange_name exchange_unit_name</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                                        &lt;chr&gt;         &lt;chr&gt;             </span></span>
+<span><span class="co">#&gt;  1 7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44c… aluminium, w… kg                </span></span>
+<span><span class="co">#&gt;  2 3b190359-a32e-5294-af63-983f38ce6525_759b89… electricity,… kWh               </span></span>
+<span><span class="co">#&gt;  3 62b803ad-e3ff-516b-947d-f08eea52c702_fbb039… copper, cath… kg                </span></span>
+<span><span class="co">#&gt;  4 372a1991-e0af-5fbf-8611-295a535373ad_9ba482… reinforcing … kg                </span></span>
+<span><span class="co">#&gt;  5 531db396-1434-54e5-b6c4-c2b4323471cb_751b5e… stone wool, … kg                </span></span>
+<span><span class="co">#&gt;  6 c93a2afc-7e58-50b6-af0e-586f71a3de0e_bfd577… waste minera… kg                </span></span>
+<span><span class="co">#&gt;  7 3a29c9e0-4183-588d-95a9-502b55d2c513_bfd577… waste minera… kg                </span></span>
+<span><span class="co">#&gt;  8 2330b528-6e31-5a99-9801-73834e2a835f_6f2eb4… waste wood, … kg                </span></span>
+<span><span class="co">#&gt;  9 79d6450d-f9ad-5619-89c3-05c8d7622af3_b0f4c2… diesel, burn… MJ                </span></span>
+<span><span class="co">#&gt; 10 044043d2-bdfc-55f1-9d2d-e8431d5266c7_8cb650… steel, low-a… kg                </span></span>
+<span><span class="co">#&gt; # ℹ 42 more rows</span></span>
 <span></span>
 <span><span class="co"># PCTR</span></span>
 <span></span>
@@ -167,7 +153,7 @@
 <span><span class="co">#&gt; # ℹ 1 more variable: co2_footprint &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="va">pctr_product_final</span> <span class="op">&lt;-</span> <span class="va">pctr_product</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/prepare_pctr_product.html">prepare_pctr_product</a></span><span class="op">(</span><span class="va">companies</span>, <span class="va">ecoinvent_activities</span>, <span class="va">matches_mapper</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="reference/prepare_pctr_product.html">prepare_pctr_product</a></span><span class="op">(</span><span class="va">ep_companies</span>, <span class="va">ecoinvent_activities</span>, <span class="va">matches_mapper</span><span class="op">)</span></span>
 <span><span class="va">pctr_product_final</span></span>
 <span><span class="co">#&gt; # A tibble: 25 × 17</span></span>
 <span><span class="co">#&gt;    companies_id company_name country PCTR_risk_category benchmark     ep_product</span></span>
@@ -206,7 +192,7 @@
 <span><span class="co">#&gt; # ℹ 44 more rows</span></span>
 <span></span>
 <span><span class="va">pctr_company_final</span> <span class="op">&lt;-</span> <span class="va">pctr_company</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/prepare_pctr_company.html">prepare_pctr_company</a></span><span class="op">(</span><span class="va">pctr_product</span>, <span class="va">companies</span>, <span class="va">ecoinvent_activities</span>, <span class="va">matches_mapper</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="reference/prepare_pctr_company.html">prepare_pctr_company</a></span><span class="op">(</span><span class="va">pctr_product</span>, <span class="va">ep_companies</span>, <span class="va">ecoinvent_activities</span>, <span class="va">matches_mapper</span><span class="op">)</span></span>
 <span><span class="va">pctr_company_final</span></span>
 <span><span class="co">#&gt; # A tibble: 37 × 11</span></span>
 <span><span class="co">#&gt;    companies_id company_name country PCTR_share PCTR_risk_category benchmark</span></span>
