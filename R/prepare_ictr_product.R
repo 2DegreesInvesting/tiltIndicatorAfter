@@ -36,10 +36,7 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     left_join(comp, by = "companies_id") |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
-    rename(matching_certainty = "completion") |>
-    mutate(matching_certainty_num = categorize_matching_certainity(.data$matching_certainty)) |>
-    mutate(avg_matching_certainty_num = mean(.data$matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
-    mutate(avg_matching_certainty = categorize_avg_matching_certainity(.data$avg_matching_certainty_num)) |>
+    add_avg_matching_certainty("completion") |>
     relocate_ictr_product() |>
     rename_ictr_product() |>
     keep_first_row("ICTR_risk_category") |>

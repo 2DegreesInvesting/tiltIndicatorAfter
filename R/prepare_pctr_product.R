@@ -36,13 +36,6 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
     arrange(.data$country)
 }
 
-keep_first_row <- function(data, col) {
-  data |>
-    mutate(has_na = all(is.na(.data[[col]])), row_number = row_number(), .by = c("companies_id")) |>
-    mutate(benchmark = ifelse(.data$has_na & .data$row_number != 1, NA, .data$benchmark)) |>
-    filter(!is.na(.data$benchmark))
-}
-
 rename_pctr_product <- function(data) {
   data |>
     rename(
