@@ -1,6 +1,6 @@
 test_that("total number of rows for a comapny is either 1 or 18", {
   out <- prepare_pctr_company(pctr_company, pctr_product, ep_companies, ecoinvent_activities, matches_mapper) |>
     group_by(companies_id) |>
-    summarise(count=n())
+    summarise(count = n())
   expect_true(all(unique(out$count) %in% c(18, 1)))
 })

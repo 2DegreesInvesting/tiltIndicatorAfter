@@ -17,21 +17,26 @@
 #' ep_companies <- ep_companies
 #' ecoinvent_inputs <- ecoinvent_inputs
 #'
-#' istr_product_final <- prepare_istr_product(istr_product, ep_companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
+#' istr_product_final <- prepare_istr_product(
+#'   istr_product,
+#'   ep_companies,
+#'   ecoinvent_activities,
+#'   matches_mapper,
+#'   ecoinvent_inputs
+#' )
 #' istr_product_final
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
   istr_prod_level <- exclude_rows(istr_prod)
+
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
-    # Different for ISTR
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
 
-  istr_prod_level <- istr_prod_level |>
+  istr_prod_level |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
     distinct() |>
     select(-c("input_activity_uuid_product_uuid")) |>
     left_join(comp, by = "companies_id") |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
-    # same as in PSTR
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     rename(matching_certainty = "completion") |>
     mutate(matching_certainty_num = categorize_matching_certainity(.data$matching_certainty)) |>
@@ -41,8 +46,10 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     rename_istr_product() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
     mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
-    select(-c("isic_4digit", "isic_4digit_name_ecoinvent",
-              "isic_section", "matching_certainty_num", "avg_matching_certainty_num")) |>
+    select(-c(
+      "isic_4digit", "isic_4digit_name_ecoinvent",
+      "isic_section", "matching_certainty_num", "avg_matching_certainty_num"
+    )) |>
     distinct() |>
     arrange(.data$country)
 }
@@ -63,10 +70,12 @@ rename_istr_product <- function(data) {
 
 relocate_istr_product <- function(data) {
   data |>
-    relocate("companies_id", "company_name", "country", "risk_category", "scenario", "year",
-           "clustered", "activity_name", "reference_product_name",
-           "unit", "tilt_sector", "multi_match", "matching_certainty", "avg_matching_certainty",
-           "exchange_name", "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector",
-           "company_city", "postcode", "address", "main_activity",
-           "activity_uuid_product_uuid", "grouped_by")
+    relocate(
+      "companies_id", "company_name", "country", "risk_category", "scenario", "year",
+      "clustered", "activity_name", "reference_product_name",
+      "unit", "tilt_sector", "multi_match", "matching_certainty", "avg_matching_certainty",
+      "exchange_name", "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector",
+      "company_city", "postcode", "address", "main_activity",
+      "activity_uuid_product_uuid", "grouped_by"
+    )
 }

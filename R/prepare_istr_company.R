@@ -27,15 +27,16 @@
 #'   matches_mapper,
 #'   ecoinvent_inputs
 #' )
-#'
 #' istr_company_final
 prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
   inter_result <- prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
-    select("companies_id", "company_name", "company_city", "country", "postcode",
-           "address", "main_activity", "matching_certainty_company_average") |>
+    select(
+      "companies_id", "company_name", "company_city", "country", "postcode",
+      "address", "main_activity", "matching_certainty_company_average"
+    ) |>
     distinct()
 
-  istr_company_level <- istr_comp |>
+  istr_comp |>
     left_join(inter_result, by = "companies_id") |>
     distinct() |>
     rename_istr_company() |>
