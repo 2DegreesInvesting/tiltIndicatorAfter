@@ -15,18 +15,23 @@
 #' pstr_product <- pstr_product
 #' ep_companies <- ep_companies
 #'
-#' pstr_product_inter <- prepare_inter_pstr_product(pstr_product, ep_companies, ecoinvent_activities, matches_mapper)
+#' pstr_product_inter <- prepare_inter_pstr_product(
+#'   pstr_product,
+#'   ep_companies,
+#'   ecoinvent_activities,
+#'   matches_mapper
+#' )
 #' pstr_product_inter
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
   pstr_prod_level <- exclude_rows(pstr_prod)
-  # different for PSTR due to some missing column names
+
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
-  # different for PSTR due to activity_name and unit
+
   activities <- eco_activities |>
     select("activity_uuid_product_uuid", "isic_4digit", "reference_product_name", "isic_4digit_name_ecoinvent", "isic_section", "activity_name", "unit")
 
-  pstr_prod_level <- pstr_prod_level |>
+  pstr_prod_level |>
     left_join(comp, by = "companies_id") |>
     left_join(activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
@@ -37,7 +42,6 @@ prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_ma
 }
 
 # excluding rows with `risk_category` as NA without excluding any company which contain NAs
-# PLEASE NOTE: chunks should be created based on `companies_id` for this code to accurately work
 exclude_rows <- function(data) {
   ids <- data |>
     filter(all(is.na(.data$risk_category)), .by = c("companies_id")) |>

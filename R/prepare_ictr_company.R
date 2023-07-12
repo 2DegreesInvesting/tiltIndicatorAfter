@@ -27,20 +27,21 @@
 #'   matches_mapper,
 #'   ecoinvent_inputs
 #' )
-#'
 #' ictr_company_final
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
   inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
-    select("companies_id", "company_name", "company_city", "country", "postcode",
-           "address", "main_activity", "matching_certainty_company_average") |>
+    select(
+      "companies_id", "company_name", "company_city", "country", "postcode",
+      "address", "main_activity", "matching_certainty_company_average"
+    ) |>
     distinct()
 
-  ictr_company_level <- ictr_comp |>
+  ictr_comp |>
     left_join(inter_result, by = "companies_id") |>
     distinct() |>
     rename_ictr_company() |>
     keep_first_row("ICTR_share") |>
-    # Error: here ICTR_share is used instead of matching_certainty_company_average
+    # To check: here ICTR_share is used instead of matching_certainty_company_average
     mutate(benchmark = ifelse(is.na(.data$ICTR_share), NA, .data$benchmark)) |>
     mutate(ICTR_risk_category = ifelse(is.na(.data$ICTR_share), NA, .data$ICTR_risk_category)) |>
     relocate_ictr_company() |>

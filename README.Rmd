@@ -7,7 +7,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%")
+  out.width = "100%"
+)
 ```
 
 # tiltIndicatorAfter
@@ -50,7 +51,7 @@ pctr_product_final
 
 pctr_company
 
-pctr_company_final <- pctr_company |> 
+pctr_company_final <- pctr_company |>
   prepare_pctr_company(pctr_product, ep_companies, ecoinvent_activities, matches_mapper)
 pctr_company_final
 ```

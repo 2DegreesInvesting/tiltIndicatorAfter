@@ -24,14 +24,13 @@
 #'   ecoinvent_activities,
 #'   matches_mapper
 #' )
-#'
 #' pctr_company_final
 prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper) {
   inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>
     distinct()
 
-  pctr_company_level <- pctr_comp |>
+  pctr_comp |>
     left_join(inter_result, by = "companies_id") |>
     distinct() |>
     rename_pctr_company() |>
@@ -47,10 +46,11 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
 
 rename_pctr_company <- function(data) {
   data |>
-    rename(PCTR_risk_category = "risk_category",
-           benchmark = "grouped_by",
-           PCTR_share = "value",
-           matching_certainty_company_average = "avg_matching_certainty"
+    rename(
+      PCTR_risk_category = "risk_category",
+      benchmark = "grouped_by",
+      PCTR_share = "value",
+      matching_certainty_company_average = "avg_matching_certainty"
     )
 }
 

@@ -15,16 +15,23 @@
 #' pstr_product <- pstr_product
 #' ep_companies <- ep_companies
 #'
-#' pstr_product_final <- prepare_pstr_product(pstr_product, ep_companies, ecoinvent_activities, matches_mapper)
+#' pstr_product_final <- prepare_pstr_product(
+#'   pstr_product,
+#'   ep_companies,
+#'   ecoinvent_activities,
+#'   matches_mapper
+#' )
 #' pstr_product_final
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-  final_result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
+  result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     relocate_pstr_product() |>
     rename_pstr_product() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
     mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
-    select(-c("isic_4digit", "isic_4digit_name_ecoinvent",
-              "isic_section", "matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type")) |>
+    select(-c(
+      "isic_4digit", "isic_4digit_name_ecoinvent",
+      "isic_section", "matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type"
+    )) |>
     distinct()
 }
 
@@ -41,9 +48,11 @@ rename_pstr_product <- function(data) {
 
 relocate_pstr_product <- function(data) {
   data |>
-    relocate("companies_id", "company_name", "country", "risk_category", "scenario", "year",
-             "clustered", "activity_name", "reference_product_name",
-             "unit", "tilt_sector", "tilt_subsector", "multi_match", "matching_certainty", "avg_matching_certainty",
-             "company_city", "postcode", "address", "main_activity",
-             "activity_uuid_product_uuid")
+    relocate(
+      "companies_id", "company_name", "country", "risk_category", "scenario", "year",
+      "clustered", "activity_name", "reference_product_name",
+      "unit", "tilt_sector", "tilt_subsector", "multi_match", "matching_certainty", "avg_matching_certainty",
+      "company_city", "postcode", "address", "main_activity",
+      "activity_uuid_product_uuid"
+    )
 }

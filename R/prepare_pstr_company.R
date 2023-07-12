@@ -24,14 +24,13 @@
 #'   ecoinvent_activities,
 #'   matches_mapper
 #' )
-#'
 #' pstr_company_final
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper) {
   inter_result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>
     distinct()
 
-  pstr_company_level <- pstr_comp |>
+  pstr_comp |>
     left_join(inter_result, by = "companies_id") |>
     distinct() |>
     rename_pstr_company() |>
