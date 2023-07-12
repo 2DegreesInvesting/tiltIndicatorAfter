@@ -3,9 +3,9 @@
 
 The goal of tiltIndicatorAfter is to conduct post-processing of four
 indicators created from the tiltIndicator package. The post-processing
-process cleans the data, adds additional columns, and creates subsets
-for Netherlands and 20 sample companies. The processed output from the
-tiltIndicatorAfter package is the final output for the user.
+process cleans the useless data and adds additional columns. The
+processed output from the tiltIndicatorAfter package is the final output
+for the user.
 
 This repository hosts only public code and may only show only fake data.
 
@@ -27,23 +27,13 @@ library(tiltIndicatorAfter)
 packageVersion("tiltIndicatorAfter")
 #> [1] '0.0.0.9000'
 
-companies
-#> # A tibble: 228 × 11
-#>    companies_id company_name country company_city postcode address main_activity
-#>    <chr>        <chr>        <chr>   <chr>           <dbl> <chr>   <chr>        
-#>  1 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  2 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  3 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  4 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  5 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  6 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  7 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  8 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#>  9 id3          company C    austria voitsberg        8570 ruhman… service prov…
-#> 10 id2          company B    germany berlin          13353 spreng… distributor  
-#> # ℹ 218 more rows
-#> # ℹ 4 more variables: group <chr>, sector <chr>, subsector <chr>,
-#> #   clustered <chr>
+ep_companies
+#> # A tibble: 3 × 7
+#>   company_name country company_city postcode address  main_activity companies_id
+#>   <chr>        <chr>   <chr>           <dbl> <chr>    <chr>         <chr>       
+#> 1 company C    austria voitsberg        8570 ruhmann… service prov… id3         
+#> 2 company B    germany berlin          13353 sprenge… distributor   id2         
+#> 3 company A    germany frankfurt       60316 wittels… manufacturer… id1
 
 matches_mapper
 #> # A tibble: 23,270 × 8
@@ -82,24 +72,20 @@ ecoinvent_activities
 #> #   isic_section <chr>, unit <chr>
 
 ecoinvent_inputs
-#> # A tibble: 246,004 × 8
-#>    activity_uuid_produc…¹ activity_name product_geography input_activity_uuid_…²
-#>    <chr>                  <chr>         <chr>             <chr>                 
-#>  1 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               b1649f21-88de-53a4-a5…
-#>  2 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               9f850d21-3a8f-5954-ba…
-#>  3 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               b114b449-7b44-539d-b5…
-#>  4 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               023ad034-21ce-56b0-b6…
-#>  5 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               9158a1e6-3c02-5113-bf…
-#>  6 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               7ac71fd7-a65b-5f2c-92…
-#>  7 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               41123892-ac9f-50d9-95…
-#>  8 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               9f7ffd08-aa89-59a3-aa…
-#>  9 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               d5039cfa-00d8-5663-b1…
-#> 10 61acb392-9dda-594b-bb… [sulfonyl]ur… RoW               40b6e556-9ee6-57c5-92…
-#> # ℹ 245,994 more rows
-#> # ℹ abbreviated names: ¹​activity_uuid_product_uuid,
-#> #   ²​input_activity_uuid_product_uuid
-#> # ℹ 4 more variables: exchange_name <chr>, input_geography <chr>,
-#> #   exchange_unit_name <chr>, exchange_amount <dbl>
+#> # A tibble: 52 × 3
+#>    input_activity_uuid_product_uuid             exchange_name exchange_unit_name
+#>    <chr>                                        <chr>         <chr>             
+#>  1 7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44c… aluminium, w… kg                
+#>  2 3b190359-a32e-5294-af63-983f38ce6525_759b89… electricity,… kWh               
+#>  3 62b803ad-e3ff-516b-947d-f08eea52c702_fbb039… copper, cath… kg                
+#>  4 372a1991-e0af-5fbf-8611-295a535373ad_9ba482… reinforcing … kg                
+#>  5 531db396-1434-54e5-b6c4-c2b4323471cb_751b5e… stone wool, … kg                
+#>  6 c93a2afc-7e58-50b6-af0e-586f71a3de0e_bfd577… waste minera… kg                
+#>  7 3a29c9e0-4183-588d-95a9-502b55d2c513_bfd577… waste minera… kg                
+#>  8 2330b528-6e31-5a99-9801-73834e2a835f_6f2eb4… waste wood, … kg                
+#>  9 79d6450d-f9ad-5619-89c3-05c8d7622af3_b0f4c2… diesel, burn… MJ                
+#> 10 044043d2-bdfc-55f1-9d2d-e8431d5266c7_8cb650… steel, low-a… kg                
+#> # ℹ 42 more rows
 
 # PCTR
 
@@ -122,7 +108,7 @@ pctr_product
 #> # ℹ 1 more variable: co2_footprint <dbl>
 
 pctr_product_final <- pctr_product |>
-  prepare_pctr_product(companies, ecoinvent_activities, matches_mapper)
+  prepare_pctr_product(ep_companies, ecoinvent_activities, matches_mapper)
 pctr_product_final
 #> # A tibble: 25 × 17
 #>    companies_id company_name country PCTR_risk_category benchmark     ep_product
@@ -161,7 +147,7 @@ pctr_company
 #> # ℹ 44 more rows
 
 pctr_company_final <- pctr_company |> 
-  prepare_pctr_company(pctr_product, companies, ecoinvent_activities, matches_mapper)
+  prepare_pctr_company(pctr_product, ep_companies, ecoinvent_activities, matches_mapper)
 pctr_company_final
 #> # A tibble: 37 × 11
 #>    companies_id company_name country PCTR_share PCTR_risk_category benchmark
