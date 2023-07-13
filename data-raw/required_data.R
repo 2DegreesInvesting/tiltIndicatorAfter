@@ -15,7 +15,7 @@ ecoinvent_inputs <- read_csv(here("data-raw", "sample_input_datasets", "ei_input
 
 matches_mapper <- read_csv(here("data-raw", "mapper_ep_ei.csv"))
 
-ecoinvent_activities <- read_csv(here("data-raw", "ei_activities_overview_2.csv"))
+ecoinvent_activities <- read_csv(here("data-raw", "ei_activities_overview.csv"))
 
 use_data(ep_companies, overwrite = TRUE)
 use_data(matches_mapper, overwrite = TRUE)
