@@ -61,7 +61,7 @@
 #     "unit"
 #   )))
 #
-# ictr_prod <- read_csv("/path/to/input/ictr_products_v2.csv", col_types = cols(input_isic_4digit = col_character())) |>
+# ictr_prod <- read_csv("/path/to/input/ictr_products.csv", col_types = cols(input_isic_4digit = col_character())) |>
 #   select(all_of(c(
 #     "input_co2_footprint",
 #     "input_tilt_sector",
@@ -71,22 +71,22 @@
 #     "activity_uuid_product_uuid"
 #   )))
 #
-# # is_na_free <- !anyNA(inputs$input_co2_footprint)
-# # stopifnot(is_na_free)
+# is_na_free <- !anyNA(ictr_prod$input_co2_footprint)
+# stopifnot(is_na_free)
 #
-# #ep_companies
-# ep_campanies_mapper <- read_csv("/path/to/input/ep_companies_2.csv") |>
+# # ep_companies
+# ep_campanies_mapper <- read_csv("/path/to/input/ep_companies.csv") |>
 #   select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
 #   distinct()
 #
 # # ecoinvent_activities
-# eco_act <- read_csv("/path/to/input/ei_activities_overview_2.csv")
+# eco_act <- read_csv("/path/to/input/ei_activities_overview.csv")
 #
 # # matches_mapper
 # match_map <- read_csv("/path/to/input/mapper_ep_ei.csv")
 #
 # # ecoinvent_inputs
-# eco_inputs_raw <- read_csv("/path/to/input/ei_input_data_2.csv") |>
+# eco_inputs_raw <- read_csv("/path/to/input/ei_input_data.csv") |>
 #   select("input_activity_uuid_product_uuid", "exchange_name", "exchange_unit_name") |>
 #   distinct()
 #
@@ -114,12 +114,12 @@
 #   future_pwalk(ictr_rds, .progress = TRUE)
 #
 # ictr_product_result <- map_df(ictr_job$file_product, read_rds)
-# ictr_product_result
-# # TODO: `... |> write_csv("/path/to/output/ictr_product_result.csv")`
+# # ictr_product_result |>
+# #   write_csv("/path/to/output/ictr_product_result.csv")
 #
 # ictr_company_result <- map_df(ictr_job$file_company, read_rds)
-# ictr_company_result
-# # TODO: `... |> write_csv("/path/to/output/ictr_company_result.csv")`
+# # ictr_company_result |>
+# #   write_csv("/path/to/output/ictr_company_result.csv")
 #
 # # Each chunk result was saved to a file
 # dir_tree(cache_path("ictr/product"))

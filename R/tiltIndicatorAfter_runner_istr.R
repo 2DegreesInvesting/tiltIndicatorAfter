@@ -50,35 +50,36 @@
 #   mutate(data, done_product = file_exists(file_product), done_company = file_exists(file_company))
 # }
 #
-# istr_comp <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/istr_companies.csv") |>
+# istr_comp <- read_csv("/path/to/input/istr_companies.csv") |>
 #   rename(company_id = "companies_id") |>
 #   xstr_prune_companies()
 #
-# istr_inputs_raw <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/istr_products.csv", col_types = cols(input_isic_4digit = col_character())) |>
+# istr_inputs_raw <- read_csv("/path/to/input/istr_products.csv", col_types = cols(input_isic_4digit = col_character())) |>
 #   rename(weo_product = "input_weo_sector", weo_flow = "input_weo_subsector", ipr_sector = "input_ipr_sector", ipr_subsector = "input_ipr_subsector") |>
 #   xstr_pivot_type_sector_subsector()
 #
 # scenario_years <- c(2030, 2050)
-# ipr <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/str_ipr_targets.csv") |>
+# ipr <- read_csv("/path/to/input/str_ipr_targets.csv") |>
 #   distinct(scenario, year, ipr_sector, ipr_subsector, .keep_all = TRUE)
-# weo <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/str_weo_targets.csv") |>
+# weo <- read_csv("/path/to/input/str_weo_targets.csv") |>
 #   distinct(scenario, year, weo_sector, weo_subsector, .keep_all = TRUE)
 # scenarios_new <- list(ipr = ipr, weo = weo) |>
 #   xstr_prepare_scenario() |>
 #   filter(year %in% scenario_years)
 #
-# ep_campanies_mapper <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/ep_companies.csv") |>
+# # ep_companies
+# ep_campanies_mapper <- read_csv("/path/to/input/ep_companies.csv") |>
 #   select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
 #   distinct()
 #
 # # ecoinvent_activities
-# eco_act <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/ei_activities_overview.csv")
+# eco_act <- read_csv("/path/to/input/ei_activities_overview.csv")
 #
 # # matches_mapper
-# match_map <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/mapper_ep_ei.csv")
+# match_map <- read_csv("/path/to/input/mapper_ep_ei.csv")
 #
 # # ecoinvent_inputs
-# eco_inputs_raw <- read_csv("/Users/kalashsinghal/git/2DII/tiltIndicatorAfter/vignettes/articles/test/ei_input_data.csv") |>
+# eco_inputs_raw <- read_csv("/path/to/input/ei_input_data.csv") |>
 #   select("input_activity_uuid_product_uuid", "exchange_name", "exchange_unit_name") |>
 #   distinct()
 #
@@ -107,12 +108,12 @@
 #   future_pwalk(istr_rds, .progress = TRUE)
 #
 # istr_product_result <- map_df(istr_job$file_product, read_rds)
-# istr_product_result
-# # TODO: `... |> write_csv("/path/to/output/istr_product_result.csv")`
+# # istr_product_result |>
+# #   write_csv("/path/to/output/istr_product_result.csv")
 #
 # istr_company_result <- map_df(istr_job$file_company, read_rds)
-# istr_company_result
-# # TODO: `... |> write_csv("/path/to/output/istr_company_result.csv")`
+# # istr_company_result |>
+# #   write_csv("/path/to/output/istr_company_result.csv")
 #
 # # Each chunk result was saved to a file
 # dir_tree(cache_path("istr/product"))
