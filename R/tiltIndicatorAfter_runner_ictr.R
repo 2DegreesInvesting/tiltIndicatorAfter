@@ -1,3 +1,5 @@
+# ## tiltIndicatorAfter-Runner for ICTR with real data
+
 # library(dplyr, warn.conflicts = FALSE)
 # library(readr, warn.conflicts = FALSE)
 # library(tidyr, warn.conflicts = FALSE)
@@ -7,6 +9,7 @@
 # library(furrr)
 # library(fs)
 # library(tiltIndicator)
+# ## devtools::install_github("2DegreesInvesting/tiltIndicatorAfter")
 # library(tiltIndicatorAfter)
 #
 # options(readr.show_col_types = FALSE)
