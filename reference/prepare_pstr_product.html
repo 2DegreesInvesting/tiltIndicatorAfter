@@ -77,7 +77,12 @@
 <span class="r-in"><span><span class="va">pstr_product</span> <span class="op">&lt;-</span> <span class="va">pstr_product</span></span></span>
 <span class="r-in"><span><span class="va">ep_companies</span> <span class="op">&lt;-</span> <span class="va">ep_companies</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">pstr_product_final</span> <span class="op">&lt;-</span> <span class="fu">prepare_pstr_product</span><span class="op">(</span><span class="va">pstr_product</span>, <span class="va">ep_companies</span>, <span class="va">ecoinvent_activities</span>, <span class="va">matches_mapper</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pstr_product_final</span> <span class="op">&lt;-</span> <span class="fu">prepare_pstr_product</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">pstr_product</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ep_companies</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ecoinvent_activities</span>,</span></span>
+<span class="r-in"><span>  <span class="va">matches_mapper</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pstr_product_final</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id company_name country PSTR_risk_category scenario      year</span>

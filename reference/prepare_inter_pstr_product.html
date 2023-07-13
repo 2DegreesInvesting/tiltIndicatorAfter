@@ -77,9 +77,14 @@
 <span class="r-in"><span><span class="va">pstr_product</span> <span class="op">&lt;-</span> <span class="va">pstr_product</span></span></span>
 <span class="r-in"><span><span class="va">ep_companies</span> <span class="op">&lt;-</span> <span class="va">ep_companies</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">pstr_product_inter</span> <span class="op">&lt;-</span> <span class="fu">prepare_inter_pstr_product</span><span class="op">(</span><span class="va">pstr_product</span>, <span class="va">ep_companies</span>, <span class="va">ecoinvent_activities</span>, <span class="va">matches_mapper</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pstr_product_inter</span> <span class="op">&lt;-</span> <span class="fu">prepare_inter_pstr_product</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">pstr_product</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ep_companies</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ecoinvent_activities</span>,</span></span>
+<span class="r-in"><span>  <span class="va">matches_mapper</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pstr_product_inter</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 27</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 24</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id grouped_by        risk_category clustered activity_uuid_produc…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id1          ipr_1.5c rps_2030 medium        building… ebd4dddf-9f74-5fd1-89…</span>
@@ -102,12 +107,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> id2          ipr_1.5c rps_2050 high          <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> id3          <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​activity_uuid_product_uuid</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more variables: tilt_sector &lt;chr&gt;, scenario &lt;chr&gt;, year &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 19 more variables: tilt_sector &lt;chr&gt;, scenario &lt;chr&gt;, year &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   type &lt;chr&gt;, tilt_subsector &lt;chr&gt;, company_name &lt;chr&gt;, country &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   company_city &lt;chr&gt;, postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   isic_4digit &lt;chr&gt;, reference_product_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   isic_4digit_name_ecoinvent &lt;chr&gt;, isic_section &lt;chr&gt;, activity_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   unit &lt;chr&gt;, multi_match &lt;chr&gt;, matching_certainty &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reference_product_name &lt;chr&gt;, activity_name &lt;chr&gt;, unit &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   multi_match &lt;chr&gt;, matching_certainty &lt;chr&gt;, matching_certainty_num &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avg_matching_certainty_num &lt;dbl&gt;, avg_matching_certainty &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
