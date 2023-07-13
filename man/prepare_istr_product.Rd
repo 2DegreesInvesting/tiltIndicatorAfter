@@ -30,6 +30,12 @@ istr_product <- istr_product
 ep_companies <- ep_companies
 ecoinvent_inputs <- ecoinvent_inputs
 
-istr_product_final <- prepare_istr_product(istr_product, ep_companies, ecoinvent_activities, matches_mapper, ecoinvent_inputs)
+istr_product_final <- prepare_istr_product(
+  istr_product,
+  ep_companies,
+  ecoinvent_activities,
+  matches_mapper,
+  ecoinvent_inputs
+)
 istr_product_final
 }

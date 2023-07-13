@@ -48,6 +48,5 @@ istr_company_final <- prepare_istr_company(
   matches_mapper,
   ecoinvent_inputs
 )
-
 istr_company_final
 }

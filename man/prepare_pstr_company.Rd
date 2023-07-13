@@ -37,6 +37,5 @@ pstr_company_final <- prepare_pstr_company(
   ecoinvent_activities,
   matches_mapper
 )
-
 pstr_company_final
 }

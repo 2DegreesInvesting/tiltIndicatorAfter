@@ -37,6 +37,5 @@ pctr_company_final <- prepare_pctr_company(
   ecoinvent_activities,
   matches_mapper
 )
-
 pctr_company_final
 }

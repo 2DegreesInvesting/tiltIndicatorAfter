@@ -48,6 +48,5 @@ ictr_company_final <- prepare_ictr_company(
   matches_mapper,
   ecoinvent_inputs
 )
-
 ictr_company_final
 }

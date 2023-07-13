@@ -29,8 +29,7 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
     keep_first_row("PCTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
-      "has_na", "row_number", "isic_4digit", "isic_4digit_name_ecoinvent",
-      "isic_section", "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"
+      "has_na", "row_number", "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"
     )) |>
     distinct() |>
     arrange(.data$country)
@@ -48,6 +47,7 @@ rename_pctr_product <- function(data) {
     )
 }
 
+# #TODO: column co2 footprint is not required in the final output results
 relocate_pctr_product <- function(data) {
   data |>
     relocate(

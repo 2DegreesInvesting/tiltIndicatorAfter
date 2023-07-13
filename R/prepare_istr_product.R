@@ -43,10 +43,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     rename_istr_product() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
     mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
-    select(-c(
-      "isic_4digit", "isic_4digit_name_ecoinvent",
-      "isic_section", "matching_certainty_num", "avg_matching_certainty_num"
-    )) |>
+    select(-c("matching_certainty_num", "avg_matching_certainty_num")) |>
     distinct() |>
     arrange(.data$country)
 }

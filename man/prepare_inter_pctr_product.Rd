@@ -27,6 +27,11 @@ ecoinvent_activities <- ecoinvent_activities
 pctr_product <- pctr_product
 ep_companies <- ep_companies
 
-pctr_product_inter <- prepare_inter_pctr_product(pctr_product, ep_companies, ecoinvent_activities, matches_mapper)
+pctr_product_inter <- prepare_inter_pctr_product(
+  pctr_product,
+  ep_companies,
+  ecoinvent_activities,
+  matches_mapper
+)
 pctr_product_inter
 }

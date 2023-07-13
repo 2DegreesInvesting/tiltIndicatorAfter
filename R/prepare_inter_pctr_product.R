@@ -28,12 +28,9 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
       "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match",
       "completion", "activity_name", "reference_product_name", "unit"
     )
-  activities <- eco_activities |>
-    select("activity_uuid_product_uuid", "isic_4digit", "isic_4digit_name_ecoinvent", "isic_section")
 
   pctr_prod <- pctr_prod |>
     left_join(comp, by = "companies_id") |>
-    left_join(activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion")
 }

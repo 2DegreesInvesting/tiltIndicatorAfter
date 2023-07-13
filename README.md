@@ -146,7 +146,7 @@ pctr_company
 #> 10 id1          unit       high            1  
 #> # ℹ 44 more rows
 
-pctr_company_final <- pctr_company |> 
+pctr_company_final <- pctr_company |>
   prepare_pctr_company(pctr_product, ep_companies, ecoinvent_activities, matches_mapper)
 pctr_company_final
 #> # A tibble: 37 × 11
