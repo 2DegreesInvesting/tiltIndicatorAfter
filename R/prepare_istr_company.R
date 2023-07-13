@@ -42,6 +42,7 @@ prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, mat
     rename_istr_company() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
     mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
+    select(-c("type")) |>
     relocate_istr_company() |>
     arrange(.data$companies_id)
 }
@@ -57,8 +58,8 @@ rename_istr_company <- function(data) {
 relocate_istr_company <- function(data) {
   data |>
     relocate(
-      "companies_id", "company_name", "company_city", "country", "ISTR_share",
+      "companies_id", "company_name", "country", "ISTR_share",
       "ISTR_risk_category", "scenario", "year", "matching_certainty_company_average",
-      "postcode", "address", "main_activity"
+      "company_city", "postcode", "address", "main_activity"
     )
 }
