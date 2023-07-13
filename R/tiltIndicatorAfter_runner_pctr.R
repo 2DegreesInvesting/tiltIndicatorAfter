@@ -60,7 +60,7 @@
 #     "unit"
 #   )))
 #
-# pctr_prod <- read_csv("/path/to/input/pctr_products_v2.csv", col_types = cols(isic_4digit = col_character()), show_col_types = FALSE) |>
+# pctr_prod <- read_csv("/path/to/input/pctr_products.csv", col_types = cols(isic_4digit = col_character()), show_col_types = FALSE) |>
 #   select(all_of(c(
 #     "co2_footprint",
 #     "tilt_sector",
@@ -71,12 +71,13 @@
 #   ))) |>
 #   filter(row_number() == 1L, .by = "activity_uuid_product_uuid")
 #
-# ep_campanies_mapper <- read_csv("/path/to/input/ep_companies_2.csv") |>
+# # ep_companies
+# ep_campanies_mapper <- read_csv("/path/to/input/ep_companies.csv") |>
 #   select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
 #   distinct()
 #
 # # ecoinvent_activities
-# eco_act <- read_csv("/path/to/input/ei_activities_overview_2.csv")
+# eco_act <- read_csv("/path/to/input/ei_activities_overview.csv")
 #
 # # matches_mapper
 # match_map <- read_csv("/path/to/input/mapper_ep_ei.csv")
@@ -106,12 +107,12 @@
 #   future_pwalk(pctr_rds, .progress = TRUE)
 #
 # pctr_product_result <- map_df(pctr_job$file_product, read_rds)
-# pctr_product_result
-# # TODO: `... |> write_csv("/path/to/output/pctr_product_result.csv")`
+# # pctr_product_result |>
+# #   write_csv("/path/to/output/pctr_product_result.csv")
 #
 # pctr_company_result <- map_df(pctr_job$file_company, read_rds)
-# pctr_company_result
-# # TODO: `... |> write_csv("/path/to/output/pctr_company_result.csv")`
+# # pctr_company_result |>
+# #   write_csv("/path/to/output/pctr_company_result.csv")
 #
 # # Each chunk result was saved to a file
 # dir_tree(cache_path("pctr/product"))

@@ -54,22 +54,21 @@ matches_mapper
 #> # ℹ 2 more variables: completion <chr>, category <chr>
 
 ecoinvent_activities
-#> # A tibble: 21,238 × 8
-#>    activity_uuid_product_uuid     activity_name geography reference_product_name
-#>    <chr>                          <chr>         <chr>     <chr>                 
-#>  1 dabb3812-eee9-5d2b-bc23-0f9a3… bark chips, … CH        residual hardwood, wet
-#>  2 3b34f2a3-abfb-5681-ac78-60c8f… market for n… GLO       nitrous oxide         
-#>  3 3a2ab192-109a-5fa4-b9d9-7ed54… market for s… CH        sawdust, wet, measure…
-#>  4 16e0e4f7-a44f-55d5-ae85-b2a61… market for s… CH        sewage sludge, 70% wa…
-#>  5 732c6740-c4fb-598d-89a0-f8d0a… phenolic res… RER       phenolic resin        
-#>  6 32ab1519-ba6d-5432-9c5d-c82d2… treatment of… CN        sewage sludge, 97% wa…
-#>  7 d08ed49a-25fd-5766-bafc-3cb50… heat and pow… US-WECC   electricity, high vol…
-#>  8 6632b6ca-fdb9-5d16-a1b1-599bb… treatment of… Europe w… organic nitrogen fert…
-#>  9 a73e89c1-abd9-54a1-8c44-17547… catch crop g… CH        ryegrass silage       
-#> 10 da6fd7f1-4ee6-5491-81a9-2e42c… nuclear fuel… RoW       nuclear fuel element,…
-#> # ℹ 21,228 more rows
-#> # ℹ 4 more variables: isic_4digit <chr>, isic_4digit_name_ecoinvent <chr>,
-#> #   isic_section <chr>, unit <chr>
+#> # A tibble: 100 × 5
+#>    activity_uuid_product_…¹ activity_name geography reference_product_name unit 
+#>    <chr>                    <chr>         <chr>     <chr>                  <chr>
+#>  1 dabb3812-eee9-5d2b-bc23… bark chips, … CH        residual hardwood, wet m3   
+#>  2 3b34f2a3-abfb-5681-ac78… market for n… GLO       nitrous oxide          kg   
+#>  3 3a2ab192-109a-5fa4-b9d9… market for s… CH        sawdust, wet, measure… kg   
+#>  4 16e0e4f7-a44f-55d5-ae85… market for s… CH        sewage sludge, 70% wa… kg   
+#>  5 732c6740-c4fb-598d-89a0… phenolic res… RER       phenolic resin         kg   
+#>  6 32ab1519-ba6d-5432-9c5d… treatment of… CN        sewage sludge, 97% wa… kg   
+#>  7 d08ed49a-25fd-5766-bafc… heat and pow… US-WECC   electricity, high vol… kWh  
+#>  8 6632b6ca-fdb9-5d16-a1b1… treatment of… Europe w… organic nitrogen fert… kg   
+#>  9 a73e89c1-abd9-54a1-8c44… catch crop g… CH        ryegrass silage        kg   
+#> 10 da6fd7f1-4ee6-5491-81a9… nuclear fuel… RoW       nuclear fuel element,… kg   
+#> # ℹ 90 more rows
+#> # ℹ abbreviated name: ¹​activity_uuid_product_uuid
 
 ecoinvent_inputs
 #> # A tibble: 52 × 3
