@@ -43,7 +43,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     rename_istr_product() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
     mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
-    select(-c("matching_certainty_num", "avg_matching_certainty_num")) |>
+    select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type", "geography")) |>
     distinct() |>
     arrange(.data$country)
 }
@@ -54,7 +54,6 @@ rename_istr_product <- function(data) {
       matched_activity_name = "activity_name",
       matched_reference_product = "reference_product_name",
       matching_certainty_company_average = "avg_matching_certainty",
-      benchmark = "grouped_by",
       ep_product = "clustered",
       ISTR_risk_category = "risk_category",
       input_name = "exchange_name",
@@ -70,6 +69,6 @@ relocate_istr_product <- function(data) {
       "unit", "tilt_sector", "multi_match", "matching_certainty", "avg_matching_certainty",
       "exchange_name", "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector",
       "company_city", "postcode", "address", "main_activity",
-      "activity_uuid_product_uuid", "grouped_by"
+      "activity_uuid_product_uuid"
     )
 }
