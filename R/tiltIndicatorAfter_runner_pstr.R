@@ -60,10 +60,8 @@
 #   xstr_pivot_type_sector_subsector()
 #
 # scenario_years <- c(2030, 2050)
-# ipr <- read_csv("/path/to/input/str_ipr_targets.csv") |>
-#   distinct(scenario, year, ipr_sector, ipr_subsector, .keep_all = TRUE)
-# weo <- read_csv("/path/to/input/str_weo_targets.csv") |>
-#   distinct(scenario, year, weo_sector, weo_subsector, .keep_all = TRUE)
+# ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
+# weo <- read_csv("/path/to/input/str_weo_targets.csv")
 # scenarios_new <- list(ipr = ipr, weo = weo) |>
 #   xstr_prepare_scenario() |>
 #   filter(year %in% scenario_years)
