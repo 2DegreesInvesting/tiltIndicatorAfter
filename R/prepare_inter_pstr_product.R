@@ -23,7 +23,7 @@
 #' )
 #' pstr_product_inter
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-  pstr_prod_level <- exclude_rows(pstr_prod)
+  pstr_prod_level <- exclude_rows(pstr_prod, "risk_category")
 
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
