@@ -25,20 +25,12 @@ add_avg_matching_certainty <- function(data, col) {
 }
 
 # excluding rows with `risk_category` as NA without excluding any company which contain NAs
-exclude_rows <- function(data) {
+exclude_rows <- function(data, col) {
   ids <- data |>
-    filter(all(is.na(.data$risk_category)), .by = c("companies_id")) |>
+    filter(all(is.na(.data[[col]])), .by = c("companies_id")) |>
     distinct(.data$companies_id)
 
   result <- data |>
-    filter(!is.na(.data$risk_category)) |>
+    filter(!is.na(.data[[col]])) |>
     bind_rows(ids)
 }
-
-keep_first_row <- function(data, col) {
-  data |>
-    mutate(has_na = all(is.na(.data[[col]])), row_number = row_number(), .by = c("companies_id")) |>
-    mutate(benchmark = ifelse(.data$has_na & .data$row_number != 1, NA, .data$benchmark)) |>
-    filter(!is.na(.data$benchmark))
-}
-

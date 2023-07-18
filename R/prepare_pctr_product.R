@@ -26,10 +26,10 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
   result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
     relocate_pctr_product() |>
     rename_pctr_product() |>
-    keep_first_row("PCTR_risk_category") |>
+    exclude_rows("PCTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
-      "has_na", "row_number", "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"
+      "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"
     )) |>
     distinct() |>
     arrange(.data$country)

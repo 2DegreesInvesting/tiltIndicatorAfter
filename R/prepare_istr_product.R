@@ -26,7 +26,7 @@
 #' )
 #' istr_product_final
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  istr_prod_level <- exclude_rows(istr_prod)
+  istr_prod_level <- exclude_rows(istr_prod, "risk_category")
 
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
