@@ -45,7 +45,6 @@ prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, mat
     mutate(benchmark = ifelse(is.na(.data$ICTR_share), NA, .data$benchmark)) |>
     mutate(ICTR_risk_category = ifelse(is.na(.data$ICTR_share), NA, .data$ICTR_risk_category)) |>
     relocate_ictr_company() |>
-    select(-c("has_na", "row_number")) |>
     arrange(.data$companies_id)
 }
 
