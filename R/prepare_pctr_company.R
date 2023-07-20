@@ -32,15 +32,14 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
 
   pctr_comp |>
     left_join(inter_result, by = "companies_id") |>
-    distinct() |>
     rename_pctr_company() |>
-    exclude_rows("PCTR_share") |>
     mutate(
       PCTR_risk_category = ifelse(is.na(.data$matching_certainty_company_average), NA, .data$PCTR_risk_category),
       benchmark = ifelse(is.na(.data$matching_certainty_company_average), NA, .data$benchmark)
     ) |>
     relocate_pctr_company() |>
-    arrange(.data$companies_id)
+    arrange(.data$companies_id) |>
+    distinct()
 }
 
 rename_pctr_company <- function(data) {

@@ -26,12 +26,10 @@
 #' )
 #' istr_product_final
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  istr_prod_level <- exclude_rows(istr_prod, "risk_category")
-
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
 
-  istr_prod_level |>
+  istr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
     distinct() |>
     select(-c("input_activity_uuid_product_uuid")) |>
@@ -39,6 +37,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
+    exclude_rows("risk_category") |>
     relocate_istr_product() |>
     rename_istr_product() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>

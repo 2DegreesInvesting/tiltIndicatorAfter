@@ -32,5 +32,6 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
   pctr_prod <- pctr_prod |>
     left_join(comp, by = "companies_id") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
-    add_avg_matching_certainty("completion")
+    add_avg_matching_certainty("completion") |>
+    exclude_rows("risk_category")
 }

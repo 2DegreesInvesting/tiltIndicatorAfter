@@ -23,7 +23,7 @@
 #' )
 #' pstr_product_inter
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-  pstr_prod_level <- exclude_rows(pstr_prod, "risk_category")
+  # pstr_prod_level <- exclude_rows(pstr_prod, "risk_category")
 
   match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
@@ -31,9 +31,10 @@ prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_ma
   activities <- eco_activities |>
     select("activity_uuid_product_uuid", "reference_product_name", "activity_name", "unit")
 
-  pstr_prod_level |>
+  pstr_prod |>
     left_join(comp, by = "companies_id") |>
     left_join(activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
-    add_avg_matching_certainty("completion")
+    add_avg_matching_certainty("completion") |>
+    exclude_rows("risk_category")
 }

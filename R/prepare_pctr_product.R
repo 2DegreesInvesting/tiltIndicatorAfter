@@ -26,7 +26,6 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
   result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
     relocate_pctr_product() |>
     rename_pctr_product() |>
-    exclude_rows("PCTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
       "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"

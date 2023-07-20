@@ -37,9 +37,9 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
+    exclude_rows("risk_category") |>
     relocate_ictr_product() |>
     rename_ictr_product() |>
-    exclude_rows("ICTR_risk_category") |>
     mutate(benchmark = ifelse(is.na(.data$ICTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
       "matching_certainty_num", "avg_matching_certainty_num", "geography"
