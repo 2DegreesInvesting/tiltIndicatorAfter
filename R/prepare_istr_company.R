@@ -38,13 +38,14 @@ prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, mat
 
   istr_comp |>
     left_join(inter_result, by = "companies_id") |>
-    distinct() |>
     rename_istr_company() |>
     mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
     mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
+    exclude_rows("ISTR_share") |>
     select(-c("type")) |>
     relocate_istr_company() |>
-    arrange(.data$companies_id)
+    arrange(.data$companies_id) |>
+    distinct()
 }
 
 rename_istr_company <- function(data) {
