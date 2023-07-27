@@ -26,16 +26,16 @@
 #' )
 #' ictr_product_final
 prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
+  prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
 
   ictr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
-    distinct() |>
     select(-c("input_activity_uuid_product_uuid", "input_co2_footprint")) |>
+    distinct() |>
     left_join(comp, by = "companies_id") |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
-    left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
+    left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
     exclude_rows("risk_category") |>
     relocate_ictr_product() |>
@@ -44,8 +44,8 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     select(-c(
       "matching_certainty_num", "avg_matching_certainty_num", "geography"
     )) |>
-    distinct() |>
-    arrange(.data$country)
+    arrange(.data$country) |>
+    distinct()
 }
 
 rename_ictr_product <- function(data) {
