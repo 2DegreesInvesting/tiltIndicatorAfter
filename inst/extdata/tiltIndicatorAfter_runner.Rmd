@@ -241,15 +241,13 @@ pstr_comp <- read_csv("/path/to/input/pstr_companies.csv", col_types = cols(isic
   xstr_prune_companies() |>
   xstr_pivot_type_sector_subsector()
 
-scenario_years <- c(2030, 2050)
 ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
 weo <- read_csv("/path/to/input/str_weo_targets.csv") |>
   mutate(co2_reductions = stringr::str_extract(co2_reductions, "-?\\d+\\.\\d+")) |>
   mutate(co2_reductions = as.numeric(co2_reductions)) |>
   mutate(co2_reductions = round(co2_reductions/100, digits = 2))
 scenarios_new <- list(ipr = ipr, weo = weo) |>
-  xstr_prepare_scenario() |>
-  filter(year %in% scenario_years)
+  xstr_prepare_scenario()
 ```
 
 ## Create PSTR job for chunk operation
@@ -314,16 +312,13 @@ istr_inputs_raw <- read_csv("/path/to/input/istr_products.csv", col_types = cols
   rename(weo_product = "input_weo_product", weo_flow = "input_weo_flow", ipr_sector = "input_ipr_sector", ipr_subsector = "input_ipr_subsector") |>
   xstr_pivot_type_sector_subsector()
 
-scenario_years <- c(2030, 2050)
 ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
 weo <- read_csv("/path/to/input/str_weo_targets.csv") |>
   mutate(co2_reductions = stringr::str_extract(co2_reductions, "-?\\d+\\.\\d+")) |>
   mutate(co2_reductions = as.numeric(co2_reductions)) |>
   mutate(co2_reductions = round(co2_reductions/100, digits = 2))
 scenarios_new <- list(ipr = ipr, weo = weo) |>
-  xstr_prepare_scenario() |>
-  filter(year %in% scenario_years)
-
+  xstr_prepare_scenario()
 ```
 
 ## Create ISTR job for chunk operation

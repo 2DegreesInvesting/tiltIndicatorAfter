@@ -30,8 +30,8 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) 
     select(-c(
       "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"
     )) |>
-    distinct() |>
-    arrange(.data$country)
+    arrange(.data$country) |>
+    distinct()
 }
 
 rename_pctr_product <- function(data) {
