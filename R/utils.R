@@ -28,7 +28,10 @@ add_avg_matching_certainty <- function(data, col) {
 exclude_rows <- function(data, col) {
   ids <- data |>
     filter(all(is.na(.data[[col]])), .by = c("companies_id")) |>
-    distinct(.data$companies_id, .data$postcode, .data$address, .data$company_name, .data$company_city, .data$country, .data$main_activity)
+    distinct(
+      .data$companies_id, .data$postcode, .data$address,
+      .data$company_name, .data$company_city, .data$country, .data$main_activity
+    )
 
   # Write test to include the meta data
   result <- data |>
