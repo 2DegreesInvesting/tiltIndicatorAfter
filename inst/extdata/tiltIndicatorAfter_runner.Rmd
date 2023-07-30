@@ -160,22 +160,10 @@ dir_tree(cache_path("pctr/company"))
 ```{r}
 ictr_comp <- read_csv("/path/to/input/xctr_companies.csv", na = c("nan", NA)) |>
   rename(company_id = "companies_id") |>
-  select(all_of(c(
-    "activity_uuid_product_uuid",
-    "clustered",
-    "company_id",
-    "unit"
-  ))) 
+  select(all_of(c("activity_uuid_product_uuid", "clustered", "company_id", "unit"))) 
 
 ictr_prod <- read_csv("/path/to/input/ictr_products.csv", col_types = cols(input_isic_4digit = col_character())) |>
-  select(all_of(c(
-    "input_co2_footprint",
-    "input_tilt_sector",
-    "input_unit",
-    "input_isic_4digit",
-    "input_activity_uuid_product_uuid",
-    "activity_uuid_product_uuid"
-  )))
+  select(all_of(c("input_co2_footprint", "input_tilt_sector", "input_unit", "input_isic_4digit", "input_activity_uuid_product_uuid", "activity_uuid_product_uuid")))
 
 is_na_free <- !anyNA(ictr_prod$input_co2_footprint)
 stopifnot(is_na_free)
@@ -236,8 +224,6 @@ dir_tree(cache_path("ictr/company"))
 ```{r}
 pstr_comp <- read_csv("/path/to/input/pstr_companies.csv", col_types = cols(isic_4digit = col_character()), col_select = -company_name, na = c("nan", NA)) |>
   rename(company_id = companies_id) |>
-  # rename(weo_product = weo_sector) |>
-  # rename(weo_flow = weo_subsector) |>
   xstr_prune_companies() |>
   xstr_pivot_type_sector_subsector()
 
@@ -309,7 +295,7 @@ istr_comp <- read_csv("/path/to/input/istr_companies.csv", na = c("nan", NA)) |>
   xstr_prune_companies()
 
 istr_inputs_raw <- read_csv("/path/to/input/istr_products.csv", col_types = cols(input_isic_4digit = col_character()), na = c("nan", NA)) |>
-  rename(weo_product = "input_weo_product", weo_flow = "input_weo_flow", ipr_sector = "input_ipr_sector", ipr_subsector = "input_ipr_subsector") |>
+  rename(weo_sector = "input_weo_product", weo_subsector = "input_weo_flow", ipr_sector = "input_ipr_sector", ipr_subsector = "input_ipr_subsector") |>
   xstr_pivot_type_sector_subsector()
 
 ipr <- read_csv("/path/to/input/str_ipr_targets.csv")

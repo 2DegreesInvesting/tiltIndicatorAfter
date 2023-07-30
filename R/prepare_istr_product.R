@@ -40,8 +40,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     exclude_rows("risk_category") |>
     relocate_istr_product() |>
     rename_istr_product() |>
-    mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
-    mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
+    mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
     select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type", "geography")) |>
     distinct() |>
     arrange(.data$country)

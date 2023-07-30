@@ -26,8 +26,7 @@ prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) 
   result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     relocate_pstr_product() |>
     rename_pstr_product() |>
-    mutate(scenario = ifelse(.data$scenario == "1.5c rps", "IPR 1.5c RPS", .data$scenario)) |>
-    mutate(scenario = ifelse(.data$scenario == "nz 2050", "WEO NZ 2050", .data$scenario)) |>
+    mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
     select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type")) |>
     distinct()
 }
