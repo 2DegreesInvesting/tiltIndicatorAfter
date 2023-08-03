@@ -1,5 +1,5 @@
 ---
-title: "tiltIndicatorAfter_runner_pctr"
+title: "tiltIndicatorAfter_runner"
 author: "Kalash"
 date: "2023-07-21"
 output: html_document
@@ -9,7 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Setup
+The tiltIndicatorAfter_runner script uses the output from the tiltIndicatorBefore package as the inputs to the tiltIndicator and tiltIndicatorAfter packages. This script uses the CSV files from the tiltIndicatorBefore package to create the final output of the four indicators. 
+To reduce the processing time of tiltIndicator and tiltIndicatorAfter code, this script also uses multiple R sessions to run the job in parallel. The `multisession` technique will produce the final outputs in chunks which all will be combined together after the completion of the job run. 
+
+## Setup
 ```{r}
 library(dplyr, warn.conflicts = FALSE)
 library(readr, warn.conflicts = FALSE)
@@ -24,7 +27,7 @@ library(tiltIndicator)
 library(tiltIndicatorAfter)
 ```
 
-# Helper functions
+## Helper functions to apply multisession and chunks approach
 
 ```{r}
 options(readr.show_col_types = FALSE)
@@ -67,7 +70,9 @@ add_done <- function(data, file_product, file_company) {
 
 ```
 
-# tiltIndicatorAfter data common for all indicators
+## tiltIndicatorAfter data common for all indicators
+
+`ep_companies`, `ecoinvent_activities`, `matches_mapper`, and `ecoinvent_inputs` are the four datasets which are used as the input to the tiltIndicatorAfter package. They all are the output from tiltIndicatorBefore package. These four datasets are used for adding additional data to all the four indicators (PCTR, ICTR, PSTR, ISTR). 
 
 ```{r}
 # ep_companies
@@ -87,11 +92,11 @@ eco_inputs_raw <- read_csv("/path/to/input/ei_input_data.csv") |>
   distinct()
 ```
 
-# PCTR
+## PCTR
 
-## Load Data
+### Load Data
 
-Input data for tiltIndicator package is loaded
+The input data of PCTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
 # PCTR companies
@@ -105,7 +110,9 @@ pctr_prod <- read_csv("/path/to/input/pctr_products.csv", col_types = cols(isic_
   filter(row_number() == 1L, .by = "activity_uuid_product_uuid")
 ```
 
-## Create PCTR job for chunk operation
+### Create PCTR job for chunk operation
+
+Multisession method will be used to create final outputs in chunks. Also, the `pctr_rds` function takes the output of tiltIndicator and use it as an input for the tiltIndicatorAfter package.
 
 ```{r}
 # Create a "job" data frame where each row is a chunk of data
@@ -128,7 +135,7 @@ pctr_rds <- function(data, file_product, file_company) {
 }
 ```
 
-## PCTR Job run
+### PCTR Job run
 
 ```{r}
 pctr_job |>
@@ -137,7 +144,7 @@ pctr_job |>
   future_pwalk(pctr_rds, .progress = TRUE)
 ```
 
-## Save the final PCTR final results
+### Save the final PCTR final results
 
 ```{r}
 pctr_product_result <- map_df(pctr_job$file_product, read_rds)
@@ -153,9 +160,11 @@ dir_tree(cache_path("pctr/product"))
 dir_tree(cache_path("pctr/company"))
 ```
 
-# ICTR
+## ICTR
 
-## Load Data
+### Load Data
+
+The input data of ICTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
 ictr_comp <- read_csv("/path/to/input/xctr_companies.csv", na = c("nan", NA)) |>
@@ -169,7 +178,9 @@ is_na_free <- !anyNA(ictr_prod$input_co2_footprint)
 stopifnot(is_na_free)
 ```
 
-## Create ICTR job for chunk operation
+### Create ICTR job for chunk operation
+
+Multisession method will be used to create final outputs in chunks. Also, the `ictr_rds` function takes the output of tiltIndicator and use it as an input for the tiltIndicatorAfter package.
 
 ```{r}
 # Create a "job" data frame where each row is a chunk of data
@@ -192,7 +203,7 @@ ictr_rds <- function(data, file_product, file_company) {
 }
 ```
 
-## ICTR Job run
+### ICTR Job run
 
 ```{r}
 ictr_job |>
@@ -201,7 +212,7 @@ ictr_job |>
   future_pwalk(ictr_rds, .progress = TRUE)
 ```
 
-## Save the final ICTR final results
+### Save the final ICTR final results
 
 ```{r}
 ictr_product_result <- map_df(ictr_job$file_product, read_rds)
@@ -217,9 +228,11 @@ dir_tree(cache_path("ictr/product"))
 dir_tree(cache_path("ictr/company"))
 ```
 
-# PSTR
+## PSTR
 
-## Load Data
+### Load Data
+
+The input data of PSTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
 pstr_comp <- read_csv("/path/to/input/pstr_companies.csv", col_types = cols(isic_4digit = col_character()), col_select = -company_name, na = c("nan", NA)) |>
@@ -228,15 +241,14 @@ pstr_comp <- read_csv("/path/to/input/pstr_companies.csv", col_types = cols(isic
   xstr_pivot_type_sector_subsector()
 
 ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
-weo <- read_csv("/path/to/input/str_weo_targets.csv") |>
-  mutate(co2_reductions = stringr::str_extract(co2_reductions, "-?\\d+\\.\\d+")) |>
-  mutate(co2_reductions = as.numeric(co2_reductions)) |>
-  mutate(co2_reductions = round(co2_reductions/100, digits = 2))
+weo <- read_csv("/path/to/input/str_weo_targets.csv")
 scenarios_new <- list(ipr = ipr, weo = weo) |>
   xstr_prepare_scenario()
 ```
 
-## Create PSTR job for chunk operation
+### Create PSTR job for chunk operation
+
+Multisession method will be used to create final outputs in chunks. Also, the `pstr_rds` function takes the output of tiltIndicator and use it as an input for the tiltIndicatorAfter package.
 
 ```{r}
 # Create a "job" data frame where each row is a chunk of data
@@ -260,7 +272,7 @@ pstr_rds <- function(data, file_product, file_company) {
 }
 ```
 
-## PSTR Job run
+### PSTR Job run
 
 ```{r}
 pstr_job |>
@@ -269,7 +281,7 @@ pstr_job |>
   future_pwalk(pstr_rds, .progress = TRUE)
 ```
 
-## Save the final PSTR final results
+### Save the final PSTR final results
 
 ```{r}
 pstr_product_result <- map_df(pstr_job$file_product, read_rds)
@@ -285,9 +297,11 @@ dir_tree(cache_path("pstr/product"))
 dir_tree(cache_path("pstr/company"))
 ```
 
-# ISTR
+## ISTR
 
-## Load Data
+### Load Data
+
+The input data of ISTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
 istr_comp <- read_csv("/path/to/input/istr_companies.csv", na = c("nan", NA)) |>
@@ -299,15 +313,14 @@ istr_inputs_raw <- read_csv("/path/to/input/istr_products.csv", col_types = cols
   xstr_pivot_type_sector_subsector()
 
 ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
-weo <- read_csv("/path/to/input/str_weo_targets.csv") |>
-  mutate(co2_reductions = stringr::str_extract(co2_reductions, "-?\\d+\\.\\d+")) |>
-  mutate(co2_reductions = as.numeric(co2_reductions)) |>
-  mutate(co2_reductions = round(co2_reductions/100, digits = 2))
+weo <- read_csv("/path/to/input/str_weo_targets.csv")
 scenarios_new <- list(ipr = ipr, weo = weo) |>
   xstr_prepare_scenario()
 ```
 
-## Create ISTR job for chunk operation
+### Create ISTR job for chunk operation
+
+Multisession method will be used to create final outputs in chunks. Also, the `istr_rds` function takes the output of tiltIndicator and use it as an input for the tiltIndicatorAfter package.
 
 ```{r}
 # Create a "job" data frame where each row is a chunk of data
@@ -331,7 +344,7 @@ istr_rds <- function(data, file_product, file_company) {
 }
 ```
 
-## ISTR Job run
+### ISTR Job run
 
 ```{r}
 istr_job |>
@@ -340,7 +353,7 @@ istr_job |>
   future_pwalk(istr_rds, .progress = TRUE)
 ```
 
-## Save the final ISTR final results
+### Save the final ISTR final results
 
 ```{r}
 istr_product_result <- map_df(istr_job$file_product, read_rds)
