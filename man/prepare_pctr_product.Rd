@@ -4,7 +4,13 @@
 \alias{prepare_pctr_product}
 \title{Creates final output of pctr product level results}
 \usage{
-prepare_pctr_product(pctr_prod, comp, eco_activities, match_mapper)
+prepare_pctr_product(
+  pctr_prod,
+  comp,
+  eco_activities,
+  match_mapper,
+  isic_tilt_map
+)
 }
 \arguments{
 \item{pctr_prod}{A dataframe like \link{pctr_product}}
@@ -14,6 +20,8 @@ prepare_pctr_product(pctr_prod, comp, eco_activities, match_mapper)
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of pctr_product
@@ -26,12 +34,14 @@ matches_mapper <- matches_mapper
 ecoinvent_activities <- ecoinvent_activities
 pctr_product <- pctr_product
 ep_companies <- ep_companies
+isic_tilt_mapper <- isic_tilt_mapper
 
 pctr_product_final <- prepare_pctr_product(
   pctr_product,
   ep_companies,
   ecoinvent_activities,
-  matches_mapper
+  matches_mapper,
+  isic_tilt_mapper
 )
 pctr_product_final
 }

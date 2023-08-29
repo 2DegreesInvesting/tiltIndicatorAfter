@@ -10,7 +10,8 @@ prepare_ictr_company(
   comp,
   eco_activities,
   match_mapper,
-  eco_inputs
+  eco_inputs,
+  isic_tilt_map
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ prepare_ictr_company(
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of ictr_company
@@ -39,6 +42,7 @@ ictr_product <- ictr_product
 ep_companies <- ep_companies
 ictr_company <- ictr_company
 ecoinvent_inputs <- ecoinvent_inputs
+isic_tilt_mapper <- isic_tilt_mapper
 
 ictr_company_final <- prepare_ictr_company(
   ictr_company,
@@ -46,7 +50,8 @@ ictr_company_final <- prepare_ictr_company(
   ep_companies,
   ecoinvent_activities,
   matches_mapper,
-  ecoinvent_inputs
+  ecoinvent_inputs,
+  isic_tilt_mapper
 )
 ictr_company_final
 }

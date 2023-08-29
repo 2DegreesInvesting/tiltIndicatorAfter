@@ -81,3 +81,10 @@
 #' @examples
 #' ep_companies
 "ep_companies"
+
+#' isic-tilt mapper
+#' @author Kalash Singhal.
+#'
+#' @examples
+#' isic_tilt_mapper
+"isic_tilt_mapper"
