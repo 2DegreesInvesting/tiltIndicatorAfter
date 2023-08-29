@@ -5,7 +5,7 @@
 \alias{ictr_product}
 \title{ICTR datasets}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 330 rows and 7 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 330 rows and 10 columns.
 }
 \usage{
 ictr_product

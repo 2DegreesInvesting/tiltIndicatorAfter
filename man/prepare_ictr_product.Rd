@@ -4,7 +4,14 @@
 \alias{prepare_ictr_product}
 \title{Creates final output of ictr product level results}
 \usage{
-prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs)
+prepare_ictr_product(
+  ictr_prod,
+  comp,
+  eco_activities,
+  match_mapper,
+  eco_inputs,
+  isic_tilt_map
+)
 }
 \arguments{
 \item{ictr_prod}{A dataframe like \link{ictr_product}}
@@ -16,6 +23,8 @@ prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs)
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of ictr_product
@@ -29,13 +38,15 @@ ecoinvent_activities <- ecoinvent_activities
 ictr_product <- ictr_product
 ep_companies <- ep_companies
 ecoinvent_inputs <- ecoinvent_inputs
+isic_tilt_mapper <- isic_tilt_mapper
 
 ictr_product_final <- prepare_ictr_product(
   ictr_product,
   ep_companies,
   ecoinvent_activities,
   matches_mapper,
-  ecoinvent_inputs
+  ecoinvent_inputs,
+  isic_tilt_mapper
 )
 ictr_product_final
 }

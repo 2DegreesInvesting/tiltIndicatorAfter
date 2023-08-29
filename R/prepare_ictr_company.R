@@ -31,8 +31,8 @@
 #'   isic_tilt_mapper
 #' )
 #' ictr_company_final
-prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_mapper) {
-  inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_mapper) |>
+prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
+  inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) |>
     select(
       "companies_id", "company_name", "company_city", "country", "postcode",
       "address", "main_activity", "matching_certainty_company_average"
