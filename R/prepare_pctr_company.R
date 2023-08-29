@@ -5,6 +5,7 @@
 #' @param pctr_prod A dataframe like [pctr_product]
 #' @param comp A dataframe like [ep_companies]
 #' @param pctr_comp A dataframe like [pctr_company]
+#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the final output of pctr_company
 #'
@@ -16,17 +17,19 @@
 #' pctr_product <- pctr_product
 #' ep_companies <- ep_companies
 #' pctr_company <- pctr_company
+#' isic_tilt_mapper <- isic_tilt_mapper
 #'
 #' pctr_company_final <- prepare_pctr_company(
 #'   pctr_company,
 #'   pctr_product,
 #'   ep_companies,
 #'   ecoinvent_activities,
-#'   matches_mapper
+#'   matches_mapper,
+#'   isic_tilt_mapper
 #' )
 #' pctr_company_final
-prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper) {
-  inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper) |>
+prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
+  inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>
     distinct()
 

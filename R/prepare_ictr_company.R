@@ -6,6 +6,7 @@
 #' @param comp A dataframe like [ep_companies]
 #' @param ictr_comp A dataframe like [ictr_company]
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
+#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the final output of ictr_company
 #'
@@ -18,6 +19,7 @@
 #' ep_companies <- ep_companies
 #' ictr_company <- ictr_company
 #' ecoinvent_inputs <- ecoinvent_inputs
+#' isic_tilt_mapper <- isic_tilt_mapper
 #'
 #' ictr_company_final <- prepare_ictr_company(
 #'   ictr_company,
@@ -25,11 +27,12 @@
 #'   ep_companies,
 #'   ecoinvent_activities,
 #'   matches_mapper,
-#'   ecoinvent_inputs
+#'   ecoinvent_inputs,
+#'   isic_tilt_mapper
 #' )
 #' ictr_company_final
-prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
+prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_mapper) {
+  inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_mapper) |>
     select(
       "companies_id", "company_name", "company_city", "country", "postcode",
       "address", "main_activity", "matching_certainty_company_average"

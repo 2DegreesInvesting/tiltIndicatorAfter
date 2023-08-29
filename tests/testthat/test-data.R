@@ -45,3 +45,7 @@ test_that("`matches_mapper` hasn't changed", {
 test_that("`ecoinvent_activities` hasn't changed", {
   expect_snapshot(format_robust_snapshot(tiltIndicatorAfter::ecoinvent_activities))
 })
+
+test_that("`isic_tilt_mapper` hasn't changed", {
+  expect_snapshot(format_robust_snapshot(tiltIndicatorAfter::isic_tilt_mapper))
+})

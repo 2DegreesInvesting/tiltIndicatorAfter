@@ -4,6 +4,7 @@
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pctr_prod A dataframe like [pctr_product]
 #' @param comp A dataframe like [ep_companies]
+#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the intermediate output of pctr_product
 #'
@@ -14,15 +15,17 @@
 #' ecoinvent_activities <- ecoinvent_activities
 #' pctr_product <- pctr_product
 #' ep_companies <- ep_companies
+#' isic_tilt_mapper <- isic_tilt_mapper
 #'
 #' pctr_product_inter <- prepare_inter_pctr_product(
 #'   pctr_product,
 #'   ep_companies,
 #'   ecoinvent_activities,
-#'   matches_mapper
+#'   matches_mapper,
+#'   isic_tilt_mapper
 #' )
 #' pctr_product_inter
-prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper) {
+prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select(
       "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match",
@@ -32,6 +35,7 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
   pctr_prod <- pctr_prod |>
     left_join(comp, by = "companies_id") |>
     left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
+    left_join(isic_tilt_map, by = "isic_4digit") |>
     add_avg_matching_certainty("completion") |>
     exclude_rows("risk_category")
 }
