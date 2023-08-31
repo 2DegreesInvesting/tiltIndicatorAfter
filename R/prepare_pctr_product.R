@@ -46,9 +46,6 @@ rename_pctr_product <- function(data) {
       benchmark = "grouped_by",
       PCTR_risk_category = "risk_category",
       ep_product = "clustered",
-      tilt_sector = "tilt_sec",
-      tilt_subsector = "tilt_subsec",
-      isic_4digit = "isic_sec",
       isic_name = "isic_4digit_name_ecoinvent"
     )
 }
@@ -60,7 +57,7 @@ relocate_pctr_product <- function(data) {
       "companies_id", "company_name", "country", "risk_category", "grouped_by",
       "clustered", "activity_name", "reference_product_name",
       "unit", "multi_match", "matching_certainty", "avg_matching_certainty",
-      "co2_footprint", "tilt_sec", "tilt_subsec", "isic_sec", "isic_4digit_name_ecoinvent",
+      "co2_footprint", "tilt_sector", "tilt_subsector", "isic_4digit", "isic_4digit_name_ecoinvent",
       "company_city", "postcode", "address", "main_activity", "activity_uuid_product_uuid"
     )
 }

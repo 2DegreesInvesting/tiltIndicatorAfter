@@ -37,7 +37,7 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     select(-c("input_activity_uuid_product_uuid", "input_co2_footprint")) |>
     distinct() |>
     left_join(comp, by = "companies_id") |>
-    left_join(isic_tilt_map, by = join_by("isic_sec" == "isic_4digit")) |>
+    left_join(isic_tilt_map, by = join_by("input_isic_4digit" == "isic_4digit")) |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
     left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
@@ -63,9 +63,6 @@ rename_ictr_product <- function(data) {
       ICTR_risk_category = "risk_category",
       input_name = "exchange_name",
       input_unit = "exchange_unit_name",
-      input_tilt_sector = "tilt_sec",
-      input_tilt_subsector = "tilt_subsec",
-      input_isic_4digit = "isic_sec",
       input_isic_name = "isic_4digit_name_ecoinvent"
     )
 }
@@ -76,7 +73,7 @@ relocate_ictr_product <- function(data) {
       "companies_id", "company_name", "country", "risk_category", "grouped_by",
       "clustered", "activity_name", "reference_product_name",
       "unit", "multi_match", "matching_certainty", "avg_matching_certainty", "exchange_name",
-      "exchange_unit_name", "tilt_sec", "tilt_subsec", "isic_sec", "isic_4digit_name_ecoinvent",
+      "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector", "input_isic_4digit", "isic_4digit_name_ecoinvent",
       "company_city", "postcode", "address", "main_activity", "activity_uuid_product_uuid"
     )
 }
