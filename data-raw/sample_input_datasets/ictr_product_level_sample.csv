@@ -1,4 +1,4 @@
-companies_id,grouped_by,risk_category,clustered,activity_uuid_product_uuid,input_activity_uuid_product_uuid,input_co2_footprint,tilt_sec,tilt_subsec,isic_sec
+companies_id,grouped_by,risk_category,clustered,activity_uuid_product_uuid,input_activity_uuid_product_uuid,input_co2_footprint,input_tilt_sector,input_tilt_subsector,input_isic_4digit
 id1,all,high,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659,311.5945515490067,tilt_sector A,tilt_subsector A,3020
 id1,isic_sec,medium,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659,311.5945515490067,tilt_sector A,tilt_subsector A,3020
 id1,tilt_sec,medium,building construction,ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad,7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659,311.5945515490067,tilt_sector A,tilt_subsector A,3020
