@@ -32,9 +32,15 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
       "completion", "activity_name", "reference_product_name", "unit"
     )
 
-  pctr_prod <- pctr_prod |>
-    left_join(comp, by = "companies_id") |>
-    left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
+  pctr_prod_comp <- left_join(pctr_prod, comp, by = "companies_id")
+
+  # FIXME: Figure out what are the stable, expected columns
+  join_by_shared_cols_quietly <- intersect(
+    names(pctr_prod_comp),
+    names(prepared_match_mapper)
+  )
+  pctr_prod_comp |>
+    left_join(prepared_match_mapper, by = join_by_shared_cols_quietly) |>
     left_join(isic_tilt_map, by = "isic_4digit") |>
     add_avg_matching_certainty("completion") |>
     exclude_rows("risk_category")
