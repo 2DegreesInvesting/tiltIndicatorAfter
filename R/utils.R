@@ -18,7 +18,7 @@ categorize_matching_certainity <- function(x, ...) {
 
 add_avg_matching_certainty <- function(data, col) {
   data |>
-    rename(matching_certainty = .data[[col]]) |>
+    rename(matching_certainty = all_of(col)) |>
     mutate(matching_certainty_num = categorize_matching_certainity(.data$matching_certainty)) |>
     mutate(avg_matching_certainty_num = mean(.data$matching_certainty_num, na.rm = TRUE), .by = c("companies_id")) |>
     mutate(avg_matching_certainty = categorize_avg_matching_certainity(.data$avg_matching_certainty_num))
