@@ -1,376 +1,177 @@
+# `pctr_product` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::pctr_product)
+    Output
+      spc_tbl_ [30 x 9] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id              : chr [1:30] "id1" "id1" "id1" "id1" ...
+       $ grouped_by                : chr [1:30] "all" "isic_sec" "tilt_sec" "unit" ...
+       $ risk_category             : chr [1:30] "high" "medium" "low" "high" ...
+       $ clustered                 : chr [1:30] "building construction" "building construction" "building construction" "building construction" ...
+       $ activity_uuid_product_uuid: chr [1:30] "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" ...
+       $ co2_footprint             : num [1:30] 312 312 312 312 312 ...
+       $ tilt_sector               : chr [1:30] "tilt_sector A" "tilt_sector A" "tilt_sector A" "tilt_sector A" ...
+       $ tilt_subsector            : chr [1:30] "tilt_subsector A" "tilt_subsector A" "tilt_subsector A" "tilt_subsector A" ...
+       $ isic_4digit               : chr [1:30] "3020" "3020" "3020" "3020" ...
+
+# `pctr_company` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::pctr_company)
+    Output
+      spc_tbl_ [54 x 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id : chr [1:54] "id1" "id1" "id1" "id1" ...
+       $ grouped_by   : chr [1:54] "all" "all" "all" "isic_sec" ...
+       $ risk_category: chr [1:54] "high" "medium" "low" "high" ...
+       $ value        : num [1:54] 0.5 0.5 0 0 1 0 0 0.5 0.5 1 ...
+
+# `ictr_product` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::ictr_product)
+    Output
+      spc_tbl_ [330 x 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id                    : chr [1:330] "id1" "id1" "id1" "id1" ...
+       $ grouped_by                      : chr [1:330] "all" "isic_sec" "tilt_sec" "unit" ...
+       $ risk_category                   : chr [1:330] "high" "medium" "medium" "high" ...
+       $ clustered                       : chr [1:330] "building construction" "building construction" "building construction" "building construction" ...
+       $ activity_uuid_product_uuid      : chr [1:330] "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" ...
+       $ input_activity_uuid_product_uuid: chr [1:330] "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" ...
+       $ input_co2_footprint             : num [1:330] 312 312 312 312 312 ...
+       $ input_tilt_sector               : chr [1:330] "tilt_sector A" "tilt_sector A" "tilt_sector A" "tilt_sector A" ...
+       $ input_tilt_subsector            : chr [1:330] "tilt_subsector A" "tilt_subsector A" "tilt_subsector A" "tilt_subsector A" ...
+       $ input_isic_4digit               : chr [1:330] "3020" "3020" "3020" "3020" ...
+
+# `ictr_company` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::ictr_company)
+    Output
+      spc_tbl_ [54 x 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id : chr [1:54] "id1" "id1" "id1" "id1" ...
+       $ grouped_by   : chr [1:54] "all" "all" "all" "isic_sec" ...
+       $ risk_category: chr [1:54] "high" "medium" "low" "high" ...
+       $ value        : num [1:54] 0.78 0.22 0 0 1 ...
+
+# `pstr_product` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::pstr_product)
+    Output
+      spc_tbl_ [19 x 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id              : chr [1:19] "id1" "id1" "id1" "id1" ...
+       $ grouped_by                : chr [1:19] "ipr_1.5c rps_2030" "weo_nz 2050_2030" "ipr_1.5c rps_2030" "weo_nz 2050_2030" ...
+       $ risk_category             : chr [1:19] "medium" "high" "high" "high" ...
+       $ clustered                 : chr [1:19] "building construction" "building construction" "machining" "machining" ...
+       $ activity_uuid_product_uuid: chr [1:19] "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3" "6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3" ...
+       $ tilt_sector               : chr [1:19] "construction industry" "construction industry" "steel and metals" "steel and metals" ...
+       $ scenario                  : chr [1:19] "1.5c rps" "nz 2050" "1.5c rps" "nz 2050" ...
+       $ year                      : num [1:19] 2030 2030 2030 2030 2050 2050 2050 2050 2030 2030 ...
+       $ type                      : chr [1:19] "ipr" "weo" "ipr" "weo" ...
+       $ tilt_subsector            : chr [1:19] "construction buildings" "construction buildings" "steel" "steel" ...
+
+# `pstr_company` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::pstr_company)
+    Output
+      spc_tbl_ [24 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id : chr [1:24] "id1" "id1" "id1" "id1" ...
+       $ type         : chr [1:24] "ipr" "ipr" "ipr" "ipr" ...
+       $ scenario     : chr [1:24] "1.5c rps" "1.5c rps" "1.5c rps" "1.5c rps" ...
+       $ year         : num [1:24] 2030 2030 2030 2050 2050 2050 2030 2030 2030 2050 ...
+       $ risk_category: chr [1:24] "high" "medium" "low" "high" ...
+       $ value        : num [1:24] 0.5 0.5 0 1 0 0 1 0 0 1 ...
+
+# `istr_product` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::istr_product)
+    Output
+      spc_tbl_ [282 x 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id                    : chr [1:282] "id1" "id1" "id1" "id1" ...
+       $ grouped_by                      : chr [1:282] "ipr_1.5c rps_2030" "ipr_1.5c rps_2050" "weo_nz 2050_2030" "weo_nz 2050_2050" ...
+       $ risk_category                   : chr [1:282] "low" "high" "medium" "high" ...
+       $ clustered                       : chr [1:282] "building construction" "building construction" "building construction" "building construction" ...
+       $ activity_uuid_product_uuid      : chr [1:282] "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad" ...
+       $ tilt_sector                     : chr [1:282] "construction industry" "construction industry" "construction industry" "construction industry" ...
+       $ scenario                        : chr [1:282] "1.5c rps" "1.5c rps" "nz 2050" "nz 2050" ...
+       $ year                            : num [1:282] 2030 2050 2030 2050 2030 2050 2030 2050 2030 2050 ...
+       $ type                            : chr [1:282] "ipr" "ipr" "weo" "weo" ...
+       $ input_activity_uuid_product_uuid: chr [1:282] "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" ...
+       $ input_tilt_sector               : chr [1:282] "construction industry" "construction industry" "construction industry" "construction industry" ...
+       $ input_tilt_subsector            : chr [1:282] "construction buildings" "construction buildings" "construction buildings" "construction buildings" ...
+
+# `istr_company` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::istr_company)
+    Output
+      spc_tbl_ [36 x 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ companies_id : chr [1:36] "id1" "id1" "id1" "id1" ...
+       $ type         : chr [1:36] "ipr" "ipr" "ipr" "ipr" ...
+       $ scenario     : chr [1:36] "1.5c rps" "1.5c rps" "1.5c rps" "1.5c rps" ...
+       $ year         : num [1:36] 2030 2030 2030 2050 2050 2050 2030 2030 2030 2050 ...
+       $ risk_category: chr [1:36] "high" "medium" "low" "high" ...
+       $ value        : num [1:36] 0.22 0.78 0 1 0 ...
+
+# `ep_companies` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::ep_companies)
+    Output
+      tibble [3 x 7] (S3: tbl_df/tbl/data.frame)
+       $ company_name : chr [1:3] "company C" "company B" "company A"
+       $ country      : chr [1:3] "austria" "germany" "germany"
+       $ company_city : chr [1:3] "voitsberg" "berlin" "frankfurt"
+       $ postcode     : num [1:3] 8570 13353 60316
+       $ address      : chr [1:3] "ruhmannstrasse 1 | 8570 voitsberg" "sprengelstrasse 15 | 13353 berlin" "wittelsbacherallee 37 | 60316 frankfurt"
+       $ main_activity: chr [1:3] "service provider" "distributor" "manufacturer/ producer"
+       $ companies_id : chr [1:3] "id3" "id2" "id1"
+
+# `ecoinvent_inputs` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::ecoinvent_inputs)
+    Output
+      tibble [52 x 3] (S3: tbl_df/tbl/data.frame)
+       $ input_activity_uuid_product_uuid: chr [1:52] "7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44ccb-917e-4c8d-bb35-a1898827b659" "3b190359-a32e-5294-af63-983f38ce6525_759b89bd-3aa6-42ad-b767-5bb9ef5d331d" "62b803ad-e3ff-516b-947d-f08eea52c702_fbb039f7-f9cc-46d2-b631-313ddb125c1a" "372a1991-e0af-5fbf-8611-295a535373ad_9ba48284-0f03-4fec-800d-de77833b12f6" ...
+       $ exchange_name                   : chr [1:52] "aluminium, wrought alloy" "electricity, medium voltage" "copper, cathode" "reinforcing steel" ...
+       $ exchange_unit_name              : chr [1:52] "kg" "kWh" "kg" "kg" ...
+
+# `matches_mapper` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::matches_mapper)
+    Output
+      spc_tbl_ [23,270 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ ep_id                     : chr [1:23270] "0b0ae0f9eb119090c2ff57778f605898e5854f01" "0b0ae0f9eb119090c2ff57778f605898e5854f01" "0dde317dd17ad7169b1590b4f49a0ab99d4b7ee8" "0dde317dd17ad7169b1590b4f49a0ab99d4b7ee8" ...
+       $ country                   : chr [1:23270] "germany" "germany" "france" "france" ...
+       $ main_activity             : chr [1:23270] "service provider" "service provider" "missing" "missing" ...
+       $ clustered                 : chr [1:23270] "air purifiers" "air purifiers" "aircraft engines" "aircraft engines" ...
+       $ activity_uuid_product_uuid: chr [1:23270] "bcdcd9f2-a3d9-58a3-b204-c6fa665a8e49_1d8da2ef-019e-4fc8-9e15-11bd37949f61" "68a453fd-c49c-5358-9ee6-553b70ff43a8_1d8da2ef-019e-4fc8-9e15-11bd37949f61" "d7739cef-e1e3-5084-974f-f5f139975486_8eea8087-3f23-44e6-8acf-c15f2f21a528" "b2559f83-c1b9-51a9-a232-bc4d56729e0c_8eea8087-3f23-44e6-8acf-c15f2f21a528" ...
+       $ multi_match               : logi [1:23270] TRUE TRUE TRUE TRUE TRUE TRUE ...
+       $ completion                : chr [1:23270] "low" "low" "high" "high" ...
+       $ category                  : chr [1:23270] "ep_product" "ep_product" "ep_product" "ep_product" ...
+
+# `ecoinvent_activities` hasn't changed
+
+    Code
+      format_minimal_snapshot(tiltIndicatorAfter::ecoinvent_activities)
+    Output
+      spc_tbl_ [100 x 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+       $ activity_uuid_product_uuid: chr [1:100] "dabb3812-eee9-5d2b-bc23-0f9a38e6f71e_bded6c5a-4dca-497e-bdd9-fcd343012087" "3b34f2a3-abfb-5681-ac78-60c8fada5b16_61c1d37e-ad50-4159-b379-cfe3976720bf" "3a2ab192-109a-5fa4-b9d9-7ed5421ce5c6_dfaef357-a79e-4846-aabc-848b1ab59fbb" "16e0e4f7-a44f-55d5-ae85-b2a614f42095_d5d05133-2092-451a-b9fa-c782a6ce3786" ...
+       $ activity_name             : chr [1:100] "bark chips, wet, measured as dry mass to generic market for residual hardwood, wet" "market for nitrous oxide" "market for sawdust, wet, measured as dry mass" "market for sewage sludge, 70% water, WWT, WW from maize starch production" ...
+       $ geography                 : chr [1:100] "CH" "GLO" "CH" "CH" ...
+       $ reference_product_name    : chr [1:100] "residual hardwood, wet" "nitrous oxide" "sawdust, wet, measured as dry mass" "sewage sludge, 70% water, WWT, WW from maize starch production" ...
+       $ unit                      : chr [1:100] "m3" "kg" "kg" "kg" ...
+
 # `isic_tilt_mapper` hasn't changed
 
     Code
-      format_robust_snapshot(tiltIndicatorAfter::isic_tilt_mapper)
+      format_minimal_snapshot(tiltIndicatorAfter::isic_tilt_mapper)
     Output
-      [[1]]
-          isic_4digit
-      1          0111
-      2          0112
-      3          0113
-      4          0114
-      5          0116
-      6          0119
-      7          0121
-      8          0122
-      9          0123
-      10         0124
-      11         0125
-      12         0126
-      13         0127
-      14         0128
-      15         0129
-      16         0130
-      17         0141
-      18         0144
-      19         0145
-      20         0146
-      21         0149
-      22         0161
-      23         0162
-      24         0163
-      25         0164
-      26         0210
-      27         0220
-      28         0230
-      29         0311
-      30          032
-      31         0322
-      32         0510
-      33         0520
-      34           06
-      35         0610
-      36         0620
-      37         0710
-      38         0721
-      39         0729
-      40         0810
-      41         0891
-      42         0892
-      43         0893
-      44         0899
-      45         0910
-      46         0990
-      47         1010
-      48         1020
-      49         1030
-      50         1040
-      51         1050
-      52         1061
-      53         1062
-      54         1072
-      55         1075
-      56         1080
-      57         1311
-      58         1312
-      59         1313
-      60         1391
-      61         1399
-      62         1610
-      63          162
-      64         1621
-      65         1622
-      66         1623
-      67         1701
-      68         1702
-      69         1709
-      70         1811
-      71         1812
-      72         1910
-      73         1920
-      74           20
-      75          201
-      76         2011
-      77         2012
-      78         2013
-      79         2021
-      80         2022
-      81         2023
-      82         2029
-      83         2030
-      84         2100
-      85         2219
-      86         2220
-      87         2310
-      88          239
-      89         2391
-      90         2392
-      91         2393
-      92         2394
-      93         2395
-      94         2396
-      95         2399
-      96         2410
-      97          242
-      98         2420
-      99         2431
-      100        2432
-      101        2511
-      102        2512
-      103         259
-      104        2591
-      105        2592
-      106        2599
-      107        2610
-      108        2620
-      109        2630
-      110        2640
-      111        2651
-      112        2710
-      113        2720
-      114        2732
-      115        2740
-      116        2750
-      117        2790
-      118        2811
-      119        2812
-      120        2813
-      121        2815
-      122        2816
-      123        2817
-      124        2818
-      125        2819
-      126        2821
-      127        2822
-      128        2823
-      129        2824
-      130        2829
-      131        2910
-      132        2920
-      133        2930
-      134        3011
-      135        3020
-      136        3030
-      137        3091
-      138        3092
-      139        3100
-      140        3314
-      141        3315
-      142        3320
-      143          35
-      144        3510
-      145        3520
-      146        3530
-      147        3600
-      148        3700
-      149        3811
-      150        3821
-      151        3822
-      152        3830
-      153        3900
-      154        4100
-      155        4210
-      156        4220
-      157        4290
-      158        4312
-      159        4322
-      160        4390
-      161        4520
-      162        4540
-      163        4661
-      164        4911
-      165        4912
-      166         492
-      167        4921
-      168        4922
-      169        4923
-      170        4930
-      171        5012
-      172        5022
-      173        5110
-      174        5120
-      175        5229
-      176        5510
-      177        6110
-      178        7110
-      179        8219
-      180        8292
-      181        9529
-      182        9601
-      
-      [[2]]
-                                                            isic_4digit_name_ecoinvent
-      1               Growing of cereals (except rice), leguminous crops and oil seeds
-      2                                                                Growing of rice
-      3                             Growing of vegetables and melons, roots and tubers
-      4                                                          Growing of sugar cane
-      5                                                         Growing of fibre crops
-      6                                           Growing of other non-perennial crops
-      7                                                              Growing of grapes
-      8                                     Growing of tropical and subtropical fruits
-      9                                                       Growing of citrus fruits
-      10                                       Growing of pome fruits and stone fruits
-      11                                Growing of other tree and bush fruits and nuts
-      12                                                  Growing of oleaginous fruits
-      13                                                     Growing of beverage crops
-      14                    Growing of spices, aromatic, drug and pharmaceutical crops
-      15                                              Growing of other perennial crops
-      16                                                             Plant propagation
-      17                                               Raising of cattle and buffaloes
-      18                                                    Raising of sheep and goats
-      19                                                         Raising of swine/pigs
-      20                                                            Raising of poultry
-      21                                                      Raising of other animals
-      22                                        Support activities for crop production
-      23                                      Support activities for animal production
-      24                                                  Post-harvest crop activities
-      25                                               Seed processing for propagation
-      26                                    Silviculture and other forestry activities
-      27                                                                       Logging
-      28                                         Gathering of non-wood forest products
-      29                                                                Marine fishing
-      30                                                                   Aquaculture
-      31                                                        Freshwater aquaculture
-      32                                                           Mining of hard coal
-      33                                                             Mining of lignite
-      34                                 Extraction of crude petroleum and natural gas
-      35                                                 Extraction of crude petroleum
-      36                                                     Extraction of natural gas
-      37                                                           Mining of iron ores
-      38                                            Mining of uranium and thorium ores
-      39                                        Mining of other non-ferrous metal ores
-      40                                             Quarrying of stone, sand and clay
-      41                                    Mining of chemical and fertilizer minerals
-      42                                                            Extraction of peat
-      43                                                            Extraction of salt
-      44                                             Other mining and quarrying n.e.c.
-      45                   Support activities for petroleum and natural gas extraction
-      46                             Support activities for other mining and quarrying
-      47                                             Processing and preserving of meat
-      48                   Processing and preserving of fish, crustaceans and molluscs
-      49                             Processing and preserving of fruit and vegetables
-      50                             Manufacture of vegetable and animal oils and fats
-      51                                                 Manufacture of dairy products
-      52                                            Manufacture of grain mill products
-      53                                   Manufacture of starches and starch products
-      54                                                          Manufacture of sugar
-      55                                      Manufacture of prepared meals and dishes
-      56                                          Manufacture of prepared animal feeds
-      57                                    Preparation and spinning of textile fibres
-      58                                                           Weaving of textiles
-      59                                                         Finishing of textiles
-      60                                  Manufacture of knitted and crocheted fabrics
-      61                                          Manufacture of other textiles n.e.c.
-      62                                                Sawmilling and planing of wood
-      63           Manufacture of products of wood, cork, straw and plaiting materials
-      64                            Manufacture of veneer sheets and wood-based panels
-      65                                Manufacture of builders' carpentry and joinery
-      66                                              Manufacture of wooden containers
-      67                                     Manufacture of pulp, paper and paperboard
-      68   Manufacture of corrugated paper and paperboard and of containers of paper a
-      69                         Manufacture of other articles of paper and paperboard
-      70                                                                      Printing
-      71                                        Service activities related to printing
-      72                                             Manufacture of coke oven products
-      73                                     Manufacture of refined petroleum products
-      74                                Manufacture of chemicals and chemical products
-      75  Manufacture of basic chemicals, fertilizers and nitrogen compounds, plastics
-      76                                                Manufacture of basic chemicals
-      77                             Manufacture of fertilizers and nitrogen compounds
-      78                 Manufacture of plastics and synthetic rubber in primary forms
-      79                     Manufacture of pesticides and other agrochemical products
-      80   Manufacture of paints, varnishes and similar coatings, printing ink and mas
-      81   Manufacture of soap and detergents, cleaning and polishing preparations, pe
-      82                                 Manufacture of other chemical products n.e.c.
-      83                                                Manufacture of man-made fibres
-      84     Manufacture of pharmaceuticals, medicinal chemical and botanical products
-      85                                          Manufacture of other rubber products
-      86                                              Manufacture of plastics products
-      87                                       Manufacture of glass and glass products
-      88                           Manufacture of non-metallic mineral products n.e.c.
-      89                                            Manufacture of refractory products
-      90                                        Manufacture of clay building materials
-      91                           Manufacture of other porcelain and ceramic products
-      92                                       Manufacture of cement, lime and plaster
-      93                       Manufacture of articles of concrete, cement and plaster
-      94                                       Cutting, shaping and finishing of stone
-      95                     Manufacture of other non-metallic mineral products n.e.c.
-      96                                             Manufacture of basic Iron & Steel
-      97                    Manufacture of basic precious and other non-ferrous metals
-      98                    Manufacture of basic precious and other non-ferrous metals
-      99                                                       Casting of Iron & Steel
-      100                                                Casting of non-ferrous metals
-      101                                     Manufacture of structural metal products
-      102                     Manufacture of tanks, reservoirs and containers of metal
-      103 Manufacture of other fabricated metal products; metalworking service activit
-      104     Forging, pressing, stamping and roll-forming of metal; powder metallurgy
-      105                                   Treatment and coating of metals; machining
-      106                        Manufacture of other fabricated metal products n.e.c.
-      107                              Manufacture of electronic components and boards
-      108                            Manufacture of computers and peripheral equipment
-      109                                       Manufacture of communication equipment
-      110                                          Manufacture of consumer electronics
-      111          Manufacture of measuring, testing, navigating and control equipment
-      112  Manufacture of electric motors, generators, transformers and electricity di
-      113                                    Manufacture of batteries and accumulators
-      114                Manufacture of other electronic and electric wires and cables
-      115                                   Manufacture of electric lighting equipment
-      116                                           Manufacture of domestic appliances
-      117                                    Manufacture of other electrical equipment
-      118  Manufacture of engines and turbines, except aircraft, vehicle and cycle eng
-      119                                         Manufacture of fluid power equipment
-      120                     Manufacture of other pumps, compressors, taps and valves
-      121                           Manufacture of ovens, furnaces and furnace burners
-      122                                Manufacture of lifting and handling equipment
-      123  Manufacture of office machinery and equipment (except computers and periphe
-      124                                       Manufacture of power-driven hand tools
-      125                               Manufacture of other general-purpose machinery
-      126                           Manufacture of agricultural and forestry machinery
-      127                     Manufacture of metal-forming machinery and machine tools
-      128                                      Manufacture of machinery for metallurgy
-      129              Manufacture of machinery for mining, quarrying and construction
-      130                               Manufacture of other special-purpose machinery
-      131                                                Manufacture of motor vehicles
-      132  Manufacture of bodies (coachwork) for motor vehicles; manufacture of traile
-      133                      Manufacture of parts and accessories for motor vehicles
-      134                                    Building of ships and floating structures
-      135                         Manufacture of railway locomotives and rolling stock
-      136                      Manufacture of air and spacecraft and related machinery
-      137                                                   Manufacture of motorcycles
-      138                                Manufacture of bicycles and invalid carriages
-      139                                                     Manufacture of furniture
-      140                                               Repair of electrical equipment
-      141                         Repair of transport equipment, except motor vehicles
-      142                           Installation of industrial machinery and equipment
-      143                          Electricity, gas, steam and air conditioning supply
-      144                     Electric power generation, transmission and distribution
-      145              Manufacture of gas; distribution of gaseous fuels through mains
-      146                                            Steam and air conditioning supply
-      147                                       Water collection, treatment and supply
-      148                                                                     Sewerage
-      149                                            Collection of non-hazardous waste
-      150                                Treatment and disposal of non-hazardous waste
-      151                                    Treatment and disposal of hazardous waste
-      152                                                           Materials recovery
-      153                   Remediation activities and other waste management services
-      154                                                    Construction of buildings
-      155                                           Construction of roads and railways
-      156                                             Construction of utility projects
-      157                             Construction of other civil engineering projects
-      158                                                             Site preparation
-      159                             Plumbing, heat and air-conditioning installation
-      160                                    Other specialized construction activities
-      161                                     Maintenance and repair of motor vehicles
-      162  Sale, maintenance and repair of motorcycles and related parts and accessori
-      163            Wholesale of solid, liquid and gaseous fuels and related products
-      164                                         Passenger rail transport, interurban
-      165                                                       Freight rail transport
-      166                                                         Other land transport
-      167                                  Urban and suburban passenger land transport
-      168                                               Other passenger land transport
-      169                                                    Freight transport by road
-      170                                                       Transport via pipeline
-      171                                      Sea and coastal freight water transport
-      172                                               Inland freight water transport
-      173                                                      Passenger air transport
-      174                                                        Freight air transport
-      175                                      Other transportation support activities
-      176                                          Short term accommodation activities
-      177                                          Wired telecommunications activities
-      178   Architectural and engineering activities and related technical consultancy
-      179  Photocopying, document preparation and other specialized office support act
-      180                                                         Packaging activities
-      181                                 Repair of other personal and household goods
-      182                      Washing and (dry-) cleaning of textile and fur products
-      
+      tibble [182 x 2] (S3: tbl_df/tbl/data.frame)
+       $ isic_4digit               : chr [1:182] "0111" "0112" "0113" "0114" ...
+       $ isic_4digit_name_ecoinvent: chr [1:182] "Growing of cereals (except rice), leguminous crops and oil seeds" "Growing of rice" "Growing of vegetables and melons, roots and tubers" "Growing of sugar cane" ...
 
