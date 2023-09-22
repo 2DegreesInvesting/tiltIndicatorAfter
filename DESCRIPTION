@@ -15,6 +15,7 @@ Imports:
     rlang,
     tibble,
     tidyr,
+    tidyselect,
     utils
 Suggests: 
     here,
