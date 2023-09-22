@@ -1,6 +1,6 @@
 Package: tiltIndicatorAfter
 Title: Create user facing outputs of tiltIndicators
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Kalash", "Singhal", , "kalash@2degrees-investing.org", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
@@ -15,15 +15,22 @@ Imports:
     rlang,
     tibble,
     tidyr,
+    tidyselect,
     utils
 Suggests: 
     here,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    stringr (>= 1.5.0),
+    testthat (>= 3.0.0),
+    tiltIndicator (>= 0.0.0.9094),
+    tiltToyData (>= 0.0.0.9002)
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
 Config/testthat/edition: 3
 URL: https://2degreesinvesting.github.io/tiltIndicatorAfter/
+Remotes: 
+    2degreesinvesting/tiltToyData,
+    2DegreesInvesting/tiltIndicator

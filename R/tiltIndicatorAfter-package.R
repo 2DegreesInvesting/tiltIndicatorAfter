@@ -25,6 +25,8 @@
 #' @importFrom rlang .data
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
+#' @importFrom tidyselect all_of
 #' @importFrom utils hasName
+#' @importFrom utils str
 ## usethis namespace: end
 NULL
