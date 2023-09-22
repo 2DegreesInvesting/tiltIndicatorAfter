@@ -21,10 +21,16 @@ Suggests:
     here,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    stringr (>= 1.5.0),
+    testthat (>= 3.0.0),
+    tiltIndicator (>= 0.0.0.9094),
+    tiltToyData (>= 0.0.0.9002)
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
 Config/testthat/edition: 3
 URL: https://2degreesinvesting.github.io/tiltIndicatorAfter/
+Remotes: 
+    2degreesinvesting/tiltToyData,
+    2DegreesInvesting/tiltIndicator

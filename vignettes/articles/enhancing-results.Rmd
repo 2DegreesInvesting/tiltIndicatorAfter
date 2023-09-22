@@ -1,0 +1,71 @@
+---
+title: "Enhancing results"
+---
+
+This article shows strategies to enhance tiltIndicator results.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(readr, warn.conflicts = FALSE)
+library(tibble)
+library(tiltToyData)
+library(tiltIndicator)
+library(tiltIndicatorAfter)
+
+packageVersion("tiltIndicatorAfter")
+
+options(readr.show_col_types = FALSE)
+```
+
+Consider `emissions_profile()`. It takes two datasets: `companies` and
+`products`.
+
+```{r}
+companies <- read_csv(toy_emissions_profile_any_companies())
+products <- read_csv(toy_emissions_profile_products()) |>
+  rowid_to_column("products_rowid") |>
+  # FIXME: #25
+  mutate(isic_4digit = stringr::str_pad(isic_4digit, width = 4, pad = "0"))
+
+result <- emissions_profile(companies, products)
+result
+```
+
+Above we added a `products_rowid` to `products`. This help you to extend the
+result of `emissions_profile()` at product level with columns from `products`.
+
+```{r}
+extension <- products |> select(matches(c("rowid", "isic", "sector")))
+extension
+
+result_at_product_level <- left_join(unnest_product(result), extension)
+result_at_product_level
+```
+
+This approach can only take you so far. To enhance it further you need the
+tiltindicatorAfter package, and a number of additional "mapper" datasets.
+
+```{r}
+europages_companies <- ep_companies
+europages_ecoinvent <- matches_mapper
+ecoinvent_activities <- ecoinvent_activities
+isic_tilt <- isic_tilt_mapper
+
+enhanced <- result_at_product_level |>
+  prepare_pctr_product(
+    europages_companies,
+    ecoinvent_activities,
+    europages_ecoinvent,
+    isic_tilt
+  )
+enhanced
+
+glimpse(enhanced)
+```
