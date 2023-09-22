@@ -29,8 +29,8 @@ Consider `emissions_profile()`. It takes two datasets: `companies` and
 
 ```{r}
 companies <- read_csv(toy_emissions_profile_any_companies())
-products <- read_csv(toy_emissions_profile_products()) |> 
-  rowid_to_column("products_rowid") |> 
+products <- read_csv(toy_emissions_profile_products()) |>
+  rowid_to_column("products_rowid") |>
   # FIXME: #25
   mutate(isic_4digit = stringr::str_pad(isic_4digit, width = 4, pad = "0"))
 
@@ -58,9 +58,9 @@ europages_ecoinvent <- matches_mapper
 ecoinvent_activities <- ecoinvent_activities
 isic_tilt <- isic_tilt_mapper
 
-enhanced <- result_at_product_level |> 
+enhanced <- result_at_product_level |>
   prepare_pctr_product(
-    europages_companies, 
+    europages_companies,
     ecoinvent_activities,
     europages_ecoinvent,
     isic_tilt
