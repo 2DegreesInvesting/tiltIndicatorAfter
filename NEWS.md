@@ -1,3 +1,3 @@
 # tiltIndicatorAfter (development version)
 
-* Initial CRAN submission.
+* Add NEWS.md to record changes.
