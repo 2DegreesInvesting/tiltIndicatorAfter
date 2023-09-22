@@ -20,7 +20,8 @@ Suggests:
     here,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tiltToyData
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
