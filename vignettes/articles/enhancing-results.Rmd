@@ -38,8 +38,9 @@ result <- emissions_profile(companies, products)
 result
 ```
 
-Above we added a `products_rowid` to `products`. This help you to extend the
-result of `emissions_profile()` at product level with columns from `products`.
+Above note the addition of `products_rowid` to `products`. This new column helps
+you to extend the result of `emissions_profile()` at product level with columns
+from `products`.
 
 ```{r}
 extension <- products |> select(matches(c("rowid", "isic", "sector")))
