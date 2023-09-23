@@ -34,7 +34,7 @@ exclude_rows <- function(data, col) {
     )
 
   # Write test to include the meta data
-  result <- data |>
+  data |>
     filter(!is.na(.data[[col]])) |>
     bind_rows(ids)
 }

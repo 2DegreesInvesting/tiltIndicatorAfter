@@ -32,7 +32,7 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
       "completion", "activity_name", "reference_product_name", "unit"
     )
 
-  pctr_prod <- pctr_prod |>
+  pctr_prod |>
     left_join(comp, by = "companies_id") |>
     left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     left_join(isic_tilt_map, by = "isic_4digit") |>
