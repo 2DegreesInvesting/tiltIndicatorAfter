@@ -29,6 +29,8 @@
 #' )
 #' ictr_product_final
 prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
+  ictr_prod <- sanitize_isic(ictr_prod)
+
   prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
 
