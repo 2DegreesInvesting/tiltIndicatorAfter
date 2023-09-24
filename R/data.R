@@ -40,13 +40,6 @@
 #' istr_product
 "istr_product"
 
-#' ISTR datasets
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' istr_company
-"istr_company"
-
 #' Matcher dataset
 #' @author Kalash Singhal.
 #'
