@@ -17,7 +17,7 @@ test_that("handles numeric `isic*`", {
   )
 })
 
-test_that("doesn't throw error: 'Column unit doesn't exist'", {
+test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   emissions_profile_product <- tibble(
     companies_id = "a",
     grouped_by = "all",
