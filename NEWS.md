@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9007 (2023-09-24)
+
+* Retire `pstr_company` and  `istr_company` as we now have more accurate toy datasets (#55).
+
 # tiltIndicatorAfter 0.0.0.9006 (2023-09-24)
 
 * `prepare_istr_company()` now accepts the output of `tiltIndicator::sector_profile_upstream()` 'as is' (#54).
