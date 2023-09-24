@@ -10,18 +10,12 @@
 #' @export
 #'
 #' @examples
-#' matches_mapper <- matches_mapper
-#' ecoinvent_activities <- ecoinvent_activities
-#' pstr_product <- pstr_product
-#' ep_companies <- ep_companies
-#'
-#' pstr_product_final <- prepare_pstr_product(
-#'   pstr_product,
-#'   ep_companies,
-#'   ecoinvent_activities,
-#'   matches_mapper
+#' prepare_pstr_product(
+#'   pstr_product |> head(1),
+#'   ep_companies |> head(1),
+#'   ecoinvent_activities |> head(1),
+#'   matches_mapper |> head(1)
 #' )
-#' pstr_product_final
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
   prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     relocate_pstr_product() |>
