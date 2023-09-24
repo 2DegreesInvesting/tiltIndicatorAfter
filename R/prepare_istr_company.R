@@ -13,8 +13,8 @@
 #'
 #' @examples
 #' prepare_istr_company(
-#'   istr_company |> head(1),
-#'   istr_product |> head(1),
+#'   unnest_company(toy_sector_profile_upstream_result()) |> head(1),
+#'   unnest_product(toy_sector_profile_upstream_result()) |> head(1),
 #'   ep_companies |> head(1),
 #'   ecoinvent_activities |> head(1),
 #'   matches_mapper |> head(1),
