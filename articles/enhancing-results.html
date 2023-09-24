@@ -91,9 +91,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">companies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_emissions_profile_any_companies</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_emissions_profile_products</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rowid_to_column</a></span><span class="op">(</span><span class="st">"products_rowid"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="co"># FIXME: #25</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>isic_4digit <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_pad.html" class="external-link">str_pad</a></span><span class="op">(</span><span class="va">isic_4digit</span>, width <span class="op">=</span> <span class="fl">4</span>, pad <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rowid_to_column</a></span><span class="op">(</span><span class="st">"products_rowid"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/emissions_profile.html" class="external-link">emissions_profile</a></span><span class="op">(</span><span class="va">companies</span>, <span class="va">products</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
@@ -117,12 +115,12 @@
 <span><span class="va">extension</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 4</span></span></span>
 <span><span class="co">#&gt;   products_rowid isic_4digit tilt_sector    tilt_subsector</span></span>
-<span><span class="co">#&gt;            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              1 2560        Industry       Other         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>              2 2560        Industry       Other         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>              3 2870        Steel &amp; Metals Steel         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>              4 1780        Agriculture    Agriculture   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>              5 2679        Industry       Other</span></span>
+<span><span class="co">#&gt;            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              1        <span style="text-decoration: underline;">2</span>560 Industry       Other         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>              2        <span style="text-decoration: underline;">2</span>560 Industry       Other         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>              3        <span style="text-decoration: underline;">2</span>870 Steel &amp; Metals Steel         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>              4        <span style="text-decoration: underline;">1</span>780 Agriculture    Agriculture   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>              5        <span style="text-decoration: underline;">2</span>679 Industry       Other</span></span>
 <span></span>
 <span><span class="va">result_at_product_level</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="va">extension</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(products_rowid)`</span></span>
@@ -142,7 +140,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> fleischerei-stiefsohn_0000…              2 unit       medium        oven     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 39 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: activity_uuid_product_uuid &lt;chr&gt;, co2_footprint &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   isic_4digit &lt;chr&gt;, tilt_sector &lt;chr&gt;, tilt_subsector &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   isic_4digit &lt;dbl&gt;, tilt_sector &lt;chr&gt;, tilt_subsector &lt;chr&gt;</span></span></span></code></pre></div>
 <p>This approach can only take you so far. To enhance it further you
 need the tiltindicatorAfter package, and a number of additional “mapper”
 datasets.</p>
