@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9004 (2023-09-24)
+
+* `prepare_pstr_company()` now accepts the output of `tiltIndicator::sector_profile()` 'as is' (#50).
+
 # tiltIndicatorAfter 0.0.0.9003 (2023-09-24)
 
 * `prepare_pctr_product()` No longer errors with "Column unit doesn't exist" (#26).
