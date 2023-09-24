@@ -2,11 +2,8 @@
 
 export(prepare_ictr_company)
 export(prepare_ictr_product)
-export(prepare_inter_pctr_product)
-export(prepare_inter_pstr_product)
 export(prepare_istr_company)
 export(prepare_istr_product)
-export(prepare_matches_mapper)
 export(prepare_pctr_company)
 export(prepare_pctr_product)
 export(prepare_pstr_company)

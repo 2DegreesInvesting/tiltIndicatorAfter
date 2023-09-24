@@ -7,24 +7,7 @@
 #' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the intermediate output of pctr_product
-#'
-#' @export
-#'
-#' @examples
-#' matches_mapper <- matches_mapper
-#' ecoinvent_activities <- ecoinvent_activities
-#' pctr_product <- pctr_product
-#' ep_companies <- ep_companies
-#' isic_tilt_mapper <- isic_tilt_mapper
-#'
-#' pctr_product_inter <- prepare_inter_pctr_product(
-#'   pctr_product,
-#'   ep_companies,
-#'   ecoinvent_activities,
-#'   matches_mapper,
-#'   isic_tilt_mapper
-#' )
-#' pctr_product_inter
+#' @noRd
 prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select(

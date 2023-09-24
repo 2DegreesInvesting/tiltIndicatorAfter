@@ -27,10 +27,10 @@ Creates final output of pstr company level results
 library(tiltIndicator)
 
 prepare_pstr_company(
-  unnest_company(sector_profile_result()),
-  unnest_product(sector_profile_result()),
-  ep_companies,
-  ecoinvent_activities,
-  matches_mapper
+  unnest_company(sector_profile_result()) |> head(1),
+  unnest_product(sector_profile_result()) |> head(1),
+  ep_companies |> head(1),
+  ecoinvent_activities |> head(1),
+  matches_mapper |> head(1)
 )
 }
