@@ -12,20 +12,22 @@ RoxygenNote: 7.2.3
 Imports: 
     dplyr,
     glue,
+    memoise,
     readr,
     rlang,
     stringr,
     tibble,
     tidyr,
     tidyselect,
-    utils
+    tiltIndicator,
+    tiltToyData,
+    utils,
+    withr
 Suggests: 
     here,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    tiltIndicator (>= 0.0.0.9094),
-    tiltToyData (>= 0.0.0.9002)
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
