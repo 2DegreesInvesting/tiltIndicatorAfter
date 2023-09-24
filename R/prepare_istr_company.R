@@ -4,7 +4,8 @@
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param istr_prod A dataframe like [istr_product]
 #' @param comp A dataframe like [ep_companies]
-#' @param istr_comp A dataframe like [istr_company]
+#' @param istr_comp A dataframe like the corresponding output at company level
+#'   from tiltIndicator.
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
 #'
 #' @return A dataframe that prepares the final output of ictr_company

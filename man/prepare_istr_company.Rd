@@ -14,7 +14,8 @@ prepare_istr_company(
 )
 }
 \arguments{
-\item{istr_comp}{A dataframe like \link{istr_company}}
+\item{istr_comp}{A dataframe like the corresponding output at company level
+from tiltIndicator.}
 
 \item{istr_prod}{A dataframe like \link{istr_product}}
 
