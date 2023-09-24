@@ -14,6 +14,8 @@ toy_sector_profile_result <- memoise(function() {
   sector_profile(companies, scenarios)
 })
 
+#' @export
+#' @rdname toy_sector_profile_result
 toy_sector_profile_upstream_result <- memoise(function() {
   local_options(readr.show_col_types = FALSE)
 

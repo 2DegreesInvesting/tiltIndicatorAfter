@@ -12,6 +12,8 @@
 #' @export
 #'
 #' @examples
+#' library(tiltIndicator)
+#'
 #' prepare_istr_company(
 #'   unnest_company(toy_sector_profile_upstream_result()) |> head(1),
 #'   unnest_product(toy_sector_profile_upstream_result()) |> head(1),

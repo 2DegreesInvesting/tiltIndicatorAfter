@@ -2,9 +2,12 @@
 % Please edit documentation in R/toy_sector_result.R
 \name{toy_sector_profile_result}
 \alias{toy_sector_profile_result}
+\alias{toy_sector_profile_upstream_result}
 \title{Example sector profile result}
 \usage{
 toy_sector_profile_result()
+
+toy_sector_profile_upstream_result()
 }
 \value{
 A dataframe like the output of \code{\link[tiltIndicator:sector_profile]{tiltIndicator::sector_profile()}}.
