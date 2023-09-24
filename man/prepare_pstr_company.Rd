@@ -24,18 +24,13 @@ A dataframe that prepares the final output of pstr_company
 Creates final output of pstr company level results
 }
 \examples{
-matches_mapper <- matches_mapper
-ecoinvent_activities <- ecoinvent_activities
-pstr_product <- pstr_product
-ep_companies <- ep_companies
-pstr_company <- pstr_company
+library(tiltIndicator)
 
-pstr_company_final <- prepare_pstr_company(
-  pstr_company,
-  pstr_product,
+prepare_pstr_company(
+  unnest_company(sector_profile_result()),
+  unnest_product(sector_profile_result()),
   ep_companies,
   ecoinvent_activities,
   matches_mapper
 )
-pstr_company_final
 }
