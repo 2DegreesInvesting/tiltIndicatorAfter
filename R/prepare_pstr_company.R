@@ -14,15 +14,14 @@
 #' library(tiltIndicator)
 #'
 #' prepare_pstr_company(
-#'   unnest_company(sector_profile_result()) |> head(1),
-#'   unnest_product(sector_profile_result()) |> head(1),
+#'   unnest_company(toy_sector_profile_result()) |> head(1),
+#'   unnest_product(toy_sector_profile_result()) |> head(1),
 #'   ep_companies |> head(1),
 #'   ecoinvent_activities |> head(1),
 #'   matches_mapper |> head(1)
 #' )
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper) {
   pstr_comp <- sector_profile_any_polish_output_at_company_level(pstr_comp)
-
 
   inter_result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>

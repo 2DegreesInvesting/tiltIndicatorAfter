@@ -12,15 +12,19 @@
 #' @export
 #'
 #' @examples
+#' library(tiltIndicator)
+#'
 #' prepare_istr_company(
-#'   istr_company |> head(1),
-#'   istr_product |> head(1),
+#'   unnest_company(toy_sector_profile_upstream_result()) |> head(1),
+#'   unnest_product(toy_sector_profile_upstream_result()) |> head(1),
 #'   ep_companies |> head(1),
 #'   ecoinvent_activities |> head(1),
 #'   matches_mapper |> head(1),
 #'   ecoinvent_inputs |> head(1)
 #' )
 prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
+  istr_comp <- sector_profile_any_polish_output_at_company_level(istr_comp)
+
   inter_result <- prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
     select(
       "companies_id", "company_name", "company_city", "country", "postcode",
