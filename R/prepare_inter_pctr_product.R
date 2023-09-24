@@ -34,7 +34,6 @@ prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_ma
 
   pctr_prod_comp <- left_join(pctr_prod, comp, by = "companies_id")
 
-  # FIXME: Figure out what are the stable, expected columns
   join_by_shared_cols_quietly <- intersect(
     names(pctr_prod_comp),
     names(prepared_match_mapper)
