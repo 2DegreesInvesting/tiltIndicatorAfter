@@ -33,20 +33,12 @@ A dataframe that prepares the final output of ictr_product
 Creates final output of ictr product level results
 }
 \examples{
-matches_mapper <- matches_mapper
-ecoinvent_activities <- ecoinvent_activities
-ictr_product <- ictr_product
-ep_companies <- ep_companies
-ecoinvent_inputs <- ecoinvent_inputs
-isic_tilt_mapper <- isic_tilt_mapper
-
 ictr_product_final <- prepare_ictr_product(
-  ictr_product,
-  ep_companies,
-  ecoinvent_activities,
-  matches_mapper,
-  ecoinvent_inputs,
-  isic_tilt_mapper
+  ictr_product |> head(1),
+  ep_companies |> head(1),
+  ecoinvent_activities |> head(1),
+  matches_mapper |> head(1),
+  ecoinvent_inputs |> head(1),
+  isic_tilt_mapper |> head(1)
 )
-ictr_product_final
 }
