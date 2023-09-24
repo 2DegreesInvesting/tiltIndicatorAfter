@@ -23,7 +23,7 @@
 #' )
 #' pstr_product_final
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-  result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
+  prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     relocate_pstr_product() |>
     rename_pstr_product() |>
     mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>

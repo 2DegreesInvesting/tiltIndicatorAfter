@@ -1,12 +1,23 @@
 test_that("total number of rows for a comapny is either 1 or 6", {
-  out <- prepare_pctr_product(pctr_product, ep_companies, ecoinvent_activities, matches_mapper, isic_tilt_mapper) |>
+  out <- prepare_pctr_product(pctr_product, ep_companies, ecoinvent_activities, small_matches_mapper, isic_tilt_mapper) |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
     summarise(count = n())
   expect_true(all(unique(out$count) %in% c(1, 6)))
 })
 
-test_that("throws no error", {
-  # FIXME: Create an example_emissions_profile_product()
+test_that("handles numeric `isic*`", {
+  expect_no_error(
+    prepare_pctr_product(
+      pctr_product |> head(1) |> modify_col("isic", as.numeric),
+      ep_companies |> head(1),
+      ecoinvent_activities |> head(1),
+      small_matches_mapper |> head(1),
+      isic_tilt_mapper |> head(1)
+    )
+  )
+})
+
+test_that("doesn't throw error: 'Column unit doesn't exist'", {
   emissions_profile_product <- tibble(
     companies_id = "a",
     grouped_by = "all",
@@ -16,18 +27,14 @@ test_that("throws no error", {
     tilt_subsector = "Other",
     isic_4digit = "2560"
   )
-  europages_companies <- tiltIndicatorAfter::ep_companies |> head(1)
-  ecoinvent_activities <- tiltIndicatorAfter::ecoinvent_activities |> head(1)
-  europages_ecoinvent <- tiltIndicatorAfter::matches_mapper |> head(1)
-  isic_tilt <- tiltIndicatorAfter::isic_tilt_mapper |> head(1)
 
   expect_no_error(
-    emissions_profile_product |>
     prepare_pctr_product(
-      europages_companies,
-      ecoinvent_activities,
-      europages_ecoinvent,
-      isic_tilt
+      emissions_profile_product,
+      ep_companies |> head(1),
+      ecoinvent_activities |> head(1),
+      small_matches_mapper |> head(1),
+      isic_tilt_mapper |> head(1)
     )
   )
 })
