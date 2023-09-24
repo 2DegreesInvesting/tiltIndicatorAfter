@@ -33,13 +33,6 @@
 #' pstr_product
 "pstr_product"
 
-#' PSTR datasets
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' pstr_company
-"pstr_company"
-
 #' ISTR datasets
 #' @author Kalash Singhal.
 #'
