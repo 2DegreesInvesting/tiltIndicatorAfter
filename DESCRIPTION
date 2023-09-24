@@ -19,8 +19,8 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
-    tiltIndicator,
-    tiltToyData,
+    tiltIndicator (>= 0.0.0.9094),
+    tiltToyData (>= 0.0.0.9002),
     utils,
     withr
 Suggests: 
