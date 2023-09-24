@@ -30,9 +30,7 @@ Consider `emissions_profile()`. It takes two datasets: `companies` and
 ```{r}
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products()) |>
-  rowid_to_column("products_rowid") |>
-  # FIXME: #25
-  mutate(isic_4digit = stringr::str_pad(isic_4digit, width = 4, pad = "0"))
+  rowid_to_column("products_rowid")
 
 result <- emissions_profile(companies, products)
 result

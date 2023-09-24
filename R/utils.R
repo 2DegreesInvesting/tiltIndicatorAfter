@@ -38,3 +38,14 @@ exclude_rows <- function(data, col) {
     filter(!is.na(.data[[col]])) |>
     bind_rows(ids)
 }
+
+sanitize_isic <- function(data) {
+  data |> pad_column("isic", width = 4, pad = "0")
+}
+
+modify_col <- function(data, pattern, f) {
+  col <- extract_name(data, pattern)
+  val <- get_column(data, pattern)
+  data[col] <- f(data[col])
+  data
+}

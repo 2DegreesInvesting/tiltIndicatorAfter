@@ -23,6 +23,7 @@
 #' @importFrom dplyr ungroup
 #' @importFrom readr read_csv
 #' @importFrom rlang .data
+#' @importFrom stringr str_pad
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
 #' @importFrom tidyselect all_of
