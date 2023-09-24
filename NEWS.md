@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9008 (2023-09-24)
+
+- Same as previous version.
+
+
 # tiltIndicatorAfter 0.0.0.9007 (2023-09-24)
 
 * Retire `pstr_company` and  `istr_company` as we now have more accurate toy datasets (#55).
