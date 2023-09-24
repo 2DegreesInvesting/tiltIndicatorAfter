@@ -14,8 +14,8 @@
 #' library(tiltIndicator)
 #'
 #' prepare_pstr_company(
-#'   unnest_company(sector_profile_result()) |> head(1),
-#'   unnest_product(sector_profile_result()) |> head(1),
+#'   unnest_company(toy_sector_profile_result()) |> head(1),
+#'   unnest_product(toy_sector_profile_result()) |> head(1),
 #'   ep_companies |> head(1),
 #'   ecoinvent_activities |> head(1),
 #'   matches_mapper |> head(1)
