@@ -12,22 +12,14 @@
 #' @export
 #'
 #' @examples
-#' matches_mapper <- matches_mapper
-#' ecoinvent_activities <- ecoinvent_activities
-#' pctr_product <- pctr_product
-#' ep_companies <- ep_companies
-#' pctr_company <- pctr_company
-#' isic_tilt_mapper <- isic_tilt_mapper
-#'
-#' pctr_company_final <- prepare_pctr_company(
-#'   pctr_company,
-#'   pctr_product,
-#'   ep_companies,
-#'   ecoinvent_activities,
-#'   matches_mapper,
-#'   isic_tilt_mapper
+#' prepare_pctr_company(
+#'   pctr_company |> head(1),
+#'   pctr_product |> head(1),
+#'   ep_companies |> head(1),
+#'   ecoinvent_activities |> head(1),
+#'   matches_mapper |> head(1),
+#'   isic_tilt_mapper |> head(1)
 #' )
-#' pctr_company_final
 prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   pctr_prod <- sanitize_isic(pctr_prod)
 

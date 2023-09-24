@@ -33,7 +33,7 @@ A dataframe that prepares the final output of ictr_product
 Creates final output of ictr product level results
 }
 \examples{
-ictr_product_final <- prepare_ictr_product(
+prepare_ictr_product(
   ictr_product |> head(1),
   ep_companies |> head(1),
   ecoinvent_activities |> head(1),

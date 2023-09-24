@@ -33,20 +33,12 @@ A dataframe that prepares the final output of ictr_company
 Creates final output of istr company level results
 }
 \examples{
-matches_mapper <- matches_mapper
-ecoinvent_activities <- ecoinvent_activities
-istr_product <- istr_product
-ep_companies <- ep_companies
-istr_company <- istr_company
-ecoinvent_inputs <- ecoinvent_inputs
-
-istr_company_final <- prepare_istr_company(
-  istr_company,
-  istr_product,
-  ep_companies,
-  ecoinvent_activities,
-  matches_mapper,
-  ecoinvent_inputs
+prepare_istr_company(
+  istr_company |> head(1),
+  istr_product |> head(1),
+  ep_companies |> head(1),
+  ecoinvent_activities |> head(1),
+  matches_mapper |> head(1),
+  ecoinvent_inputs |> head(1)
 )
-istr_company_final
 }

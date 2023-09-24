@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' ictr_company_final <- prepare_ictr_company(
+#' prepare_ictr_company(
 #'   ictr_company |> head(1),
 #'   ictr_product |> head(1),
 #'   ep_companies |> head(1),
