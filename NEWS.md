@@ -1,8 +1,13 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9009 (2023-09-24)
+
+* Remove article showing how to enhance results (TiltDevProjectMGMT#126). This
+duplicates an article in tiltIndicator.
+
 # tiltIndicatorAfter 0.0.0.9008 (2023-09-24)
 
-- Same as previous version.
+* Same as previous version.
 
 
 # tiltIndicatorAfter 0.0.0.9007 (2023-09-24)
