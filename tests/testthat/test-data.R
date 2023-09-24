@@ -18,16 +18,8 @@ test_that("`pstr_product` hasn't changed", {
   expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::pstr_product))
 })
 
-test_that("`pstr_company` hasn't changed", {
-  expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::pstr_company))
-})
-
 test_that("`istr_product` hasn't changed", {
   expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::istr_product))
-})
-
-test_that("`istr_company` hasn't changed", {
-  expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::istr_company))
 })
 
 test_that("`ep_companies` hasn't changed", {

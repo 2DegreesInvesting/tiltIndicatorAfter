@@ -7,7 +7,8 @@
 prepare_pstr_company(pstr_comp, pstr_prod, comp, eco_activities, match_mapper)
 }
 \arguments{
-\item{pstr_comp}{A dataframe like \link{pstr_company}}
+\item{pstr_comp}{A dataframe like the corresponding output at company level
+from tiltIndicator.}
 
 \item{pstr_prod}{A dataframe like \link{pstr_product}}
 
