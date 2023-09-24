@@ -6,22 +6,7 @@
 #' @param comp A dataframe like [ep_companies]
 #'
 #' @return A dataframe that prepares the intermediate output of pstr_product
-#'
-#' @export
-#'
-#' @examples
-#' matches_mapper <- matches_mapper
-#' ecoinvent_activities <- ecoinvent_activities
-#' pstr_product <- pstr_product
-#' ep_companies <- ep_companies
-#'
-#' pstr_product_inter <- prepare_inter_pstr_product(
-#'   pstr_product,
-#'   ep_companies,
-#'   ecoinvent_activities,
-#'   matches_mapper
-#' )
-#' pstr_product_inter
+#' @noRd
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
   prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
     select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")

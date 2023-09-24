@@ -4,15 +4,7 @@
 #' @param activities A dataframe like [ecoinvent_activities]
 #'
 #' @return A dataframe that contains information on multiple matches
-#'
-#' @export
-#'
-#' @examples
-#' matches_mapper <- matches_mapper
-#' ecoinvent_activities <- ecoinvent_activities
-#'
-#' output <- prepare_matches_mapper(matches_mapper, ecoinvent_activities)
-#' output
+#' @noRd
 prepare_matches_mapper <- function(mapper, activities) {
   activities <- activities |>
     select("activity_uuid_product_uuid", "activity_name", "reference_product_name", "unit")
