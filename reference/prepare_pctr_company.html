@@ -96,36 +96,18 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">matches_mapper</span> <span class="op">&lt;-</span> <span class="va">matches_mapper</span></span></span>
-<span class="r-in"><span><span class="va">ecoinvent_activities</span> <span class="op">&lt;-</span> <span class="va">ecoinvent_activities</span></span></span>
-<span class="r-in"><span><span class="va">pctr_product</span> <span class="op">&lt;-</span> <span class="va">pctr_product</span></span></span>
-<span class="r-in"><span><span class="va">ep_companies</span> <span class="op">&lt;-</span> <span class="va">ep_companies</span></span></span>
-<span class="r-in"><span><span class="va">pctr_company</span> <span class="op">&lt;-</span> <span class="va">pctr_company</span></span></span>
-<span class="r-in"><span><span class="va">isic_tilt_mapper</span> <span class="op">&lt;-</span> <span class="va">isic_tilt_mapper</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">pctr_company_final</span> <span class="op">&lt;-</span> <span class="fu">prepare_pctr_company</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">pctr_company</span>,</span></span>
-<span class="r-in"><span>  <span class="va">pctr_product</span>,</span></span>
-<span class="r-in"><span>  <span class="va">ep_companies</span>,</span></span>
-<span class="r-in"><span>  <span class="va">ecoinvent_activities</span>,</span></span>
-<span class="r-in"><span>  <span class="va">matches_mapper</span>,</span></span>
-<span class="r-in"><span>  <span class="va">isic_tilt_mapper</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">prepare_pctr_company</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">pctr_company</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">pctr_product</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ep_companies</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ecoinvent_activities</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">isic_tilt_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">pctr_company_final</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 37 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id company_name country PCTR_share PCTR_risk_category benchmark</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id1          company A    germany        0.5 high               all      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> id1          company A    germany        0.5 medium             all      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> id1          company A    germany        0   low                all      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> id1          company A    germany        0   high               isic_sec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> id1          company A    germany        1   medium             isic_sec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> id1          company A    germany        0   low                isic_sec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> id1          company A    germany        0   high               tilt_sec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> id1          company A    germany        0.5 medium             tilt_sec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> id1          company A    germany        0.5 low                tilt_sec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> id1          company A    germany        1   high               unit     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   companies_id company_name country PCTR_share PCTR_risk_category benchmark</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> id1          <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>             0.5 <span style="color: #BB0000;">NA</span>                 <span style="color: #BB0000;">NA</span>       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: matching_certainty_company_average &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   company_city &lt;chr&gt;, postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
 </code></pre></div>

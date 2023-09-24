@@ -96,37 +96,19 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">matches_mapper</span> <span class="op">&lt;-</span> <span class="va">matches_mapper</span></span></span>
-<span class="r-in"><span><span class="va">ecoinvent_activities</span> <span class="op">&lt;-</span> <span class="va">ecoinvent_activities</span></span></span>
-<span class="r-in"><span><span class="va">istr_product</span> <span class="op">&lt;-</span> <span class="va">istr_product</span></span></span>
-<span class="r-in"><span><span class="va">ep_companies</span> <span class="op">&lt;-</span> <span class="va">ep_companies</span></span></span>
-<span class="r-in"><span><span class="va">istr_company</span> <span class="op">&lt;-</span> <span class="va">istr_company</span></span></span>
-<span class="r-in"><span><span class="va">ecoinvent_inputs</span> <span class="op">&lt;-</span> <span class="va">ecoinvent_inputs</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">istr_company_final</span> <span class="op">&lt;-</span> <span class="fu">prepare_istr_company</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">istr_company</span>,</span></span>
-<span class="r-in"><span>  <span class="va">istr_product</span>,</span></span>
-<span class="r-in"><span>  <span class="va">ep_companies</span>,</span></span>
-<span class="r-in"><span>  <span class="va">ecoinvent_activities</span>,</span></span>
-<span class="r-in"><span>  <span class="va">matches_mapper</span>,</span></span>
-<span class="r-in"><span>  <span class="va">ecoinvent_inputs</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">prepare_istr_company</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">istr_company</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">istr_product</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ep_companies</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ecoinvent_activities</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">ecoinvent_inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">istr_company_final</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id company_name country ISTR_share ISTR_risk_category scenario    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id1          company A    germany      0.220 high               IPR 1.5c RPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> id1          company A    germany      0.780 medium             IPR 1.5c RPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> id1          company A    germany      0     low                IPR 1.5c RPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> id1          company A    germany      1     high               IPR 1.5c RPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> id1          company A    germany      0     medium             IPR 1.5c RPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> id1          company A    germany      0     low                IPR 1.5c RPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> id1          company A    germany      1     high               WEO NZ 2050 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> id1          company A    germany      0     medium             WEO NZ 2050 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> id1          company A    germany      0     low                WEO NZ 2050 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> id1          company A    germany      1     high               WEO NZ 2050 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: year &lt;dbl&gt;, matching_certainty_company_average &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   companies_id company_name country ISTR_share ISTR_risk_category scenario  year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> id1          <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>           0.220 high               IPR 1.5…  <span style="text-decoration: underline;">2</span>030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: matching_certainty_company_average &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   company_city &lt;chr&gt;, postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
