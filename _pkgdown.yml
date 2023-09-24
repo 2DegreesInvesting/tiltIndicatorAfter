@@ -2,3 +2,18 @@ url: https://2degreesinvesting.github.io/tiltIndicatorAfter/
 template:
   bootstrap: 5
 
+reference:
+
+  - title: Functions
+    contents:
+      - matches("prepare_")
+
+  - title: Datasets
+    contents:
+      - -matches("..tr_")
+
+  - title: Datasets from tiltIndicator
+    desc: This datasets will be retired. Intead see the package tiltToyData.
+    contents:
+      - matches("..tr_")
+      - -matches("prepare_")
