@@ -9,7 +9,6 @@ duplicates an article in tiltIndicator.
 
 * Same as previous version.
 
-
 # tiltIndicatorAfter 0.0.0.9007 (2023-09-24)
 
 * Retire `pstr_company` and  `istr_company` as we now have more accurate toy datasets (#55).
