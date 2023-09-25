@@ -26,6 +26,7 @@
 #' @importFrom readr read_csv
 #' @importFrom rlang .data
 #' @importFrom rlang abort
+#' @importFrom rlang exec
 #' @importFrom stringr str_pad
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
