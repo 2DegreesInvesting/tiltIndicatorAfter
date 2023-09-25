@@ -1,7 +1,7 @@
 # toy_sector_profile_result hasn't changed
 
     Code
-      str(unnest_product(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_product(out))
     Output
       tibble [196 x 10] (S3: tbl_df/tbl/data.frame)
        $ companies_id              : chr [1:196] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -18,7 +18,7 @@
 ---
 
     Code
-      str(unnest_company(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_company(out))
     Output
       tibble [588 x 4] (S3: tbl_df/tbl/data.frame)
        $ companies_id : chr [1:588] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -29,7 +29,7 @@
 # toy_sector_profile_upstream_result hasn't changed
 
     Code
-      str(unnest_product(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_product(out))
     Output
       tibble [704 x 12] (S3: tbl_df/tbl/data.frame)
        $ companies_id                    : chr [1:704] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -48,7 +48,7 @@
 ---
 
     Code
-      str(unnest_company(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_company(out))
     Output
       tibble [294 x 4] (S3: tbl_df/tbl/data.frame)
        $ companies_id : chr [1:294] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -59,7 +59,7 @@
 # toy_emissions_profile_result hasn't changed
 
     Code
-      str(unnest_product(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_product(out))
     Output
       tibble [49 x 6] (S3: tbl_df/tbl/data.frame)
        $ companies_id              : chr [1:49] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -72,7 +72,7 @@
 ---
 
     Code
-      str(unnest_company(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_company(out))
     Output
       tibble [129 x 4] (S3: tbl_df/tbl/data.frame)
        $ companies_id : chr [1:129] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -83,7 +83,7 @@
 # toy_emissions_profile_upstream_result hasn't changed
 
     Code
-      str(unnest_product(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_product(out))
     Output
       tibble [319 x 7] (S3: tbl_df/tbl/data.frame)
        $ companies_id                    : chr [1:319] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
@@ -97,7 +97,7 @@
 ---
 
     Code
-      str(unnest_company(out), give.attr = FALSE)
+      format_minimal_snapshot(unnest_company(out))
     Output
       tibble [129 x 4] (S3: tbl_df/tbl/data.frame)
        $ companies_id : chr [1:129] "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" "fleischerei-stiefsohn_00000005219477-001" ...
