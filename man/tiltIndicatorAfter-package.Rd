@@ -16,7 +16,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kalash Singhal \email{kalash@2degrees-investing.org} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Kalash Singhal \email{kalash@2degrees-investing.org}
+
+Other contributors:
+\itemize{
+  \item Mauro Lepore (\href{https://orcid.org/0000-0002-1986-7988}{ORCID}) [contributor]
+}
 
 }
 \keyword{internal}
