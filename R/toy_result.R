@@ -23,6 +23,30 @@ toy_result <- memoise(function(fun, paths) {
 
 #' @export
 #' @rdname toy_result
+toy_emissions_profile_result <- function() {
+  toy_result(
+    emissions_profile,
+    list(
+      toy_emissions_profile_any_companies(),
+      toy_emissions_profile_products()
+    )
+  )
+}
+
+#' @export
+#' @rdname toy_result
+toy_emissions_profile_upstream_result <- function() {
+  toy_result(
+    emissions_profile_upstream,
+    list(
+      toy_emissions_profile_any_companies(),
+      toy_emissions_profile_upstream_products()
+    )
+  )
+}
+
+#' @export
+#' @rdname toy_result
 toy_sector_profile_result <- function() {
   toy_result(
     sector_profile,
@@ -42,30 +66,6 @@ toy_sector_profile_upstream_result <- function() {
       toy_sector_profile_upstream_companies(),
       toy_sector_profile_any_scenarios(),
       toy_sector_profile_upstream_products()
-    )
-  )
-}
-
-#' @export
-#' @rdname toy_result
-toy_emissions_profile_result <- function() {
-  toy_result(
-    emissions_profile,
-    list(
-      toy_emissions_profile_any_companies(),
-      toy_emissions_profile_products()
-    )
-  )
-}
-
-#' @export
-#' @rdname toy_result
-toy_emissions_profile_upstream_result <- function() {
-  toy_result(
-    emissions_profile_upstream,
-    list(
-      toy_emissions_profile_any_companies(),
-      toy_emissions_profile_upstream_products()
     )
   )
 }
