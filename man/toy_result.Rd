@@ -4,12 +4,15 @@
 \alias{toy_result}
 \alias{toy_sector_profile_result}
 \alias{toy_sector_profile_upstream_result}
+\alias{toy_emissions_profile_result}
 \alias{toy_emissions_profile_upstream_result}
 \title{Example datasets craeted from tiltToyData and tiltIndicator}
 \usage{
 toy_sector_profile_result()
 
 toy_sector_profile_upstream_result()
+
+toy_emissions_profile_result()
 
 toy_emissions_profile_upstream_result()
 }
