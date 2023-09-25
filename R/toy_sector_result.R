@@ -19,7 +19,7 @@ toy_sector_profile_result <- memoise(function() {
 toy_sector_profile_upstream_result <- memoise(function() {
   local_options(readr.show_col_types = FALSE)
 
-  companies <- read_csv(toy_sector_profile_companies())
+  companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
 

@@ -37,6 +37,7 @@
 #' @importFrom tiltIndicator unnest_product
 #' @importFrom tiltToyData toy_sector_profile_any_scenarios
 #' @importFrom tiltToyData toy_sector_profile_companies
+#' @importFrom tiltToyData toy_sector_profile_upstream_companies
 #' @importFrom tiltToyData toy_sector_profile_upstream_products
 #' @importFrom utils hasName
 #' @importFrom utils str
