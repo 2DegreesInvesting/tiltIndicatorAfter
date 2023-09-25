@@ -1,11 +1,11 @@
 test_that("total number of rows for a comapny is either 1 or 3", {
   out <- prepare_istr_company(
-    unnest_company(toy_sector_profile_upstream_result()) |> head(1),
-    unnest_product(toy_sector_profile_upstream_result()) |> head(1),
-    ep_companies |> head(1),
-    ecoinvent_activities |> head(1),
-    small_matches_mapper |> head(1),
-    ecoinvent_inputs |> head(1)
+    unnest_company(toy_sector_profile_upstream_result()),
+    unnest_product(toy_sector_profile_upstream_result()),
+    ep_companies,
+    ecoinvent_activities,
+    small_matches_mapper,
+    ecoinvent_inputs
   ) |>
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
