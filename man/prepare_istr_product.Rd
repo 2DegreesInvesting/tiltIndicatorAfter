@@ -25,10 +25,10 @@ Creates final output of istr product level results
 }
 \examples{
 prepare_istr_product(
-  istr_product |> head(1),
-  ep_companies |> head(1),
-  ecoinvent_activities |> head(1),
-  matches_mapper |> head(1),
-  ecoinvent_inputs |> head(1)
+  istr_product |> head(3),
+  ep_companies |> head(3),
+  ecoinvent_activities |> head(3),
+  matches_mapper |> head(3),
+  ecoinvent_inputs |> head(3)
 )
 }

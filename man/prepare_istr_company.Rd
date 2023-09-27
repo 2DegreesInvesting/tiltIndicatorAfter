@@ -36,12 +36,15 @@ Creates final output of istr company level results
 \examples{
 library(tiltIndicator)
 
+company <- unnest_company(toy_sector_profile_upstream_output())
+product <- unnest_product(toy_sector_profile_upstream_output())
+
 prepare_istr_company(
-  unnest_company(toy_sector_profile_upstream_result()) |> head(1),
-  unnest_product(toy_sector_profile_upstream_result()) |> head(1),
-  ep_companies |> head(1),
-  ecoinvent_activities |> head(1),
-  matches_mapper |> head(1),
-  ecoinvent_inputs |> head(1)
+  company |> head(3),
+  product |> head(3),
+  ep_companies |> head(3),
+  ecoinvent_activities |> head(3),
+  matches_mapper |> head(3),
+  ecoinvent_inputs |> head(3)
 )
 }

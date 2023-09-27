@@ -1,4 +1,4 @@
-# toy_emissions_profile_result hasn't changed
+# toy_emissions_profile_output hasn't changed
 
     Code
       format_minimal_snapshot(unnest_product(out))
@@ -22,7 +22,7 @@
        $ risk_category: chr [1:129] "high" "medium" "low" "high" ...
        $ value        : num [1:129] 1 0 0 0.5 0.5 0 0.5 0.5 0 0.5 ...
 
-# toy_emissions_profile_upstream_result hasn't changed
+# toy_emissions_profile_upstream_output hasn't changed
 
     Code
       format_minimal_snapshot(unnest_product(out))
@@ -47,7 +47,7 @@
        $ risk_category: chr [1:129] "high" "medium" "low" "high" ...
        $ value        : num [1:129] 0.571 0.214 0.214 0.357 0.357 ...
 
-# toy_sector_profile_result hasn't changed
+# toy_sector_profile_output hasn't changed
 
     Code
       format_minimal_snapshot(unnest_product(out))
@@ -75,7 +75,7 @@
        $ risk_category: chr [1:588] "high" "medium" "low" "high" ...
        $ value        : num [1:588] 1 0 0 1 0 0 0 0 1 0 ...
 
-# toy_sector_profile_upstream_result hasn't changed
+# toy_sector_profile_upstream_output hasn't changed
 
     Code
       format_minimal_snapshot(unnest_product(out))
