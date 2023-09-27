@@ -18,8 +18,6 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   out <- prepare_pctr_company(
     company,
     product,
-    # pctr_company,
-    # pctr_product,
     ep_companies,
     ecoinvent_activities,
     small_matches_mapper,
