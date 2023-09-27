@@ -28,6 +28,7 @@
 #' @importFrom rlang abort
 #' @importFrom rlang exec
 #' @importFrom stringr str_pad
+#' @importFrom tibble rowid_to_column
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
 #' @importFrom tidyselect all_of

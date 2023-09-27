@@ -34,11 +34,11 @@ Creates final output of pctr company level results
 }
 \examples{
 prepare_pctr_company(
-  pctr_company |> head(1),
-  pctr_product |> head(1),
-  ep_companies |> head(1),
-  ecoinvent_activities |> head(1),
-  matches_mapper |> head(1),
-  isic_tilt_mapper |> head(1)
+  pctr_company |> head(3),
+  pctr_product |> head(3),
+  ep_companies |> head(3),
+  ecoinvent_activities |> head(3),
+  matches_mapper |> head(3),
+  isic_tilt_mapper |> head(3)
 )
 }

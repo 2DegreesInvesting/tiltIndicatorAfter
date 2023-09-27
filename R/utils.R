@@ -46,6 +46,6 @@ sanitize_isic <- function(data) {
 modify_col <- function(data, pattern, f) {
   col <- extract_name(data, pattern)
   val <- get_column(data, pattern)
-  data[col] <- f(data[col])
+  data[col] <- f(val)
   data
 }

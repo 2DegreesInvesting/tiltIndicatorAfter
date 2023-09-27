@@ -14,13 +14,13 @@
 #'
 #' @examples
 #' prepare_ictr_company(
-#'   ictr_company |> head(1),
-#'   ictr_product |> head(1),
-#'   ep_companies |> head(1),
-#'   ecoinvent_activities |> head(1),
-#'   matches_mapper |> head(1),
-#'   ecoinvent_inputs |> head(1),
-#'   isic_tilt_mapper |> head(1)
+#'   ictr_company |> head(3),
+#'   ictr_product |> head(3),
+#'   ep_companies |> head(3),
+#'   ecoinvent_activities |> head(3),
+#'   matches_mapper |> head(3),
+#'   ecoinvent_inputs |> head(3),
+#'   isic_tilt_mapper |> head(3)
 #' )
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
   ictr_prod <- sanitize_isic(ictr_prod)

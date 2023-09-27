@@ -23,9 +23,9 @@ Creates final output of pstr product level results
 }
 \examples{
 prepare_pstr_product(
-  pstr_product |> head(1),
-  ep_companies |> head(1),
-  ecoinvent_activities |> head(1),
-  matches_mapper |> head(1)
+  pstr_product |> head(3),
+  ep_companies |> head(3),
+  ecoinvent_activities |> head(3),
+  matches_mapper |> head(3)
 )
 }

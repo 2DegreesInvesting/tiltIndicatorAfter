@@ -7,24 +7,22 @@
 #' with data from tiltToyData.
 #'
 #' @examples
-#' toy_sector_profile_result()
-#'
 #' # All datasets are momoised
-#' system.time(toy_sector_profile_upstream_result())
-#' system.time(toy_sector_profile_upstream_result())
+#' system.time(toy_sector_profile_output())
+#' system.time(toy_sector_profile_output())
 #' @keywords internal
-#' @name toy_result
+#' @name toy_output
 NULL
 
-toy_result <- memoise(function(fun, paths) {
+toy_output <- memoise(function(fun, paths) {
   datasets <- lapply(paths, function(x) read_csv(x, show_col_types = FALSE))
   exec(fun, !!!datasets)
 })
 
 #' @export
-#' @rdname toy_result
-toy_emissions_profile_result <- function() {
-  toy_result(
+#' @rdname toy_output
+toy_emissions_profile_output <- function() {
+  toy_output(
     emissions_profile,
     list(
       toy_emissions_profile_any_companies(),
@@ -34,9 +32,9 @@ toy_emissions_profile_result <- function() {
 }
 
 #' @export
-#' @rdname toy_result
-toy_emissions_profile_upstream_result <- function() {
-  toy_result(
+#' @rdname toy_output
+toy_emissions_profile_upstream_output <- function() {
+  toy_output(
     emissions_profile_upstream,
     list(
       toy_emissions_profile_any_companies(),
@@ -46,9 +44,9 @@ toy_emissions_profile_upstream_result <- function() {
 }
 
 #' @export
-#' @rdname toy_result
-toy_sector_profile_result <- function() {
-  toy_result(
+#' @rdname toy_output
+toy_sector_profile_output <- function() {
+  toy_output(
     sector_profile,
     list(
       toy_sector_profile_companies(),
@@ -58,9 +56,9 @@ toy_sector_profile_result <- function() {
 }
 
 #' @export
-#' @rdname toy_result
-toy_sector_profile_upstream_result <- function() {
-  toy_result(
+#' @rdname toy_output
+toy_sector_profile_upstream_output <- function() {
+  toy_output(
     sector_profile_upstream,
     list(
       toy_sector_profile_upstream_companies(),
