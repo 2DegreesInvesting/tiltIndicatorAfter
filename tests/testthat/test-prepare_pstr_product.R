@@ -26,3 +26,13 @@ test_that("handles tiltIndicator output", {
     )
   )
 })
+
+test_that("risk_category colummn should not have more than one NA for no result companies", {
+  result <- prepare_pstr_product(pstr_product, ep_companies, ecoinvent_activities, small_matches_mapper)
+  out <- result |>
+    filter(is.na(get_column(result, "risk_category"))) |>
+    group_by(companies_id) |>
+    summarise(count = n())
+
+  expect_equal(unique(out$count), 1L)
+})
