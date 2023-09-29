@@ -29,3 +29,26 @@ test_that("handles tiltIndicator output", {
     )
   )
 })
+
+test_that("risk_category colummn should not have more than one NA for no result companies", {
+  product_empty <- unnest_product(toy_sector_profile_output())[1, ]
+  product_empty[1, "companies_id"] <- "a"
+  product_empty[1, "risk_category"] <- NA_character_
+
+  # FIXME: Export a fake from tiltIndicator
+  company_empty <- tiltIndicator:::empty_company_output_from("a")
+
+  result <- prepare_pstr_company(
+    company_empty,
+    product_empty,
+    ep_companies,
+    ecoinvent_activities,
+    small_matches_mapper
+  )
+  out <- result |>
+    filter(is.na(get_column(result, "risk_category"))) |>
+    group_by(companies_id) |>
+    summarise(count = n())
+
+  expect_true(unique(out$count) <= 1)
+})
