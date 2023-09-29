@@ -33,6 +33,5 @@ test_that("risk_category colummn should not have more than one NA for no result 
     filter(is.na(get_column(result, "risk_category"))) |>
     group_by(companies_id) |>
     summarise(count = n())
-
-  expect_equal(unique(out$count), 1L)
+  expect_true(unique(out$count) <= 1)
 })
