@@ -54,5 +54,5 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
     group_by(companies_id) |>
     summarise(count = n())
 
-  expect_true(unique(out$count) <= 1)
+  expect_lte(unique(out$count), 1)
 })
