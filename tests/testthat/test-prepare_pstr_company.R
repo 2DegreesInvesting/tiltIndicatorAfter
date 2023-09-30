@@ -35,8 +35,12 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
   product_empty[1, "companies_id"] <- "a"
   product_empty[1, "risk_category"] <- NA_character_
 
-  # FIXME: Export a fake from tiltIndicator
-  company_empty <- tiltIndicator:::empty_company_output_from("a")
+  company_empty <- tibble(
+    companies_id = "a",
+    grouped_by = NA_character_,
+    risk_category = NA_character_,
+    value = NA_real_
+  )
 
   result <- prepare_pstr_company(
     company_empty,
