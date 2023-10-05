@@ -29,3 +29,30 @@ test_that("handles tiltIndicator output", {
     )
   )
 })
+
+test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", {
+  product_empty <- unnest_product(toy_sector_profile_output())[1, ]
+  product_empty[1, "companies_id"] <- "a"
+  product_empty[1, "risk_category"] <- NA_character_
+
+  company_empty <- tibble(
+    companies_id = "a",
+    grouped_by = NA_character_,
+    risk_category = NA_character_,
+    value = NA_real_
+  )
+
+  result <- prepare_pstr_company(
+    company_empty,
+    product_empty,
+    ep_companies,
+    ecoinvent_activities,
+    small_matches_mapper
+  )
+  out <- result |>
+    filter(is.na(get_column(result, "risk_category"))) |>
+    group_by(companies_id) |>
+    summarise(count = n())
+
+  expect_lte(unique(out$count), 1)
+})
