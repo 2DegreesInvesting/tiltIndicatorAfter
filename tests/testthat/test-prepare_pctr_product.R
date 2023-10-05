@@ -98,3 +98,30 @@ test_that("handles tiltIndicator output", {
     )
   )
 })
+
+test_that("*matching_certainty_company_average column yield only 1 unique value", {
+  product_empty <- tibble(
+    companies_id = "a",
+    grouped_by = NA_character_,
+    risk_category = NA_character_,
+    activity_uuid_product_uuid = NA_character_,
+    co2_footprint = NA_character_,
+    tilt_sector = NA_character_,
+    tilt_subsector = NA_character_,
+    isic_4digit = NA_character_
+  )
+
+  result <- prepare_pctr_product(
+    product_empty,
+    ep_companies,
+    ecoinvent_activities,
+    small_matches_mapper,
+    isic_tilt_mapper
+  )
+  out <- result |>
+    group_by(companies_id) |>
+    summarise(count = dplyr::n_distinct(matching_certainty_company_average))
+
+  expect_lte(unique(out$count), 1)
+})
+
