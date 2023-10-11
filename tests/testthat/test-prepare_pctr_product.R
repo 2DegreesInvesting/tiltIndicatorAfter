@@ -100,16 +100,9 @@ test_that("handles tiltIndicator output", {
 })
 
 test_that("*matching_certainty_company_average column yield only 1 unique value", {
-  product_empty <- tibble(
-    companies_id = "a",
-    grouped_by = NA_character_,
-    risk_category = NA_character_,
-    activity_uuid_product_uuid = NA_character_,
-    co2_footprint = NA_character_,
-    tilt_sector = NA_character_,
-    tilt_subsector = NA_character_,
-    isic_4digit = NA_character_
-  )
+
+  product_empty <- pctr_product |>
+    filter(clustered %in% c("building construction", "machining"))
 
   result <- prepare_pctr_product(
     product_empty,
@@ -120,7 +113,7 @@ test_that("*matching_certainty_company_average column yield only 1 unique value"
   )
   out <- result |>
     group_by(companies_id) |>
-    summarise(count = dplyr::n_distinct(matching_certainty_company_average))
+    summarise(count = n_distinct(matching_certainty_company_average))
 
   expect_lte(unique(out$count), 1)
 })

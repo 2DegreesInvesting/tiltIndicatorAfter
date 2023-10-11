@@ -14,6 +14,7 @@
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate
 #' @importFrom dplyr n
+#' @importFrom dplyr n_distinct
 #' @importFrom dplyr recode
 #' @importFrom dplyr relocate
 #' @importFrom dplyr rename
