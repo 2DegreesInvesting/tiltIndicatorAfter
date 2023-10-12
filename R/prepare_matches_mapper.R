@@ -16,7 +16,7 @@ prepare_matches_mapper <- function(mapper, activities) {
     mutate_all(~ifelse(. == "", NA_character_, .)) |>
     distinct() |>
     mutate(multi_match = case_when(
-      multi_match == "" ~ "FALSE",
+      is.na(multi_match) ~ "FALSE",
       TRUE ~ multi_match
     ))
 }

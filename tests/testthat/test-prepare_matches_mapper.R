@@ -8,27 +8,30 @@ test_that("`completion` column has either `low`, `medium`, or `high` values", {
   expect_equal(unique(out$completion), c("low", "high", "medium"))
 })
 
-test_that("prepare_matches_mapper doesn't have any empty string", {
-  matches_mapper <- tibble(
-    ep_id = c("b", "a", "all"),
-    country = c("b", "a", "all"),
-    main_activity = c("b", "a", "all"),
-    clustered = c("b", "a", "all"),
-    activity_uuid_product_uuid = c("b", "any", NA_character_),
-    multi_match = c("b", "a", "all"),
-    completion = c("b", "a", "all"),
-    category = c("b", "a", "all")
-  )
+test_that("`prepare_matches_mapper` doesn't have any empty string", {
+  tibble_names <- function(x, nms) {
+    m <- matrix(x, ncol = length(nms), dimnames = list(NULL, nms))
+    tibble::as_tibble(m)
+  }
 
-  ecoinvent_activities <- tibble(
-    activity_uuid_product_uuid = c("any", NA_character_),
-    activity_name = c(NA_character_, "c"),
-    geography = c("d", NA_character_),
-    reference_product_name = c("d", NA_character_),
-    unit = c("d", "c")
-  )
+  mm <- tibble_names("a", names(matches_mapper))
+  mm$activity_uuid_product_uuid <- NA_character_
+  ea <- tibble_names("a", names(ecoinvent_activities))
 
-  out <- prepare_matches_mapper(matches_mapper, ecoinvent_activities)
-  final <- unlist(out)
-  expect_false(any(final[!is.na(final)] == ""))
+  out <- prepare_matches_mapper(mm, ea)
+  expect_equal(out$activity_uuid_product_uuid, NA_character_)
+})
+
+test_that("`multi_match` column outputs `FALSE` for null input value", {
+  tibble_names <- function(x, nms) {
+    m <- matrix(x, ncol = length(nms), dimnames = list(NULL, nms))
+    tibble::as_tibble(m)
+  }
+
+  mm <- tibble_names("a", names(matches_mapper))
+  mm$multi_match <- NA_character_
+  ea <- tibble_names("a", names(ecoinvent_activities))
+
+  out <- prepare_matches_mapper(mm, ea)
+  expect_equal(unique(out$multi_match), c("FALSE"))
 })
