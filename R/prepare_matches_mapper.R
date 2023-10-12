@@ -13,7 +13,7 @@ prepare_matches_mapper <- function(mapper, activities) {
     left_join(activities, by = "activity_uuid_product_uuid") |>
     summarise(across(everything(), ~ paste0(na.omit(unique(.)), collapse = "; ")), .by = c("country", "main_activity", "clustered")) |>
     ungroup() |>
-    mutate_all(~ifelse(. == "", NA_character_, .)) |>
+    mutate(across(everything(), ~ifelse(. == "", NA_character_, .))) |>
     distinct() |>
     mutate(multi_match = case_when(
       is.na(multi_match) ~ "FALSE",
