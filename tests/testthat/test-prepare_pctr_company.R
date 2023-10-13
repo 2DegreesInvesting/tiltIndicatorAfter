@@ -82,21 +82,38 @@ test_that("handles tiltIndicator output", {
   )
 })
 
-test_that("*matching_certainty_company_average column yield only 1 unique value", {
-  product_empty <- pctr_product |>
-    filter(clustered %in% c("building construction", "machining"))
+test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  product <- tibble(
+    companies_id = c("id1", "id1"),
+    grouped_by = c("a", "a"),
+    risk_category = c("a", "a"),
+    clustered = c("building construction", "building construction"),
+    activity_uuid_product_uuid = c(
+      "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad",
+      "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad"
+    ),
+    co2_footprint = c("a", "a"),
+    tilt_sector = c("a", "a"),
+    tilt_subsector = c("a", "a"),
+    isic_4digit = c("a", "a")
+  )
 
-  company_empty <- pctr_company |>
-    filter(companies_id == "id1")
+  company <- tibble(
+    companies_id = c("id1", "id1"),
+    grouped_by = c("a", "a"),
+    risk_category = c("high", "medium"),
+    value = c(1.0, 1.0)
+  )
 
   result <- prepare_pctr_company(
-    company_empty,
-    product_empty,
+    company,
+    product,
     ep_companies,
     ecoinvent_activities,
-    small_matches_mapper,
+    matches_mapper,
     isic_tilt_mapper
   )
+
   out <- result |>
     group_by(companies_id) |>
     summarise(count = n_distinct(matching_certainty_company_average))

@@ -99,16 +99,28 @@ test_that("handles tiltIndicator output", {
   )
 })
 
-test_that("*matching_certainty_company_average column yield only 1 unique value", {
-
-  product_empty <- pctr_product |>
-    filter(clustered %in% c("building construction", "machining"))
+test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  product <- tibble(
+    companies_id = c("id1", "id1", "id1"),
+    grouped_by = c("a", "a", "a"),
+    risk_category = c("a", "a", "a"),
+    clustered = c("building construction", "building construction", "machining"),
+    activity_uuid_product_uuid = c(
+      "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad",
+      "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad",
+      "6fcaa508-05b7-5a7b-981a-c9145f5e5dc4_a1de1103-7e58-4fe9-bd26-b86ebd3211b3"
+    ),
+    co2_footprint = c("a", "a", "a"),
+    tilt_sector = c("a", "a", "a"),
+    tilt_subsector = c("a", "a", "a"),
+    isic_4digit = c("a", "a", "a")
+  )
 
   result <- prepare_pctr_product(
-    product_empty,
+    product,
     ep_companies,
     ecoinvent_activities,
-    small_matches_mapper,
+    matches_mapper,
     isic_tilt_mapper
   )
   out <- result |>
@@ -117,4 +129,3 @@ test_that("*matching_certainty_company_average column yield only 1 unique value"
 
   expect_lte(unique(out$count), 1)
 })
-
