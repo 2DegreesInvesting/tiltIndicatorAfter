@@ -49,3 +49,22 @@ modify_col <- function(data, pattern, f) {
   data[col] <- f(val)
   data
 }
+
+# stop if columns other than "activity_uuid_product_uuid" and "activity_name" have
+# more than one unique value for `country`, `main_activity`, and `clustered` group of columns.
+stop_if_some_columns_have_more_than_one_unique_value <- function(matches_mapp) {
+  check_col <- matches_mapp |>
+    select(-c("activity_uuid_product_uuid", "activity_name")) |>
+    summarise(across(everything(), \(x) length(unique(x))), .by = c("country", "main_activity", "clustered")) |>
+    select(-c("country", "main_activity", "clustered"))
+
+  if (!all(unlist(check_col) == 1)) {
+    abort(c(
+      "Columns other than `activity_uuid_product_uuid` and `activity_name`
+      should not have more than one unique value for `country`, `main_activity`,
+      and `clustered` group of columns."
+    ))
+  }
+  invisible(matches_mapp)
+}
+

@@ -27,6 +27,7 @@
 #' @importFrom rlang .data
 #' @importFrom rlang abort
 #' @importFrom rlang exec
+#' @importFrom stats na.omit
 #' @importFrom stringr str_pad
 #' @importFrom tibble rowid_to_column
 #' @importFrom tibble tibble
