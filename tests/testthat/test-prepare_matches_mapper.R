@@ -49,3 +49,10 @@ test_that("stops if columns other than `activity_uuid_product_uuid` and `activit
 
   expect_error(prepare_matches_mapper(mm, ea), "activity_uuid_product_uuid.*country")
 })
+
+test_that("stops if type of column `multi_match` is not logical", {
+  mm <- tibble_names("a", names(matches_mapper))
+  ea <- tibble_names("a", names(ecoinvent_activities))
+
+  expect_error(prepare_matches_mapper(mm, ea), "multi_match.*TRUE")
+})
