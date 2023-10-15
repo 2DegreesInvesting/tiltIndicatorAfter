@@ -83,26 +83,29 @@ test_that("handles tiltIndicator output", {
 })
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  id <- "id3"
+  clustered_one <- "alarm system"
+  clustered_two <- "aluminium"
+  uuid_one <- "3d731062-1960-5a36-bd19-6ab2b0bf67c2_245732f4-a5ce-4881-816b-a207ba8df4c8; 3b11f419-2204-5b7c-8cf5-70650f0555ca_245732f4-a5ce-4881-816b-a207ba8df4c8"
+  uuid_two <- "ff4fd9d9-7dcb-5a50-926f-76ae31fa454d_618bf4eb-bee5-4d38-8e4f-78cfebf779be; 73f37024-063b-507c-a976-5bc8e1ee469f_618bf4eb-bee5-4d38-8e4f-78cfebf779be"
+
   product <- tibble(
-    companies_id = c("id1", "id1"),
-    grouped_by = c("a", "a"),
-    risk_category = c("a", "a"),
-    clustered = c("building construction", "building construction"),
-    activity_uuid_product_uuid = c(
-      "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad",
-      "ebd4dddf-9f74-5fd1-89ce-197b60cb8d06_006863b7-d736-4eb6-bbf8-648d292184ad"
-    ),
-    co2_footprint = c("a", "a"),
-    tilt_sector = c("a", "a"),
-    tilt_subsector = c("a", "a"),
-    isic_4digit = c("a", "a")
+    companies_id = id,
+    grouped_by = "a",
+    risk_category = "a",
+    clustered = c(clustered_one, clustered_one, clustered_two),
+    activity_uuid_product_uuid = c(uuid_one, uuid_one, uuid_two),
+    co2_footprint = "a",
+    tilt_sector = "a",
+    tilt_subsector = "a",
+    isic_4digit = "a"
   )
 
   company <- tibble(
-    companies_id = c("id1", "id1"),
-    grouped_by = c("a", "a"),
+    companies_id = id,
+    grouped_by = "a",
     risk_category = c("high", "medium"),
-    value = c(1.0, 1.0)
+    value = 1.0
   )
 
   result <- prepare_pctr_company(
@@ -110,7 +113,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     product,
     ep_companies,
     ecoinvent_activities,
-    matches_mapper,
+    small_matches_mapper,
     isic_tilt_mapper
   )
 
