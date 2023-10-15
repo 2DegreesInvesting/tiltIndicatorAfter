@@ -29,21 +29,21 @@ test_that("doesn't have any empty string", {
 test_that("stops if columns other than `activity_uuid_product_uuid` and `activity_name`
           have more than one unique value for specific group of columns", {
   mm <- tibble(
-    country = c("x", "x"),
-    main_activity = c("x", "x"),
-    clustered = c("x", "x"),
-    ep_id = c("a", "a"),
+    country = "x",
+    main_activity = "x",
+    clustered = "x",
+    ep_id = "a",
     activity_uuid_product_uuid = c("y", "z"),
-    multi_match = c(TRUE, TRUE),
-    completion = c("a", "a"),
-    category = c("a", "a")
+    multi_match = TRUE,
+    completion = "a",
+    category = "a"
   )
 
   ea <- tibble(
     activity_uuid_product_uuid = c("y", "z"),
     activity_name = c("y", "z"),
-    geography = c("a", "a"),
-    reference_product_name = c("a", "a"),
+    geography = "a",
+    reference_product_name = "a",
     unit = c("a", "should be `a`")
   )
 
