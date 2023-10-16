@@ -99,7 +99,6 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     isic_4digit = "a"
   )
 
-
   company <- tibble(
     companies_id = id,
     grouped_by = "a",
@@ -116,9 +115,5 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     isic_tilt_mapper
   )
 
-  out <- result |>
-    group_by(companies_id) |>
-    summarise(count = n_distinct(matching_certainty_company_average))
-
-  expect_lte(unique(out$count), 1)
+  expect_equal(unique(result$matching_certainty_company_average), "low")
 })
