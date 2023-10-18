@@ -14,7 +14,7 @@ To reduce the processing time of tiltIndicator and tiltIndicatorAfter code, this
 
 ## Setup
 ```{r}
-library(dplyr, warn.conflicts = FALSE)
+# library(dplyr, warn.conflicts = FALSE)
 library(readr, warn.conflicts = FALSE)
 library(tidyr, warn.conflicts = FALSE)
 library(purrr, warn.conflicts = FALSE)
@@ -76,18 +76,18 @@ add_done <- function(data, file_product, file_company) {
 
 ```{r}
 # ep_companies
-ep_campanies_mapper <- read_csv("/path/to/input/ep_companies.csv") |>
+ep_campanies_mapper <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/ep_companies.csv") |>
   select("company_name", "country", "company_city", "postcode", "address", "main_activity", "companies_id") |>
   distinct()
 
 # ecoinvent_activities
-eco_act <- read_csv("/path/to/input/ei_activities_overview.csv")
+eco_act <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/ei_activities_overview.csv")
 
 # matches_mapper
-match_map <- read_csv("/path/to/input/mapper_ep_ei.csv")
+match_map <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/mapper_ep_ei.csv")
 
 # ecoinvent_inputs
-eco_inputs_raw <- read_csv("/path/to/input/ei_input_data.csv") |>
+eco_inputs_raw <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/ei_input_data.csv") |>
   select("input_activity_uuid_product_uuid", "exchange_name", "exchange_unit_name") |>
   distinct()
 ```
@@ -100,12 +100,12 @@ The input data of PCTR which comes from tiltIndicatorBefore package becomes the 
 
 ```{r}
 # PCTR companies
-pctr_comp <- read_csv("/path/to/input/xctr_companies.csv", na = c("nan", NA)) |>
+pctr_comp <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/xctr_companies.csv", na = c("nan", NA)) |>
   rename(company_id = "companies_id") |>
   select(all_of(c("activity_uuid_product_uuid", "clustered", "company_id", "unit")))
 
 # PCTR products
-pctr_prod <- read_csv("/path/to/input/pctr_products.csv", col_types = cols(isic_4digit = col_character()), show_col_types = FALSE) |>
+pctr_prod <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/pctr_products.csv", col_types = cols(isic_4digit = col_character()), show_col_types = FALSE) |>
   select(all_of(c("co2_footprint", "tilt_sector", "unit", "isic_4digit", "activity_uuid_product_uuid", "ei_activity_name"))) |>
   filter(row_number() == 1L, .by = "activity_uuid_product_uuid")
 ```
@@ -121,7 +121,7 @@ pctr_job <- pctr_comp |>
   add_file(parent_product = cache_path("pctr/product"), parent_company = cache_path("pctr/company"))
 
 pctr_rds <- function(data, file_product, file_company) {
-  out <- xctr(data, pctr_prod)
+  out <- emissions_profile(data, pctr_prod)
 
   out |>
     unnest_product() |>
@@ -149,11 +149,11 @@ pctr_job |>
 ```{r}
 pctr_product_result <- map_df(pctr_job$file_product, read_rds)
 pctr_product_result |>
-  write_csv("/path/to/output/pctr_product_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/pctr_product_result.csv")
 
 pctr_company_result <- map_df(pctr_job$file_company, read_rds)
 pctr_company_result |>
-  write_csv("/path/to/output/pctr_company_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/pctr_company_result.csv")
 
 # Each chunk result was saved to a file
 dir_tree(cache_path("pctr/product"))
@@ -167,11 +167,11 @@ dir_tree(cache_path("pctr/company"))
 The input data of ICTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
-ictr_comp <- read_csv("/path/to/input/xctr_companies.csv", na = c("nan", NA)) |>
+ictr_comp <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/xctr_companies.csv", na = c("nan", NA)) |>
   rename(company_id = "companies_id") |>
   select(all_of(c("activity_uuid_product_uuid", "clustered", "company_id", "unit"))) 
 
-ictr_prod <- read_csv("/path/to/input/ictr_products.csv", col_types = cols(input_isic_4digit = col_character())) |>
+ictr_prod <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/ictr_products.csv", col_types = cols(input_isic_4digit = col_character())) |>
   select(all_of(c("input_co2_footprint", "input_tilt_sector", "input_unit", "input_isic_4digit", "input_activity_uuid_product_uuid", "activity_uuid_product_uuid")))
 
 is_na_free <- !anyNA(ictr_prod$input_co2_footprint)
@@ -189,7 +189,7 @@ ictr_job <- ictr_comp |>
   add_file(parent_product = cache_path("ictr/product"), parent_company = cache_path("ictr/company"))
 
 ictr_rds <- function(data, file_product, file_company) {
-  out <- xctr(data, ictr_prod)
+  out <- emissions_profile_upstream(data, ictr_prod)
 
   out |>
     unnest_product() |>
@@ -217,11 +217,11 @@ ictr_job |>
 ```{r}
 ictr_product_result <- map_df(ictr_job$file_product, read_rds)
 ictr_product_result |>
-  write_csv("/path/to/output/ictr_product_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/ictr_product_result.csv")
 
 ictr_company_result <- map_df(ictr_job$file_company, read_rds)
 ictr_company_result |>
-  write_csv("/path/to/output/ictr_company_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/ictr_company_result.csv")
 
 # Each chunk result was saved to a file
 dir_tree(cache_path("ictr/product"))
@@ -235,15 +235,15 @@ dir_tree(cache_path("ictr/company"))
 The input data of PSTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
-pstr_comp <- read_csv("/path/to/input/pstr_companies.csv", col_types = cols(isic_4digit = col_character()), col_select = -company_name, na = c("nan", NA)) |>
+pstr_comp <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/pstr_companies.csv", col_types = cols(isic_4digit = col_character()), col_select = -company_name, na = c("nan", NA)) |>
   rename(company_id = companies_id) |>
-  xstr_prune_companies() |>
-  xstr_pivot_type_sector_subsector()
+  sector_profile_any_prune_companies() |>
+  sector_profile_any_pivot_type_sector_subsector()
 
-ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
-weo <- read_csv("/path/to/input/str_weo_targets.csv")
+ipr <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/str_ipr_targets.csv")
+weo <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/str_weo_targets.csv")
 scenarios_new <- list(ipr = ipr, weo = weo) |>
-  xstr_prepare_scenario()
+  sector_profile_any_prepare_scenario()
 ```
 
 ### Create PSTR job for chunk operation
@@ -257,7 +257,7 @@ pstr_job <- pstr_comp |>
   add_file(parent_product = cache_path("pstr/product"), parent_company = cache_path("pstr/company"))
 
 pstr_rds <- function(data, file_product, file_company) {
-  out <- pstr(data, scenarios_new)
+  out <- sector_profile(data, scenarios_new)
 
   out |>
     unnest_product() |>
@@ -266,7 +266,7 @@ pstr_rds <- function(data, file_product, file_company) {
 
   out |>
     unnest_company() |>
-    xstr_polish_output_at_company_level() |>
+    sector_profile_any_polish_output_at_company_level() |>
     prepare_pstr_company(unnest_product(out), ep_campanies_mapper, eco_act, match_map) |>
     write_rds(file_company)
 }
@@ -286,11 +286,11 @@ pstr_job |>
 ```{r}
 pstr_product_result <- map_df(pstr_job$file_product, read_rds)
 pstr_product_result |>
-  write_csv("/path/to/output/pstr_product_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/pstr_product_result.csv")
 
 pstr_company_result <- map_df(pstr_job$file_company, read_rds)
 pstr_company_result |>
-  write_csv("/path/to/output/pstr_company_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/pstr_company_result.csv")
 
 # Each chunk result was saved to a file
 dir_tree(cache_path("pstr/product"))
@@ -304,18 +304,18 @@ dir_tree(cache_path("pstr/company"))
 The input data of ISTR which comes from tiltIndicatorBefore package becomes the input for the tiltIndicator package.
 
 ```{r}
-istr_comp <- read_csv("/path/to/input/istr_companies.csv", na = c("nan", NA)) |>
+istr_comp <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/istr_companies.csv", na = c("nan", NA)) |>
   rename(company_id = "companies_id") |>
-  xstr_prune_companies()
+  sector_profile_any_prune_companies()
 
-istr_inputs_raw <- read_csv("/path/to/input/istr_products.csv", col_types = cols(input_isic_4digit = col_character()), na = c("nan", NA)) |>
-  rename(weo_sector = "input_weo_product", weo_subsector = "input_weo_flow", ipr_sector = "input_ipr_sector", ipr_subsector = "input_ipr_subsector") |>
-  xstr_pivot_type_sector_subsector()
+istr_inputs_raw <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/istr_products.csv", col_types = cols(input_isic_4digit = col_character()), na = c("nan", NA)) |>
+  rename(weo_sector = "input_weo_sector", weo_subsector = "input_weo_subsector", ipr_sector = "input_ipr_sector", ipr_subsector = "input_ipr_subsector") |>
+  sector_profile_any_pivot_type_sector_subsector()
 
-ipr <- read_csv("/path/to/input/str_ipr_targets.csv")
-weo <- read_csv("/path/to/input/str_weo_targets.csv")
+ipr <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/str_ipr_targets.csv")
+weo <- read_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/str_weo_targets.csv")
 scenarios_new <- list(ipr = ipr, weo = weo) |>
-  xstr_prepare_scenario()
+  sector_profile_any_prepare_scenario()
 ```
 
 ### Create ISTR job for chunk operation
@@ -329,7 +329,7 @@ istr_job <- istr_comp |>
   add_file(parent_product = cache_path("istr/product"), parent_company = cache_path("istr/company"))
 
 istr_rds <- function(data, file_product, file_company) {
-  out <- istr(data, scenarios_new, istr_inputs_raw)
+  out <- sector_profile_upstream(data, scenarios_new, istr_inputs_raw)
 
   out |>
     unnest_product() |>
@@ -338,7 +338,7 @@ istr_rds <- function(data, file_product, file_company) {
 
   out |>
     unnest_company() |>
-    xstr_polish_output_at_company_level() |>
+    sector_profile_any_polish_output_at_company_level() |>
     prepare_istr_company(unnest_product(out), ep_campanies_mapper, eco_act, match_map, eco_inputs_raw) |>
     write_rds(file_company)
 }
@@ -358,11 +358,11 @@ istr_job |>
 ```{r}
 istr_product_result <- map_df(istr_job$file_product, read_rds)
 istr_product_result |>
-  write_csv("/path/to/output/istr_product_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/istr_product_result.csv")
 
 istr_company_result <- map_df(istr_job$file_company, read_rds)
 istr_company_result |>
-  write_csv("/path/to/output/istr_company_result.csv")
+  write_csv("/Users/kalashsinghal/git/2DII/Files Structure/eurocaps/istr_company_result.csv")
 
 # Each chunk result was saved to a file
 dir_tree(cache_path("istr/product"))
