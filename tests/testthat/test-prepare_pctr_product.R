@@ -128,3 +128,4 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
 
   expect_equal(unique(result$matching_certainty_company_average), "medium")
 })
+
