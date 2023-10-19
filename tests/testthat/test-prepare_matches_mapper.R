@@ -1,6 +1,6 @@
 test_that("yields either `TRUE` or `FALSE` in `multi_match`", {
   out <- prepare_matches_mapper(small_matches_mapper, ecoinvent_activities)
-  expect_true(unique(out$multi_match) %in% c(TRUE, FALSE))
+  expect_equal(unique(out$multi_match), c(TRUE, FALSE))
 })
 
 test_that("`completion` column has either `low`, `medium`, or `high` values", {
@@ -50,9 +50,35 @@ test_that("stops if columns other than `activity_uuid_product_uuid` and `activit
   expect_error(prepare_matches_mapper(mm, ea), "activity_uuid_product_uuid.*country")
 })
 
-test_that("stops if type of column `multi_match` is not logical", {
-  mm <- tibble_names("a", names(matches_mapper))
-  ea <- tibble_names("a", names(ecoinvent_activities))
+test_that("outputs non-null output for group of columns `country`, `main_activity`,
+          and `clustered` if there are NAs are also present in other columns", {
+  mm <- tibble(
+    country = "x",
+    main_activity = "x",
+    clustered = "x",
+    ep_id = "a",
+    activity_uuid_product_uuid = "a",
+    multi_match = TRUE,
+    completion = "a",
+    category = "a"
+  )
 
-  expect_error(prepare_matches_mapper(mm, ea), "multi_match.*TRUE")
+  ea <- tibble(
+    activity_uuid_product_uuid = "a",
+    activity_name = "a",
+    geography = "a",
+    reference_product_name = "a",
+    unit = c("a", NA)
+  )
+
+  out <- prepare_matches_mapper(mm, ea)
+  expect_equal(nrow(out), 1)
+})
+
+test_that("stops if `multi_match` is not logical", {
+  mm <- tibble_names("a", names(matches_mapper))
+  all_characters_none_logical <- "a"
+  ea <- tibble_names(all_characters_none_logical, names(ecoinvent_activities))
+
+  expect_error(prepare_matches_mapper(mm, ea), "logical.*multi_match.*not TRUE")
 })

@@ -33,6 +33,7 @@
 #' @importFrom tibble rowid_to_column
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
+#' @importFrom tidyr replace_na
 #' @importFrom tidyselect all_of
 #' @importFrom tiltIndicator emissions_profile
 #' @importFrom tiltIndicator emissions_profile_upstream
