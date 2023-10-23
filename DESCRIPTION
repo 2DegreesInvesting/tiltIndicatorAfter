@@ -17,6 +17,7 @@ Imports:
     memoise,
     readr,
     rlang,
+    stats,
     stringr,
     tibble,
     tidyr,
