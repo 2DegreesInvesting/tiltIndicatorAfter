@@ -45,3 +45,18 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
 
   expect_lte(unique(out$count), 1)
 })
+
+test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category", {
+  product_empty <- unnest_product(toy_sector_profile_output())[1, ]
+  product_empty[1, "risk_category"] <- NA_character_
+
+  result <- prepare_pstr_product(
+    product_empty,
+    ep_companies,
+    ecoinvent_activities,
+    small_matches_mapper
+  )
+
+  expect_true(all(is.na(select(result, tilt_sector, tilt_subsector))))
+})
+
