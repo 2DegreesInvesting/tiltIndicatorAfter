@@ -23,9 +23,6 @@
 prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
   ictr_prod <- sanitize_isic(ictr_prod)
 
-  prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
-    select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
-
   ictr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
     select(-c("input_activity_uuid_product_uuid", "input_co2_footprint")) |>
@@ -33,7 +30,7 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     left_join(comp, by = "companies_id") |>
     left_join(isic_tilt_map, by = join_by("input_isic_4digit" == "isic_4digit")) |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
-    left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
+    left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
     exclude_rows("risk_category") |>
     relocate_ictr_product() |>

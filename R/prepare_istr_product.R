@@ -19,8 +19,6 @@
 #'   ecoinvent_inputs |> head(3)
 #' )
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
-  prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
-    select("country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match", "completion")
 
   istr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
@@ -28,7 +26,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     distinct() |>
     left_join(comp, by = "companies_id") |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
-    left_join(prepared_match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
+    left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
     exclude_rows("risk_category") |>
     relocate_istr_product() |>
