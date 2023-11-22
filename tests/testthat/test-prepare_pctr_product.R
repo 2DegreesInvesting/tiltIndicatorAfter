@@ -126,5 +126,5 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     isic_tilt_mapper
   )
 
-  expect_equal(unique(result$matching_certainty_company_average), "medium")
+  expect_equal(unique(result$matching_certainty_company_average), "low")
 })
