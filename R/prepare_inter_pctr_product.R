@@ -9,12 +9,7 @@
 #' @return A dataframe that prepares the intermediate output of pctr_product
 #' @noRd
 prepare_inter_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
-  prepared_match_mapper <- prepare_matches_mapper(match_mapper, eco_activities) |>
-    select(
-      "country", "main_activity", "clustered", "activity_uuid_product_uuid", "multi_match",
-      "completion", "activity_name", "reference_product_name", "unit"
-    )
-
+  prepared_match_mapper <- left_join(match_mapper, eco_activities, by = "activity_uuid_product_uuid")
   pctr_prod_comp <- left_join(pctr_prod, comp, by = "companies_id")
 
   join_by_shared_cols_quietly <- intersect(

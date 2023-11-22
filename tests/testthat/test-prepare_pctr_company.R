@@ -85,7 +85,7 @@ test_that("handles tiltIndicator output", {
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
   id <- "id3"
   clustered <- "alarm system"
-  uuid <- "3d731062-1960-5a36-bd19-6ab2b0bf67c2_245732f4-a5ce-4881-816b-a207ba8df4c8; 3b11f419-2204-5b7c-8cf5-70650f0555ca_245732f4-a5ce-4881-816b-a207ba8df4c8"
+  uuid <- "3d731062-1960-5a36-bd19-6ab2b0bf67c2_245732f4-a5ce-4881-816b-a207ba8df4c8"
 
   product <- tibble(
     companies_id = id,
@@ -111,7 +111,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     product,
     ep_companies,
     ecoinvent_activities,
-    small_matches_mapper,
+    matches_mapper,
     isic_tilt_mapper
   )
 
