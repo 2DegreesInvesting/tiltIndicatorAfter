@@ -81,3 +81,39 @@ test_that("handles tiltIndicator output", {
     )
   )
 })
+
+test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  id <- "id3"
+  clustered <- "alarm system"
+  uuid <- "3d731062-1960-5a36-bd19-6ab2b0bf67c2_245732f4-a5ce-4881-816b-a207ba8df4c8"
+
+  product <- tibble(
+    companies_id = id,
+    grouped_by = "a",
+    risk_category = "a",
+    clustered = clustered,
+    activity_uuid_product_uuid = uuid,
+    co2_footprint = "a",
+    tilt_sector = "a",
+    tilt_subsector = "a",
+    isic_4digit = "a"
+  )
+
+  company <- tibble(
+    companies_id = id,
+    grouped_by = "a",
+    risk_category = c("high", "medium"),
+    value = 1.0
+  )
+
+  result <- prepare_pctr_company(
+    company,
+    product,
+    ep_companies,
+    ecoinvent_activities,
+    matches_mapper,
+    isic_tilt_mapper
+  )
+
+  expect_equal(unique(result$matching_certainty_company_average), "low")
+})
