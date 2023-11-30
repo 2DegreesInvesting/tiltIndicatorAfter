@@ -40,7 +40,7 @@ exclude_rows <- function(data, col) {
 }
 
 sanitize_isic <- function(data) {
-  data |> pad_column("isic", width = 4, pad = "0")
+  data |> modify_col("isic", as.character)
 }
 
 modify_col <- function(data, pattern, f) {
