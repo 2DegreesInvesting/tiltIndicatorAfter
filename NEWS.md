@@ -2,7 +2,7 @@
 
 # tiltIndicatorAfter 0.0.0.9010 (2023-11-30)
 
-* Values of `*isic_4digit` are no longer padded to 4 digits (#79 @kalashsinghal).
+* Values of `*isic_4digit` are no longer padded to 4 digits (#81 @kalashsinghal).
 
 # tiltIndicatorAfter 0.0.0.9009 (2023-09-24)
 
