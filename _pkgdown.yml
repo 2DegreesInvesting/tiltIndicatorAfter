@@ -4,7 +4,11 @@ template:
 
 reference:
 
-  - title: Functions
+  - title: New API
+    contents:
+      - has_concept("top-level functions")
+
+  - title: Old API
     contents:
       - matches("prepare_")
 
