@@ -21,7 +21,6 @@
 #'   isic_tilt_mapper |> head(3)
 #' )
 prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
-  pctr_prod <- sanitize_isic(pctr_prod)
 
   inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>

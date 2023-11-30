@@ -21,7 +21,6 @@
 #'   isic_tilt_mapper |> head(3)
 #' )
 prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
-  ictr_prod <- sanitize_isic(ictr_prod)
 
   ictr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
