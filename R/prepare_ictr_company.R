@@ -23,6 +23,7 @@
 #'   isic_tilt_mapper |> head(3)
 #' )
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
+  ictr_prod <- sanitize_isic(ictr_prod)
 
   inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) |>
     select(
