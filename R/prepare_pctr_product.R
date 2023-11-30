@@ -19,6 +19,7 @@
 #'   isic_tilt_mapper |> head(3)
 #' )
 prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
+  pctr_prod <- sanitize_isic(pctr_prod)
 
   prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) |>
     relocate_pctr_product() |>

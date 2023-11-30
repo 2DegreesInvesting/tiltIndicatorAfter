@@ -39,6 +39,17 @@ exclude_rows <- function(data, col) {
     bind_rows(ids)
 }
 
+sanitize_isic <- function(data) {
+  data |> modify_col("isic", as.character)
+}
+
+modify_col <- function(data, pattern, f) {
+  col <- extract_name(data, pattern)
+  val <- get_column(data, pattern)
+  data[col] <- f(val)
+  data
+}
+
 # stop if columns other than "activity_uuid_product_uuid" and "activity_name" have
 # more than one unique value for `country`, `main_activity`, and `clustered` group of columns.
 stop_if_some_columns_have_more_than_one_unique_value <- function(matches_mapp) {
