@@ -54,8 +54,8 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     out_product |> arrange(companies_id)
   )
   expect_equal(
-    out |> unnest_company() |> arrange_and_exclude_extra_columns(),
-    out_company |> arrange_and_exclude_extra_columns()
+    out |> unnest_company() |> arrange(companies_id),
+    out_company |> arrange(companies_id)
   )
 })
 
