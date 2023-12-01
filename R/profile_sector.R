@@ -8,7 +8,7 @@ profile_sector <- function(companies,
                            low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                            high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
   indicator <- list(
-    companies,
+    rowid_to_column(companies, "extra_rowid"),
     scenarios,
     low_threshold,
     high_threshold

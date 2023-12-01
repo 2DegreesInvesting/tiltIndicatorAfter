@@ -6,6 +6,10 @@ exec_profile <- function(.fn, indicator, indicator_after) {
     co2 <- indicator[[2]]
     product <- extend_product(product, co2)
   }
+  if (grepl("sector", .fn)) {
+    companies <- indicator[[1]]
+    product <- extend_with(product, companies)
+  }
   company <- unnest_company(tilt_indicator_output)
 
   out_product <- exec(polish_product(.fn), product, !!!indicator_after)
@@ -16,6 +20,12 @@ exec_profile <- function(.fn, indicator, indicator_after) {
 
 extend_product <- function(product, .co2, cols_pattern = extra_cols_pattern()) {
   left_join(product, select(.co2, matches(cols_pattern)), by = "co2_rowid")
+}
+
+extend_with <- function(data, with, cols_pattern = extra_cols_pattern()) {
+  .data <- data |> select(-matches(cols_pattern), matches("rowid"))
+  .with <- with |> select(matches(cols_pattern))
+  left_join(.data, .with, by = "extra_rowid")
 }
 
 extra_cols_pattern <- function() {
