@@ -1,7 +1,19 @@
 exec_profile <- function(.fn, indicator, indicator_after) {
   tilt_indicator_output <- exec(get(.fn), !!!indicator)
 
-  product <- unnest_product(tilt_indicator_output)
+  product <- unnest_product(tilt_indicator_output) |>
+    extend_with_columns_from_arguments_of_tilt_indicator(indicator, .fn)
+  company <- unnest_company(tilt_indicator_output)
+
+  out_product <- exec(polish_product(.fn), product, !!!indicator_after)
+  out_company <- exec(polish_company(.fn), company, product, !!!indicator_after)
+
+  nest_levels(out_product, out_company)
+}
+
+extend_with_columns_from_arguments_of_tilt_indicator <- function(product,
+                                                                 indicator,
+                                                                 .fn) {
   if (grepl("sector_profile$", .fn)) {
     companies <- indicator[[1]]
     product <- extend_with(product, companies)
@@ -14,12 +26,8 @@ exec_profile <- function(.fn, indicator, indicator_after) {
     inputs <- indicator[[3]]
     product <- extend_with(product, inputs)
   }
-  company <- unnest_company(tilt_indicator_output)
 
-  out_product <- exec(polish_product(.fn), product, !!!indicator_after)
-  out_company <- exec(polish_company(.fn), company, product, !!!indicator_after)
-
-  nest_levels(out_product, out_company)
+  product
 }
 
 extend_product <- function(product, .co2, cols_pattern = extra_cols_pattern()) {
