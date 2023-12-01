@@ -16,10 +16,24 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_europages
   )
 
+
+
   # Old API
-  output <- sector_profile(companies, scenarios)
-  product <- unnest_product(output)
+  .companies <- rowid_to_column(companies, "extra_rowid")
+  output <- sector_profile(.companies, scenarios)
+  .product <- unnest_product(output)
+  product <- left_join(
+    select(.product, -matches(extra_cols_pattern()), "extra_rowid"),
+    select(.companies, matches(extra_cols_pattern())),
+    relationship = "many-to-many",
+    by = "extra_rowid"
+  )
   company <- unnest_company(output)
+  #
+  # # Old API
+  # output <- sector_profile(companies, scenarios)
+  # product <- unnest_product(output)
+  # company <- unnest_company(output)
 
   out_product <- prepare_pstr_product(
     product,
