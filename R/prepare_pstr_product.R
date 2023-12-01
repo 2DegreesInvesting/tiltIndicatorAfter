@@ -27,7 +27,8 @@ rename_pstr_product <- function(data) {
       matched_reference_product = "reference_product_name",
       matching_certainty_company_average = "avg_matching_certainty",
       PSTR_risk_category = "risk_category",
-      ep_product = "clustered"
+      ep_product = "clustered",
+      isic_4digit_name = "isic_4digit_name_ecoinvent"
     )
 }
 

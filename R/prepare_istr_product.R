@@ -40,7 +40,8 @@ rename_istr_product <- function(data) {
       ep_product = "clustered",
       ISTR_risk_category = "risk_category",
       input_name = "exchange_name",
-      input_unit = "exchange_unit_name"
+      input_unit = "exchange_unit_name",
+      isic_4digit_name = "isic_4digit_name_ecoinvent"
     )
 }
 
