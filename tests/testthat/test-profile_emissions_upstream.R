@@ -48,8 +48,8 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     isic_tilt
   )
 
-  new <- out |> unnest_product() |> arrange(companies_id)
-  old <- out_product |> arrange(companies_id)
+  new <- arrange(unnest_product(out), companies_id)
+  old <- arrange(out_product, companies_id)
   expect_equal(relocate(new, sort(names(new))), relocate(old, sort(names(old))))
 
   expect_equal(
