@@ -16,8 +16,6 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_europages
   )
 
-
-
   # Old API
   .companies <- rowid_to_column(companies, "extra_rowid")
   output <- sector_profile(.companies, scenarios)
@@ -29,11 +27,6 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     by = "extra_rowid"
   )
   company <- unnest_company(output)
-  #
-  # # Old API
-  # output <- sector_profile(companies, scenarios)
-  # product <- unnest_product(output)
-  # company <- unnest_company(output)
 
   out_product <- prepare_pstr_product(
     product,
@@ -51,12 +44,12 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   )
 
   expect_equal(
-    out |> unnest_product() |> arrange_and_exclude_extra_columns(),
-    out_product |> arrange_and_exclude_extra_columns()
+    out |> unnest_product() |> arrange(companies_id),
+    out_product |> arrange(companies_id)
   )
   expect_equal(
-    out |> unnest_company() |> arrange_and_exclude_extra_columns(),
-    out_company |> arrange_and_exclude_extra_columns()
+    out |> unnest_company() |> arrange(companies_id),
+    out_company |> arrange(companies_id)
   )
 })
 
