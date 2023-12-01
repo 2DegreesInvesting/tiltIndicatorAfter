@@ -13,7 +13,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   company <- unnest_company(output)
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   out <- prepare_pctr_company(
     company,
@@ -41,7 +41,7 @@ test_that("handles numeric `isic*`", {
   company <- unnest_company(output)
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_pctr_company(
@@ -68,7 +68,7 @@ test_that("handles tiltIndicator output", {
   company <- unnest_company(output)
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_pctr_company(

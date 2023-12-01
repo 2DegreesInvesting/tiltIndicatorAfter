@@ -7,10 +7,10 @@ test_that("handles numeric `isic*`", {
     rowid_to_column("co2_rowid")
   output <- emissions_profile_upstream(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_ictr_product(
@@ -33,10 +33,10 @@ test_that("takes the outpus of tiltIndicator", {
     rowid_to_column("co2_rowid")
   output <- emissions_profile_upstream(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_ictr_product(

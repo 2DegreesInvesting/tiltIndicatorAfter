@@ -7,10 +7,10 @@ test_that("total number of rows for a comapny is either 1 or 6", {
     rowid_to_column("co2_rowid")
   output <- emissions_profile(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   out <- prepare_pctr_product(
     product,
@@ -33,10 +33,10 @@ test_that("handles numeric `isic*`", {
     rowid_to_column("co2_rowid")
   output <- emissions_profile(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_pctr_product(
@@ -58,10 +58,10 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
     rowid_to_column("co2_rowid")
   output <- emissions_profile(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_pctr_product(
@@ -83,10 +83,10 @@ test_that("handles tiltIndicator output", {
     rowid_to_column("co2_rowid")
   output <- emissions_profile(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
 
   expect_no_error(
     prepare_pctr_product(
