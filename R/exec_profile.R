@@ -2,13 +2,17 @@ exec_profile <- function(.fn, indicator, indicator_after) {
   tilt_indicator_output <- exec(get(.fn), !!!indicator)
 
   product <- unnest_product(tilt_indicator_output)
+  if (grepl("sector_profile$", .fn)) {
+    companies <- indicator[[1]]
+    product <- extend_with(product, companies)
+  }
   if (grepl("emissions", .fn)) {
     co2 <- indicator[[2]]
     product <- extend_product(product, co2)
   }
-  if (grepl("sector", .fn)) {
-    companies <- indicator[[1]]
-    product <- extend_with(product, companies)
+  if (grepl("sector_profile_upstream$", .fn)) {
+    inputs <- indicator[[3]]
+    product <- extend_with(product, inputs)
   }
   company <- unnest_company(tilt_indicator_output)
 

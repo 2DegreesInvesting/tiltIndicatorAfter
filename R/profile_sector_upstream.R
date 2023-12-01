@@ -61,9 +61,9 @@ profile_sector_upstream <- function(companies,
                                     low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                                     high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
   indicator <- list(
-    rowid_to_column(companies, "extra_rowid"),
+    companies,
     scenarios,
-    inputs,
+    rowid_to_column(inputs, "extra_rowid"),
     low_threshold,
     high_threshold
   )
