@@ -1,4 +1,4 @@
-test_that("the new API is equivalent to the old API", {
+test_that("the new API is equivalent to the old API except for extra columns", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_sector_profile_companies())
@@ -36,17 +36,19 @@ test_that("the new API is equivalent to the old API", {
     ecoinvent_europages
   )
 
-  new <- out |>
-    unnest_product() |>
-    arrange(companies_id) |>
+  standardize_profile <- function(data) {
+    data |>
+      arrange(companies_id) |>
     select(-matches(extra_cols_pattern()))
-  old <- out_product |>
-    arrange(companies_id) |>
-    select(-matches(extra_cols_pattern()))
-  expect_equal(new, old)
+  }
+
   expect_equal(
-    out |> unnest_company() |> arrange(companies_id) |> select(-matches(extra_cols_pattern())),
-    out_company |> arrange(companies_id) |> select(-matches(extra_cols_pattern()))
+    out |> unnest_product() |> standardize_profile(),
+    out_product |> standardize_profile()
+  )
+  expect_equal(
+    out |> unnest_company() |> standardize_profile(),
+    out_company |> standardize_profile()
   )
 })
 

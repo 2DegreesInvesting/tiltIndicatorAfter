@@ -1,4 +1,4 @@
-test_that("the new API is equivalent to the old API", {
+test_that("the new API is equivalent to the old API except for extra columns", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
