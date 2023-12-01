@@ -1,6 +1,17 @@
 test_that("total number of rows for a comapny is either 1 or 3", {
-  company <- unnest_company(toy_sector_profile_upstream_output())
-  product <- unnest_product(toy_sector_profile_upstream_output())
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_sector_profile_upstream_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  inputs <- read_csv(toy_sector_profile_upstream_products())
+  .inputs <- add_rowid(inputs)
+  output <- sector_profile_upstream(companies, scenarios, .inputs)
+  .product <- unnest_product(output)
+
+  y <- select(.inputs, matches(extra_cols_pattern()))
+  x <- select(.product, -any_of(names(y)), extra_rowid())
+  product <- left_join(x, y, relationship = "many-to-many", by = extra_rowid())
+  company <- unnest_company(output)
 
   out <- prepare_istr_company(
     company,
@@ -8,7 +19,8 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     ep_companies,
     ecoinvent_activities,
     small_matches_mapper,
-    ecoinvent_inputs
+    ecoinvent_inputs,
+    isic_tilt_mapper
   ) |>
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
@@ -16,8 +28,19 @@ test_that("total number of rows for a comapny is either 1 or 3", {
 })
 
 test_that("handles tiltIndicator output", {
-  company <- unnest_company(toy_sector_profile_upstream_output())
-  product <- unnest_product(toy_sector_profile_upstream_output())
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_sector_profile_upstream_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  inputs <- read_csv(toy_sector_profile_upstream_products())
+  .inputs <- add_rowid(inputs)
+  output <- sector_profile_upstream(companies, scenarios, .inputs)
+  .product <- unnest_product(output)
+
+  y <- select(.inputs, matches(extra_cols_pattern()))
+  x <- select(.product, -any_of(names(y)), extra_rowid())
+  product <- left_join(x, y, relationship = "many-to-many", by = extra_rowid())
+  company <- unnest_company(output)
 
   expect_no_error(
     prepare_istr_company(
@@ -26,7 +49,8 @@ test_that("handles tiltIndicator output", {
       ep_companies |> head(3),
       ecoinvent_activities |> head(3),
       matches_mapper |> head(3),
-      ecoinvent_inputs |> head(3)
+      ecoinvent_inputs |> head(3),
+      isic_tilt_mapper |> head(3)
     )
   )
 })

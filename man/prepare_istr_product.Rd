@@ -4,7 +4,14 @@
 \alias{prepare_istr_product}
 \title{Creates final output of istr product level results}
 \usage{
-prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs)
+prepare_istr_product(
+  istr_prod,
+  comp,
+  eco_activities,
+  match_mapper,
+  eco_inputs,
+  isic_tilt_map
+)
 }
 \arguments{
 \item{istr_prod}{A dataframe like \link{istr_product}}
@@ -16,19 +23,12 @@ prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs)
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of istr_product
 }
 \description{
 Creates final output of istr product level results
-}
-\examples{
-prepare_istr_product(
-  istr_product |> head(3),
-  ep_companies |> head(3),
-  ecoinvent_activities |> head(3),
-  matches_mapper |> head(3),
-  ecoinvent_inputs |> head(3)
-)
 }

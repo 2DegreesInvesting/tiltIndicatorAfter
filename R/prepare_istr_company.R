@@ -7,29 +7,16 @@
 #' @param istr_comp A dataframe like the corresponding output at company level
 #'   from tiltIndicator.
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
+#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the final output of ictr_company
 #'
 #' @export
-#'
-#' @examples
-#' library(tiltIndicator)
-#'
-#' company <- unnest_company(toy_sector_profile_upstream_output())
-#' product <- unnest_product(toy_sector_profile_upstream_output())
-#'
-#' prepare_istr_company(
-#'   company |> head(3),
-#'   product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3),
-#'   ecoinvent_inputs |> head(3)
-#' )
-prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
+prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
+  istr_prod <- sanitize_isic(istr_prod)
   istr_comp <- sector_profile_any_polish_output_at_company_level(istr_comp)
 
-  inter_result <- prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs) |>
+  inter_result <- prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) |>
     select(
       "companies_id", "company_name", "company_city", "country", "postcode",
       "address", "main_activity", "matching_certainty_company_average"

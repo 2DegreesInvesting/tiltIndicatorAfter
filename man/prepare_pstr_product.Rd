@@ -4,7 +4,13 @@
 \alias{prepare_pstr_product}
 \title{Creates final output of pstr product level results}
 \usage{
-prepare_pstr_product(pstr_prod, comp, eco_activities, match_mapper)
+prepare_pstr_product(
+  pstr_prod,
+  comp,
+  eco_activities,
+  match_mapper,
+  isic_tilt_map
+)
 }
 \arguments{
 \item{pstr_prod}{A dataframe like \link{pstr_product}}
@@ -14,18 +20,12 @@ prepare_pstr_product(pstr_prod, comp, eco_activities, match_mapper)
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of pstr_product
 }
 \description{
 Creates final output of pstr product level results
-}
-\examples{
-prepare_pstr_product(
-  pstr_product |> head(3),
-  ep_companies |> head(3),
-  ecoinvent_activities |> head(3),
-  matches_mapper |> head(3)
-)
 }

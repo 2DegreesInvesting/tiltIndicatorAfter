@@ -23,7 +23,8 @@
 #'   # TODO: Move to tiltToyData
 #'   europages_companies = ep_companies |> head(3),
 #'   ecoinvent_activities = ecoinvent_activities |> head(3),
-#'   ecoinvent_europages = matches_mapper |> head(3)
+#'   ecoinvent_europages = matches_mapper |> head(3),
+#'   isic_tilt = isic_tilt_mapper |> head(3)
 #' )
 #'
 #' result |> unnest_product()
@@ -45,7 +46,8 @@
 #'   europages_companies = ep_companies |> head(3),
 #'   ecoinvent_activities = ecoinvent_activities |> head(3),
 #'   ecoinvent_europages = matches_mapper |> head(3),
-#'   ecoinvent_inputs = ecoinvent_inputs |> head(3)
+#'   ecoinvent_inputs = ecoinvent_inputs |> head(3),
+#'   isic_tilt = isic_tilt_mapper |> head(3)
 #' )
 #'
 #' result |> unnest_product()
@@ -58,6 +60,7 @@ profile_sector_upstream <- function(companies,
                                     ecoinvent_activities,
                                     ecoinvent_europages,
                                     ecoinvent_inputs,
+                                    isic_tilt,
                                     low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                                     high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
   indicator <- list(
@@ -71,7 +74,8 @@ profile_sector_upstream <- function(companies,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    ecoinvent_inputs
+    ecoinvent_inputs,
+    isic_tilt
   )
   exec_profile("sector_profile_upstream", indicator, indicator_after)
 }
