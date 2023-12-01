@@ -21,14 +21,14 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   )
 
   # Old API
-  .inputs <- rowid_to_column(inputs, "extra_rowid")
+  .inputs <- add_rowid(inputs)
   output <- sector_profile_upstream(companies, scenarios, .inputs)
   .product <- unnest_product(output)
   product <- left_join(
-    select(.product, -matches(extra_cols_pattern()), "extra_rowid"),
+    select(.product, -matches(extra_cols_pattern()), extra_rowid()),
     select(.inputs, matches(extra_cols_pattern())),
     relationship = "many-to-many",
-    by = "extra_rowid"
+    by = extra_rowid()
   )
   company <- unnest_company(output)
 

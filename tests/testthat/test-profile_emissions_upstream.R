@@ -21,13 +21,13 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   )
 
   # Old API
-  .co2 <- rowid_to_column(co2, "co2_rowid")
+  .co2 <- add_rowid(co2)
   output <- emissions_profile_upstream(companies, .co2)
 
 
   company <- unnest_company(output)
   product <- unnest_product(output) |>
-    left_join(select(.co2, matches(extra_cols_pattern())), by = "co2_rowid")
+    left_join(select(.co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   out_product <- prepare_ictr_product(
     product,

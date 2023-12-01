@@ -63,7 +63,7 @@ profile_sector_upstream <- function(companies,
   indicator <- list(
     companies,
     scenarios,
-    rowid_to_column(inputs, "extra_rowid"),
+    add_rowid(inputs),
     low_threshold,
     high_threshold
   )

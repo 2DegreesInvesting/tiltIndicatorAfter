@@ -4,13 +4,13 @@ test_that("total number of rows for a comapny is either 1 or 6", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile(companies, co2)
 
 
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   out <- prepare_pctr_product(
     product,
@@ -30,13 +30,13 @@ test_that("handles numeric `isic*`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile(companies, co2)
 
 
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   expect_no_error(
     prepare_pctr_product(
@@ -55,13 +55,13 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile(companies, co2)
 
 
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   expect_no_error(
     prepare_pctr_product(
@@ -80,13 +80,13 @@ test_that("handles tiltIndicator output", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile(companies, co2)
 
 
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   expect_no_error(
     prepare_pctr_product(

@@ -23,13 +23,13 @@ exec_profile <- function(.fn, indicator, indicator_after) {
 }
 
 extend_product <- function(product, .co2, cols_pattern = extra_cols_pattern()) {
-  left_join(product, select(.co2, matches(cols_pattern)), by = "co2_rowid")
+  left_join(product, select(.co2, matches(cols_pattern)), by = extra_rowid())
 }
 
 extend_with <- function(data, with, cols_pattern = extra_cols_pattern()) {
   .data <- data |> select(-matches(cols_pattern), matches("rowid"))
   .with <- with |> select(matches(cols_pattern))
-  left_join(.data, .with, by = "extra_rowid")
+  left_join(.data, .with, by = extra_rowid())
 }
 
 extra_cols_pattern <- function() {
@@ -45,6 +45,9 @@ polish_company <- function(.fn) {
 }
 
 add_rowid <- function(data) {
-  label <- deparse(substitute(data))
-  rowid_to_column(data, paste0(label, "_rowid"))
+  rowid_to_column(data, extra_rowid())
+}
+
+extra_rowid <- function() {
+  "extra_rowid"
 }
