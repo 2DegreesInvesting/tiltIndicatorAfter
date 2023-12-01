@@ -36,19 +36,13 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_europages
   )
 
-  standardize_profile <- function(data) {
-    data |>
-      arrange(companies_id) |>
-    select(-matches(extra_cols_pattern()))
-  }
-
   expect_equal(
-    out |> unnest_product() |> standardize_profile(),
-    out_product |> standardize_profile()
+    out |> unnest_product() |> arrange_and_exclude_extra_columns(),
+    out_product |> arrange_and_exclude_extra_columns()
   )
   expect_equal(
-    out |> unnest_company() |> standardize_profile(),
-    out_company |> standardize_profile()
+    out |> unnest_company() |> arrange_and_exclude_extra_columns(),
+    out_company |> arrange_and_exclude_extra_columns()
   )
 })
 
