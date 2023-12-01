@@ -36,10 +36,14 @@ test_that("the new API is equivalent to the old API", {
     ecoinvent_europages
   )
 
-  expect_equal(
-    out |> unnest_product() |> arrange(companies_id) |> select(-matches(extra_cols_pattern())),
-    out_product |> arrange(companies_id) |> select(-matches(extra_cols_pattern()))
-  )
+  new <- out |>
+    unnest_product() |>
+    arrange(companies_id) |>
+    select(-matches(extra_cols_pattern()))
+  old <- out_product |>
+    arrange(companies_id) |>
+    select(-matches(extra_cols_pattern()))
+  expect_equal(new, old)
   expect_equal(
     out |> unnest_company() |> arrange(companies_id) |> select(-matches(extra_cols_pattern())),
     out_company |> arrange(companies_id) |> select(-matches(extra_cols_pattern()))
