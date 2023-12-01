@@ -4,14 +4,14 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile_upstream(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   company <- unnest_company(output)
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   out <- prepare_ictr_company(
     company,
@@ -33,14 +33,14 @@ test_that("handles numeric `isic*`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile_upstream(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   company <- unnest_company(output)
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   expect_no_error(
     prepare_ictr_company(
@@ -61,14 +61,14 @@ test_that("takes the outpus of tiltIndicator", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products()) |>
     # FIXME: Handle this in tiltIndicator
-    rowid_to_column("co2_rowid")
+    add_rowid()
   output <- emissions_profile_upstream(companies, co2)
 
-  extra_cols_pattern <- c("rowid", "isic", "sector")
+
   company <- unnest_company(output)
   product <- unnest_product(output) |>
     # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern)), by = "co2_rowid")
+    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
 
   expect_no_error(
     prepare_ictr_company(

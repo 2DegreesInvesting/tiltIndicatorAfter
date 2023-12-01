@@ -1,0 +1,78 @@
+test_that("the new API is equivalent to the old API except for extra columns", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products())
+  europages_companies <- ep_companies |> head(3)
+  ecoinvent_activities <- ecoinvent_activities
+  ecoinvent_europages <- small_matches_mapper |> head(3)
+  isic_tilt <- isic_tilt_mapper |> head(3)
+
+  # New API
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic_tilt = isic_tilt
+  )
+
+  # Old API
+  .co2 <- add_rowid(co2)
+  output <- emissions_profile(companies, .co2)
+
+  company <- unnest_company(output)
+  product <- unnest_product(output) |>
+    left_join(select(.co2, matches(extra_cols_pattern())), by = extra_rowid())
+
+  out_product <- prepare_pctr_product(
+    product,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_tilt
+  )
+
+  out_company <- prepare_pctr_company(
+    company,
+    product,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_tilt
+  )
+
+  new <- arrange(unnest_product(out), companies_id)
+  old <- arrange(out_product, companies_id)
+  expect_equal(relocate(new, sort(names(new))), relocate(old, sort(names(old))))
+
+  expect_equal(
+    out |> unnest_company() |> arrange(companies_id),
+    out_company |> arrange(companies_id)
+  )
+})
+
+test_that("the output at product level has columns matching isic and sector", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products())
+  europages_companies <- ep_companies |> head(3)
+  ecoinvent_activities <- ecoinvent_activities
+  ecoinvent_europages <- small_matches_mapper |> head(3)
+  isic_tilt <- isic_tilt_mapper |> head(3)
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_tilt
+  )
+
+  product <- unnest_product(out)
+  expect_true(any(matches_name(product, "isic")))
+  expect_true(any(matches_name(product, "sector")))
+})
