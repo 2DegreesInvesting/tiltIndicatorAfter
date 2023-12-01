@@ -16,22 +16,18 @@ extend_with_columns_from_arguments_of_tilt_indicator <- function(product,
                                                                  .fn) {
   if (grepl("sector_profile$", .fn)) {
     companies <- indicator[[1]]
-    product <- extend_with(product, companies)
+    out <- product |> extend_with(companies)
   }
   if (grepl("emissions", .fn)) {
     co2 <- indicator[[2]]
-    product <- extend_product(product, co2)
+    out <- product |> extend_with(co2)
   }
   if (grepl("sector_profile_upstream$", .fn)) {
     inputs <- indicator[[3]]
-    product <- extend_with(product, inputs)
+    out <- product |> extend_with(inputs)
   }
 
-  product
-}
-
-extend_product <- function(product, .co2, cols_pattern = extra_cols_pattern()) {
-  left_join(product, select(.co2, matches(cols_pattern)), by = extra_rowid())
+  out
 }
 
 extend_with <- function(data, with, cols_pattern = extra_cols_pattern()) {
