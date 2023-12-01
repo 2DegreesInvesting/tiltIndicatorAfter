@@ -31,8 +31,8 @@ extend_with_columns_from_arguments_of_tilt_indicator <- function(product,
 }
 
 extend_with <- function(data, with, cols_pattern = extra_cols_pattern()) {
-  .data <- data |> select(-matches(cols_pattern), matches("rowid"))
   .with <- with |> select(matches(cols_pattern))
+  .data <- data |> select(-any_of(names(.with)), matches("rowid"))
   left_join(.data, .with, by = extra_rowid())
 }
 

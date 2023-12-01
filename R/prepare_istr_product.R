@@ -52,12 +52,12 @@ rename_istr_product <- function(data) {
 
 relocate_istr_product <- function(data) {
   data |>
-    relocate(matches(c(
+    relocate(
       "companies_id", "company_name", "country", "risk_category", "scenario", "year",
       "clustered", "activity_name", "reference_product_name",
       "unit", "tilt_sector", "multi_match", "matching_certainty", "avg_matching_certainty",
       "exchange_name", "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector",
       "company_city", "postcode", "address", "main_activity",
       "activity_uuid_product_uuid"
-    )))
+    )
 }
