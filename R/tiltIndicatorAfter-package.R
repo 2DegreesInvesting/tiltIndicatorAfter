@@ -58,3 +58,8 @@
 #' @importFrom withr local_options
 ## usethis namespace: end
 NULL
+
+#' @export
+tiltIndicator::unnest_product
+#' @export
+tiltIndicator::unnest_company
