@@ -32,3 +32,15 @@ A dataframe that prepares the final output of istr_product
 \description{
 Creates final output of istr product level results
 }
+\examples{
+product <- unnest_product(toy_sector_profile_upstream_output())
+
+prepare_istr_product(
+  product |> head(3),
+  ep_companies |> head(3),
+  ecoinvent_activities |> head(3),
+  matches_mapper |> head(3),
+  ecoinvent_inputs |> head(3),
+  isic_tilt_mapper |> head(3)
+)
+}
