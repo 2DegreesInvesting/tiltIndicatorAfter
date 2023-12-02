@@ -52,7 +52,8 @@ toy_sector_profile_output <- function() {
       toy_sector_profile_companies(),
       toy_sector_profile_any_scenarios()
     )
-  )
+  ) |>
+    FIXME_mutate_product(isic_4digit = "1234")
 }
 
 #' @export
@@ -65,5 +66,12 @@ toy_sector_profile_upstream_output <- function() {
       toy_sector_profile_any_scenarios(),
       toy_sector_profile_upstream_products()
     )
-  )
+  ) |>
+    FIXME_mutate_product(input_isic_4digit = "1234")
+}
+
+# isic_4digit: https://github.com/2DegreesInvesting/tiltToyData/issues/15
+FIXME_mutate_product <- function(data, ...) {
+  data |>
+    mutate(product = lapply(product, \(x) mutate(x, ...)))
 }

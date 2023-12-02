@@ -33,3 +33,18 @@ A dataframe that prepares the final output of pstr_company
 \description{
 Creates final output of pstr company level results
 }
+\examples{
+library(tiltIndicator)
+
+company <- unnest_company(toy_sector_profile_output())
+product <- unnest_product(toy_sector_profile_output())
+
+prepare_pstr_company(
+  company |> head(3),
+  product |> head(3),
+  ep_companies |> head(3),
+  ecoinvent_activities |> head(3),
+  matches_mapper |> head(3),
+  isic_tilt_mapper |> head(3)
+)
+}
