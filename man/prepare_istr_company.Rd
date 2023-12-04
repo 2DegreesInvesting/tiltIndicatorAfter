@@ -31,7 +31,7 @@ from tiltIndicator.}
 A dataframe that prepares the final output of ictr_company
 }
 \description{
-Creates final output of istr company level results
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
 library(tiltIndicator)

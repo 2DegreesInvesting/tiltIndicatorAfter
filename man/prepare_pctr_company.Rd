@@ -30,7 +30,7 @@ prepare_pctr_company(
 A dataframe that prepares the final output of pctr_company
 }
 \description{
-Creates final output of pctr company level results
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
 prepare_pctr_company(

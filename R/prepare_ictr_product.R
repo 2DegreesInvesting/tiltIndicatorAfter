@@ -1,5 +1,8 @@
 #' Creates final output of ictr product level results
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param ictr_prod A dataframe like [ictr_product]

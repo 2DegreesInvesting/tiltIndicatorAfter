@@ -30,7 +30,7 @@ prepare_ictr_product(
 A dataframe that prepares the final output of ictr_product
 }
 \description{
-Creates final output of ictr product level results
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
 prepare_ictr_product(

@@ -21,7 +21,7 @@ prepare_istr_product(istr_prod, comp, eco_activities, match_mapper, eco_inputs)
 A dataframe that prepares the final output of istr_product
 }
 \description{
-Creates final output of istr product level results
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
 prepare_istr_product(
