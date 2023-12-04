@@ -56,8 +56,8 @@ profile_sector_upstream <- function(companies,
                                     inputs,
                                     europages_companies,
                                     ecoinvent_activities,
-                                    ecoinvent_europages,
                                     ecoinvent_inputs,
+                                    ecoinvent_europages,
                                     low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                                     high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
   indicator <- list(
