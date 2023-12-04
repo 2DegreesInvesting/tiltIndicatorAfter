@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9013 (2023-12-04)
+
+* The argument `ecoinvent_inputs` of `profile_emissions_upstream()` and
+`profile_sector_upstream()` is now relocated next to other ecoinvent datasets,
+and before the mappers (#91). This gives all `profile*()` functions a more
+consistent structure.
+
 # tiltIndicatorAfter 0.0.0.9012 (2023-12-04)
 
 * Reexport `tiltIndicator::unest_product()` and `tiltIndicator::unnest_company()`
