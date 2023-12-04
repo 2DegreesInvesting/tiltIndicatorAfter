@@ -17,7 +17,6 @@
 #'
 #' @examples
 #' library(tiltToyData)
-#' library(tiltIndicator)
 #' library(readr, warn.conflicts = FALSE)
 #'
 #' options(readr.show_col_types = FALSE)

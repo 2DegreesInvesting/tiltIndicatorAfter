@@ -57,7 +57,6 @@ These functions wrap the output of the corresponding function in
 }
 \examples{
 library(tiltToyData)
-library(tiltIndicator)
 library(readr, warn.conflicts = FALSE)
 
 options(readr.show_col_types = FALSE)
