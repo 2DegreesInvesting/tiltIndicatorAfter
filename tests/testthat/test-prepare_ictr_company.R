@@ -1,5 +1,5 @@
 # TODO: Move to test-profile_emissions_upstream.R
-test_that("the total number of rows for a comapny is either 1 or 3", {
+test_that("total number of rows for a comapny is either 1 or 3", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
