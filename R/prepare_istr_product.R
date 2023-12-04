@@ -14,13 +14,7 @@
 #' @export
 #'
 #' @examples
-#' prepare_istr_product(
-#'   istr_product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3),
-#'   ecoinvent_inputs |> head(3)
-#' )
+#' See examples in `?profile_sector_upstream`
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
 
   istr_prod |>

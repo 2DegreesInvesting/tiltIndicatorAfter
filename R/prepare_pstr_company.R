@@ -15,18 +15,7 @@
 #' @export
 #'
 #' @examples
-#' library(tiltIndicator)
-#'
-#' company <- unnest_company(toy_sector_profile_upstream_output())
-#' product <- unnest_product(toy_sector_profile_upstream_output())
-#'
-#' prepare_pstr_company(
-#'   company |> head(3),
-#'   product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3)
-#' )
+#' See examples in `?profile_sector`
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper) {
   pstr_comp <- sector_profile_any_polish_output_at_company_level(pstr_comp)
 
