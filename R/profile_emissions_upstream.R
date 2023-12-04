@@ -6,8 +6,8 @@
 #' @inheritParams tiltIndicator::emissions_profile_upstream
 #' @param europages_companies Dataframe. Companies from europages.
 #' @param ecoinvent_activities Dataframe. Activities from ecoinvent.
-#' @param ecoinvent_europages Dataframe. Mapper between europages and ecoinvent.
 #' @param ecoinvent_inputs Dataframe. Upstream products from ecoinvent.
+#' @param ecoinvent_europages Dataframe. Mapper between europages and ecoinvent.
 #' @param isic_tilt Dataframe. Mapper between isic and tilt.
 #'
 #' @return `r document_default_value()`

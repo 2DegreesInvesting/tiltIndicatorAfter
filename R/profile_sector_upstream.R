@@ -44,8 +44,8 @@
 #'   # TODO: Move to tiltToyData
 #'   europages_companies = ep_companies |> head(3),
 #'   ecoinvent_activities = ecoinvent_activities |> head(3),
-#'   ecoinvent_europages = matches_mapper |> head(3),
-#'   ecoinvent_inputs = ecoinvent_inputs |> head(3)
+#'   ecoinvent_inputs = ecoinvent_inputs |> head(3),
+#'   ecoinvent_europages = matches_mapper |> head(3)
 #' )
 #'
 #' result |> unnest_product()
