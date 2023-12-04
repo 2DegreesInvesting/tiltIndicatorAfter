@@ -64,8 +64,8 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 <span>  <span class="va">inputs</span>,</span>
 <span>  <span class="va">europages_companies</span>,</span>
 <span>  <span class="va">ecoinvent_activities</span>,</span>
-<span>  <span class="va">ecoinvent_europages</span>,</span>
 <span>  <span class="va">ecoinvent_inputs</span>,</span>
+<span>  <span class="va">ecoinvent_europages</span>,</span>
 <span>  low_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">scenarios</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2030</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>  high_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">scenarios</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2030</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -188,8 +188,8 @@ risk products.</p></dd>
 <span class="r-in"><span>  <span class="co"># TODO: Move to tiltToyData</span></span></span>
 <span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="va">ep_companies</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  ecoinvent_inputs <span class="op">=</span> <span class="va">ecoinvent_inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  ecoinvent_inputs <span class="op">=</span> <span class="va">ecoinvent_inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
