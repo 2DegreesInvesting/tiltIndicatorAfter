@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9012 (2023-12-04)
+
+* Reexport `tiltIndicator::unest_product()` and `tiltIndicator::unnest_company()`
+(#88).
+
 # tiltIndicatorAfter 0.0.0.9011 (2023-12-01)
 
 * New API wraps titlIndicator and outputs columns matching `*isic*` and `*sector*`
