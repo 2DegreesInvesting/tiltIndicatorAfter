@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tiltIndicatorAfter</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9013</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9014</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,13 @@
       
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.0.9014" id="tiltindicatorafter-0009014-2023-12-04">tiltIndicatorAfter 0.0.0.9014 (2023-12-04)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009014-2023-12-04"></a></h2>
+<p>New arguments, new columns, and rename columns about <code>*isic_4digit*</code> (#86 @kalashsinghal):</p>
+<ul><li><p>The functions <code><a href="../reference/profile_sector_upstream.html">profile_sector()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> gain the argument <code>isic_tilt</code>.</p></li>
+<li><p>In the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions()</a></code> and <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> at product level the columns <code>isic_name</code> and <code>input_isic_name</code> are now renamed to <code>isic_4digit_name</code> and <code>input_isic_4digit_name</code>, respectively.</p></li>
+<li><p>The output of <code><a href="../reference/profile_sector_upstream.html">profile_sector()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> at product level gains the column <code>isic_4digit_name</code> and <code>input_isic_4digit_name</code>, respectively.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9013" id="tiltindicatorafter-0009013-2023-12-04">tiltIndicatorAfter 0.0.0.9013 (2023-12-04)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009013-2023-12-04"></a></h2>
 <ul><li>The argument <code>ecoinvent_inputs</code> of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> is now relocated next to other ecoinvent datasets, and before the mappers (#91). This gives all <code>profile*()</code> functions a more consistent structure.</li>
