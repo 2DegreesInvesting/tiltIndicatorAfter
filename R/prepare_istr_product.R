@@ -12,8 +12,6 @@
 #' @export
 #'
 #' @examples
-#' library(tiltIndicator)
-#'
 #' product <- unnest_product(toy_sector_profile_upstream_output())
 #' prepare_istr_product(
 #'   product |> head(3),
@@ -54,7 +52,7 @@ rename_istr_product <- function(data) {
       ISTR_risk_category = "risk_category",
       input_name = "exchange_name",
       input_unit = "exchange_unit_name",
-      isic_4digit_name = "isic_4digit_name_ecoinvent"
+      input_isic_4digit_name = "isic_4digit_name_ecoinvent"
     )
 }
 

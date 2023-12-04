@@ -17,8 +17,8 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     inputs,
     europages_companies,
     ecoinvent_activities,
-    ecoinvent_europages,
     ecoinvent_inputs,
+    ecoinvent_europages,
     isic_tilt
   )
 
@@ -73,15 +73,14 @@ test_that("the output at product level has columns matching isic and sector", {
   ecoinvent_inputs <- ecoinvent_inputs |> head(3)
   isic_tilt <- isic_tilt_mapper |> head(3)
 
-  # New API
   out <- profile_sector_upstream(
     companies,
     scenarios,
     inputs,
-    europages_companies,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    ecoinvent_inputs,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
     isic_tilt
   )
 

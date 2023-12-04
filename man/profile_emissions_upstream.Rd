@@ -22,8 +22,8 @@ profile_emissions_upstream(
   co2,
   europages_companies,
   ecoinvent_activities,
-  ecoinvent_europages,
   ecoinvent_inputs,
+  ecoinvent_europages,
   isic_tilt,
   low_threshold = 1/3,
   high_threshold = 2/3
@@ -57,7 +57,6 @@ These functions wrap the output of the corresponding function in
 }
 \examples{
 library(tiltToyData)
-library(tiltIndicator)
 library(readr, warn.conflicts = FALSE)
 
 options(readr.show_col_types = FALSE)

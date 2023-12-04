@@ -22,8 +22,8 @@ profile_sector_upstream(
   inputs,
   europages_companies,
   ecoinvent_activities,
-  ecoinvent_europages,
   ecoinvent_inputs,
+  ecoinvent_europages,
   isic_tilt,
   low_threshold = ifelse(scenarios$year == 2030, 1/9, 1/3),
   high_threshold = ifelse(scenarios$year == 2030, 2/9, 2/3)
@@ -57,7 +57,6 @@ These functions wrap the output of the corresponding function in
 }
 \examples{
 library(tiltToyData)
-library(tiltIndicator)
 library(readr, warn.conflicts = FALSE)
 
 options(readr.show_col_types = FALSE)
@@ -93,8 +92,8 @@ result <- profile_sector_upstream(
   # TODO: Move to tiltToyData
   europages_companies = ep_companies |> head(3),
   ecoinvent_activities = ecoinvent_activities |> head(3),
-  ecoinvent_europages = matches_mapper |> head(3),
   ecoinvent_inputs = ecoinvent_inputs |> head(3),
+  ecoinvent_europages = matches_mapper |> head(3),
   isic_tilt = isic_tilt_mapper |> head(3)
 )
 

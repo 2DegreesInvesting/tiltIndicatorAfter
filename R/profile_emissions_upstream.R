@@ -6,8 +6,8 @@
 #' @inheritParams tiltIndicator::emissions_profile_upstream
 #' @param europages_companies Dataframe. Companies from europages.
 #' @param ecoinvent_activities Dataframe. Activities from ecoinvent.
-#' @param ecoinvent_europages Dataframe. Mapper between europages and ecoinvent.
 #' @param ecoinvent_inputs Dataframe. Upstream products from ecoinvent.
+#' @param ecoinvent_europages Dataframe. Mapper between europages and ecoinvent.
 #' @param isic_tilt Dataframe. Mapper between isic and tilt.
 #'
 #' @return `r document_default_value()`
@@ -17,7 +17,6 @@
 #'
 #' @examples
 #' library(tiltToyData)
-#' library(tiltIndicator)
 #' library(readr, warn.conflicts = FALSE)
 #'
 #' options(readr.show_col_types = FALSE)
@@ -61,8 +60,8 @@ profile_emissions_upstream <- function(companies,
                                        co2,
                                        europages_companies,
                                        ecoinvent_activities,
-                                       ecoinvent_europages,
                                        ecoinvent_inputs,
+                                       ecoinvent_europages,
                                        isic_tilt,
                                        low_threshold = 1 / 3,
                                        high_threshold = 2 / 3) {

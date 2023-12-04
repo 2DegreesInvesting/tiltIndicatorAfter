@@ -73,5 +73,5 @@ toy_sector_profile_upstream_output <- function() {
 # isic_4digit: https://github.com/2DegreesInvesting/tiltToyData/issues/15
 FIXME_mutate_product <- function(data, ...) {
   data |>
-    mutate(product = lapply(product, \(x) mutate(x, ...)))
+    mutate(product = lapply(.data$product, \(x) mutate(x, ...)))
 }
