@@ -7,7 +7,8 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     product,
     ep_companies,
     ecoinvent_activities,
-    small_matches_mapper
+    small_matches_mapper,
+    isic_tilt_mapper
   ) |>
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
@@ -25,13 +26,15 @@ test_that("handles tiltIndicator output", {
       product |> head(3),
       ep_companies |> head(3),
       ecoinvent_activities |> head(3),
-      matches_mapper |> head(3)
+      matches_mapper |> head(3),
+      isic_tilt_mapper |> head(3)
     )
   )
 })
 
 test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", {
-  product_empty <- unnest_product(toy_sector_profile_output())[1, ]
+  product <- unnest_product(toy_sector_profile_output())
+  product_empty <- product[1, ]
   product_empty[1, "companies_id"] <- "a"
   product_empty[1, "risk_category"] <- NA_character_
 
@@ -47,7 +50,8 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
     product_empty,
     ep_companies,
     ecoinvent_activities,
-    small_matches_mapper
+    small_matches_mapper,
+    isic_tilt_mapper
   )
   out <- result |>
     filter(is.na(get_column(result, "risk_category"))) |>

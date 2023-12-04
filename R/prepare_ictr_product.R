@@ -54,7 +54,7 @@ rename_ictr_product <- function(data) {
       ICTR_risk_category = "risk_category",
       input_name = "exchange_name",
       input_unit = "exchange_unit_name",
-      input_isic_name = "isic_4digit_name_ecoinvent"
+      input_isic_4digit_name = "isic_4digit_name_ecoinvent"
     )
 }
 

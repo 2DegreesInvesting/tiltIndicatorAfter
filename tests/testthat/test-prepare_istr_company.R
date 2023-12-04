@@ -8,7 +8,8 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     ep_companies,
     ecoinvent_activities,
     small_matches_mapper,
-    ecoinvent_inputs
+    ecoinvent_inputs,
+    isic_tilt_mapper
   ) |>
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
@@ -26,7 +27,8 @@ test_that("handles tiltIndicator output", {
       ep_companies |> head(3),
       ecoinvent_activities |> head(3),
       matches_mapper |> head(3),
-      ecoinvent_inputs |> head(3)
+      ecoinvent_inputs |> head(3),
+      isic_tilt_mapper |> head(3)
     )
   )
 })

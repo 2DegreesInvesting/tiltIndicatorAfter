@@ -4,7 +4,14 @@
 \alias{prepare_pstr_company}
 \title{Creates final output of pstr company level results}
 \usage{
-prepare_pstr_company(pstr_comp, pstr_prod, comp, eco_activities, match_mapper)
+prepare_pstr_company(
+  pstr_comp,
+  pstr_prod,
+  comp,
+  eco_activities,
+  match_mapper,
+  isic_tilt_map
+)
 }
 \arguments{
 \item{pstr_comp}{A dataframe like the corresponding output at company level
@@ -17,6 +24,8 @@ from tiltIndicator.}
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of pstr_company
@@ -25,15 +34,15 @@ A dataframe that prepares the final output of pstr_company
 Creates final output of pstr company level results
 }
 \examples{
-
-company <- unnest_company(toy_sector_profile_upstream_output())
-product <- unnest_product(toy_sector_profile_upstream_output())
+company <- unnest_company(toy_sector_profile_output())
+product <- unnest_product(toy_sector_profile_output())
 
 prepare_pstr_company(
   company |> head(3),
   product |> head(3),
   ep_companies |> head(3),
   ecoinvent_activities |> head(3),
-  matches_mapper |> head(3)
+  matches_mapper |> head(3),
+  isic_tilt_mapper |> head(3)
 )
 }

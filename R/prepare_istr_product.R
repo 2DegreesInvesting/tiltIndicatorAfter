@@ -5,26 +5,31 @@
 #' @param istr_prod A dataframe like [istr_product]
 #' @param comp A dataframe like [ep_companies]
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
+#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the final output of istr_product
 #'
 #' @export
 #'
 #' @examples
+#' product <- unnest_product(toy_sector_profile_upstream_output())
 #' prepare_istr_product(
-#'   istr_product |> head(3),
+#'   product |> head(3),
 #'   ep_companies |> head(3),
 #'   ecoinvent_activities |> head(3),
 #'   matches_mapper |> head(3),
-#'   ecoinvent_inputs |> head(3)
+#'   ecoinvent_inputs |> head(3),
+#'   isic_tilt_mapper |> head(3)
 #' )
-prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
+prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
+  istr_prod <- sanitize_isic(istr_prod)
 
   istr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
     select(-c("input_activity_uuid_product_uuid")) |>
     distinct() |>
     left_join(comp, by = "companies_id") |>
+    left_join(isic_tilt_map, by = join_by("input_isic_4digit" == "isic_4digit")) |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>
     left_join(match_mapper, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     add_avg_matching_certainty("completion") |>
@@ -46,7 +51,8 @@ rename_istr_product <- function(data) {
       ep_product = "clustered",
       ISTR_risk_category = "risk_category",
       input_name = "exchange_name",
-      input_unit = "exchange_unit_name"
+      input_unit = "exchange_unit_name",
+      input_isic_4digit_name = "isic_4digit_name_ecoinvent"
     )
 }
 

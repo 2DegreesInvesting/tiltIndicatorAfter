@@ -4,20 +4,15 @@
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pstr_prod A dataframe like [pstr_product]
 #' @param comp A dataframe like [ep_companies]
+#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
 #'
 #' @return A dataframe that prepares the final output of pstr_product
 #'
 #' @export
-#'
-#' @examples
-#' prepare_pstr_product(
-#'   pstr_product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3)
-#' )
-prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
-  prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
+prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
+  pstr_prod <- sanitize_isic(pstr_prod)
+
+  prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper, isic_tilt_map) |>
     relocate_pstr_product() |>
     rename_pstr_product() |>
     mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
@@ -32,7 +27,8 @@ rename_pstr_product <- function(data) {
       matched_reference_product = "reference_product_name",
       matching_certainty_company_average = "avg_matching_certainty",
       PSTR_risk_category = "risk_category",
-      ep_product = "clustered"
+      ep_product = "clustered",
+      isic_4digit_name = "isic_4digit_name_ecoinvent"
     )
 }
 

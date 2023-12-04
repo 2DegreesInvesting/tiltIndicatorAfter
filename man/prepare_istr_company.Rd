@@ -10,7 +10,8 @@ prepare_istr_company(
   comp,
   eco_activities,
   match_mapper,
-  eco_inputs
+  eco_inputs,
+  isic_tilt_map
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ from tiltIndicator.}
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
+
+\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
 }
 \value{
 A dataframe that prepares the final output of ictr_company
@@ -34,7 +37,6 @@ A dataframe that prepares the final output of ictr_company
 Creates final output of istr company level results
 }
 \examples{
-
 company <- unnest_company(toy_sector_profile_upstream_output())
 product <- unnest_product(toy_sector_profile_upstream_output())
 
@@ -44,6 +46,7 @@ prepare_istr_company(
   ep_companies |> head(3),
   ecoinvent_activities |> head(3),
   matches_mapper |> head(3),
-  ecoinvent_inputs |> head(3)
+  ecoinvent_inputs |> head(3),
+  isic_tilt_mapper |> head(3)
 )
 }
