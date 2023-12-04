@@ -14,10 +14,10 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     companies,
     scenarios,
     inputs,
-    europages_companies,
-    ecoinvent_activities,
-    ecoinvent_inputs,
-    ecoinvent_europages
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages
   )
 
   # Old API
@@ -73,10 +73,10 @@ test_that("the output at product level has columns matching isic and sector", {
     companies,
     scenarios,
     inputs,
-    europages_companies,
-    ecoinvent_activities,
-    ecoinvent_inputs,
-    ecoinvent_europages
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages
   )
 
   product <- unnest_product(out)
