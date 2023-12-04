@@ -54,6 +54,7 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 <span>  <span class="va">europages_companies</span>,</span>
 <span>  <span class="va">ecoinvent_activities</span>,</span>
 <span>  <span class="va">ecoinvent_europages</span>,</span>
+<span>  <span class="va">isic_tilt</span>,</span>
 <span>  low_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">scenarios</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2030</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>  high_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">scenarios</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2030</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -66,6 +67,7 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 <span>  <span class="va">ecoinvent_activities</span>,</span>
 <span>  <span class="va">ecoinvent_inputs</span>,</span>
 <span>  <span class="va">ecoinvent_europages</span>,</span>
+<span>  <span class="va">isic_tilt</span>,</span>
 <span>  low_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">scenarios</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2030</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>  high_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">scenarios</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2030</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">9</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -87,6 +89,10 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 
 <dt>ecoinvent_europages</dt>
 <dd><p>Dataframe. Mapper between europages and ecoinvent.</p></dd>
+
+
+<dt>isic_tilt</dt>
+<dd><p>Dataframe. Mapper between isic and tilt.</p></dd>
 
 
 <dt>low_threshold</dt>
@@ -131,11 +137,12 @@ risk products.</p></dd>
 <span class="r-in"><span>  <span class="co"># TODO: Move to tiltToyData</span></span></span>
 <span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="va">ep_companies</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  isic_tilt <span class="op">=</span> <span class="va">isic_tilt_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 196 × 27</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 196 × 28</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id           company_name country PSTR_risk_category scenario  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> fleischerei-stiefsohn… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high               IPR 1.5…  <span style="text-decoration: underline;">2</span>030</span>
@@ -149,7 +156,7 @@ risk products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> fleischerei-stiefsohn… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low                stated …  <span style="text-decoration: underline;">2</span>040</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fleischerei-stiefsohn… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      medium             announc…  <span style="text-decoration: underline;">2</span>040</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 186 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tilt_subsector &lt;chr&gt;, multi_match &lt;lgl&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, company_city &lt;chr&gt;,</span></span>
@@ -189,11 +196,12 @@ risk products.</p></dd>
 <span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="va">ep_companies</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  ecoinvent_inputs <span class="op">=</span> <span class="va">ecoinvent_inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">matches_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  isic_tilt <span class="op">=</span> <span class="va">isic_tilt_mapper</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 704 × 30</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 704 × 31</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id           company_name country ISTR_risk_category scenario  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> fleischerei-stiefsohn… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low                stated …  <span style="text-decoration: underline;">2</span>020</span>
@@ -207,7 +215,7 @@ risk products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> fleischerei-stiefsohn… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low                net zer…  <span style="text-decoration: underline;">2</span>020</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fleischerei-stiefsohn… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high               net zer…  <span style="text-decoration: underline;">2</span>030</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 694 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 24 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 25 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   multi_match &lt;lgl&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, input_name &lt;chr&gt;,</span></span>
