@@ -13,7 +13,7 @@
 #' @return A dataframe that prepares the final output of pstr_company
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
 #' See examples in `?profile_sector`
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper) {

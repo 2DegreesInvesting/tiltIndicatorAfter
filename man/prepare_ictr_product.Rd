@@ -35,3 +35,4 @@ A dataframe that prepares the final output of ictr_product
 \examples{
 See examples in `?profile_emissions_upstream`
 }
+\keyword{internal}

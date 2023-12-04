@@ -12,7 +12,7 @@
 #' @return A dataframe that prepares the final output of pctr_product
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
 #' See examples in `?profile_emissions`
 prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {

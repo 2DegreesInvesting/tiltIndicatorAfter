@@ -14,7 +14,7 @@
 #' @return A dataframe that prepares the final output of ictr_company
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
 #' See examples in `?profile_sector_upstream`
 prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs) {

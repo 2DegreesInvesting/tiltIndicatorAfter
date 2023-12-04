@@ -35,3 +35,4 @@ A dataframe that prepares the final output of pctr_company
 \examples{
 See examples in `?profile_emissions`
 }
+\keyword{internal}

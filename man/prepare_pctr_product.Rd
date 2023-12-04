@@ -32,3 +32,4 @@ A dataframe that prepares the final output of pctr_product
 \examples{
 See examples in `?profile_emissions`
 }
+\keyword{internal}

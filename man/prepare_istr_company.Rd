@@ -36,3 +36,4 @@ A dataframe that prepares the final output of ictr_company
 \examples{
 See examples in `?profile_sector_upstream`
 }
+\keyword{internal}

@@ -13,7 +13,7 @@
 #' @return A dataframe that prepares the final output of pctr_company
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
 #' See examples in `?profile_emissions`
 prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {

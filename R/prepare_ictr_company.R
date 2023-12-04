@@ -14,7 +14,7 @@
 #' @return A dataframe that prepares the final output of ictr_company
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
 #' See examples in `?profile_emissions_upstream`
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {

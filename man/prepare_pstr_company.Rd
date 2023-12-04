@@ -27,3 +27,4 @@ A dataframe that prepares the final output of pstr_company
 \examples{
 See examples in `?profile_sector`
 }
+\keyword{internal}
