@@ -33,8 +33,6 @@ A dataframe that prepares the final output of istr_product
 Creates final output of istr product level results
 }
 \examples{
-library(tiltIndicator)
-
 product <- unnest_product(toy_sector_profile_upstream_output())
 prepare_istr_product(
   product |> head(3),

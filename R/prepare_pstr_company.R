@@ -13,8 +13,6 @@
 #' @export
 #'
 #' @examples
-#' library(tiltIndicator)
-#'
 #' company <- unnest_company(toy_sector_profile_output())
 #' product <- unnest_product(toy_sector_profile_output())
 #'

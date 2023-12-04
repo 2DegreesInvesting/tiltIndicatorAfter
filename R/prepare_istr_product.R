@@ -12,8 +12,6 @@
 #' @export
 #'
 #' @examples
-#' library(tiltIndicator)
-#'
 #' product <- unnest_product(toy_sector_profile_upstream_output())
 #' prepare_istr_product(
 #'   product |> head(3),
