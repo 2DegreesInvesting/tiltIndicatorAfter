@@ -1,105 +1,44 @@
+# TODO: Move to test-profile_emissions()
 test_that("total number of rows for a comapny is either 1 or 6", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products()) |>
-    # FIXME: Handle this in tiltIndicator
-    add_rowid()
-  output <- emissions_profile(companies, co2)
+  co2 <- read_csv(toy_emissions_profile_products())
 
-
-  product <- unnest_product(output) |>
-    # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
-
-  out <- prepare_pctr_product(
-    product,
-    ep_companies,
-    ecoinvent_activities,
-    small_matches_mapper,
-    isic_tilt_mapper
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = ep_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = small_matches_mapper,
+    isic_tilt = isic_tilt_mapper
   ) |>
+    unnest_product() |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
     summarise(count = n())
   expect_true(all(unique(out$count) %in% c(1, 6)))
-})
-
-test_that("handles numeric `isic*`", {
-  local_options(readr.show_col_types = FALSE)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products()) |>
-    # FIXME: Handle this in tiltIndicator
-    add_rowid()
-  output <- emissions_profile(companies, co2)
-
-
-  product <- unnest_product(output) |>
-    # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
-
-  expect_no_error(
-    prepare_pctr_product(
-      pctr_product |> head(3) |> modify_col("isic", as.numeric),
-      ep_companies |> head(3),
-      ecoinvent_activities |> head(3),
-      small_matches_mapper |> head(3),
-      isic_tilt_mapper |> head(3)
-    )
-  )
 })
 
 test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products()) |>
-    # FIXME: Handle this in tiltIndicator
-    add_rowid()
-  output <- emissions_profile(companies, co2)
-
-
-  product <- unnest_product(output) |>
-    # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
+  co2 <- read_csv(toy_emissions_profile_products())
 
   expect_no_error(
-    prepare_pctr_product(
-      product,
-      ep_companies |> head(3),
-      ecoinvent_activities |> head(3),
-      small_matches_mapper |> head(3),
-      isic_tilt_mapper |> head(3)
-    )
-  )
-})
-
-test_that("handles tiltIndicator output", {
-  local_options(readr.show_col_types = FALSE)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products()) |>
-    # FIXME: Handle this in tiltIndicator
-    add_rowid()
-  output <- emissions_profile(companies, co2)
-
-
-  product <- unnest_product(output) |>
-    # FIXME: Handle this inside the new interface
-    left_join(select(co2, matches(extra_cols_pattern())), by = extra_rowid())
-
-  expect_no_error(
-    prepare_pctr_product(
-      product |> head(3),
-      ep_companies |> head(3),
-      ecoinvent_activities |> head(3),
-      small_matches_mapper |> head(3),
-      isic_tilt_mapper |> head(3)
+    profile_emissions(
+      companies,
+      co2,
+      europages_companies = ep_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_europages = small_matches_mapper,
+      isic_tilt = isic_tilt_mapper
     )
   )
 })
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  # TODO: Rewrite to call the new API
   id <- "id3"
   clustered_one <- "alarm system"
   clustered_two <- "aluminium"
