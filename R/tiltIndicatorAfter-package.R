@@ -23,6 +23,7 @@
 #' @importFrom dplyr summarise
 #' @importFrom dplyr ungroup
 #' @importFrom glue glue
+#' @importFrom lifecycle deprecated
 #' @importFrom memoise memoise
 #' @importFrom readr read_csv
 #' @importFrom rlang .data
