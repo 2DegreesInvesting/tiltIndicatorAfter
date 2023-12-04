@@ -18,6 +18,12 @@
 #' @examples
 #' See examples in `?profile_emissions_upstream`
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
+  deprecate_soft(
+    "0.0.0.9011",
+    "prepare_ictr_company()",
+    "profile_emissions_upstream()"
+  )
+
   ictr_prod <- sanitize_isic(ictr_prod)
 
   inter_result <- prepare_ictr_product(ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) |>
