@@ -25,7 +25,6 @@ A dataframe that prepares the final output of pstr_company
 Creates final output of pstr company level results
 }
 \examples{
-library(tiltIndicator)
 
 company <- unnest_company(toy_sector_profile_upstream_output())
 product <- unnest_product(toy_sector_profile_upstream_output())
