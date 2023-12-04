@@ -11,15 +11,16 @@
 #' @return A dataframe that prepares the final output of pstr_product
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
-#' prepare_pstr_product(
-#'   pstr_product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3)
-#' )
+#' See examples in `?profile_sector`
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper) {
+  deprecate_soft(
+    "0.0.0.9011",
+    "prepare_pstr_product()",
+    "profile_sector()"
+  )
+
   prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>
     relocate_pstr_product() |>
     rename_pstr_product() |>

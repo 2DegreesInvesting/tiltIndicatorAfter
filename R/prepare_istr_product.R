@@ -16,6 +16,11 @@
 #' @examples
 #' See examples in `?profile_sector_upstream`
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs) {
+  deprecate_soft(
+    "0.0.0.9011",
+    "prepare_istr_product()",
+    "profile_sector_upstream()"
+  )
 
   istr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>

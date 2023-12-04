@@ -17,6 +17,12 @@
 #' @examples
 #' See examples in `?profile_sector`
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper) {
+  deprecate_soft(
+    "0.0.0.9011",
+    "prepare_pstr_company()",
+    "profile_sector()"
+  )
+
   pstr_comp <- sector_profile_any_polish_output_at_company_level(pstr_comp)
 
   inter_result <- prepare_inter_pstr_product(pstr_prod, comp, eco_activities, match_mapper) |>

@@ -17,6 +17,12 @@
 #' @examples
 #' See examples in `?profile_emissions`
 prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
+  deprecate_soft(
+    "0.0.0.9011",
+    "prepare_pctr_company()",
+    "profile_emissions()"
+  )
+
   pctr_prod <- sanitize_isic(pctr_prod)
 
   inter_result <- prepare_inter_pctr_product(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) |>
