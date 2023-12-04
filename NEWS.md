@@ -1,5 +1,21 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9014 (2023-12-04)
+
+New arguments, new columns, and rename columns about `*isic_4digit*` (#86
+@kalashsinghal):
+
+* The functions `profile_sector()` and `profile_sector_upstream()` gain the
+argument `isic_tilt`.
+
+* In the output of `profile_emissions()` and `profile_emissions_upstream()` at
+product level the columns `isic_name` and `input_isic_name` are now renamed to
+`isic_4digit_name` and `input_isic_4digit_name`, respectively.
+
+* The output of `profile_sector()` and `profile_sector_upstream()` at product
+level gains the column `isic_4digit_name` and `input_isic_4digit_name`,
+respectively.
+
 # tiltIndicatorAfter 0.0.0.9013 (2023-12-04)
 
 * The argument `ecoinvent_inputs` of `profile_emissions_upstream()` and
