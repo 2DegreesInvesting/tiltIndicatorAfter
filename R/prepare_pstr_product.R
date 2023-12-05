@@ -1,5 +1,8 @@
 #' Creates final output of pstr product level results
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pstr_prod A dataframe like [pstr_product]
@@ -9,6 +12,9 @@
 #' @return A dataframe that prepares the final output of pstr_product
 #'
 #' @export
+#' @keywords internal
+#' @examples
+#' See examples in `?profile_xxxxxxxxx`
 prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   pstr_prod <- sanitize_isic(pstr_prod)
 
