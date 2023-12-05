@@ -1,5 +1,8 @@
 #' Creates final output of pctr product level results
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pctr_prod A dataframe like [pctr_product]
@@ -9,15 +12,9 @@
 #' @return A dataframe that prepares the final output of pctr_product
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
-#' prepare_pctr_product(
-#'   pctr_product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3),
-#'   isic_tilt_mapper |> head(3)
-#' )
+#' # See examples in `?profile_emissions`
 prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   pctr_prod <- sanitize_isic(pctr_prod)
 
