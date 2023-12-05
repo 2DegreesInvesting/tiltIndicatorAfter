@@ -1,6 +1,4 @@
 test_that("total number of rows for a comapny is either 1 or 3", {
-  skip("FIXME the result is unexpected")
-
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())

@@ -1,6 +1,4 @@
 test_that("total number of rows for a comapny is either 1, 2 or 4", {
-  skip("FIXME unexpected result")
-
   product <- unnest_product(toy_sector_profile_output())
 
   out <- prepare_pstr_product(
