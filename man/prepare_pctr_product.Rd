@@ -27,14 +27,9 @@ prepare_pctr_product(
 A dataframe that prepares the final output of pctr_product
 }
 \description{
-Creates final output of pctr product level results
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
-prepare_pctr_product(
-  pctr_product |> head(3),
-  ep_companies |> head(3),
-  ecoinvent_activities |> head(3),
-  matches_mapper |> head(3),
-  isic_tilt_mapper |> head(3)
-)
+See examples in `?profile_xxxxxxxxx`
 }
+\keyword{internal}
