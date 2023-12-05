@@ -16,7 +16,7 @@
 #' @export
 #' @keywords internal
 #' @examples
-#' See examples in `?profile_xxxxxxxxx`
+#' See examples in `?profile_emissions_upstream`
 prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
   ictr_prod <- sanitize_isic(ictr_prod)
 
