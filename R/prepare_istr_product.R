@@ -1,5 +1,8 @@
 #' Creates final output of istr product level results
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param istr_prod A dataframe like [istr_product]
@@ -10,17 +13,9 @@
 #' @return A dataframe that prepares the final output of istr_product
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
-#' product <- unnest_product(toy_sector_profile_upstream_output())
-#' prepare_istr_product(
-#'   product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3),
-#'   ecoinvent_inputs |> head(3),
-#'   isic_tilt_mapper |> head(3)
-#' )
+#' See examples in `?profile_xxxxxxxxx`
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
   istr_prod <- sanitize_isic(istr_prod)
 
