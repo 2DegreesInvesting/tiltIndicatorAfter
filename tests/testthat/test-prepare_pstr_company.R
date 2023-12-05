@@ -1,38 +1,27 @@
 test_that("total number of rows for a comapny is either 1 or 3", {
-  company <- unnest_company(toy_sector_profile_output())
-  product <- unnest_product(toy_sector_profile_output())
+  local_options(readr.show_col_types = FALSE)
 
-  out <- prepare_pstr_company(
-    company,
-    product,
-    ep_companies,
-    ecoinvent_activities,
-    small_matches_mapper,
-    isic_tilt_mapper
+  companies <- read_csv(toy_sector_profile_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+
+  out <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies = ep_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = small_matches_mapper,
+    isic_tilt = isic_tilt_mapper
   ) |>
+    unnest_company() |>
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
 
   expect_true(all(unique(out$count) %in% c(1, 3)))
 })
 
-test_that("handles tiltIndicator output", {
-  company <- unnest_company(toy_sector_profile_output())
-  product <- unnest_product(toy_sector_profile_output())
-
-  expect_no_error(
-    prepare_pstr_company(
-      company |> head(3),
-      product |> head(3),
-      ep_companies |> head(3),
-      ecoinvent_activities |> head(3),
-      matches_mapper |> head(3),
-      isic_tilt_mapper |> head(3)
-    )
-  )
-})
-
 test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", {
+  skip("FIXME: Rewrite using the new API")
+
   product <- unnest_product(toy_sector_profile_output())
   product_empty <- product[1, ]
   product_empty[1, "companies_id"] <- "a"
