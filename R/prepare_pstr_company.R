@@ -16,7 +16,7 @@
 #' @export
 #' @keywords internal
 #' @examples
-#' See examples in `?profile_sector_profile`
+#' # See examples in `?profile_sector_profile`
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   pstr_prod <- sanitize_isic(pstr_prod)
   pstr_comp <- sector_profile_any_polish_output_at_company_level(pstr_comp)

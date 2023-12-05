@@ -17,7 +17,7 @@
 #' @export
 #' @keywords internal
 #' @examples
-#' See examples in `?profile_sector_upstream`
+#' # See examples in `?profile_sector_upstream`
 prepare_istr_company <- function(istr_comp, istr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
   istr_prod <- sanitize_isic(istr_prod)
   istr_comp <- sector_profile_any_polish_output_at_company_level(istr_comp)
