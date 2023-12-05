@@ -34,19 +34,9 @@ from tiltIndicator.}
 A dataframe that prepares the final output of ictr_company
 }
 \description{
-Creates final output of istr company level results
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
-company <- unnest_company(toy_sector_profile_upstream_output())
-product <- unnest_product(toy_sector_profile_upstream_output())
-
-prepare_istr_company(
-  company |> head(3),
-  product |> head(3),
-  ep_companies |> head(3),
-  ecoinvent_activities |> head(3),
-  matches_mapper |> head(3),
-  ecoinvent_inputs |> head(3),
-  isic_tilt_mapper |> head(3)
-)
+See examples in `?profile_xxxxxxxxx`
 }
+\keyword{internal}
