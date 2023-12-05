@@ -8,10 +8,6 @@ reference:
     contents:
       - has_concept("top-level functions")
 
-  - title: Old API
-    contents:
-      - matches("prepare_")
-
   - title: Datasets
     contents:
       - -matches("..tr_")
