@@ -1,5 +1,8 @@
 #' Creates final output of pstr company level results
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param match_mapper A dataframe like [matches_mapper]
 #' @param eco_activities A dataframe like [ecoinvent_activities]
 #' @param pstr_prod A dataframe like [pstr_product]
@@ -11,19 +14,9 @@
 #' @return A dataframe that prepares the final output of pstr_company
 #'
 #' @export
-#'
+#' @keywords internal
 #' @examples
-#' company <- unnest_company(toy_sector_profile_output())
-#' product <- unnest_product(toy_sector_profile_output())
-#'
-#' prepare_pstr_company(
-#'   company |> head(3),
-#'   product |> head(3),
-#'   ep_companies |> head(3),
-#'   ecoinvent_activities |> head(3),
-#'   matches_mapper |> head(3),
-#'   isic_tilt_mapper |> head(3)
-#' )
+#' See examples in `?profile_xxxxxxxxx`
 prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
   pstr_prod <- sanitize_isic(pstr_prod)
   pstr_comp <- sector_profile_any_polish_output_at_company_level(pstr_comp)
