@@ -80,3 +80,28 @@ test_that("the output at product level has columns matching isic and sector", {
   expect_true(any(matches_name(product, "isic")))
   expect_true(any(matches_name(product, "sector")))
 })
+
+test_that("doesn't pad `*isic*`", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_sector_profile_companies())
+  companies$isic_4digit <- "1"
+
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  europages_companies <- ep_companies |> head(3)
+  ecoinvent_activities <- ecoinvent_activities |> head(3)
+  ecoinvent_europages <- small_matches_mapper |> head(3)
+  isic_tilt <- isic_tilt_mapper |> head(3)
+
+  out <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_tilt
+  )
+
+  actual <- rm_na(unique(unnest_product(out)$isic_4digit))
+  expect_equal(actual, "1")
+})

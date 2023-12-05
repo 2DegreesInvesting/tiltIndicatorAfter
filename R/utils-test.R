@@ -6,3 +6,7 @@ tibble_names <- function(x, nms) {
   m <- matrix(x, ncol = length(nms), dimnames = list(NULL, nms))
   tibble::as_tibble(m)
 }
+
+rm_na <- function(x) {
+  x[!is.na(x)]
+}
