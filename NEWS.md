@@ -1,5 +1,19 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9015 (2023-12-05)
+
+The following functions are now deprecated in favor of the equivalent functions
+of the new API (#96, see also [`?tiltIndicator::rename`](https://2degreesinvesting.github.io/tiltIndicator/reference/rename.html)).
+
+* `prepare_ictr_company()`.
+* `prepare_ictr_product()`.
+* `prepare_istr_company()`.
+* `prepare_istr_product()`.
+* `prepare_pctr_company()`.
+* `prepare_pctr_product()`.
+* `prepare_pstr_company()`.
+* `prepare_pstr_product()`.
+
 # tiltIndicatorAfter 0.0.0.9014 (2023-12-04)
 
 New arguments, new columns, and rename columns about `*isic_4digit*` (#86
