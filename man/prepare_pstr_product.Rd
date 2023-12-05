@@ -30,6 +30,6 @@ A dataframe that prepares the final output of pstr_product
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \examples{
-See examples in `?profile_xxxxxxxxx`
+See examples in `?profile_sector_profile`
 }
 \keyword{internal}

@@ -15,7 +15,7 @@
 #' @export
 #' @keywords internal
 #' @examples
-#' See examples in `?profile_xxxxxxxxx`
+#' See examples in `?profile_sector_upstream`
 prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, eco_inputs, isic_tilt_map) {
   istr_prod <- sanitize_isic(istr_prod)
 
