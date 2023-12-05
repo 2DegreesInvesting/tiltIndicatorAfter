@@ -30,23 +30,46 @@ devtools::install_github("2DegreesInvesting/tiltIndicatorAfter")
 
 ```{r}
 library(tiltIndicatorAfter)
+library(tiltToyData)
+library(readr, warn.conflicts = FALSE)
+
+options(readr.show_col_types = FALSE)
 
 packageVersion("tiltIndicatorAfter")
 
-prepare_pctr_product(
-  pctr_product,
-  ep_companies,
-  ecoinvent_activities,
-  matches_mapper,
-  isic_tilt_mapper
+companies <- read_csv(toy_emissions_profile_any_companies())
+products <- read_csv(toy_emissions_profile_products())
+
+result <- profile_emissions(
+  companies,
+  products,
+  # TODO: Move to tiltToyData
+  europages_companies = tiltIndicatorAfter::ep_companies,
+  ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
+  ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
+  isic_tilt = tiltIndicatorAfter::isic_tilt_mapper
 )
 
-prepare_pctr_company(
-  pctr_company,
-  pctr_product,
-  ep_companies,
-  ecoinvent_activities,
-  matches_mapper,
-  isic_tilt_mapper
+result |> unnest_product()
+
+result |> unnest_company()
+
+
+
+inputs <- read_csv(toy_emissions_profile_upstream_products())
+
+result <- profile_emissions_upstream(
+  companies,
+  inputs,
+  # TODO: Move to tiltToyData
+  europages_companies = tiltIndicatorAfter::ep_companies,
+  ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
+  ecoinvent_inputs = tiltIndicatorAfter::ecoinvent_inputs,
+  ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
+  isic_tilt = tiltIndicatorAfter::isic_tilt_mapper
 )
+
+result |> unnest_product()
+
+result |> unnest_company()
 ```
