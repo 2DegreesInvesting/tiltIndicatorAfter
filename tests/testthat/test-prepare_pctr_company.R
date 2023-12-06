@@ -29,7 +29,7 @@ test_that("handles numeric `isic*` in `co2`", {
   expect_no_error(
     profile_emissions(
       companies,
-      co2 |> head(3) |> modify_col("isic", as.numeric),
+      co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
       europages_companies = ep_companies,
       ecoinvent_activities = ecoinvent_activities,
       ecoinvent_europage = small_matches_mapper,
