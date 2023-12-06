@@ -1,3 +1,7 @@
+unquote <- function(x) {
+  gsub("^'(.*)'$", "\\1", x)
+}
+
 format_minimal_snapshot <- function(data) {
   str(data, give.attr = FALSE)
 }
