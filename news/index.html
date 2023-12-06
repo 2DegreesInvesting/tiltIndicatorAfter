@@ -27,7 +27,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -35,12 +41,12 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Changelog</h1>
-      
+      <small>Source: <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9015" id="tiltindicatorafter-0009015-2023-12-05">tiltIndicatorAfter 0.0.0.9015 (2023-12-05)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009015-2023-12-05"></a></h2>
-<p>The following functions are now deprecated in favor of the equivalent functions of the new API (#96, see also <a href="https://2degreesinvesting.github.io/tiltIndicator/reference/rename.html" class="external-link"><code>?tiltIndicator::rename</code></a>).</p>
+<p>The following functions are now deprecated in favor of the equivalent functions of the new API (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/96" class="external-link">#96</a>, see also <a href="https://2degreesinvesting.github.io/tiltIndicator/reference/rename.html" class="external-link"><code>?tiltIndicator::rename</code></a>).</p>
 <ul><li>
 <code><a href="../reference/prepare_ictr_company.html">prepare_ictr_company()</a></code>.</li>
 <li>
@@ -60,26 +66,26 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9014" id="tiltindicatorafter-0009014-2023-12-04">tiltIndicatorAfter 0.0.0.9014 (2023-12-04)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009014-2023-12-04"></a></h2>
-<p>New arguments, new columns, and rename columns about <code>*isic_4digit*</code> (#86 @kalashsinghal):</p>
+<p>New arguments, new columns, and rename columns about <code>*isic_4digit*</code> (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/86" class="external-link">#86</a> <a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a>):</p>
 <ul><li><p>The functions <code><a href="../reference/profile_sector_upstream.html">profile_sector()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> gain the argument <code>isic_tilt</code>.</p></li>
 <li><p>In the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions()</a></code> and <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> at product level the columns <code>isic_name</code> and <code>input_isic_name</code> are now renamed to <code>isic_4digit_name</code> and <code>input_isic_4digit_name</code>, respectively.</p></li>
 <li><p>The output of <code><a href="../reference/profile_sector_upstream.html">profile_sector()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> at product level gains the column <code>isic_4digit_name</code> and <code>input_isic_4digit_name</code>, respectively.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9013" id="tiltindicatorafter-0009013-2023-12-04">tiltIndicatorAfter 0.0.0.9013 (2023-12-04)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009013-2023-12-04"></a></h2>
-<ul><li>The argument <code>ecoinvent_inputs</code> of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> is now relocated next to other ecoinvent datasets, and before the mappers (#91). This gives all <code>profile*()</code> functions a more consistent structure.</li>
+<ul><li>The argument <code>ecoinvent_inputs</code> of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> is now relocated next to other ecoinvent datasets, and before the mappers (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/91" class="external-link">#91</a>). This gives all <code>profile*()</code> functions a more consistent structure.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9012" id="tiltindicatorafter-0009012-2023-12-04">tiltIndicatorAfter 0.0.0.9012 (2023-12-04)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009012-2023-12-04"></a></h2>
-<ul><li>Reexport <code>tiltIndicator::unest_product()</code> and <code><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">tiltIndicator::unnest_company()</a></code> (#88).</li>
+<ul><li>Reexport <code>tiltIndicator::unest_product()</code> and <code><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">tiltIndicator::unnest_company()</a></code> (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/88" class="external-link">#88</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9011" id="tiltindicatorafter-0009011-2023-12-01">tiltIndicatorAfter 0.0.0.9011 (2023-12-01)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009011-2023-12-01"></a></h2>
-<ul><li>New API wraps titlIndicator and outputs columns matching <code>*isic*</code> and <code>*sector*</code> (#78).</li>
+<ul><li>New API wraps titlIndicator and outputs columns matching <code>*isic*</code> and <code>*sector*</code> (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/78" class="external-link">#78</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9010" id="tiltindicatorafter-0009010-2023-11-30">tiltIndicatorAfter 0.0.0.9010 (2023-11-30)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009010-2023-11-30"></a></h2>
-<ul><li>Values of <code>*isic_4digit</code> are no longer padded to 4 digits (#81 @kalashsinghal).</li>
+<ul><li>Values of <code>*isic_4digit</code> are no longer padded to 4 digits (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/81" class="external-link">#81</a> <a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9009" id="tiltindicatorafter-0009009-2023-09-24">tiltIndicatorAfter 0.0.0.9009 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009009-2023-09-24"></a></h2>
@@ -91,16 +97,16 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9007" id="tiltindicatorafter-0009007-2023-09-24">tiltIndicatorAfter 0.0.0.9007 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009007-2023-09-24"></a></h2>
-<ul><li>Retire <code>pstr_company</code> and <code>istr_company</code> as we now have more accurate toy datasets (#55).</li>
+<ul><li>Retire <code>pstr_company</code> and <code>istr_company</code> as we now have more accurate toy datasets (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/55" class="external-link">#55</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9006" id="tiltindicatorafter-0009006-2023-09-24">tiltIndicatorAfter 0.0.0.9006 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009006-2023-09-24"></a></h2>
 <ul><li>
-<code><a href="../reference/prepare_istr_company.html">prepare_istr_company()</a></code> now accepts the output of <code><a href="https://rdrr.io/pkg/tiltIndicator/man/sector_profile_upstream.html" class="external-link">tiltIndicator::sector_profile_upstream()</a></code> ‘as is’ (#54).</li>
+<code><a href="../reference/prepare_istr_company.html">prepare_istr_company()</a></code> now accepts the output of <code><a href="https://rdrr.io/pkg/tiltIndicator/man/sector_profile_upstream.html" class="external-link">tiltIndicator::sector_profile_upstream()</a></code> ‘as is’ (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/54" class="external-link">#54</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9005" id="tiltindicatorafter-0009005-2023-09-24">tiltIndicatorAfter 0.0.0.9005 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009005-2023-09-24"></a></h2>
-<ul><li>Retire internal functions from the public API (#53):
+<ul><li>Retire internal functions from the public API (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/53" class="external-link">#53</a>):
 <ul><li>
 <code>prepare_inter_pctr_product()</code>.</li>
 <li>
@@ -112,16 +118,16 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9004" id="tiltindicatorafter-0009004-2023-09-24">tiltIndicatorAfter 0.0.0.9004 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009004-2023-09-24"></a></h2>
 <ul><li>
-<code><a href="../reference/prepare_pstr_company.html">prepare_pstr_company()</a></code> now accepts the output of <code><a href="https://rdrr.io/pkg/tiltIndicator/man/sector_profile.html" class="external-link">tiltIndicator::sector_profile()</a></code> ‘as is’ (#50).</li>
+<code><a href="../reference/prepare_pstr_company.html">prepare_pstr_company()</a></code> now accepts the output of <code><a href="https://rdrr.io/pkg/tiltIndicator/man/sector_profile.html" class="external-link">tiltIndicator::sector_profile()</a></code> ‘as is’ (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/50" class="external-link">#50</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9003" id="tiltindicatorafter-0009003-2023-09-24">tiltIndicatorAfter 0.0.0.9003 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009003-2023-09-24"></a></h2>
 <ul><li>
-<code><a href="../reference/prepare_pctr_product.html">prepare_pctr_product()</a></code> No longer errors with “Column unit doesn’t exist” (#26).</li>
+<code><a href="../reference/prepare_pctr_product.html">prepare_pctr_product()</a></code> No longer errors with “Column unit doesn’t exist” (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/26" class="external-link">#26</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9002" id="tiltindicatorafter-0009002-2023-09-24">tiltIndicatorAfter 0.0.0.9002 (2023-09-24)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009002-2023-09-24"></a></h2>
-<ul><li>Emmisions functions no longer error if the column <code>*isic_4digit</code> is numeric (#42).</li>
+<ul><li>Emmisions functions no longer error if the column <code>*isic_4digit</code> is numeric (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/42" class="external-link">#42</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9001" id="tiltindicatorafter-0009001-2023-09-22">tiltIndicatorAfter 0.0.0.9001 (2023-09-22)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009001-2023-09-22"></a></h2>
