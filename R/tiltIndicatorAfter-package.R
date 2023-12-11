@@ -6,6 +6,7 @@
 #' @importFrom dplyr arrange
 #' @importFrom dplyr bind_rows
 #' @importFrom dplyr case_when
+#' @importFrom dplyr count
 #' @importFrom dplyr distinct
 #' @importFrom dplyr everything
 #' @importFrom dplyr filter
