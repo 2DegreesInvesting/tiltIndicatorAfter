@@ -62,6 +62,9 @@ profile_sector_upstream <- function(companies,
                                     isic_tilt,
                                     low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                                     high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
+  europages_companies <- select_europages_companies(europages_companies)
+  ecoinvent_inputs <- select_ecoinvent_inputs(ecoinvent_inputs)
+
   indicator <- list(
     companies,
     scenarios,

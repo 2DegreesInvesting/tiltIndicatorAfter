@@ -12,6 +12,8 @@ Create user facing outputs of tiltIndicators.
 Useful links:
 \itemize{
   \item \url{https://2degreesinvesting.github.io/tiltIndicatorAfter/}
+  \item \url{https://github.com/2DegreesInvesting/tiltIndicatorAfter}
+  \item Report bugs at \url{https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues}
 }
 
 }

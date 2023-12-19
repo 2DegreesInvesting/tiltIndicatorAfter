@@ -1,3 +1,31 @@
+test_that("irrelevant columns in `ecoinvent_inputs` aren't in the output", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products())
+  europages_companies <- ep_companies |> head(3)
+  ecoinvent_activities <- ecoinvent_activities |> head(3)
+
+  ecoinvent_inputs <- ecoinvent_inputs |> head(3)
+  ecoinvent_inputs$new <- "test"
+
+  ecoinvent_europages <- small_matches_mapper |> head(3)
+  isic_tilt <- isic_tilt_mapper |> head(3)
+
+  out <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic_tilt = isic_tilt
+  )
+
+  expect_false(hasName(unnest_product(out), "new"))
+  expect_false(hasName(unnest_company(out), "new"))
+})
+
 test_that("the new API is equivalent to the old API except for extra columns", {
   local_options(readr.show_col_types = FALSE)
 
