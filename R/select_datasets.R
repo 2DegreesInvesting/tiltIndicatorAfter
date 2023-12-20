@@ -8,7 +8,8 @@ select_europages_companies <- function(data) {
       "address",
       "main_activity",
       "companies_id"
-    )
+    ) |>
+    distinct()
 }
 
 select_ecoinvent_inputs <- function(data) {
