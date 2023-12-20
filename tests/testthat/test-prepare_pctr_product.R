@@ -49,7 +49,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     companies_id = id,
     grouped_by = "a",
     risk_category = "a",
-    clustered =  c(clustered_one, clustered_one, clustered_two),
+    clustered = c(clustered_one, clustered_one, clustered_two),
     activity_uuid_product_uuid = c(uuid_one, uuid_one, uuid_two),
     co2_footprint = "a",
     tilt_sector = "a",
