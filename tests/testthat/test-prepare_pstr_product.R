@@ -68,4 +68,3 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category
   these_cols_are_full_of_na <- all(is.na(select(na, tilt_sector, tilt_subsector)))
   expect_true(these_cols_are_full_of_na)
 })
-
