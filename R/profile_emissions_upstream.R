@@ -65,6 +65,9 @@ profile_emissions_upstream <- function(companies,
                                        isic_tilt,
                                        low_threshold = 1 / 3,
                                        high_threshold = 2 / 3) {
+  europages_companies <- select_europages_companies(europages_companies)
+  ecoinvent_inputs <- select_ecoinvent_inputs(ecoinvent_inputs)
+
   indicator <- list(
     companies,
     add_rowid(co2),

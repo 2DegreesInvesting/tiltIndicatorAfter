@@ -1,3 +1,27 @@
+test_that("characterize columns", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products())
+  europages_companies <- ep_companies |> head(3)
+  ecoinvent_activities <- ecoinvent_activities
+  ecoinvent_europages <- small_matches_mapper |> head(3)
+  isic_tilt <- isic_tilt_mapper |> head(3)
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic_tilt = isic_tilt
+  )
+
+  expect_snapshot(names(unnest_product(out)))
+
+  expect_snapshot(names(unnest_company(out)))
+})
+
 test_that("the new API is equivalent to the old API except for extra columns", {
   local_options(readr.show_col_types = FALSE)
 

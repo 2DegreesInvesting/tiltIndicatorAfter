@@ -1,3 +1,31 @@
+test_that("characterize columns", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_sector_profile_upstream_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  inputs <- read_csv(toy_sector_profile_upstream_products())
+  europages_companies <- ep_companies |> head(3)
+  ecoinvent_activities <- ecoinvent_activities |> head(3)
+  ecoinvent_europages <- small_matches_mapper |> head(3)
+  ecoinvent_inputs <- ecoinvent_inputs |> head(3)
+  isic_tilt <- isic_tilt_mapper |> head(3)
+
+  out <- profile_sector_upstream(
+    companies,
+    scenarios,
+    inputs,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_inputs,
+    ecoinvent_europages,
+    isic_tilt
+  )
+
+  expect_snapshot(names(unnest_product(out)))
+
+  expect_snapshot(names(unnest_company(out)))
+})
+
 test_that("the new API is equivalent to the old API except for extra columns", {
   local_options(readr.show_col_types = FALSE)
 
