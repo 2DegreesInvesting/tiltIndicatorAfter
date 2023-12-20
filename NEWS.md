@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9016 (2023-12-20)
+
+* Irrelevant columns in `europages_companies` and `ecoinvent_inputs` are no 
+longer passed to the output (@kalashsinghal #105).
+
 # tiltIndicatorAfter 0.0.0.9015 (2023-12-05)
 
 The following functions are now deprecated in favor of the equivalent functions
