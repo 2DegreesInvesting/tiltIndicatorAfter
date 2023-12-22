@@ -13,8 +13,6 @@ prepare_pstr_product(
 )
 }
 \arguments{
-\item{pstr_prod}{A dataframe like \link{pstr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}

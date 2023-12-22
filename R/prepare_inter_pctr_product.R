@@ -1,10 +1,6 @@
 #' Creates intermediate output of pctr product level results
 #'
-#' @param match_mapper A dataframe like [matches_mapper]
-#' @param eco_activities A dataframe like [ecoinvent_activities]
-#' @param pctr_prod A dataframe like [pctr_product]
-#' @param comp A dataframe like [ep_companies]
-#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
+#' @inheritParams prepare_ictr_company
 #'
 #' @return A dataframe that prepares the intermediate output of pctr_product
 #' @noRd

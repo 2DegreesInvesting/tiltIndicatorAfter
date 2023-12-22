@@ -13,8 +13,6 @@ prepare_pctr_product(
 )
 }
 \arguments{
-\item{pctr_prod}{A dataframe like \link{pctr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}

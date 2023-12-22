@@ -14,8 +14,6 @@ prepare_istr_product(
 )
 }
 \arguments{
-\item{istr_prod}{A dataframe like \link{istr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
