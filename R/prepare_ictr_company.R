@@ -9,7 +9,7 @@
 #' @param comp A dataframe like [ep_companies]
 #' @param ictr_comp A dataframe like [ictr_company]
 #' @param eco_inputs A dataframe like [ecoinvent_inputs]
-#' @param isic_tilt_map A dataframe like [isic]
+#' @param isic_tilt_map A dataframe like [isic_name]
 #'
 #' @return A dataframe that prepares the final output of ictr_company
 #'

@@ -20,7 +20,7 @@ prepare_pstr_company(
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic}}
+\item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }
 \value{
 A dataframe that prepares the final output of pstr_company

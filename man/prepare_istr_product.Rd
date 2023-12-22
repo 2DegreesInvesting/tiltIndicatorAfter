@@ -22,7 +22,7 @@ prepare_istr_product(
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic}}
+\item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }
 \value{
 A dataframe that prepares the final output of istr_product
