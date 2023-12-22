@@ -140,10 +140,10 @@
        $ reference_product_name    : chr [1:100] "residual hardwood, wet" "nitrous oxide" "sawdust, wet, measured as dry mass" "sewage sludge, 70% water, WWT, WW from maize starch production" ...
        $ unit                      : chr [1:100] "m3" "kg" "kg" "kg" ...
 
-# `isic_tilt_mapper` hasn't changed
+# `isic` hasn't changed
 
     Code
-      format_minimal_snapshot(tiltIndicatorAfter::isic_tilt_mapper)
+      format_minimal_snapshot(tiltIndicatorAfter::isic)
     Output
       tibble [182 x 2] (S3: tbl_df/tbl/data.frame)
        $ isic_4digit               : chr [1:182] "0111" "0112" "0113" "0114" ...

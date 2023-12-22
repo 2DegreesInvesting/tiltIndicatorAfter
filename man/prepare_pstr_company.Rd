@@ -14,18 +14,13 @@ prepare_pstr_company(
 )
 }
 \arguments{
-\item{pstr_comp}{A dataframe like the corresponding output at company level
-from tiltIndicator.}
-
-\item{pstr_prod}{A dataframe like \link{pstr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
+\item{isic_tilt_map}{A dataframe like \link{isic}}
 }
 \value{
 A dataframe that prepares the final output of pstr_company

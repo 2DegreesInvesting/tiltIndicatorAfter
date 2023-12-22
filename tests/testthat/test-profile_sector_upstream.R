@@ -8,7 +8,7 @@ test_that("characterize columns", {
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   ecoinvent_inputs <- ecoinvent_inputs |> head(3)
-  isic_tilt <- isic_tilt_mapper |> head(3)
+  isic <- isic |> head(3)
 
   out <- profile_sector_upstream(
     companies,
@@ -18,7 +18,7 @@ test_that("characterize columns", {
     ecoinvent_activities,
     ecoinvent_inputs,
     ecoinvent_europages,
-    isic_tilt
+    isic
   )
 
   expect_snapshot(names(unnest_product(out)))
@@ -36,7 +36,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   ecoinvent_inputs <- ecoinvent_inputs |> head(3)
-  isic_tilt <- isic_tilt_mapper |> head(3)
+  isic <- isic |> head(3)
 
   # New API
   out <- profile_sector_upstream(
@@ -47,7 +47,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_activities,
     ecoinvent_inputs,
     ecoinvent_europages,
-    isic_tilt
+    isic
   )
 
   # Old API
@@ -66,7 +66,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_activities,
     ecoinvent_europages,
     ecoinvent_inputs,
-    isic_tilt
+    isic
   )
 
   out_company <- prepare_istr_company(
@@ -76,7 +76,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_activities,
     ecoinvent_europages,
     ecoinvent_inputs,
-    isic_tilt
+    isic
   )
 
   expect_equal(
@@ -99,7 +99,7 @@ test_that("the output at product level has columns matching isic and sector", {
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   ecoinvent_inputs <- ecoinvent_inputs |> head(3)
-  isic_tilt <- isic_tilt_mapper |> head(3)
+  isic <- isic |> head(3)
 
   out <- profile_sector_upstream(
     companies,
@@ -109,7 +109,7 @@ test_that("the output at product level has columns matching isic and sector", {
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = ecoinvent_europages,
-    isic_tilt
+    isic
   )
 
   product <- unnest_product(out)
@@ -129,7 +129,7 @@ test_that("doesn't pad `*isic*`", {
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   ecoinvent_inputs <- ecoinvent_inputs |> head(3)
-  isic_tilt <- isic_tilt_mapper |> head(3)
+  isic <- isic |> head(3)
 
   out <- profile_sector_upstream(
     companies,
@@ -139,7 +139,7 @@ test_that("doesn't pad `*isic*`", {
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = ecoinvent_europages,
-    isic_tilt
+    isic
   )
 
   actual <- rm_na(unique(unnest_product(out)$input_isic_4digit))

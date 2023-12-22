@@ -13,15 +13,13 @@ prepare_pctr_product(
 )
 }
 \arguments{
-\item{pctr_prod}{A dataframe like \link{pctr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
+\item{isic_tilt_map}{A dataframe like \link{isic}}
 }
 \value{
 A dataframe that prepares the final output of pctr_product

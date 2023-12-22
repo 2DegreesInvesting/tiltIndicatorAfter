@@ -15,11 +15,6 @@ prepare_istr_company(
 )
 }
 \arguments{
-\item{istr_comp}{A dataframe like the corresponding output at company level
-from tiltIndicator.}
-
-\item{istr_prod}{A dataframe like \link{istr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
@@ -28,7 +23,7 @@ from tiltIndicator.}
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
+\item{isic_tilt_map}{A dataframe like \link{isic}}
 }
 \value{
 A dataframe that prepares the final output of ictr_company

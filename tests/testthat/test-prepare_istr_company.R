@@ -13,7 +13,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = small_matches_mapper,
-    isic_tilt = isic_tilt_mapper
+    isic = isic
   ) |>
     unnest_company() |>
     group_by(companies_id, scenario, year) |>
