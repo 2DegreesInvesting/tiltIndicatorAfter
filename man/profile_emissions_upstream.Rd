@@ -40,7 +40,9 @@ profile_emissions_upstream(
 
 \item{ecoinvent_europages}{Dataframe. Mapper between europages and ecoinvent.}
 
-\item{isic_tilt}{Dataframe. Mapper between isic and tilt.}
+\item{isic}{Dataframe. ISIC data.}
+
+\item{isic_tilt}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{low_threshold}{A numeric value to segment low and medium transition
 risk products.}

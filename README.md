@@ -29,7 +29,7 @@ library(readr, warn.conflicts = FALSE)
 options(readr.show_col_types = FALSE)
 
 packageVersion("tiltIndicatorAfter")
-#> [1] '0.0.0.9014'
+#> [1] '0.0.0.9016'
 
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products())
@@ -41,7 +41,7 @@ result <- profile_emissions(
   europages_companies = tiltIndicatorAfter::ep_companies,
   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
-  isic_tilt = tiltIndicatorAfter::isic_tilt_mapper
+  isic = tiltIndicatorAfter::isic_tilt_mapper
 )
 
 result |> unnest_product()
@@ -96,7 +96,7 @@ result <- profile_emissions_upstream(
   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
   ecoinvent_inputs = tiltIndicatorAfter::ecoinvent_inputs,
   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
-  isic_tilt = tiltIndicatorAfter::isic_tilt_mapper
+  isic = tiltIndicatorAfter::isic_tilt_mapper
 )
 
 result |> unnest_product()

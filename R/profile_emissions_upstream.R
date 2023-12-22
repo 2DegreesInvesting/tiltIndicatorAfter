@@ -8,7 +8,8 @@
 #' @param ecoinvent_activities Dataframe. Activities from ecoinvent.
 #' @param ecoinvent_inputs Dataframe. Upstream products from ecoinvent.
 #' @param ecoinvent_europages Dataframe. Mapper between europages and ecoinvent.
-#' @param isic_tilt Dataframe. Mapper between isic and tilt.
+#' @param isic Dataframe. ISIC data.
+#' @param isic_tilt `r lifecycle::badge("deprecated")`
 #'
 #' @return `r document_default_value()`
 #' @export
