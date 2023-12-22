@@ -25,7 +25,8 @@ profile_emissions_upstream(
   ecoinvent_activities,
   ecoinvent_inputs,
   ecoinvent_europages,
-  isic_tilt,
+  isic,
+  isic_tilt = lifecycle::deprecated(),
   low_threshold = 1/3,
   high_threshold = 2/3
 )
@@ -72,7 +73,7 @@ result <- profile_emissions(
   europages_companies = tiltIndicatorAfter::ep_companies,
   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
-  isic_tilt = tiltIndicatorAfter::isic_tilt_mapper
+  isic = tiltIndicatorAfter::isic_tilt_mapper
 )
 
 result |> unnest_product()
@@ -91,7 +92,7 @@ result <- profile_emissions_upstream(
   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
   ecoinvent_inputs = tiltIndicatorAfter::ecoinvent_inputs,
   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
-  isic_tilt = tiltIndicatorAfter::isic_tilt_mapper
+  isic = tiltIndicatorAfter::isic_tilt_mapper
 )
 
 result |> unnest_product()
