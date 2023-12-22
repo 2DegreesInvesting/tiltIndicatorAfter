@@ -75,7 +75,7 @@ result <- profile_sector(
   europages_companies = ep_companies |> head(3),
   ecoinvent_activities = ecoinvent_activities |> head(3),
   ecoinvent_europages = matches_mapper |> head(3),
-  isic = isic |> head(3)
+  isic = isic_name |> head(3)
 )
 
 result |> unnest_product()
@@ -98,7 +98,7 @@ result <- profile_sector_upstream(
   ecoinvent_activities = ecoinvent_activities |> head(3),
   ecoinvent_inputs = ecoinvent_inputs |> head(3),
   ecoinvent_europages = matches_mapper |> head(3),
-  isic = isic |> head(3)
+  isic = isic_name |> head(3)
 )
 
 result |> unnest_product()

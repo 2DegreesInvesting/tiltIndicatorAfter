@@ -1,4 +1,4 @@
-#' Deprecated in favor of `isic`
+#' Deprecated in favor of `isic_name`
 #'
 #' `r lifecycle::badge("deprecated")`
 #'

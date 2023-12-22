@@ -32,7 +32,7 @@
 #'   europages_companies = tiltIndicatorAfter::ep_companies,
 #'   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
 #'   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
-#'   isic = tiltIndicatorAfter::isic
+#'   isic = tiltIndicatorAfter::isic_name
 #' )
 #'
 #' result |> unnest_product()
@@ -51,7 +51,7 @@
 #'   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
 #'   ecoinvent_inputs = tiltIndicatorAfter::ecoinvent_inputs,
 #'   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
-#'   isic = tiltIndicatorAfter::isic
+#'   isic = tiltIndicatorAfter::isic_name
 #' )
 #'
 #' result |> unnest_product()

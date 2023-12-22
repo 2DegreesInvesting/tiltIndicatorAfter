@@ -28,7 +28,7 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
     europages_companies = ep_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = small_matches_mapper,
-    isic = isic
+    isic = isic_name
   ) |>
     unnest_product()
 
@@ -55,7 +55,7 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category
     europages_companies = ep_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = small_matches_mapper,
-    isic = isic
+    isic = isic_name
   ) |>
     unnest_product()
 

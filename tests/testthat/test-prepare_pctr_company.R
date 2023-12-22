@@ -12,7 +12,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     europages_companies = ep_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europage = small_matches_mapper,
-    isic = isic
+    isic = isic_name
   ) |>
     unnest_company() |>
     group_by(companies_id, benchmark) |>
@@ -33,7 +33,7 @@ test_that("handles numeric `isic*` in `co2`", {
       europages_companies = ep_companies,
       ecoinvent_activities = ecoinvent_activities,
       ecoinvent_europage = small_matches_mapper,
-      isic = isic
+      isic = isic_name
     )
   )
 })
@@ -69,7 +69,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     ep_companies,
     ecoinvent_activities,
     matches_mapper,
-    isic
+    isic_name
   )
 
   expect_equal(unique(result$matching_certainty_company_average), "low")

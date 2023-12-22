@@ -72,5 +72,5 @@
 #' @author Kalash Singhal.
 #'
 #' @examples
-#' isic
-"isic"
+#' isic_name
+"isic_name"

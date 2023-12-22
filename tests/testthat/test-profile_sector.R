@@ -9,7 +9,7 @@ test_that("irrelevant columns in europages_companies aren't in the output ", {
 
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   out <- profile_sector(
     companies,
@@ -32,7 +32,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   # New API
   out <- profile_sector(
@@ -91,7 +91,7 @@ test_that("the output at product level has columns matching isic and sector", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   out <- profile_sector(
     companies,
@@ -117,7 +117,7 @@ test_that("doesn't pad `*isic*`", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   out <- profile_sector(
     companies,

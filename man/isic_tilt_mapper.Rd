@@ -3,7 +3,7 @@
 \docType{data}
 \name{isic_tilt_mapper}
 \alias{isic_tilt_mapper}
-\title{Deprecated in favor of \code{isic}}
+\title{Deprecated in favor of \code{isic_name}}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 182 rows and 2 columns.
 }

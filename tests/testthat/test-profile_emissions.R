@@ -6,7 +6,7 @@ test_that("characterize columns", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   out <- profile_emissions(
     companies,
@@ -14,7 +14,7 @@ test_that("characterize columns", {
     europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic
+    isic = isic_name
   )
 
   expect_snapshot(names(unnest_product(out)))
@@ -30,7 +30,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   # New API
   out <- profile_emissions(
@@ -39,7 +39,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic
+    isic = isic_name
   )
 
   # Old API
@@ -85,7 +85,7 @@ test_that("the output at product level has columns matching isic and sector", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   out <- profile_emissions(
     companies,
@@ -111,7 +111,7 @@ test_that("doesn't pad `*isic*`", {
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic |> head(3)
+  isic <- isic_name |> head(3)
 
   out <- profile_emissions(
     companies,

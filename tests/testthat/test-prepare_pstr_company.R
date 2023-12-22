@@ -10,7 +10,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     europages_companies = ep_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = small_matches_mapper,
-    isic = isic
+    isic = isic_name
   ) |>
     unnest_company() |>
     group_by(companies_id, scenario, year) |>
@@ -32,7 +32,7 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
     europages_companies = ep_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = small_matches_mapper,
-    isic = isic
+    isic = isic_name
   ) |>
     unnest_company()
 
