@@ -12,7 +12,8 @@ profile_emissions(
   europages_companies,
   ecoinvent_activities,
   ecoinvent_europages,
-  isic_tilt,
+  isic,
+  isic_tilt = lifecycle::deprecated(),
   low_threshold = 1/3,
   high_threshold = 2/3
 )
