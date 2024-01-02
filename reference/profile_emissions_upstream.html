@@ -60,7 +60,8 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 <span>  <span class="va">europages_companies</span>,</span>
 <span>  <span class="va">ecoinvent_activities</span>,</span>
 <span>  <span class="va">ecoinvent_europages</span>,</span>
-<span>  <span class="va">isic_tilt</span>,</span>
+<span>  <span class="va">isic</span>,</span>
+<span>  isic_tilt <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  low_threshold <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,</span>
 <span>  high_threshold <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span></span>
 <span><span class="op">)</span></span>
@@ -72,7 +73,8 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 <span>  <span class="va">ecoinvent_activities</span>,</span>
 <span>  <span class="va">ecoinvent_inputs</span>,</span>
 <span>  <span class="va">ecoinvent_europages</span>,</span>
-<span>  <span class="va">isic_tilt</span>,</span>
+<span>  <span class="va">isic</span>,</span>
+<span>  isic_tilt <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  low_threshold <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,</span>
 <span>  high_threshold <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -96,8 +98,12 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 <dd><p>Dataframe. Mapper between europages and ecoinvent.</p></dd>
 
 
+<dt>isic</dt>
+<dd><p>Dataframe. ISIC data.</p></dd>
+
+
 <dt>isic_tilt</dt>
-<dd><p>Dataframe. Mapper between isic and tilt.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></dd>
 
 
 <dt>low_threshold</dt>
@@ -143,7 +149,7 @@ risk products.</p></dd>
 <span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ep_companies.html">ep_companies</a></span>,</span></span>
 <span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ecoinvent_activities.html">ecoinvent_activities</a></span>,</span></span>
 <span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="matches_mapper.html">matches_mapper</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  isic_tilt <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="isic_tilt_mapper.html">isic_tilt_mapper</a></span></span></span>
+<span class="r-in"><span>  isic <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="isic_name.html">isic_name</a></span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -198,7 +204,7 @@ risk products.</p></dd>
 <span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ecoinvent_activities.html">ecoinvent_activities</a></span>,</span></span>
 <span class="r-in"><span>  ecoinvent_inputs <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ecoinvent_inputs.html">ecoinvent_inputs</a></span>,</span></span>
 <span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="matches_mapper.html">matches_mapper</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  isic_tilt <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="isic_tilt_mapper.html">isic_tilt_mapper</a></span></span></span>
+<span class="r-in"><span>  isic <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="isic_name.html">isic_name</a></span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
