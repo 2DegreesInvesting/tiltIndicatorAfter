@@ -14,8 +14,6 @@ prepare_istr_product(
 )
 }
 \arguments{
-\item{istr_prod}{A dataframe like \link{istr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
@@ -24,7 +22,7 @@ prepare_istr_product(
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
+\item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }
 \value{
 A dataframe that prepares the final output of istr_product

@@ -5,9 +5,19 @@ profile_sector <- function(companies,
                            europages_companies,
                            ecoinvent_activities,
                            ecoinvent_europages,
-                           isic_tilt,
+                           isic,
+                           isic_tilt = lifecycle::deprecated(),
                            low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                            high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
+  if (lifecycle::is_present(isic_tilt)) {
+    lifecycle::deprecate_warn(
+      "0.0.0.9017",
+      "profile_sector(isic_tilt)",
+      "profile_sector(isic)"
+    )
+    isic <- isic_tilt
+  }
+
   europages_companies <- select_europages_companies(europages_companies)
 
   indicator <- list(
@@ -20,7 +30,7 @@ profile_sector <- function(companies,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic_tilt
+    isic
   )
   exec_profile("sector_profile", indicator, indicator_after)
 }

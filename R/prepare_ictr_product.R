@@ -3,12 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' @param match_mapper A dataframe like [matches_mapper]
-#' @param eco_activities A dataframe like [ecoinvent_activities]
-#' @param ictr_prod A dataframe like [ictr_product]
-#' @param comp A dataframe like [ep_companies]
-#' @param eco_inputs A dataframe like [ecoinvent_inputs]
-#' @param isic_tilt_map A dataframe like [isic_tilt_mapper]
+#' @inheritParams prepare_ictr_company
 #'
 #' @return A dataframe that prepares the final output of ictr_product
 #'

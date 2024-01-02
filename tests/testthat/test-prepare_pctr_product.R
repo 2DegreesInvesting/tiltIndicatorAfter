@@ -11,7 +11,7 @@ test_that("total number of rows for a comapny is either 1 or 6", {
     europages_companies = ep_companies,
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = small_matches_mapper,
-    isic_tilt = isic_tilt_mapper
+    isic = isic_name
   ) |>
     unnest_product() |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
@@ -32,7 +32,7 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
       europages_companies = ep_companies,
       ecoinvent_activities = ecoinvent_activities,
       ecoinvent_europages = small_matches_mapper,
-      isic_tilt = isic_tilt_mapper
+      isic = isic_name
     )
   )
 })
@@ -62,7 +62,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     ep_companies,
     ecoinvent_activities,
     matches_mapper,
-    isic_tilt_mapper
+    isic_name
   )
 
   expect_equal(unique(result$matching_certainty_company_average), "low")

@@ -14,17 +14,13 @@ prepare_pctr_company(
 )
 }
 \arguments{
-\item{pctr_comp}{A dataframe like \link{pctr_company}}
-
-\item{pctr_prod}{A dataframe like \link{pctr_product}}
-
 \item{comp}{A dataframe like \link{ep_companies}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
+\item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }
 \value{
 A dataframe that prepares the final output of pctr_company

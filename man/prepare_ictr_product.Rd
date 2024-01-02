@@ -24,7 +24,7 @@ prepare_ictr_product(
 
 \item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_tilt_mapper}}
+\item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }
 \value{
 A dataframe that prepares the final output of ictr_product
