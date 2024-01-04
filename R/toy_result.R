@@ -44,7 +44,7 @@ toy_emissions_profile_upstream_output <- function() {
       toy_emissions_profile_any_companies(),
       ifelse(
         old_toy_data(),
-        tiltToyData::toy_emissions_profile_upstream_products(),
+        toy_emissions_profile_upstream_products(),
         tiltToyData::toy_emissions_profile_upstream_products_ecoinvent()
       )
     )
