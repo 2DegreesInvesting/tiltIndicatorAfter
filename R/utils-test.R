@@ -14,3 +14,12 @@ tibble_names <- function(x, nms) {
 rm_na <- function(x) {
   x[!is.na(x)]
 }
+
+# FIXME: Delete once tiltToyData#19 is merged
+# TODO:
+# * Search for "tiltToyData::", remove the namespace.
+# * Import the "*_ecoinvent()" functions.
+# Helps add snapshots of new toy datasets before tiltToyData#19 is merged
+skip_if_toy_data_is_old <- function() {
+  testthat::skip_if(utils::packageVersion("tiltToyData") <= "0.0.0.9005")
+}
