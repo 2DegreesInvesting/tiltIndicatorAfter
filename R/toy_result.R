@@ -26,7 +26,11 @@ toy_emissions_profile_output <- function() {
     emissions_profile,
     list(
       toy_emissions_profile_any_companies(),
-      tiltToyData::toy_emissions_profile_products_ecoinvent()
+      ifelse(
+        old_toy_data(),
+        toy_emissions_profile_products(),
+        tiltToyData::toy_emissions_profile_products_ecoinvent()
+      )
     )
   )
 }
@@ -38,7 +42,11 @@ toy_emissions_profile_upstream_output <- function() {
     emissions_profile_upstream,
     list(
       toy_emissions_profile_any_companies(),
-      tiltToyData::toy_emissions_profile_upstream_products_ecoinvent()
+      ifelse(
+        old_toy_data(),
+        tiltToyData::toy_emissions_profile_upstream_products(),
+        tiltToyData::toy_emissions_profile_upstream_products_ecoinvent()
+      )
     )
   )
 }

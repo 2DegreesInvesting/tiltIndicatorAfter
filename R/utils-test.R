@@ -21,5 +21,9 @@ rm_na <- function(x) {
 # * Import the "*_ecoinvent()" functions.
 # Helps add snapshots of new toy datasets before tiltToyData#19 is merged
 skip_if_toy_data_is_old <- function() {
-  testthat::skip_if(utils::packageVersion("tiltToyData") <= "0.0.0.9005")
+  testthat::skip_if(old_toy_data())
+}
+
+old_toy_data <- function(utils, packageVersion) {
+  utils::packageVersion("tiltToyData") <= "0.0.0.9005"
 }
