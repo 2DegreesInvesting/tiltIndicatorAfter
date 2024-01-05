@@ -18,4 +18,3 @@ rm_na <- function(x) {
 skip_unless_toy_data_is_newer_than <- function(version) {
   testthat::skip_if(utils::packageVersion("tiltToyData") <= version)
 }
-
