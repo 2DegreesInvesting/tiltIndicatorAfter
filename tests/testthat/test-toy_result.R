@@ -1,5 +1,16 @@
 test_that("toy_emissions_profile_output hasn't changed", {
-  skip_if_toy_data_is_old()
+  skip_unless_toy_data_is_newer_than("0.0.0.9005")
+  # FIXME
+  toy_emissions_profile_output <- function() {
+    toy_output(
+      emissions_profile,
+      list(
+        toy_emissions_profile_any_companies(),
+        tiltToyData::toy_emissions_profile_products_ecoinvent()
+      )
+    )
+  }
+
 
   out <- toy_emissions_profile_output()
   expect_snapshot(format_minimal_snapshot(unnest_product(out)))
@@ -7,7 +18,17 @@ test_that("toy_emissions_profile_output hasn't changed", {
 })
 
 test_that("toy_emissions_profile_upstream_output hasn't changed", {
-  skip_if_toy_data_is_old()
+  skip_unless_toy_data_is_newer_than("0.0.0.9005")
+  # FIXME
+  toy_emissions_profile_upstream_output <- function() {
+    toy_output(
+      emissions_profile_upstream,
+      list(
+        toy_emissions_profile_any_companies(),
+        tiltToyData::toy_emissions_profile_upstream_products_ecoinvent()
+      )
+    )
+  }
 
   out <- toy_emissions_profile_upstream_output()
   expect_snapshot(format_minimal_snapshot(unnest_product(out)))
