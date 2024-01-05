@@ -1,6 +1,6 @@
 test_that("toy_emissions_profile_output hasn't changed", {
   skip_unless_toy_data_is_newer_than("0.0.0.9005")
-  # FIXME
+  # FIXME: Prune #121
   toy_emissions_profile_output <- function() {
     toy_output(
       emissions_profile,
@@ -11,7 +11,6 @@ test_that("toy_emissions_profile_output hasn't changed", {
     )
   }
 
-
   out <- toy_emissions_profile_output()
   expect_snapshot(format_minimal_snapshot(unnest_product(out)))
   expect_snapshot(format_minimal_snapshot(unnest_company(out)))
@@ -19,7 +18,7 @@ test_that("toy_emissions_profile_output hasn't changed", {
 
 test_that("toy_emissions_profile_upstream_output hasn't changed", {
   skip_unless_toy_data_is_newer_than("0.0.0.9005")
-  # FIXME
+  # FIXME: Prune #121
   toy_emissions_profile_upstream_output <- function() {
     toy_output(
       emissions_profile_upstream,
