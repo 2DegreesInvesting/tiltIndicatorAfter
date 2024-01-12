@@ -20,5 +20,5 @@ skip_unless_toy_data_is_newer_than <- function(version) {
 }
 
 toy_data_version <- function() {
-  "0.0.0.9005"
+  "0.0.0.9007"
 }
