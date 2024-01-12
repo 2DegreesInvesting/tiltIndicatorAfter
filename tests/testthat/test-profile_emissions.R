@@ -102,7 +102,7 @@ test_that("the output at product level has columns matching isic and sector", {
 })
 
 test_that("doesn't pad `*isic*`", {
-  skip_unless_toy_data_is_newer_than("0.0.0.9005")
+  skip_unless_toy_data_is_newer_than(toy_data_version())
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
