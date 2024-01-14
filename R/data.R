@@ -39,4 +39,3 @@
 #' @examples
 #' istr_product
 "istr_product"
-
