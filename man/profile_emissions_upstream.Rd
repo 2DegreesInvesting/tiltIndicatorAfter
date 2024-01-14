@@ -66,7 +66,7 @@ library(readr, warn.conflicts = FALSE)
 options(readr.show_col_types = FALSE)
 
 companies <- read_csv(toy_emissions_profile_any_companies())
-products <- read_csv(toy_emissions_profile_products())
+products <- read_csv(toy_emissions_profile_products_ecoinvent())
 
 result <- profile_emissions(
   companies,
@@ -84,7 +84,7 @@ result |> unnest_company()
 
 
 
-inputs <- read_csv(toy_emissions_profile_upstream_products())
+inputs <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
 
 result <- profile_emissions_upstream(
   companies,

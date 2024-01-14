@@ -3,7 +3,7 @@ test_that("total number of rows for a comapny is either 1 or 6", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   out <- profile_emissions(
     companies,
@@ -23,7 +23,7 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   expect_no_error(
     profile_emissions(

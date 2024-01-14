@@ -2,7 +2,7 @@ test_that("characterize columns", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
@@ -26,7 +26,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
@@ -81,7 +81,7 @@ test_that("the output at product level has columns matching isic and sector", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- ep_companies |> head(3)
   ecoinvent_activities <- ecoinvent_activities
   ecoinvent_europages <- small_matches_mapper |> head(3)
