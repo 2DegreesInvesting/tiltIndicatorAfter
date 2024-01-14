@@ -94,7 +94,7 @@
     Code
       format_minimal_snapshot(tiltIndicatorAfter::ep_companies)
     Output
-      tibble [3 x 7] (S3: tbl_df/tbl/data.frame)
+      spc_tbl_ [3 x 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
        $ company_name : chr [1:3] "company C" "company B" "company A"
        $ country      : chr [1:3] "austria" "germany" "germany"
        $ company_city : chr [1:3] "voitsberg" "berlin" "frankfurt"
