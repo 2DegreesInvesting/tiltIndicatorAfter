@@ -62,7 +62,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     read_csv(toy_europages_companies()),
     read_csv(toy_ecoinvent_activities()),
     read_csv(toy_ecoinvent_europages()),
-    isic_name
+    read_csv(toy_isic_name())
   )
 
   expect_equal(unique(result$matching_certainty_company_average), "low")
