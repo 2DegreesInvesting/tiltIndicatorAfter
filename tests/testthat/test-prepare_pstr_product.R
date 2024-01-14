@@ -7,7 +7,7 @@ test_that("total number of rows for a comapny is either 1, 2 or 4", {
     product,
     read_csv(toy_europages_companies()),
     read_csv(toy_ecoinvent_activities()),
-    small_matches_mapper,
+    read_csv(toy_ecoinvent_europages()),
     isic
   ) |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>

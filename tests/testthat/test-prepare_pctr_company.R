@@ -68,7 +68,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     product,
     read_csv(toy_europages_companies()),
     read_csv(toy_ecoinvent_activities()),
-    matches_mapper,
+    read_csv(toy_ecoinvent_europages()),
     isic_name
   )
 
