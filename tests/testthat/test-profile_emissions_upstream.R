@@ -116,7 +116,7 @@ test_that("doesn't pad `*isic*`", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(tiltToyData::toy_emissions_profile_upstream_products_ecoinvent())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   co2$input_isic_4digit <- "1"
 
   europages_companies <- ep_companies |> head(3)
