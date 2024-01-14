@@ -13,4 +13,9 @@ matches_mapper
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
+\examples{
+matches_mapper
+# ->
+readr::read_csv(tiltToyData::toy_ecoinvent_europages())
+}
 \keyword{internal}

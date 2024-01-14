@@ -13,4 +13,10 @@ ep_companies
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
+\examples{
+ep_companies
+# ->
+readr::read_csv(tiltToyData::toy_europages_companies())
+
+}
 \keyword{internal}

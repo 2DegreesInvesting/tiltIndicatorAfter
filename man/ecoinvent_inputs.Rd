@@ -13,4 +13,9 @@ ecoinvent_inputs
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
+\examples{
+ecoinvent_inputs
+# ->
+readr::read_csv(tiltToyData::toy_ecoinvent_inputs())
+}
 \keyword{internal}
