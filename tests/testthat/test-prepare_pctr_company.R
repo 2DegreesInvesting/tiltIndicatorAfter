@@ -10,7 +10,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     companies,
     co2,
     europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europage = small_matches_mapper,
     isic = isic_name
   ) |>
@@ -31,7 +31,7 @@ test_that("handles numeric `isic*` in `co2`", {
       companies,
       co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
       europages_companies = read_csv(toy_europages_companies()),
-      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
       ecoinvent_europage = small_matches_mapper,
       isic = isic_name
     )

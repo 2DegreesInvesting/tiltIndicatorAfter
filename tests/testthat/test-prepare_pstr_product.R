@@ -26,7 +26,7 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
     companies,
     scenarios_that_yields_na,
     europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = small_matches_mapper,
     isic = isic_name
   ) |>
@@ -53,7 +53,7 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category
     companies,
     scenarios_that_yields_na,
     europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = small_matches_mapper,
     isic = isic_name
   ) |>

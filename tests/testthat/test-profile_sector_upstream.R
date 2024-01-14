@@ -106,7 +106,7 @@ test_that("the output at product level has columns matching isic and sector", {
     scenarios,
     inputs,
     europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = ecoinvent_europages,
     isic
@@ -136,7 +136,7 @@ test_that("doesn't pad `*isic*`", {
     scenarios,
     inputs,
     europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = ecoinvent_europages,
     isic

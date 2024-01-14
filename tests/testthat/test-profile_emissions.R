@@ -12,7 +12,7 @@ test_that("characterize columns", {
     companies,
     co2,
     europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   )
@@ -37,7 +37,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     companies,
     co2,
     europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   )
