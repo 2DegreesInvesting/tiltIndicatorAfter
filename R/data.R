@@ -47,13 +47,6 @@
 #' matches_mapper
 "matches_mapper"
 
-#' Ecoinvent activities dataset
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' ecoinvent_activities
-"ecoinvent_activities"
-
 #' Ecoinvent inputs dataset
 #' @author Kalash Singhal.
 #'

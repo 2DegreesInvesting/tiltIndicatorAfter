@@ -15,7 +15,7 @@ prepare_pctr_product(
 \arguments{
 \item{comp}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_europages_companies()}}}
 
-\item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
+\item{eco_activities}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_activities()}}}
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 

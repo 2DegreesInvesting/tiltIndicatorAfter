@@ -4,7 +4,7 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' @param match_mapper A dataframe like [matches_mapper]
-#' @param eco_activities A dataframe like [ecoinvent_activities]
+#' @param eco_activities A dataframe like [tiltToyData::toy_ecoinvent_activities()]
 #' @param ictr_prod A dataframe like [ictr_product]
 #' @param comp A dataframe like [tiltToyData::toy_europages_companies()]
 #' @param ictr_comp A dataframe like [ictr_company]
