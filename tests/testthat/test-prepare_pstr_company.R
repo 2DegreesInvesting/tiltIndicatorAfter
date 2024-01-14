@@ -9,7 +9,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     scenarios,
     europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
     isic = isic_name
   ) |>
     unnest_company() |>
@@ -31,7 +31,7 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
     scenarios_that_yields_na,
     europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
     isic = isic_name
   ) |>
     unnest_company()
