@@ -4,9 +4,9 @@ ep_companies <- tiltToyData::toy_europages_companies() |>
 ecoinvent_activities <- tiltToyData::toy_ecoinvent_activities() |>
   readr::read_csv(show_col_types = FALSE)
 
-# tiltIndicatorAfter::ecoinvent_inputs |>
-#   readr::write_csv("inst/extdata/ecoinvent_inputs.csv.gz")
-#
+ecoinvent_inputs <- tiltToyData::toy_ecoinvent_inputs() |>
+  readr::read_csv(show_col_types = FALSE)
+
 # tiltIndicatorAfter::matches_mapper |>
 #   head(100) |>
 #   readr::write_csv("inst/extdata/ecoinvent_europages.csv.gz")
