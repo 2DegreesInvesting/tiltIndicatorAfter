@@ -8,10 +8,6 @@ reference:
     contents:
       - has_concept("top-level functions")
 
-  - title: Datasets
-    contents:
-      - -matches("..tr_")
-
   - title: Datasets from tiltIndicator
     desc: This datasets will be retired. Intead see the package tiltToyData.
     contents:
