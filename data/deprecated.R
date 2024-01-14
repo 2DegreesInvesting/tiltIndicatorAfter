@@ -4,5 +4,5 @@ delayedAssign("isic_tilt_mapper", value = {
   on_rcmd <- nzchar(Sys.getenv("R_CMD"))
   if (!on_rcmd) .Deprecated(msg = msg)
 
-  isic_name
+  read_csv(toy_isic_name())
 })
