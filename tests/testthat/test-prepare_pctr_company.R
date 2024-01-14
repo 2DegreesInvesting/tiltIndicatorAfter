@@ -66,7 +66,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
   result <- prepare_pctr_company(
     company,
     product,
-    ep_companies,
+    read_csv(toy_europages_companies()),
     ecoinvent_activities,
     matches_mapper,
     isic_name

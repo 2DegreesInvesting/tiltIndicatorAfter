@@ -5,7 +5,7 @@ test_that("total number of rows for a comapny is either 1, 2 or 4", {
 
   out <- prepare_pstr_product(
     product,
-    ep_companies,
+    read_csv(toy_europages_companies()),
     ecoinvent_activities,
     small_matches_mapper,
     isic
