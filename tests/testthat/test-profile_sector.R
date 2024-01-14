@@ -4,7 +4,7 @@ test_that("irrelevant columns in europages_companies aren't in the output ", {
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
 
-  europages_companies <- ep_companies |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
   europages_companies$new <- "test"
 
   ecoinvent_activities <- ecoinvent_activities |> head(3)
@@ -29,7 +29,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
 
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  europages_companies <- ep_companies |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   isic <- isic_name |> head(3)
@@ -88,7 +88,7 @@ test_that("the output at product level has columns matching isic and sector", {
 
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  europages_companies <- ep_companies |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   isic <- isic_name |> head(3)
@@ -114,7 +114,7 @@ test_that("doesn't pad `*isic*`", {
   companies$isic_4digit <- "1"
 
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  europages_companies <- ep_companies |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
   ecoinvent_activities <- ecoinvent_activities |> head(3)
   ecoinvent_europages <- small_matches_mapper |> head(3)
   isic <- isic_name |> head(3)

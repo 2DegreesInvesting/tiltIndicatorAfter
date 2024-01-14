@@ -72,7 +72,7 @@ result <- profile_sector(
   companies,
   scenarios,
   # TODO: Move to tiltToyData
-  europages_companies = ep_companies |> head(3),
+  europages_companies = read_csv(toy_europages_companies()) |> head(3),
   ecoinvent_activities = ecoinvent_activities |> head(3),
   ecoinvent_europages = matches_mapper |> head(3),
   isic = isic_name |> head(3)
@@ -94,7 +94,7 @@ result <- profile_sector_upstream(
   scenarios,
   inputs,
   # TODO: Move to tiltToyData
-  europages_companies = ep_companies |> head(3),
+  europages_companies = read_csv(toy_europages_companies()) |> head(3),
   ecoinvent_activities = ecoinvent_activities |> head(3),
   ecoinvent_inputs = ecoinvent_inputs |> head(3),
   ecoinvent_europages = matches_mapper |> head(3),
