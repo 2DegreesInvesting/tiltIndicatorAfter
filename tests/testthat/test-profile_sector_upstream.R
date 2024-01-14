@@ -8,7 +8,7 @@ test_that("characterize columns", {
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
   ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic <- isic_name |> head(3)
+  isic <- read_csv(toy_isic_name()) |>head(3)
 
   out <- profile_sector_upstream(
     companies,
@@ -36,7 +36,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
   ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic <- isic_name |> head(3)
+  isic <- read_csv(toy_isic_name()) |>head(3)
 
   # New API
   out <- profile_sector_upstream(
@@ -99,7 +99,7 @@ test_that("the output at product level has columns matching isic and sector", {
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
   ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic <- isic_name |> head(3)
+  isic <- read_csv(toy_isic_name()) |>head(3)
 
   out <- profile_sector_upstream(
     companies,
@@ -129,7 +129,7 @@ test_that("doesn't pad `*isic*`", {
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
   ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic <- isic_name |> head(3)
+  isic <- read_csv(toy_isic_name()) |>head(3)
 
   out <- profile_sector_upstream(
     companies,
