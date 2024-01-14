@@ -14,7 +14,6 @@
 #' ep_companies
 #' # ->
 #' readr::read_csv(tiltToyData::toy_europages_companies())
-#'
 "ep_companies"
 
 #' Deprecated in favor of an equivalent dataset in tiltToyData
