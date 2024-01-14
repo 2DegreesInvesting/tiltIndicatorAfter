@@ -145,7 +145,7 @@
     Code
       format_minimal_snapshot(tiltIndicatorAfter::isic_name)
     Output
-      tibble [182 x 2] (S3: tbl_df/tbl/data.frame)
+      spc_tbl_ [182 x 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
        $ isic_4digit               : chr [1:182] "0111" "0112" "0113" "0114" ...
        $ isic_4digit_name_ecoinvent: chr [1:182] "Growing of cereals (except rice), leguminous crops and oil seeds" "Growing of rice" "Growing of vegetables and melons, roots and tubers" "Growing of sugar cane" ...
 

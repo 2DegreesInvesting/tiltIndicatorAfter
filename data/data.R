@@ -10,5 +10,5 @@ ecoinvent_inputs <- tiltToyData::toy_ecoinvent_inputs() |>
 matches_mapper <- tiltToyData::toy_ecoinvent_europages() |>
   readr::read_csv(show_col_types = FALSE)
 
-# tiltIndicatorAfter::isic_name |>
-#   readr::write_csv("inst/extdata/isic_name.csv.gz")
+isic_name <- tiltToyData::toy_isic_name() |>
+  readr::read_csv(show_col_types = FALSE)
