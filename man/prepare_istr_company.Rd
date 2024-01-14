@@ -21,7 +21,7 @@ prepare_istr_company(
 
 \item{match_mapper}{A dataframe like \link{matches_mapper}}
 
-\item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
+\item{eco_inputs}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_inputs()}}}
 
 \item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }

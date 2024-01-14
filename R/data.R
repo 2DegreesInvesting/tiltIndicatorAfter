@@ -47,13 +47,6 @@
 #' matches_mapper
 "matches_mapper"
 
-#' Ecoinvent inputs dataset
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' ecoinvent_inputs
-"ecoinvent_inputs"
-
 #' ISIC
 #' @author Kalash Singhal.
 #'

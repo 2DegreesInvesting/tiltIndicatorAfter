@@ -8,7 +8,7 @@
 #' @param ictr_prod A dataframe like [ictr_product]
 #' @param comp A dataframe like [tiltToyData::toy_europages_companies()]
 #' @param ictr_comp A dataframe like [ictr_company]
-#' @param eco_inputs A dataframe like [ecoinvent_inputs]
+#' @param eco_inputs A dataframe like [tiltToyData::toy_ecoinvent_inputs()]
 #' @param isic_tilt_map A dataframe like [isic_name]
 #'
 #' @return A dataframe that prepares the final output of ictr_company
