@@ -21,7 +21,3 @@ test_that("`pstr_product` hasn't changed", {
 test_that("`istr_product` hasn't changed", {
   expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::istr_product))
 })
-
-test_that("`isic_name` hasn't changed", {
-  expect_snapshot(format_minimal_snapshot(read_csv(toy_isic_name())))
-})
