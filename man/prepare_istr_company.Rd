@@ -15,7 +15,7 @@ prepare_istr_company(
 )
 }
 \arguments{
-\item{comp}{A dataframe like \link{ep_companies}}
+\item{comp}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_europages_companies()}}}
 
 \item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
 
