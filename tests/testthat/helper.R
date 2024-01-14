@@ -1,4 +1,4 @@
-small_matches_mapper <- head(tiltIndicatorAfter::matches_mapper, 100)
+small_matches_mapper <- head(read_csv(toy_ecoinvent_europages()), 100)
 
 toy_emissions_profile_products <- function() {
   withr::local_options(lifecycle_verbosity = "quiet")

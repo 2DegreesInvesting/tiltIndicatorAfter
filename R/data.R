@@ -40,13 +40,6 @@
 #' istr_product
 "istr_product"
 
-#' Matcher dataset
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' matches_mapper
-"matches_mapper"
-
 #' ISIC
 #' @author Kalash Singhal.
 #'

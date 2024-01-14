@@ -92,7 +92,7 @@
 # `matches_mapper` hasn't changed
 
     Code
-      format_minimal_snapshot(tiltIndicatorAfter::matches_mapper)
+      format_minimal_snapshot(read_csv(toy_ecoinvent_europages()))
     Output
       spc_tbl_ [100 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
        $ ep_id                     : chr [1:100] "0b0ae0f9eb119090c2ff57778f605898e5854f01" "0b0ae0f9eb119090c2ff57778f605898e5854f01" "0dde317dd17ad7169b1590b4f49a0ab99d4b7ee8" "0dde317dd17ad7169b1590b4f49a0ab99d4b7ee8" ...
