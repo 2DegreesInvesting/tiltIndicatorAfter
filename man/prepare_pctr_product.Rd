@@ -17,7 +17,7 @@ prepare_pctr_product(
 
 \item{eco_activities}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_activities()}}}
 
-\item{match_mapper}{A dataframe like \link{matches_mapper}}
+\item{match_mapper}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_europages()}}}
 
 \item{isic_tilt_map}{A dataframe like \link{isic_name}}
 }

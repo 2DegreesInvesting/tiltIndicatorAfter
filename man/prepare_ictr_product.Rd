@@ -20,7 +20,7 @@ prepare_ictr_product(
 
 \item{eco_activities}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_activities()}}}
 
-\item{match_mapper}{A dataframe like \link{matches_mapper}}
+\item{match_mapper}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_europages()}}}
 
 \item{eco_inputs}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_inputs()}}}
 
