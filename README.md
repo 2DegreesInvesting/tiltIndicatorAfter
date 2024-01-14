@@ -45,20 +45,20 @@ result <- profile_emissions(
 )
 
 result |> unnest_product()
-#> # A tibble: 49 × 26
+#> # A tibble: 2,736 × 26
 #>    companies_id     company_name country PCTR_risk_category benchmark ep_product
 #>    <chr>            <chr>        <chr>   <chr>              <chr>     <chr>     
-#>  1 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  2 fleischerei-sti… <NA>         <NA>    high               isic_4di… stove     
-#>  3 fleischerei-sti… <NA>         <NA>    high               tilt_sec… stove     
-#>  4 fleischerei-sti… <NA>         <NA>    high               unit      stove     
-#>  5 fleischerei-sti… <NA>         <NA>    high               unit_isi… stove     
-#>  6 fleischerei-sti… <NA>         <NA>    high               unit_til… stove     
-#>  7 fleischerei-sti… <NA>         <NA>    high               all       oven      
-#>  8 fleischerei-sti… <NA>         <NA>    medium             isic_4di… oven      
-#>  9 fleischerei-sti… <NA>         <NA>    medium             tilt_sec… oven      
-#> 10 fleischerei-sti… <NA>         <NA>    medium             unit      oven      
-#> # ℹ 39 more rows
+#>  1 antimonarchy_ca… <NA>         <NA>    low                all       tent      
+#>  2 antimonarchy_ca… <NA>         <NA>    high               all       tent      
+#>  3 antimonarchy_ca… <NA>         <NA>    high               all       tent      
+#>  4 antimonarchy_ca… <NA>         <NA>    medium             all       tent      
+#>  5 antimonarchy_ca… <NA>         <NA>    low                all       tent      
+#>  6 antimonarchy_ca… <NA>         <NA>    medium             all       tent      
+#>  7 antimonarchy_ca… <NA>         <NA>    medium             isic_4di… tent      
+#>  8 antimonarchy_ca… <NA>         <NA>    high               isic_4di… tent      
+#>  9 antimonarchy_ca… <NA>         <NA>    low                isic_4di… tent      
+#> 10 antimonarchy_ca… <NA>         <NA>    high               isic_4di… tent      
+#> # ℹ 2,726 more rows
 #> # ℹ 20 more variables: matched_activity_name <chr>,
 #> #   matched_reference_product <chr>, unit <chr>, multi_match <lgl>,
 #> #   matching_certainty <chr>, matching_certainty_company_average <chr>,
@@ -67,20 +67,20 @@ result |> unnest_product()
 #> #   main_activity <chr>, activity_uuid_product_uuid <chr>, …
 
 result |> unnest_company()
-#> # A tibble: 129 × 11
+#> # A tibble: 1,296 × 11
 #>    companies_id     company_name country PCTR_share PCTR_risk_category benchmark
 #>    <chr>            <chr>        <chr>        <dbl> <lgl>              <lgl>    
-#>  1 fleischerei-sti… <NA>         <NA>           1   NA                 NA       
-#>  2 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#>  3 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#>  4 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  5 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  6 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#>  7 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  8 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  9 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#> 10 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#> # ℹ 119 more rows
+#>  1 antimonarchy_ca… <NA>         <NA>         0.333 NA                 NA       
+#>  2 antimonarchy_ca… <NA>         <NA>         0.333 NA                 NA       
+#>  3 antimonarchy_ca… <NA>         <NA>         0.333 NA                 NA       
+#>  4 antimonarchy_ca… <NA>         <NA>         0.5   NA                 NA       
+#>  5 antimonarchy_ca… <NA>         <NA>         0.167 NA                 NA       
+#>  6 antimonarchy_ca… <NA>         <NA>         0.333 NA                 NA       
+#>  7 antimonarchy_ca… <NA>         <NA>         0.5   NA                 NA       
+#>  8 antimonarchy_ca… <NA>         <NA>         0     NA                 NA       
+#>  9 antimonarchy_ca… <NA>         <NA>         0.5   NA                 NA       
+#> 10 antimonarchy_ca… <NA>         <NA>         0.5   NA                 NA       
+#> # ℹ 1,286 more rows
 #> # ℹ 5 more variables: matching_certainty_company_average <chr>,
 #> #   company_city <chr>, postcode <dbl>, address <chr>, main_activity <chr>
 
@@ -100,20 +100,20 @@ result <- profile_emissions_upstream(
 )
 
 result |> unnest_product()
-#> # A tibble: 319 × 27
+#> # A tibble: 4,140 × 27
 #>    companies_id     company_name country ICTR_risk_category benchmark ep_product
 #>    <chr>            <chr>        <chr>   <chr>              <chr>     <chr>     
-#>  1 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  2 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  3 fleischerei-sti… <NA>         <NA>    medium             all       stove     
-#>  4 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  5 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  6 fleischerei-sti… <NA>         <NA>    low                all       stove     
-#>  7 fleischerei-sti… <NA>         <NA>    low                all       stove     
-#>  8 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  9 fleischerei-sti… <NA>         <NA>    high               input_is… stove     
-#> 10 fleischerei-sti… <NA>         <NA>    high               input_is… stove     
-#> # ℹ 309 more rows
+#>  1 antimonarchy_ca… <NA>         <NA>    medium             all       tent      
+#>  2 antimonarchy_ca… <NA>         <NA>    low                all       tent      
+#>  3 antimonarchy_ca… <NA>         <NA>    low                all       tent      
+#>  4 antimonarchy_ca… <NA>         <NA>    high               all       tent      
+#>  5 antimonarchy_ca… <NA>         <NA>    medium             all       tent      
+#>  6 antimonarchy_ca… <NA>         <NA>    low                all       tent      
+#>  7 antimonarchy_ca… <NA>         <NA>    medium             input_is… tent      
+#>  8 antimonarchy_ca… <NA>         <NA>    medium             input_is… tent      
+#>  9 antimonarchy_ca… <NA>         <NA>    low                input_is… tent      
+#> 10 antimonarchy_ca… <NA>         <NA>    high               input_is… tent      
+#> # ℹ 4,130 more rows
 #> # ℹ 21 more variables: matched_activity_name <chr>,
 #> #   matched_reference_product <chr>, unit <chr>, multi_match <lgl>,
 #> #   matching_certainty <chr>, matching_certainty_company_average <chr>,
@@ -122,20 +122,20 @@ result |> unnest_product()
 #> #   input_isic_4digit_name <chr>, company_city <chr>, postcode <dbl>, …
 
 result |> unnest_company()
-#> # A tibble: 127 × 11
+#> # A tibble: 1,296 × 11
 #>    companies_id  company_name company_city country ICTR_share ICTR_risk_category
 #>    <chr>         <chr>        <chr>        <chr>        <dbl> <chr>             
-#>  1 fleischerei-… <NA>         <NA>         <NA>         0.571 high              
-#>  2 fleischerei-… <NA>         <NA>         <NA>         0.214 medium            
-#>  3 fleischerei-… <NA>         <NA>         <NA>         0.214 low               
-#>  4 fleischerei-… <NA>         <NA>         <NA>         0.357 high              
-#>  5 fleischerei-… <NA>         <NA>         <NA>         0.357 medium            
-#>  6 fleischerei-… <NA>         <NA>         <NA>         0.286 low               
-#>  7 fleischerei-… <NA>         <NA>         <NA>         0.429 high              
-#>  8 fleischerei-… <NA>         <NA>         <NA>         0.357 medium            
-#>  9 fleischerei-… <NA>         <NA>         <NA>         0.214 low               
-#> 10 fleischerei-… <NA>         <NA>         <NA>         0.429 high              
-#> # ℹ 117 more rows
+#>  1 antimonarchy… <NA>         <NA>         <NA>         0.167 high              
+#>  2 antimonarchy… <NA>         <NA>         <NA>         0.333 medium            
+#>  3 antimonarchy… <NA>         <NA>         <NA>         0.5   low               
+#>  4 antimonarchy… <NA>         <NA>         <NA>         0.167 high              
+#>  5 antimonarchy… <NA>         <NA>         <NA>         0.5   medium            
+#>  6 antimonarchy… <NA>         <NA>         <NA>         0.333 low               
+#>  7 antimonarchy… <NA>         <NA>         <NA>         0.333 high              
+#>  8 antimonarchy… <NA>         <NA>         <NA>         0.167 medium            
+#>  9 antimonarchy… <NA>         <NA>         <NA>         0.5   low               
+#> 10 antimonarchy… <NA>         <NA>         <NA>         0.333 high              
+#> # ℹ 1,286 more rows
 #> # ℹ 5 more variables: benchmark <chr>,
 #> #   matching_certainty_company_average <chr>, postcode <dbl>, address <chr>,
 #> #   main_activity <chr>
