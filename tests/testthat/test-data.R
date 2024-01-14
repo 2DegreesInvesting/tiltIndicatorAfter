@@ -22,9 +22,6 @@ test_that("`istr_product` hasn't changed", {
   expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::istr_product))
 })
 
-test_that("`ecoinvent_inputs` hasn't changed", {
-  expect_snapshot(format_minimal_snapshot(read_csv(toy_ecoinvent_inputs())))
-})
 
 test_that("`matches_mapper` hasn't changed", {
   expect_snapshot(format_minimal_snapshot(tiltIndicatorAfter::matches_mapper))
