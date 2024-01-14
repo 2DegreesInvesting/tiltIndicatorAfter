@@ -19,7 +19,7 @@ test_that("irrelevant columns in `ecoinvent_inputs` aren't in the output", {
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   )
 
   expect_false(hasName(unnest_product(out), "new"))
@@ -45,7 +45,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   )
 
   # Old API
@@ -104,7 +104,7 @@ test_that("the output at product level has columns matching isic and sector", {
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   )
 
   product <- unnest_product(out)
@@ -133,7 +133,7 @@ test_that("doesn't pad `*isic*`", {
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   )
 
   actual <- rm_na(unique(unnest_product(out)$input_isic_4digit))

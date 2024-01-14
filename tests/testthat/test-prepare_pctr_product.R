@@ -11,7 +11,7 @@ test_that("total number of rows for a comapny is either 1 or 6", {
     europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   ) |>
     unnest_product() |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
@@ -32,7 +32,7 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
       europages_companies = read_csv(toy_europages_companies()),
       ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
       ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-      isic = isic_name
+      isic = read_csv(toy_isic_name())
     )
   )
 })

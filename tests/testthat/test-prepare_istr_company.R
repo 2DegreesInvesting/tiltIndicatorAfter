@@ -13,7 +13,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   ) |>
     unnest_company() |>
     group_by(companies_id, scenario, year) |>

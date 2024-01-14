@@ -12,7 +12,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   ) |>
     unnest_company() |>
     group_by(companies_id, benchmark) |>
@@ -33,7 +33,7 @@ test_that("handles numeric `isic*` in `co2`", {
       europages_companies = read_csv(toy_europages_companies()),
       ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
       ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-      isic = isic_name
+      isic = read_csv(toy_isic_name())
     )
   )
 })

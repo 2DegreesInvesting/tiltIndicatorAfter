@@ -14,7 +14,7 @@ test_that("characterize columns", {
     europages_companies = europages_companies,
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   )
 
   expect_snapshot(names(unnest_product(out)))
@@ -39,7 +39,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies = europages_companies,
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
     ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
+    isic = read_csv(toy_isic_name())
   )
 
   # Old API
