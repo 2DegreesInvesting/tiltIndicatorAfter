@@ -61,13 +61,6 @@
 #' ecoinvent_inputs
 "ecoinvent_inputs"
 
-#' Europages companies
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' ep_companies
-"ep_companies"
-
 #' ISIC
 #' @author Kalash Singhal.
 #'

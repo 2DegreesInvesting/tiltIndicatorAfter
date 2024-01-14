@@ -1,6 +1,3 @@
-ep_companies <- tiltToyData::toy_europages_companies() |>
-  readr::read_csv(show_col_types = FALSE)
-
 ecoinvent_activities <- tiltToyData::toy_ecoinvent_activities() |>
   readr::read_csv(show_col_types = FALSE)
 
