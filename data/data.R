@@ -7,9 +7,8 @@ ecoinvent_activities <- tiltToyData::toy_ecoinvent_activities() |>
 ecoinvent_inputs <- tiltToyData::toy_ecoinvent_inputs() |>
   readr::read_csv(show_col_types = FALSE)
 
-# tiltIndicatorAfter::matches_mapper |>
-#   head(100) |>
-#   readr::write_csv("inst/extdata/ecoinvent_europages.csv.gz")
-#
+matches_mapper <- tiltToyData::toy_ecoinvent_europages() |>
+  readr::read_csv(show_col_types = FALSE)
+
 # tiltIndicatorAfter::isic_name |>
 #   readr::write_csv("inst/extdata/isic_name.csv.gz")

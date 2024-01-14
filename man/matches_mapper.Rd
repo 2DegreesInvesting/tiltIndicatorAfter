@@ -5,7 +5,7 @@
 \alias{matches_mapper}
 \title{Matcher dataset}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 23270 rows and 8 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 100 rows and 8 columns.
 }
 \usage{
 matches_mapper
