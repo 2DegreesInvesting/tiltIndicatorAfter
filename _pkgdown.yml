@@ -4,7 +4,7 @@ template:
 
 reference:
 
-  - title: New API
+  - title: Main functions
     contents:
       - has_concept("top-level functions")
 
