@@ -8,7 +8,7 @@ test_that("total number of rows for a comapny is either 1 or 6", {
   out <- profile_emissions(
     companies,
     co2,
-    europages_companies = ep_companies,
+    europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_europages = small_matches_mapper,
     isic = isic_name
@@ -29,7 +29,7 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
     profile_emissions(
       companies,
       co2,
-      europages_companies = ep_companies,
+      europages_companies = read_csv(toy_europages_companies()),
       ecoinvent_activities = ecoinvent_activities,
       ecoinvent_europages = small_matches_mapper,
       isic = isic_name

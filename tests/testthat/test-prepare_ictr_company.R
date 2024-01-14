@@ -8,7 +8,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   out <- profile_emissions_upstream(
     companies,
     co2,
-    europages_companies = ep_companies,
+    europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities,
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = small_matches_mapper,
@@ -31,7 +31,7 @@ test_that("handles numeric `isic*` in `co2`", {
     profile_emissions_upstream(
       companies,
       co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
-      europages_companies = ep_companies,
+      europages_companies = read_csv(toy_europages_companies()),
       ecoinvent_activities,
       ecoinvent_inputs = ecoinvent_inputs,
       ecoinvent_europages = small_matches_mapper,

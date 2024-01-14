@@ -9,7 +9,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     companies,
     scenarios,
     inputs,
-    europages_companies = ep_companies,
+    europages_companies = read_csv(toy_europages_companies()),
     ecoinvent_activities = ecoinvent_activities,
     ecoinvent_inputs = ecoinvent_inputs,
     ecoinvent_europages = small_matches_mapper,
