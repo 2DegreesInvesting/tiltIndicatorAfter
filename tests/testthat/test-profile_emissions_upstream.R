@@ -17,7 +17,7 @@ test_that("irrelevant columns in `ecoinvent_inputs` aren't in the output", {
     co2,
     europages_companies = europages_companies,
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   )
@@ -43,7 +43,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     co2,
     europages_companies = europages_companies,
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   )
@@ -102,7 +102,7 @@ test_that("the output at product level has columns matching isic and sector", {
     co2,
     europages_companies = europages_companies,
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   )
@@ -131,7 +131,7 @@ test_that("doesn't pad `*isic*`", {
     co2,
     europages_companies = europages_companies,
     ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
     ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   )
