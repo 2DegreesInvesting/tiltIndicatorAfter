@@ -92,7 +92,7 @@
 # `ep_companies` hasn't changed
 
     Code
-      format_minimal_snapshot(tiltIndicatorAfter::ep_companies)
+      format_minimal_snapshot(read_csv(toy_europages_companies()))
     Output
       spc_tbl_ [3 x 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
        $ company_name : chr [1:3] "company C" "company B" "company A"

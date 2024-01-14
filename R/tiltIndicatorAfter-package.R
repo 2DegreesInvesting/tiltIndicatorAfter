@@ -50,6 +50,7 @@
 #' @importFrom tiltToyData toy_emissions_profile_any_companies
 #' @importFrom tiltToyData toy_emissions_profile_products
 #' @importFrom tiltToyData toy_emissions_profile_upstream_products
+#' @importFrom tiltToyData toy_europages_companies
 #' @importFrom tiltToyData toy_sector_profile_any_scenarios
 #' @importFrom tiltToyData toy_sector_profile_companies
 #' @importFrom tiltToyData toy_sector_profile_upstream_companies

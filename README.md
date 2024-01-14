@@ -33,32 +33,37 @@ packageVersion("tiltIndicatorAfter")
 
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products())
+#> Warning: `toy_emissions_profile_products()` was deprecated in tiltToyData 0.0.0.9009.
+#> ℹ Please use `toy_emissions_profile_products_ecoinvent()` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 
 result <- profile_emissions(
   companies,
   products,
   # TODO: Move to tiltToyData
-  europages_companies = tiltIndicatorAfter::ep_companies,
+  europages_companies = read_csv(toy_europages_companies()),
   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
   isic = tiltIndicatorAfter::isic_name
 )
 
 result |> unnest_product()
-#> # A tibble: 49 × 26
+#> # A tibble: 72 × 26
 #>    companies_id     company_name country PCTR_risk_category benchmark ep_product
-#>    <chr>            <chr>        <chr>   <chr>              <chr>     <chr>     
-#>  1 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  2 fleischerei-sti… <NA>         <NA>    high               isic_4di… stove     
-#>  3 fleischerei-sti… <NA>         <NA>    high               tilt_sec… stove     
-#>  4 fleischerei-sti… <NA>         <NA>    high               unit      stove     
-#>  5 fleischerei-sti… <NA>         <NA>    high               unit_isi… stove     
-#>  6 fleischerei-sti… <NA>         <NA>    high               unit_til… stove     
-#>  7 fleischerei-sti… <NA>         <NA>    high               all       oven      
-#>  8 fleischerei-sti… <NA>         <NA>    medium             isic_4di… oven      
-#>  9 fleischerei-sti… <NA>         <NA>    medium             tilt_sec… oven      
-#> 10 fleischerei-sti… <NA>         <NA>    medium             unit      oven      
-#> # ℹ 39 more rows
+#>    <chr>            <chr>        <chr>   <chr>              <lgl>     <chr>     
+#>  1 antimonarchy_ca… <NA>         <NA>    <NA>               NA        <NA>      
+#>  2 celestial_loveb… <NA>         <NA>    <NA>               NA        <NA>      
+#>  3 nonphilosophica… <NA>         <NA>    <NA>               NA        <NA>      
+#>  4 asteria_megalot… <NA>         <NA>    <NA>               NA        <NA>      
+#>  5 quasifaithful_a… <NA>         <NA>    <NA>               NA        <NA>      
+#>  6 spectacular_ame… <NA>         <NA>    <NA>               NA        <NA>      
+#>  7 contrite_silkwo… <NA>         <NA>    <NA>               NA        <NA>      
+#>  8 harmless_owlbut… <NA>         <NA>    <NA>               NA        <NA>      
+#>  9 fascist_maiasau… <NA>         <NA>    <NA>               NA        <NA>      
+#> 10 charismatic_isl… <NA>         <NA>    <NA>               NA        <NA>      
+#> # ℹ 62 more rows
 #> # ℹ 20 more variables: matched_activity_name <chr>,
 #> #   matched_reference_product <chr>, unit <chr>, multi_match <lgl>,
 #> #   matching_certainty <chr>, matching_certainty_company_average <chr>,
@@ -67,32 +72,38 @@ result |> unnest_product()
 #> #   main_activity <chr>, activity_uuid_product_uuid <chr>, …
 
 result |> unnest_company()
-#> # A tibble: 129 × 11
+#> # A tibble: 72 × 11
 #>    companies_id     company_name country PCTR_share PCTR_risk_category benchmark
 #>    <chr>            <chr>        <chr>        <dbl> <lgl>              <lgl>    
-#>  1 fleischerei-sti… <NA>         <NA>           1   NA                 NA       
-#>  2 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#>  3 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#>  4 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  5 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  6 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#>  7 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  8 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#>  9 fleischerei-sti… <NA>         <NA>           0   NA                 NA       
-#> 10 fleischerei-sti… <NA>         <NA>           0.5 NA                 NA       
-#> # ℹ 119 more rows
+#>  1 antimonarchy_ca… <NA>         <NA>            NA NA                 NA       
+#>  2 celestial_loveb… <NA>         <NA>            NA NA                 NA       
+#>  3 nonphilosophica… <NA>         <NA>            NA NA                 NA       
+#>  4 asteria_megalot… <NA>         <NA>            NA NA                 NA       
+#>  5 quasifaithful_a… <NA>         <NA>            NA NA                 NA       
+#>  6 spectacular_ame… <NA>         <NA>            NA NA                 NA       
+#>  7 contrite_silkwo… <NA>         <NA>            NA NA                 NA       
+#>  8 harmless_owlbut… <NA>         <NA>            NA NA                 NA       
+#>  9 fascist_maiasau… <NA>         <NA>            NA NA                 NA       
+#> 10 charismatic_isl… <NA>         <NA>            NA NA                 NA       
+#> # ℹ 62 more rows
 #> # ℹ 5 more variables: matching_certainty_company_average <chr>,
 #> #   company_city <chr>, postcode <dbl>, address <chr>, main_activity <chr>
 
 
 
 inputs <- read_csv(toy_emissions_profile_upstream_products())
+#> Warning: `toy_emissions_profile_upstream_products()` was deprecated in tiltToyData
+#> 0.0.0.9009.
+#> ℹ Please use `toy_emissions_profile_upstream_products_ecoinvent()` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 
 result <- profile_emissions_upstream(
   companies,
   inputs,
   # TODO: Move to tiltToyData
-  europages_companies = tiltIndicatorAfter::ep_companies,
+  europages_companies = read_csv(toy_europages_companies()),
   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
   ecoinvent_inputs = tiltIndicatorAfter::ecoinvent_inputs,
   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
@@ -100,20 +111,20 @@ result <- profile_emissions_upstream(
 )
 
 result |> unnest_product()
-#> # A tibble: 319 × 27
+#> # A tibble: 72 × 27
 #>    companies_id     company_name country ICTR_risk_category benchmark ep_product
-#>    <chr>            <chr>        <chr>   <chr>              <chr>     <chr>     
-#>  1 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  2 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  3 fleischerei-sti… <NA>         <NA>    medium             all       stove     
-#>  4 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  5 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  6 fleischerei-sti… <NA>         <NA>    low                all       stove     
-#>  7 fleischerei-sti… <NA>         <NA>    low                all       stove     
-#>  8 fleischerei-sti… <NA>         <NA>    high               all       stove     
-#>  9 fleischerei-sti… <NA>         <NA>    high               input_is… stove     
-#> 10 fleischerei-sti… <NA>         <NA>    high               input_is… stove     
-#> # ℹ 309 more rows
+#>    <chr>            <chr>        <chr>   <chr>              <lgl>     <chr>     
+#>  1 antimonarchy_ca… <NA>         <NA>    <NA>               NA        <NA>      
+#>  2 celestial_loveb… <NA>         <NA>    <NA>               NA        <NA>      
+#>  3 nonphilosophica… <NA>         <NA>    <NA>               NA        <NA>      
+#>  4 asteria_megalot… <NA>         <NA>    <NA>               NA        <NA>      
+#>  5 quasifaithful_a… <NA>         <NA>    <NA>               NA        <NA>      
+#>  6 spectacular_ame… <NA>         <NA>    <NA>               NA        <NA>      
+#>  7 contrite_silkwo… <NA>         <NA>    <NA>               NA        <NA>      
+#>  8 harmless_owlbut… <NA>         <NA>    <NA>               NA        <NA>      
+#>  9 fascist_maiasau… <NA>         <NA>    <NA>               NA        <NA>      
+#> 10 charismatic_isl… <NA>         <NA>    <NA>               NA        <NA>      
+#> # ℹ 62 more rows
 #> # ℹ 21 more variables: matched_activity_name <chr>,
 #> #   matched_reference_product <chr>, unit <chr>, multi_match <lgl>,
 #> #   matching_certainty <chr>, matching_certainty_company_average <chr>,
@@ -122,21 +133,21 @@ result |> unnest_product()
 #> #   input_isic_4digit_name <chr>, company_city <chr>, postcode <dbl>, …
 
 result |> unnest_company()
-#> # A tibble: 127 × 11
+#> # A tibble: 72 × 11
 #>    companies_id  company_name company_city country ICTR_share ICTR_risk_category
-#>    <chr>         <chr>        <chr>        <chr>        <dbl> <chr>             
-#>  1 fleischerei-… <NA>         <NA>         <NA>         0.571 high              
-#>  2 fleischerei-… <NA>         <NA>         <NA>         0.214 medium            
-#>  3 fleischerei-… <NA>         <NA>         <NA>         0.214 low               
-#>  4 fleischerei-… <NA>         <NA>         <NA>         0.357 high              
-#>  5 fleischerei-… <NA>         <NA>         <NA>         0.357 medium            
-#>  6 fleischerei-… <NA>         <NA>         <NA>         0.286 low               
-#>  7 fleischerei-… <NA>         <NA>         <NA>         0.429 high              
-#>  8 fleischerei-… <NA>         <NA>         <NA>         0.357 medium            
-#>  9 fleischerei-… <NA>         <NA>         <NA>         0.214 low               
-#> 10 fleischerei-… <NA>         <NA>         <NA>         0.429 high              
-#> # ℹ 117 more rows
-#> # ℹ 5 more variables: benchmark <chr>,
+#>    <chr>         <chr>        <chr>        <chr>        <dbl> <lgl>             
+#>  1 antimonarchy… <NA>         <NA>         <NA>            NA NA                
+#>  2 celestial_lo… <NA>         <NA>         <NA>            NA NA                
+#>  3 nonphilosoph… <NA>         <NA>         <NA>            NA NA                
+#>  4 asteria_mega… <NA>         <NA>         <NA>            NA NA                
+#>  5 quasifaithfu… <NA>         <NA>         <NA>            NA NA                
+#>  6 spectacular_… <NA>         <NA>         <NA>            NA NA                
+#>  7 contrite_sil… <NA>         <NA>         <NA>            NA NA                
+#>  8 harmless_owl… <NA>         <NA>         <NA>            NA NA                
+#>  9 fascist_maia… <NA>         <NA>         <NA>            NA NA                
+#> 10 charismatic_… <NA>         <NA>         <NA>            NA NA                
+#> # ℹ 62 more rows
+#> # ℹ 5 more variables: benchmark <lgl>,
 #> #   matching_certainty_company_average <chr>, postcode <dbl>, address <chr>,
 #> #   main_activity <chr>
 ```
