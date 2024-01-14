@@ -15,7 +15,7 @@ test_that("characterize columns", {
     scenarios,
     inputs,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_inputs,
     ecoinvent_europages,
     isic
@@ -44,7 +44,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     scenarios,
     inputs,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_inputs,
     ecoinvent_europages,
     isic
@@ -63,7 +63,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   out_product <- prepare_istr_product(
     product,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     ecoinvent_inputs,
     isic
@@ -73,7 +73,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     company,
     product,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     ecoinvent_inputs,
     isic

@@ -15,7 +15,7 @@ test_that("irrelevant columns in europages_companies aren't in the output ", {
     companies,
     scenarios,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     isic
   )
@@ -39,7 +39,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     companies,
     scenarios,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     isic
   )
@@ -59,7 +59,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   out_product <- prepare_pstr_product(
     product,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     isic
   )
@@ -68,7 +68,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     company,
     product,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     isic
   )
@@ -97,7 +97,7 @@ test_that("the output at product level has columns matching isic and sector", {
     companies,
     scenarios,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     isic
   )
@@ -123,7 +123,7 @@ test_that("doesn't pad `*isic*`", {
     companies,
     scenarios,
     europages_companies,
-    read_csv(toy_ecoinvent_activities()),
+    ecoinvent_activities,
     ecoinvent_europages,
     isic
   )
