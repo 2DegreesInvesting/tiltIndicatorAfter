@@ -35,7 +35,7 @@
 #' companies <- read_csv(toy_sector_profile_upstream_companies())
 #' scenarios <- read_csv(toy_sector_profile_any_scenarios())
 #' inputs <- read_csv(toy_sector_profile_upstream_products())
-#' ecoinvent_inputs <- ecoinvent_inputs |> head(3)
+#' ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
 #'
 #' result <- profile_sector_upstream(
 #'   companies,
@@ -44,7 +44,7 @@
 #'   # TODO: Move to tiltToyData
 #'   europages_companies = read_csv(toy_europages_companies()) |> head(3),
 #'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()) |> head(3),
-#'   ecoinvent_inputs = ecoinvent_inputs |> head(3),
+#'   ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()) |> head(3),
 #'   ecoinvent_europages = matches_mapper |> head(3),
 #'   isic = isic_name |> head(3)
 #' )
