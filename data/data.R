@@ -1,6 +1,3 @@
-ecoinvent_activities <- tiltToyData::toy_ecoinvent_activities() |>
-  readr::read_csv(show_col_types = FALSE)
-
 ecoinvent_inputs <- tiltToyData::toy_ecoinvent_inputs() |>
   readr::read_csv(show_col_types = FALSE)
 
