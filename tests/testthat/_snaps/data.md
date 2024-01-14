@@ -92,7 +92,7 @@
 # `isic_name` hasn't changed
 
     Code
-      format_minimal_snapshot(tiltIndicatorAfter::isic_name)
+      format_minimal_snapshot(read_csv(toy_isic_name()))
     Output
       spc_tbl_ [182 x 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
        $ isic_4digit               : chr [1:182] "0111" "0112" "0113" "0114" ...

@@ -20,7 +20,7 @@ prepare_pstr_company(
 
 \item{match_mapper}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_europages()}}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_name}}
+\item{isic_tilt_map}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_isic_name()}}}
 }
 \value{
 A dataframe that prepares the final output of pstr_company

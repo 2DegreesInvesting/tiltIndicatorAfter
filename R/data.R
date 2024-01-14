@@ -40,9 +40,3 @@
 #' istr_product
 "istr_product"
 
-#' ISIC
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' isic_name
-"isic_name"

@@ -23,7 +23,7 @@ prepare_istr_company(
 
 \item{eco_inputs}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_inputs()}}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_name}}
+\item{isic_tilt_map}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_isic_name()}}}
 }
 \value{
 A dataframe that prepares the final output of ictr_company
