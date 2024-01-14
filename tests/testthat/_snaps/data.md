@@ -89,20 +89,6 @@
        $ input_tilt_sector               : chr [1:282] "construction industry" "construction industry" "construction industry" "construction industry" ...
        $ input_tilt_subsector            : chr [1:282] "construction buildings" "construction buildings" "construction buildings" "construction buildings" ...
 
-# `ep_companies` hasn't changed
-
-    Code
-      format_minimal_snapshot(read_csv(toy_europages_companies()))
-    Output
-      spc_tbl_ [3 x 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-       $ company_name : chr [1:3] "company C" "company B" "company A"
-       $ country      : chr [1:3] "austria" "germany" "germany"
-       $ company_city : chr [1:3] "voitsberg" "berlin" "frankfurt"
-       $ postcode     : num [1:3] 8570 13353 60316
-       $ address      : chr [1:3] "ruhmannstrasse 1 | 8570 voitsberg" "sprengelstrasse 15 | 13353 berlin" "wittelsbacherallee 37 | 60316 frankfurt"
-       $ main_activity: chr [1:3] "service provider" "distributor" "manufacturer/ producer"
-       $ companies_id : chr [1:3] "id3" "id2" "id1"
-
 # `ecoinvent_inputs` hasn't changed
 
     Code
