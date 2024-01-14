@@ -47,6 +47,7 @@
 #' @importFrom tiltIndicator sector_profile_upstream
 #' @importFrom tiltIndicator unnest_company
 #' @importFrom tiltIndicator unnest_product
+#' @importFrom tiltToyData toy_ecoinvent_activities
 #' @importFrom tiltToyData toy_emissions_profile_any_companies
 #' @importFrom tiltToyData toy_emissions_profile_products
 #' @importFrom tiltToyData toy_emissions_profile_upstream_products

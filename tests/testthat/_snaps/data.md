@@ -117,7 +117,7 @@
 # `ecoinvent_activities` hasn't changed
 
     Code
-      format_minimal_snapshot(tiltIndicatorAfter::ecoinvent_activities)
+      format_minimal_snapshot(read_csv(toy_ecoinvent_activities()))
     Output
       spc_tbl_ [100 x 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
        $ activity_uuid_product_uuid: chr [1:100] "dabb3812-eee9-5d2b-bc23-0f9a38e6f71e_bded6c5a-4dca-497e-bdd9-fcd343012087" "3b34f2a3-abfb-5681-ac78-60c8fada5b16_61c1d37e-ad50-4159-b379-cfe3976720bf" "3a2ab192-109a-5fa4-b9d9-7ed5421ce5c6_dfaef357-a79e-4846-aabc-848b1ab59fbb" "16e0e4f7-a44f-55d5-ae85-b2a614f42095_d5d05133-2092-451a-b9fa-c782a6ce3786" ...

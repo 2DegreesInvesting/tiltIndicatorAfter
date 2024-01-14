@@ -30,7 +30,7 @@
 #'   products,
 #'   # TODO: Move to tiltToyData
 #'   europages_companies = read_csv(toy_europages_companies()),
-#'   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
+#'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
 #'   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
 #'   isic = tiltIndicatorAfter::isic_name
 #' )
@@ -48,7 +48,7 @@
 #'   inputs,
 #'   # TODO: Move to tiltToyData
 #'   europages_companies = read_csv(toy_europages_companies()),
-#'   ecoinvent_activities = tiltIndicatorAfter::ecoinvent_activities,
+#'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
 #'   ecoinvent_inputs = tiltIndicatorAfter::ecoinvent_inputs,
 #'   ecoinvent_europages = tiltIndicatorAfter::matches_mapper |> head(100),
 #'   isic = tiltIndicatorAfter::isic_name
