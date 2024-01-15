@@ -17,6 +17,5 @@ ep_companies
 ep_companies
 # ->
 readr::read_csv(tiltToyData::toy_europages_companies())
-
 }
 \keyword{internal}
