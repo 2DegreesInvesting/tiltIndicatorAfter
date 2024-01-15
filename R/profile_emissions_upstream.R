@@ -28,7 +28,6 @@
 #' result <- profile_emissions(
 #'   companies,
 #'   products,
-#'   # TODO: Move to tiltToyData
 #'   europages_companies = read_csv(toy_europages_companies()),
 #'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
 #'   ecoinvent_europages = read_csv(toy_ecoinvent_europages()) |> head(100),
@@ -46,7 +45,6 @@
 #' result <- profile_emissions_upstream(
 #'   companies,
 #'   inputs,
-#'   # TODO: Move to tiltToyData
 #'   europages_companies = read_csv(toy_europages_companies()),
 #'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
 #'   ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),

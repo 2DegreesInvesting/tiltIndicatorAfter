@@ -15,15 +15,18 @@
 #'
 #' companies <- read_csv(toy_sector_profile_companies())
 #' scenarios <- read_csv(toy_sector_profile_any_scenarios())
+#' europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+#' ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
+#' ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+#' isic_name <- read_csv(toy_isic_name()) |> head(3)
 #'
 #' result <- profile_sector(
 #'   companies,
 #'   scenarios,
-#'   # TODO: Move to tiltToyData
-#'   europages_companies = read_csv(toy_europages_companies()) |> head(3),
-#'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()) |> head(3),
-#'   ecoinvent_europages = read_csv(toy_ecoinvent_europages()) |> head(3),
-#'   isic = read_csv(toy_isic_name()) |> head(3)
+#'   europages_companies = europages_companies,
+#'   ecoinvent_activities = ecoinvent_activities,
+#'   ecoinvent_europages = ecoinvent_europages,
+#'   isic = isic_name
 #' )
 #'
 #' result |> unnest_product()
@@ -35,18 +38,21 @@
 #' companies <- read_csv(toy_sector_profile_upstream_companies())
 #' scenarios <- read_csv(toy_sector_profile_any_scenarios())
 #' inputs <- read_csv(toy_sector_profile_upstream_products())
+#' europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+#' ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
 #' ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
+#' ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+#' isic_name <- read_csv(toy_isic_name()) |> head(3)
 #'
 #' result <- profile_sector_upstream(
 #'   companies,
 #'   scenarios,
 #'   inputs,
-#'   # TODO: Move to tiltToyData
-#'   europages_companies = read_csv(toy_europages_companies()) |> head(3),
-#'   ecoinvent_activities = read_csv(toy_ecoinvent_activities()) |> head(3),
-#'   ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()) |> head(3),
-#'   ecoinvent_europages = read_csv(toy_ecoinvent_europages()) |> head(3),
-#'   isic = read_csv(toy_isic_name()) |> head(3)
+#'   europages_companies = europages_companies,
+#'   ecoinvent_activities = ecoinvent_activities,
+#'   ecoinvent_inputs = ecoinvent_inputs,
+#'   ecoinvent_europages = ecoinvent_europages,
+#'   isic = isic_name
 #' )
 #'
 #' result |> unnest_product()
