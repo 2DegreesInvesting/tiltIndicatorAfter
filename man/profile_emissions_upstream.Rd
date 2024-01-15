@@ -67,9 +67,9 @@ options(readr.show_col_types = FALSE)
 
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products())
-europages_companies <- read_csv(toy_europages_companies()),
-ecoinvent_activities <- read_csv(toy_ecoinvent_activities()),
-ecoinvent_europages <- read_csv(toy_ecoinvent_europages()),
+europages_companies <- read_csv(toy_europages_companies())
+ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 isic_name <- read_csv(toy_isic_name())
 
 result <- profile_emissions(
