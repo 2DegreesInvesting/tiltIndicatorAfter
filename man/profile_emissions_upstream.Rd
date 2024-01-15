@@ -73,7 +73,7 @@ result <- profile_emissions(
   products,
   europages_companies = read_csv(toy_europages_companies()),
   ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-  ecoinvent_europages = read_csv(toy_ecoinvent_europages()) |> head(100),
+  ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
   isic = read_csv(toy_isic_name())
 )
 
@@ -91,7 +91,7 @@ result <- profile_emissions_upstream(
   europages_companies = read_csv(toy_europages_companies()),
   ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
   ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
-  ecoinvent_europages = read_csv(toy_ecoinvent_europages()) |> head(100),
+  ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
   isic = read_csv(toy_isic_name())
 )
 
