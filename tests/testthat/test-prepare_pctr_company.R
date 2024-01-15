@@ -34,7 +34,7 @@ test_that("handles numeric `isic*` in `co2`", {
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic <- read_csv(toy_isic_name())
+  isic_name <- read_csv(toy_isic_name())
 
   expect_no_error(
     profile_emissions(
