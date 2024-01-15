@@ -38,14 +38,18 @@ products <- read_csv(toy_emissions_profile_products())
 #> This warning is displayed once every 8 hours.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 #> generated.
+europages_companies <- read_csv(toy_europages_companies())
+ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+isic_name <- read_csv(toy_isic_name())
 
 result <- profile_emissions(
   companies,
   products,
-  europages_companies = read_csv(toy_europages_companies()),
-  ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-  ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-  isic = read_csv(toy_isic_name())
+  europages_companies = europages_companies,
+  ecoinvent_activities = ecoinvent_activities,
+  ecoinvent_europages = ecoinvent_europages,
+  isic = isic_name
 )
 
 result |> unnest_product()
@@ -97,15 +101,16 @@ inputs <- read_csv(toy_emissions_profile_upstream_products())
 #> This warning is displayed once every 8 hours.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 #> generated.
+ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
 
 result <- profile_emissions_upstream(
   companies,
   inputs,
-  europages_companies = read_csv(toy_europages_companies()),
-  ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-  ecoinvent_inputs = read_csv(toy_ecoinvent_inputs()),
-  ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-  isic = read_csv(toy_isic_name())
+  europages_companies = europages_companies,
+  ecoinvent_activities = ecoinvent_activities,
+  ecoinvent_inputs = ecoinvent_inputs,
+  ecoinvent_europages = ecoinvent_europages,
+  isic = isic_name
 )
 
 result |> unnest_product()
