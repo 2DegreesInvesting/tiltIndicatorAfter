@@ -54,13 +54,18 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category
   scenarios_that_yields_na <- read_csv(toy_sector_profile_any_scenarios()) |>
     head(1)
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   result <- profile_sector(
     companies,
     scenarios_that_yields_na,
-    europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = read_csv(toy_isic_name())
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
   ) |>
     unnest_product()
 
