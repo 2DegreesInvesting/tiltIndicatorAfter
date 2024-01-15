@@ -6,13 +6,18 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   out <- profile_emissions(
     companies,
     co2,
-    europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = read_csv(toy_isic_name())
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
   ) |>
     unnest_company() |>
     group_by(companies_id, benchmark) |>
