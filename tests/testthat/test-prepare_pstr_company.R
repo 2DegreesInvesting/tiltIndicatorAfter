@@ -3,14 +3,19 @@ test_that("total number of rows for a comapny is either 1 or 3", {
 
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
+
 
   out <- profile_sector(
     companies,
     scenarios,
-    europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = read_csv(toy_isic_name())
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
   ) |>
     unnest_company() |>
     group_by(companies_id, scenario, year) |>
