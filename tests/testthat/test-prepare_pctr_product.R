@@ -5,13 +5,18 @@ test_that("total number of rows for a comapny is either 1 or 6", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   out <- profile_emissions(
     companies,
     co2,
-    europages_companies = read_csv(toy_europages_companies()),
-    ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-    ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-    isic = read_csv(toy_isic_name())
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
   ) |>
     unnest_product() |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
@@ -25,14 +30,19 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   expect_no_error(
     profile_emissions(
       companies,
       co2,
-      europages_companies = read_csv(toy_europages_companies()),
-      ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-      ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-      isic = read_csv(toy_isic_name())
+      europages_companies = europages_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_europages = ecoinvent_europages,
+      isic = isic_name
     )
   )
 })
