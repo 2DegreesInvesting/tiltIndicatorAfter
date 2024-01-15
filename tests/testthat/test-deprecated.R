@@ -1,5 +1,6 @@
 test_that("`ep_companies` is deprecated", {
   skip_on_ci()
+  skip_on_rcmd()
 
   expect_snapshot(expect_equal(
     readr::read_csv(tiltToyData::toy_europages_companies()),
@@ -9,6 +10,7 @@ test_that("`ep_companies` is deprecated", {
 
 test_that("`ecoinvent_activities` is deprecated", {
   skip_on_ci()
+  skip_on_rcmd()
 
   expect_snapshot(expect_equal(
     readr::read_csv(tiltToyData::toy_ecoinvent_activities()),
@@ -18,6 +20,7 @@ test_that("`ecoinvent_activities` is deprecated", {
 
 test_that("`ecoinvent_inputs` is deprecated", {
   skip_on_ci()
+  skip_on_rcmd()
 
   expect_snapshot(expect_equal(
     readr::read_csv(tiltToyData::toy_ecoinvent_inputs()),
@@ -27,6 +30,7 @@ test_that("`ecoinvent_inputs` is deprecated", {
 
 test_that("`matches_mapper` is deprecated", {
   skip_on_ci()
+  skip_on_rcmd()
 
   expect_snapshot(expect_equal(
     readr::read_csv(tiltToyData::toy_ecoinvent_europages()),
@@ -36,6 +40,7 @@ test_that("`matches_mapper` is deprecated", {
 
 test_that("`isic_name` is deprecated", {
   skip_on_ci()
+  skip_on_rcmd()
 
   expect_snapshot(expect_equal(
     readr::read_csv(tiltToyData::toy_isic_name()),
