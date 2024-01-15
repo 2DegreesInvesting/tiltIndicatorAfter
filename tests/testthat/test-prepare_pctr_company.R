@@ -31,14 +31,19 @@ test_that("handles numeric `isic*` in `co2`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic <- read_csv(toy_isic_name())
+
   expect_no_error(
     profile_emissions(
       companies,
       co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
-      europages_companies = read_csv(toy_europages_companies()),
-      ecoinvent_activities = read_csv(toy_ecoinvent_activities()),
-      ecoinvent_europages = read_csv(toy_ecoinvent_europages()),
-      isic = read_csv(toy_isic_name())
+      europages_companies = europages_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_europages = ecoinvent_europages,
+      isic = isic_name
     )
   )
 })
