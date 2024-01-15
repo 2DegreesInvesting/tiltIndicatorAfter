@@ -19,7 +19,8 @@ prepare_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper, 
     rename_pstr_product() |>
     mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
     select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type")) |>
-    distinct()
+    distinct() |>
+    rename_118()
 }
 
 rename_pstr_product <- function(data) {

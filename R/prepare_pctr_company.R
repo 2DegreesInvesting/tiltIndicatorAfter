@@ -27,7 +27,8 @@ prepare_pctr_company <- function(pctr_comp, pctr_prod, comp, eco_activities, mat
       benchmark = ifelse(is.na(.data$matching_certainty_company_average), NA, .data$benchmark)
     ) |>
     relocate_pctr_company() |>
-    arrange(.data$companies_id)
+    arrange(.data$companies_id) |>
+    rename_118()
 }
 
 rename_pctr_company <- function(data) {

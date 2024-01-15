@@ -29,7 +29,8 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
     select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type", "geography")) |>
     distinct() |>
-    arrange(.data$country)
+    arrange(.data$country) |>
+    rename_118()
 }
 
 rename_istr_product <- function(data) {

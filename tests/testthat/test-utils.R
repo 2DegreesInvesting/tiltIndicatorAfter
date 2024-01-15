@@ -21,3 +21,19 @@ test_that("sanitize_co2() works with both products and upstream products", {
   out <- sanitize_isic(tibble(input_isic_4digit = 1))
   expect_equal(out$input_isic_4digit, c("1"))
 })
+
+test_that("rename_118() function is applied if issue #118 is addressed", {
+  options(tiltIndicatorAfter.dissable_issue_118 = FALSE)
+  df <- tibble(PCTR_risk_category = "high")
+
+  out <- df |> rename_118()
+  expect_equal(colnames(out), "emission_profile")
+})
+
+test_that("rename_118() function is not applied if issue #118 is not addressed", {
+  options(tiltIndicatorAfter.dissable_issue_118 = TRUE)
+  df <- tibble(PCTR_risk_category = "high")
+
+  out <- df |> rename_118()
+  expect_equal(colnames(out), "PCTR_risk_category")
+})
