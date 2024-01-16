@@ -39,38 +39,3 @@
 #' @examples
 #' istr_product
 "istr_product"
-
-#' Matcher dataset
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' matches_mapper
-"matches_mapper"
-
-#' Ecoinvent activities dataset
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' ecoinvent_activities
-"ecoinvent_activities"
-
-#' Ecoinvent inputs dataset
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' ecoinvent_inputs
-"ecoinvent_inputs"
-
-#' Europages companies
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' ep_companies
-"ep_companies"
-
-#' ISIC
-#' @author Kalash Singhal.
-#'
-#' @examples
-#' isic_name
-"isic_name"

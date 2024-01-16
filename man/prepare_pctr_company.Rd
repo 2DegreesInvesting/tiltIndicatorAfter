@@ -14,13 +14,13 @@ prepare_pctr_company(
 )
 }
 \arguments{
-\item{comp}{A dataframe like \link{ep_companies}}
+\item{comp}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_europages_companies()}}}
 
-\item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
+\item{eco_activities}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_activities()}}}
 
-\item{match_mapper}{A dataframe like \link{matches_mapper}}
+\item{match_mapper}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_europages()}}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_name}}
+\item{isic_tilt_map}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_isic_name()}}}
 }
 \value{
 A dataframe that prepares the final output of pctr_company

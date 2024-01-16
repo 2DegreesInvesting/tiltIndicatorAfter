@@ -3,10 +3,10 @@ test_that("characterize columns", {
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   out <- profile_emissions(
     companies,
@@ -27,10 +27,10 @@ test_that("the new API is equivalent to the old API except for extra columns", {
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   # New API
   out <- profile_emissions(
@@ -55,7 +55,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   out_company <- prepare_pctr_company(
@@ -64,7 +64,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   new <- arrange(unnest_product(out), companies_id)
@@ -82,10 +82,10 @@ test_that("the output at product level has columns matching isic and sector", {
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   out <- profile_emissions(
     companies,
@@ -93,7 +93,7 @@ test_that("the output at product level has columns matching isic and sector", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   product <- unnest_product(out)
@@ -109,10 +109,10 @@ test_that("doesn't pad `*isic*`", {
   co2 <- read_csv(tiltToyData::toy_emissions_profile_products_ecoinvent())
   co2$isic_4digit <- "1"
 
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   out <- profile_emissions(
     companies,
@@ -120,7 +120,7 @@ test_that("doesn't pad `*isic*`", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   actual <- rm_na(unique(unnest_product(out)$isic_4digit))

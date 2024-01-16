@@ -5,12 +5,17 @@ test_that("total number of rows for a comapny is either 1 or 6", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   out <- profile_emissions(
     companies,
     co2,
-    europages_companies = ep_companies,
+    europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   ) |>
     unnest_product() |>
@@ -25,13 +30,18 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   expect_no_error(
     profile_emissions(
       companies,
       co2,
-      europages_companies = ep_companies,
+      europages_companies = europages_companies,
       ecoinvent_activities = ecoinvent_activities,
-      ecoinvent_europages = small_matches_mapper,
+      ecoinvent_europages = ecoinvent_europages,
       isic = isic_name
     )
   )
@@ -59,10 +69,10 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
 
   result <- prepare_pctr_product(
     product,
-    ep_companies,
-    ecoinvent_activities,
-    matches_mapper,
-    isic_name
+    read_csv(toy_europages_companies()),
+    read_csv(toy_ecoinvent_activities()),
+    read_csv(toy_ecoinvent_europages()),
+    read_csv(toy_isic_name())
   )
 
   expect_equal(unique(result$matching_certainty_company_average), "low")

@@ -4,12 +4,12 @@ test_that("irrelevant columns in europages_companies aren't in the output ", {
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
 
-  europages_companies <- ep_companies |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
   europages_companies$new <- "test"
 
-  ecoinvent_activities <- ecoinvent_activities |> head(3)
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   out <- profile_sector(
     companies,
@@ -17,7 +17,7 @@ test_that("irrelevant columns in europages_companies aren't in the output ", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   expect_false(hasName(unnest_product(out), "new"))
@@ -29,10 +29,10 @@ test_that("the new API is equivalent to the old API except for extra columns", {
 
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities |> head(3)
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   # New API
   out <- profile_sector(
@@ -41,7 +41,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   # Old API
@@ -61,7 +61,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   out_company <- prepare_pstr_company(
@@ -70,7 +70,7 @@ test_that("the new API is equivalent to the old API except for extra columns", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   expect_equal(
@@ -88,10 +88,10 @@ test_that("the output at product level has columns matching isic and sector", {
 
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities |> head(3)
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   out <- profile_sector(
     companies,
@@ -99,7 +99,7 @@ test_that("the output at product level has columns matching isic and sector", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   product <- unnest_product(out)
@@ -114,10 +114,10 @@ test_that("doesn't pad `*isic*`", {
   companies$isic_4digit <- "1"
 
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  europages_companies <- ep_companies |> head(3)
-  ecoinvent_activities <- ecoinvent_activities |> head(3)
-  ecoinvent_europages <- small_matches_mapper |> head(3)
-  isic <- isic_name |> head(3)
+  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
+  isic_name <- read_csv(toy_isic_name()) |> head(3)
 
   out <- profile_sector(
     companies,
@@ -125,7 +125,7 @@ test_that("doesn't pad `*isic*`", {
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
-    isic
+    isic_name
   )
 
   actual <- rm_na(unique(unnest_product(out)$isic_4digit))

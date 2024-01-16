@@ -22,3 +22,7 @@ skip_unless_toy_data_is_newer_than <- function(version) {
 toy_data_version <- function() {
   "0.0.0.9007"
 }
+
+skip_on_rcmd <- function() {
+  testthat::skip_if(nzchar(Sys.getenv("R_CMD")), "On R CMD")
+}
