@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9017 (2024-01-16)
+
+The following toy datasets are now deprecated in favor of equivalent data from
+tiltToyData (#132).
+
+* `ecoinvent_activities`
+* `ecoinvent_inputs`
+* `ep_companies`
+* `isic_name`
+* `matches_mapper`
+
 # tiltIndicatorAfter 0.0.0.9016 (2023-12-20)
 
 * Irrelevant columns in `europages_companies` and `ecoinvent_inputs` are no 
