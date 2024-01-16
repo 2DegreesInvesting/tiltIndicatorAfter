@@ -88,32 +88,40 @@
 <span></span>
 <span><span class="va">companies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_emissions_profile_any_companies</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/deprecated.html" class="external-link">toy_emissions_profile_products</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `toy_emissions_profile_products()` was deprecated in tiltToyData 0.0.0.9009.</span></span>
+<span><span class="co">#&gt; ℹ Please use `toy_emissions_profile_products_ecoinvent()` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span>
+<span><span class="va">europages_companies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_europages_companies</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ecoinvent_activities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_activities</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ecoinvent_europages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_europages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">isic_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_isic_name</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/profile_emissions_upstream.html">profile_emissions</a></span><span class="op">(</span></span>
 <span>  <span class="va">companies</span>,</span>
 <span>  <span class="va">products</span>,</span>
-<span>  <span class="co"># TODO: Move to tiltToyData</span></span>
-<span>  europages_companies <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/ep_companies.html">ep_companies</a></span>,</span>
-<span>  ecoinvent_activities <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/ecoinvent_activities.html">ecoinvent_activities</a></span>,</span>
-<span>  ecoinvent_europages <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/matches_mapper.html">matches_mapper</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
-<span>  isic <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/isic_name.html">isic_name</a></span></span>
+<span>  europages_companies <span class="op">=</span> <span class="va">europages_companies</span>,</span>
+<span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span>,</span>
+<span>  ecoinvent_europages <span class="op">=</span> <span class="va">ecoinvent_europages</span>,</span>
+<span>  isic <span class="op">=</span> <span class="va">isic_name</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 49 × 26</span></span>
+<span><span class="co">#&gt; # A tibble: 72 × 26</span></span>
 <span><span class="co">#&gt;    companies_id     company_name country PCTR_risk_category benchmark ep_product</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt;  1 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       stove     </span></span>
-<span><span class="co">#&gt;  2 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               isic_4di… stove     </span></span>
-<span><span class="co">#&gt;  3 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               tilt_sec… stove     </span></span>
-<span><span class="co">#&gt;  4 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               unit      stove     </span></span>
-<span><span class="co">#&gt;  5 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               unit_isi… stove     </span></span>
-<span><span class="co">#&gt;  6 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               unit_til… stove     </span></span>
-<span><span class="co">#&gt;  7 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       oven      </span></span>
-<span><span class="co">#&gt;  8 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    medium             isic_4di… oven      </span></span>
-<span><span class="co">#&gt;  9 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    medium             tilt_sec… oven      </span></span>
-<span><span class="co">#&gt; 10 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    medium             unit      oven      </span></span>
-<span><span class="co">#&gt; # ℹ 39 more rows</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;              &lt;lgl&gt;     &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt;  1 antimonarchy_ca… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  2 celestial_loveb… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  3 nonphilosophica… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  4 asteria_megalot… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  5 quasifaithful_a… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  6 spectacular_ame… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  7 contrite_silkwo… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  8 harmless_owlbut… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  9 fascist_maiasau… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; 10 charismatic_isl… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; # ℹ 62 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 20 more variables: matched_activity_name &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, multi_match &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   matching_certainty &lt;chr&gt;, matching_certainty_company_average &lt;chr&gt;,</span></span>
@@ -122,53 +130,59 @@
 <span><span class="co">#&gt; #   main_activity &lt;chr&gt;, activity_uuid_product_uuid &lt;chr&gt;, …</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 129 × 11</span></span>
+<span><span class="co">#&gt; # A tibble: 72 × 11</span></span>
 <span><span class="co">#&gt;    companies_id     company_name country PCTR_share PCTR_risk_category benchmark</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;              &lt;lgl&gt;    </span></span>
-<span><span class="co">#&gt;  1 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           1   NA                 NA       </span></span>
-<span><span class="co">#&gt;  2 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0   NA                 NA       </span></span>
-<span><span class="co">#&gt;  3 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0   NA                 NA       </span></span>
-<span><span class="co">#&gt;  4 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0.5 NA                 NA       </span></span>
-<span><span class="co">#&gt;  5 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0.5 NA                 NA       </span></span>
-<span><span class="co">#&gt;  6 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0   NA                 NA       </span></span>
-<span><span class="co">#&gt;  7 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0.5 NA                 NA       </span></span>
-<span><span class="co">#&gt;  8 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0.5 NA                 NA       </span></span>
-<span><span class="co">#&gt;  9 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0   NA                 NA       </span></span>
-<span><span class="co">#&gt; 10 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;           0.5 NA                 NA       </span></span>
-<span><span class="co">#&gt; # ℹ 119 more rows</span></span>
+<span><span class="co">#&gt;  1 antimonarchy_ca… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  2 celestial_loveb… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  3 nonphilosophica… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  4 asteria_megalot… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  5 quasifaithful_a… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  6 spectacular_ame… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  7 contrite_silkwo… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  8 harmless_owlbut… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt;  9 fascist_maiasau… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt; 10 charismatic_isl… &lt;NA&gt;         &lt;NA&gt;            NA NA                 NA       </span></span>
+<span><span class="co">#&gt; # ℹ 62 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 5 more variables: matching_certainty_company_average &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   company_city &lt;chr&gt;, postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
 <span></span>
 <span></span>
 <span></span>
 <span><span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/deprecated.html" class="external-link">toy_emissions_profile_upstream_products</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `toy_emissions_profile_upstream_products()` was deprecated in tiltToyData</span></span>
+<span><span class="co">#&gt; 0.0.0.9009.</span></span>
+<span><span class="co">#&gt; ℹ Please use `toy_emissions_profile_upstream_products_ecoinvent()` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span>
+<span><span class="va">ecoinvent_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_inputs</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/profile_emissions_upstream.html">profile_emissions_upstream</a></span><span class="op">(</span></span>
 <span>  <span class="va">companies</span>,</span>
 <span>  <span class="va">inputs</span>,</span>
-<span>  <span class="co"># TODO: Move to tiltToyData</span></span>
-<span>  europages_companies <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/ep_companies.html">ep_companies</a></span>,</span>
-<span>  ecoinvent_activities <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/ecoinvent_activities.html">ecoinvent_activities</a></span>,</span>
-<span>  ecoinvent_inputs <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/ecoinvent_inputs.html">ecoinvent_inputs</a></span>,</span>
-<span>  ecoinvent_europages <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/matches_mapper.html">matches_mapper</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
-<span>  isic <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="reference/isic_name.html">isic_name</a></span></span>
+<span>  europages_companies <span class="op">=</span> <span class="va">europages_companies</span>,</span>
+<span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span>,</span>
+<span>  ecoinvent_inputs <span class="op">=</span> <span class="va">ecoinvent_inputs</span>,</span>
+<span>  ecoinvent_europages <span class="op">=</span> <span class="va">ecoinvent_europages</span>,</span>
+<span>  isic <span class="op">=</span> <span class="va">isic_name</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 319 × 27</span></span>
+<span><span class="co">#&gt; # A tibble: 72 × 27</span></span>
 <span><span class="co">#&gt;    companies_id     company_name country ICTR_risk_category benchmark ep_product</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt;  1 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       stove     </span></span>
-<span><span class="co">#&gt;  2 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       stove     </span></span>
-<span><span class="co">#&gt;  3 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    medium             all       stove     </span></span>
-<span><span class="co">#&gt;  4 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       stove     </span></span>
-<span><span class="co">#&gt;  5 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       stove     </span></span>
-<span><span class="co">#&gt;  6 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    low                all       stove     </span></span>
-<span><span class="co">#&gt;  7 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    low                all       stove     </span></span>
-<span><span class="co">#&gt;  8 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               all       stove     </span></span>
-<span><span class="co">#&gt;  9 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               input_is… stove     </span></span>
-<span><span class="co">#&gt; 10 fleischerei-sti… &lt;NA&gt;         &lt;NA&gt;    high               input_is… stove     </span></span>
-<span><span class="co">#&gt; # ℹ 309 more rows</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;              &lt;lgl&gt;     &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt;  1 antimonarchy_ca… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  2 celestial_loveb… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  3 nonphilosophica… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  4 asteria_megalot… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  5 quasifaithful_a… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  6 spectacular_ame… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  7 contrite_silkwo… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  8 harmless_owlbut… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  9 fascist_maiasau… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; 10 charismatic_isl… &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;               NA        &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; # ℹ 62 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 21 more variables: matched_activity_name &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, multi_match &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   matching_certainty &lt;chr&gt;, matching_certainty_company_average &lt;chr&gt;,</span></span>
@@ -177,21 +191,21 @@
 <span><span class="co">#&gt; #   input_isic_4digit_name &lt;chr&gt;, company_city &lt;chr&gt;, postcode &lt;dbl&gt;, …</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 127 × 11</span></span>
+<span><span class="co">#&gt; # A tibble: 72 × 11</span></span>
 <span><span class="co">#&gt;    companies_id  company_name company_city country ICTR_share ICTR_risk_category</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;             </span></span>
-<span><span class="co">#&gt;  1 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.571 high              </span></span>
-<span><span class="co">#&gt;  2 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.214 medium            </span></span>
-<span><span class="co">#&gt;  3 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.214 low               </span></span>
-<span><span class="co">#&gt;  4 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.357 high              </span></span>
-<span><span class="co">#&gt;  5 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.357 medium            </span></span>
-<span><span class="co">#&gt;  6 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.286 low               </span></span>
-<span><span class="co">#&gt;  7 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.429 high              </span></span>
-<span><span class="co">#&gt;  8 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.357 medium            </span></span>
-<span><span class="co">#&gt;  9 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.214 low               </span></span>
-<span><span class="co">#&gt; 10 fleischerei-… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;         0.429 high              </span></span>
-<span><span class="co">#&gt; # ℹ 117 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 5 more variables: benchmark &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;             </span></span>
+<span><span class="co">#&gt;  1 antimonarchy… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  2 celestial_lo… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  3 nonphilosoph… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  4 asteria_mega… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  5 quasifaithfu… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  6 spectacular_… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  7 contrite_sil… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  8 harmless_owl… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt;  9 fascist_maia… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt; 10 charismatic_… &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;            NA NA                </span></span>
+<span><span class="co">#&gt; # ℹ 62 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 5 more variables: benchmark &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   matching_certainty_company_average &lt;chr&gt;, postcode &lt;dbl&gt;, address &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   main_activity &lt;chr&gt;</span></span></code></pre></div>
 </div>

@@ -143,15 +143,18 @@ risk products.</p></dd>
 <span class="r-in"><span><span class="va">products</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/deprecated.html" class="external-link">toy_emissions_profile_products</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`toy_emissions_profile_products()` was deprecated in tiltToyData 0.0.0.9009.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `toy_emissions_profile_products_ecoinvent()` instead.</span>
+<span class="r-in"><span><span class="va">europages_companies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_europages_companies</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ecoinvent_activities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_activities</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ecoinvent_europages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_europages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">isic_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_isic_name</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">profile_emissions</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">companies</span>,</span></span>
 <span class="r-in"><span>  <span class="va">products</span>,</span></span>
-<span class="r-in"><span>  <span class="co"># TODO: Move to tiltToyData</span></span></span>
-<span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ep_companies.html">ep_companies</a></span>,</span></span>
-<span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ecoinvent_activities.html">ecoinvent_activities</a></span>,</span></span>
-<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="matches_mapper.html">matches_mapper</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  isic <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="isic_name.html">isic_name</a></span></span></span>
+<span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="va">europages_companies</span>,</span></span>
+<span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span>,</span></span>
+<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">ecoinvent_europages</span>,</span></span>
+<span class="r-in"><span>  isic <span class="op">=</span> <span class="va">isic_name</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -200,16 +203,16 @@ risk products.</p></dd>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`toy_emissions_profile_upstream_products()` was deprecated in tiltToyData</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> 0.0.0.9009.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `toy_emissions_profile_upstream_products_ecoinvent()` instead.</span>
+<span class="r-in"><span><span class="va">ecoinvent_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_inputs</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">profile_emissions_upstream</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">companies</span>,</span></span>
 <span class="r-in"><span>  <span class="va">inputs</span>,</span></span>
-<span class="r-in"><span>  <span class="co"># TODO: Move to tiltToyData</span></span></span>
-<span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ep_companies.html">ep_companies</a></span>,</span></span>
-<span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ecoinvent_activities.html">ecoinvent_activities</a></span>,</span></span>
-<span class="r-in"><span>  ecoinvent_inputs <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="ecoinvent_inputs.html">ecoinvent_inputs</a></span>,</span></span>
-<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="matches_mapper.html">matches_mapper</a></span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  isic <span class="op">=</span> <span class="fu">tiltIndicatorAfter</span><span class="fu">::</span><span class="va"><a href="isic_name.html">isic_name</a></span></span></span>
+<span class="r-in"><span>  europages_companies <span class="op">=</span> <span class="va">europages_companies</span>,</span></span>
+<span class="r-in"><span>  ecoinvent_activities <span class="op">=</span> <span class="va">ecoinvent_activities</span>,</span></span>
+<span class="r-in"><span>  ecoinvent_inputs <span class="op">=</span> <span class="va">ecoinvent_inputs</span>,</span></span>
+<span class="r-in"><span>  ecoinvent_europages <span class="op">=</span> <span class="va">ecoinvent_europages</span>,</span></span>
+<span class="r-in"><span>  isic <span class="op">=</span> <span class="va">isic_name</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
