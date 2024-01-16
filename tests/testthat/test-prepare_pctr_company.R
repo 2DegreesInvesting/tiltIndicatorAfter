@@ -4,7 +4,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   out <- profile_emissions(
     companies,
@@ -24,7 +24,7 @@ test_that("handles numeric `isic*` in `co2`", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   expect_no_error(
     profile_emissions(
