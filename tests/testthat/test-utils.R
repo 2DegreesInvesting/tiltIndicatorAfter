@@ -23,17 +23,39 @@ test_that("sanitize_co2() works with both products and upstream products", {
 })
 
 test_that("rename_118() function is applied if issue #118 is addressed", {
-  options(tiltIndicatorAfter.dissable_issue_118 = FALSE)
-  df <- tibble(PCTR_risk_category = "high")
+  withr::local_options(tiltIndicatorAfter.dissable_issue_118 = FALSE)
+  companies <- read_csv(toy_sector_profile_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
 
-  out <- df |> rename_118()
-  expect_equal(colnames(out), "emission_profile")
+  result <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies = ep_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = small_matches_mapper,
+    isic = isic_name
+  ) |>
+    unnest_product()
+
+  expected_col_name <- "sector_profile"
+  expect_true(expected_col_name %in% colnames(result))
 })
 
 test_that("rename_118() function is not applied if issue #118 is not addressed", {
-  options(tiltIndicatorAfter.dissable_issue_118 = TRUE)
-  df <- tibble(PCTR_risk_category = "high")
+  withr::local_options(tiltIndicatorAfter.dissable_issue_118 = TRUE)
+  companies <- read_csv(toy_sector_profile_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
 
-  out <- df |> rename_118()
-  expect_equal(colnames(out), "PCTR_risk_category")
+  result <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies = ep_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = small_matches_mapper,
+    isic = isic_name
+  ) |>
+    unnest_product()
+
+  expected_col_name <- "PSTR_risk_category"
+  expect_true(expected_col_name %in% colnames(result))
 })
