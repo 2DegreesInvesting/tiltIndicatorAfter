@@ -24,38 +24,52 @@ test_that("sanitize_co2() works with both products and upstream products", {
 
 test_that("rename_118() function is applied if issue #118 is addressed", {
   withr::local_options(tiltIndicatorAfter.dissable_issue_118 = FALSE)
+  local_options(readr.show_col_types = FALSE)
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
+
+  europages_companies <- read_csv(toy_europages_companies()) |> head(1)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(1)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(1)
+  isic_name <- read_csv(toy_isic_name()) |> head(1)
 
   result <- profile_sector(
     companies,
     scenarios,
-    europages_companies = ep_companies,
+    europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   ) |>
-    unnest_product()
+    unnest_company()
 
+  actual_col_name <- "sector_profile$"
   expected_col_name <- "sector_profile"
-  expect_true(expected_col_name %in% colnames(result))
+  expect_equal(grep(actual_col_name, names(result), value = TRUE), expected_col_name)
 })
 
 test_that("rename_118() function is not applied if issue #118 is not addressed", {
   withr::local_options(tiltIndicatorAfter.dissable_issue_118 = TRUE)
+  local_options(readr.show_col_types = FALSE)
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
+
+  europages_companies <- read_csv(toy_europages_companies()) |> head(1)
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(1)
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(1)
+  isic_name <- read_csv(toy_isic_name()) |> head(1)
 
   result <- profile_sector(
     companies,
     scenarios,
-    europages_companies = ep_companies,
+    europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   ) |>
-    unnest_product()
+    unnest_company()
 
+  actual_col_name <- "PSTR_risk_category"
   expected_col_name <- "PSTR_risk_category"
-  expect_true(expected_col_name %in% colnames(result))
+  expect_equal(grep(actual_col_name, names(result), value = TRUE), expected_col_name)
 })
