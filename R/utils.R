@@ -85,6 +85,6 @@ rename_118 <- function(data) {
       sector_profile_upstream_share = "ISTR_share",
       sector_scenario = "sector",
       subsector_scenario = "subsector",
-      reduction_targets = "profile_ranking"))
-    )
+      reduction_targets = "profile_ranking"
+    )))
 }

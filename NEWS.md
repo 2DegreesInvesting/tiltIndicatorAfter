@@ -1,4 +1,20 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# tiltIndicatorAfter 0.0.0.9018 (2024-01-17)
+
+In the output of all `profile_*()` functions these columns now have new names (#118):
+
+* `PCTR_risk_category` -> `emission_profile`
+* `PCTR_share` -> `emission_profile_share`
+* `ICTR_risk_category` -> `emission_usptream_profile`
+* `ICTR_share` -> `emission_usptream_profile_share`
+* `PSTR_risk_category` -> `sector_profile`
+* `PSTR_share` -> `sector_profile_share`
+* `ISTR_risk_category` -> `sector_profile_upstream`
+* `ISTR_share` -> `sector_profile_upstream_share`
+* `sector` -> `sector_scenario`
+* `subsector` -> `subsector_scenario`
+* `profile_ranking` -> `reduction_targets`
 
 # tiltIndicatorAfter 0.0.0.9017 (2024-01-16)
 
