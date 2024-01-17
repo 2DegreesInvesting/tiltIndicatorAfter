@@ -5,10 +5,10 @@ test_that("total number of rows for a comapny is either 1, 2 or 4", {
 
   out <- prepare_pstr_product(
     product,
-    ep_companies,
-    ecoinvent_activities,
-    small_matches_mapper,
-    isic
+    read_csv(toy_europages_companies()),
+    read_csv(toy_ecoinvent_activities()),
+    read_csv(toy_ecoinvent_europages()),
+    read_csv(toy_isic_name())
   ) |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
     summarise(count = n())
@@ -22,12 +22,17 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *profile$ risk co
   scenarios_that_yields_na <- read_csv(toy_sector_profile_any_scenarios()) |>
     head(1)
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   result <- profile_sector(
     companies,
     scenarios_that_yields_na,
-    europages_companies = ep_companies,
+    europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   ) |>
     unnest_product()
@@ -49,12 +54,17 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk co
   scenarios_that_yields_na <- read_csv(toy_sector_profile_any_scenarios()) |>
     head(1)
 
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
   result <- profile_sector(
     companies,
     scenarios_that_yields_na,
-    europages_companies = ep_companies,
+    europages_companies = europages_companies,
     ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = small_matches_mapper,
+    ecoinvent_europages = ecoinvent_europages,
     isic = isic_name
   ) |>
     unnest_product()

@@ -15,15 +15,15 @@ prepare_istr_company(
 )
 }
 \arguments{
-\item{comp}{A dataframe like \link{ep_companies}}
+\item{comp}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_europages_companies()}}}
 
-\item{eco_activities}{A dataframe like \link{ecoinvent_activities}}
+\item{eco_activities}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_activities()}}}
 
-\item{match_mapper}{A dataframe like \link{matches_mapper}}
+\item{match_mapper}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_europages()}}}
 
-\item{eco_inputs}{A dataframe like \link{ecoinvent_inputs}}
+\item{eco_inputs}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_ecoinvent_inputs()}}}
 
-\item{isic_tilt_map}{A dataframe like \link{isic_name}}
+\item{isic_tilt_map}{A dataframe like \code{\link[tiltToyData:toy_files]{tiltToyData::toy_isic_name()}}}
 }
 \value{
 A dataframe that prepares the final output of ictr_company
