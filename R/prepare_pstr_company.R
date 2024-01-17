@@ -27,7 +27,8 @@ prepare_pstr_company <- function(pstr_comp, pstr_prod, comp, eco_activities, mat
     select(-c("type")) |>
     relocate_pstr_company() |>
     arrange(.data$companies_id) |>
-    distinct()
+    distinct() |>
+    rename_118()
 }
 
 rename_pstr_company <- function(data) {
