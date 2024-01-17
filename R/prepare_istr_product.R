@@ -16,7 +16,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
 
   istr_prod |>
     left_join(eco_inputs, by = "input_activity_uuid_product_uuid") |>
-    select(-c("input_activity_uuid_product_uuid")) |>
+    select(-c("input_activity_uuid_product_uuid", "extra_rowid")) |>
     distinct() |>
     left_join(comp, by = "companies_id") |>
     left_join(isic_tilt_map, by = join_by("input_isic_4digit" == "isic_4digit")) |>
