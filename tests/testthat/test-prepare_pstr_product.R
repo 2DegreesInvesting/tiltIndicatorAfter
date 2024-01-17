@@ -15,7 +15,7 @@ test_that("total number of rows for a comapny is either 1, 2 or 4", {
   expect_true(all(unique(out$count) %in% c(1, 2, 4)))
 })
 
-test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", {
+test_that("'empty' tiltIndicator results yield at most 1 NA in *profile$ risk column", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_sector_profile_companies())
@@ -37,7 +37,7 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
   ) |>
     unnest_product()
 
-  na <- filter(result, is.na(get_column(result, "risk_category")))
+  na <- filter(result, is.na(get_column(result, "profile$")))
   # Ensure we have many missing values
   stopifnot(nrow(na) > 5)
   # Ensure we have many companies
@@ -47,7 +47,7 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *risk_category", 
   expect_equal(unique(number_of_na_per_company), 1)
 })
 
-test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category", {
+test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk column", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_sector_profile_companies())
@@ -69,7 +69,7 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` for no risk category
   ) |>
     unnest_product()
 
-  na <- filter(result, is.na(get_column(result, "risk_category")))
+  na <- filter(result, is.na(get_column(result, "profile$")))
   # Ensure we have many missing values
   stopifnot(nrow(na) > 5)
   # Ensure we have many companies

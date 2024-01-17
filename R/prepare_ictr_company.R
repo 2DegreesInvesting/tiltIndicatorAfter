@@ -37,7 +37,8 @@ prepare_ictr_company <- function(ictr_comp, ictr_prod, comp, eco_activities, mat
     ) |>
     relocate_ictr_company() |>
     arrange(.data$companies_id) |>
-    distinct()
+    distinct() |>
+    rename_118()
 }
 
 rename_ictr_company <- function(data) {

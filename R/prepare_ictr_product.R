@@ -31,7 +31,8 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
       "matching_certainty_num", "avg_matching_certainty_num", "geography"
     )) |>
     arrange(.data$country) |>
-    distinct()
+    distinct() |>
+    rename_118()
 }
 
 rename_ictr_product <- function(data) {

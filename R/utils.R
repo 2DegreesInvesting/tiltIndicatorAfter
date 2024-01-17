@@ -66,3 +66,25 @@ stop_if_some_columns_have_more_than_one_unique_value <- function(matches_mapp) {
   }
   invisible(matches_mapp)
 }
+
+# To disable this renaming function use: options(tiltIndicatorAfter.dissable_issue_118 = TRUE)
+rename_118 <- function(data) {
+  if (getOption("tiltIndicatorAfter.dissable_issue_118", default = FALSE)) {
+    return(data)
+  }
+
+  data |>
+    rename(any_of(c(
+      emission_profile = "PCTR_risk_category",
+      emission_profile_share = "PCTR_share",
+      emission_usptream_profile = "ICTR_risk_category",
+      emission_usptream_profile_share = "ICTR_share",
+      sector_profile = "PSTR_risk_category",
+      sector_profile_share = "PSTR_share",
+      sector_profile_upstream = "ISTR_risk_category",
+      sector_profile_upstream_share = "ISTR_share",
+      sector_scenario = "sector",
+      subsector_scenario = "subsector",
+      reduction_targets = "profile_ranking"))
+    )
+}
