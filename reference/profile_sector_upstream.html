@@ -157,7 +157,7 @@ risk products.</p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 196 × 28</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 196 × 27</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id    company_name country sector_profile scenario  year ep_product</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> fleischerei-st… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high           IPR 1.5…  <span style="text-decoration: underline;">2</span>030 steel     </span>
@@ -171,7 +171,7 @@ risk products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> fleischerei-st… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low            stated …  <span style="text-decoration: underline;">2</span>040 steel     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fleischerei-st… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      medium         announc…  <span style="text-decoration: underline;">2</span>040 steel     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 186 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21 more variables: matched_activity_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more variables: matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tilt_subsector &lt;chr&gt;, multi_match &lt;lgl&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, company_city &lt;chr&gt;,</span></span>
@@ -220,7 +220,7 @@ risk products.</p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 704 × 31</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 662 × 30</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id       company_name country sector_profile_upstr…¹ scenario  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> fleischerei-stief… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low                    stated …  <span style="text-decoration: underline;">2</span>020</span>
@@ -233,9 +233,9 @@ risk products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> fleischerei-stief… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   announc…  <span style="text-decoration: underline;">2</span>050</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> fleischerei-stief… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low                    net zer…  <span style="text-decoration: underline;">2</span>020</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> fleischerei-stief… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   net zer…  <span style="text-decoration: underline;">2</span>030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 694 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 652 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​sector_profile_upstream</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 25 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 24 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   multi_match &lt;lgl&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, input_name &lt;chr&gt;,</span></span>
