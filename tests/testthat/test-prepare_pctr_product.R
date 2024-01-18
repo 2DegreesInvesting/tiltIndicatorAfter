@@ -49,6 +49,7 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
   # TODO: Rewrite to call the new API
+  skip("FIXME using correct toy datasets of tiltIndicatorAfter from tiltToyData")
   id <- "id3"
   clustered_one <- "alarm system"
   clustered_two <- "aluminium"

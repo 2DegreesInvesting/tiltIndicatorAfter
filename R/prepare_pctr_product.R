@@ -19,7 +19,7 @@ prepare_pctr_product <- function(pctr_prod, comp, eco_activities, match_mapper, 
     rename_pctr_product() |>
     mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
-      "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint"
+      "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint", "extra_rowid"
     )) |>
     arrange(.data$country) |>
     distinct() |>
