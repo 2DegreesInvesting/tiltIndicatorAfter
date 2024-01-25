@@ -77,8 +77,8 @@ rename_118 <- function(data) {
     rename(any_of(c(
       emission_profile = "PCTR_risk_category",
       emission_profile_share = "PCTR_share",
-      emission_usptream_profile = "ICTR_risk_category",
-      emission_usptream_profile_share = "ICTR_share",
+      emission_upstream_profile = "ICTR_risk_category",
+      emission_upstream_profile_share = "ICTR_share",
       sector_profile = "PSTR_risk_category",
       sector_profile_share = "PSTR_share",
       sector_profile_upstream = "ISTR_risk_category",
