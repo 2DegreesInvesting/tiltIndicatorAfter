@@ -16,7 +16,8 @@
       [21] "address"                            "main_activity"                     
       [23] "activity_uuid_product_uuid"         "reduction_targets"                 
       [25] "input_isic_4digit"                  "sector_scenario"                   
-      [27] "subsector_scenario"                 "input_isic_4digit_name"            
+      [27] "subsector_scenario"                 "ei_input_geography"                
+      [29] "input_isic_4digit_name"             "ei_geography"                      
 
 ---
 

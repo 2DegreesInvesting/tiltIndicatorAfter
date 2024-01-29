@@ -14,7 +14,7 @@
       [17] "company_city"                       "postcode"                          
       [19] "address"                            "main_activity"                     
       [21] "activity_uuid_product_uuid"         "reduction_targets"                 
-      [23] "geography"                         
+      [23] "ei_geography"                      
 
 ---
 

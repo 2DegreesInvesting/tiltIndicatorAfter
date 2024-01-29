@@ -140,3 +140,27 @@ test_that("doesn't pad `*isic*`", {
   actual <- rm_na(unique(unnest_product(out)$input_isic_4digit))
   expect_equal(actual, "1")
 })
+
+test_that("`ei_geography` and `input_ei_grougraphy` columns are present at product level output", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_inputs,
+    ecoinvent_europages,
+    isic_name
+  ) |> unnest_product()
+
+  expect_true(all(c("ei_geography", "ei_input_geography") %in% names(out)))
+})

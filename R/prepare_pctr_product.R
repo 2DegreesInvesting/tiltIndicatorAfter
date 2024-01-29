@@ -35,7 +35,8 @@ rename_pctr_product <- function(data) {
       benchmark = "grouped_by",
       PCTR_risk_category = "risk_category",
       ep_product = "clustered",
-      isic_4digit_name = "isic_4digit_name_ecoinvent"
+      isic_4digit_name = "isic_4digit_name_ecoinvent",
+      ei_geography = "geography"
     )
 }
 
