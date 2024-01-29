@@ -44,11 +44,11 @@ profile_sector_upstream(
 
 \item{isic_tilt}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
-\item{low_threshold}{A numeric value to segment low and medium transition
-risk products.}
+\item{low_threshold}{A numeric value to segment low and medium emission
+profile products.}
 
-\item{high_threshold}{A numeric value to segment medium and high transition
-risk products.}
+\item{high_threshold}{A numeric value to segment medium and high emission
+profile products.}
 
 \item{ecoinvent_inputs}{Dataframe. Upstream products from ecoinvent.}
 }

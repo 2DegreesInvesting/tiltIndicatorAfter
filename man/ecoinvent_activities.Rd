@@ -5,7 +5,7 @@
 \alias{ecoinvent_activities}
 \title{Deprecated in favor of an equivalent dataset in tiltToyData}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 100 rows and 5 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 3 rows and 5 columns.
 }
 \usage{
 ecoinvent_activities

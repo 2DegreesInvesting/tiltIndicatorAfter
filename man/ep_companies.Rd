@@ -5,7 +5,7 @@
 \alias{ep_companies}
 \title{Deprecated in favor of an equivalent dataset in tiltToyData}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 3 rows and 7 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 76 rows and 8 columns.
 }
 \usage{
 ep_companies
