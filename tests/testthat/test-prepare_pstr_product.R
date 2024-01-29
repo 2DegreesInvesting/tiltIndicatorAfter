@@ -1,17 +1,26 @@
 test_that("total number of rows for a comapny is either 1, 2 or 4", {
-  skip("FIXME unexpected result")
+  # this test is applied on real data to ascertain that number of rows can either be 1, 2, or 4
 
-  product <- unnest_product(toy_sector_profile_output())
+  companies <- read_csv(toy_sector_profile_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
 
-  out <- prepare_pstr_product(
-    product,
-    read_csv(toy_europages_companies()),
-    read_csv(toy_ecoinvent_activities()),
-    read_csv(toy_ecoinvent_europages()),
-    read_csv(toy_isic_name())
-  ) |>
+  product <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  ) |> unnest_product()
+
+  out <- product |>
     group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
     summarise(count = n())
+
   expect_true(all(unique(out$count) %in% c(1, 2, 4)))
 })
 

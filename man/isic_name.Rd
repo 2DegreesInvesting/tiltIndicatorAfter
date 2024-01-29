@@ -5,7 +5,7 @@
 \alias{isic_name}
 \title{Deprecated in favor of an equivalent dataset in tiltToyData}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 182 rows and 2 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 14 rows and 2 columns.
 }
 \usage{
 isic_name

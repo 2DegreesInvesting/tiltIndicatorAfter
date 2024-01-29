@@ -4,11 +4,11 @@ test_that("characterize columns", {
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
-  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic_name <- read_csv(toy_isic_name()) |> head(3)
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  isic_name <- read_csv(toy_isic_name())
 
   out <- profile_sector_upstream(
     companies,
@@ -32,11 +32,11 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
-  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic_name <- read_csv(toy_isic_name()) |> head(3)
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  isic_name <- read_csv(toy_isic_name())
 
   # New API
   out <- profile_sector_upstream(
@@ -59,23 +59,25 @@ test_that("the new API is equivalent to the old API except for extra columns", {
   x <- select(.product, -any_of(names(y)), extra_rowid())
   product <- left_join(x, y, relationship = "many-to-many", by = extra_rowid())
   company <- unnest_company(output)
+  europages_companies_old <- select_europages_companies(europages_companies)
+  ecoinvent_inputs_old <- select_ecoinvent_inputs(ecoinvent_inputs)
 
   out_product <- prepare_istr_product(
     product,
-    europages_companies,
+    europages_companies_old,
     ecoinvent_activities,
     ecoinvent_europages,
-    ecoinvent_inputs,
+    ecoinvent_inputs_old,
     isic_name
   )
 
   out_company <- prepare_istr_company(
     company,
     product,
-    europages_companies,
+    europages_companies_old,
     ecoinvent_activities,
     ecoinvent_europages,
-    ecoinvent_inputs,
+    ecoinvent_inputs_old,
     isic_name
   )
 
@@ -95,11 +97,11 @@ test_that("the output at product level has columns matching isic and sector", {
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
-  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic_name <- read_csv(toy_isic_name()) |> head(3)
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  isic_name <- read_csv(toy_isic_name())
 
   out <- profile_sector_upstream(
     companies,
@@ -125,11 +127,11 @@ test_that("doesn't pad `*isic*`", {
   inputs <- read_csv(toy_sector_profile_upstream_products())
   inputs$input_isic_4digit <- "1"
 
-  europages_companies <- read_csv(toy_europages_companies()) |> head(3)
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |> head(3)
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(3)
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs()) |> head(3)
-  isic_name <- read_csv(toy_isic_name()) |> head(3)
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  isic_name <- read_csv(toy_isic_name())
 
   out <- profile_sector_upstream(
     companies,

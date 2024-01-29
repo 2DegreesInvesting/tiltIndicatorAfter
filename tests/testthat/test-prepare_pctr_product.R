@@ -48,33 +48,30 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
 })
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
-  # TODO: Rewrite to call the new API
-  skip("FIXME using correct toy datasets of tiltIndicatorAfter from tiltToyData")
-  id <- "id3"
-  clustered_one <- "alarm system"
-  clustered_two <- "aluminium"
-  uuid_one <- "3d731062-1960-5a36-bd19-6ab2b0bf67c2_245732f4-a5ce-4881-816b-a207ba8df4c8"
-  uuid_two <- "ff4fd9d9-7dcb-5a50-926f-76ae31fa454d_618bf4eb-bee5-4d38-8e4f-78cfebf779be"
+  local_options(readr.show_col_types = FALSE)
 
-  product <- tibble(
-    companies_id = id,
-    grouped_by = "a",
-    risk_category = "a",
-    clustered = c(clustered_one, clustered_one, clustered_two),
-    activity_uuid_product_uuid = c(uuid_one, uuid_one, uuid_two),
-    co2_footprint = "a",
-    tilt_sector = "a",
-    tilt_subsector = "a",
-    isic_4digit = "a"
-  )
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
 
-  result <- prepare_pctr_product(
-    product,
-    read_csv(toy_europages_companies()),
-    read_csv(toy_ecoinvent_activities()),
-    read_csv(toy_ecoinvent_europages()),
-    read_csv(toy_isic_name())
-  )
+  product <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_product()
 
-  expect_equal(unique(result$matching_certainty_company_average), "low")
+  count <- product |>
+    summarise(
+      n_distinct_matching_certainity_per_company = n_distinct(matching_certainty_company_average),
+      .by = companies_id
+    )
+
+  expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
 })

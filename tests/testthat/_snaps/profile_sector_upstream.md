@@ -17,7 +17,6 @@
       [23] "activity_uuid_product_uuid"         "reduction_targets"                 
       [25] "input_isic_4digit"                  "sector_scenario"                   
       [27] "subsector_scenario"                 "input_isic_4digit_name"            
-      [29] "ep_id"                              "category"                          
 
 ---
 

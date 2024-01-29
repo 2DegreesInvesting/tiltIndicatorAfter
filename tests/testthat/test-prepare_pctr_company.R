@@ -1,10 +1,8 @@
 test_that("total number of rows for a comapny is either 1 or 3", {
-  skip("FIXME the result is unexpected")
-
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
@@ -29,7 +27,7 @@ test_that("handles numeric `isic*` in `co2`", {
   local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
@@ -49,38 +47,30 @@ test_that("handles numeric `isic*` in `co2`", {
 })
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
-  # TODO: Rewrite to call the new API
-  id <- "id3"
-  clustered <- "alarm system"
-  uuid <- "3d731062-1960-5a36-bd19-6ab2b0bf67c2_245732f4-a5ce-4881-816b-a207ba8df4c8"
+  local_options(readr.show_col_types = FALSE)
 
-  product <- tibble(
-    companies_id = id,
-    grouped_by = "a",
-    risk_category = "a",
-    clustered = clustered,
-    activity_uuid_product_uuid = uuid,
-    co2_footprint = "a",
-    tilt_sector = "a",
-    tilt_subsector = "a",
-    isic_4digit = "a"
-  )
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
 
-  company <- tibble(
-    companies_id = id,
-    grouped_by = "a",
-    risk_category = c("high", "medium"),
-    value = 1.0
-  )
+  company <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_company()
 
-  result <- prepare_pctr_company(
-    company,
-    product,
-    read_csv(toy_europages_companies()),
-    read_csv(toy_ecoinvent_activities()),
-    read_csv(toy_ecoinvent_europages()),
-    read_csv(toy_isic_name())
-  )
+  count <- company |>
+    summarise(
+      n_distinct_matching_certainity_per_company = n_distinct(matching_certainty_company_average),
+      .by = companies_id
+    )
 
-  expect_equal(unique(result$matching_certainty_company_average), "low")
+  expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
 })
