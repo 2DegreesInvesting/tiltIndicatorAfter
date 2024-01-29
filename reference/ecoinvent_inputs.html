@@ -56,50 +56,69 @@
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>An object of class <code>spec_tbl_df</code> (inherits from <code>tbl_df</code>, <code>tbl</code>, <code>data.frame</code>) with 52 rows and 3 columns.</p>
+    <p>An object of class <code>spec_tbl_df</code> (inherits from <code>tbl_df</code>, <code>tbl</code>, <code>data.frame</code>) with 16 rows and 9 columns.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ecoinvent_inputs</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`ecoinvent_inputs` was deprecated in 0.0.0.9017. Please use `readr::read_csv(tiltToyData::toy_ecoinvent_inputs())`.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 52 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    input_activity_uuid_product_uuid             exchange_name exchange_unit_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44c… aluminium, w… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 3b190359-a32e-5294-af63-983f38ce6525_759b89… electricity,… kWh               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 62b803ad-e3ff-516b-947d-f08eea52c702_fbb039… copper, cath… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 372a1991-e0af-5fbf-8611-295a535373ad_9ba482… reinforcing … kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 531db396-1434-54e5-b6c4-c2b4323471cb_751b5e… stone wool, … kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> c93a2afc-7e58-50b6-af0e-586f71a3de0e_bfd577… waste minera… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 3a29c9e0-4183-588d-95a9-502b55d2c513_bfd577… waste minera… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2330b528-6e31-5a99-9801-73834e2a835f_6f2eb4… waste wood, … kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 79d6450d-f9ad-5619-89c3-05c8d7622af3_b0f4c2… diesel, burn… MJ                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 044043d2-bdfc-55f1-9d2d-e8431d5266c7_8cb650… steel, low-a… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 42 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    activity_uuid_produc…¹ activity_name product_geography input_activity_uuid_…²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 833caa78-30df-4374-90… market for d… tilt_world        f8b471d4-b6b5-4e91-91…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 76269c17-78d6-420b-99… market for s… tilt_world        44e5e288-4f81-40d0-88…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        9cdbbd45-c7e6-4308-aa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        983dd322-ac70-4167-af…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        7191f33c-f13f-4228-80…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        c58df129-466c-44c5-85…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        3a920a69-f567-4c9d-b7…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        cd68b4bd-d6ea-437f-95…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        875cd7e3-19a7-45e0-80…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        dd83290a-ca62-448c-81…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        6d77c0f7-076c-4e92-b0…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        e2e4b62e-300c-4418-aa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        f4650b0c-02a4-4a1b-82…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        0014714d-33d9-46f1-8c…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        0428e3ea-d934-4df8-aa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        35f71ed6-0c7e-4238-a3…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated names: ¹​activity_uuid_product_uuid,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​input_activity_uuid_product_uuid</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: exchange_name &lt;chr&gt;, input_geography &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   exchange_unit_name &lt;chr&gt;, input_priority &lt;dbl&gt;, ecoinvent_geography &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># -&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu">tiltToyData</span><span class="fu">::</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_inputs</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">52</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">3</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">16</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">9</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (3): input_activity_uuid_product_uuid, exchange_name, exchange_unit_name</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (8): activity_uuid_product_uuid, activity_name, product_geography, input...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">dbl</span> (1): input_priority</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 52 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    input_activity_uuid_product_uuid             exchange_name exchange_unit_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 7ac71fd7-a65b-5f2c-9289-7335f9945c11_fef44c… aluminium, w… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 3b190359-a32e-5294-af63-983f38ce6525_759b89… electricity,… kWh               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 62b803ad-e3ff-516b-947d-f08eea52c702_fbb039… copper, cath… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 372a1991-e0af-5fbf-8611-295a535373ad_9ba482… reinforcing … kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 531db396-1434-54e5-b6c4-c2b4323471cb_751b5e… stone wool, … kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> c93a2afc-7e58-50b6-af0e-586f71a3de0e_bfd577… waste minera… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 3a29c9e0-4183-588d-95a9-502b55d2c513_bfd577… waste minera… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2330b528-6e31-5a99-9801-73834e2a835f_6f2eb4… waste wood, … kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 79d6450d-f9ad-5619-89c3-05c8d7622af3_b0f4c2… diesel, burn… MJ                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 044043d2-bdfc-55f1-9d2d-e8431d5266c7_8cb650… steel, low-a… kg                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 42 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    activity_uuid_produc…¹ activity_name product_geography input_activity_uuid_…²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 833caa78-30df-4374-90… market for d… tilt_world        f8b471d4-b6b5-4e91-91…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 76269c17-78d6-420b-99… market for s… tilt_world        44e5e288-4f81-40d0-88…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        9cdbbd45-c7e6-4308-aa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        983dd322-ac70-4167-af…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        7191f33c-f13f-4228-80…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        c58df129-466c-44c5-85…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        3a920a69-f567-4c9d-b7…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        cd68b4bd-d6ea-437f-95…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        875cd7e3-19a7-45e0-80…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        dd83290a-ca62-448c-81…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        6d77c0f7-076c-4e92-b0…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        e2e4b62e-300c-4418-aa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        f4650b0c-02a4-4a1b-82…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        0014714d-33d9-46f1-8c…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        0428e3ea-d934-4df8-aa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> bf94b5a7-b7a2-46d1-bb… iron-nickel-… tilt_world        35f71ed6-0c7e-4238-a3…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated names: ¹​activity_uuid_product_uuid,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​input_activity_uuid_product_uuid</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: exchange_name &lt;chr&gt;, input_geography &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   exchange_unit_name &lt;chr&gt;, input_priority &lt;dbl&gt;, ecoinvent_geography &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

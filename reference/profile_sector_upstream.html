@@ -108,13 +108,13 @@ tiltIndicator."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
 
 
 <dt>low_threshold</dt>
-<dd><p>A numeric value to segment low and medium transition
-risk products.</p></dd>
+<dd><p>A numeric value to segment low and medium emission
+profile products.</p></dd>
 
 
 <dt>high_threshold</dt>
-<dd><p>A numeric value to segment medium and high transition
-risk products.</p></dd>
+<dd><p>A numeric value to segment medium and high emission
+profile products.</p></dd>
 
 
 <dt>ecoinvent_inputs</dt>
@@ -157,7 +157,7 @@ risk products.</p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 304 × 27</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 304 × 25</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id    company_name country sector_profile scenario  year ep_product</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> antimonarchy_c… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      medium         1.5C RPS  <span style="text-decoration: underline;">2</span>030 tent      </span>
@@ -171,11 +171,11 @@ risk products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> nonphilosophic… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      low            1.5C RPS  <span style="text-decoration: underline;">2</span>030 surface e…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> nonphilosophic… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high           1.5C RPS  <span style="text-decoration: underline;">2</span>050 surface e…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 294 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more variables: matched_activity_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18 more variables: matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tilt_subsector &lt;chr&gt;, multi_match &lt;lgl&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, company_city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   activity_uuid_product_uuid &lt;chr&gt;, reduction_targets &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -195,7 +195,7 @@ risk products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 854 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: scenario &lt;chr&gt;, year &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, company_city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -220,22 +220,22 @@ risk products.</p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 436 × 30</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 436 × 28</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id       company_name country sector_profile_upstr…¹ scenario  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> antimonarchy_cani… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      medium                 1.5C RPS  <span style="text-decoration: underline;">2</span>030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> antimonarchy_cani… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   1.5C RPS  <span style="text-decoration: underline;">2</span>050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> antimonarchy_cani… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   NZ 2050   <span style="text-decoration: underline;">2</span>030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> antimonarchy_cani… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   NZ 2050   <span style="text-decoration: underline;">2</span>050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotom… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      medium                 1.5C RPS  <span style="text-decoration: underline;">2</span>030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotom… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   1.5C RPS  <span style="text-decoration: underline;">2</span>050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotom… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   NZ 2050   <span style="text-decoration: underline;">2</span>030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotom… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   NZ 2050   <span style="text-decoration: underline;">2</span>050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> quasifaithful_amp… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      medium                 1.5C RPS  <span style="text-decoration: underline;">2</span>030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> quasifaithful_amp… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>      high                   1.5C RPS  <span style="text-decoration: underline;">2</span>050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> leathery_acornwoo… leathery_ac… germany medium                 1.5C RPS  <span style="text-decoration: underline;">2</span>030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> leathery_acornwoo… leathery_ac… germany high                   1.5C RPS  <span style="text-decoration: underline;">2</span>050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> leathery_acornwoo… leathery_ac… germany high                   NZ 2050   <span style="text-decoration: underline;">2</span>030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> leathery_acornwoo… leathery_ac… germany high                   NZ 2050   <span style="text-decoration: underline;">2</span>050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> warriorlike_grays… warriorlike… germany medium                 1.5C RPS  <span style="text-decoration: underline;">2</span>030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> warriorlike_grays… warriorlike… germany high                   1.5C RPS  <span style="text-decoration: underline;">2</span>050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> warriorlike_grays… warriorlike… germany high                   NZ 2050   <span style="text-decoration: underline;">2</span>030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> warriorlike_grays… warriorlike… germany high                   NZ 2050   <span style="text-decoration: underline;">2</span>050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> automotive_alaska… automotive_… germany medium                 1.5C RPS  <span style="text-decoration: underline;">2</span>030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> automotive_alaska… automotive_… germany high                   1.5C RPS  <span style="text-decoration: underline;">2</span>050</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 426 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​sector_profile_upstream</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 24 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more variables: ep_product &lt;chr&gt;, matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, unit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   multi_match &lt;lgl&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, input_name &lt;chr&gt;,</span></span>
@@ -243,22 +243,23 @@ risk products.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 864 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id        company_name country sector_profile_upstream_share</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> antimonarchy_canine <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>                                  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id             company_name          country sector_profile_upstr…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> leathery_acornwoodpecker leathery_acornwoodpe… germany                      1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 854 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​sector_profile_upstream_share</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: sector_profile_upstream &lt;chr&gt;, scenario &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   year &lt;chr&gt;, matching_certainty_company_average &lt;chr&gt;, company_city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;dbl&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
