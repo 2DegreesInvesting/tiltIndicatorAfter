@@ -27,7 +27,7 @@ prepare_istr_product <- function(istr_prod, comp, eco_activities, match_mapper, 
     relocate_istr_product() |>
     rename_istr_product() |>
     mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
-    select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type", "geography")) |>
+    select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type")) |>
     distinct() |>
     arrange(.data$country) |>
     rename_118()
@@ -43,7 +43,9 @@ rename_istr_product <- function(data) {
       ISTR_risk_category = "risk_category",
       input_name = "exchange_name",
       input_unit = "exchange_unit_name",
-      input_isic_4digit_name = "isic_4digit_name_ecoinvent"
+      input_isic_4digit_name = "isic_4digit_name_ecoinvent",
+      ei_geography = "geography",
+      ei_input_geography = "input_geography"
     )
 }
 

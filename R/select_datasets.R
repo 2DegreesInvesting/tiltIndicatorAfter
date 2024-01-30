@@ -17,7 +17,8 @@ select_ecoinvent_inputs <- function(data) {
     select(
       "input_activity_uuid_product_uuid",
       "exchange_name",
-      "exchange_unit_name"
+      "exchange_unit_name",
+      "input_geography"
     ) |>
     distinct()
 }

@@ -28,7 +28,7 @@ prepare_ictr_product <- function(ictr_prod, comp, eco_activities, match_mapper, 
     rename_ictr_product() |>
     mutate(benchmark = ifelse(is.na(.data$ICTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
-      "matching_certainty_num", "avg_matching_certainty_num", "geography", "extra_rowid"
+      "matching_certainty_num", "avg_matching_certainty_num", "extra_rowid"
     )) |>
     arrange(.data$country) |>
     distinct() |>
@@ -46,7 +46,9 @@ rename_ictr_product <- function(data) {
       ICTR_risk_category = "risk_category",
       input_name = "exchange_name",
       input_unit = "exchange_unit_name",
-      input_isic_4digit_name = "isic_4digit_name_ecoinvent"
+      input_isic_4digit_name = "isic_4digit_name_ecoinvent",
+      ei_geography = "geography",
+      ei_input_geography = "input_geography"
     )
 }
 
