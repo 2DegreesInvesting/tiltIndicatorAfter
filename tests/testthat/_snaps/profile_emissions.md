@@ -13,7 +13,7 @@
       [15] "isic_4digit"                        "isic_4digit_name"                  
       [17] "company_city"                       "postcode"                          
       [19] "address"                            "main_activity"                     
-      [21] "activity_uuid_product_uuid"         "reduction_targets"                 
+      [21] "activity_uuid_product_uuid"         "profile_ranking"                   
       [23] "ei_geography"                      
 
 ---

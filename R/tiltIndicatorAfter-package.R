@@ -10,6 +10,7 @@
 #' @importFrom dplyr distinct
 #' @importFrom dplyr everything
 #' @importFrom dplyr filter
+#' @importFrom dplyr full_join
 #' @importFrom dplyr group_by
 #' @importFrom dplyr join_by
 #' @importFrom dplyr left_join
