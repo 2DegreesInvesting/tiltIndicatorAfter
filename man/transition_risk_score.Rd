@@ -2,17 +2,37 @@
 % Please edit documentation in R/transition_risk_score.R
 \name{transition_risk_score}
 \alias{transition_risk_score}
-\title{Calculate the Transition Risk Score at product and company levels
-.}
+\title{Transition Risk Score}
 \usage{
-transition_risk_score(emissions_at_product_level, sector_at_product_level)
+transition_risk_score(
+  emissions_profile_at_product_level,
+  sector_profile_at_product_level
+)
 }
 \arguments{
-\item{emissions_at_product_level}{Emissions profile at product level result.}
+\item{emissions_profile_at_product_level}{Dataframe. Emissions profile product level output}
 
-\item{sector_at_product_level}{Sector profile at product level result.}
+\item{sector_profile_at_product_level}{Dataframe. Sector profile product level output}
 }
 \description{
-Calculate the Transition Risk Score at product and company levels
-.
+Calulate Transition Risk Score at product level and company level
 }
+\examples{
+library(dplyr)
+library(readr, warn.conflicts = FALSE)
+
+emissions_profile_at_product_level <- example_emissions_profile_at_product_level()
+sector_profile_at_product_level <- example_sector_profile_at_product_level()
+
+result <- transition_risk_score(emissions_profile_at_product_level, sector_profile_at_product_level)
+
+result |> unnest_product()
+
+result |> unnest_company()
+}
+\seealso{
+Other top-level functions: 
+\code{\link{profile_emissions}()},
+\code{\link{profile_sector}()}
+}
+\concept{top-level functions}

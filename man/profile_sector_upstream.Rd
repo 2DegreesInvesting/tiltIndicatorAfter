@@ -113,6 +113,7 @@ result |> unnest_company()
 }
 \seealso{
 Other top-level functions: 
-\code{\link{profile_emissions}()}
+\code{\link{profile_emissions}()},
+\code{\link{transition_risk_score}()}
 }
 \concept{top-level functions}
