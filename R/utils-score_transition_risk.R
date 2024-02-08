@@ -40,11 +40,11 @@ get_rows_union_for_common_cols <-
   function(emissions_at_product_level,
            sector_at_product_level) {
     emission_common_columns <- emissions_at_product_level |>
-      select(common_columns_emissions_sector()) |>
+      select(common_columns_emissions_sector_at_product_level()) |>
       distinct()
 
     sector_common_columns <- sector_at_product_level |>
-      select(common_columns_emissions_sector()) |>
+      select(common_columns_emissions_sector_at_product_level()) |>
       distinct()
 
     distinct(bind_rows(emission_common_columns, sector_common_columns))
@@ -69,15 +69,8 @@ product_level_trs_ranking_reduction_columns <- function() {
 }
 
 trs_company_columns <- function() {
-  c(
-    "companies_id",
-    "company_name",
-    "country",
-    "company_city",
-    "benchmark_tr_score",
-    "postcode",
-    "address",
-    "main_activity"
+  c(common_columns_emissions_sector_at_company_level(),
+    "benchmark_tr_score"
   )
 }
 
@@ -98,13 +91,13 @@ trs_company_output_columns <- function() {
 
 trs_product_output_columns <- function() {
   c(
-    common_columns_emissions_sector(),
+    common_columns_emissions_sector_at_product_level(),
     product_level_trs_ranking_reduction_columns(),
     "benchmark_tr_score"
   )
 }
 
-common_columns_emissions_sector <- function() {
+common_columns_emissions_sector_at_product_level <- function() {
   c(
     "companies_id",
     "company_name",
@@ -126,5 +119,17 @@ common_columns_emissions_sector <- function() {
     "isic_4digit",
     "isic_4digit_name",
     "ei_geography"
+  )
+}
+
+common_columns_emissions_sector_at_company_level <- function() {
+  c(
+    "companies_id",
+    "company_name",
+    "country",
+    "company_city",
+    "postcode",
+    "address",
+    "main_activity"
   )
 }
