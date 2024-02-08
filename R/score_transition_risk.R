@@ -7,21 +7,49 @@
 #'
 #' @family top-level functions
 #'
+#' @return A dataframe
 #' @export
 #'
 #' @examples
 #' library(dplyr)
 #' library(readr, warn.conflicts = FALSE)
+#' library(tiltToyData)
+#' options(readr.show_col_types = FALSE)
 #'
-#' emissions_profile_at_product_level <- example_emissions_profile_at_product_level()
-#' sector_profile_at_product_level <- example_sector_profile_at_product_level()
+#' emissions_companies <- read_csv(toy_emissions_profile_any_companies())
+#' products <- read_csv(toy_emissions_profile_products())
+#' europages_companies <- read_csv(toy_europages_companies())
+#' ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+#' ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+#' isic_name <- read_csv(toy_isic_name())
 #'
-#' result <- transition_risk_score(emissions_profile_at_product_level, sector_profile_at_product_level)
+#' emissions_profile_at_product_level <- profile_emissions(
+#'   companies = emissions_companies,
+#'   co2 = products,
+#'   europages_companies = europages_companies,
+#'   ecoinvent_activities = ecoinvent_activities,
+#'   ecoinvent_europages = ecoinvent_europages,
+#'   isic = isic_name
+#' ) |> unnest_product()
+#'
+#' sector_companies <- read_csv(toy_sector_profile_companies())
+#' scenarios <- read_csv(toy_sector_profile_any_scenarios())
+#'
+#' sector_profile_at_product_level <- profile_sector(
+#'   companies = sector_companies,
+#'   scenarios = scenarios,
+#'   europages_companies = europages_companies,
+#'   ecoinvent_activities = ecoinvent_activities,
+#'   ecoinvent_europages = ecoinvent_europages,
+#'   isic = isic_name
+#' ) |> unnest_product()
+#'
+#' result <- score_transition_risk(emissions_profile_at_product_level, sector_profile_at_product_level)
 #'
 #' result |> unnest_product()
 #'
 #' result |> unnest_company()
-transition_risk_score <- function(emissions_profile_at_product_level, sector_profile_at_product_level) {
+score_transition_risk <- function(emissions_profile_at_product_level, sector_profile_at_product_level) {
   union_emissions_sector_rows <- get_rows_union_for_common_cols(emissions_profile_at_product_level, sector_profile_at_product_level)
   trs_emissions <- prepare_trs_emissions(emissions_profile_at_product_level)
   trs_sector <- prepare_trs_sector(sector_profile_at_product_level)

@@ -4,7 +4,7 @@ test_that("outputs expected columns at product level", {
   sector_profile_at_product_level <- example_sector_profile_at_product_level() |>
     filter(companies_id == "antimonarchy_canine")
 
-  out <- transition_risk_score(emissions_profile_at_product_level, sector_profile_at_product_level) |>
+  out <- score_transition_risk(emissions_profile_at_product_level, sector_profile_at_product_level) |>
     unnest_product()
 
   expect_equal(sort(names(out)), sort(trs_product_output_columns()))
@@ -16,7 +16,7 @@ test_that("outputs expected columns at company level", {
   sector_profile_at_product_level <- example_sector_profile_at_product_level() |>
     filter(companies_id == "antimonarchy_canine")
 
-  out <- transition_risk_score(emissions_profile_at_product_level, sector_profile_at_product_level) |>
+  out <- score_transition_risk(emissions_profile_at_product_level, sector_profile_at_product_level) |>
     unnest_company()
 
   expect_equal(sort(names(out)), sort(trs_company_output_columns()))
@@ -30,7 +30,7 @@ test_that("`transition_risk_score` and `benchmark_tr_score` has NA due to
   sector_profile_at_product_level <- example_sector_profile_at_product_level() |>
     filter(companies_id %in% c("celestial_lovebird", "nonphilosophical_llama"))
 
-  out <- transition_risk_score(emissions_profile_at_product_level, sector_profile_at_product_level) |>
+  out <- score_transition_risk(emissions_profile_at_product_level, sector_profile_at_product_level) |>
     unnest_product()
 
   tr_score_na <- out |>
