@@ -9,8 +9,10 @@
 #' example_sector_profile_at_product_level()
 example_emissions_profile_at_product_level <- function() {
   local_options(readr.show_col_types = FALSE)
-  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
-  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+  toy_emissions_profile_products_ecoinvent <-
+    read_csv(toy_emissions_profile_products_ecoinvent())
+  toy_emissions_profile_any_companies <-
+    read_csv(toy_emissions_profile_any_companies())
   toy_europages_companies <- read_csv(toy_europages_companies())
   toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
   toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
@@ -33,8 +35,10 @@ example_emissions_profile_at_product_level <- function() {
 #' @rdname example_emissions_profile_at_product_level
 example_sector_profile_at_product_level <- function() {
   local_options(readr.show_col_types = FALSE)
-  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies())
+  toy_sector_profile_any_scenarios <-
+    read_csv(toy_sector_profile_any_scenarios())
+  toy_sector_profile_companies <-
+    read_csv(toy_sector_profile_companies())
   toy_europages_companies <- read_csv(toy_europages_companies())
   toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
   toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())

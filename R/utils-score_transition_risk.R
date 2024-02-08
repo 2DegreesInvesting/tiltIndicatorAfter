@@ -51,17 +51,21 @@ get_rows_union_for_common_cols <-
   }
 
 relocate_trs_columns <- function(columns) {
-  c("companies_id",
+  c(
+    "companies_id",
     "company_name",
     "country",
     "benchmark_tr_score",
-    columns)
+    columns
+  )
 }
 
 product_level_trs_ranking_reduction_columns <- function() {
-  c("transition_risk_score",
+  c(
+    "transition_risk_score",
     "profile_ranking",
-    "reduction_targets")
+    "reduction_targets"
+  )
 }
 
 trs_company_columns <- function() {
@@ -78,14 +82,18 @@ trs_company_columns <- function() {
 }
 
 trs_company_avg_columns <- function() {
-  c("transition_risk_score_avg",
+  c(
+    "transition_risk_score_avg",
     "profile_ranking_avg",
-    "reduction_targets_avg")
+    "reduction_targets_avg"
+  )
 }
 
 trs_company_output_columns <- function() {
-  c(trs_company_columns(),
-    trs_company_avg_columns())
+  c(
+    trs_company_columns(),
+    trs_company_avg_columns()
+  )
 }
 
 trs_product_output_columns <- function() {
