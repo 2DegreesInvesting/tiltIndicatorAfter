@@ -45,7 +45,8 @@ test_that("calculates `transition_risk_score` and `benchmark_tr_score` correctly
     out <-
       unnest_product(
         score_transition_risk(
-          emissions_profile_at_product_level, sector_profile_at_product_level
+          emissions_profile_at_product_level,
+          sector_profile_at_product_level
         )
       )
 
@@ -68,12 +69,43 @@ test_that("calculates `transition_risk_score_avg` correctly",
     out <-
       unnest_company(
         score_transition_risk(
-          emissions_profile_at_product_level, sector_profile_at_product_level
+          emissions_profile_at_product_level,
+          sector_profile_at_product_level
         )
       )
 
     expect_equal(out$transition_risk_score_avg, 0.212)
   })
+
+test_that(
+  "calculates `transition_risk_score_avg` correctly for unmatched `ep_product`
+          of a company",
+  {
+    emissions_profile_at_product_level <-
+      example_emissions_profile_at_product_level() |>
+      filter(
+        companies_id %in% c("nonphilosophical_llama"),
+        ep_product == "surface finishing, galvanic"
+      )
+    sector_profile_at_product_level <-
+      example_sector_profile_at_product_level() |>
+      filter(companies_id %in% c("nonphilosophical_llama"),
+             ep_product == "surface engineering")
+
+    out <-
+      unnest_company(
+        score_transition_risk(
+          emissions_profile_at_product_level,
+          sector_profile_at_product_level
+        )
+      )
+
+    # Both the ep_products are present only in one dataframe which will lead to
+    # unmatched results and thereafter Null in `transition_risk_score_avg` column
+    expect_equal(out$transition_risk_score_avg, NaN)
+  }
+)
+
 
 test_that(
   "`transition_risk_score` and `benchmark_tr_score` has NA due to
