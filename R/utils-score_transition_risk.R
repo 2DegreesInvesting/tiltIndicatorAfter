@@ -51,50 +51,39 @@ get_rows_union_for_common_cols <-
   }
 
 relocate_trs_columns <- function(columns) {
-  c(
-    "companies_id",
+  c("companies_id",
     "company_name",
     "country",
     "benchmark_tr_score",
-    columns
-  )
+    columns)
 }
 
-product_level_trs_ranking_reduction_columns <- function() {
-  c(
-    "transition_risk_score",
-    "profile_ranking",
-    "reduction_targets"
-  )
+product_level_trs_column <- function() {
+  c("transition_risk_score")
+}
+
+company_level_trs_avg_column <- function() {
+  c("transition_risk_score_avg")
 }
 
 trs_company_columns <- function() {
   c(common_columns_emissions_sector_at_company_level(),
-    "benchmark_tr_score"
-  )
-}
-
-trs_company_avg_columns <- function() {
-  c(
-    "transition_risk_score_avg",
-    "profile_ranking_avg",
-    "reduction_targets_avg"
-  )
-}
-
-trs_company_output_columns <- function() {
-  c(
-    trs_company_columns(),
-    trs_company_avg_columns()
-  )
+    "benchmark_tr_score")
 }
 
 trs_product_output_columns <- function() {
   c(
     common_columns_emissions_sector_at_product_level(),
-    product_level_trs_ranking_reduction_columns(),
+    product_level_trs_column(),
+    "profile_ranking",
+    "reduction_targets",
     "benchmark_tr_score"
   )
+}
+
+trs_company_output_columns <- function() {
+  c(trs_company_columns(),
+    company_level_trs_avg_column())
 }
 
 common_columns_emissions_sector_at_product_level <- function() {

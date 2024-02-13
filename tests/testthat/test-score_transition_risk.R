@@ -30,6 +30,50 @@ test_that("outputs expected columns at company level", {
   expect_equal(sort(names(out)), sort(trs_company_output_columns()))
 })
 
+test_that("calculates `transition_risk_score` and `benchmark_tr_score` correctly",
+  {
+    emissions_profile_at_product_level <-
+      example_emissions_profile_at_product_level() |>
+      filter(companies_id %in% c("antimonarchy_canine"),
+             benchmark == "all")
+    sector_profile_at_product_level <-
+      example_sector_profile_at_product_level() |>
+      filter(companies_id %in% c("antimonarchy_canine"),
+             scenario == "1.5C RPS",
+             year == "2030")
+
+    out <-
+      unnest_product(
+        score_transition_risk(
+          emissions_profile_at_product_level, sector_profile_at_product_level
+        )
+      )
+
+    expect_equal(out$benchmark_tr_score, "1.5C RPS_2030_all")
+    expect_equal(out$transition_risk_score, 0.59)
+  })
+
+test_that("calculates `transition_risk_score_avg` correctly",
+  {
+    emissions_profile_at_product_level <-
+      example_emissions_profile_at_product_level() |>
+      filter(companies_id %in% c("nonphilosophical_llama"),
+             benchmark == "all")
+    sector_profile_at_product_level <-
+      example_sector_profile_at_product_level() |>
+      filter(companies_id %in% c("nonphilosophical_llama"),
+             scenario == "1.5C RPS",
+             year == "2030")
+
+    out <-
+      unnest_company(
+        score_transition_risk(
+          emissions_profile_at_product_level, sector_profile_at_product_level
+        )
+      )
+
+    expect_equal(out$transition_risk_score_avg, 0.212)
+  })
 
 test_that(
   "`transition_risk_score` and `benchmark_tr_score` has NA due to
@@ -62,9 +106,10 @@ test_that(
 )
 
 test_that(
-  "product level and company level outputs contain additional info of all
-  uncommon/unmatched companies after joining emissions companies with sector companies",
+  "product level and company level outputs contain non-null info of all
+  matched and unmatched companies after joining dataframes",
   {
+    # uncommon companies in either dataframe will give unmatched results
     emissions_profile_at_product_level <-
       example_emissions_profile_at_product_level() |>
       filter(companies_id %in% c("antimonarchy_canine", "nonphilosophical_llama"))
@@ -82,25 +127,16 @@ test_that(
                             sector_profile_at_product_level) |>
       unnest_company()
 
-    # NA values in `profile_ranking` and `reduction_targets` columns due to unmatched companies
-    unmatched_product_output <- trs_product |>
-      filter(is.na(profile_ranking) | is.na(reduction_targets))
-    unmatched_company_output <- trs_company |>
-      filter(is.na(profile_ranking_avg) |
-               is.na(reduction_targets_avg))
-
-    # Select NA values in common columns of unmatched companies (except columns
+    # Select common columns of both matched and unmatched companies (except columns
     # computed by `score_transition_risk` function)
-    null_common_cols_product <- unmatched_product_output |>
-      select(common_columns_emissions_sector_at_product_level()) |>
-      filter(if_any(everything(), is.na))
-    null_common_cols_company <- unmatched_company_output |>
-      select(common_columns_emissions_sector_at_company_level()) |>
-      filter(if_any(everything(), is.na))
+    common_cols_product <- trs_product |>
+      select(common_columns_emissions_sector_at_product_level())
+    common_cols_company <- trs_company |>
+      select(common_columns_emissions_sector_at_company_level())
 
     # These checks ensures that there is not even a single NA in common columns
-    # of unmatched companies at both product and company level
-    expect_true(nrow(null_common_cols_product) == 0)
-    expect_true(nrow(null_common_cols_company) == 0)
+    # of matched and unmatched companies at both product and company level
+    expect_false(any(is.na(common_cols_product)))
+    expect_false(any(is.na(common_cols_company)))
   }
 )
