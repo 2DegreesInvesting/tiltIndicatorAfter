@@ -5,7 +5,6 @@
 #' @return A dataframe that prepares the intermediate output of pstr_product
 #' @noRd
 prepare_inter_pstr_product <- function(pstr_prod, comp, eco_activities, match_mapper, isic_tilt_map) {
-
   pstr_prod |>
     left_join(comp, by = "companies_id") |>
     left_join(eco_activities, by = "activity_uuid_product_uuid") |>

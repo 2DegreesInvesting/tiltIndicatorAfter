@@ -32,17 +32,18 @@ rename_pstr_product <- function(data) {
       PSTR_risk_category = "risk_category",
       ep_product = "clustered",
       isic_4digit_name = "isic_4digit_name_ecoinvent",
-      ei_geography = "geography"
+      ei_geography = "geography",
+      reduction_targets = "profile_ranking"
     )
 }
 
 relocate_pstr_product <- function(data) {
   data |>
     relocate(
-      "companies_id", "company_name", "country", "risk_category", "scenario", "year",
-      "clustered", "activity_name", "reference_product_name",
-      "unit", "tilt_sector", "tilt_subsector", "multi_match", "matching_certainty", "avg_matching_certainty",
-      "company_city", "postcode", "address", "main_activity",
+      "companies_id", "company_name", "country", "risk_category", "profile_ranking",
+      "scenario", "year", "clustered", "activity_name", "reference_product_name",
+      "unit", "tilt_sector", "tilt_subsector", "multi_match", "matching_certainty",
+      "avg_matching_certainty", "company_city", "postcode", "address", "main_activity",
       "activity_uuid_product_uuid"
     )
 }

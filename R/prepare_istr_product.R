@@ -45,18 +45,18 @@ rename_istr_product <- function(data) {
       input_unit = "exchange_unit_name",
       input_isic_4digit_name = "isic_4digit_name_ecoinvent",
       ei_geography = "geography",
-      ei_input_geography = "input_geography"
+      ei_input_geography = "input_geography",
+      reduction_targets = "profile_ranking"
     )
 }
 
 relocate_istr_product <- function(data) {
   data |>
     relocate(
-      "companies_id", "company_name", "country", "risk_category", "scenario", "year",
-      "clustered", "activity_name", "reference_product_name",
+      "companies_id", "company_name", "country", "risk_category", "profile_ranking",
+      "scenario", "year", "clustered", "activity_name", "reference_product_name",
       "unit", "tilt_sector", "multi_match", "matching_certainty", "avg_matching_certainty",
       "exchange_name", "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector",
-      "company_city", "postcode", "address", "main_activity",
-      "activity_uuid_product_uuid"
+      "company_city", "postcode", "address", "main_activity", "activity_uuid_product_uuid"
     )
 }
