@@ -54,7 +54,7 @@ relocate_ictr_company <- function(data) {
   data |>
     relocate(
       "companies_id", "company_name", "company_city", "country", "ICTR_share",
-      "ICTR_risk_category", "benchmark", "matching_certainty_company_average",
+      "ICTR_risk_category", "benchmark", "co2e_lower", "co2e_upper", "matching_certainty_company_average",
       "postcode", "address", "main_activity"
     )
 }
