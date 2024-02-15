@@ -45,7 +45,7 @@ relocate_pctr_company <- function(data) {
   data |>
     relocate(
       "companies_id", "company_name", "country", "PCTR_share", "PCTR_risk_category",
-      "benchmark", "co2e_lower", "co2e_upper", "matching_certainty_company_average",
-      "company_city", "postcode", "address", "main_activity"
+      "benchmark", "matching_certainty_company_average", "company_city", "postcode",
+      "address", "main_activity"
     )
 }
