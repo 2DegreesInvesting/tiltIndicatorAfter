@@ -22,76 +22,40 @@
     <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/pull_request_template.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/ecoinvent_activities.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/ecoinvent_inputs.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/ep_companies.html</loc>
-  </url>
-  <url>
     <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/example_emissions_profile_at_product_level.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/ictr_company.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/ictr_product.html</loc>
   </url>
   <url>
     <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/isic_name.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_emissions_profile_company.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/isic_tilt_mapper.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_emissions_profile_product.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/istr_product.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_emissions_profile_upstream_company.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/matches_mapper.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_emissions_profile_upstream_product.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/pctr_company.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_sector_profile_company.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/pctr_product.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_sector_profile_product.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_ictr_company.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_sector_profile_upstream_company.html</loc>
   </url>
   <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_ictr_product.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_istr_company.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_istr_product.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_pctr_company.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_pctr_product.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_pstr_company.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/prepare_pstr_product.html</loc>
+    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/polish_sector_profile_upstream_product.html</loc>
   </url>
   <url>
     <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_emissions_upstream.html</loc>
   </url>
   <url>
     <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_sector_upstream.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/pstr_product.html</loc>
   </url>
   <url>
     <loc>https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/reexports.html</loc>
