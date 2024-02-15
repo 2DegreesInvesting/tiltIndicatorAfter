@@ -22,62 +22,6 @@ test_that("characterize columns", {
   expect_snapshot(names(unnest_company(out)))
 })
 
-test_that("the new API is equivalent to the old API except for extra columns", {
-  local_options(readr.show_col_types = FALSE)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  # New API
-  out <- profile_emissions(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  )
-
-  # Old API
-  .co2 <- add_rowid(co2)
-  output <- emissions_profile(companies, .co2)
-
-  company <- unnest_company(output)
-  product <- unnest_product(output) |>
-    left_join(select(.co2, matches(extra_cols_pattern())), by = extra_rowid())
-  europages_companies_old <- select_europages_companies(europages_companies)
-
-  out_product <- prepare_pctr_product(
-    product,
-    europages_companies_old,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    isic_name
-  )
-
-  out_company <- prepare_pctr_company(
-    company,
-    product,
-    europages_companies_old,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    isic_name
-  )
-
-  new <- arrange(unnest_product(out), companies_id, benchmark)
-  old <- arrange(out_product, companies_id, benchmark)
-  expect_equal(relocate(new, sort(names(new))), relocate(old, sort(names(old))))
-
-  expect_equal(
-    out |> unnest_company() |> arrange(companies_id),
-    out_company |> arrange(companies_id)
-  )
-})
-
 test_that("the output at product level has columns matching isic and sector", {
   local_options(readr.show_col_types = FALSE)
 
@@ -148,4 +92,158 @@ test_that("`ei_geography` column is present at product level output", {
   ) |> unnest_product()
 
   expect_true(all(c("ei_geography") %in% names(out)))
+})
+
+test_that("total number of rows for a comapny is either 1 or 6", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_product() |>
+    group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
+    summarise(count = n())
+  expect_true(all(unique(out$count) %in% c(1, 6)))
+})
+
+test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  expect_no_error(
+    profile_emissions(
+      companies,
+      co2,
+      europages_companies = europages_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_europages = ecoinvent_europages,
+      isic = isic_name
+    )
+  )
+})
+
+test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  product <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_product()
+
+  count <- product |>
+    summarise(
+      n_distinct_matching_certainity_per_company = n_distinct(matching_certainty_company_average),
+      .by = companies_id
+    )
+
+  expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
+})
+
+test_that("total number of rows for a comapny is either 1 or 3", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_company() |>
+    group_by(companies_id, benchmark) |>
+    summarise(count = n())
+  expect_true(all(unique(out$count) %in% c(1, 3)))
+})
+
+test_that("handles numeric `isic*` in `co2`", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  expect_no_error(
+    profile_emissions(
+      companies,
+      co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
+      europages_companies = europages_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_europages = ecoinvent_europages,
+      isic = isic_name
+    )
+  )
+})
+
+test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  company <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_company()
+
+  count <- company |>
+    summarise(
+      n_distinct_matching_certainity_per_company = n_distinct(matching_certainty_company_average),
+      .by = companies_id
+    )
+
+  expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
 })

@@ -26,67 +26,6 @@ test_that("irrelevant columns in `ecoinvent_inputs` aren't in the output", {
   expect_false(hasName(unnest_company(out), "new"))
 })
 
-test_that("the new API is equivalent to the old API except for extra columns", {
-  local_options(readr.show_col_types = FALSE)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  # New API
-  out <- profile_emissions_upstream(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_inputs = ecoinvent_inputs,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  )
-
-  # Old API
-  .co2 <- add_rowid(co2)
-  output <- emissions_profile_upstream(companies, .co2)
-
-  company <- unnest_company(output)
-  product <- unnest_product(output) |>
-    left_join(select(.co2, matches(extra_cols_pattern())), by = extra_rowid())
-  europages_companies_old <- select_europages_companies(europages_companies)
-  ecoinvent_inputs_old <- select_ecoinvent_inputs(ecoinvent_inputs)
-
-  out_product <- prepare_ictr_product(
-    product,
-    europages_companies_old,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    ecoinvent_inputs_old,
-    isic_name
-  )
-
-  out_company <- prepare_ictr_company(
-    company,
-    product,
-    europages_companies_old,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    ecoinvent_inputs_old,
-    isic_name
-  )
-
-  new <- arrange(unnest_product(out), companies_id)
-  old <- arrange(out_product, companies_id)
-  expect_equal(relocate(new, sort(names(new))), relocate(old, sort(names(old))))
-
-  expect_equal(
-    out |> unnest_company() |> arrange(companies_id),
-    out_company |> arrange(companies_id)
-  )
-})
-
 test_that("the output at product level has columns matching isic and sector", {
   local_options(readr.show_col_types = FALSE)
 
@@ -163,4 +102,57 @@ test_that("`ei_geography` and `input_ei_grougraphy` columns are present at produ
   ) |> unnest_product()
 
   expect_true(all(c("ei_geography", "ei_input_geography") %in% names(out)))
+})
+
+test_that("total number of rows for a comapny is either 1 or 3", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_company() |>
+    group_by(companies_id, benchmark) |>
+    summarise(count = n())
+
+  expect_true(all(unique(out$count) %in% c(1, 3)))
+})
+
+test_that("handles numeric `isic*` in `co2`", {
+  local_options(readr.show_col_types = FALSE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  expect_no_error(
+    profile_emissions_upstream(
+      companies,
+      co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
+      europages_companies = europages_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_inputs = ecoinvent_inputs,
+      ecoinvent_europages = ecoinvent_europages,
+      isic = isic_name
+    )
+  )
 })
