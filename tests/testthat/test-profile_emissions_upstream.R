@@ -1,6 +1,4 @@
 test_that("irrelevant columns in `ecoinvent_inputs` aren't in the output", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -27,8 +25,6 @@ test_that("irrelevant columns in `ecoinvent_inputs` aren't in the output", {
 })
 
 test_that("the output at product level has columns matching isic and sector", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -53,8 +49,6 @@ test_that("the output at product level has columns matching isic and sector", {
 })
 
 test_that("the output at product and company level has columns `co2e_lower` and `co2e_upper`", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -84,7 +78,6 @@ test_that("the output at product and company level has columns `co2e_lower` and 
 
 test_that("doesn't pad `*isic*`", {
   skip_unless_toy_data_is_newer_than(toy_data_version())
-  local_options(readr.show_col_types = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
@@ -111,8 +104,6 @@ test_that("doesn't pad `*isic*`", {
 })
 
 test_that("`ei_geography` and `input_ei_grougraphy` columns are present at product level output", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -135,8 +126,6 @@ test_that("`ei_geography` and `input_ei_grougraphy` columns are present at produ
 })
 
 test_that("total number of rows for a comapny is either 1 or 3", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products())
 
@@ -163,8 +152,6 @@ test_that("total number of rows for a comapny is either 1 or 3", {
 })
 
 test_that("handles numeric `isic*` in `co2`", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products())
 

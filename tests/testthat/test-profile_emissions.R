@@ -1,6 +1,4 @@
 test_that("characterize columns", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -23,8 +21,6 @@ test_that("characterize columns", {
 })
 
 test_that("the output at product level has columns matching isic and sector", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -47,8 +43,6 @@ test_that("the output at product level has columns matching isic and sector", {
 })
 
 test_that("the output at product and company level has columns `co2e_lower` and `co2e_upper`", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -100,8 +94,6 @@ test_that("doesn't pad `*isic*`", {
 })
 
 test_that("`ei_geography` column is present at product level output", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -122,8 +114,6 @@ test_that("`ei_geography` column is present at product level output", {
 })
 
 test_that("total number of rows for a comapny is either 1 or 6", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
@@ -147,8 +137,6 @@ test_that("total number of rows for a comapny is either 1 or 6", {
 })
 
 test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products())
 
@@ -170,8 +158,6 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
 })
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -199,8 +185,6 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
 })
 
 test_that("total number of rows for a comapny is either 1 or 3", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
@@ -224,8 +208,6 @@ test_that("total number of rows for a comapny is either 1 or 3", {
 })
 
 test_that("handles numeric `isic*` in `co2`", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
@@ -247,8 +229,6 @@ test_that("handles numeric `isic*` in `co2`", {
 })
 
 test_that("yields a single distinct value of `*matching_certainty_company_average` per company", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())

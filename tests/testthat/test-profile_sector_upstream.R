@@ -1,6 +1,4 @@
 test_that("characterize columns", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
@@ -27,8 +25,6 @@ test_that("characterize columns", {
 })
 
 test_that("the output at product level has columns matching isic and sector", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
@@ -55,8 +51,6 @@ test_that("the output at product level has columns matching isic and sector", {
 })
 
 test_that("doesn't pad `*isic*`", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
@@ -84,8 +78,6 @@ test_that("doesn't pad `*isic*`", {
 })
 
 test_that("`ei_geography` and `input_ei_grougraphy` columns are present at product level output", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
@@ -110,8 +102,6 @@ test_that("`ei_geography` and `input_ei_grougraphy` columns are present at produ
 })
 
 test_that("total number of rows for a comapny is either 1 or 3", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())

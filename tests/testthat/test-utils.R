@@ -50,7 +50,6 @@ test_that("rename_118() function is applied if issue #118 is addressed", {
 
 test_that("rename_118() function is not applied if issue #118 is not addressed", {
   withr::local_options(tiltIndicatorAfter.dissable_issue_118 = TRUE)
-  local_options(readr.show_col_types = FALSE)
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
 
