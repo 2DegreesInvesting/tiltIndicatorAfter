@@ -23,32 +23,30 @@ exec_profile <- function(.fn, indicator, indicator_after) {
   nest_levels(out_product, out_company)
 }
 
-extend_with_columns_from_arguments_of_tilt_indicator <-
-  function(product,
-           indicator,
-           .fn) {
-    if (grepl("sector_profile$", .fn)) {
-      companies <- indicator[[1]]
-      out <- product |> extend_with(companies)
-    }
-    if (grepl("emissions", .fn)) {
-      co2 <- indicator[[2]]
-      out <- product |> extend_with(co2)
-    }
-    if (grepl("sector_profile_upstream$", .fn)) {
-      inputs <- indicator[[3]]
-      out <- product |> extend_with(inputs)
-    }
-
-    out
+extend_with_columns_from_arguments_of_tilt_indicator <- function(product,
+                                                                 indicator,
+                                                                 .fn) {
+  if (grepl("sector_profile$", .fn)) {
+    companies <- indicator[[1]]
+    out <- product |> extend_with(companies)
+  }
+  if (grepl("emissions", .fn)) {
+    co2 <- indicator[[2]]
+    out <- product |> extend_with(co2)
+  }
+  if (grepl("sector_profile_upstream$", .fn)) {
+    inputs <- indicator[[3]]
+    out <- product |> extend_with(inputs)
   }
 
-extend_with <-
-  function(data, with, cols_pattern = extra_cols_pattern()) {
-    .with <- with |> select(matches(cols_pattern))
-    .data <- data |> select(-any_of(names(.with)), matches("rowid"))
-    left_join(.data, .with, by = extra_rowid())
-  }
+  out
+}
+
+extend_with <- function(data, with, cols_pattern = extra_cols_pattern()) {
+  .with <- with |> select(matches(cols_pattern))
+  .data <- data |> select(-any_of(names(.with)), matches("rowid"))
+  left_join(.data, .with, by = extra_rowid())
+}
 
 extra_cols_pattern <- function() {
   c("rowid", "isic", "sector")
