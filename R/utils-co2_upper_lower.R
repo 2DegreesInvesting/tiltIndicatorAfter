@@ -1,4 +1,3 @@
-set.seed(111)
 create_co2_range <- function(data) {
   data |>
     summarize_range(.data[[grep("co2_footprint", names(data), value = TRUE)]],
