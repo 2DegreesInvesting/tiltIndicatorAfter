@@ -1,6 +1,4 @@
 test_that("irrelevant columns in europages_companies aren't in the output ", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
 
@@ -25,8 +23,6 @@ test_that("irrelevant columns in europages_companies aren't in the output ", {
 })
 
 test_that("the output at product level has columns matching isic and sector", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   europages_companies <- read_csv(toy_europages_companies())
@@ -49,8 +45,6 @@ test_that("the output at product level has columns matching isic and sector", {
 })
 
 test_that("doesn't pad `*isic*`", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   companies$isic_4digit <- "1"
 
@@ -74,8 +68,6 @@ test_that("doesn't pad `*isic*`", {
 })
 
 test_that("`ei_geography` column is present at product level output", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   europages_companies <- read_csv(toy_europages_companies())
@@ -96,8 +88,6 @@ test_that("`ei_geography` column is present at product level output", {
 })
 
 test_that("total number of rows for a comapny is either 1 or 3", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   europages_companies <- read_csv(toy_europages_companies()) |> head(3)
@@ -122,8 +112,6 @@ test_that("total number of rows for a comapny is either 1 or 3", {
 })
 
 test_that("'empty' tiltIndicator results yield at most 1 NA in *profile$ risk column", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios_that_yields_na <- read_csv(toy_sector_profile_any_scenarios()) |>
     head(1)
@@ -181,8 +169,6 @@ test_that("total number of rows for a comapny is either 1, 2 or 4", {
 })
 
 test_that("'empty' tiltIndicator results yield at most 1 NA in *profile$ risk column", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios_that_yields_na <- read_csv(toy_sector_profile_any_scenarios()) |>
     head(1)
@@ -213,8 +199,6 @@ test_that("'empty' tiltIndicator results yield at most 1 NA in *profile$ risk co
 })
 
 test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk column", {
-  local_options(readr.show_col_types = FALSE)
-
   companies <- read_csv(toy_sector_profile_companies())
   scenarios_that_yields_na <- read_csv(toy_sector_profile_any_scenarios()) |>
     head(1)
