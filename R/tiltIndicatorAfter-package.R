@@ -44,6 +44,7 @@
 #' @importFrom tiltIndicator emissions_profile_upstream
 #' @importFrom tiltIndicator jitter_range
 #' @importFrom tiltIndicator nest_levels
+#' @importFrom tiltIndicator percent_noise
 #' @importFrom tiltIndicator sector_profile
 #' @importFrom tiltIndicator sector_profile_any_polish_output_at_company_level
 #' @importFrom tiltIndicator sector_profile_upstream

@@ -99,7 +99,7 @@ test_that("`ei_geography` and `input_ei_grougraphy` columns are present at produ
 
 test_that("total number of rows for a comapny is either 1 or 3", {
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
@@ -125,7 +125,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
 
 test_that("handles numeric `isic*` in `co2`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
