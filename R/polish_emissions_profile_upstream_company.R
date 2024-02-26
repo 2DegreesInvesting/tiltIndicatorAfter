@@ -16,6 +16,7 @@ polish_emissions_profile_upstream_company <- function(epu_comp, epu_prod, europa
     distinct()
 
   epu_comp |>
+    add_profile_ranking_average(epu_prod) |>
     left_join(inter_result, by = "companies_id") |>
     rename_emissions_profile_upstream_company() |>
     # To check: here ICTR_share is used instead of matching_certainty_company_average

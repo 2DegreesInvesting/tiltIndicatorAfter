@@ -7,7 +7,9 @@
 #' # See examples in `?profile_sector_profile`
 polish_sector_profile_company <- function(sp_comp, sp_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, isic) {
   sp_prod <- sanitize_isic(sp_prod)
-  sp_comp <- sector_profile_any_polish_output_at_company_level(sp_comp)
+  sp_comp <- sp_comp |>
+    add_profile_ranking_average(sp_prod) |>
+    sector_profile_any_polish_output_at_company_level()
 
   inter_result <- prepare_inter_sector_profile(sp_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, isic) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>
@@ -30,7 +32,8 @@ rename_sector_profile_company <- function(data) {
     rename(
       PSTR_risk_category = "risk_category",
       PSTR_share = "value",
-      matching_certainty_company_average = "avg_matching_certainty"
+      matching_certainty_company_average = "avg_matching_certainty",
+      reduction_targets_avg = "profile_ranking_avg"
     )
 }
 
