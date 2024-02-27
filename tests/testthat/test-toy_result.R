@@ -1,4 +1,6 @@
 test_that("toy_emissions_profile_output hasn't changed", {
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9206")
+
   # FIXME: Prune #121
   skip_unless_toy_data_is_newer_than(toy_data_version())
   toy_emissions_profile_output <- function() {
@@ -17,6 +19,8 @@ test_that("toy_emissions_profile_output hasn't changed", {
 })
 
 test_that("toy_emissions_profile_upstream_output hasn't changed", {
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9206")
+
   # FIXME: Prune #121
   skip_unless_toy_data_is_newer_than(toy_data_version())
   toy_emissions_profile_upstream_output <- function() {
