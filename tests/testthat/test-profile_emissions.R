@@ -160,6 +160,8 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
 })
 
 test_that("total number of rows for a comapny is either 1 or 4", {
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9206")
+
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
