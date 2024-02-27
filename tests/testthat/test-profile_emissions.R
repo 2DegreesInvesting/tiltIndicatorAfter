@@ -159,10 +159,11 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
   expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
 })
 
-test_that("total number of rows for a comapny is either 1 or 3", {
+test_that("total number of rows for a comapny is either 1 or 4", {
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9206")
+
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
@@ -179,7 +180,8 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     unnest_company() |>
     group_by(companies_id, benchmark) |>
     summarise(count = n())
-  expect_true(all(unique(out$count) %in% c(1, 3)))
+
+  expect_true(all(unique(out$count) %in% c(1, 4)))
 })
 
 test_that("handles numeric `isic*` in `co2`", {
