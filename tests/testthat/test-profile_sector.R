@@ -227,3 +227,24 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk co
   these_cols_are_full_of_na <- all(is.na(select(na, tilt_sector, tilt_subsector)))
   expect_true(these_cols_are_full_of_na)
 })
+
+test_that("outputs `profile_ranking_avg` at company level", {
+  companies <- read_csv(toy_sector_profile_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  company <- unnest_company(out)
+  expect_true(hasName(company, "reduction_targets_avg"))
+})

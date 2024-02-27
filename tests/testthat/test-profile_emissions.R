@@ -292,3 +292,51 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   expect_equal(product_first, product_second)
   expect_equal(company_first, company_second)
 })
+
+test_that("outputs `profile_ranking_avg` at company level", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  company <- unnest_company(out)
+  expect_true(hasName(company, "profile_ranking_avg"))
+})
+
+test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
+  companies <- read_csv(toy_emissions_profile_any_companies()) |>
+    filter(companies_id %in% c("nonphilosophical_llama"))
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  product <- unnest_product(out) |>
+    filter(benchmark == "all")
+  company <- unnest_company(out) |>
+    filter(benchmark == "all")
+
+  expected_value <- round(mean(product$profile_ranking, na.rm = TRUE), 3)
+  expect_equal(unique(company$profile_ranking_avg), expected_value)
+})

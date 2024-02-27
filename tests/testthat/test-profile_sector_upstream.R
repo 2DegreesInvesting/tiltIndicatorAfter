@@ -128,3 +128,27 @@ test_that("total number of rows for a comapny is either 1 or 3", {
   expect_true(all(unique(out$count) %in% c(1, 3)))
 })
 
+test_that("outputs `profile_ranking_avg` at company level", {
+  companies <- read_csv(toy_sector_profile_upstream_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  inputs <- read_csv(toy_sector_profile_upstream_products())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_sector_upstream(
+    companies,
+    scenarios,
+    inputs,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_inputs,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  company <- unnest_company(out)
+  expect_true(hasName(company, "reduction_targets_avg"))
+})

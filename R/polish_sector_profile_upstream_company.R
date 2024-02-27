@@ -7,7 +7,9 @@
 #' # See examples in `?profile_sector_upstream`
 polish_sector_profile_upstream_company <- function(spu_comp, spu_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, ecoinvent_inputs, isic) {
   spu_prod <- sanitize_isic(spu_prod)
-  spu_comp <- sector_profile_any_polish_output_at_company_level(spu_comp)
+  spu_comp <- spu_comp |>
+    add_profile_ranking_average(spu_prod) |>
+    sector_profile_any_polish_output_at_company_level()
 
   inter_result <- polish_sector_profile_upstream_product(spu_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, ecoinvent_inputs, isic) |>
     select(
@@ -32,7 +34,8 @@ rename_sector_profile_upstream_company <- function(data) {
   data |>
     rename(
       ISTR_risk_category = "risk_category",
-      ISTR_share = "value"
+      ISTR_share = "value",
+      reduction_targets_avg = "profile_ranking_avg"
     )
 }
 

@@ -30,4 +30,5 @@
        [7] "year"                               "matching_certainty_company_average"
        [9] "company_city"                       "postcode"                          
       [11] "address"                            "main_activity"                     
+      [13] "reduction_targets_avg"             
 
