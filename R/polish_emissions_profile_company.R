@@ -13,6 +13,7 @@ polish_emissions_profile_company <- function(ep_comp, ep_prod, europages_compani
     distinct()
 
   ep_comp |>
+    add_profile_ranking_average(ep_prod) |>
     left_join(inter_result, by = "companies_id", relationship = "many-to-many") |>
     distinct() |>
     rename_emissions_profile_company() |>
