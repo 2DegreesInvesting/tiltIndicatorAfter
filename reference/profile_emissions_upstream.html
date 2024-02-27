@@ -181,7 +181,7 @@ profile products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   company_city &lt;chr&gt;, postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 14</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id     company_name country emission_profile_share emission_profile</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalot… asteria_meg… austria                     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>              </span>
@@ -195,9 +195,10 @@ profile products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gentlemanlike_a… gentlemanli… austria                     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> frowsy_metalmar… frowsy_meta… austria                     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 62 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: benchmark &lt;lgl&gt;, co2e_lower &lt;dbl&gt;, co2e_upper &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: benchmark &lt;lgl&gt;, co2e_lower &lt;dbl&gt;, co2e_upper &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, company_city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   profile_ranking_avg &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -240,7 +241,7 @@ profile products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   input_unit &lt;chr&gt;, input_tilt_sector &lt;chr&gt;, input_tilt_subsector &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 14</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id         company_name company_city country emission_upstream_pr…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotomus… asteria_meg… wilhelmsburg austria                     <span style="color: #BB0000;">NA</span></span>
@@ -255,10 +256,10 @@ profile products.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> frowsy_metalmarkbut… frowsy_meta… langenzersd… austria                     <span style="color: #BB0000;">NA</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 62 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​emission_upstream_profile_share</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: emission_upstream_profile &lt;lgl&gt;, benchmark &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: emission_upstream_profile &lt;lgl&gt;, benchmark &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   co2e_lower &lt;dbl&gt;, co2e_upper &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matching_certainty_company_average &lt;chr&gt;, postcode &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   main_activity &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   main_activity &lt;chr&gt;, profile_ranking_avg &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
