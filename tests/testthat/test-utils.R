@@ -81,6 +81,6 @@ test_that("`stop_if_percent_noise_more_than_100` throws an error if added noise 
     min_jitter = 10000
   )
 
-  expect_error(stop_if_percent_noise_more_than_100(data))
+  expect_error(stop_if_percent_noise_more_than_100(data), "noise.*readjust.*amount")
 })
 
