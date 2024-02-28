@@ -75,5 +75,3 @@ NULL
 tiltIndicator::unnest_product
 #' @export
 tiltIndicator::unnest_company
-
-

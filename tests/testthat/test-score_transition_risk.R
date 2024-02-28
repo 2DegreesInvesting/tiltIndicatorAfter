@@ -7,8 +7,10 @@ test_that("outputs expected columns at product level", {
     filter(companies_id == "antimonarchy_canine")
 
   out <-
-    score_transition_risk(emissions_profile_at_product_level,
-                          sector_profile_at_product_level) |>
+    score_transition_risk(
+      emissions_profile_at_product_level,
+      sector_profile_at_product_level
+    ) |>
     unnest_product()
 
   expect_equal(sort(names(out)), sort(trs_product_output_columns()))
@@ -23,59 +25,67 @@ test_that("outputs expected columns at company level", {
     filter(companies_id == "antimonarchy_canine")
 
   out <-
-    score_transition_risk(emissions_profile_at_product_level,
-                          sector_profile_at_product_level) |>
+    score_transition_risk(
+      emissions_profile_at_product_level,
+      sector_profile_at_product_level
+    ) |>
     unnest_company()
 
   expect_equal(sort(names(out)), sort(trs_company_output_columns()))
 })
 
-test_that("calculates `transition_risk_score` and `benchmark_tr_score` correctly",
-  {
-    emissions_profile_at_product_level <-
-      example_emissions_profile_at_product_level() |>
-      filter(companies_id %in% c("antimonarchy_canine"),
-             benchmark == "all")
-    sector_profile_at_product_level <-
-      example_sector_profile_at_product_level() |>
-      filter(companies_id %in% c("antimonarchy_canine"),
-             scenario == "1.5C RPS",
-             year == "2030")
+test_that("calculates `transition_risk_score` and `benchmark_tr_score` correctly", {
+  emissions_profile_at_product_level <-
+    example_emissions_profile_at_product_level() |>
+    filter(
+      companies_id %in% c("antimonarchy_canine"),
+      benchmark == "all"
+    )
+  sector_profile_at_product_level <-
+    example_sector_profile_at_product_level() |>
+    filter(
+      companies_id %in% c("antimonarchy_canine"),
+      scenario == "1.5C RPS",
+      year == "2030"
+    )
 
-    out <-
-      unnest_product(
-        score_transition_risk(
-          emissions_profile_at_product_level,
-          sector_profile_at_product_level
-        )
+  out <-
+    unnest_product(
+      score_transition_risk(
+        emissions_profile_at_product_level,
+        sector_profile_at_product_level
       )
+    )
 
-    expect_equal(out$benchmark_tr_score, "1.5C RPS_2030_all")
-    expect_equal(out$transition_risk_score, 0.59)
-  })
+  expect_equal(out$benchmark_tr_score, "1.5C RPS_2030_all")
+  expect_equal(out$transition_risk_score, 0.59)
+})
 
-test_that("calculates `transition_risk_score_avg` correctly",
-  {
-    emissions_profile_at_product_level <-
-      example_emissions_profile_at_product_level() |>
-      filter(companies_id %in% c("nonphilosophical_llama"),
-             benchmark == "all")
-    sector_profile_at_product_level <-
-      example_sector_profile_at_product_level() |>
-      filter(companies_id %in% c("nonphilosophical_llama"),
-             scenario == "1.5C RPS",
-             year == "2030")
+test_that("calculates `transition_risk_score_avg` correctly", {
+  emissions_profile_at_product_level <-
+    example_emissions_profile_at_product_level() |>
+    filter(
+      companies_id %in% c("nonphilosophical_llama"),
+      benchmark == "all"
+    )
+  sector_profile_at_product_level <-
+    example_sector_profile_at_product_level() |>
+    filter(
+      companies_id %in% c("nonphilosophical_llama"),
+      scenario == "1.5C RPS",
+      year == "2030"
+    )
 
-    out <-
-      unnest_company(
-        score_transition_risk(
-          emissions_profile_at_product_level,
-          sector_profile_at_product_level
-        )
+  out <-
+    unnest_company(
+      score_transition_risk(
+        emissions_profile_at_product_level,
+        sector_profile_at_product_level
       )
+    )
 
-    expect_equal(out$transition_risk_score_avg, 0.212)
-  })
+  expect_equal(out$transition_risk_score_avg, 0.212)
+})
 
 test_that(
   "calculates `transition_risk_score_avg` correctly for unmatched `ep_product`
@@ -89,8 +99,10 @@ test_that(
       )
     sector_profile_at_product_level <-
       example_sector_profile_at_product_level() |>
-      filter(companies_id %in% c("nonphilosophical_llama"),
-             ep_product == "surface engineering")
+      filter(
+        companies_id %in% c("nonphilosophical_llama"),
+        ep_product == "surface engineering"
+      )
 
     out <-
       unnest_company(
@@ -119,8 +131,10 @@ test_that(
       filter(companies_id %in% c("celestial_lovebird", "nonphilosophical_llama"))
 
     out <-
-      score_transition_risk(emissions_profile_at_product_level,
-                            sector_profile_at_product_level) |>
+      score_transition_risk(
+        emissions_profile_at_product_level,
+        sector_profile_at_product_level
+      ) |>
       unnest_product()
 
     tr_score_na <- out |>
@@ -150,13 +164,17 @@ test_that(
       filter(companies_id %in% c("celestial_lovebird", "nonphilosophical_llama"))
 
     trs_product <-
-      score_transition_risk(emissions_profile_at_product_level,
-                            sector_profile_at_product_level) |>
+      score_transition_risk(
+        emissions_profile_at_product_level,
+        sector_profile_at_product_level
+      ) |>
       unnest_product()
 
     trs_company <-
-      score_transition_risk(emissions_profile_at_product_level,
-                            sector_profile_at_product_level) |>
+      score_transition_risk(
+        emissions_profile_at_product_level,
+        sector_profile_at_product_level
+      ) |>
       unnest_company()
 
     # Select common columns of both matched and unmatched companies (except columns

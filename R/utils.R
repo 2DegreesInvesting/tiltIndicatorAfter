@@ -91,8 +91,10 @@ rename_118 <- function(data) {
 add_profile_ranking_average <- function(data, product) {
   profile_ranking_average <- product |>
     select("companies_id", "grouped_by", "profile_ranking") |>
-    mutate(profile_ranking_avg = round(mean(.data$profile_ranking, na.rm = TRUE), 3),
-           .by = c("companies_id", "grouped_by")) |>
+    mutate(
+      profile_ranking_avg = round(mean(.data$profile_ranking, na.rm = TRUE), 3),
+      .by = c("companies_id", "grouped_by")
+    ) |>
     select(-c("profile_ranking")) |>
     distinct()
 
