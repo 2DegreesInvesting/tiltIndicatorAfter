@@ -4,7 +4,7 @@ create_co2_range <- function(data, amount = co2_jitter_amount()) {
       .by = c("grouped_by", "risk_category")
     ) |>
     jitter_range(amount = amount) |>
-    stop_if_percent_noise_more_than_100() |>
+    warn_if_percent_noise_is_too_high_or_too_low() |>
     rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
   if (co2_keep_licensed_min_max()) {
@@ -18,25 +18,17 @@ add_co2_upper_lower <- function(data, co2_range) {
   left_join(data, co2_range, by = join_by("grouped_by", "risk_category"))
 }
 
-stop_if_percent_noise_more_than_100 <- function(data) {
-  check_noise <- data |>
-    mutate(
-      max_percent_noise = percent_noise(.data$max, .data$max_jitter),
-      min_percent_noise = percent_noise(.data$min, .data$min_jitter)
-    )
-
-  bad_noise <- any(check_noise$max_percent_noise > 100) | any(check_noise$min_percent_noise > 100)
-  if (is.na(bad_noise)) {
+warn_if_percent_noise_is_too_high_or_too_low <- function(data) {
+  min <- round(mean(percent_noise(data$min, data$min_jitter)), 2)
+  max <- round(mean(percent_noise(data$max, data$max_jitter)), 2)
+  if (min < 50 || max < 50 || min > 100 || max > 100) {
     rlang::warn(c(
-      "The noise data is `NA`",
-      i = "Are you using the correct data?"
+      "The mean percent noise of the `co2*` columns is too high or too low:",
+      "* `min`: {min}%",
+      "* `max`: {max}%",
+      i = "Do you need to adjust the `amount` of jitter? See `?tiltIndicatorAfter_options`."
     ))
-    return(invisible(data))
   }
 
-  if (bad_noise) {
-    abort(glue("`jitter_range` should not add more than 100% of noise to `max` and `min` columns.
-               Please readjust the value of `amount` parameter in `create_co2_range` function"))
-  }
   invisible(data)
 }

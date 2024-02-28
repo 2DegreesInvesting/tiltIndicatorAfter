@@ -290,8 +290,10 @@ test_that("is sensitive to the option `tiltIndicatorAfter.co2_jitter_amount`", {
   expect_false(identical(out1, out2))
 })
 
-test_that("if the noise is too high throws an error", {
-  withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 1000)
+test_that("warns if the noise is too low", {
+  withr::local_seed(1)
+  withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 0.1)
+  withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -300,8 +302,8 @@ test_that("if the noise is too high throws an error", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  expect_snapshot_error(
-    profile_emissions(
+  expect_snapshot_warning({
+    result <- profile_emissions(
       companies,
       co2,
       europages_companies,
@@ -309,7 +311,40 @@ test_that("if the noise is too high throws an error", {
       ecoinvent_europages,
       isic_name
     )
+  })
+
+  out <- result |> unnest_product()
+  low_lower <- mean(percent_noise(out$min, out$co2e_lower)) < 50
+  low_upper <- mean(percent_noise(out$max, out$co2e_upper)) < 50
+  expect_true(low_lower || low_upper)
+})
+
+test_that("warns if the noise is too high", {
+  withr::local_seed(1)
+  withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 100)
+  withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  expect_snapshot_warning(
+    out <- profile_emissions(
+      companies,
+      co2,
+      europages_companies,
+      ecoinvent_activities,
+      ecoinvent_europages,
+      isic_name
+    ) |> unnest_product()
   )
+
+  low_lower <- mean(percent_noise(out$min, out$co2e_lower)) > 100
+  low_upper <- mean(percent_noise(out$max, out$co2e_upper)) > 100
+  expect_true(low_lower || low_upper)
 })
 
 test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_licensed_min_max`", {

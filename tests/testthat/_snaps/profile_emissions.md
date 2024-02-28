@@ -30,3 +30,15 @@
       [11] "postcode"                           "address"                           
       [13] "main_activity"                      "profile_ranking_avg"               
 
+# warns if the noise is too low
+
+    Percent noise is out of range (min: 5.47%, max = 4.96%).
+    i Do you need to adjust the amount of jitter?
+    i See `?tiltIndicatorAfter_options`.
+
+# warns if the noise is too high
+
+    Percent noise is out of range (min: 5041.11%, max = 4759.1%).
+    i Do you need to adjust the amount of jitter?
+    i See `?tiltIndicatorAfter_options`.
+
