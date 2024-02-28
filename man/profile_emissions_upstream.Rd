@@ -54,6 +54,12 @@ profile products.}
 }
 \value{
 A data frame with the column \code{companies_id}, and the nested columns\code{product} and \code{company} holding the outputs at product and company level. Unnesting \code{product} yields a data frame with at least columns \code{companies_id}, \code{grouped_by}, \code{risk_category}. Unnesting \code{company} yields a data frame with at least columns \code{companies_id}, \code{grouped_by}, \code{risk_category}, \code{value}.
+
+The columns \code{co2e_lower} and \code{co2e_upper} show the lowest and highest value
+of \code{co2_footprint} within the group to which the product was compared, plus
+some randomness. Therefore, every benchmark can have different \code{co2e_lower}
+and \code{co2e_upper}, because every benchmark can contain a different set of
+products.
 }
 \description{
 These functions wrap the output of the corresponding function in
@@ -61,8 +67,10 @@ These functions wrap the output of the corresponding function in
 }
 \section{Options}{
 
-\emph{\code{tiltIndicatorAfter.jitter_amount} passes \code{amount} to \code{\link[=jitter]{jitter()}} and controls
-the amount of jitter in the "co2}" columns.
+\itemize{
+\item \code{tiltIndicatorAfter.jitter_amount} controls the amount of random noise in the
+\verb{co2*} columns.
+}
 }
 
 \examples{
