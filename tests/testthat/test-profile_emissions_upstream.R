@@ -97,11 +97,9 @@ test_that("`ei_geography` and `input_ei_grougraphy` columns are present at produ
   expect_true(all(c("ei_geography", "ei_input_geography") %in% names(out)))
 })
 
-test_that("total number of rows for a comapny is either 1 or 4", {
-  skip_unless_tilt_indicator_is_newer_than("0.0.0.9206")
-
+test_that("total number of rows for a comapny is either 1 or 3", {
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  co2 <- read_csv(toy_emissions_profile_upstream_products())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
@@ -122,12 +120,12 @@ test_that("total number of rows for a comapny is either 1 or 4", {
     group_by(companies_id, benchmark) |>
     summarise(count = n())
 
-  expect_true(all(unique(out$count) %in% c(1, 4)))
+  expect_true(all(unique(out$count) %in% c(1, 3)))
 })
 
 test_that("handles numeric `isic*` in `co2`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  co2 <- read_csv(toy_emissions_profile_upstream_products())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())

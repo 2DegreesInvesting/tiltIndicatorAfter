@@ -90,7 +90,7 @@ test_that("`ei_geography` column is present at product level output", {
 
 test_that("total number of rows for a comapny is either 1 or 6", {
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  co2 <- read_csv(toy_emissions_profile_products())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
@@ -113,7 +113,7 @@ test_that("total number of rows for a comapny is either 1 or 6", {
 
 test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  co2 <- read_csv(toy_emissions_profile_products())
 
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
