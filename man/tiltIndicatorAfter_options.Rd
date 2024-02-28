@@ -19,6 +19,7 @@ library(readr, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 library(withr)
 library(tiltToyData)
+library(tiltIndicator)
 
 local_options(readr.show_col_types = FALSE)
 
@@ -46,8 +47,8 @@ co2_cols <- profile_emissions(
   select(matches(c("min", "max", "co2")))
 
 getOption("tiltIndicatorAfter.co2_jitter_amount")
-mean(tiltIndicator::percent_noise(co2_cols$min, co2_cols$co2e_lower))
-mean(tiltIndicator::percent_noise(co2_cols$max, co2_cols$co2e_upper))
+mean(percent_noise(co2_cols$min, co2_cols$co2e_lower))
+mean(percent_noise(co2_cols$max, co2_cols$co2e_upper))
 
 
 
@@ -69,7 +70,7 @@ co2_cols <- profile_emissions(
   select(matches(c("min", "max", "co2")))
 
 getOption("tiltIndicatorAfter.co2_jitter_amount")
-mean(tiltIndicator::percent_noise(co2_cols$min, co2_cols$co2e_lower))
-mean(tiltIndicator::percent_noise(co2_cols$max, co2_cols$co2e_upper))
+mean(percent_noise(co2_cols$min, co2_cols$co2e_lower))
+mean(percent_noise(co2_cols$max, co2_cols$co2e_upper))
 }
 \keyword{internal}
