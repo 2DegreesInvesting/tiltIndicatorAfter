@@ -57,27 +57,21 @@ A data frame with the column \code{companies_id}, and the nested columns\code{pr
 
 The columns \code{co2e_lower} and \code{co2e_upper} show the lowest and highest value
 of \code{co2_footprint} within the group to which the product was compared, plus
-some randomness. Therefore, every benchmark can have different \code{co2e_lower}
-and \code{co2e_upper}, because every benchmark can contain a different set of
-products.
+some randomness (controlled via the option
+\code{tiltIndicatorAfter.co2_jitter_amount}). Therefore, every benchmark can have
+different \code{co2e_lower} and \code{co2e_upper}, because every benchmark can contain
+a different set of products.
 }
 \description{
 These functions wrap the output of the corresponding function in
 \href{https://2degreesinvesting.github.io/tiltIndicator/reference/index.html}{tiltIndicator}.
 }
-\section{Options}{
-
-\itemize{
-\item \code{tiltIndicatorAfter.jitter_amount} controls the amount of random noise in the
-\verb{co2*} columns.
-}
-}
-
 \examples{
 library(tiltToyData)
 library(readr, warn.conflicts = FALSE)
 
-options(readr.show_col_types = FALSE)
+withr::local_seed(1)
+withr::local_options(readr.show_col_types = FALSE)
 
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products_ecoinvent())

@@ -9,13 +9,10 @@
 #'
 #' The columns `co2e_lower` and `co2e_upper` show the lowest and highest value
 #' of `co2_footprint` within the group to which the product was compared, plus
-#' some randomness. Therefore, every benchmark can have different `co2e_lower`
-#' and `co2e_upper`, because every benchmark can contain a different set of
-#' products.
-#'
-#' @section Options:
-#' * `tiltIndicatorAfter.jitter_amount` controls the amount of random noise in the
-#' `co2*` columns.
+#' some randomness (controlled via the option
+#' `tiltIndicatorAfter.co2_jitter_amount`). Therefore, every benchmark can have
+#' different `co2e_lower` and `co2e_upper`, because every benchmark can contain
+#' a different set of products.
 #'
 #' @export
 #'
@@ -23,7 +20,8 @@
 #' library(tiltToyData)
 #' library(readr, warn.conflicts = FALSE)
 #'
-#' options(readr.show_col_types = FALSE)
+#' withr::local_seed(1)
+#' withr::local_options(readr.show_col_types = FALSE)
 #'
 #' companies <- read_csv(toy_emissions_profile_any_companies())
 #' products <- read_csv(toy_emissions_profile_products_ecoinvent())
