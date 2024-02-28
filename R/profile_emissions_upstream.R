@@ -1,21 +1,13 @@
 #' Profile emissions and upstream emissions
 #'
-#' These functions wrap the output of the corresponding function in
-#' [tiltIndicator](https://2degreesinvesting.github.io/tiltIndicator/reference/index.html).
-#'
+#' @inherit profile_sector_upstream
 #' @inheritParams tiltIndicator::emissions_profile_upstream
-#' @param europages_companies Dataframe. Companies from europages.
-#' @param ecoinvent_activities Dataframe. Activities from ecoinvent.
-#' @param ecoinvent_inputs Dataframe. Upstream products from ecoinvent.
-#' @param ecoinvent_europages Dataframe. Mapper between europages and ecoinvent.
-#' @param isic Dataframe. ISIC data.
-#' @param isic_tilt `r lifecycle::badge("deprecated")`
-#'
-#' @return `r document_default_value()`
-#' @export
 #'
 #' @family top-level functions
 #'
+#' @return `r document_default_value()`
+#'
+#' @export
 #' @examples
 #' library(tiltToyData)
 #' library(readr, warn.conflicts = FALSE)
