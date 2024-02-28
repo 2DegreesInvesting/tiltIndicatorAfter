@@ -74,7 +74,7 @@
 NULL
 
 co2_jitter_amount <- function() {
-  getOption("tiltIndicatorAfter.co2_jitter_amount", default = 0.5)
+  getOption("tiltIndicatorAfter.co2_jitter_amount", default = 3)
 }
 
 co2_keep_licensed_min_max <- function() {

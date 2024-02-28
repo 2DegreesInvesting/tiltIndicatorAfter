@@ -19,13 +19,18 @@ add_co2_upper_lower <- function(data, co2_range) {
 }
 
 warn_if_percent_noise_is_too_high_or_too_low <- function(data) {
+  min_allowed <- 20
+  max_allowed <- 150
   min <- round(mean(percent_noise(data$min, data$min_jitter)), 2)
   max <- round(mean(percent_noise(data$max, data$max_jitter)), 2)
-  if (min < 50 || max < 50 || min > 100 || max > 100) {
+  if (min < min_allowed ||
+      max < min_allowed ||
+      min > max_allowed ||
+      max > max_allowed) {
     rlang::warn(c(
       "The mean percent noise of the `co2*` columns is too high or too low:",
-      "* `min`: {min}%",
-      "* `max`: {max}%",
+      glue("* `min`: {min}%"),
+      glue("* `max`: {max}%"),
       i = "Do you need to adjust the `amount` of jitter? See `?tiltIndicatorAfter_options`."
     ))
   }

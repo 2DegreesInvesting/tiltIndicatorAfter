@@ -33,14 +33,14 @@
 # warns if the noise is too low
 
     The mean percent noise of the `co2*` columns is too high or too low:
-    * `min`: {min}%
-    * `max`: {max}%
+    * `min`: 5.47%
+    * `max`: 4.96%
     i Do you need to adjust the `amount` of jitter? See `?tiltIndicatorAfter_options`.
 
 # warns if the noise is too high
 
     The mean percent noise of the `co2*` columns is too high or too low:
-    * `min`: {min}%
-    * `max`: {max}%
+    * `min`: 5041.11%
+    * `max`: 4759.1%
     i Do you need to adjust the `amount` of jitter? See `?tiltIndicatorAfter_options`.
 
