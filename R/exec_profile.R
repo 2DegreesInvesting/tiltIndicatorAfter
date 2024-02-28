@@ -4,7 +4,7 @@ exec_profile <- function(.fn, indicator, indicator_after) {
     product_raw <- unnest_product(tilt_indicator_output) |>
       extend_with_columns_from_arguments_of_tilt_indicator(indicator, .fn)
 
-    co2_range <- create_co2_range(product_raw, amount = getOption("tiltIndicatorAfter.co2_jitter_amount", default = 0.5))
+    co2_range <- create_co2_range(product_raw)
     product <- add_co2_upper_lower(product_raw, co2_range)
 
     company <- unnest_company(tilt_indicator_output) |>

@@ -68,3 +68,11 @@
 #' mean(tiltIndicator::percent_noise(co2_cols$min, co2_cols$co2e_lower))
 #' mean(tiltIndicator::percent_noise(co2_cols$max, co2_cols$co2e_upper))
 NULL
+
+co2_jitter_amount <- function() {
+  getOption("tiltIndicatorAfter.co2_jitter_amount", default = 0.5)
+}
+
+co2_keep_licensed_min_max <- function() {
+  getOption("tiltIndicatorAfter.co2_keep_licensed_min_max", default = FALSE)
+}
