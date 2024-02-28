@@ -19,6 +19,10 @@ skip_unless_toy_data_is_newer_than <- function(version) {
   testthat::skip_if(utils::packageVersion("tiltToyData") <= version)
 }
 
+skip_unless_tilt_indicator_is_newer_than <- function(version) {
+  testthat::skip_if(utils::packageVersion("tiltIndicator") <= version)
+}
+
 toy_data_version <- function() {
   "0.0.0.9007"
 }
