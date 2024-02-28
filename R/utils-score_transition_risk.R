@@ -86,10 +86,7 @@ trs_product_output_columns <- function() {
 }
 
 trs_company_output_columns <- function() {
-  c(
-    trs_company_columns(),
-    company_level_trs_avg_column()
-  )
+  c(trs_company_columns(), company_level_trs_avg_column())
 }
 
 common_columns_emissions_sector_at_product_level <- function() {

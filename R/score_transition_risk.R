@@ -78,10 +78,7 @@ score_transition_risk <-
       distinct()
 
     trs_company <- trs_product |>
-      select(
-        trs_company_columns(),
-        product_level_trs_column()
-      ) |>
+      select(trs_company_columns(), product_level_trs_column()) |>
       create_trs_average() |>
       select(-product_level_trs_column()) |>
       relocate(relocate_trs_columns(company_level_trs_avg_column())) |>

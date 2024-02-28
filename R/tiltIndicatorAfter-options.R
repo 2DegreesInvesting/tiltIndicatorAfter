@@ -1,7 +1,7 @@
 #' tiltIndicatorAfter options
 #'
 #' @description
-#' Some behaviour can be controlled via an option. Typically this options are
+#' Some behaviour can be controlled via an option. Typically these options are
 #' used by developers or analysts who test the code or data before it's ready
 #' for public consumption.
 #'
