@@ -59,6 +59,12 @@ A data frame with the column \code{companies_id}, and the nested columns\code{pr
 These functions wrap the output of the corresponding function in
 \href{https://2degreesinvesting.github.io/tiltIndicator/reference/index.html}{tiltIndicator}.
 }
+\section{Options}{
+
+\emph{\code{tiltIndicatorAfter.jitter_amount} passes \code{amount} to \code{\link[=jitter]{jitter()}} and controls
+the amount of jitter in the "co2}" columns.
+}
+
 \examples{
 library(tiltToyData)
 library(readr, warn.conflicts = FALSE)

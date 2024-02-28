@@ -16,6 +16,10 @@
 #'
 #' @family top-level functions
 #'
+#' @section Options:
+#' *`tiltIndicatorAfter.jitter_amount` passes `amount` to [jitter()] and controls
+#' the amount of jitter in the "co2*" columns.
+#'
 #' @examples
 #' library(tiltToyData)
 #' library(readr, warn.conflicts = FALSE)
