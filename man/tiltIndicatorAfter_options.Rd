@@ -4,7 +4,7 @@
 \alias{tiltIndicatorAfter_options}
 \title{tiltIndicatorAfter options}
 \description{
-Some behaviour can be controlled via an option. Typically this options are
+Some behaviour can be controlled via an option. Typically these options are
 used by developers or analysts who test the code or data before it's ready
 for public consumption.
 \itemize{
@@ -17,9 +17,10 @@ and \code{max} columns that yield the noisy \verb{co2*} columns.
 \examples{
 library(readr, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
+library(withr)
 library(tiltToyData)
 
-withr::local_options(readr.show_col_types = FALSE)
+local_options(readr.show_col_types = FALSE)
 
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -29,9 +30,10 @@ ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 isic_name <- read_csv(toy_isic_name())
 
 amount <- 0.1
-withr::local_seed(1)
-withr::local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
-withr::local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
+local_seed(1)
+local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
+local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
+
 co2_cols <- profile_emissions(
   companies,
   products,
@@ -51,9 +53,10 @@ mean(tiltIndicator::percent_noise(co2_cols$max, co2_cols$co2e_upper))
 
 # Compare
 amount <- 1
-withr::local_seed(1)
-withr::local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
-withr::local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
+local_seed(1)
+local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
+local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
+
 co2_cols <- profile_emissions(
   companies,
   products,
