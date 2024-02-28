@@ -290,6 +290,28 @@ test_that("is sensitive to the option `tiltIndicatorAfter.co2_jitter_amount`", {
   expect_false(identical(out1, out2))
 })
 
+test_that("if the noise is too high throws an error", {
+  withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 1000)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  expect_snapshot_error(
+    profile_emissions(
+      companies,
+      co2,
+      europages_companies,
+      ecoinvent_activities,
+      ecoinvent_europages,
+      isic_name
+    )
+  )
+})
+
 test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_licensed_min_max`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())

@@ -72,14 +72,3 @@ test_that("rename_118() function is not applied if issue #118 is not addressed",
   expected_col_name <- "PSTR_risk_category"
   expect_equal(grep(actual_col_name, names(result), value = TRUE), expected_col_name)
 })
-
-test_that("`stop_if_percent_noise_more_than_100` throws an error if added noise is more than 100%", {
-  data <- tibble(
-    min = 1,
-    max = 2,
-    max_jitter = 10000,
-    min_jitter = 10000
-  )
-
-  expect_error(stop_if_percent_noise_more_than_100(data), "noise.*readjust.*amount")
-})
