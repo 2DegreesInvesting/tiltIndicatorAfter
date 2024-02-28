@@ -27,7 +27,7 @@ library(tiltToyData)
 options(readr.show_col_types = FALSE)
 
 emissions_companies <- read_csv(toy_emissions_profile_any_companies())
-products <- read_csv(toy_emissions_profile_products())
+products <- read_csv(toy_emissions_profile_products_ecoinvent())
 europages_companies <- read_csv(toy_europages_companies())
 ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
 ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
