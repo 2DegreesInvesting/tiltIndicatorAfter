@@ -257,6 +257,39 @@ test_that("the output at product and company level has columns `co2e_lower` and 
   expect_true(any(matches_name(company, "co2e_upper")))
 })
 
+test_that("is sensitive to `amount`", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  withr::local_seed(111)
+  withr::local_options(amount = 0.1)
+  out1 <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  withr::local_seed(111)
+  withr::local_options(amount = 0.9)
+  out2 <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  expect_false(identical(out1, out2))
+})
+
 test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after setting the seed", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
