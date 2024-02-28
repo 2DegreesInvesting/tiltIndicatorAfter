@@ -290,7 +290,7 @@ test_that("is sensitive to the option `tiltIndicatorAfter.co2_jitter_amount`", {
   expect_false(identical(out1, out2))
 })
 
-test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_min_max`", {
+test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_licensed_min_max`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -299,7 +299,7 @@ test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_min_max`", {
   isic_name <- read_csv(toy_isic_name())
 
   withr::local_seed(111)
-  withr::local_options(tiltIndicatorAfter.co2_keep_min_max = TRUE)
+  withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
   out <- profile_emissions(
     companies,
     co2,

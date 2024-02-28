@@ -6,7 +6,7 @@ create_co2_range <- function(data, amount = 0.5) {
     stop_if_percent_noise_more_than_100() |>
     rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
-  if (getOption("tiltIndicatorAfter.co2_keep_min_max", default = FALSE)) {
+  if (getOption("tiltIndicatorAfter.co2_keep_licensed_min_max", default = FALSE)) {
     return(out)
   }
 
