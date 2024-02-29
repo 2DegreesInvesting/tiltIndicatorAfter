@@ -1,10 +1,9 @@
 #' tiltIndicatorAfter options
 #'
-#' @description
-#' Some behaviour can be controlled via an option. Typically these options are
-#' used by developers or analysts who test the code or data before it's ready
-#' for public consumption.
 #'
+#' @description
+#' These options are meant to be used mainly by developers or analysts while
+#' testing the code or creating data:
 #' * `tiltIndicatorAfter.co2_jitter_amount`: Controls the amount of random noise
 #' in the `co2*` columns.
 #' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Keeps the licensed `min`
@@ -30,11 +29,19 @@
 #' ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 #' isic_name <- read_csv(toy_isic_name())
 #'
-#' amount <- 0.1
-#' local_seed(1)
-#' local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
-#' local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
+#' # The example `co2_footprint` is hard to work with. It's small and widespread
+#' products$co2_footprint
 #'
+#' # This makes it challenging to find the "right" jitter amount. So we need to
+#' # be able to experiment with it.
+#'
+#' amount <- 0.1
+#' # Ensure reproducible results
+#' local_seed(1)
+#' # Control percent noise
+#' local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
+#'
+#' # A message informs you the *mean* percent noise you achieved
 #' co2_cols <- profile_emissions(
 #'   companies,
 #'   products,
@@ -42,21 +49,16 @@
 #'   ecoinvent_activities = ecoinvent_activities,
 #'   ecoinvent_europages = ecoinvent_europages,
 #'   isic = isic_name
-#' ) |>
-#'   unnest_product() |>
-#'   select(matches(c("min", "max", "co2")))
-#'
-#' getOption("tiltIndicatorAfter.co2_jitter_amount")
-#' mean(percent_noise(co2_cols$min, co2_cols$co2e_lower))
-#' mean(percent_noise(co2_cols$max, co2_cols$co2e_upper))
-#'
-#'
+#' )
 #'
 #' # Compare
 #' amount <- 1
 #' local_seed(1)
 #' local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
+#' # Request the licensed `min` and `max` columns to explore the noise
 #' local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
+#' # You may turn off the message informing the noise
+#' local_options(list(tiltIndicatorAfter.verbose = FALSE))
 #'
 #' co2_cols <- profile_emissions(
 #'   companies,
@@ -69,7 +71,6 @@
 #'   unnest_product() |>
 #'   select(matches(c("min", "max", "co2")))
 #'
-#' getOption("tiltIndicatorAfter.co2_jitter_amount")
 #' mean(percent_noise(co2_cols$min, co2_cols$co2e_lower))
 #' mean(percent_noise(co2_cols$max, co2_cols$co2e_upper))
 NULL
