@@ -21,7 +21,9 @@ add_co2_upper_lower <- function(data, co2_range) {
 }
 
 inform_mean_percent_noise <- function(data) {
-  if (!verbose()) return(data)
+  if (!verbose()) {
+    return(data)
+  }
 
   l <- round(mean(percent_noise(data$min, data$min_jitter)))
   u <- round(mean(percent_noise(data$max, data$max_jitter)))
