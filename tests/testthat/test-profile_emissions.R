@@ -257,7 +257,7 @@ test_that("the output at product and company level has columns `co2e_lower` and 
   expect_true(any(matches_name(company, "co2e_upper")))
 })
 
-test_that("is sensitive to the option `tiltIndicatorAfter.co2_jitter_amount`", {
+test_that("allows controlling the amount of noise", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -314,7 +314,7 @@ test_that("informs the mean noise percent", {
   )
 })
 
-test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_licensed_min_max`", {
+test_that("allows yielding the licensed `min` and `max` columns", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
