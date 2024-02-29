@@ -68,6 +68,7 @@
 #' @importFrom utils hasName
 #' @importFrom utils str
 #' @importFrom withr local_options
+#' @importFrom withr local_seed
 ## usethis namespace: end
 NULL
 

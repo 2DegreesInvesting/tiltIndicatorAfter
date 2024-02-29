@@ -30,23 +30,11 @@
       [11] "postcode"                           "address"                           
       [13] "main_activity"                      "profile_ranking_avg"               
 
-# warns if the noise is too low
+# informs the mean noise percent
 
     Code
-      out <- profile_emissions(companies, co2, europages_companies,
+      invisible <- profile_emissions(companies, co2, europages_companies,
         ecoinvent_activities, ecoinvent_europages, isic_name)
     Message
-      Mean percent noise in the `co2*` columns:
-      * `lower`: 5.47%
-      * `upper`: 4.96%
-
-# warns if the noise is too high
-
-    Code
-      out <- profile_emissions(companies, co2, europages_companies,
-        ecoinvent_activities, ecoinvent_europages, isic_name)
-    Message
-      Mean percent noise in the `co2*` columns:
-      * `lower`: 5041.11%
-      * `upper`: 4759.1%
+      i Adding 48% and 99% noise to `co2e_lower` and `co2e_upper`, respectively.
 

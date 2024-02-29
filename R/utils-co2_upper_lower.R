@@ -23,13 +23,11 @@ add_co2_upper_lower <- function(data, co2_range) {
 inform_mean_percent_noise <- function(data) {
   if (!verbose()) return(data)
 
-  lower <- round(mean(percent_noise(data$min, data$min_jitter)), 2)
-  upper <- round(mean(percent_noise(data$max, data$max_jitter)), 2)
-  rlang::inform(glue(
-    "Mean percent noise in the `co2*` columns:
-      * `lower`: {lower}%
-      * `upper`: {upper}%"
-  ))
+  l <- round(mean(percent_noise(data$min, data$min_jitter)))
+  u <- round(mean(percent_noise(data$max, data$max_jitter)))
+  rlang::inform(c(i = glue(
+    "Adding {l}% and {u}% noise to `co2e_lower` and `co2e_upper`, respectively."
+  )))
 
   invisible(data)
 }

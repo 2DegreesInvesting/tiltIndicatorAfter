@@ -184,7 +184,7 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  withr::local_seed(111)
+  local_seed(111)
   out_first <- profile_emissions_upstream(
     companies,
     co2,
@@ -198,7 +198,7 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   product_first <- unnest_product(out_first)
   company_first <- unnest_company(out_first)
 
-  withr::local_seed(111)
+  local_seed(111)
   out_second <- profile_emissions_upstream(
     companies,
     co2,

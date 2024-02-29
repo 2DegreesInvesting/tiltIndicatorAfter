@@ -7,7 +7,7 @@
 #' in the `co2*` columns.
 #' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Keeps the licensed `min`
 #' and `max` columns that yield the noisy `co2*` columns.
-#' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Controls verbosity.
+#' * `tiltIndicatorAfter.verbose`: Controls verbosity.
 #'
 #' @keywords internal
 #' @name tiltIndicatorAfter_options
