@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tiltIndicatorAfter</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9019</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9020</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,20 @@
       <small>Source: <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.0.9020" id="tiltindicatorafter-0009020-2024-02-29">tiltIndicatorAfter 0.0.0.9020 (2024-02-29)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009020-2024-02-29"></a></h2>
+<p>NEW FUNCTIONS</p>
+<ul><li>New function <code><a href="../reference/score_transition_risk.html">score_transition_risk()</a></code> (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/152" class="external-link">#152</a>).</li>
+</ul><p>NEW COLUMNS</p>
+<ul><li>New columns <code>profile_ranking_avg</code> and <code>reduction_targets_avg</code> in the output at company level of <code>profile_emissions*()</code> and <code>profile_sector*()</code>, respectively (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/164" class="external-link">#164</a>).</li>
+<li>New columns <code>co2e_lower</code> and <code>co2e_upper</code> in the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions()</a></code> and <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> – both at product and company levels. This columns include some noise that protects the privacy of the licensed CO2 values (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/155" class="external-link">#155</a>).</li>
+<li>New column <code>ei_geography</code> in the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector()</a></code> at product level now output (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/148" class="external-link">#148</a>).</li>
+<li>New columns <code>ei_geography</code> and <code>ei_input_geography</code> in the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> at product level (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/148" class="external-link">#148</a>).</li>
+</ul><p>BREAKING CHANGES</p>
+<p>In practice these change should break nothing.</p>
+<ul><li>Retire functions and datasets that have been deprecated for 8 weeks or more (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/157" class="external-link">#157</a>).</li>
+<li>The column <code>extra_rowid</code> was removed from all output files (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/141" class="external-link">#141</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9019" id="tiltindicatorafter-0009019-2024-01-17">tiltIndicatorAfter 0.0.0.9019 (2024-01-17)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009019-2024-01-17"></a></h2>
 <ul><li>Use license GPLv3 (<a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/140" class="external-link">#140</a>).</li>
