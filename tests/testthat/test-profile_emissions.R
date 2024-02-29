@@ -291,11 +291,9 @@ test_that("is sensitive to the option `tiltIndicatorAfter.co2_jitter_amount`", {
 })
 
 test_that("warns if the noise is too low", {
-  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
-
   withr::local_seed(1)
+  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
   withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 0.1)
-  withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -304,8 +302,8 @@ test_that("warns if the noise is too low", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  expect_snapshot_warning({
-    result <- profile_emissions(
+  expect_snapshot({
+    out <- profile_emissions(
       companies,
       co2,
       europages_companies,
@@ -317,11 +315,9 @@ test_that("warns if the noise is too low", {
 })
 
 test_that("warns if the noise is too high", {
-  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
-
   withr::local_seed(1)
+  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
   withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 100)
-  withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -330,7 +326,7 @@ test_that("warns if the noise is too high", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  expect_snapshot_warning(
+  expect_snapshot(
     out <- profile_emissions(
       companies,
       co2,
@@ -338,7 +334,7 @@ test_that("warns if the noise is too high", {
       ecoinvent_activities,
       ecoinvent_europages,
       isic_name
-    ) |> unnest_product()
+    )
   )
 })
 

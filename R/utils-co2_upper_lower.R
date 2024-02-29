@@ -5,7 +5,7 @@ create_co2_range <- function(data, amount = co2_jitter_amount()) {
     ) |>
     jitter_range(amount = amount)
 
-  out |> warn_mean_percent_noise_outside_range()
+  out |> inform_mean_percent_noise()
 
   out <- out |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
@@ -20,25 +20,16 @@ add_co2_upper_lower <- function(data, co2_range) {
   left_join(data, co2_range, by = join_by("grouped_by", "risk_category"))
 }
 
-warn_mean_percent_noise_outside_range <- function(data,
-                                                  min = 40,
-                                                  max = 80) {
+inform_mean_percent_noise <- function(data) {
   if (!verbose()) return(data)
 
-  min_actual <- round(mean(percent_noise(data$min, data$min_jitter)), 2)
-  max_actual <- round(mean(percent_noise(data$max, data$max_jitter)), 2)
-  if (min_actual < min ||
-      max_actual < min ||
-      min_actual > max ||
-      max_actual > max) {
-    rlang::warn(c(
-      glue("The mean percent noise of `co2*` is outside the range {min}%-{max}%."),
-      i = glue("Actual values:
-        * `min`: {min_actual}%
-        * `max`: {max_actual}%"),
-      i = "Do you need to adjust the jitter `amount`? See `?tiltIndicatorAfter_options`."
-    ))
-  }
+  lower <- round(mean(percent_noise(data$min, data$min_jitter)), 2)
+  upper <- round(mean(percent_noise(data$max, data$max_jitter)), 2)
+  rlang::inform(glue(
+    "Mean percent noise in the `co2*` columns:
+      * `lower`: {lower}%
+      * `upper`: {upper}%"
+  ))
 
   invisible(data)
 }

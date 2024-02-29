@@ -32,17 +32,21 @@
 
 # warns if the noise is too low
 
-    The mean percent noise of `co2*` is outside the range 40%-80%.
-    i Actual values:
-    * `min`: 5.47%
-    * `max`: 4.96%
-    i Do you need to adjust the jitter `amount`? See `?tiltIndicatorAfter_options`.
+    Code
+      result <- profile_emissions(companies, co2, europages_companies,
+        ecoinvent_activities, ecoinvent_europages, isic_name)
+    Message
+      Mean percent noise in the `co2*` columns:
+      * `lower`: 5.47%
+      * `upper`: 4.96%
 
 # warns if the noise is too high
 
-    The mean percent noise of `co2*` is outside the range 40%-80%.
-    i Actual values:
-    * `min`: 5041.11%
-    * `max`: 4759.1%
-    i Do you need to adjust the jitter `amount`? See `?tiltIndicatorAfter_options`.
+    Code
+      out <- unnest_product(profile_emissions(companies, co2, europages_companies,
+        ecoinvent_activities, ecoinvent_europages, isic_name))
+    Message
+      Mean percent noise in the `co2*` columns:
+      * `lower`: 5041.11%
+      * `upper`: 4759.1%
 
