@@ -1,6 +1,5 @@
 #' tiltIndicatorAfter options
 #'
-#'
 #' @description
 #' These options are meant to be used mainly by developers or analysts while
 #' testing the code or creating data:
