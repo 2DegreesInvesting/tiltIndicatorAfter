@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9021 (2024-02-29)
+
+* `profile_emissions()` and `profile_emissions_upstream()` now inform the amount
+of noise added on average to the `co2*` columns. They now also allow controlling
+the amount of noise, and demanding the licensed `min` and `max` columns that are
+required to examine such noise before delivering data (#163).
+
 # tiltIndicatorAfter 0.0.0.9020 (2024-02-29)
 
 NEW FUNCTIONS
