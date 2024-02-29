@@ -12,6 +12,7 @@ for public consumption.
 in the \verb{co2*} columns.
 \item \code{tiltIndicatorAfter.co2_keep_licensed_min_max}: Keeps the licensed \code{min}
 and \code{max} columns that yield the noisy \verb{co2*} columns.
+\item \code{tiltIndicatorAfter.co2_keep_licensed_min_max}: Controls verbosity.
 }
 }
 \examples{

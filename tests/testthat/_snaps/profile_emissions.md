@@ -34,15 +34,15 @@
 
     The mean percent noise of `co2*` is outside the range 40%-80%.
     i Actual values:
-    * `min`: 40%
-    * `max`: 80%
+    * `min`: 5.47%
+    * `max`: 4.96%
     i Do you need to adjust the jitter `amount`? See `?tiltIndicatorAfter_options`.
 
 # warns if the noise is too high
 
     The mean percent noise of `co2*` is outside the range 40%-80%.
     i Actual values:
-    * `min`: 40%
-    * `max`: 80%
+    * `min`: 5041.11%
+    * `max`: 4759.1%
     i Do you need to adjust the jitter `amount`? See `?tiltIndicatorAfter_options`.
 

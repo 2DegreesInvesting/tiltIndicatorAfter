@@ -34,8 +34,8 @@ warn_mean_percent_noise_outside_range <- function(data,
     rlang::warn(c(
       glue("The mean percent noise of `co2*` is outside the range {min}%-{max}%."),
       i = glue("Actual values:
-        * `min`: {min}%
-        * `max`: {max}%"),
+        * `min`: {min_actual}%
+        * `max`: {max_actual}%"),
       i = "Do you need to adjust the jitter `amount`? See `?tiltIndicatorAfter_options`."
     ))
   }
