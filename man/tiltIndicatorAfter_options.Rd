@@ -21,8 +21,6 @@ library(withr)
 library(tiltToyData)
 library(tiltIndicator)
 
-local_options(readr.show_col_types = FALSE)
-
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products_ecoinvent())
 europages_companies <- read_csv(toy_europages_companies())
@@ -30,19 +28,14 @@ ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
 ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 isic_name <- read_csv(toy_isic_name())
 
-# The example `co2_footprint` is hard to work with. It's small and widespread
-products$co2_footprint
+set.seed(1)
+restore <- options(list(
+  tiltIndicatorAfter.co2_jitter_amount = 0.1,
+  tiltIndicatorAfter.co2_keep_licensed_min_max = FALSE,
+  tiltIndicatorAfter.verbose = TRUE
+))
+on.exit(options(restore), add = TRUE, after = FALSE)
 
-# This makes it challenging to find the "right" jitter amount. So we need to
-# be able to experiment with it.
-
-amount <- 0.1
-# Ensure reproducible results
-local_seed(1)
-# Control percent noise
-local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
-
-# A message informs you the *mean* percent noise you achieved
 co2_cols <- profile_emissions(
   companies,
   products,
@@ -53,13 +46,13 @@ co2_cols <- profile_emissions(
 )
 
 # Compare
-amount <- 1
-local_seed(1)
-local_options(list(tiltIndicatorAfter.co2_jitter_amount = amount))
-# Request the licensed `min` and `max` columns to explore the noise
-local_options(list(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE))
-# You may turn off the message informing the noise
-local_options(list(tiltIndicatorAfter.verbose = FALSE))
+
+set.seed(1)
+restore <- options(list(
+  tiltIndicatorAfter.co2_jitter_amount = 1,
+  tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE,
+  tiltIndicatorAfter.verbose = FALSE
+))
 
 co2_cols <- profile_emissions(
   companies,
@@ -74,5 +67,7 @@ co2_cols <- profile_emissions(
 
 mean(percent_noise(co2_cols$min, co2_cols$co2e_lower))
 mean(percent_noise(co2_cols$max, co2_cols$co2e_upper))
+
+options(restore)
 }
 \keyword{internal}
