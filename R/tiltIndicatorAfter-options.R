@@ -9,6 +9,7 @@
 #' in the `co2*` columns.
 #' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Keeps the licensed `min`
 #' and `max` columns that yield the noisy `co2*` columns.
+#' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Controls verbosity.
 #'
 #' @keywords internal
 #' @name tiltIndicatorAfter_options
@@ -74,9 +75,13 @@
 NULL
 
 co2_jitter_amount <- function() {
-  getOption("tiltIndicatorAfter.co2_jitter_amount", default = 3)
+  getOption("tiltIndicatorAfter.co2_jitter_amount", default = 2)
 }
 
 co2_keep_licensed_min_max <- function() {
   getOption("tiltIndicatorAfter.co2_keep_licensed_min_max", default = FALSE)
+}
+
+verbose <- function() {
+  getOption("tiltIndicatorAfter.verbose", default = TRUE)
 }

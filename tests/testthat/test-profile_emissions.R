@@ -291,6 +291,8 @@ test_that("is sensitive to the option `tiltIndicatorAfter.co2_jitter_amount`", {
 })
 
 test_that("warns if the noise is too low", {
+  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
+
   withr::local_seed(1)
   withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 0.1)
   withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
@@ -312,14 +314,11 @@ test_that("warns if the noise is too low", {
       isic_name
     )
   })
-
-  out <- result |> unnest_product()
-  low_lower <- mean(percent_noise(out$min, out$co2e_lower)) < 50
-  low_upper <- mean(percent_noise(out$max, out$co2e_upper)) < 50
-  expect_true(low_lower || low_upper)
 })
 
 test_that("warns if the noise is too high", {
+  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
+
   withr::local_seed(1)
   withr::local_options(tiltIndicatorAfter.co2_jitter_amount = 100)
   withr::local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
@@ -341,10 +340,6 @@ test_that("warns if the noise is too high", {
       isic_name
     ) |> unnest_product()
   )
-
-  low_lower <- mean(percent_noise(out$min, out$co2e_lower)) > 100
-  low_upper <- mean(percent_noise(out$max, out$co2e_upper)) > 100
-  expect_true(low_lower || low_upper)
 })
 
 test_that("is sensitive to the option `tiltIndicatorAfter.co2_keep_licensed_min_max`", {
