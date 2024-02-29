@@ -216,6 +216,10 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   expect_equal(company_first, company_second)
 })
 
+
+
+
+
 test_that("outputs `profile_ranking_avg` at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
