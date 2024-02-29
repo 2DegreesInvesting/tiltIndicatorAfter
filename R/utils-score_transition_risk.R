@@ -51,11 +51,13 @@ get_rows_union_for_common_cols <-
   }
 
 relocate_trs_columns <- function(columns) {
-  c("companies_id",
+  c(
+    "companies_id",
     "company_name",
     "country",
     "benchmark_tr_score",
-    columns)
+    columns
+  )
 }
 
 product_level_trs_column <- function() {
@@ -67,8 +69,10 @@ company_level_trs_avg_column <- function() {
 }
 
 trs_company_columns <- function() {
-  c(common_columns_emissions_sector_at_company_level(),
-    "benchmark_tr_score")
+  c(
+    common_columns_emissions_sector_at_company_level(),
+    "benchmark_tr_score"
+  )
 }
 
 trs_product_output_columns <- function() {
@@ -82,8 +86,7 @@ trs_product_output_columns <- function() {
 }
 
 trs_company_output_columns <- function() {
-  c(trs_company_columns(),
-    company_level_trs_avg_column())
+  c(trs_company_columns(), company_level_trs_avg_column())
 }
 
 common_columns_emissions_sector_at_product_level <- function() {

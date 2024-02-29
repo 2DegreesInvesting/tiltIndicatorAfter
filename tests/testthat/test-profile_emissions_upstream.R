@@ -184,7 +184,7 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  withr::local_seed(111)
+  local_seed(111)
   out_first <- profile_emissions_upstream(
     companies,
     co2,
@@ -198,7 +198,7 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   product_first <- unnest_product(out_first)
   company_first <- unnest_company(out_first)
 
-  withr::local_seed(111)
+  local_seed(111)
   out_second <- profile_emissions_upstream(
     companies,
     co2,
@@ -214,6 +214,96 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
 
   expect_equal(product_first, product_second)
   expect_equal(company_first, company_second)
+})
+
+test_that("allows controlling the amount of noise", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  local_seed(111)
+  local_options(tiltIndicatorAfter.co2_jitter_amount = 0.1)
+  out1 <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  )
+
+  local_seed(111)
+  local_options(tiltIndicatorAfter.co2_jitter_amount = 0.9)
+  out2 <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  )
+
+  expect_false(identical(out1, out2))
+})
+
+test_that("informs the mean noise percent", {
+  local_seed(1)
+  local_options(tiltIndicatorAfter.verbose = TRUE)
+  local_options(tiltIndicatorAfter.co2_jitter_amount = 2)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  expect_snapshot(
+    invisible <- profile_emissions_upstream(
+      companies,
+      co2,
+      europages_companies = europages_companies,
+      ecoinvent_activities = ecoinvent_activities,
+      ecoinvent_inputs = ecoinvent_inputs,
+      ecoinvent_europages = ecoinvent_europages,
+      isic = isic_name
+    )
+  )
+})
+
+test_that("allows yielding the licensed `min` and `max` columns", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+
+  local_seed(111)
+  local_options(tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE)
+  out <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  )
+
+  expect_true(hasName(unnest_product(out), "min"))
+  expect_true(hasName(unnest_product(out), "max"))
+  expect_true(hasName(unnest_company(out), "min"))
+  expect_true(hasName(unnest_company(out), "max"))
 })
 
 test_that("outputs `profile_ranking_avg` at company level", {

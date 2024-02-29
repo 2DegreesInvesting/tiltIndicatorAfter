@@ -53,8 +53,10 @@ score_transition_risk <-
   function(emissions_profile_at_product_level,
            sector_profile_at_product_level) {
     union_emissions_sector_rows <-
-      get_rows_union_for_common_cols(emissions_profile_at_product_level,
-                                     sector_profile_at_product_level)
+      get_rows_union_for_common_cols(
+        emissions_profile_at_product_level,
+        sector_profile_at_product_level
+      )
     trs_emissions <-
       prepare_trs_emissions(emissions_profile_at_product_level)
     trs_sector <-
@@ -76,8 +78,7 @@ score_transition_risk <-
       distinct()
 
     trs_company <- trs_product |>
-      select(trs_company_columns(),
-             product_level_trs_column()) |>
+      select(trs_company_columns(), product_level_trs_column()) |>
       create_trs_average() |>
       select(-product_level_trs_column()) |>
       relocate(relocate_trs_columns(company_level_trs_avg_column())) |>

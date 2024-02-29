@@ -14,11 +14,14 @@
 #' products.
 #'
 #' @export
+#'
 #' @examples
 #' library(tiltToyData)
+#' library(withr)
 #' library(readr, warn.conflicts = FALSE)
 #'
-#' options(readr.show_col_types = FALSE)
+#' local_seed(1)
+#' local_options(readr.show_col_types = FALSE)
 #'
 #' companies <- read_csv(toy_emissions_profile_any_companies())
 #' products <- read_csv(toy_emissions_profile_products_ecoinvent())

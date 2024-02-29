@@ -30,3 +30,11 @@
       [11] "postcode"                           "address"                           
       [13] "main_activity"                      "profile_ranking_avg"               
 
+# informs the mean noise percent
+
+    Code
+      invisible <- profile_emissions(companies, co2, europages_companies,
+        ecoinvent_activities, ecoinvent_europages, isic_name)
+    Message
+      i Adding 48% and 99% noise to `co2e_lower` and `co2e_upper`, respectively.
+
