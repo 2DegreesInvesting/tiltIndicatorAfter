@@ -33,7 +33,7 @@
 # warns if the noise is too low
 
     Code
-      result <- profile_emissions(companies, co2, europages_companies,
+      out <- profile_emissions(companies, co2, europages_companies,
         ecoinvent_activities, ecoinvent_europages, isic_name)
     Message
       Mean percent noise in the `co2*` columns:
@@ -43,8 +43,8 @@
 # warns if the noise is too high
 
     Code
-      out <- unnest_product(profile_emissions(companies, co2, europages_companies,
-        ecoinvent_activities, ecoinvent_europages, isic_name))
+      out <- profile_emissions(companies, co2, europages_companies,
+        ecoinvent_activities, ecoinvent_europages, isic_name)
     Message
       Mean percent noise in the `co2*` columns:
       * `lower`: 5041.11%
