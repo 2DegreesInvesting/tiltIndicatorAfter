@@ -1,5 +1,35 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9020 (2024-02-29)
+
+NEW FUNCTIONS
+
+* New function `score_transition_risk()` (@kalashsinghal #152).
+
+NEW COLUMNS
+
+* New columns `profile_ranking_avg` and `reduction_targets_avg` in the output at
+company level of `profile_emissions*()` and `profile_sector*()`, respectively
+(@kalashsinghal #164).
+* New columns `co2e_lower` and `co2e_upper` in the output of `profile_emissions()`
+and `profile_emissions_upstream()` -- both at product and company levels. This
+columns include some noise that protects the privacy of the licensed CO2 values
+(@kalashsinghal #155).
+* New column `ei_geography` in the output of `profile_emissions()` and `profile_sector()`
+  at product level now output (@kalashsinghal #148).
+* New columns `ei_geography` and `ei_input_geography` in the output of
+  `profile_emissions_upstream()` and `profile_sector_upstream()` at product
+  level (@kalashsinghal #148).
+
+BREAKING CHANGES
+
+In practice these change should break nothing.
+
+* Retire functions and datasets that have been deprecated for 8 weeks or more
+(@kalashsinghal #157).
+* The column `extra_rowid` was removed from all output files (@kalashsinghal
+#141).
+
 # tiltIndicatorAfter 0.0.0.9019 (2024-01-17)
 
 * Use license GPLv3 (#140).
