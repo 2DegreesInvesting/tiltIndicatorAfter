@@ -87,7 +87,9 @@ test_that("`ei_geography` column is present at product level output", {
   expect_true(all(c("ei_geography") %in% names(out)))
 })
 
-test_that("total number of rows for a comapny is either 1 or 3", {
+test_that("total number of rows for a comapny is either 1 or 4", {
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9209")
+
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   europages_companies <- read_csv(toy_europages_companies()) |> head(3)
@@ -108,7 +110,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
 
-  expect_true(all(unique(out$count) %in% c(1, 3)))
+  expect_true(all(unique(out$count) %in% c(1, 4)))
 })
 
 test_that("'empty' tiltIndicator results yield at most 1 NA in *profile$ risk column", {

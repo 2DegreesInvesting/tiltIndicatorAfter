@@ -101,7 +101,9 @@ test_that("`ei_geography` and `input_ei_grougraphy` columns are present at produ
   expect_true(all(c("ei_geography", "ei_input_geography") %in% names(out)))
 })
 
-test_that("total number of rows for a comapny is either 1 or 3", {
+test_that("total number of rows for a comapny is either 1 or 4", {
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9209")
+
   companies <- read_csv(toy_sector_profile_upstream_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
   inputs <- read_csv(toy_sector_profile_upstream_products())
@@ -125,7 +127,7 @@ test_that("total number of rows for a comapny is either 1 or 3", {
     unnest_company() |>
     group_by(companies_id, scenario, year) |>
     summarise(count = n())
-  expect_true(all(unique(out$count) %in% c(1, 3)))
+  expect_true(all(unique(out$count) %in% c(1, 4)))
 })
 
 test_that("outputs `profile_ranking_avg` at company level", {
