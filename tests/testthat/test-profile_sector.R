@@ -88,7 +88,7 @@ test_that("`ei_geography` column is present at product level output", {
 })
 
 test_that("total number of rows for a comapny is either 1 or 4", {
-  skip_unless_tilt_indicator_is_newer_than("0.0.0.9210")
+  skip_unless_tilt_indicator_is_newer_than("0.0.0.9209")
 
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())
