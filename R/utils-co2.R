@@ -33,3 +33,14 @@ inform_mean_percent_noise <- function(data) {
 
   invisible(data)
 }
+
+may_add_co2_footprint <- function(out, co2_footprint) {
+  if (co2_keep_licensed_footprint()) {
+    product <- out |>
+      unnest_product() |>
+      left_join(co2_footprint, by = "activity_uuid_product_uuid")
+    company <- out |> unnest_company()
+    out <- nest_levels(product, company)
+  }
+  out
+}
