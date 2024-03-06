@@ -61,6 +61,11 @@ co2_keep_licensed_min_max <- function() {
   getOption("tiltIndicatorAfter.co2_keep_licensed_min_max", default = FALSE)
 }
 
+co2_keep_licensed_footprint <- function() {
+  getOption("tiltIndicatorAfter.co2_keep_licensed_footprint", default = FALSE)
+}
+
 verbose <- function() {
   getOption("tiltIndicatorAfter.verbose", default = TRUE)
 }
+

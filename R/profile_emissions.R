@@ -32,5 +32,17 @@ profile_emissions <- function(companies,
     ecoinvent_europages,
     isic
   )
-  exec_profile("emissions_profile", indicator, indicator_after)
+  out <- exec_profile("emissions_profile", indicator, indicator_after)
+
+  if (co2_keep_licensed_footprint()) {
+    co2_footprint <- select(indicator[[2]], matches(c("uuid", "co2")))
+    product <- out |>
+      unnest_product() |>
+      left_join(co2_footprint, by = "activity_uuid_product_uuid")
+    company <- out |> unnest_company()
+    out <- nest_levels(product, company)
+  }
+
+  out
 }
+

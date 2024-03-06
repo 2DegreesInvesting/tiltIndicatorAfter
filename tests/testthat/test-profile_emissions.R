@@ -385,8 +385,7 @@ test_that("allows yielding the licensed `co2_footprint` column at product level"
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  local_seed(111)
-  local_options(tiltIndicatorAfter.co2_keep_licensed_co2_footprint = TRUE)
+  local_options(tiltIndicatorAfter.co2_keep_licensed_footprint = TRUE)
   out <- profile_emissions(
     companies,
     co2,
