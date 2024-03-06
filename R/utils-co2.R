@@ -39,7 +39,14 @@ may_add_co2_footprint <- function(out, co2_footprint) {
     product <- out |>
       unnest_product() |>
       left_join(co2_footprint, by = "activity_uuid_product_uuid")
-    company <- out |> unnest_company()
+
+    co2_avg <- product |>
+      select("companies_id", "co2_footprint") |>
+      dplyr::summarize(co2_avg = mean(co2_footprint, na.rm = TRUE) , .by = "companies_id")
+    company <- out |>
+      unnest_company() |>
+      left_join(co2_avg, by = "companies_id")
+
     out <- nest_levels(product, company)
   }
   out
