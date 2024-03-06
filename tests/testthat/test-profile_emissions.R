@@ -399,8 +399,7 @@ test_that("allows yielding the licensed `co2_footprint` column at product level"
 })
 
 test_that("can optionally output `co2_avg` at company level", {
-  companies <- read_csv(toy_emissions_profile_any_companies()) |>
-    head(1)
+  companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
