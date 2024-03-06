@@ -42,7 +42,7 @@ may_add_co2_footprint <- function(out, co2_footprint) {
 
     co2_avg <- product |>
       select("companies_id", "co2_footprint") |>
-      dplyr::summarize(co2_avg = mean(co2_footprint, na.rm = TRUE), .by = "companies_id")
+      summarise(co2_avg = mean(co2_footprint, na.rm = TRUE), .by = "companies_id")
     company <- out |>
       unnest_company() |>
       left_join(co2_avg, by = "companies_id")
