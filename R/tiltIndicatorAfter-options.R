@@ -70,4 +70,3 @@ co2_keep_licensed_footprint <- function() {
 verbose <- function() {
   getOption("tiltIndicatorAfter.verbose", default = TRUE)
 }
-
