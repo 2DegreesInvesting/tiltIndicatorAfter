@@ -41,8 +41,11 @@ may_add_co2_footprint <- function(out, co2_footprint) {
       left_join(co2_footprint, by = "activity_uuid_product_uuid")
 
     co2_avg <- product |>
-      select("companies_id", "co2_footprint") |>
-      summarise(co2_avg = mean(co2_footprint, na.rm = TRUE), .by = "companies_id")
+      select("companies_id", "benchmark", "co2_footprint") |>
+      summarise(
+        co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
+        .by = c("companies_id", "benchmark")
+      )
     company <- out |>
       unnest_company() |>
       left_join(co2_avg, by = "companies_id")
