@@ -40,8 +40,7 @@ may_add_co2_footprint <- function(out, co2_footprint) {
       unnest_product() |>
       left_join(
         co2_footprint,
-        by = "activity_uuid_product_uuid",
-        relationship = "many-to-many"
+        by = "activity_uuid_product_uuid"
       )
 
     co2_avg <- product |>
@@ -52,7 +51,7 @@ may_add_co2_footprint <- function(out, co2_footprint) {
       )
     company <- out |>
       unnest_company() |>
-      left_join(co2_avg, by = "companies_id")
+      left_join(co2_avg, by = "companies_id", relationship = "many-to-many")
 
     out <- nest_levels(product, company)
   }
