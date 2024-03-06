@@ -38,7 +38,11 @@ may_add_co2_footprint <- function(out, co2_footprint) {
   if (co2_keep_licensed_footprint()) {
     product <- out |>
       unnest_product() |>
-      left_join(co2_footprint, by = "activity_uuid_product_uuid")
+      left_join(
+        co2_footprint,
+        by = "activity_uuid_product_uuid",
+        relationship = "many-to-many"
+      )
 
     co2_avg <- product |>
       select("companies_id", "benchmark", "co2_footprint") |>
