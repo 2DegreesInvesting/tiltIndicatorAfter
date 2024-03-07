@@ -34,7 +34,7 @@ inform_mean_percent_noise <- function(data) {
   invisible(data)
 }
 
-may_add_licensed_co2_columns <- function(out, co2_footprint) {
+optionally_output_co2_footprint <- function(out, co2_footprint) {
   if (!output_co2_footprint()) {
     return(out)
   }
