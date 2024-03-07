@@ -35,27 +35,27 @@ inform_mean_percent_noise <- function(data) {
 }
 
 may_add_licensed_co2_columns <- function(out, co2_footprint) {
-  if (output_co2_footprint()) {
-    product <- out |>
-      unnest_product() |>
-      left_join(
-        co2_footprint,
-        by = "activity_uuid_product_uuid"
-      )
-
-    by <- c("companies_id", "benchmark")
-    co2_avg <- product |>
-      select(all_of(c(by, "co2_footprint"))) |>
-      summarise(
-        co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
-        .by = all_of(by)
-      )
-    company <- out |>
-      unnest_company() |>
-      left_join(co2_avg, by = by, relationship = "many-to-many")
-
-    out <- nest_levels(product, company)
+  if (!output_co2_footprint()) {
+    return(out)
   }
 
-  out
+  product <- out |>
+    unnest_product() |>
+    left_join(
+      co2_footprint,
+      by = "activity_uuid_product_uuid"
+    )
+
+  by <- c("companies_id", "benchmark")
+  co2_avg <- product |>
+    select(all_of(c(by, "co2_footprint"))) |>
+    summarise(
+      co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
+      .by = all_of(by)
+    )
+  company <- out |>
+    unnest_company() |>
+    left_join(co2_avg, by = by, relationship = "many-to-many")
+
+  nest_levels(product, company)
 }
