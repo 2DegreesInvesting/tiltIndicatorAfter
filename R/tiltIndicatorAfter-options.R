@@ -3,10 +3,11 @@
 #' @description
 #' These options are meant to be used mainly by developers or analysts while
 #' testing the code or creating data:
-#' * `tiltIndicatorAfter.co2_jitter_amount`: Controls the amount of random noise
-#' in the `co2*` columns.
-#' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Keeps the licensed `min`
-#' and `max` columns that yield the noisy `co2*` columns.
+#' * `tiltIndicatorAfter.set_jitter_amount`: Controls the amount of random noise
+#' in the columns `co2*`.
+#' * `tiltIndicatorAfter.output_co2_footprint_min_max`: Outputs the columns `min`
+#' and `max` (calculated from `co2_footprint`), which yield the noisy `co2*`
+#' columns.
 #' * `tiltIndicatorAfter.output_co2_footprint`:
 #'     * At product level it outputs licensed column `co2_footprint`.
 #'     * At company level it outputs the column `co2_avg` (average `co2_footprint`
@@ -27,9 +28,9 @@
 #'
 #' restore <- withr::local_options(list(
 #'   readr.show_col_types = FALSE,
-#'   tiltIndicatorAfter.co2_jitter_amount = 1,
+#'   tiltIndicatorAfter.set_jitter_amount = 1,
 #'   tiltIndicatorAfter.verbose = TRUE,
-#'   tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE
+#'   tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
 #' ))
 #'
 #' companies <- read_csv(toy_emissions_profile_any_companies())
@@ -57,12 +58,12 @@
 #'   select(matches(c("min", "max", "co2")))
 NULL
 
-co2_jitter_amount <- function() {
-  getOption("tiltIndicatorAfter.co2_jitter_amount", default = 2)
+set_jitter_amount <- function() {
+  getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
 }
 
-co2_keep_licensed_min_max <- function() {
-  getOption("tiltIndicatorAfter.co2_keep_licensed_min_max", default = FALSE)
+output_co2_footprint_min_max <- function() {
+  getOption("tiltIndicatorAfter.output_co2_footprint_min_max", default = FALSE)
 }
 
 output_co2_footprint <- function() {
