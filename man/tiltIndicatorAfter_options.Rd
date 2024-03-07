@@ -11,8 +11,12 @@ testing the code or creating data:
 in the \verb{co2*} columns.
 \item \code{tiltIndicatorAfter.co2_keep_licensed_min_max}: Keeps the licensed \code{min}
 and \code{max} columns that yield the noisy \verb{co2*} columns.
-\item \code{tiltIndicatorAfter.co2_keep_licensed_footprint}: Keeps the licensed
-\code{co2_footprint} column.
+\item \code{tiltIndicatorAfter.output_co2_footprint}:
+\itemize{
+\item At product level it outputs licensed column \code{co2_footprint}.
+\item At company level it outputs the column \code{co2_avg} (average \code{co2_footprint}
+by \code{companies_id}).
+}
 \item \code{tiltIndicatorAfter.verbose}: Controls verbosity.
 }
 }

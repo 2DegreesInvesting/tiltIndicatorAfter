@@ -385,7 +385,7 @@ test_that("can optionally output `co2_footprint` at product level", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  local_options(tiltIndicatorAfter.co2_keep_licensed_footprint = TRUE)
+  local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
   out <- profile_emissions(
     companies,
     co2,
@@ -406,7 +406,7 @@ test_that("can optionally output `co2_avg` at company level", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  local_options(tiltIndicatorAfter.co2_keep_licensed_footprint = TRUE)
+  local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
   out <- profile_emissions(
     companies,
     co2,

@@ -33,5 +33,5 @@ profile_emissions <- function(companies,
     isic
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
-    may_add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
+    may_add_licensed_co2_columns(select(co2, matches(c("_uuid", "co2_footprint"))))
 }
