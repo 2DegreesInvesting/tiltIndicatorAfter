@@ -278,7 +278,7 @@ test_that("informs the mean noise percent", {
   )
 })
 
-test_that("allows yielding the licensed `min` and `max` columns", {
+test_that("can optionally output `min` and `max`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
