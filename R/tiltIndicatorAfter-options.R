@@ -7,8 +7,10 @@
 #' in the `co2*` columns.
 #' * `tiltIndicatorAfter.co2_keep_licensed_min_max`: Keeps the licensed `min`
 #' and `max` columns that yield the noisy `co2*` columns.
-#' * `tiltIndicatorAfter.co2_keep_licensed_footprint`: Keeps the licensed
-#' `co2_footprint` column.
+#' * `tiltIndicatorAfter.output_co2_footprint`:
+#'     * At product level it outputs licensed column `co2_footprint`.
+#'     * At company level it outputs the column `co2_avg` (average `co2_footprint`
+#'     by `companies_id`).
 #' * `tiltIndicatorAfter.verbose`: Controls verbosity.
 #'
 #' @keywords internal
@@ -63,8 +65,8 @@ co2_keep_licensed_min_max <- function() {
   getOption("tiltIndicatorAfter.co2_keep_licensed_min_max", default = FALSE)
 }
 
-co2_keep_licensed_footprint <- function() {
-  getOption("tiltIndicatorAfter.co2_keep_licensed_footprint", default = FALSE)
+output_co2_footprint <- function() {
+  getOption("tiltIndicatorAfter.output_co2_footprint", default = FALSE)
 }
 
 verbose <- function() {
