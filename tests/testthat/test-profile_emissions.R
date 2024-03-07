@@ -377,6 +377,27 @@ test_that("allows yielding the licensed `min` and `max` columns", {
   expect_true(hasName(unnest_company(out), "max"))
 })
 
+test_that("allows yielding the licensed `co2_footprint` column at product level", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  local_options(tiltIndicatorAfter.co2_keep_licensed_footprint = TRUE)
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  expect_true(hasName(unnest_product(out), "co2_footprint"))
+})
+
 test_that("outputs `profile_ranking_avg` at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
