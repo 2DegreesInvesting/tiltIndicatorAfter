@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9023 (2024-03-07)
+
+* At company level `profile_emissions()` can now optionally output the column
+`co2_avg` (@AnneSchoenauer #186). This is the mean of the `co2_footprint` for
+each company. This control is via internal options (see
+`?tiltIndicatorAfter_options`).
+
 # tiltIndicatorAfter 0.0.0.9022 (2024-03-07)
 
 * At product level `profile_emissions()` can now optionally output the licensed
