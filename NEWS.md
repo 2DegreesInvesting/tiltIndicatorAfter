@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9022 (2024-03-07)
+
+* At product level `profile_emissions()` can now optionally output the licensed
+column `co2_footprint` (#184). This control is via internal options (see
+`?tiltIndicatorAfter_options`).
+
 # tiltIndicatorAfter 0.0.0.9021 (2024-02-29)
 
 * `profile_emissions()` and `profile_emissions_upstream()` now inform the amount

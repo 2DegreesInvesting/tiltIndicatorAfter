@@ -1,6 +1,6 @@
 Package: tiltIndicatorAfter
 Title: Create user facing outputs of tiltIndicators
-Version: 0.0.0.9021
+Version: 0.0.0.9022
 Authors@R: c(
     person("Kalash", "Singhal", , "kalash@2degrees-investing.org", role = c("aut", "cre")),
     person("Mauro", "Lepore", role = "ctb",
