@@ -1,4 +1,4 @@
-create_co2_range <- function(data, amount = co2_jitter_amount()) {
+create_co2_range <- function(data, amount = set_jitter_amount()) {
   out <- data |>
     summarize_range(.data[[grep("co2_footprint", names(data), value = TRUE)]],
       .by = c("grouped_by", "risk_category")
@@ -9,7 +9,7 @@ create_co2_range <- function(data, amount = co2_jitter_amount()) {
 
   out <- out |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
-  if (co2_keep_licensed_min_max()) {
+  if (output_co2_footprint_min_max()) {
     return(out)
   }
 

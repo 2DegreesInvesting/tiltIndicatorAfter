@@ -7,10 +7,11 @@
 These options are meant to be used mainly by developers or analysts while
 testing the code or creating data:
 \itemize{
-\item \code{tiltIndicatorAfter.co2_jitter_amount}: Controls the amount of random noise
-in the \verb{co2*} columns.
-\item \code{tiltIndicatorAfter.co2_keep_licensed_min_max}: Keeps the licensed \code{min}
-and \code{max} columns that yield the noisy \verb{co2*} columns.
+\item \code{tiltIndicatorAfter.set_jitter_amount}: Controls the amount of random noise
+in the columns \verb{co2*}.
+\item \code{tiltIndicatorAfter.output_co2_footprint_min_max}: Outputs the columns \code{min}
+and \code{max} (calculated from \code{co2_footprint}), which yield the noisy \verb{co2*}
+columns.
 \item \code{tiltIndicatorAfter.output_co2_footprint}:
 \itemize{
 \item At product level it outputs licensed column \code{co2_footprint}.
@@ -31,9 +32,9 @@ set.seed(1)
 
 restore <- withr::local_options(list(
   readr.show_col_types = FALSE,
-  tiltIndicatorAfter.co2_jitter_amount = 1,
+  tiltIndicatorAfter.set_jitter_amount = 1,
   tiltIndicatorAfter.verbose = TRUE,
-  tiltIndicatorAfter.co2_keep_licensed_min_max = TRUE
+  tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
 ))
 
 companies <- read_csv(toy_emissions_profile_any_companies())
