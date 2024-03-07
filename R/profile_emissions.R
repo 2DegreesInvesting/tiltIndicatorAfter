@@ -35,4 +35,3 @@ profile_emissions <- function(companies,
   exec_profile("emissions_profile", indicator, indicator_after) |>
     may_add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
 }
-

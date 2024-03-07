@@ -53,5 +53,6 @@ may_add_co2_footprint <- function(out, co2_footprint) {
 
     out <- nest_levels(product, company)
   }
+
   out
 }
