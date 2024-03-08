@@ -398,6 +398,27 @@ test_that("can optionally output `co2_footprint` at product level", {
   expect_true(hasName(unnest_product(out), "co2_footprint"))
 })
 
+test_that("is sensitive to `options`", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name,
+    options = list(tiltIndicatorAfter.output_co2_footprint = TRUE)
+  )
+
+  expect_true(hasName(unnest_product(out), "co2_footprint"))
+})
+
 test_that("can optionally output `co2_avg` at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())

@@ -8,7 +8,8 @@ profile_emissions <- function(companies,
                               isic,
                               isic_tilt = lifecycle::deprecated(),
                               low_threshold = 1 / 3,
-                              high_threshold = 2 / 3) {
+                              high_threshold = 2 / 3,
+                              options = NULL) {
   if (lifecycle::is_present(isic_tilt)) {
     lifecycle::deprecate_warn(
       "0.0.0.9017",
@@ -33,5 +34,8 @@ profile_emissions <- function(companies,
     isic
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
-    optionally_output_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
+    optionally_output_co2_footprint(
+      select(co2, matches(c("_uuid", "co2_footprint"))),
+      options = options
+    )
 }

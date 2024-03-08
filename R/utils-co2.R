@@ -34,8 +34,8 @@ inform_mean_percent_noise <- function(data) {
   invisible(data)
 }
 
-optionally_output_co2_footprint <- function(out, co2_footprint) {
-  if (!output_co2_footprint()) {
+optionally_output_co2_footprint <- function(out, co2_footprint, options = NULL) {
+  if (!output_co2_footprint(options)) {
     return(out)
   }
 

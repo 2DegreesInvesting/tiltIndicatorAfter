@@ -66,8 +66,9 @@ output_co2_footprint_min_max <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint_min_max", default = FALSE)
 }
 
-output_co2_footprint <- function() {
-  getOption("tiltIndicatorAfter.output_co2_footprint", default = FALSE)
+output_co2_footprint <- function(options = NULL) {
+  options$tiltIndicatorAfter.output_co2_footprint %||%
+    getOption("tiltIndicatorAfter.output_co2_footprint", default = FALSE)
 }
 
 verbose <- function() {

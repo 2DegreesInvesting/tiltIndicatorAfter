@@ -28,6 +28,7 @@
 #' @importFrom memoise memoise
 #' @importFrom readr read_csv
 #' @importFrom rlang .data
+#' @importFrom rlang %||%
 #' @importFrom rlang abort
 #' @importFrom rlang exec
 #' @importFrom stats na.omit
