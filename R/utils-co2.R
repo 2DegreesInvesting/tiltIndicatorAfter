@@ -46,7 +46,7 @@ optionally_output_co2_footprint <- function(out, co2_footprint) {
       by = "activity_uuid_product_uuid"
     )
 
-  by <- c("companies_id", "benchmark")
+  by <- c("companies_id")
   co2_avg <- product |>
     select(all_of(c(by, "co2_footprint"))) |>
     summarise(
