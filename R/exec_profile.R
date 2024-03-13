@@ -4,8 +4,11 @@ exec_profile <- function(.fn, indicator, indicator_after) {
     product_raw <- unnest_product(tilt_indicator_output) |>
       extend_with_columns_from_arguments_of_tilt_indicator(indicator, .fn)
 
-    co2_range <- create_co2_range(product_raw)
+    co2_range <- product_raw |>
+      filter(!is.na(co2_footprint)) |>
+      create_co2_range()
     product <- add_co2_upper_lower(product_raw, co2_range)
+    product |> filter(is.na(co2_footprint))
 
     company <- unnest_company(tilt_indicator_output) |>
       add_co2_upper_lower(co2_range)

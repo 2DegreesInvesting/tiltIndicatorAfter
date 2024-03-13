@@ -1,6 +1,9 @@
 create_co2_range <- function(data, amount = set_jitter_amount()) {
+  co2 <- grep("co2_footprint", names(data), value = TRUE)
+
   out <- data |>
-    summarize_range(.data[[grep("co2_footprint", names(data), value = TRUE)]],
+    filter(!is.na(.data[[co2]])) |>
+    summarize_range(.data[[co2]],
       .by = c("grouped_by", "risk_category")
     ) |>
     jitter_range(amount = amount)
@@ -48,6 +51,7 @@ optionally_output_co2_footprint <- function(out, co2_footprint) {
 
   by <- c("companies_id", "benchmark")
   co2_avg <- product |>
+    filter(!is.na(co2_footprint)) |>
     select(all_of(c(by, "co2_footprint"))) |>
     summarise(
       co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
