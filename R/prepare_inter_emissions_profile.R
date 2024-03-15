@@ -13,6 +13,5 @@ prepare_inter_emissions_profile <- function(ep_prod, europages_companies, ecoinv
   ep_product_europages |>
     left_join(prepared_match_mapper, by = join_by_shared_cols_quietly) |>
     left_join(isic, by = "isic_4digit") |>
-    add_avg_matching_certainty("completion") |>
-    exclude_rows("risk_category")
+    add_avg_matching_certainty("completion")
 }

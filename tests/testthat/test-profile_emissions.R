@@ -398,6 +398,44 @@ test_that("can optionally output `co2_footprint` at product level", {
   expect_true(hasName(unnest_product(out), "co2_footprint"))
 })
 
+test_that("preserves unmatched products", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  id <- unique(companies$companies_id)[[1]]
+  uuid <- unique(companies$activity_uuid_product_uuid)[[1]]
+  companies <- companies |>
+    filter(companies_id == id) |>
+    filter(activity_uuid_product_uuid == uuid)
+  companies <- bind_rows(companies, companies)
+  companies[1, "activity_uuid_product_uuid"] <- "unmatched"
+
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
+    filter(activity_uuid_product_uuid == uuid)
+
+  europages_companies <- read_csv(toy_europages_companies()) |>
+    filter(companies_id == id)
+
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |>
+    filter(activity_uuid_product_uuid == uuid)
+
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |>
+    filter(activity_uuid_product_uuid == uuid)
+
+  isic_name <- read_csv(toy_isic_name()) |>
+    filter(isic_4digit == co2$isic_4digit)
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  product <- unnest_product(out)
+  expect_equal(unique(product$activity_uuid_product_uuid), c("unmatched", uuid))
+})
+
 test_that("can optionally output `co2_avg` at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
