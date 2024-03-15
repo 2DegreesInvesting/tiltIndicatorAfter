@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9024 (2024-03-15)
+
+* `profile_emissions()` now preserves unmatched products (#193).
+
 # tiltIndicatorAfter 0.0.0.9023 (2024-03-07)
 
 * At company level `profile_emissions()` can now optionally output the column
