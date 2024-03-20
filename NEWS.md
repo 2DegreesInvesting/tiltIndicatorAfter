@@ -1,5 +1,3 @@
-# tiltIndicatorAfter (development version)
-
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
 # tiltIndicatorAfter 0.0.0.9024 (2024-03-15)
