@@ -462,7 +462,7 @@ test_that("with no match preserves unmatched products (#193)", {
   expect_true("unmatched" %in% product$activity_uuid_product_uuid)
 })
 
-test_that("at product level, `NA` in a benchmark yields `NA` in `risk_category` and `profile_ranking` (#638)", {
+test_that("at product level, a missing benchmark is preserved (#153#issuecomment-2010043596)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   id <- unique(companies$companies_id)[[1]]
   uuid <- unique(companies$activity_uuid_product_uuid)[[1]]
@@ -472,6 +472,7 @@ test_that("at product level, `NA` in a benchmark yields `NA` in `risk_category` 
 
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == uuid)
+  # Introduce a "missing benchmark"
   co2$isic_4digit <- NA
 
   europages_companies <- read_csv(toy_europages_companies()) |>
