@@ -11,7 +11,6 @@ polish_emissions_profile_product <- function(ep_prod, europages_companies, ecoin
   prepare_inter_emissions_profile(ep_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, isic) |>
     relocate_emissions_profile_product() |>
     rename_emissions_profile_product() |>
-    mutate(benchmark = ifelse(is.na(.data$PCTR_risk_category), NA, .data$benchmark), .by = c("companies_id")) |>
     select(-c(
       "matching_certainty_num", "avg_matching_certainty_num", "co2_footprint", "extra_rowid"
     )) |>
