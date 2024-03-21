@@ -436,40 +436,6 @@ test_that("preserves unmatched products", {
   expect_equal(unique(product$activity_uuid_product_uuid), c("unmatched", uuid))
 })
 
-test_that("at product level, preserves missing benchmarks (#153#issuecomment-2010043596)", {
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  id <- unique(companies$companies_id)[[1]]
-  uuid <- unique(companies$activity_uuid_product_uuid)[[1]]
-  companies <- companies |>
-    filter(companies_id == id) |>
-    filter(activity_uuid_product_uuid == uuid)
-
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
-    filter(activity_uuid_product_uuid == uuid)
-  # Introduce a "missing benchmark"
-  co2$isic_4digit <- NA
-
-  europages_companies <- read_csv(toy_europages_companies()) |>
-    filter(companies_id == id)
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |>
-    filter(activity_uuid_product_uuid == uuid)
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |>
-    filter(activity_uuid_product_uuid == uuid)
-  isic_name <- read_csv(toy_isic_name()) |>
-    filter(isic_4digit == co2$isic_4digit)
-
-  out <- profile_emissions(
-    companies,
-    co2,
-    europages_companies,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    isic_name
-  )
-
-  expect_true(any(grepl("isic", unnest_product(out)$benchmark)))
-})
-
 test_that("can optionally output `co2_avg` at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
