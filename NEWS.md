@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9025 (2024-03-21)
+
+* At product level, `profile_emissions()` now preserves missing benchmarks (#196).
+
 # tiltIndicatorAfter 0.0.0.9024 (2024-03-15)
 
 * `profile_emissions()` now preserves unmatched products (#193).
