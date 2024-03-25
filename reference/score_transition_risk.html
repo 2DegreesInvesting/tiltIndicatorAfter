@@ -150,22 +150,21 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,728 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id   company_name country benchmark_tr_score transition_risk_scor…¹</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megal… asteria_meg… austria 1.5C RPS_2030_all                   0.59 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megal… asteria_meg… austria 1.5C RPS_2050_all                   0.99 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megal… asteria_meg… austria NZ 2050_2030_all                    0.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megal… asteria_meg… austria NZ 2050_2050_all                    0.985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megal… asteria_meg… austria 1.5C RPS_2030_isi…                  0.59 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megal… asteria_meg… austria 1.5C RPS_2050_isi…                  0.99 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megal… asteria_meg… austria NZ 2050_2030_isic…                  0.7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megal… asteria_meg… austria NZ 2050_2050_isic…                  0.985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megal… asteria_meg… austria 1.5C RPS_2030_til…                  0.59 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megal… asteria_meg… austria 1.5C RPS_2050_til…                  0.99 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id                      company_name country benchmark_tr_score_avg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotomusquinquespinos… asteria_meg… austria 1.5C RPS_2030_all     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megalotomusquinquespinos… asteria_meg… austria 1.5C RPS_2050_all     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megalotomusquinquespinos… asteria_meg… austria NZ 2050_2030_all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megalotomusquinquespinos… asteria_meg… austria NZ 2050_2050_all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotomusquinquespinos… asteria_meg… austria 1.5C RPS_2030_isic_4d…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotomusquinquespinos… asteria_meg… austria 1.5C RPS_2050_isic_4d…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotomusquinquespinos… asteria_meg… austria NZ 2050_2030_isic_4di…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotomusquinquespinos… asteria_meg… austria NZ 2050_2050_isic_4di…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megalotomusquinquespinos… asteria_meg… austria 1.5C RPS_2030_tilt_se…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megalotomusquinquespinos… asteria_meg… austria 1.5C RPS_2050_tilt_se…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,718 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​transition_risk_score_avg</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: company_city &lt;chr&gt;, postcode &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   main_activity &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: transition_risk_score_avg &lt;dbl&gt;, company_city &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   postcode &lt;chr&gt;, address &lt;chr&gt;, main_activity &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
