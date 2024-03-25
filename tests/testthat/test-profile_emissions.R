@@ -564,3 +564,31 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
   expected_value <- round(mean(product$profile_ranking, na.rm = TRUE), 3)
   expect_equal(unique(company$profile_ranking_avg), expected_value)
 })
+
+test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk column", {
+  withr::local_options()
+  companies <- read_csv(toy_emissions_profile_any_companies()) |>
+    filter(companies_id %in% c("nonphilosophical_llama"))
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
+    filter(activity_uuid_product_uuid == "bf94b5a7-b7a2-46d1-bb95-84bc560b12fb")
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  result <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  ) |>
+    unnest_product() |>
+    suppressWarnings()
+
+  na <- filter(result, is.na(get_column(result, "profile$")))
+  these_cols_are_full_of_na <- all(is.na(select(na, tilt_sector, tilt_subsector)))
+  expect_true(these_cols_are_full_of_na)
+})
