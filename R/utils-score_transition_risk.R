@@ -71,7 +71,7 @@ company_level_trs_avg_column <- function() {
 trs_company_columns <- function() {
   c(
     common_columns_emissions_sector_at_company_level(),
-    "benchmark_tr_score"
+    "benchmark_tr_score_avg"
   )
 }
 
