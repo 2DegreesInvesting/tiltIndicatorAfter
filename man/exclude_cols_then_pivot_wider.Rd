@@ -25,6 +25,7 @@ Excluding irrelevant columns and duplicates, then pivot from long to wide
 library(tidyr, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 
+# styler: off
 data <- tribble(
   ~to_exclude,  ~id, ~name,  ~value,
             1, "id",   "a",       1,
@@ -32,6 +33,7 @@ data <- tribble(
             1, "id",   "b",       2,
             2, "id",   "b",       2,
 )
+# styler: on
 
 # `exclude_cols_then_pivot_wider()` excludes columns and duplicates
 data |> exclude_cols_then_pivot_wider(exclude_cols = "exclude")
