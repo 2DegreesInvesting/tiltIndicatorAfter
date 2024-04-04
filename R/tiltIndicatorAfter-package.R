@@ -34,6 +34,7 @@
 #' @importFrom stringr str_pad
 #' @importFrom tibble rowid_to_column
 #' @importFrom tibble tibble
+#' @importFrom tibble tribble
 #' @importFrom tidyr nest
 #' @importFrom tidyr pivot_wider
 #' @importFrom tidyr replace_na
