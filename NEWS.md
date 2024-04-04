@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9026 (2024-04-04)
+
+BREAKING CHANGE
+
+* New column `benchmark_tr_score_avg` replaces `benchmark_tr_score` in the output
+at company level of `score_transition_risk()` (@kalashsinghal #199).
+
 # tiltIndicatorAfter 0.0.0.9025 (2024-03-21)
 
 * At product level, `profile_emissions()` now preserves missing benchmarks (#196).
