@@ -190,3 +190,28 @@ test_that(
     expect_false(any(is.na(common_cols_company)))
   }
 )
+
+test_that("characterize commit 663d12", {
+  emissions_profile_at_product_level <-
+    example_emissions_profile_at_product_level() |>
+    filter(companies_id == "antimonarchy_canine")
+  sector_profile_at_product_level <-
+    example_sector_profile_at_product_level() |>
+    filter(companies_id == "antimonarchy_canine")
+
+  out <-
+    score_transition_risk(
+      emissions_profile_at_product_level,
+      sector_profile_at_product_level
+    )
+
+  out |>
+    unnest_product() |>
+    hasName("benchmark_tr_score") |>
+    expect_true()
+
+  out |>
+    unnest_company() |>
+    hasName("benchmark_tr_score_avg") |>
+    expect_true()
+})
