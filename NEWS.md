@@ -45,7 +45,7 @@ and `profile_emissions_upstream()` -- both at product and company levels. This
 columns include some noise that protects the privacy of the licensed CO2 values
 (@kalashsinghal #155).
 * New column `ei_geography` in the output of `profile_emissions()` and `profile_sector()`
-  at product level now output (@kalashsinghal #148).
+  at product level (@kalashsinghal #148).
 * New columns `ei_geography` and `ei_input_geography` in the output of
   `profile_emissions_upstream()` and `profile_sector_upstream()` at product
   level (@kalashsinghal #148).
