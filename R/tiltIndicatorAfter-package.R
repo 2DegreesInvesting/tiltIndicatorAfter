@@ -35,6 +35,7 @@
 #' @importFrom tibble rowid_to_column
 #' @importFrom tibble tibble
 #' @importFrom tidyr nest
+#' @importFrom tidyr pivot_wider
 #' @importFrom tidyr replace_na
 #' @importFrom tidyselect all_of
 #' @importFrom tidyselect any_of
