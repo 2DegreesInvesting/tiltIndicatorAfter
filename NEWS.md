@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9027 (2024-04-05)
+
+* New `exclude_cols_then_pivot_wider()` (#203). This is an internal,
+developer-oriented function to exclude irrelevant columns and duplicates from a
+dataset, then pivot it to a wide format.
+
 # tiltIndicatorAfter 0.0.0.9026 (2024-04-04)
 
 BREAKING CHANGE
