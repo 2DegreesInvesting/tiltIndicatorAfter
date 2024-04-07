@@ -1,8 +1,10 @@
 #' Add transition risk score and polish the output for delivery
 #'
-#' @param emissions_profile The output of [emissions_profile()].
-#' @param sector_profile The output of [sector_profile()].
-#' @param pivot_wider Pivot the output at company level to a wide format?
+#' @param emissions_profile Nested data frame. The output of
+#'   `profile_emissions()`.
+#' @param sector_profile Nested data frame. The output of `profile_sector()`.
+#' @param pivot_wider Logical. Pivot the output at company level to a wide
+#'   format?
 #'
 #' @return A data frame with the column `companies_id`, and the nested
 #'   columns`product` and `company` holding the outputs at product and company
@@ -14,7 +16,11 @@
 #' library(readr, warn.conflicts = FALSE)
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tiltToyData)
-#' withr::local_options(readr.show_col_types = FALSE)
+#'
+#' withr::local_options(
+#'   readr.show_col_types = FALSE,
+#'   tiltIndicatorAfter.output_co2_footprint = TRUE
+#' )
 #'
 #' toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
 #' toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -34,12 +40,6 @@
 #'   ecoinvent_europages = toy_ecoinvent_europages,
 #'   isic = toy_isic_name)
 #'
-#'  # FIXME Use options to output co2_footprint and co2_avg
-#'  emissions_profile$product <- emissions_profile$product |>
-#'    lapply(mutate, co2_footprint = 1)
-#'  emissions_profile$company <- emissions_profile$product |>
-#'    lapply(mutate, co2_avg = 1)
-#'
 #' sector_profile <- profile_sector(
 #'   companies = toy_sector_profile_companies,
 #'   scenarios = toy_sector_profile_any_scenarios,
@@ -53,21 +53,18 @@
 #' result |> unnest_company()
 #'
 #' # Some banks need a wide format for the output at company level
-#' # FIXME: Why this fails?
-#' try(score_transition_risk_and_polish(
+#' score_transition_risk_and_polish(
 #'   emissions_profile,
 #'   sector_profile,
 #'   pivot_wider = TRUE
-#'  ))
+#' ) |>
+#'   unnest_company() |>
+#'   relocate(matches("emission_category"))
 score_transition_risk_and_polish <- function(emissions_profile, sector_profile, pivot_wider = FALSE) {
   emissions_profile_at_product_level <- unnest_product(emissions_profile)
   emissions_profile_at_company_level <- unnest_company(emissions_profile)
-  # sector_profile_at_product_level <- read_csv("xx-sector-profile/sector_profile_at_product_level.csv")
   sector_profile_at_product_level <- unnest_product(sector_profile)
-  # sector_profile_at_company_level <- read_csv("xx-sector-profile/sector_profile_at_company_level.csv")
   sector_profile_at_company_level <- unnest_company(sector_profile)
-
-  # New stuff starts here -----------------------------------------------------
 
   transition_risk_score <- score_transition_risk(emissions_profile_at_product_level, sector_profile_at_product_level)
   transition_risk_score_at_product_level <- unnest_product(transition_risk_score)
@@ -123,13 +120,10 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     mutate(benchmark_tr_score = paste(scenario, year, benchmark, sep = "_")) |>
     left_join(select_transition_risk_score_at_product_level, by = c("companies_id", "ep_product", "benchmark_tr_score")) |>
     distinct()
-    # TODO: `europages_companies` should include headcount. tiltIndicatorBefore
+    ## TODO: `europages_companies` should include headcount? Submit issue to tiltIndicatorBefore
     # left_join(headcount, by = c("companies_id")) |>
-    # This is specific to the latest bundesbank delivery
+    ## This is specific to the latest bundesbank delivery
     # filter(country == "germany", benchmark %in% c("unit", "unit_tilt_sector") | is.na(benchmark))
-
-
-
 
   select_emissions_profile_at_company_level <- emissions_profile_at_company_level |>
     select(
@@ -141,8 +135,8 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
         "co2e_upper",
         "benchmark",
         "emission_profile",
-        matches("emission_profile_share"),
-        matches("profile_ranking_avg"),
+        "emission_profile_share",
+        "profile_ranking_avg",
         "co2_avg"
       )
     )
@@ -164,7 +158,6 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
   tmp <- select_emissions_profile_at_company_level
   if (pivot_wider) {
     tmp <- tmp |>
-      # FIXME: Run this conditionally since it's only necessary for Bunedesbank
       exclude_cols_then_pivot_wider(
         exclude_cols = "co2e",
         id_cols = c(
@@ -189,9 +182,9 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     mutate(benchmark_tr_score_avg = paste(scenario, year, benchmark, sep = "_")) |>
     left_join(select_transition_risk_score_at_company_level, by = c("companies_id", "benchmark_tr_score_avg")) |>
     distinct()
-    # TODO: `europages_companies` should include headcount. tiltIndicatorBefore
+    ## TODO: `europages_companies` should include headcount? Submit issue to tiltIndicatorBefore
     # left_join(headcount, by = c("companies_id")) |>
-    # This is specific to the latest bundesbank delivery
+    ## This is specific to the latest bundesbank delivery
     # filter(country == "germany", benchmark %in% c("all", "unit_tilt_sector"))
 
   nest_levels(
