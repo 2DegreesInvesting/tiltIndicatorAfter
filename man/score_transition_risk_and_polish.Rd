@@ -31,7 +31,11 @@ Add transition risk score and polish the output for delivery
 library(readr, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 library(tiltToyData)
-withr::local_options(readr.show_col_types = FALSE)
+
+withr::local_options(
+  readr.show_col_types = FALSE,
+  tiltIndicatorAfter.output_co2_footprint = TRUE
+)
 
 toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
 toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -51,12 +55,6 @@ emissions_profile <- profile_emissions(
   ecoinvent_europages = toy_ecoinvent_europages,
   isic = toy_isic_name)
 
- # FIXME Use options to output co2_footprint and co2_avg
- emissions_profile$product <- emissions_profile$product |>
-   lapply(mutate, co2_footprint = 1)
- emissions_profile$company <- emissions_profile$product |>
-   lapply(mutate, co2_avg = 1)
-
 sector_profile <- profile_sector(
   companies = toy_sector_profile_companies,
   scenarios = toy_sector_profile_any_scenarios,
@@ -70,11 +68,12 @@ result |> unnest_product()
 result |> unnest_company()
 
 # Some banks need a wide format for the output at company level
-# FIXME: Why this fails?
-try(score_transition_risk_and_polish(
+score_transition_risk_and_polish(
   emissions_profile,
   sector_profile,
   pivot_wider = TRUE
- ))
+) |>
+  unnest_company() |>
+  relocate(matches("emission_category"))
 }
 \keyword{internal}
