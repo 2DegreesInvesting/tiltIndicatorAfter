@@ -35,9 +35,20 @@
 #' data |>
 #'   pivot_wider(id_cols = id, names_from = "name", values_from = "value") |>
 #'   unnest(c(a, b))
-exclude_cols_then_pivot_wider <- function(data, ..., exclude_cols = NULL) {
-  data |>
+exclude_cols_then_pivot_wider <- function(data,
+                                          ...,
+                                          exclude_cols = NULL,
+                                          avoid_list_cols = FALSE) {
+  pruned <- data |>
     select(-matches(exclude_cols)) |>
-    distinct() |>
-    pivot_wider(...)
+    distinct()
+
+  if (!avoid_list_cols) {
+    pruned |> pivot_wider(...)
+  } else {
+    pruned |>
+      pivot_wider(...) |>
+      tidyr::unchop(tidyselect::everything())
+  }
 }
+
