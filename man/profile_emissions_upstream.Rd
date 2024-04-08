@@ -71,7 +71,7 @@ library(withr)
 library(readr, warn.conflicts = FALSE)
 
 local_seed(1)
-local_options(readr.show_col_types = FALSE)
+restore <- options(readr.show_col_types = FALSE)
 
 companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -111,6 +111,9 @@ result <- profile_emissions_upstream(
 result |> unnest_product()
 
 result |> unnest_company()
+
+# Cleanup
+options(restore)
 }
 \seealso{
 Other top-level functions: 

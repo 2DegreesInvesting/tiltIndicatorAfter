@@ -20,7 +20,7 @@
 #' library(tiltToyData)
 #' library(readr, warn.conflicts = FALSE)
 #'
-#' withr::local_options(readr.show_col_types = FALSE)
+#' restore <- options(readr.show_col_types = FALSE)
 #'
 #' companies <- read_csv(toy_sector_profile_companies())
 #' scenarios <- read_csv(toy_sector_profile_any_scenarios())
@@ -67,6 +67,9 @@
 #' result |> unnest_product()
 #'
 #' result |> unnest_company()
+#'
+#' # Cleanup
+#' options(restore)
 profile_sector_upstream <- function(companies,
                                     scenarios,
                                     inputs,

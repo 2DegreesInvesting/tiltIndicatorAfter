@@ -24,7 +24,8 @@ Calulate Transition Risk Score at product level and company level
 library(dplyr)
 library(readr, warn.conflicts = FALSE)
 library(tiltToyData)
-withr::local_options(readr.show_col_types = FALSE)
+
+restore <- options(readr.show_col_types = FALSE)
 
 emissions_companies <- read_csv(toy_emissions_profile_any_companies())
 products <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -59,6 +60,9 @@ result <- score_transition_risk(emissions_profile_at_product_level, sector_profi
 result |> unnest_product()
 
 result |> unnest_company()
+
+# Cleanup
+options(restore)
 }
 \seealso{
 Other top-level functions: 
