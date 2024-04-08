@@ -85,7 +85,6 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     emissions_profile_at_product_level |> check_col("co2_footprint", hint)
   }
 
-  col_if <- function(col, condition) if (condition) col else NULL
   select_emissions_profile_at_product_level <- emissions_profile_at_product_level |>
     select(
       c(
@@ -103,8 +102,8 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
         "benchmark",
         "profile_ranking",
         "tilt_sector",
-        "co2_footprint" |> col_if(!pivot_wider),
-        "tilt_subsector"
+        "tilt_subsector",
+        "co2_footprint" |> col_if(!pivot_wider)
       )
     )
   select_sector_profile_at_product_level <- sector_profile_at_product_level |>
@@ -154,7 +153,7 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
         "emission_profile",
         "emission_profile_share",
         "profile_ranking_avg",
-        "co2_avg"
+        "co2_avg" |> col_if(!pivot_wider)
       )
     )
 
@@ -183,7 +182,7 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
           "main_activity",
           "benchmark",
           "profile_ranking_avg",
-          "co2_avg"
+          "co2_avg" |> col_if(!pivot_wider)
         ),
         names_from = "emission_profile",
         names_prefix = "emission_category_",

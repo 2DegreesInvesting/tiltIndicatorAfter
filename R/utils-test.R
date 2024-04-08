@@ -38,9 +38,28 @@ skip_on_rcmd <- function() {
 check_col <- function(data, col, hint = NULL) {
   if (!hasName(data, col)) {
     label <- deparse(substitute(data))
-    abort(c(glue("`{label}` must have the column `{col}`."), i = hint)
-    )
+    abort(c(glue("`{label}` must have the column `{col}`."), i = hint))
   }
 
   invisible(data)
 }
+
+#' @examples
+#' c(
+#'  "x",
+#'  "y" |> col_if(TRUE)
+#' )
+#'
+#' c(
+#'  "x",
+#'  "y" |> col_if(FALSE)
+#' )
+#'
+#' # Typically useful to conditionally `select()` based on an argument
+#' data <- tibble(x = 1, y = 1, z = 1)
+#' arg <- TRUE
+#' data |> select(c("x", "y" |> col_if(arg)))
+#' arg <- FALSE
+#' data |> select(c("x", "y" |> col_if(arg)))
+#' @noRd
+col_if <- function(col, condition) if (condition) col else NULL
