@@ -127,7 +127,6 @@ score_transition_risk_and_polish <- function(emissions_profile,
       "transition_risk_score"
     ))
 
-
   out_product <- select_emissions_profile_product |>
     left_join(
       select_sector_profile_product,
@@ -187,6 +186,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
         values_from = "emission_profile_share"
       )
   }
+
   out_company <- tmp |>
     left_join(
       select_sector_profile_company,
