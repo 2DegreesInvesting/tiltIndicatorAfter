@@ -37,6 +37,33 @@
 #' data |>
 #'   pivot_wider(id_cols = id, names_from = "name", values_from = "value") |>
 #'   unnest(c(a, b))
+#'
+#' # styler: off
+#' data <- tribble(
+#'    ~id, ~name, ~value, ~to_exclude, ~yields_duplicates,
+#'   "id",   "a",      1,           1,                  1,
+#'   "id",   "a",      1,           2,                  2
+#' )
+#' # styler: on
+#'
+#' # `data` may have columns that yield duplicates and thus list-columns
+#' with_list_cols <- exclude_cols_then_pivot_wider(
+#'   data,
+#'   exclude_cols = "to_exclude",
+#'   id_cols = "id"
+#' )
+#' # You can handle it after the fact
+#' with_list_cols |>
+#'   tidyr::unnest(everything()) |>
+#'   distinct()
+#'
+#' # But also you can avoid it with `avoid_list_cols = TRUE`
+#' exclude_cols_then_pivot_wider(
+#'   data,
+#'   exclude_cols = "to_exclude",
+#'   id_cols = "id",
+#'   avoid_list_cols = TRUE
+#' )
 exclude_cols_then_pivot_wider <- function(data,
                                           ...,
                                           exclude_cols = NULL,
