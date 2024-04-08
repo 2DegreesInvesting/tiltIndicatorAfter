@@ -73,22 +73,20 @@
 #'
 #' # Cleanup
 #' options(restore)
-score_transition_risk_and_polish <- function(emissions_profile, sector_profile, pivot_wider = FALSE) {
-  emissions_profile_at_product_level <- unnest_product(emissions_profile)
-  emissions_profile_at_company_level <- unnest_company(emissions_profile)
-  sector_profile_at_product_level <- unnest_product(sector_profile)
-  sector_profile_at_company_level <- unnest_company(sector_profile)
-
-  transition_risk_score <- score_transition_risk(emissions_profile_at_product_level, sector_profile_at_product_level)
-  transition_risk_score_at_product_level <- unnest_product(transition_risk_score)
-  transition_risk_score_at_company_level <- unnest_company(transition_risk_score)
+score_transition_risk_and_polish <- function(emissions_profile,
+                                             sector_profile,
+                                             pivot_wider = FALSE) {
+  transition_risk_score <- score_transition_risk(
+    unnest_product(emissions_profile),
+    unnest_product(sector_profile)
+  )
 
   if (!pivot_wider) {
     hint <- "Do you need `options(tiltIndicatorAfter.output_co2_footprint = TRUE)`?"
-    emissions_profile_at_product_level |> check_col("co2_footprint", hint)
+    unnest_product(emissions_profile) |> check_col("co2_footprint", hint)
   }
 
-  select_emissions_profile_at_product_level <- emissions_profile_at_product_level |>
+  select_emissions_profile_product <- unnest_product(emissions_profile) |>
     select(
       c(
         "companies_id",
@@ -109,7 +107,7 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
         if (!pivot_wider) "co2_footprint"
       )
     )
-  select_sector_profile_at_product_level <- sector_profile_at_product_level |>
+  select_sector_profile_product <- unnest_product(sector_profile) |>
     select(
       c(
         "companies_id",
@@ -121,7 +119,7 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
       )
     )
 
-  select_transition_risk_score_at_product_level <- transition_risk_score_at_product_level |>
+  select_transition_risk_score_product <- unnest_product(transition_risk_score) |>
     select(c(
       "companies_id",
       "ep_product",
@@ -129,17 +127,21 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
       "transition_risk_score"
     ))
 
-  bundesbank_data_at_product_level <- select_emissions_profile_at_product_level |>
+
+  out_product <- select_emissions_profile_product |>
     left_join(
-      select_sector_profile_at_product_level,
+      select_sector_profile_product,
       relationship = "many-to-many",
       by = c("companies_id", "ep_product")
     ) |>
-    mutate(benchmark_tr_score = paste(.data$scenario, .data$year, .data$benchmark, sep = "_")) |>
-    left_join(select_transition_risk_score_at_product_level, by = c("companies_id", "ep_product", "benchmark_tr_score")) |>
+    unite("benchmark_tr_score", all_of(benchmark_cols()), remove = FALSE) |>
+    left_join(
+      select_transition_risk_score_product,
+      by = c("companies_id", "ep_product", "benchmark_tr_score")
+    ) |>
     distinct()
 
-  select_emissions_profile_at_company_level <- emissions_profile_at_company_level |>
+  select_emissions_profile_company <- unnest_company(emissions_profile) |>
     select(
       c(
         "companies_id",
@@ -155,10 +157,10 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
       )
     )
 
-  select_sector_profile_at_company_level <- sector_profile_at_company_level |>
+  select_sector_profile_company <- unnest_company(sector_profile) |>
     select(c("companies_id", "scenario", "year", "reduction_targets_avg"))
 
-  select_transition_risk_score_at_company_level <- transition_risk_score_at_company_level |>
+  select_transition_risk_score_company <- unnest_company(transition_risk_score) |>
     select(
       c(
         "companies_id",
@@ -167,7 +169,7 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
       )
     )
 
-  tmp <- select_emissions_profile_at_company_level
+  tmp <- select_emissions_profile_company
   if (pivot_wider) {
     tmp <- tmp |>
       exclude_cols_then_pivot_wider(
@@ -185,18 +187,22 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
         values_from = "emission_profile_share"
       )
   }
-  bundesbank_data_at_company_level <- tmp |>
+  out_company <- tmp |>
     left_join(
-      select_sector_profile_at_company_level,
+      select_sector_profile_company,
       relationship = "many-to-many",
       by = c("companies_id")
     ) |>
-    mutate(benchmark_tr_score_avg = paste(.data$scenario, .data$year, .data$benchmark, sep = "_")) |>
-    left_join(select_transition_risk_score_at_company_level, by = c("companies_id", "benchmark_tr_score_avg")) |>
+    unite("benchmark_tr_score_avg", all_of(benchmark_cols()), remove = FALSE) |>
+    left_join(
+      select_transition_risk_score_company,
+      by = c("companies_id", "benchmark_tr_score_avg")
+    ) |>
     distinct()
 
-  nest_levels(
-    bundesbank_data_at_product_level,
-    bundesbank_data_at_company_level
-  )
+  nest_levels(out_product, out_company)
+}
+
+benchmark_cols <- function() {
+  c("scenario", "year", "benchmark")
 }

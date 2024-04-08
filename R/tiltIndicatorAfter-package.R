@@ -38,6 +38,7 @@
 #' @importFrom tidyr nest
 #' @importFrom tidyr pivot_wider
 #' @importFrom tidyr replace_na
+#' @importFrom tidyr unite
 #' @importFrom tidyselect all_of
 #' @importFrom tidyselect any_of
 #' @importFrom tidyselect matches
