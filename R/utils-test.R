@@ -30,7 +30,3 @@ toy_data_version <- function() {
 skip_on_rcmd <- function() {
   testthat::skip_if(nzchar(Sys.getenv("R_CMD")), "On R CMD")
 }
-
-read_test <- function(file, n_max = 1L, ...) {
-  read_csv(file, n_max = 1L, ...)
-}
