@@ -4,6 +4,8 @@
 #' @param ... Arguments passed to [tidyr::pivot_wider()].
 #' @param exclude_cols A character vector giving regular expressions matching
 #'   column names to exclude. If lengh > 1, the union is taken.
+#' @param avoid_list_cols Logical. Avoid all list-columns, duplicates, and the
+#'   associated warning?
 #'
 #' @return A data frame giving the result you get from [tidyr::pivot_wider()] if
 #'   `data` lacks the excluded columns and the resulting duplicates.

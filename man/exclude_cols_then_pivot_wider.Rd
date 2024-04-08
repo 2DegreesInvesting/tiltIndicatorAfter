@@ -4,7 +4,12 @@
 \alias{exclude_cols_then_pivot_wider}
 \title{Excluding irrelevant columns and duplicates, then pivot from long to wide}
 \usage{
-exclude_cols_then_pivot_wider(data, ..., exclude_cols = NULL)
+exclude_cols_then_pivot_wider(
+  data,
+  ...,
+  exclude_cols = NULL,
+  avoid_list_cols = FALSE
+)
 }
 \arguments{
 \item{data}{A data frame to pivot.}
@@ -13,6 +18,9 @@ exclude_cols_then_pivot_wider(data, ..., exclude_cols = NULL)
 
 \item{exclude_cols}{A character vector giving regular expressions matching
 column names to exclude. If lengh > 1, the union is taken.}
+
+\item{avoid_list_cols}{Logical. Avoid all list-columns, duplicates, and the
+associated warning?}
 }
 \value{
 A data frame giving the result you get from \code{\link[tidyr:pivot_wider]{tidyr::pivot_wider()}} if
