@@ -135,7 +135,6 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
       relationship = "many-to-many",
       by = c("companies_id", "ep_product")
     ) |>
-    # TODO: Maybe replace with tidyr::unite()?
     mutate(benchmark_tr_score = paste(.data$scenario, .data$year, .data$benchmark, sep = "_")) |>
     left_join(select_transition_risk_score_at_product_level, by = c("companies_id", "ep_product", "benchmark_tr_score")) |>
     distinct()
