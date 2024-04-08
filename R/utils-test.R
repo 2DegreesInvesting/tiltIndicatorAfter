@@ -43,21 +43,3 @@ check_col <- function(data, col, hint = NULL) {
 
   invisible(data)
 }
-
-#' @examples
-#' c(
-#'  "x",
-#'  "y" |> unless(TRUE)
-#' )
-#'
-#' c(
-#'  "x",
-#'  "y" |> unless(FALSE)
-#' )
-#'
-#' # Typically useful to conditionally `select()` based on an argument
-#' data <- tibble(x = 1, y = 1, z = 1)
-#' data |> select(c("x", "y" |> unless(TRUE)))
-#' data |> select(c("x", "y" |> unless(FALSE)))
-#' @noRd
-unless <- function(col, condition) if (condition) col else NULL
