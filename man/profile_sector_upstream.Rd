@@ -63,7 +63,7 @@ These functions wrap the output of the corresponding function in
 library(tiltToyData)
 library(readr, warn.conflicts = FALSE)
 
-options(readr.show_col_types = FALSE)
+withr::local_options(readr.show_col_types = FALSE)
 
 companies <- read_csv(toy_sector_profile_companies())
 scenarios <- read_csv(toy_sector_profile_any_scenarios())

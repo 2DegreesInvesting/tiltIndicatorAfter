@@ -14,7 +14,7 @@
 #' library(dplyr)
 #' library(readr, warn.conflicts = FALSE)
 #' library(tiltToyData)
-#' options(readr.show_col_types = FALSE)
+#' withr::local_options(readr.show_col_types = FALSE)
 #'
 #' emissions_companies <- read_csv(toy_emissions_profile_any_companies())
 #' products <- read_csv(toy_emissions_profile_products_ecoinvent())
