@@ -139,10 +139,6 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     mutate(benchmark_tr_score = paste(.data$scenario, .data$year, .data$benchmark, sep = "_")) |>
     left_join(select_transition_risk_score_at_product_level, by = c("companies_id", "ep_product", "benchmark_tr_score")) |>
     distinct()
-  ## TODO: `europages_companies` should include headcount? Submit issue to tiltIndicatorBefore
-  # left_join(headcount, by = c("companies_id")) |>
-  ## This is specific to the latest bundesbank delivery
-  # filter(country == "germany", benchmark %in% c("unit", "unit_tilt_sector") | is.na(benchmark))
 
   select_emissions_profile_at_company_level <- emissions_profile_at_company_level |>
     select(
@@ -199,10 +195,6 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     mutate(benchmark_tr_score_avg = paste(.data$scenario, .data$year, .data$benchmark, sep = "_")) |>
     left_join(select_transition_risk_score_at_company_level, by = c("companies_id", "benchmark_tr_score_avg")) |>
     distinct()
-  ## TODO: `europages_companies` should include headcount? Submit issue to tiltIndicatorBefore
-  # left_join(headcount, by = c("companies_id")) |>
-  ## This is specific to the latest bundesbank delivery
-  # filter(country == "germany", benchmark %in% c("all", "unit_tilt_sector"))
 
   nest_levels(
     bundesbank_data_at_product_level,
