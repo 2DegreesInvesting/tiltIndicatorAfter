@@ -164,7 +164,7 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     select(
       c(
         "companies_id",
-        # `benchmark_tr_score` was renamed to `benchmark_tr_score_avg`
+        # Backward compatibile: `benchmark_tr_score` -> `benchmark_tr_score_avg`
         # https://2degreesinvesting.github.io/tiltIndicatorAfter/news/index.html#tiltindicatorafter-0009026-2024-04-04
         matches("benchmark_tr_score"),
         "transition_risk_score_avg"
