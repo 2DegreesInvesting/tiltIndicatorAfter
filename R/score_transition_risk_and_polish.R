@@ -207,14 +207,3 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
     bundesbank_data_at_company_level
   )
 }
-
-check_col <- function(data, col, hint = NULL) {
-  if (!hasName(data, col)) {
-    label <- deparse(substitute(data))
-    abort(c(glue("`{label}` must have {col}."), i = hint)
-    )
-  }
-
-  invisible(data)
-}
-
