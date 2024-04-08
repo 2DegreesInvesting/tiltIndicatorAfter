@@ -20,16 +20,19 @@ test_that("can avoid list-columns, the warning, and duplicates", {
     ~to_exclude,  ~id, ~name,  ~value,
               1, "id",   "a",       1,
               2, "id",   "a",       1,
-  )
-  # styler: on
+  ) |>
+    mutate(another_col_that_yields_duplicates = to_exclude)
+    # styler: on
 
-  out <- data |>
-    mutate(another_col_that_yields_duplicates = to_exclude) |>
-    exclude_cols_then_pivot_wider(
+
+  expect_no_warning({
+    out <- exclude_cols_then_pivot_wider(
+      data,
       exclude_cols = "to_exclude",
       id_cols = "id",
       avoid_list_cols = TRUE
     )
+  })
 
   expect_type(out$a, "double")
 })

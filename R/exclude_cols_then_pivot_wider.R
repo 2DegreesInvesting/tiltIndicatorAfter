@@ -47,7 +47,7 @@ exclude_cols_then_pivot_wider <- function(data,
     pruned |> pivot_wider(...)
   } else {
     pruned |>
-      pivot_wider(...) |>
+      pivot_wider(..., values_fn = list) |>
       tidyr::unchop(tidyselect::everything())
   }
 }
