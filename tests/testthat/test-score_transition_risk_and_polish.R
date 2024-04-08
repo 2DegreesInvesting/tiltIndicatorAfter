@@ -1,5 +1,4 @@
 test_that("outputs results both at product and company level", {
-  # FIXME: This is easy to forget. Set an informative error if this is unset
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
 
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -35,7 +34,6 @@ test_that("outputs results both at product and company level", {
 })
 
 test_that("is sensitive to `pivot_wider`", {
-  # FIXME: This is easy to forget. Set an informative error if this is unset
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
 
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())

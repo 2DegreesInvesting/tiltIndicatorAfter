@@ -71,7 +71,9 @@ result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
 result |> unnest_product()
 
 # Most banks need company-level results in long format
-long <- result |> unnest_company() |> relocate(matches("emission_"))
+long <- result |>
+  unnest_company() |>
+  relocate(matches("emission_"))
 long
 
 # Some banks need company-level results in wide format

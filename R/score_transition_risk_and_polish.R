@@ -172,16 +172,16 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
       exclude_cols_then_pivot_wider(
         exclude_cols = "co2e",
         id_cols = c(
-          .data$companies_id,
-          .data$country,
-          .data$main_activity,
-          .data$benchmark,
-          .data$profile_ranking_avg,
-          .data$co2_avg
+          "companies_id",
+          "country",
+          "main_activity",
+          "benchmark",
+          "profile_ranking_avg",
+          "co2_avg"
         ),
-        names_from = .data$emission_profile,
+        names_from = "emission_profile",
         names_prefix = "emission_category_",
-        values_from = .data$emission_profile_share
+        values_from = "emission_profile_share"
       )
   }
   bundesbank_data_at_company_level <- tmp |>
