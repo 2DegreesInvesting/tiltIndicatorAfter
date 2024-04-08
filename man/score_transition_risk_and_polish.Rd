@@ -30,6 +30,7 @@ Add transition risk score and polish the output for delivery
 \examples{
 library(readr, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
+library(tiltToyData, warn.conflicts = FALSE)
 
 withr::local_seed(123)
 withr::local_options(
