@@ -33,7 +33,7 @@ library(dplyr, warn.conflicts = FALSE)
 library(tiltToyData, warn.conflicts = FALSE)
 
 set.seed(123)
-options(list(
+restore <- options(list(
   readr.show_col_types = FALSE,
   tiltIndicatorAfter.output_co2_footprint = TRUE
 ))
@@ -85,5 +85,8 @@ wide <- score_transition_risk_and_polish(
   unnest_company() |>
   relocate(matches("emission_"))
 wide
+
+# Cleanup
+options(restore)
 }
 \keyword{internal}

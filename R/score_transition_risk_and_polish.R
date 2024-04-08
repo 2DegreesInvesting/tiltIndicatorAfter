@@ -18,7 +18,7 @@
 #' library(tiltToyData, warn.conflicts = FALSE)
 #'
 #' set.seed(123)
-#' options(list(
+#' restore <- options(list(
 #'   readr.show_col_types = FALSE,
 #'   tiltIndicatorAfter.output_co2_footprint = TRUE
 #' ))
@@ -70,6 +70,9 @@
 #'   unnest_company() |>
 #'   relocate(matches("emission_"))
 #' wide
+#'
+#' # Cleanup
+#' options(restore)
 score_transition_risk_and_polish <- function(emissions_profile, sector_profile, pivot_wider = FALSE) {
   emissions_profile_at_product_level <- unnest_product(emissions_profile)
   emissions_profile_at_company_level <- unnest_company(emissions_profile)
