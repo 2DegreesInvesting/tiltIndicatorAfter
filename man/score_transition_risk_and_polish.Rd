@@ -33,10 +33,10 @@ library(dplyr, warn.conflicts = FALSE)
 library(tiltToyData, warn.conflicts = FALSE)
 
 withr::local_seed(123)
-withr::local_options(
+withr::local_options(list(
   readr.show_col_types = FALSE,
   tiltIndicatorAfter.output_co2_footprint = TRUE
-)
+))
 
 toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
 toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
