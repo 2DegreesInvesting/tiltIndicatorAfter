@@ -30,8 +30,8 @@ Add transition risk score and polish the output for delivery
 \examples{
 library(readr, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
-library(tiltToyData)
 
+withr::local_seed(123)
 withr::local_options(
   readr.show_col_types = FALSE,
   tiltIndicatorAfter.output_co2_footprint = TRUE
@@ -53,7 +53,8 @@ emissions_profile <- profile_emissions(
   europages_companies = toy_europages_companies,
   ecoinvent_activities = toy_ecoinvent_activities,
   ecoinvent_europages = toy_ecoinvent_europages,
-  isic = toy_isic_name)
+  isic = toy_isic_name
+)
 
 sector_profile <- profile_sector(
   companies = toy_sector_profile_companies,
@@ -61,19 +62,25 @@ sector_profile <- profile_sector(
   europages_companies = toy_europages_companies,
   ecoinvent_activities = toy_ecoinvent_activities,
   ecoinvent_europages = toy_ecoinvent_europages,
-  isic = toy_isic_name)
+  isic = toy_isic_name
+)
 
 result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
-result |> unnest_product()
-result |> unnest_company()
 
-# Some banks need a wide format for the output at company level
-score_transition_risk_and_polish(
+result |> unnest_product()
+
+# Most banks need company-level results in long format
+long <- result |> unnest_company() |> relocate(matches("emission_"))
+long
+
+# Some banks need company-level results in wide format
+wide <- score_transition_risk_and_polish(
   emissions_profile,
   sector_profile,
   pivot_wider = TRUE
 ) |>
   unnest_company() |>
-  relocate(matches("emission_category"))
+  relocate(matches("emission_"))
+wide
 }
 \keyword{internal}
