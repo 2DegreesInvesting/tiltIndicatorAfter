@@ -76,8 +76,14 @@ test_that("is sensitive to `pivot_wider`", {
   )
 
   expect_equal(names(long), names(wide))
-  long_cols <- long |> unnest_company() |> select(matches("emission")) |> ncol()
-  wide_cols <- wide |> unnest_company() |> select(matches("emission")) |> ncol()
+  long_cols <- long |>
+    unnest_company() |>
+    select(matches("emission")) |>
+    ncol()
+  wide_cols <- wide |>
+    unnest_company() |>
+    select(matches("emission")) |>
+    ncol()
   expect_true(long_cols < wide_cols)
 })
 
