@@ -17,8 +17,8 @@
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tiltToyData, warn.conflicts = FALSE)
 #'
-#' withr::local_seed(123)
-#' withr::local_options(list(
+#' set.seed(123)
+#' options(list(
 #'   readr.show_col_types = FALSE,
 #'   tiltIndicatorAfter.output_co2_footprint = TRUE
 #' ))
