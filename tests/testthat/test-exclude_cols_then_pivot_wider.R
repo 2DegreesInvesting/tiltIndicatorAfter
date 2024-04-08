@@ -35,4 +35,5 @@ test_that("can avoid list-columns, the warning, and duplicates", {
   })
 
   expect_type(out$a, "double")
+  expect_false(any(duplicated(out)))
 })

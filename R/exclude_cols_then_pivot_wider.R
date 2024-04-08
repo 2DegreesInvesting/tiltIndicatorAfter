@@ -48,7 +48,8 @@ exclude_cols_then_pivot_wider <- function(data,
   } else {
     pruned |>
       pivot_wider(..., values_fn = list) |>
-      tidyr::unchop(tidyselect::everything())
+      tidyr::unchop(tidyselect::everything()) |>
+      distinct()
   }
 }
 
