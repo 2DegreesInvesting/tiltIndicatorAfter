@@ -87,8 +87,9 @@ test_that("is sensitive to `pivot_wider`", {
   expect_true(long_cols < wide_cols)
 })
 
-test_that("with `pivot_wider = FALSE`, errors if tiltIndicatorAfter.output_co2_footprint is unset", {
-  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = NULL))
+test_that("with `*.output_co2_footprint` unset, `pivot_wider = FALSE` yiels no error", {
+  unset <- NULL
+  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -124,8 +125,9 @@ test_that("with `pivot_wider = FALSE`, errors if tiltIndicatorAfter.output_co2_f
   )
 })
 
-test_that("with `pivot_wider = TRUE`, doesn't errors if tiltIndicatorAfter.output_co2_footprint is unset", {
-  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = NULL))
+test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yiels an error", {
+  unset <- NULL
+  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
