@@ -47,19 +47,17 @@ check_col <- function(data, col, hint = NULL) {
 #' @examples
 #' c(
 #'  "x",
-#'  "y" |> col_if(TRUE)
+#'  "y" |> unless(TRUE)
 #' )
 #'
 #' c(
 #'  "x",
-#'  "y" |> col_if(FALSE)
+#'  "y" |> unless(FALSE)
 #' )
 #'
 #' # Typically useful to conditionally `select()` based on an argument
 #' data <- tibble(x = 1, y = 1, z = 1)
-#' arg <- TRUE
-#' data |> select(c("x", "y" |> col_if(arg)))
-#' arg <- FALSE
-#' data |> select(c("x", "y" |> col_if(arg)))
+#' data |> select(c("x", "y" |> unless(TRUE)))
+#' data |> select(c("x", "y" |> unless(FALSE)))
 #' @noRd
-col_if <- function(col, condition) if (condition) col else NULL
+unless <- function(col, condition) if (condition) col else NULL
