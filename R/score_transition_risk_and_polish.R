@@ -80,6 +80,19 @@ score_transition_risk_and_polish <- function(emissions_profile, sector_profile, 
   transition_risk_score_at_product_level <- unnest_product(transition_risk_score)
   transition_risk_score_at_company_level <- unnest_company(transition_risk_score)
 
+  check_col <- function(data, col, hint = NULL) {
+    if (!hasName(data, col)) {
+      label <- deparse(substitute(data))
+      abort(c(glue("`{label}` must have {col}."), i = hint)
+      )
+    }
+
+    invisible(data)
+  }
+
+  hint <- "Do you need `options(tiltIndicatorAfter.output_co2_footprint = TRUE)`?"
+  emissions_profile_at_product_level |> check_col("co2_footprint", hint)
+
   select_emissions_profile_at_product_level <- emissions_profile_at_product_level |>
     select(
       c(
