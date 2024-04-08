@@ -46,6 +46,8 @@ exclude_cols_then_pivot_wider <- function(data,
   if (!avoid_list_cols) {
     pruned |> pivot_wider(...)
   } else {
+    check_values_fn(...)
+
     pruned |>
       pivot_wider(..., values_fn = list) |>
       tidyr::unchop(tidyselect::everything()) |>
@@ -53,3 +55,8 @@ exclude_cols_then_pivot_wider <- function(data,
   }
 }
 
+check_values_fn <- function(...) {
+  if (hasName(list(...), "values_fn")) {
+    abort("`values_fn` should not be used when `avoid_list_cols = TRUE`.")
+  }
+}

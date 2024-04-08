@@ -37,3 +37,24 @@ test_that("can avoid list-columns, the warning, and duplicates", {
   expect_type(out$a, "double")
   expect_false(any(duplicated(out)))
 })
+
+test_that("with `avoid_list_cols` AND `values_fn` errors gracefully", {
+  # styler: off
+  data <- tribble(
+    ~to_exclude,  ~id, ~name,  ~value,
+              1, "id",   "a",       1,
+              2, "id",   "a",       1,
+  ) |>
+    mutate(another_col_that_yields_duplicates = to_exclude)
+    # styler: on
+
+  expect_snapshot_error(
+    exclude_cols_then_pivot_wider(
+      data,
+      exclude_cols = "to_exclude",
+      id_cols = "id",
+      avoid_list_cols = TRUE,
+      values_fn = list
+    )
+  )
+})
