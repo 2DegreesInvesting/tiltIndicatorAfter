@@ -51,7 +51,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">exclude_cols_then_pivot_wider</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, exclude_cols <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">exclude_cols_then_pivot_wider</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  exclude_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  avoid_list_cols <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,6 +72,11 @@
 <dt>exclude_cols</dt>
 <dd><p>A character vector giving regular expressions matching
 column names to exclude. If lengh &gt; 1, the union is taken.</p></dd>
+
+
+<dt>avoid_list_cols</dt>
+<dd><p>Logical. Avoid all list-columns, duplicates, and the
+associated warning?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -124,6 +134,48 @@ column names to exclude. If lengh &gt; 1, the union is taken.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> id        1     2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> id        1     2</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># styler: off</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>   <span class="op">~</span><span class="va">id</span>, <span class="op">~</span><span class="va">name</span>, <span class="op">~</span><span class="va">value</span>, <span class="op">~</span><span class="va">to_exclude</span>, <span class="op">~</span><span class="va">yields_duplicates</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"id"</span>,   <span class="st">"a"</span>,      <span class="fl">1</span>,           <span class="fl">1</span>,                  <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"id"</span>,   <span class="st">"a"</span>,      <span class="fl">1</span>,           <span class="fl">2</span>,                  <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># styler: on</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># `data` may have columns that yield duplicates and thus list-columns</span></span></span>
+<span class="r-in"><span><span class="va">with_list_cols</span> <span class="op">&lt;-</span> <span class="fu">exclude_cols_then_pivot_wider</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  exclude_cols <span class="op">=</span> <span class="st">"to_exclude"</span>,</span></span>
+<span class="r-in"><span>  id_cols <span class="op">=</span> <span class="st">"id"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Values from `value` are not uniquely identified; output will contain list-cols.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Use `values_fn = list` to suppress this warning.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Use `values_fn = {summary_fun}` to summarise duplicates.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Use the following dplyr code to identify duplicates.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   {data} |&gt;</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   dplyr::summarise(n = dplyr::n(), .by = c(id, name)) |&gt;</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   dplyr::filter(n &gt; 1L)</span>
+<span class="r-in"><span><span class="co"># You can handle it after the fact</span></span></span>
+<span class="r-in"><span><span class="va">with_list_cols</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id        a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> id        1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># But also you can avoid it with `avoid_list_cols = TRUE`</span></span></span>
+<span class="r-in"><span><span class="fu">exclude_cols_then_pivot_wider</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  exclude_cols <span class="op">=</span> <span class="st">"to_exclude"</span>,</span></span>
+<span class="r-in"><span>  id_cols <span class="op">=</span> <span class="st">"id"</span>,</span></span>
+<span class="r-in"><span>  avoid_list_cols <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id        a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> id        1</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
