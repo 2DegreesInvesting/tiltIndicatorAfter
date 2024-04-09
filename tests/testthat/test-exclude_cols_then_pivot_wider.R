@@ -22,7 +22,7 @@ test_that("can avoid list-columns, the warning, and duplicates", {
               2, "id",   "a",       1,
   ) |>
     mutate(another_col_that_yields_duplicates = to_exclude)
-    # styler: on
+  # styler: on
 
 
   expect_no_warning({
@@ -46,7 +46,7 @@ test_that("with `avoid_list_cols` AND `values_fn` errors gracefully", {
               2, "id",   "a",       1,
   ) |>
     mutate(another_col_that_yields_duplicates = to_exclude)
-    # styler: on
+  # styler: on
 
   expect_snapshot_error(
     exclude_cols_then_pivot_wider(

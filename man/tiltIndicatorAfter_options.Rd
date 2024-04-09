@@ -30,7 +30,7 @@ library(tiltIndicator)
 
 set.seed(1)
 
-restore <- withr::local_options(list(
+restore <- options(list(
   readr.show_col_types = FALSE,
   tiltIndicatorAfter.set_jitter_amount = 1,
   tiltIndicatorAfter.verbose = TRUE,
