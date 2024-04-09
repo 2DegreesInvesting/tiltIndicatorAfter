@@ -82,7 +82,7 @@ score_transition_risk <-
       distinct()
 
     trs_company <- trs_product |>
-      select(common_columns_emissions_sector_at_company_level(), "benchmark_tr_score" , product_level_trs_column()) |>
+      select(common_columns_emissions_sector_at_company_level(), "benchmark_tr_score", product_level_trs_column()) |>
       create_trs_average() |>
       select(-product_level_trs_column()) |>
       relocate(relocate_trs_columns(company_level_trs_avg_column())) |>
