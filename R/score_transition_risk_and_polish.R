@@ -173,6 +173,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
     tmp <- tmp |>
       exclude_cols_then_pivot_wider(
         exclude_cols = "co2e",
+        avoid_list_cols = TRUE,
         id_cols = c(
           "companies_id",
           "country",
