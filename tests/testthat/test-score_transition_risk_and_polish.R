@@ -87,7 +87,7 @@ test_that("is sensitive to `pivot_wider`", {
   expect_true(long_cols < wide_cols)
 })
 
-test_that("with `*.output_co2_footprint` unset, `pivot_wider = FALSE` yiels no error", {
+test_that("with `*.output_co2_footprint` unset, `pivot_wider = FALSE` yields no error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -125,7 +125,7 @@ test_that("with `*.output_co2_footprint` unset, `pivot_wider = FALSE` yiels no e
   )
 })
 
-test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yiels an error", {
+test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yields an error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
