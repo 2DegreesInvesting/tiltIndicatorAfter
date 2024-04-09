@@ -25,8 +25,8 @@ inform_mean_percent_noise <- function(data) {
     return(data)
   }
 
-  l <- round(mean(percent_noise(data$min, data$min_jitter)))
-  u <- round(mean(percent_noise(data$max, data$max_jitter)))
+  l <- round(mean(percent_noise(data$min, data$min_jitter), na.rm = TRUE))
+  u <- round(mean(percent_noise(data$max, data$max_jitter), na.rm = TRUE))
   rlang::inform(c(i = glue(
     "Adding {l}% and {u}% noise to `co2e_lower` and `co2e_upper`, respectively."
   )))
