@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9029 (2024-04-09)
+
+* New internal `score_transition_risk_and_polish()` wraps and generalizes the
+latest script used to format outputs before delivery (#205).
+
 # tiltIndicatorAfter 0.0.0.9028 (2024-04-09)
 
 * `exclude_cols_then_pivot_wider()` gains `avoid_list_cols` (#206). This is a
