@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9028 (2024-04-09)
+
+* `exclude_cols_then_pivot_wider()` gains `avoid_list_cols` (#206). This is a
+coarse, catch-all alternative to the finer grained control you get via the
+`id_cols` of `tidyr::pivot_wider()`. While it's generally best to specify the
+id_cols you care about, it's hard to anticipate what columns the real data might
+have, and some of them may introduce list-columns, duplicates, and trigger a
+warning. This new argument avoids all of that.
+
 # tiltIndicatorAfter 0.0.0.9027 (2024-04-05)
 
 * New `exclude_cols_then_pivot_wider()` (#203). This is an internal,
