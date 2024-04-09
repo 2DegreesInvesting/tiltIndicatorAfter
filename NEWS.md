@@ -16,7 +16,7 @@ warning. This new argument avoids all of that.
 
 # tiltIndicatorAfter 0.0.0.9027 (2024-04-05)
 
-* New `exclude_cols_then_pivot_wider()` (#203). This is an internal,
+* New internal `exclude_cols_then_pivot_wider()` (#203). This is a
 developer-oriented function to exclude irrelevant columns and duplicates from a
 dataset, then pivot it to a wide format.
 
