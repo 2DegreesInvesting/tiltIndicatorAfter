@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9030 (2024-04-10)
+
+* `profile_emissions()` and `profile_emissions_upstrem()` now inform a meaningful
+percent noise (#212). This fixes a bug where the message reported a noise of
+"NA%".
+
 # tiltIndicatorAfter 0.0.0.9029 (2024-04-09)
 
 * New internal `score_transition_risk_and_polish()` wraps and generalizes the
