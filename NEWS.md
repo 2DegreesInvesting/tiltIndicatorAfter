@@ -2,7 +2,7 @@
 
 # tiltIndicatorAfter 0.0.0.9030 (2024-04-10)
 
-* `profile_emissions()` and `profile_emissions_upstrem()` now inform a meaningful
+* `profile_emissions()` and `profile_emissions_upstream()` now inform a meaningful
 percent noise (#212). This fixes a bug where the message reported a noise of
 "NA%".
 
