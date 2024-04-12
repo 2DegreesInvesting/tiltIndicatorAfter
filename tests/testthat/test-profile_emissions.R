@@ -622,7 +622,7 @@ test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", 
   )
 })
 
-test_that("yields a distinct `co2e*` for each distinct `tilt_subsector`", {
+test_that("with 2 different `tilt_subsector` yields 2 different `co2e*`", {
   withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
   withr::local_options(tiltIndicatorAfter.output_co2_footprint_min_max = TRUE)
 
