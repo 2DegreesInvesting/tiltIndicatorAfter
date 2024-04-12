@@ -623,11 +623,6 @@ test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", 
 })
 
 test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
-  # setup ----
-  # FIXME: Delete
-  withr::local_options(readr.show_col_types = FALSE)
-
-  # TODO: Delete?
   withr::local_seed(1)
   withr::local_options(list(
     tiltIndicatorAfter.output_co2_footprint = TRUE,
@@ -646,7 +641,6 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
     "76269c17-78d6-420b-991a-aa38c51b45b7",             10, "market for shed, large, wood, non-insulated, fire-unprotected",         "GLO",     "'4100'", "construction", "construction residential",  "m2"
   )
   # styler: on
-
   europages_companies <- read_csv(toy_europages_companies())
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
@@ -659,22 +653,15 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
   #  subsectors - so the values are different for agriculture and livestock or
   #  other industry
 
-  # run ----
-  result <- profile_emissions(
+  out <- profile_emissions(
     companies,
     co2,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
     isic_name
-  )
-
-  # TODO do_it_all()
-  co2e <- result |> unnest_product() |> summarize_co2e()
-  out <- nest_levels(
-    result |> unnest_product() |> add_co2e(co2e),
-    result |> unnest_company() |> add_co2e(co2e)
-  )
+  ) |>
+    add_co2e()
 
   expected <- nrow(distinct(unnest_product(out), .data[[.benchmark]]))
   actual <- unnest_product(out) |>
