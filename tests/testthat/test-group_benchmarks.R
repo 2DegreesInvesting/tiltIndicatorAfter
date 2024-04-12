@@ -5,12 +5,12 @@ test_that("hangles missing values", {
 })
 
 test_that("with tilt_sector the output includes tilt_subsector", {
-  out <- group_benchmark("tilt_sector",  "all")
+  out <- group_benchmark("tilt_sector", "all")
   expect_true("tilt_subsector" %in% out[[1]])
 })
 
 test_that("with input_tilt_sector the output includes input_tilt_subsector", {
-  out <- group_benchmark("input_tilt_sector",  "all")
+  out <- group_benchmark("input_tilt_sector", "all")
   expect_true("input_tilt_subsector" %in% out[[1]])
 })
 

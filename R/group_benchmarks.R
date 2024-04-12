@@ -4,7 +4,9 @@ group_benchmark <- function(x, all) {
 }
 
 group_benchmark_impl <- function(x, all) {
-  if (is.na(x)) return(x)
+  if (is.na(x)) {
+    return(x)
+  }
 
   # Handle "all"
   out <- all
@@ -49,8 +51,8 @@ summarize_range_by <- function(data, col, .by) {
     # FIXME: Do we need these NAs?
     filter(!is.na(col))
 
-    if (identical(nrow(.l), 0L)) {
-      rlang::abort("Empty output")
+  if (identical(nrow(.l), 0L)) {
+    rlang::abort("Empty output")
   }
 
   purrr::pmap(.l, summarize_range) |>
