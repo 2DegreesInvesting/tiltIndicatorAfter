@@ -1,4 +1,4 @@
-test_that("all", {
+test_that("different benchmarks output different number of rows", {
   join_quietly <- function(x, y) {
     suppressMessages(left_join(x, y, relationship = "many-to-many"))
   }
