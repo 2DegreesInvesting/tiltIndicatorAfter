@@ -631,8 +631,7 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
   withr::local_seed(1)
   withr::local_options(list(
     tiltIndicatorAfter.output_co2_footprint = TRUE,
-    tiltIndicatorAfter.output_co2_footprint_min_max = TRUE,
-    tiltIndicatorAfter.verbose = TRUE
+    tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
   ))
 
   # styler: off
@@ -661,16 +660,17 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
   #  other industry
 
   # run ----
-  product <- profile_emissions(
+  result <- profile_emissions(
     companies,
     co2,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
     isic_name
-  ) |> unnest_product()
+  )
 
 
+  product <- result |> unnest_product()
 
   # fix_co2e
   p <- product |>
