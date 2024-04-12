@@ -623,11 +623,8 @@ test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", 
 })
 
 test_that("yields a distinct `co2e*` for each distinct `tilt_subsector`", {
-  withr::local_seed(1)
-  withr::local_options(list(
-    tiltIndicatorAfter.output_co2_footprint = TRUE,
-    tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
-  ))
+  withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
+  withr::local_options(tiltIndicatorAfter.output_co2_footprint_min_max = TRUE)
 
   # styler: off
   companies <- tribble(
