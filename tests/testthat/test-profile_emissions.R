@@ -654,14 +654,18 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_subsector`", {
     add_co2e()
 
   .benchmark <- "tilt_sector"
-  # as03. For benchmark tilt_sector: all categories low have the same co2_lower
-  # and co2_higher values, as well as medium and high but grouped in all
-  # subsectors - so the values are different for agriculture and livestock or
-  # other industry
-  expected <- nrow(distinct(unnest_product(out), .data[[.benchmark]]))
+  .group <- "tilt_subsector"
+  # For benchmark `tilt_sector` Anne expects each value of `emission_profile` to
+  # have the same value of `co2_lower` and `co2_higher` in each level of
+  # `tilt_subsector` - "so the values are different for agriculture and
+  # livestock or other industry"
   actual <- unnest_product(out) |>
     filter(benchmark == .benchmark) |>
     select(matches("co2e")) |>
+    distinct() |>
+    nrow()
+  expected <- unnest_product(out) |>
+    select(all_of(.group)) |>
     distinct() |>
     nrow()
 
