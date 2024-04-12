@@ -621,3 +621,90 @@ test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", 
     )
   )
 })
+
+test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
+  # setup ----
+  # FIXME: Delete
+  withr::local_options(readr.show_col_types = FALSE)
+
+  # TODO: Delete?
+  withr::local_seed(1)
+  withr::local_options(list(
+    tiltIndicatorAfter.output_co2_footprint = TRUE,
+    tiltIndicatorAfter.output_co2_footprint_min_max = TRUE,
+    tiltIndicatorAfter.verbose = TRUE
+  ))
+
+  # styler: off
+  companies <- tribble(
+               ~activity_uuid_product_uuid, ~clustered,         ~companies_id,  ~country,                                               ~ei_activity_name, ~main_activity,
+    "76269c17-78d6-420b-991a-aa38c51b45b7",     "tent", "antimonarchy_canine", "germany", "market for shed, large, wood, non-insulated, fire-unprotected",  "distributor",
+    "833caa78-30df-4374-900f-7f88ab44075b",     "tent", "antimonarchy_canine", "germany", "market for shed, large, wood, non-insulated, fire-unprotected",  "distributor"
+  )
+  co2 <- tribble(
+               ~activity_uuid_product_uuid, ~co2_footprint,                                               ~ei_activity_name, ~ei_geography, ~isic_4digit,   ~tilt_sector,            ~tilt_subsector, ~unit,
+    "833caa78-30df-4374-900f-7f88ab44075b",            0.5,      "market for deep drawing, steel, 10000 kN press, automode",         "GLO",     "'2591'",       "metals",             "other metals",  "kg",
+    "76269c17-78d6-420b-991a-aa38c51b45b7",             10, "market for shed, large, wood, non-insulated, fire-unprotected",         "GLO",     "'4100'", "construction", "construction residential",  "m2"
+  )
+  # styler: on
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  .benchmark <- "tilt_sector"
+  # as03.
+  #  For benchmark tilt_sector: all categories low have the same co2_lower
+  #  and co2_higher values, as well as medium and high but grouped in all
+  #  subsectors - so the values are different for agriculture and livestock or
+  #  other industry
+
+  # run ----
+  product <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  ) |> unnest_product()
+
+
+
+  # fix_co2e
+  p <- product |>
+    select(matches(c(
+      cols <- c(
+        "bench",
+        "emission_profile",
+        "unit",
+        "isic_4digit$",
+        "sector",
+        "co2"
+      ))))
+  .all <- c("benchmark", "emission_profile")
+  .by <- group_benchmark(p$benchmark, all = .all)
+  co2e <- p |>
+    summarize_range_by(
+      "co2_footprint",
+      .by = .by
+    ) |>
+    jitter_range() |>
+    rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter") |>
+    select(all_of(.all), matches("co2e"), ".by") |>
+    arrange(benchmark)
+
+  out <- product |>
+    select(-matches("co2e")) |>
+    left_join(co2e, by = .all, relationship = "many-to-many")
+
+  expected <- nrow(distinct(out, .data[[.benchmark]]))
+  actual <- out |>
+    filter(benchmark == .benchmark) |>
+    select(matches("co2e")) |>
+    distinct() |>
+    nrow()
+
+  expect_equal(actual, expected)
+})
