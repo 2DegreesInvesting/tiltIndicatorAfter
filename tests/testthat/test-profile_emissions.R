@@ -669,38 +669,15 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
     isic_name
   )
 
+  # TODO do_it_all()
+  co2e <- result |> unnest_product() |> summarize_co2e()
+  out <- nest_levels(
+    result |> unnest_product() |> add_co2e(co2e),
+    result |> unnest_company() |> add_co2e(co2e)
+  )
 
-  product <- result |> unnest_product()
-
-  # fix_co2e
-  p <- product |>
-    select(matches(c(
-      cols <- c(
-        "bench",
-        "emission_profile",
-        "unit",
-        "isic_4digit$",
-        "sector",
-        "co2"
-      ))))
-  .all <- c("benchmark", "emission_profile")
-  .by <- group_benchmark(p$benchmark, all = .all)
-  co2e <- p |>
-    summarize_range_by(
-      "co2_footprint",
-      .by = .by
-    ) |>
-    jitter_range() |>
-    rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter") |>
-    select(all_of(.all), matches("co2e"), ".by") |>
-    arrange(benchmark)
-
-  out <- product |>
-    select(-matches("co2e")) |>
-    left_join(co2e, by = .all, relationship = "many-to-many")
-
-  expected <- nrow(distinct(out, .data[[.benchmark]]))
-  actual <- out |>
+  expected <- nrow(distinct(unnest_product(out), .data[[.benchmark]]))
+  actual <- unnest_product(out) |>
     filter(benchmark == .benchmark) |>
     select(matches("co2e")) |>
     distinct() |>
