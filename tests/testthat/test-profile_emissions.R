@@ -657,8 +657,8 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_subsector`", {
   .group <- "tilt_subsector"
   # For benchmark `tilt_sector` Anne expects each value of `emission_profile` to
   # have the same value of `co2_lower` and `co2_higher` in each level of
-  # `tilt_subsector` - "so the values are different for agriculture and
-  # livestock or other industry"
+  # `tilt_subsector` - so two different values of `tilt_subsector` should have
+  # two different values of `co2e_lower` and `co2e_upper`.
   actual <- unnest_product(out) |>
     filter(benchmark == .benchmark) |>
     select(matches("co2e")) |>
