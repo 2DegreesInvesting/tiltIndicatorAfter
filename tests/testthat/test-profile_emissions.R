@@ -622,7 +622,7 @@ test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", 
   )
 })
 
-test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
+test_that("yields a distinct `co2e*` for each distinct `tilt_subsector`", {
   withr::local_seed(1)
   withr::local_options(list(
     tiltIndicatorAfter.output_co2_footprint = TRUE,
@@ -646,13 +646,6 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  .benchmark <- "tilt_sector"
-  # as03.
-  #  For benchmark tilt_sector: all categories low have the same co2_lower
-  #  and co2_higher values, as well as medium and high but grouped in all
-  #  subsectors - so the values are different for agriculture and livestock or
-  #  other industry
-
   out <- profile_emissions(
     companies,
     co2,
@@ -663,6 +656,11 @@ test_that("yields a distinct `co2e*` for each distinct `tilt_sector`", {
   ) |>
     add_co2e()
 
+  .benchmark <- "tilt_sector"
+  # as03. For benchmark tilt_sector: all categories low have the same co2_lower
+  # and co2_higher values, as well as medium and high but grouped in all
+  # subsectors - so the values are different for agriculture and livestock or
+  # other industry
   expected <- nrow(distinct(unnest_product(out), .data[[.benchmark]]))
   actual <- unnest_product(out) |>
     filter(benchmark == .benchmark) |>
