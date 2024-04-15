@@ -13,9 +13,8 @@ draft_summarize_benchmark_range <- function(data) {
 
 summarize_values_range_in_groups_by <- function(data, .values, .groups, .by) {
   .x <- split(data, data[[.groups]])
-
   out <- vector("list", length = length(.x))
-  out <- setNames(out, names(.x))
+  names(out) <- names(.x)
 
   for (i in names(.x)) {
     out[[i]] <- summarize_range(
