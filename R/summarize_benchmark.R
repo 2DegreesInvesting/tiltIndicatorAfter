@@ -6,13 +6,12 @@ draft_summarize_benchmark_range <- function(data) {
   summarize_values_range_in_groups_by(
     data = data,
     .groups = .benchmark,
-    .all = .all,
     .by = .by,
     .values = extract_name(data, "co2_footprint")
   )
 }
 
-summarize_values_range_in_groups_by <- function(data, .values, .groups, .by, .all) {
+summarize_values_range_in_groups_by <- function(data, .values, .groups, .by) {
   .x <- split(data, data[[.groups]])
 
   out <- vector("list", length = length(.x))
