@@ -15,7 +15,8 @@ summarize_benchmark_range <- function(data) {
 summarize_range_of_benchmark_impl <- function(data, .benchmark, .all, .by, .values) {
   .x <- split(data, data[[.benchmark]])
 
-  out <- setNames(vector("list", length = length(.x)), names(.x))
+  out <- vector("list", length = length(.x))
+  out <- setNames(out, names(.x))
   for (i in names(.x)) {
     x_i <- .x[[i]]
     .by_i <- .by[[i]]
