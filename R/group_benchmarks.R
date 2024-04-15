@@ -8,16 +8,20 @@ group_benchmark_impl <- function(x, all) {
     return(x)
   }
 
-  # Handle "all"
   out <- all
-  if (x != "all") out <- c(out, x)
 
-  # Fix oddities
+  # Append other values to `all`
+  if (x != "all") {
+    out <- c(out, x)
+  }
+
+  # Handle "unit":
+  # 1. Remove it from everywhere
   out <- gsub("unit", "", out)
+  # Remove debris
   out <- gsub("__", "_", out)
   out <- gsub("^_", "", out)
-
-  # Add "unit" if necessary
+  # 2. Add it again wherever it's necessary
   if (grepl("unit", x)) {
     if (grepl("input", x)) {
       out <- c(out, "input_unit")
@@ -29,6 +33,7 @@ group_benchmark_impl <- function(x, all) {
   # Remove debris
   out <- out[!grepl("^input_$", out)]
   out <- out[nzchar(out)]
+
 
   # https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/194#issuecomment-2050573259
   # > the benchmark tilt sector groups on tilt subsector level -- Anne
