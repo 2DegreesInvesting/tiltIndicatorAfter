@@ -22,27 +22,21 @@ test_that("different benchmarks output different number of rows", {
     join_quietly(ts) |>
     mutate(isic_4digit = "'1234'")
 
-  # (1 + 0) * 3 = 3
-  # one = c("benchmark", "emission_profile") +
-  # zero = c() *
-  # n_risk_categories =
-  # 3
-  out <- summarize_benchmark_impl(data)
-  expect_equal(nrow(out[["all"]]), 3)
+  benchmark <- "all"
+  expected <- 3
+  # 3 = 3 emission_profile
+  out <- summarize_benchmark_impl(data)[[benchmark]]
+  expect_equal(nrow(out), expected)
 
-  # (1 + 1) * 3 = 6
-  # one = c("benchmark", "emission_profile") +
-  # one = c("unit") *
-  # n_risk_categories =
-  # 6
-  out <- summarize_benchmark_impl(data)
-  expect_equal(nrow(out[["unit"]]), 6)
+  benchmark <- "unit"
+  expected <- 6
+  # 6 = 3 emission_profile * 2 unit
+  out <- summarize_benchmark_impl(data)[[benchmark]]
+  expect_equal(nrow(out), expected)
 
-  # (1 + 2) * 3 = 12
-  # one = c("benchmark", "emission_profile") +
-  # two = c("unit", "tilt_sector")) *
-  # n_risk_categories =
-  # 12
-  out <- summarize_benchmark_impl(data)
-  expect_equal(nrow(out[["unit_tilt_sector"]]), 12)
+  benchmark <- "unit_tilt_sector"
+  expected <- 24
+  # 24 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector * 2 unit
+  out <- summarize_benchmark_impl(data)[[benchmark]]
+  expect_equal(nrow(out), expected)
 })
