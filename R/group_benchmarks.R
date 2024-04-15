@@ -48,7 +48,7 @@ group_benchmark_impl <- function(x, all) {
   out
 }
 
-# FIXME: replace with summarize_benchmark_range_lst()
+# FIXME: replace with draft_summarize_range()
 # FIXME: Move to tiltIndicator?
 summarize_range_by <- function(data, col, .by) {
   # FIXME? Handle `col` rather than "col"?
