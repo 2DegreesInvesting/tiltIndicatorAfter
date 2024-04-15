@@ -1,3 +1,4 @@
+# TODO: Maybe move to tiltIndicator? Seems like business logic
 group_benchmark <- function(x, all) {
   out <- lapply(x, group_benchmark_impl, all = all)
   setNames(out, x)
