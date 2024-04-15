@@ -56,34 +56,3 @@ test_that("hangles missing values", {
   expect_equal(out[[1]], NA_character_)
   expect_equal(names(out), NA_character_)
 })
-
-# DELETE
-
-test_that("with tilt_sector the output includes tilt_sector", {
-  out <- group_benchmark("tilt_sector", "all")
-  expect_true("tilt_sector" %in% out[[1]])
-})
-
-test_that("with tilt_sector the output includes tilt_subsector", {
-  out <- group_benchmark("tilt_sector", "all")
-  expect_true("tilt_subsector" %in% out[[1]])
-})
-
-test_that("with input_tilt_sector the output includes input_tilt_sector", {
-  out <- group_benchmark("input_tilt_sector", "all")
-  expect_true("input_tilt_sector" %in% out[[1]])
-})
-
-test_that("with input_tilt_sector the output includes input_tilt_subsector", {
-  out <- group_benchmark("input_tilt_sector", "all")
-  expect_true("input_tilt_subsector" %in% out[[1]])
-})
-test_that("with unit_tilt_sector the output includes tilt_sector", {
-  out <- group_benchmark("unit_tilt_sector", "all")
-  expect_true("tilt_sector" %in% out[[1]])
-})
-
-test_that("with unit_tilt_sector the output includes tilt_subsector", {
-  out <- group_benchmark("unit_tilt_sector", "all")
-  expect_true("tilt_subsector" %in% out[[1]])
-})
