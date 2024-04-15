@@ -1,6 +1,4 @@
 test_that("with products-benchmarks, outpts the expected groups", {
-  withr::local_options(width = 500)
-
   product_benchmarks <- c(
     "all",
     "unit",
@@ -14,8 +12,6 @@ test_that("with products-benchmarks, outpts the expected groups", {
 })
 
 test_that("with inputs-benchmarks, outpts the expected groups", {
-  withr::local_options(width = 500)
-
   input_benchmark <- c(
     "all",
     "input_unit",
