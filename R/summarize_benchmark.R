@@ -3,7 +3,7 @@ draft_summarize_range <- function(data) {
   .all <- c(.benchmark, "emission_profile")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
 
-  summarize_range_of_benchmark_impl(
+  summarize_benchmark_range_impl(
     data = data,
     .benchmark = .benchmark,
     .all = .all,
@@ -12,7 +12,7 @@ draft_summarize_range <- function(data) {
   )
 }
 
-summarize_range_of_benchmark_impl <- function(data, .benchmark, .all, .by, .values) {
+summarize_benchmark_range_impl <- function(data, .benchmark, .all, .by, .values) {
   .x <- split(data, data[[.benchmark]])
 
   out <- vector("list", length = length(.x))
