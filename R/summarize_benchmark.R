@@ -1,4 +1,4 @@
-summarize_benchmark_range <- function(data) {
+summarize_benchmark_range_lst <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
