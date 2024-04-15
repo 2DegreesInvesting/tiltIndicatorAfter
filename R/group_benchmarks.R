@@ -47,27 +47,3 @@ group_benchmark_impl <- function(x, all) {
 
   out
 }
-
-# FIXME: replace with draft_summarize_range()
-# FIXME: Move to tiltIndicator?
-summarize_range_by <- function(data, col, .by) {
-  # FIXME? Handle `col` rather than "col"?
-  # Avoiding `mutate()`. The name `.by` clashes with the argument `.by`
-  data$.by <- .by
-  data$grouped_across <- lapply(.by, toString)
-
-  .l <- data |>
-    rename(col = .env$col) |>
-    tidyr::nest(.by = c("col", ".by")) |>
-    # FIXME: Do we need these NAs?
-    filter(!is.na(col))
-
-  if (identical(nrow(.l), 0L)) {
-    rlang::abort("Empty output")
-  }
-
-  purrr::pmap(.l, summarize_range) |>
-    setNames(lapply(.by, toString)) |>
-    tibble::enframe(name = ".by") |>
-    tidyr::unnest("value")
-}
