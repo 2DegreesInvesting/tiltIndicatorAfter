@@ -28,15 +28,13 @@ group_benchmark_impl <- function(x, all) {
   }
 
   # Remove debris
-  # Remove debris
   out <- gsub("__", "_", out)
   out <- gsub("^_", "", out)
   out <- out[!grepl("^input_$", out)]
   out <- out[nzchar(out)]
 
-
+  # tilt_sector groups on tilt subsector
   # https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/194#issuecomment-2050573259
-  # > the benchmark tilt sector groups on tilt subsector level -- Anne
   if (any(grepl("tilt_sector", out))) {
     # extract original match
     extracted <- grep("tilt_sector", out, value = TRUE)
@@ -46,7 +44,7 @@ group_benchmark_impl <- function(x, all) {
     out <- c(out, extracted)
   }
 
-  # After `all`, sort the other output
+  # Polish
   other <- setdiff(out, all)
   out <- c(all, sort(other))
 
