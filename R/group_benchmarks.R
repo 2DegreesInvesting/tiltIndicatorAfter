@@ -30,10 +30,16 @@ group_benchmark_impl <- function(x, all) {
   out <- out[!grepl("^input_$", out)]
   out <- out[nzchar(out)]
 
-  # Turn "tilt_sector" into "tilt_subsector"
   # https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/194#issuecomment-2050573259
   # > the benchmark tilt sector groups on tilt subsector level -- Anne
-  out <- gsub("tilt_sector", "tilt_subsector", out)
+  if (any(grepl("tilt_sector", out))) {
+    # extract original match
+    extracted <- grep("tilt_sector", out, value = TRUE)
+    # turn "tilt_sector" into "tilt_subsector"
+    out <- gsub("tilt_sector", "tilt_subsector", out)
+    # re-add original match
+    out <- c(out, extracted)
+  }
 
   out
 }

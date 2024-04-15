@@ -10,10 +10,11 @@
       [1] "benchmark"        "emission_profile" "unit"            
       
       $tilt_sector
-      [1] "benchmark"        "emission_profile" "tilt_subsector"  
+      [1] "benchmark"        "emission_profile" "tilt_subsector"   "tilt_sector"     
       
       $unit_tilt_sector
       [1] "benchmark"        "emission_profile" "tilt_subsector"   "unit"            
+      [5] "tilt_sector"     
       
       $isic_4digit
       [1] "benchmark"        "emission_profile" "isic_4digit"     
@@ -36,11 +37,12 @@
       
       $input_tilt_sector
       [1] "benchmark"                 "emission_upstream_profile"
-      [3] "input_tilt_subsector"     
+      [3] "input_tilt_subsector"      "input_tilt_sector"        
       
       $input_unit_tilt_sector
       [1] "benchmark"                 "emission_upstream_profile"
       [3] "input_tilt_subsector"      "input_unit"               
+      [5] "input_tilt_sector"        
       
       $input_isic_4digit
       [1] "benchmark"                 "emission_upstream_profile"
