@@ -1,19 +1,19 @@
-draft_summarize_range <- function(data) {
+draft_summarize_benchmark_range <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
 
-  summarize_benchmark_range_impl(
+  summarize_values_range_in_groups_by(
     data = data,
-    .benchmark = .benchmark,
+    .groups = .benchmark,
     .all = .all,
     .by = .by,
     .values = extract_name(data, "co2_footprint")
   )
 }
 
-summarize_benchmark_range_impl <- function(data, .benchmark, .all, .by, .values) {
-  .x <- split(data, data[[.benchmark]])
+summarize_values_range_in_groups_by <- function(data, .groups, .all, .by, .values) {
+  .x <- split(data, data[[.groups]])
 
   out <- vector("list", length = length(.x))
   out <- setNames(out, names(.x))

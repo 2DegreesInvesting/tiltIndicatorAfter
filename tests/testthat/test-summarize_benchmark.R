@@ -16,24 +16,24 @@ test_that("different benchmarks output different number of rows", {
   benchmark <- "all"
   expected <- 3
   # 3 = 3 emission_profile
-  out <- draft_summarize_range(data)[[benchmark]]
+  out <- draft_summarize_benchmark_range(data)[[benchmark]]
   expect_equal(nrow(out), expected)
 
   benchmark <- "unit"
   expected <- 6
   # 6 = 3 emission_profile * 2 unit
-  out <- draft_summarize_range(data)[[benchmark]]
+  out <- draft_summarize_benchmark_range(data)[[benchmark]]
   expect_equal(nrow(out), expected)
 
   benchmark <- "tilt_sector"
   expected <- 12
   # 12 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector
-  out <- draft_summarize_range(data)[[benchmark]]
+  out <- draft_summarize_benchmark_range(data)[[benchmark]]
   expect_equal(nrow(out), expected)
 
   benchmark <- "unit_tilt_sector"
   expected <- 24
   # 24 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector * 2 unit
-  out <- draft_summarize_range(data)[[benchmark]]
+  out <- draft_summarize_benchmark_range(data)[[benchmark]]
   expect_equal(nrow(out), expected)
 })
