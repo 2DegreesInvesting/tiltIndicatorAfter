@@ -1,3 +1,17 @@
+summarize_benchmark <- function(data) {
+  .benchmark <- "benchmark"
+  .all <- c(.benchmark, "emission_profile")
+  .by <- group_benchmark(unique(data[[.benchmark]]), .all)
+
+  summarize_benchmark_impl(
+    data = data,
+    .benchmark = .benchmark,
+    .all = .all,
+    .by = .by,
+    .values  = extract_name(data, "co2_footprint")
+  )
+}
+
 summarize_benchmark_impl <- function(data,
                                 .benchmark = "benchmark",
                                 .values  = NULL,
