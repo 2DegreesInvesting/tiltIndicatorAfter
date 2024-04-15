@@ -41,6 +41,10 @@ group_benchmark_impl <- function(x, all) {
     out <- c(out, extracted)
   }
 
+  # After `all`, sort the other output
+  other <- setdiff(out, all)
+  out <- c(all, sort(other))
+
   out
 }
 
