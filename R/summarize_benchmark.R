@@ -5,9 +5,9 @@ draft_summarize_benchmark_range <- function(data) {
 
   summarize_values_range_in_groups_by(
     data = data,
+    .values = extract_name(data, "co2_footprint"),
     .groups = .benchmark,
-    .by = .by,
-    .values = extract_name(data, "co2_footprint")
+    .by = .by
   )
 }
 
