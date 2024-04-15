@@ -50,7 +50,6 @@ test_that("after `all`, the output is alpha sorted", {
   expect_equal(other, sorted)
 })
 
-# FIXME: Maybe best to throw an error until I understand how NAs might happen
 test_that("handles missing values", {
   out <- group_benchmark(NA_character_, "all")
   expect_equal(out[[1]], NA_character_)
