@@ -18,7 +18,11 @@ summarize_range_of_benchmark_impl <- function(data, .benchmark, .all, .by, .valu
   out <- vector("list", length = length(.x))
   out <- setNames(out, names(.x))
   for (i in names(.x)) {
-    out[[i]] <- summarize_range(.x[[i]], .x[[i]][[.values]], all_of(.by[[i]]))
+    out[[i]] <- summarize_range(
+      data = .x[[i]],
+      col = .x[[i]][[.values]],
+      .by = all_of(.by[[i]])
+    )
   }
 
   out
