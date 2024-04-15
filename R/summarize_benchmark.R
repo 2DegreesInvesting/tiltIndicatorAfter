@@ -8,7 +8,7 @@ draft_summarize_range <- function(data) {
     .benchmark = .benchmark,
     .all = .all,
     .by = .by,
-    .values  = extract_name(data, "co2_footprint")
+    .values = extract_name(data, "co2_footprint")
   )
 }
 

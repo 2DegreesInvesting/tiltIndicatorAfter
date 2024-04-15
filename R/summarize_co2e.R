@@ -42,4 +42,3 @@ add_co2e <- function(data) {
     data |> unnest_company() |> join_co2e(co2e)
   )
 }
-
