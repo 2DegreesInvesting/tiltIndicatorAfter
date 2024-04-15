@@ -13,11 +13,6 @@ summarize_benchmark_range <- function(data) {
 }
 
 summarize_range_of_benchmark_impl <- function(data, .benchmark, .all, .by, .values) {
-  .all <- .all %||% c(.benchmark, "emission_profile")
-  .values <- .values %||% extract_name(data, "co2_footprint")
-  .by <- .by %||% group_benchmark(unique(data[[.benchmark]]), .all)
-
-
   .x <- split(data, data[[.benchmark]])
 
   out <- setNames(vector("list", length = length(.x)), names(.x))
