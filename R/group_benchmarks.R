@@ -18,9 +18,6 @@ group_benchmark_impl <- function(x, all) {
   # Handle "unit":
   # 1. Remove it from everywhere
   out <- gsub("unit", "", out)
-  # Remove debris
-  out <- gsub("__", "_", out)
-  out <- gsub("^_", "", out)
   # 2. Add it again wherever it's necessary
   if (grepl("unit", x)) {
     if (grepl("input", x)) {
@@ -31,6 +28,9 @@ group_benchmark_impl <- function(x, all) {
   }
 
   # Remove debris
+  # Remove debris
+  out <- gsub("__", "_", out)
+  out <- gsub("^_", "", out)
   out <- out[!grepl("^input_$", out)]
   out <- out[nzchar(out)]
 
