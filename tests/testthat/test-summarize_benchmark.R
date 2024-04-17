@@ -37,3 +37,18 @@ test_that("different benchmarks output different number of rows", {
   out <- summarize_benchmark_range_impl(data)[[benchmark]]
   expect_equal(nrow(out), expected)
 })
+
+xpotest_that("with a simple case yields the same as `summarize_range()`", {
+  # styler: off
+  data <- tibble::tribble(
+    ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
+         "all",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
+         "all",          "medium",             2L,  "m2",    "sector1",    "subsector2",     "'1234'"
+  )
+  # styler: off
+
+  expect_equal(
+    summarize_range(data, co2_footprint, .by = c("benchmark", "emission_profile")),
+    summarize_benchmark_range_impl(data)[["all"]]
+  )
+})
