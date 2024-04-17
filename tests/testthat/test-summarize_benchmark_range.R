@@ -69,12 +69,12 @@ test_that("is vectorized over by", {
   data <- left_join(x, y, by = "emission_profile", relationship = "many-to-many")
 
   benchmark <- c("all", "unit")
-  out <- map_summarize_benchmark_range(data, benchmark)
+  out <- summarize_benchmark_range(data, benchmark)
   expect_equal(benchmark, unique(data$benchmark))
 
   benchmark <- c("all")
-  out_all <- map_summarize_benchmark_range(data, benchmark)
+  out_all <- summarize_benchmark_range(data, benchmark)
   benchmark <- c("unit")
-  out_unit <- map_summarize_benchmark_range(data, benchmark)
+  out_unit <- summarize_benchmark_range(data, benchmark)
   expect_equal(nrow(out), nrow(out_all) + nrow(out_unit))
 })
