@@ -10,9 +10,16 @@ summarize_co2_range <- function(data) {
   reduce(out, bind_rows)
 }
 
-polish_benchmark_range <- function(data, benchmark) {
-  data[[benchmark]] |>
-    jitter_range() |>
-    select(-"min", -"max") |>
-    rename(co2_lower = "min_jitter", co2_upper = "max_jitter")
+jitter_co2_range <- function(data, amount = 2) {
+  data |>
+    group_by(benchmark) |>
+    dplyr::group_split() |>
+    lapply(jitter_range, amount = amount) |>
+    purrr::reduce(bind_rows)
+}
+
+polish_co2_range <- function(data, ...) {
+  data |>
+    rename(co2_lower = "min_jitter", co2_upper = "max_jitter") |>
+    select(-c("min", "max"))
 }
