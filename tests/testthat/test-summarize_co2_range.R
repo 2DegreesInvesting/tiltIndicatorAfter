@@ -38,7 +38,7 @@ test_that("different benchmarks output different number of rows", {
   expect_equal(nrow(out), expected)
 })
 
-test_that("with a simple case yields the same as `summarize_range()`", {
+test_that("with a simple case yields the same as `summarize_range()` (214#issuecomment-2061180499)", {
   # styler: off
   data <- tibble::tribble(
     ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
