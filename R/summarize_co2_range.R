@@ -1,3 +1,9 @@
+summarize_co2_range2 <- function(data) {
+  data |>
+    summarize_co2_range_impl() |>
+    purrr::reduce(bind_rows)
+}
+
 summarize_co2_range <- function(data, benchmark) {
   map_df(benchmark, function(x) summarize_co2_range_once(data, x))
 }
