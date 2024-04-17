@@ -42,9 +42,9 @@ summarize_co2_range <- function(data) {
 jitter_co2_range <- function(data, amount = 2) {
   data |>
     group_by(benchmark) |>
-    dplyr::group_split() |>
-    lapply(jitter_range, amount = amount) |>
-    purrr::reduce(bind_rows)
+    group_split() |>
+    map(jitter_range, amount = amount) |>
+    reduce(bind_rows)
 }
 
 #' @export
