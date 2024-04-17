@@ -1,7 +1,6 @@
 summarize_co2_range <- function(data) {
-  data |>
-    summarize_co2_range_impl() |>
-    purrr::reduce(bind_rows)
+  out <- summarize_co2_range_impl(data)
+  reduce(out, bind_rows)
 }
 
 summarize_co2_range_impl <- function(data) {
