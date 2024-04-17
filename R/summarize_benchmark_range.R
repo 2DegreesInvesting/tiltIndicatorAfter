@@ -1,3 +1,9 @@
+map_summarize_benchmark_range <- function(data, benchmark) {
+  map_df(benchmark, function(benchmark) {
+    summarize_benchmark_range(data, benchmark)
+  })
+}
+
 summarize_benchmark_range <- function(data, benchmark) {
   data |>
     summarize_benchmark_range_impl() |>
@@ -19,5 +25,5 @@ polish_benchmark_range <- function(data, benchmark) {
   data[[benchmark]] |>
     jitter_range() |>
     select(-"min", -"max") |>
-    rename(co2_lower = .data$min_jitter, co2_upper = .data$max_jitter)
+    rename(co2_lower = "min_jitter", co2_upper = "max_jitter")
 }

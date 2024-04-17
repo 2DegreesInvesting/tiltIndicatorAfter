@@ -16,6 +16,10 @@ test_that("different benchmarks output different number of rows", {
   benchmark <- "all"
   expected <- 3
   # 3 = 3 emission_profile
+
+  summarize_benchmark_range(data, benchmark)
+  summarize_benchmark_range(data, "all")
+
   out <- summarize_benchmark_range_impl(data)[[benchmark]]
   expect_equal(nrow(out), expected)
 
