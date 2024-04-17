@@ -10,7 +10,9 @@ map_summarize_range <- function(.x, col, .by = NULL, na.rm = FALSE) {
   names(out) <- names(.x)
   for (i in names(.x)) {
     out[[i]] <- summarize_range(
-      .x[[i]], col = .data[[col]], .by = all_of(.by[[i]]), na.rm = na.rm)
+      .x[[i]],
+      col = .data[[col]], .by = all_of(.by[[i]]), na.rm = na.rm
+    )
   }
 
   out
