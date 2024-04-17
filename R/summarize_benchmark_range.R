@@ -5,9 +5,7 @@ summarize_benchmark_range <- function(data, benchmark) {
       polish_benchmark_range(benchmark)
   }
 
-  map_df(benchmark, function(benchmark) {
-    summarize_benchmark_range_once(data, benchmark)
-  })
+  map_df(benchmark, function(x) summarize_benchmark_range_once(data, x))
 }
 
 summarize_benchmark_range_impl <- function(data) {
