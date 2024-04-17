@@ -1,13 +1,13 @@
 summarize_benchmark_range <- function(data, benchmark) {
+  summarize_benchmark_range_once <- function(data, benchmark) {
+    data |>
+      summarize_benchmark_range_impl() |>
+      polish_benchmark_range(benchmark)
+  }
+
   map_df(benchmark, function(benchmark) {
     summarize_benchmark_range_once(data, benchmark)
   })
-}
-
-summarize_benchmark_range_once <- function(data, benchmark) {
-  data |>
-    summarize_benchmark_range_impl() |>
-    polish_benchmark_range(benchmark)
 }
 
 summarize_benchmark_range_impl <- function(data) {
