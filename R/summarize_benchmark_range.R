@@ -1,9 +1,9 @@
-summarize_benchmark_range <- function(data, benchmark) {
+summarize_co2e_range <- function(data, benchmark) {
   benchmark |>
-    map_df(function(x) summarize_benchmark_range_once(data, x))
+    map_df(function(x) summarize_co2e_range_once(data, x))
 }
 
-summarize_benchmark_range_once <- function(data, benchmark) {
+summarize_co2e_range_once <- function(data, benchmark) {
   data |>
     summarize_benchmark_range_impl() |>
     polish_benchmark_range(benchmark)
