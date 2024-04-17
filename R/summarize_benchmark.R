@@ -1,7 +1,7 @@
 summarize_benchmark_range <- function(data, benchmark) {
   data |>
     summarize_benchmark_range_impl() |>
-    polish_benchmark_range(out, benchmark)
+    polish_benchmark_range(benchmark)
 }
 
 polish_benchmark_range <- function(data, benchmark) {
