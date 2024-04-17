@@ -23,6 +23,15 @@
 #' # styler: off
 #'
 #' data |>
+#'   summarize_co2_range()
+#'
+#' withr::local_seed(1)
+#' data |>
+#'   summarize_co2_range() |>
+#'   jitter_co2_range(amount = 1)
+#'
+#' withr::local_seed(1)
+#' data |>
 #'   summarize_co2_range() |>
 #'   jitter_co2_range(amount = 1) |>
 #'   polish_co2_range()
@@ -41,8 +50,10 @@ summarize_co2_range <- function(data) {
 #' @export
 #' @rdname summarize_co2_range
 jitter_co2_range <- function(data, ...) {
+  col <- "benchmark"
+
   data |>
-    group_by(data$benchmark) |>
+    group_by(.data[[col]]) |>
     group_split() |>
     map(jitter_range, ...) |>
     reduce(bind_rows)
