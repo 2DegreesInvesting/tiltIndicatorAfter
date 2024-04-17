@@ -1,4 +1,4 @@
-summarize_co2_range2 <- function(data) {
+summarize_co2_range <- function(data) {
   data |>
     summarize_co2_range_impl() |>
     purrr::reduce(bind_rows)
