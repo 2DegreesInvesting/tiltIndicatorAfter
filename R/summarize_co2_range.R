@@ -1,8 +1,4 @@
 summarize_co2_range <- function(data) {
-  summarize_co2_range_impl(data)
-}
-
-summarize_co2_range_impl <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
 
