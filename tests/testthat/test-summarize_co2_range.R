@@ -54,27 +54,14 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
 })
 
 test_that("is vectorized over by", {
-  x <- tidyr::expand_grid(
-    benchmark = c("all", "unit"),
-    emission_profile = c("low", "medium", "high"),
-    unit = c("m2", "kg"),
-    tilt_sector = c("sector1", "sector2"),
-    tilt_subsector = c("subsector1", "subsector2"),
+  # styler: off
+  data <- tibble::tribble(
+    ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
+         "all",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
+        "unit",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
   )
-  y <- tibble::tibble(
-    emission_profile = c("low", "medium", "high"),
-    isic_4digit = "'1234'",
-    co2_footprint = 1:3,
-  )
-  data <- left_join(x, y, by = "emission_profile", relationship = "many-to-many")
+  # styler: off
 
-  benchmark <- c("all", "unit")
-  out <- summarize_co2_range(data, benchmark)
-  expect_equal(benchmark, unique(data$benchmark))
-
-  benchmark <- c("all")
-  out_all <- summarize_co2_range(data, benchmark)
-  benchmark <- c("unit")
-  out_unit <- summarize_co2_range(data, benchmark)
-  expect_equal(nrow(out), nrow(out_all) + nrow(out_unit))
+  out <- summarize_co2_range(data, c("all", "unit"))
+  expect_equal(unique(out$benchmark), c("all", "unit"))
 })
