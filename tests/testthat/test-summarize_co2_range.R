@@ -53,7 +53,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
   )
 })
 
-test_that("is vectorized over by", {
+test_that("is vectorized over `benchmark`", {
   # styler: off
   data <- tibble::tribble(
     ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
