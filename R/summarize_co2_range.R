@@ -4,16 +4,6 @@ summarize_co2_range2 <- function(data) {
     purrr::reduce(bind_rows)
 }
 
-summarize_co2_range <- function(data, benchmark) {
-  map_df(benchmark, function(x) summarize_co2_range_once(data, x))
-}
-
-summarize_co2_range_once <- function(data, benchmark) {
-  data |>
-    summarize_co2_range_impl() |>
-    polish_benchmark_range(benchmark)
-}
-
 summarize_co2_range_impl <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
