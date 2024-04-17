@@ -4,11 +4,11 @@ summarize_co2_range <- function(data, benchmark) {
 
 summarize_co2_range_once <- function(data, benchmark) {
   data |>
-    summarize_benchmark_range_impl() |>
+    summarize_co2_range_impl() |>
     polish_benchmark_range(benchmark)
 }
 
-summarize_benchmark_range_impl <- function(data) {
+summarize_co2_range_impl <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
 

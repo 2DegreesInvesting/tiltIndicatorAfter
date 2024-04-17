@@ -16,25 +16,25 @@ test_that("different benchmarks output different number of rows", {
   benchmark <- "all"
   expected <- 3
   # 3 = 3 emission_profile
-  out <- summarize_benchmark_range_impl(data)[[benchmark]]
+  out <- summarize_co2_range(data, benchmark)
   expect_equal(nrow(out), expected)
 
   benchmark <- "unit"
   expected <- 6
   # 6 = 3 emission_profile * 2 unit
-  out <- summarize_benchmark_range_impl(data)[[benchmark]]
+  out <- summarize_co2_range(data, benchmark)
   expect_equal(nrow(out), expected)
 
   benchmark <- "tilt_sector"
   expected <- 12
   # 12 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector
-  out <- summarize_benchmark_range_impl(data)[[benchmark]]
+  out <- summarize_co2_range(data, benchmark)
   expect_equal(nrow(out), expected)
 
   benchmark <- "unit_tilt_sector"
   expected <- 24
   # 24 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector * 2 unit
-  out <- summarize_benchmark_range_impl(data)[[benchmark]]
+  out <- summarize_co2_range(data, benchmark)
   expect_equal(nrow(out), expected)
 })
 
@@ -49,7 +49,7 @@ test_that("with a simple case yields the same as `summarize_range()`", {
 
   expect_equal(
     summarize_range(data, co2_footprint, .by = c("benchmark", "emission_profile")),
-    summarize_benchmark_range_impl(data)[["all"]]
+    summarize_co2_range_impl(data)[["all"]]
   )
 })
 
