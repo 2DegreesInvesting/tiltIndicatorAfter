@@ -1,6 +1,7 @@
 #' Summarize CO2 footprint
 #'
 #' @param data The output of `profile_emissions*()` at product level.
+#' @param ... Arguments passed to [tiltIndicator::jitter_range].
 #' @keywords internal
 #'
 #' @return A dataframe
@@ -39,17 +40,17 @@ summarize_co2_range <- function(data) {
 
 #' @export
 #' @rdname summarize_co2_range
-jitter_co2_range <- function(data, amount = 2) {
+jitter_co2_range <- function(data, ...) {
   data |>
-    group_by(benchmark) |>
+    group_by(data$benchmark) |>
     group_split() |>
-    map(jitter_range, amount = amount) |>
+    map(jitter_range, ...) |>
     reduce(bind_rows)
 }
 
 #' @export
 #' @rdname summarize_co2_range
-polish_co2_range <- function(data, ...) {
+polish_co2_range <- function(data) {
   data |>
     rename(co2_lower = "min_jitter", co2_upper = "max_jitter") |>
     select(-c("min", "max"))

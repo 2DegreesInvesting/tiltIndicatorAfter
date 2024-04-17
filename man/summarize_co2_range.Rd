@@ -8,12 +8,14 @@
 \usage{
 summarize_co2_range(data)
 
-jitter_co2_range(data, amount = 2)
+jitter_co2_range(data, ...)
 
-polish_co2_range(data, ...)
+polish_co2_range(data)
 }
 \arguments{
 \item{data}{The output of \verb{profile_emissions*()} at product level.}
+
+\item{...}{Arguments passed to \link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range}.}
 }
 \value{
 A dataframe
