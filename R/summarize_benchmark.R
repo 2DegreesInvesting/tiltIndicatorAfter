@@ -7,7 +7,7 @@ summarize_benchmark_range <- function(data, benchmark) {
 polish_benchmark_range <- function(data, benchmark) {
   data[[benchmark]] |>
     jitter_range() |>
-    select(-min, -max) |>
+    select(-"min", -"max") |>
     rename(co2_lower = min_jitter, co2_upper = max_jitter)
 }
 
