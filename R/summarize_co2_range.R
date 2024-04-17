@@ -1,6 +1,5 @@
 summarize_co2_range <- function(data) {
-  out <- summarize_co2_range_impl(data)
-  reduce(out, bind_rows)
+  summarize_co2_range_impl(data)
 }
 
 summarize_co2_range_impl <- function(data) {
@@ -11,7 +10,8 @@ summarize_co2_range_impl <- function(data) {
   col <- extract_name(data, "co2_footprint")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
 
-  map_summarize_range(.x, col = col, .by = .by)
+  out <- map_summarize_range(.x, col = col, .by = .by)
+  reduce(out, bind_rows)
 }
 
 polish_benchmark_range <- function(data, benchmark) {
