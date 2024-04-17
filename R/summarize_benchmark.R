@@ -19,7 +19,7 @@ summarize_values_range_in_groups_by <- function(data, .values, .groups, .by) {
   for (i in names(.x)) {
     out[[i]] <- summarize_range(
       data = .x[[i]],
-      col = .x[[i]][[.values]],
+      col = .data[[.values]],
       .by = all_of(.by[[i]])
     )
   }
