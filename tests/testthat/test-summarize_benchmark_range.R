@@ -52,3 +52,29 @@ test_that("with a simple case yields the same as `summarize_range()`", {
     summarize_benchmark_range_impl(data)[["all"]]
   )
 })
+
+test_that("is vectorized over by", {
+  x <- tidyr::expand_grid(
+    benchmark = c("all", "unit"),
+    emission_profile = c("low", "medium", "high"),
+    unit = c("m2", "kg"),
+    tilt_sector = c("sector1", "sector2"),
+    tilt_subsector = c("subsector1", "subsector2"),
+  )
+  y <- tibble::tibble(
+    emission_profile = c("low", "medium", "high"),
+    isic_4digit = "'1234'",
+    co2_footprint = 1:3,
+  )
+  data <- left_join(x, y, by = "emission_profile", relationship = "many-to-many")
+
+  benchmark <- c("all", "unit")
+  out <- map_summarize_benchmark_range(data, benchmark)
+  expect_equal(benchmark, unique(data$benchmark))
+
+  benchmark <- c("all")
+  out_all <- map_summarize_benchmark_range(data, benchmark)
+  benchmark <- c("unit")
+  out_unit <- map_summarize_benchmark_range(data, benchmark)
+  expect_equal(nrow(out), nrow(out_all) + nrow(out_unit))
+})
