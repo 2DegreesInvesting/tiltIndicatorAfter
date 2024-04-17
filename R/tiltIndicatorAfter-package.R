@@ -27,6 +27,7 @@
 #' @importFrom glue glue
 #' @importFrom memoise memoise
 #' @importFrom purrr map_df
+#' @importFrom purrr reduce
 #' @importFrom readr read_csv
 #' @importFrom rlang .data
 #' @importFrom rlang abort
