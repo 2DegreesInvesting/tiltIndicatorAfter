@@ -49,18 +49,6 @@ summarize_co2_range <- function(data) {
 
 #' @export
 #' @rdname summarize_co2_range
-jitter_co2_range <- function(data, ...) {
-  col <- "benchmark"
-
-  data |>
-    group_by(.data[[col]]) |>
-    group_split() |>
-    map(jitter_range, ...) |>
-    reduce(bind_rows)
-}
-
-#' @export
-#' @rdname summarize_co2_range
 polish_co2_range <- function(data) {
   data |>
     rename(co2_lower = "min_jitter", co2_upper = "max_jitter") |>
