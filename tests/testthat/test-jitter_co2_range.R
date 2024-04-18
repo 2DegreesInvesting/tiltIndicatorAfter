@@ -31,7 +31,7 @@ test_that("yields `min*` smaller than `max*`", {
   )
   # styler: on
 
-out <- jitter_co2_range(data)
+  out <- jitter_co2_range(data)
   expect_true(all(out$min_jitter < out$max_jitter))
 })
 
@@ -44,7 +44,7 @@ test_that("if min/max increases across risk categories, *jittered increases too 
   )
   # styler: on
 
-out <- jitter_co2_range(data)
+  out <- jitter_co2_range(data)
 
   # Ensure min and max are strictly increasing
   strictly_increasing <- function(x) all(diff(x) > 0)

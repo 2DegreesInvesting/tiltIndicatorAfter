@@ -45,7 +45,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
          "all",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
          "all",          "medium",             2L,  "m2",    "sector1",    "subsector2",     "'1234'"
   )
-  # styler: off
+  # styler: on
 
   expect_equal(
     summarize_range(data, co2_footprint, .by = c("benchmark", "emission_profile")),
@@ -60,7 +60,7 @@ test_that("is vectorized over `benchmark`", {
          "all",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
         "unit",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
   )
-  # styler: off
+  # styler: on
 
   out <- summarize_co2_range(data)
   expect_equal(unique(out$benchmark), c("all", "unit"))
