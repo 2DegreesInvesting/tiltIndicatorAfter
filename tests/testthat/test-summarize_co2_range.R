@@ -6,7 +6,7 @@ test_that("different benchmarks output different number of rows", {
     tilt_sector = c("sector1", "sector2"),
     tilt_subsector = c("subsector1", "subsector2"),
   )
-  y <- tibble::tibble(
+  y <- tibble(
     emission_profile = c("low", "medium", "high"),
     isic_4digit = "'1234'",
     co2_footprint = 1:3,
@@ -40,7 +40,7 @@ test_that("different benchmarks output different number of rows", {
 
 test_that("with a simple case yields the same as `summarize_range()` (214#issuecomment-2061180499)", {
   # styler: off
-  data <- tibble::tribble(
+  data <- tribble(
     ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
          "all",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
          "all",          "medium",             2L,  "m2",    "sector1",    "subsector2",     "'1234'"
@@ -55,7 +55,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
 
 test_that("is vectorized over `benchmark`", {
   # styler: off
-  data <- tibble::tribble(
+  data <- tribble(
     ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
          "all",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
         "unit",             "low",             1L,  "m2",    "sector1",    "subsector1",     "'1234'",
