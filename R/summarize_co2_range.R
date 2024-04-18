@@ -38,11 +38,19 @@
 summarize_co2_range <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
+  .by <- group_benchmark(unique(data[[.benchmark]]), .all)
+
+  check_summarize_co2_range(data, benchmark_cols = unique(unlist(.by)))
 
   .x <- split(data, data[[.benchmark]])
   col <- extract_name(data, "co2_footprint")
-  .by <- group_benchmark(unique(data[[.benchmark]]), .all)
-
   out <- map_summarize_range(.x, col = col, .by = .by)
-  reduce(out, bind_rows)
+  out <- reduce(out, bind_rows)
+  out
+}
+
+check_summarize_co2_range <- function(data, benchmark_cols) {
+  check_col(data, "benchmark")
+  check_col(data, "co2_footprint")
+  walk(benchmark_cols, function(pattern) check_matches_name(data, pattern))
 }
