@@ -48,7 +48,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
   # styler: on
 
   expect_equal(
-    summarize_range(data, co2_footprint, .by = c("benchmark", "emission_profile")),
+    summarize_range2(data, "co2_footprint", .by = c("benchmark", "emission_profile")),
     summarize_co2_range(data)
   )
 })
