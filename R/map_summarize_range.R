@@ -2,12 +2,12 @@
 # TODO check that .x is a list
 # TODO check that .by is a named list
 # TODO check the relationship between the names of .x and .by
-map_summarize_range <- function(.x, col, .by = NULL, na.rm = FALSE) {
-  out <- vector("list", length = length(.x))
-  names(out) <- names(.x)
-  for (i in names(.x)) {
+map_summarize_range <- function(data, col, .by = NULL, na.rm = FALSE) {
+  out <- vector("list", length = length(data))
+  names(out) <- names(data)
+  for (i in names(data)) {
     out[[i]] <- summarize_range2(
-      .x[[i]],
+      data[[i]],
       col = col, .by = all_of(.by[[i]]), na.rm = na.rm
     )
   }
@@ -16,7 +16,7 @@ map_summarize_range <- function(.x, col, .by = NULL, na.rm = FALSE) {
 }
 
 # `col` is now a string now a symbol
-summarize_range2 <- function(data, col, .by = NULL, na.rm = NULL) {
+summarize_range2 <- function(data, col, .by = NULL, na.rm = FALSE) {
   tiltIndicator::summarize_range(
     data,
     col = .data[[col]],
