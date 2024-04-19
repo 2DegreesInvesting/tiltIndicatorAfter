@@ -100,3 +100,7 @@ add_profile_ranking_average <- function(data, product) {
 
   data |> left_join(profile_ranking_average, by = c("companies_id", "grouped_by"))
 }
+
+is_profile_result <- function(data) {
+  identical(names(data), c("companies_id", "product", "company"))
+}
