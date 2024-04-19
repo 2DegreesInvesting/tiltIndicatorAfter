@@ -113,7 +113,9 @@ test_that("without crucial columns errors gracefully", {
 })
 
 test_that("works with the output of profile_emissions()", {
+  withr::local_options(readr.show_col_types = FALSE)
   withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
+  withr::local_options(tiltIndicatorAfter.verbose = FALSE)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
