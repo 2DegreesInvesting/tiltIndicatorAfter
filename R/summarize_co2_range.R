@@ -1,6 +1,7 @@
 #' Summarize CO2 footprint
 #'
-#' @param data The output of `profile_emissions*()` at product level.
+#' @param data The output of [profile_emissions()] at product level but you can
+#'   conveniently pipe the entire result "as is".
 #' @param ... Arguments passed to [tiltIndicator::jitter_range].
 #' @keywords internal
 #'

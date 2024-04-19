@@ -14,7 +14,8 @@ polish_co2_range(data)
 summarize_co2_range(data)
 }
 \arguments{
-\item{data}{The output of \verb{profile_emissions*()} at product level.}
+\item{data}{The output of \code{\link[=profile_emissions]{profile_emissions()}} at product level but you can
+conveniently pipe the entire result "as is".}
 
 \item{...}{Arguments passed to \link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range}.}
 }
