@@ -2,9 +2,14 @@ create_co2_range <- function(data, amount = set_jitter_amount()) {
   col <- extract_name(data, "co2_footprint")
   .by <- c("grouped_by", "risk_category")
 
-  out <- data |>
-    summarize_range(.data[[col]], .by = all_of(.by)) |>
-    jitter_range(amount = amount)
+  if (packageVersion("tiltIndicator") > "0.0.0.9213") {
+    out <- data |> summarize_range(.data[[col]], .by = all_of(.by))
+  } else {
+    out <- data |> summarize_range(!! rlang::ensym(col), .by = all_of(.by)) |>
+      suppressWarnings()
+  }
+
+  out <- out |> jitter_range(amount = amount)
 
   out |> inform_mean_percent_noise()
 
