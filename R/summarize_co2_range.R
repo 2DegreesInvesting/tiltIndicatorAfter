@@ -58,10 +58,13 @@
 #' )
 #'
 #' # It works with the product-level result
-#' result |> unnest_product() |> summarize_co2_range()
+#' result |>
+#'   unnest_product() |>
+#'   summarize_co2_range()
 #'
 #' # But you can conveniently pipe profile result "as is"
-#' result |> summarize_co2_range()
+#' result |>
+#'   summarize_co2_range()
 summarize_co2_range <- function(data) {
   if (is_profile_result(data)) data <- unnest_product(data)
 
@@ -73,7 +76,7 @@ summarize_co2_range <- function(data) {
 
   .x <- split(data, data[[.benchmark]])
   col <- extract_name(data, "co2_footprint")
-  out <- summarize_range(.x, col = !! ensym(col), .by = .by) |>
+  out <- summarize_range(.x, col = !!ensym(col), .by = .by) |>
     suppressWarnings(classes = "passing_col_as_a_symbol_is_superseded")
   out <- reduce(out, bind_rows)
   out

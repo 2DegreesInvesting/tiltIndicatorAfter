@@ -75,9 +75,12 @@ result <- profile_emissions(
 )
 
 # It works with the product-level result
-result |> unnest_product() |> summarize_co2_range()
+result |>
+  unnest_product() |>
+  summarize_co2_range()
 
 # But you can conveniently pipe profile result "as is"
-result |> summarize_co2_range()
+result |>
+  summarize_co2_range()
 }
 \keyword{internal}

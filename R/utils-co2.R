@@ -3,7 +3,7 @@ create_co2_range <- function(data, amount = set_jitter_amount()) {
   .by <- c("grouped_by", "risk_category")
 
   out <- data |>
-    summarize_range(!! ensym(col), .by = all_of(.by)) |>
+    summarize_range(!!ensym(col), .by = all_of(.by)) |>
     suppressWarnings(classes = "passing_col_as_a_symbol_is_superseded") |>
     jitter_range(amount = amount)
 
