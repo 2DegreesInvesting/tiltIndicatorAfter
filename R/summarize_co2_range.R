@@ -88,6 +88,5 @@ summarize_co2_range <- function(data) {
 check_summarize_co2_range <- function(data, benchmark_cols) {
   check_col(data, "benchmark")
   check_col(data, "co2_footprint")
-
   walk(benchmark_cols, function(pattern) check_matches_name(data, pattern))
 }
