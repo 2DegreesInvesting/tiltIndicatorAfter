@@ -27,7 +27,11 @@ Summarize CO2 footprint
 }
 \examples{
 library(readr, warn.conflicts = FALSE)
-withr::local_options(readr.show_col_types = FALSE)
+
+restore <- options(list(
+  readr.show_col_types = FALSE,
+  tiltIndicatorAfter.output_co2_footprint = TRUE
+))
 
 # styler: off
 data <- tibble::tribble(
@@ -55,9 +59,6 @@ data |>
 
 # Works with the result of `emissions_profile()` --------------------------
 
-withr::local_options(readr.show_col_types = FALSE)
-withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
-
 companies <- read_csv(toy_emissions_profile_any_companies())
 co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 europages_companies <- read_csv(toy_europages_companies())
@@ -82,6 +83,9 @@ result |>
 # But you can conveniently pipe profile result "as is"
 result |>
   summarize_co2_range()
+
+# Cleanup
+options(restore)
 }
 \seealso{
 Other pipable functions: 
