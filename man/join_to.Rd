@@ -28,6 +28,7 @@ data |>
 }
 \seealso{
 Other pipable functions: 
+\code{\link{excluding}()},
 \code{\link{jitter_co2_range}()}
 }
 \concept{pipable functions}

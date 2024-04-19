@@ -85,6 +85,7 @@ result |>
 }
 \seealso{
 Other pipable functions: 
+\code{\link{excluding}()},
 \code{\link{join_to}()}
 }
 \concept{pipable functions}

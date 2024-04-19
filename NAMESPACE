@@ -3,6 +3,7 @@
 export(example_emissions_profile_at_product_level)
 export(example_sector_profile_at_product_level)
 export(exclude_cols_then_pivot_wider)
+export(excluding)
 export(jitter_co2_range)
 export(join_to)
 export(polish_co2_range)
