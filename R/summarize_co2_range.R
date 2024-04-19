@@ -9,6 +9,9 @@
 #' @export
 #'
 #' @examples
+#' library(readr, warn.conflicts = FALSE)
+#' withr::local_options(readr.show_col_types = FALSE)
+#'
 #' # styler: off
 #' data <- tibble::tribble(
 #'   ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
@@ -77,8 +80,7 @@ summarize_co2_range <- function(data) {
 
   .x <- split(data, data[[.benchmark]])
   col <- extract_name(data, "co2_footprint")
-  out <- summarize_range(.x, col = !!ensym(col), .by = .by) |>
-    suppressWarnings(classes = "passing_col_as_a_symbol_is_superseded")
+  out <- summarize_range(.x, col = !!ensym(col), .by = .by)
   out <- reduce(out, bind_rows)
   out
 }

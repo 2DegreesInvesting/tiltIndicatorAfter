@@ -26,6 +26,9 @@ A dataframe
 Summarize CO2 footprint
 }
 \examples{
+library(readr, warn.conflicts = FALSE)
+withr::local_options(readr.show_col_types = FALSE)
+
 # styler: off
 data <- tibble::tribble(
   ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,

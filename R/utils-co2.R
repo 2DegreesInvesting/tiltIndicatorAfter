@@ -4,7 +4,6 @@ create_co2_range <- function(data, amount = set_jitter_amount()) {
 
   out <- data |>
     summarize_range(!!ensym(col), .by = all_of(.by)) |>
-    suppressWarnings(classes = "passing_col_as_a_symbol_is_superseded") |>
     jitter_range(amount = amount)
 
   out |> inform_mean_percent_noise()
