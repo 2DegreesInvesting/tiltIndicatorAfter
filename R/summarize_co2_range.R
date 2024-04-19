@@ -44,7 +44,7 @@ summarize_co2_range <- function(data) {
 
   .x <- split(data, data[[.benchmark]])
   col <- extract_name(data, "co2_footprint")
-  out <- summarize_range(.x, col = col, .by = .by)
+  out <- summarize_range(.x, col = !! ensym(col), .by = .by)
   out <- reduce(out, bind_rows)
   out
 }
