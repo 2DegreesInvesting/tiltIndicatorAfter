@@ -26,15 +26,17 @@ and then join back the data to the summary. It joins by all shared columns
 using a "many-to-many" relationship.
 }
 \examples{
+library(dplyr, warn.conflicts = FALSE)
+
 data <- tibble(x = rep(1, 4), y = letters[rep(c(1, 2), 2)], z = 1:4)
 data
 
 data |>
-  dplyr::summarise(mean = mean(x), .by = "y") |>
+  summarize(mean = mean(x), .by = "y") |>
   join_to(data)
 
 data |>
-  dplyr::summarise(mean = mean(x), .by = "y") |>
+  summarize(mean = mean(x), .by = "y") |>
   join_to(data, excluding = "z")
 }
 \seealso{
