@@ -85,8 +85,8 @@ result |>
 }
 \seealso{
 Other pipable functions: 
-\code{\link{excluding}()},
-\code{\link{join_to}()}
+\code{\link{join_to}()},
+\code{\link{unselect}()}
 }
 \concept{pipable functions}
 \keyword{internal}

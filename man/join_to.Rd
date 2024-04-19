@@ -4,7 +4,7 @@
 \alias{join_to}
 \title{Join every possible column and row}
 \usage{
-join_to(x, y)
+join_to(x, y, excluding = NULL)
 }
 \arguments{
 \item{x, y}{A pair of data frames, data frame extensions (e.g. a tibble), or
@@ -20,16 +20,20 @@ and then join back the data to the summary. It joins by all shared columns
 using a "many-to-many" relationship.
 }
 \examples{
-data <- tibble(x = 1:4, y = letters[c(1, 1, 2, 2)])
+data <- tibble(x = 1, y = letters[c(1, 2)], z = 1:4)
 
 data |>
-  dplyr::summarise(z = mean(x), .by = "y") |>
+  dplyr::summarise(mean = mean(x), .by = "y") |>
   join_to(data)
+
+data |>
+  dplyr::summarise(mean = mean(x), .by = "y") |>
+  join_to(data, excluding = "z")
 }
 \seealso{
 Other pipable functions: 
-\code{\link{excluding}()},
-\code{\link{jitter_co2_range}()}
+\code{\link{jitter_co2_range}()},
+\code{\link{unselect}()}
 }
 \concept{pipable functions}
 \keyword{internal}
