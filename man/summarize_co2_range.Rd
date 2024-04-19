@@ -51,7 +51,7 @@ data |>
   summarize_co2_range() |>
   jitter_co2_range(amount = 1) |>
   polish_co2_range() |>
-  join_to(data)
+  join_to(data, excluding = "co2_footprint")
 
 # Works with the result of `emissions_profile()` --------------------------
 
