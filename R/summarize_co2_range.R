@@ -67,7 +67,7 @@
 #' result |>
 #'   summarize_co2_range()
 summarize_co2_range <- function(data) {
-  if (is_profile_result(data)) data <- unnest_product(data)
+  data <- use_product(data)
 
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
