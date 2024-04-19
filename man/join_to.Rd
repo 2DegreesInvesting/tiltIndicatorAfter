@@ -10,6 +10,9 @@ join_to(x, y, excluding = NULL)
 \item{x, y}{A pair of data frames, data frame extensions (e.g. a tibble), or
 lazy data frames (e.g. from dbplyr or dtplyr). See \emph{Methods}, below, for
 more details.}
+
+\item{excluding}{Character vector used to exclude columns with a pattern
+passed to \code{\link[tidyselect:starts_with]{tidyselect::matches()}}, also excluding any resulting duplicates.}
 }
 \value{
 A data frame with all columns in \code{x} and \code{y} and all rows in \code{y}.

@@ -5,6 +5,8 @@
 #' using a "many-to-many" relationship.
 #'
 #' @inheritParams dplyr::left_join
+#' @param excluding Character vector used to exclude columns with a pattern
+#'   passed to [tidyselect::matches()], also excluding any resulting duplicates.
 #'
 #' @return A data frame with all columns in `x` and `y` and all rows in `y`.
 #' @export
