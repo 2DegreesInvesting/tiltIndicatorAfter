@@ -5,10 +5,13 @@
 #' using a "many-to-many" relationship.
 #'
 #' @inheritParams dplyr::left_join
-#' @param excluding Character vector used to exclude columns with a pattern
-#'   passed to [tidyselect::matches()], also excluding any resulting duplicates.
+#' @param excluding Character vector with patterns to exclude columns via
+#'   [tidyselect::matches()] and any resulting duplicate via
+#'   [dplyr::distinct()].
 #'
-#' @return A data frame with all columns in `x` and `y` and all rows in `y`.
+#' @return A data frame with all columns in `x` and `y` and all rows in `y`,
+#'   except the columns and resulting duplicates matched by the argument
+#'   `excluding`.
 #' @export
 #' @keywords internal
 #' @family pipable functions

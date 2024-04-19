@@ -11,11 +11,14 @@ join_to(x, y, excluding = NULL)
 lazy data frames (e.g. from dbplyr or dtplyr). See \emph{Methods}, below, for
 more details.}
 
-\item{excluding}{Character vector used to exclude columns with a pattern
-passed to \code{\link[tidyselect:starts_with]{tidyselect::matches()}}, also excluding any resulting duplicates.}
+\item{excluding}{Character vector with patterns to exclude columns via
+\code{\link[tidyselect:starts_with]{tidyselect::matches()}} and any resulting duplicate via
+\code{\link[dplyr:distinct]{dplyr::distinct()}}.}
 }
 \value{
-A data frame with all columns in \code{x} and \code{y} and all rows in \code{y}.
+A data frame with all columns in \code{x} and \code{y} and all rows in \code{y},
+except the columns and resulting duplicates matched by the argument
+\code{excluding}.
 }
 \description{
 This function is typically useful when you want to pipe data into a summary
