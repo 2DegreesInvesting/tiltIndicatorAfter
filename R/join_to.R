@@ -19,5 +19,5 @@
 #'   join_to(data)
 join_to <- function(x, y) {
   shared <- intersect(names(x), names(y))
-  right_join(y, x, by = shared, relationship = "many-to-many")
+  left_join(y, x, by = shared, relationship = "many-to-many")
 }

@@ -46,12 +46,7 @@ data <- tibble::tribble(
 data |>
   summarize_co2_range()
 
-withr::local_seed(1)
-data |>
-  summarize_co2_range() |>
-  jitter_co2_range(amount = 1)
-
-withr::local_seed(1)
+# Other pipable friends
 data |>
   summarize_co2_range() |>
   jitter_co2_range(amount = 1) |>
