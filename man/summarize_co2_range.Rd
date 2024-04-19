@@ -55,7 +55,8 @@ withr::local_seed(1)
 data |>
   summarize_co2_range() |>
   jitter_co2_range(amount = 1) |>
-  polish_co2_range()
+  polish_co2_range() |>
+  join_to(data)
 
 # Works with the result of `emissions_profile()` --------------------------
 
@@ -87,4 +88,9 @@ result |>
 result |>
   summarize_co2_range()
 }
+\seealso{
+Other pipable functions: 
+\code{\link{join_to}()}
+}
+\concept{pipable functions}
 \keyword{internal}

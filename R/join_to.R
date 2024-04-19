@@ -9,15 +9,15 @@
 #' @return A data frame with all columns in `x` and `y` and all rows in `y`.
 #' @export
 #' @keywords internal
-#' functions in the pipable API
+#' @family pipable functions
 #'
 #' @examples
 #' data <- tibble(x = 1:4, y = letters[c(1, 1, 2, 2)])
 #'
 #' data |>
 #'   dplyr::summarise(z = mean(x), .by = "y") |>
-#'   join_everything(data)
-join_everything <- function(x, y) {
+#'   join_to(data)
+join_to <- function(x, y) {
   shared <- intersect(names(x), names(y))
   right_join(y, x, by = shared, relationship = "many-to-many")
 }

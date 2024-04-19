@@ -7,7 +7,7 @@
 #'
 #' @return A dataframe
 #' @export
-#' functions in the pipable API
+#' @family pipable functions
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
@@ -39,7 +39,8 @@
 #' data |>
 #'   summarize_co2_range() |>
 #'   jitter_co2_range(amount = 1) |>
-#'   polish_co2_range()
+#'   polish_co2_range() |>
+#'   join_to(data)
 #'
 #' # Works with the result of `emissions_profile()` --------------------------
 #'
