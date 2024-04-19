@@ -7,6 +7,7 @@
 #'
 #' @return A dataframe
 #' @export
+#' functions in the pipable API
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
