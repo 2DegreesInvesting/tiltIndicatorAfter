@@ -111,3 +111,26 @@ test_that("without crucial columns errors gracefully", {
   bad <- select(data, -all_of(crucial))
   expect_error(summarize_co2_range(bad), crucial)
 })
+
+test_that("works with the output of profile_emissions()", {
+  withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
+
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  )
+
+  data <- unnest_product(out)
+  expect_no_error(summarize_co2_range(data))
+})

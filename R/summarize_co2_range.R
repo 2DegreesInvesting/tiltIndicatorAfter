@@ -37,8 +37,6 @@
 #'   polish_co2_range()
 summarize_co2_range <- function(data) {
   .benchmark <- "benchmark"
-  # FIXME: "emission_profile" can also be "emission_upstream_profile"
-  # TODO: Test with profile_emissions_upstream
   .all <- c(.benchmark, "emission_profile")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
 
