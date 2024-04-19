@@ -54,11 +54,11 @@ data |>
   jitter_co2_range(amount = 1) |>
   polish_co2_range()
 
+# Works with the result of `emissions_profile()` --------------------------
 
-
-# Works with the result of `emissions_profile()`
 withr::local_options(readr.show_col_types = FALSE)
 withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
+
 companies <- read_csv(toy_emissions_profile_any_companies())
 co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 europages_companies <- read_csv(toy_europages_companies())
