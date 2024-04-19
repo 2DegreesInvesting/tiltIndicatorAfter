@@ -17,3 +17,19 @@ test_that("joins as expected", {
   expected <- suppressMessages(left_join(data, summary))
   expect_equal(join_to(summary, data), expected)
 })
+
+test_that("is sensitive to `excluding`", {
+  data <- tibble(x = rep(1, 4), y = letters[rep(c(1, 2), 2)], z = 1:4)
+
+  out1 <- data |>
+    dplyr::summarise(mean = mean(x), .by = "y") |>
+    join_to(data)
+  expect_true(hasName(out1, "z"))
+
+  out2 <- data |>
+    dplyr::summarise(mean = mean(x), .by = "y") |>
+    join_to(data, excluding = "z")
+  expect_false(hasName(out2, "z"))
+
+  expect_true(nrow(out1) > nrow(out2))
+})

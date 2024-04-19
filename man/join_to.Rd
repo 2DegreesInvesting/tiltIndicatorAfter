@@ -32,8 +32,7 @@ data |>
 }
 \seealso{
 Other pipable functions: 
-\code{\link{jitter_co2_range}()},
-\code{\link{unselect}()}
+\code{\link{jitter_co2_range}()}
 }
 \concept{pipable functions}
 \keyword{internal}
