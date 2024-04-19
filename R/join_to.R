@@ -12,7 +12,8 @@
 #' @family pipable functions
 #'
 #' @examples
-#' data <- tibble(x = 1, y = letters[c(1, 2)], z = 1:4)
+#' data <- tibble(x = rep(1, 4), y = letters[rep(c(1, 2), 2)], z = 1:4)
+#' data
 #'
 #' data |>
 #'   dplyr::summarise(mean = mean(x), .by = "y") |>

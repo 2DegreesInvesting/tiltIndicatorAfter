@@ -20,7 +20,8 @@ and then join back the data to the summary. It joins by all shared columns
 using a "many-to-many" relationship.
 }
 \examples{
-data <- tibble(x = 1, y = letters[c(1, 2)], z = 1:4)
+data <- tibble(x = rep(1, 4), y = letters[rep(c(1, 2), 2)], z = 1:4)
+data
 
 data |>
   dplyr::summarise(mean = mean(x), .by = "y") |>
