@@ -133,6 +133,6 @@ test_that("works with the output of profile_emissions()", {
     isic = isic_name
   )
 
-  data <- unnest_product(out)
-  expect_no_error(summarize_co2_range(data))
+  expect_no_error(summarize_co2_range(out |> unnest_product()))
+  expect_no_error(summarize_co2_range(out))
 })

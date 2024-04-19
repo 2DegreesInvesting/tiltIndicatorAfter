@@ -36,6 +36,13 @@
 #'   jitter_co2_range(amount = 1) |>
 #'   polish_co2_range()
 summarize_co2_range <- function(data) {
+  is_profile_result <- function(data) {
+    identical(names(data), c("companies_id", "product", "company"))
+  }
+  if (is_profile_result(data)) data <- unnest_product(data)
+
+
+
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
