@@ -60,8 +60,3 @@ optionally_output_co2_footprint <- function(out, co2_footprint) {
 
   nest_levels(product, company)
 }
-
-check_co2_footprint <- function(data) {
-  hint <- "Do you need `options(tiltIndicatorAfter.output_co2_footprint = TRUE)`?"
-  check_col(data, "co2_footprint", hint)
-}
