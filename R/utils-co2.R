@@ -1,8 +1,9 @@
 create_co2_range <- function(data, amount = set_jitter_amount()) {
+  col <- extract_name(data, "co2_footprint")
+  .by <- c("grouped_by", "risk_category")
+
   out <- data |>
-    summarize_range(.data[[grep("co2_footprint", names(data), value = TRUE)]],
-      .by = c("grouped_by", "risk_category")
-    ) |>
+    summarize_range(.data[[col]], .by = all_of(.by)) |>
     jitter_range(amount = amount)
 
   out |> inform_mean_percent_noise()
