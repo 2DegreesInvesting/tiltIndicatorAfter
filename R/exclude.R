@@ -1,14 +1,15 @@
-#' Title
+#' Exclude columns matching a pattern and the resulting duplicates
 #'
 #' @param data A dataframe.
-#' @param excluding Character vector with patterns to exclude columns and any
-#'   resulting duplicate.
+#' @inheritParams tidyselect::matches
 #'
-#' @return
+#' @return A dataframe excluding the matching columns and duplicates.
 #' @export
 #' @family composable friends
 #'
 #' @examples
+#' library(tibble)
+#'
 #' # Excludes columns along with all its duplicates
 #' data <- tibble(x = 1, y = 1:2)
 #' data
@@ -19,6 +20,6 @@
 #' data
 #' data |> exclude("y")
 #' data |> exclude("y$")
-exclude <- function(data, excluding) {
-  distinct(select(data, -matches(excluding)))
+exclude <- function(data, match) {
+  distinct(select(data, -matches(match)))
 }

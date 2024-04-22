@@ -2,20 +2,29 @@
 % Please edit documentation in R/exclude.R
 \name{exclude}
 \alias{exclude}
-\title{Title}
+\title{Exclude columns matching a pattern and the resulting duplicates}
 \usage{
-exclude(data, excluding)
+exclude(data, match)
 }
 \arguments{
 \item{data}{A dataframe.}
 
-\item{excluding}{Character vector with patterns to exclude columns and any
-resulting duplicate.}
+\item{match}{A character vector. If length > 1, the union of the
+matches is taken.
+
+For \code{starts_with()}, \code{ends_with()}, and \code{contains()} this is an exact
+match. For \code{matches()} this is a regular expression, and can be a
+stringr pattern.}
+}
+\value{
+A dataframe excluding the matching columns and duplicates.
 }
 \description{
-Title
+Exclude columns matching a pattern and the resulting duplicates
 }
 \examples{
+library(tibble)
+
 # Excludes columns along with all its duplicates
 data <- tibble(x = 1, y = 1:2)
 data

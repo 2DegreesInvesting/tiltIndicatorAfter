@@ -25,7 +25,7 @@
 #'
 #' data |>
 #'   summarize(mean = mean(x), .by = "y") |>
-#'   join_to(data|> exclude("z"))
+#'   join_to(data |> exclude("z"))
 join_to <- function(x, y) {
   shared_cols <- intersect(names(x), names(y))
   left_join(y, x, by = shared_cols, relationship = "many-to-many")

@@ -33,7 +33,7 @@ data |>
 
 data |>
   summarize(mean = mean(x), .by = "y") |>
-  join_to(data|> exclude("z"))
+  join_to(data |> exclude("z"))
 }
 \seealso{
 Other composable friends: 
