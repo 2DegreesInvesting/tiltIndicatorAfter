@@ -4,7 +4,7 @@
 \alias{join_to}
 \title{Join every possible column and row}
 \usage{
-join_to(x, y, excluding = NULL)
+join_to(x, y)
 }
 \arguments{
 \item{x, y}{A pair of data frames, data frame extensions (e.g. a tibble), or
@@ -33,7 +33,7 @@ data |>
 
 data |>
   summarize(mean = mean(x), .by = "y") |>
-  join_to(data|> excluding("z"))
+  join_to(data|> exclude("z"))
 }
 \seealso{
 Other composable friends: 
