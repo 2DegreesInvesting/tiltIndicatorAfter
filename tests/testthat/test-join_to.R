@@ -17,3 +17,42 @@ test_that("joins as expected", {
   expected <- suppressMessages(left_join(data, summary))
   expect_equal(join_to(summary, data), expected)
 })
+
+test_that("with a profile_result yields a profile_result", {
+  skip("TODO")
+  # TODO: Rename profile_result to profile
+  product <- tibble(companies_id = 1:3, x = 1:3)
+  company <- tibble(companies_id = 1:3, y = 1)
+  profile <- nest_levels(product, company)
+
+  summary <- summarise(product, mean = mean(x))
+
+  joint_profile <- summary |> join_to(profile)
+
+  expect_true(is_profile_result(profile_result))
+  expect_true(is_profile_result(joint_profile))
+})
+
+test_that("works with 'profile_result'", {
+  skip("TODO")
+  product <- tibble(companies_id = 1:3, x = 1:3)
+  company <- tibble(companies_id = 1:3, y = 1)
+  profile <- nest_levels(product, company)
+
+  summary <- summarise(product, mean = mean(x))
+
+  joint_product <- summary |> join_to(product)
+  joint_company <- summary |> join_to(company)
+  joint_profile <- summary |> join_to(profile)
+
+  expect_equal(
+    joint_profile |> unnest_product(),
+    joint_product
+  )
+
+  expect_equal(
+    joint_profile |> unnest_company(),
+    joint_company
+  )
+})
+

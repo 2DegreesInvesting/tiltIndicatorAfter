@@ -11,7 +11,7 @@
 #' @param isic Dataframe. ISIC data.
 #' @param isic_tilt `r lifecycle::badge("deprecated")`
 #'
-#' @return `r document_default_value()`
+#' @return `r document_profile()`
 #' @export
 #'
 #' @family top-level functions
