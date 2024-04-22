@@ -27,6 +27,7 @@ Summarize CO2 footprint
 }
 \examples{
 library(readr, warn.conflicts = FALSE)
+library(tiltToyData)
 
 restore <- options(list(
   readr.show_col_types = FALSE,
