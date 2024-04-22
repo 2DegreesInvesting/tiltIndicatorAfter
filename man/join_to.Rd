@@ -10,10 +10,6 @@ join_to(x, y, excluding = NULL)
 \item{x, y}{A pair of data frames, data frame extensions (e.g. a tibble), or
 lazy data frames (e.g. from dbplyr or dtplyr). See \emph{Methods}, below, for
 more details.}
-
-\item{excluding}{Character vector with patterns to exclude columns via
-\code{\link[tidyselect:starts_with]{tidyselect::matches()}} and any resulting duplicate via
-\code{\link[dplyr:distinct]{dplyr::distinct()}}.}
 }
 \value{
 A data frame with all columns in \code{x} and \code{y} and all rows in \code{y},
@@ -37,7 +33,7 @@ data |>
 
 data |>
   summarize(mean = mean(x), .by = "y") |>
-  join_to(data, excluding = "z")
+  join_to(data|> excluding("z"))
 }
 \seealso{
 Other pipable functions: 
