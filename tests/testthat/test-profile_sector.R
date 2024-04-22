@@ -1,3 +1,24 @@
+test_that("yields a 'tilt_profile'", {
+  companies <- read_csv(toy_sector_profile_companies())
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  expect_s3_class(out, "tilt_profile")
+})
+
 test_that("irrelevant columns in europages_companies aren't in the output ", {
   companies <- read_csv(toy_sector_profile_companies())
   scenarios <- read_csv(toy_sector_profile_any_scenarios())

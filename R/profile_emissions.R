@@ -33,5 +33,6 @@ profile_emissions <- function(companies,
     isic
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
-    optionally_output_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
+    optionally_output_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
+    tilt_profile()
 }
