@@ -11,7 +11,7 @@
 #'   `excluding`.
 #' @export
 #' @keywords internal
-#' @family pipable functions
+#' @family composable friends
 #'
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)

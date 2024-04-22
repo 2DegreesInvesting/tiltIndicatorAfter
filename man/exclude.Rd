@@ -15,3 +15,21 @@ resulting duplicate.}
 \description{
 Title
 }
+\examples{
+# Excludes columns along with all its duplicates
+data <- tibble(x = 1, y = 1:2)
+data
+data |> exclude("y")
+
+# Columns are matched as a regular expression
+data <- tibble(x = 1, yz = 1:2, zy = 1)
+data
+data |> exclude("y")
+data |> exclude("y$")
+}
+\seealso{
+Other composable friends: 
+\code{\link{jitter_co2_range}()},
+\code{\link{join_to}()}
+}
+\concept{composable friends}

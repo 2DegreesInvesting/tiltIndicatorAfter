@@ -7,7 +7,7 @@
 #'
 #' @return A dataframe
 #' @export
-#' @family pipable functions
+#' @family composable friends
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)

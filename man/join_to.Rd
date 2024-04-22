@@ -36,8 +36,9 @@ data |>
   join_to(data|> excluding("z"))
 }
 \seealso{
-Other pipable functions: 
+Other composable friends: 
+\code{\link{exclude}()},
 \code{\link{jitter_co2_range}()}
 }
-\concept{pipable functions}
+\concept{composable friends}
 \keyword{internal}
