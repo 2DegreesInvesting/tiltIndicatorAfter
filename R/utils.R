@@ -120,3 +120,7 @@ use_company <- function(data) {
 is_profile_result <- function(data) {
   identical(names(data), c("companies_id", "product", "company"))
 }
+
+names_diff <- function(x, y) {
+  setdiff(names(x), names(y))
+}
