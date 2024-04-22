@@ -29,8 +29,8 @@ test_that("with a profile_result yields a profile_result", {
 
   joint_profile <- summary |> join_to(profile)
 
-  expect_true(is_profile_result(profile_result))
-  expect_true(is_profile_result(joint_profile))
+  expect_true(has_profile_names(profile_result))
+  expect_true(has_profile_names(joint_profile))
 })
 
 test_that("works with 'profile_result'", {
@@ -55,4 +55,3 @@ test_that("works with 'profile_result'", {
     joint_company
   )
 })
-

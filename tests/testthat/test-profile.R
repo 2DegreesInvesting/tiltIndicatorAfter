@@ -4,6 +4,7 @@ test_that("has class 'profile'", {
   out <- profile(nest_levels(product, company))
 
   expect_s3_class(out, "profile")
+  expect_true(is_profile(out))
 })
 
 test_that("subsetting rows still yields an object of class 'profile'", {
@@ -49,5 +50,3 @@ test_that("with invalid input errors gracefully", {
     class = "validate_profile_type"
   )
 })
-
-

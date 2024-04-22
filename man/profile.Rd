@@ -2,9 +2,12 @@
 % Please edit documentation in R/profile.R
 \name{profile}
 \alias{profile}
+\alias{is_profile}
 \title{Create objects of class profile}
 \usage{
 profile(data)
+
+is_profile(data)
 }
 \arguments{
 \item{data}{A data frame with the column \code{companies_id}, and the list columns \code{product} and \code{company} holding the outputs at product and company level.}
@@ -16,6 +19,7 @@ An object of class 'profile'.
 Create objects of class profile
 }
 \examples{
+library(tibble)
 library(tiltIndicator)
 
 product <- company <- tibble(companies_id = 1)
@@ -24,5 +28,7 @@ data <- nest_levels(product, company)
 class(data)
 
 class(profile(data))
+
+is_profile(profile(data))
 }
 \keyword{internal}

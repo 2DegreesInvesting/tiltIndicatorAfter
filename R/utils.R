@@ -102,7 +102,7 @@ add_profile_ranking_average <- function(data, product) {
 }
 
 use_product <- function(data) {
-  if (is_profile_result(data)) {
+  if (has_profile_names(data)) {
     data <- unnest_product(data)
   }
 
@@ -110,15 +110,11 @@ use_product <- function(data) {
 }
 
 use_company <- function(data) {
-  if (is_profile_result(data)) {
+  if (has_profile_names(data)) {
     data <- unnest_company(data)
   }
 
   data
-}
-
-is_profile_result <- function(data) {
-  identical(names(data), c("companies_id", "product", "company"))
 }
 
 names_diff <- function(x, y) {
