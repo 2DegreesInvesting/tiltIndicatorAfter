@@ -30,10 +30,6 @@
 #'   summarize(mean = mean(x), .by = "y") |>
 #'   join_to(data, excluding = "z")
 join_to <- function(x, y, excluding = NULL) {
-  if (!is.null(excluding)) {
-    y <- distinct(select(y, -matches(excluding)))
-  }
-
   shared <- intersect(names(x), names(y))
   left_join(y, x, by = shared, relationship = "many-to-many")
 }
