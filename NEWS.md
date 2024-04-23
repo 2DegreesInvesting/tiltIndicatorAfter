@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9032 (2024-04-23)
+
+* `profile_*()` now yield objects of [S3
+class](https://adv-r.hadley.nz/s3.html#s3) 'tilt\_profile' (#219). This allows
+creating generics with specialized methods.
+
 # tiltIndicatorAfter 0.0.0.9031 (2024-04-23)
 
 * New internal `profile_*impl()` (#222). This initiates an alternative
