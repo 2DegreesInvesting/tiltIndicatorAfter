@@ -5,7 +5,7 @@
 #'
 #' @family top-level functions
 #'
-#' @return `r document_default_value()`
+#' @return `r document_tilt_profile()`
 #'
 #' The columns `co2e_lower` and `co2e_upper` show the lowest and highest value
 #' of `co2_footprint` within the group to which the product was compared, plus
