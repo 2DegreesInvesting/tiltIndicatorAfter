@@ -35,9 +35,13 @@
 #'   polish_co2_range() |>
 #'   join_to(raw |> exclude("co2_footprint"))
 #'
-#' final |> unnest_product() |> relocate(matches("co2e"))
+#' final |>
+#'   unnest_product() |>
+#'   relocate(matches("co2e"))
 #'
-#' final |> unnest_company() |> relocate(matches("co2e"))
+#' final |>
+#'   unnest_company() |>
+#'   relocate(matches("co2e"))
 #'
 #' # Cleanup
 #' options(restore)
