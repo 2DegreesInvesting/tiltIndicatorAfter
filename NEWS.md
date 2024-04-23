@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9031 (2024-04-23)
+
+* New internal `profile_*impl()` (#222). This initiates an alternative
+developer-oriented API documented at `?composable_friends`.
+
 # tiltIndicatorAfter 0.0.0.9030 (2024-04-10)
 
 * `profile_emissions()` and `profile_emissions_upstream()` now inform a meaningful
