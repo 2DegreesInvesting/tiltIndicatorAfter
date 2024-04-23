@@ -68,8 +68,7 @@ options(restore)
 \link{composable_friends}
 
 Other composable friends: 
-\code{\link{exclude}()},
-\code{\link{join_to}()}
+\code{\link{exclude}()}
 }
 \concept{composable friends}
 \keyword{internal}

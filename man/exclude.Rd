@@ -38,7 +38,6 @@ data |> exclude("y$")
 }
 \seealso{
 Other composable friends: 
-\code{\link{jitter_co2_range}()},
-\code{\link{join_to}()}
+\code{\link{jitter_co2_range}()}
 }
 \concept{composable friends}
