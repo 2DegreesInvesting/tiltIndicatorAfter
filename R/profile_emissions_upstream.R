@@ -4,6 +4,7 @@
 #' @inheritParams tiltIndicator::emissions_profile_upstream
 #'
 #' @family top-level functions
+#'
 #' @return `r document_tilt_profile()`
 #'
 #' The columns `co2e_lower` and `co2e_upper` show the lowest and highest value
