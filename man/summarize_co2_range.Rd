@@ -66,9 +66,6 @@ options(restore)
 }
 \seealso{
 \link{composable_friends}
-
-Other composable friends: 
-\code{\link{exclude}()}
 }
 \concept{composable friends}
 \keyword{internal}
