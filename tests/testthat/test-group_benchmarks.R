@@ -50,8 +50,11 @@ test_that("after `all`, the output is alpha sorted", {
   expect_equal(other, sorted)
 })
 
-test_that("handles missing values", {
-  out <- group_benchmark(NA_character_, "all")
-  expect_equal(out[[1]], NA_character_)
-  expect_equal(names(out), NA_character_)
+test_that("drops missing values", {
+  # Similar to `?split()`: Any missing values in f are dropped together with the
+  # corresponding values of x.
+  expect_equal(
+    group_benchmark(c("all", NA_character_), "all"),
+    group_benchmark(c("all"), "all")
+  )
 })
