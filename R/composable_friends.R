@@ -6,7 +6,9 @@
 #' @name composable_friends
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
+#' library(dplyr, warn.conflicts = FALSE)
 #' library(tiltToyData)
+#' library(tiltIndicator)
 #'
 #' restore <- options(list(
 #'   readr.show_col_types = FALSE,
