@@ -54,6 +54,7 @@
 #' @importFrom tiltIndicator document_tilt_profile
 #' @importFrom tiltIndicator emissions_profile
 #' @importFrom tiltIndicator emissions_profile_upstream
+#' @importFrom tiltIndicator exclude
 #' @importFrom tiltIndicator jitter_range
 #' @importFrom tiltIndicator nest_levels
 #' @importFrom tiltIndicator percent_noise
