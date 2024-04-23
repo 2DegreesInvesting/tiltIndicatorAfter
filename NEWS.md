@@ -2,7 +2,7 @@
 
 # tiltIndicatorAfter 0.0.0.9031 (2024-04-23)
 
-* New internal `profile_*impl()` (#222). This iniciates an alternative
+* New internal `profile_*impl()` (#222). This initiates an alternative
 developer-oriented API documented at `?composable_friends`.
 
 # tiltIndicatorAfter 0.0.0.9030 (2024-04-10)
