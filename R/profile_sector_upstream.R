@@ -81,6 +81,35 @@ profile_sector_upstream <- function(companies,
                                     isic_tilt = lifecycle::deprecated(),
                                     low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
                                     high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
+  profile_sector_upstream_impl(
+    companies = companies,
+    scenarios = scenarios,
+    inputs = inputs,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic,
+    isic_tilt = isic_tilt,
+    low_threshold = low_threshold,
+    high_threshold = high_threshold
+  )
+}
+
+#' @rdname composable_friends
+#' @export
+#' @keywords internal
+profile_sector_upstream_impl <- function(companies,
+                                         scenarios,
+                                         inputs,
+                                         europages_companies,
+                                         ecoinvent_activities,
+                                         ecoinvent_inputs,
+                                         ecoinvent_europages,
+                                         isic,
+                                         isic_tilt = lifecycle::deprecated(),
+                                         low_threshold = ifelse(scenarios$year == 2030, 1 / 9, 1 / 3),
+                                         high_threshold = ifelse(scenarios$year == 2030, 2 / 9, 2 / 3)) {
   if (lifecycle::is_present(isic_tilt)) {
     lifecycle::deprecate_warn(
       "0.0.0.9017",

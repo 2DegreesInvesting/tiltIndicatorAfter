@@ -9,6 +9,31 @@ profile_emissions <- function(companies,
                               isic_tilt = lifecycle::deprecated(),
                               low_threshold = 1 / 3,
                               high_threshold = 2 / 3) {
+  profile_emissions_impl(
+    companies = companies,
+    co2 = co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic,
+    isic_tilt = isic_tilt,
+    low_threshold = low_threshold,
+    high_threshold = high_threshold
+  )
+}
+
+#' @rdname composable_friends
+#' @export
+#' @keywords internal
+profile_emissions_impl <- function(companies,
+                                   co2,
+                                   europages_companies,
+                                   ecoinvent_activities,
+                                   ecoinvent_europages,
+                                   isic,
+                                   isic_tilt = lifecycle::deprecated(),
+                                   low_threshold = 1 / 3,
+                                   high_threshold = 2 / 3) {
   if (lifecycle::is_present(isic_tilt)) {
     lifecycle::deprecate_warn(
       "0.0.0.9017",
