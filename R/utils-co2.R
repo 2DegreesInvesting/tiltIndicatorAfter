@@ -3,8 +3,7 @@ create_co2_range <- function(data, amount = set_jitter_amount()) {
   .by <- c("grouped_by", "risk_category")
 
   out <- data |>
-    summarize_range(!! rlang::ensym(col), .by = all_of(.by)) |>
-    suppressWarnings(classes = "passing_col_as_a_symbol_is_superseded") |>
+    summarize_range(!!ensym(col), .by = all_of(.by)) |>
     jitter_range(amount = amount)
 
   out |> inform_mean_percent_noise()
@@ -29,7 +28,7 @@ inform_mean_percent_noise <- function(data) {
 
   l <- round(mean(percent_noise(data$min, data$min_jitter), na.rm = TRUE))
   u <- round(mean(percent_noise(data$max, data$max_jitter), na.rm = TRUE))
-  rlang::inform(c(i = glue(
+  inform(c(i = glue(
     "Adding {l}% and {u}% noise to `co2e_lower` and `co2e_upper`, respectively."
   )))
 
