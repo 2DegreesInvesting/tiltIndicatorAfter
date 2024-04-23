@@ -38,6 +38,7 @@
 #' @importFrom rlang ensym
 #' @importFrom rlang exec
 #' @importFrom rlang inform
+#' @importFrom rlang warn
 #' @importFrom stats na.omit
 #' @importFrom stringr str_pad
 #' @importFrom tibble rowid_to_column

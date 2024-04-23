@@ -49,8 +49,11 @@
 #' # Cleanup
 #' options(restore)
 summarize_co2_range <- function(data) {
-  data <- use_product(data)
+  UseMethod("summarize_co2_range")
+}
 
+#' @export
+summarize_co2_range.data.frame <- function(data) {
   .benchmark <- "benchmark"
   .all <- c(.benchmark, "emission_profile")
   .by <- group_benchmark(unique(data[[.benchmark]]), .all)
@@ -64,8 +67,15 @@ summarize_co2_range <- function(data) {
   out
 }
 
+#' @export
+summarize_co2_range.tilt_profile <- function(data) {
+  product <- unnest_product(data)
+  summarize_co2_range(product)
+}
+
 check_summarize_co2_range <- function(data, benchmark_cols) {
   check_col(data, "benchmark")
   check_col(data, "co2_footprint")
   walk(benchmark_cols, function(pattern) check_matches_name(data, pattern))
 }
+

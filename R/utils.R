@@ -101,22 +101,6 @@ add_profile_ranking_average <- function(data, product) {
   data |> left_join(profile_ranking_average, by = c("companies_id", "grouped_by"))
 }
 
-use_product <- function(data) {
-  if (has_profile_names(data)) {
-    data <- unnest_product(data)
-  }
-
-  data
-}
-
-use_company <- function(data) {
-  if (has_profile_names(data)) {
-    data <- unnest_company(data)
-  }
-
-  data
-}
-
 names_diff <- function(x, y) {
   setdiff(names(x), names(y))
 }

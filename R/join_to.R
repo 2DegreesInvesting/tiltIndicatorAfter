@@ -27,6 +27,33 @@
 #'   summarize(mean = mean(x), .by = "y") |>
 #'   join_to(data |> exclude("z"))
 join_to <- function(x, y) {
+  UseMethod("join_to", y)
+}
+
+#' @export
+join_to.data.frame <- function(x, y) {
   shared_cols <- intersect(names(x), names(y))
-  left_join(y, x, by = shared_cols, relationship = "many-to-many")
+  no_shared_cols <- rlang::is_empty(shared_cols)
+  if (no_shared_cols) {
+    msg <- "`x` and `y` have no shared columns. Returning `y`"
+    warn(msg, class = "no_shared_cols")
+    return(y)
+  }
+
+  # Suppress the message about shared columns (and unfortunately other messages)
+  suppressMessages(
+    left_join(y, x, relationship = "many-to-many")
+  )
+}
+
+#' @export
+join_to.tilt_profile <- function(x, y) {
+  product <- unnest_product(y)
+  out_product <- join_to(x, product)
+  company <- unnest_company(y)
+  out_company <- join_to(x, company)
+
+  result <- nest_levels(out_product, out_company)
+
+  tilt_profile(result)
 }

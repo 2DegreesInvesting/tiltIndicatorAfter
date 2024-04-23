@@ -21,5 +21,25 @@
 #' data |> exclude("y")
 #' data |> exclude("y$")
 exclude <- function(data, match) {
-  distinct(select(data, -matches(match)))
+  UseMethod("exclude")
+}
+
+#' @export
+exclude.data.frame <- function(data, match) {
+  out <- select(data, -matches(match))
+
+  no_match <- rlang::is_empty(names_diff(data, out))
+  if (no_match) {
+    return(out)
+  } else {
+    distinct(out)
+  }
+}
+
+#' @export
+exclude.tilt_profile <- function(data, match) {
+  product <- exclude(unnest_product(data), match)
+  company <- exclude(unnest_company(data), match)
+  result <- nest_levels(product, company)
+  tilt_profile(result)
 }

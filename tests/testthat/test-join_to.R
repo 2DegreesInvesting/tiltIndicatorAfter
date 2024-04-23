@@ -18,40 +18,37 @@ test_that("joins as expected", {
   expect_equal(join_to(summary, data), expected)
 })
 
-test_that("with a profile_result yields a profile_result", {
-  skip("TODO")
-  # TODO: Rename profile_result to profile
+test_that("with a tilt_profile works at both levels", {
   product <- tibble(companies_id = 1:3, x = 1:3)
-  company <- tibble(companies_id = 1:3, y = 1)
-  profile <- nest_levels(product, company)
+  company <- tibble(companies_id = 1:3, x = 1)
+  result <- tilt_profile(nest_levels(product, company))
+  summary <- summarise(product, mean = mean(x), .by = "x")
 
-  summary <- summarise(product, mean = mean(x))
+  out_product1 <- join_to(summary, unnest_product(result))
+  out_product2 <- unnest_product(join_to(summary, result))
+  expect_equal(out_product1, out_product2)
 
-  joint_profile <- summary |> join_to(profile)
-
-  expect_true(has_profile_names(profile_result))
-  expect_true(has_profile_names(joint_profile))
+  out_company1 <- join_to(summary, unnest_company(result))
+  out_company2 <- unnest_company(join_to(summary, result))
+  expect_equal(out_product1, out_product2)
 })
 
-test_that("works with 'profile_result'", {
-  skip("TODO")
-  product <- tibble(companies_id = 1:3, x = 1:3)
-  company <- tibble(companies_id = 1:3, y = 1)
-  profile <- nest_levels(product, company)
+test_that("with a tilt_profile yields a tilt_profile", {
+  product <- tibble(companies_id = 1, x = 1)
+  company <- tibble(companies_id = 1, x = 1)
+  result <- tilt_profile(nest_levels(product, company))
+  summary <- summarise(product, mean = mean(x), .by = "x")
 
-  summary <- summarise(product, mean = mean(x))
+  out <- join_to(summary, result)
 
-  joint_product <- summary |> join_to(product)
-  joint_company <- summary |> join_to(company)
-  joint_profile <- summary |> join_to(profile)
+  expect_s3_class(out, "tilt_profile")
+})
 
-  expect_equal(
-    joint_profile |> unnest_product(),
-    joint_product
-  )
+test_that("without shared columns yields `y` with a warning", {
+  data <- tibble(companies_id = 1, x = 1)
+  summary <- summarise(data, mean = mean(x))
 
-  expect_equal(
-    joint_profile |> unnest_company(),
-    joint_company
-  )
+  expect_warning(out <- join_to(summary, data))
+
+  expect_equal(out, data)
 })
