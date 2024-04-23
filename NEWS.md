@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9033 (2024-04-23)
+
+* The documented 'Value' of each `profile_*()` no longer refers to columns that
+don't exist (#221).
+
 # tiltIndicatorAfter 0.0.0.9032 (2024-04-23)
 
 * `profile_*()` now yield objects of [S3
