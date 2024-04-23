@@ -90,7 +90,7 @@ result <- profile_emissions_impl(
   isic = isic_name
 )
 
-result <- profile_emissions(
+result <- profile_emissions_impl(
   companies,
   co2,
   europages_companies = europages_companies,
