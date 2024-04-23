@@ -136,5 +136,6 @@ profile_sector_upstream_impl <- function(companies,
     ecoinvent_inputs,
     isic
   )
-  exec_profile("sector_profile_upstream", indicator, indicator_after)
+  exec_profile("sector_profile_upstream", indicator, indicator_after) |>
+    tilt_profile()
 }
