@@ -57,5 +57,6 @@ profile_sector_impl <- function(companies,
     ecoinvent_europages,
     isic
   )
-  exec_profile("sector_profile", indicator, indicator_after)
+  exec_profile("sector_profile", indicator, indicator_after) |>
+    tilt_profile()
 }
