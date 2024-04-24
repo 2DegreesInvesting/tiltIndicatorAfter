@@ -28,7 +28,7 @@
 #' ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 #' isic_name <- read_csv(toy_isic_name())
 #'
-#' result <- profile_emissions(
+#' result <- profile_emissions_impl(
 #'   companies,
 #'   co2,
 #'   europages_companies = europages_companies,

@@ -76,35 +76,59 @@ restore <- options(list(
   tiltIndicatorAfter.output_co2_footprint = TRUE
 ))
 
-companies <- read_csv(toy_emissions_profile_any_companies())
-co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-europages_companies <- read_csv(toy_europages_companies())
-ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-isic_name <- read_csv(toy_isic_name())
+toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
+toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
+toy_sector_profile_companies <- read_csv(toy_sector_profile_companies())
+toy_europages_companies <- read_csv(toy_europages_companies())
+toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+toy_isic_name <- read_csv(toy_isic_name())
 
-raw <- profile_emissions_impl(
-  companies,
-  co2,
-  europages_companies = europages_companies,
-  ecoinvent_activities = ecoinvent_activities,
-  ecoinvent_europages = ecoinvent_europages,
-  isic = isic_name
+emissions_profile_raw <- profile_emissions_impl(
+  companies = toy_emissions_profile_any_companies,
+  co2 = toy_emissions_profile_products_ecoinvent,
+  europages_companies = toy_europages_companies,
+  ecoinvent_activities = toy_ecoinvent_activities,
+  ecoinvent_europages = toy_ecoinvent_europages,
+  isic = toy_isic_name
 )
 
-final <- raw |>
+# Add `co2e*`
+emissions_profile <- emissions_profile_raw |>
   summarize_co2_range() |>
   jitter_co2_range(amount = 1) |>
   polish_co2_range() |>
-  join_to(raw |> exclude("co2_footprint"))
+  # FIXME: Is it OK to not exlude()?
+  # - Do we need to remove duplidates?
+  # - Do I need to remove it after `score_transition*()`?
+  # join_to(emissions_profile_raw |> exclude("co2_footprint"))
+  join_to(emissions_profile_raw)
 
-final |>
+emissions_profile |>
   unnest_product() |>
   relocate(matches("co2e"))
 
-final |>
+emissions_profile |>
   unnest_company() |>
   relocate(matches("co2e"))
+
+# FIXME: Add `co2_avg*`
+
+
+
+sector_profile <- profile_sector(
+  companies = toy_sector_profile_companies,
+  scenarios = toy_sector_profile_any_scenarios,
+  europages_companies = toy_europages_companies,
+  ecoinvent_activities = toy_ecoinvent_activities,
+  ecoinvent_europages = toy_ecoinvent_europages,
+  isic = toy_isic_name
+)
+
+# TODO: Use the class 'tilt_profile'?
+result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
 
 # Cleanup
 options(restore)
