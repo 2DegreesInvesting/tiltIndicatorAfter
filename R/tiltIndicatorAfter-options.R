@@ -58,6 +58,8 @@
 #'   select(matches(c("min", "max", "co2")))
 NULL
 
+#' @export
+#' @keywords internal
 set_jitter_amount <- function() {
   getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
 }
