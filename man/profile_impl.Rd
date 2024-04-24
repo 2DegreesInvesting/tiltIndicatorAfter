@@ -8,7 +8,7 @@
 \alias{profile_emissions_upstream_impl}
 \alias{profile_sector_impl}
 \alias{profile_sector_upstream_impl}
-\title{Composable friends}
+\title{Profile implementations}
 \usage{
 profile_emissions_impl(
   companies,
@@ -62,8 +62,8 @@ profile_sector_upstream_impl(
 )
 }
 \description{
-These functions are designed to work well together. Each does something
-small. Compose them to create complex results.
+These functions are designed to work with other functions in the family of
+composable friends. Compose them to create complex results.
 }
 \examples{
 library(readr, warn.conflicts = FALSE)

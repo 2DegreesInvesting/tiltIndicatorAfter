@@ -1,7 +1,7 @@
-#' Composable friends
+#' Profile implementations
 #'
-#' These functions are designed to work well together. Each does something
-#' small. Compose them to create complex results.
+#' These functions are designed to work with other functions in the family of
+#' composable friends. Compose them to create complex results.
 #'
 #' @family composable_friends
 #' @name profile_impl
