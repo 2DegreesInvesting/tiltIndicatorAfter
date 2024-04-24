@@ -21,15 +21,8 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
-  # TODO: consider overwrite optionally_output_co2_footprint()
-  if (output_co2_footprint()) {
-    out <- out |>
-      summarize_co2_range() |>
-      jitter_co2_range(amount = set_jitter_amount()) |>
-      polish_co2_range() |>
-      join_to(out)
-  }
-
+  # TODO: Prune optionally_output_co2_footprint()
+  if (output_co2_footprint()) out <- add_co2_range(out)
   out
 }
 
@@ -69,7 +62,7 @@ profile_emissions_impl <- function(companies,
     isic
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
-    # FIXME: Move outside _impl()
+    # FIXME: Remove
     optionally_output_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
     tilt_profile()
 }

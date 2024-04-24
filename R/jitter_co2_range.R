@@ -1,5 +1,5 @@
 #' @export
-#' @rdname summarize_co2_range
+#' @rdname add_co2_range
 jitter_co2_range <- function(data, ...) {
   col <- "benchmark"
 

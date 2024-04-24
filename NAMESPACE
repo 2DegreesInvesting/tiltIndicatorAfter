@@ -2,6 +2,7 @@
 
 S3method(summarize_co2_range,data.frame)
 S3method(summarize_co2_range,tilt_profile)
+export(add_co2_range)
 export(example_emissions_profile_at_product_level)
 export(example_sector_profile_at_product_level)
 export(exclude_cols_then_pivot_wider)

@@ -1,4 +1,6 @@
-#' Summarize CO2 footprint
+#' Add co2 range
+#'
+#' `add_co2_range()` is a shortcut for all other `*co2_range()` functions.
 #'
 #' @param data The output of [profile_emissions()] at product level but you can
 #'   conveniently pipe the entire result "as is".
@@ -8,7 +10,6 @@
 #' @return A dataframe
 #' @export
 #' @family composable friends
-#' @seealso [composable_friends]
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
@@ -48,6 +49,16 @@
 #'
 #' # Cleanup
 #' options(restore)
+add_co2_range <- function(data, ...) {
+  data |>
+    summarize_co2_range() |>
+    jitter_co2_range(...) |>
+    polish_co2_range() |>
+    join_to(data)
+}
+
+#' @export
+#' @rdname add_co2_range
 summarize_co2_range <- function(data) {
   UseMethod("summarize_co2_range")
 }
