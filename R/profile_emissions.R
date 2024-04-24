@@ -21,6 +21,7 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
+  # TODO ensure to test
   if (!output_co2_footprint()) {
     return(tilt_profile)
   }

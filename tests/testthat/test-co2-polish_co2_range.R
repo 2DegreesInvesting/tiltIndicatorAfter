@@ -3,7 +3,7 @@ test_that("yields the expected names", {
 
   out <- polish_co2_range(data)
 
-  expected <- c("co2_lower", "co2_upper")
+  expected <- c("co2e_lower", "co2e_upper")
   expect_named(out, expected)
 })
 

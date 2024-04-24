@@ -6,7 +6,7 @@ test_that("yields a 'tilt_profile'", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions_impl(
+  out <- profile_emissions(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -19,6 +19,8 @@ test_that("yields a 'tilt_profile'", {
 })
 
 test_that("characterize columns", {
+  withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
+
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -26,7 +28,7 @@ test_that("characterize columns", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions_impl(
+  out <- profile_emissions(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -260,7 +262,7 @@ test_that("the output at product and company level has columns `co2e_lower` and 
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions_impl(
+  out <- profile_emissions(
     companies,
     co2,
     europages_companies,
@@ -361,7 +363,7 @@ test_that("informs the mean noise percent", {
   isic_name <- read_csv(toy_isic_name())
 
   expect_snapshot(
-    invisible <- profile_emissions_impl(
+    invisible <- profile_emissions(
       companies,
       co2,
       europages_companies,
