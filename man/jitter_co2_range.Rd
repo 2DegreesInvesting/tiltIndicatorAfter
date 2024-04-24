@@ -50,6 +50,7 @@ Other composable friends:
 \code{\link{summarize_co2_range}()}
 
 Other functions to handle CO2 range: 
+\code{\link{add_co2_range}()},
 \code{\link{polish_co2_range}()},
 \code{\link{summarize_co2_range}()}
 }

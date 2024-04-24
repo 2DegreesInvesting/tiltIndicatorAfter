@@ -88,7 +88,7 @@ profile_emissions_upstream <- function(companies,
   )
 }
 
-#' @rdname composable_friends
+#' @rdname profile_impl
 #' @export
 #' @keywords internal
 profile_emissions_upstream_impl <- function(companies,

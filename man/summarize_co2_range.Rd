@@ -48,6 +48,7 @@ Other composable friends:
 \code{\link{score_transition_risk_and_polish}()}
 
 Other functions to handle CO2 range: 
+\code{\link{add_co2_range}()},
 \code{\link{jitter_co2_range}()},
 \code{\link{polish_co2_range}()}
 }

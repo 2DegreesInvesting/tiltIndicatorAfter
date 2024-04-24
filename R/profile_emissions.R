@@ -26,7 +26,7 @@ profile_emissions <- function(companies,
   out
 }
 
-#' @rdname composable_friends
+#' @rdname profile_impl
 #' @export
 #' @keywords internal
 profile_emissions_impl <- function(companies,

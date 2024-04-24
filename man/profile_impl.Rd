@@ -2,8 +2,8 @@
 % Please edit documentation in R/composable_friends.R, R/profile_emissions.R,
 %   R/profile_emissions_upstream.R, R/profile_sector.R,
 %   R/profile_sector_upstream.R
-\name{composable_friends}
-\alias{composable_friends}
+\name{profile_impl}
+\alias{profile_impl}
 \alias{profile_emissions_impl}
 \alias{profile_emissions_upstream_impl}
 \alias{profile_sector_impl}
@@ -113,4 +113,5 @@ result
 # Cleanup
 options(restore)
 }
+\concept{composable_friends}
 \keyword{internal}

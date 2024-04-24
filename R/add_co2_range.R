@@ -1,7 +1,7 @@
 #' Add a the jittered range of CO2 values
 #'
-#' `add_co2_range()` is a shortcut for piping `data` into all other
-#' `*co2_range()` functions, and then into [tiltIndicator::join_to()].
+#' This function is a shortcut for piping `data` into all other `*co2_range()`
+#' functions, and then into [tiltIndicator::join_to()].
 #'
 #' @param data Depends on the class:
 #' * `data.frame`: The `product` data frame of a `tilt_profile`.
@@ -12,6 +12,7 @@
 #' @return An object of the same class as `data`.
 #' @export
 #' @family composable friends
+#' @family functions to handle CO2 range
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)

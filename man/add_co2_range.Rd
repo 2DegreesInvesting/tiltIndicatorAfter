@@ -19,8 +19,8 @@ add_co2_range(data, ...)
 An object of the same class as \code{data}.
 }
 \description{
-\code{add_co2_range()} is a shortcut for piping \code{data} into all other
-\verb{*co2_range()} functions, and then into \code{\link[tiltIndicator:join_to]{tiltIndicator::join_to()}}.
+This function is a shortcut for piping \code{data} into all other \verb{*co2_range()}
+functions, and then into \code{\link[tiltIndicator:join_to]{tiltIndicator::join_to()}}.
 }
 \examples{
 library(readr, warn.conflicts = FALSE)
@@ -65,6 +65,12 @@ Other composable friends:
 \code{\link{polish_co2_range}()},
 \code{\link{score_transition_risk_and_polish}()},
 \code{\link{summarize_co2_range}()}
+
+Other functions to handle CO2 range: 
+\code{\link{jitter_co2_range}()},
+\code{\link{polish_co2_range}()},
+\code{\link{summarize_co2_range}()}
 }
 \concept{composable friends}
+\concept{functions to handle CO2 range}
 \keyword{internal}
