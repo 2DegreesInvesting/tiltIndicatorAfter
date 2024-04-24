@@ -9,10 +9,7 @@ profile_emissions <- function(companies,
                               isic_tilt = lifecycle::deprecated(),
                               low_threshold = 1 / 3,
                               high_threshold = 2 / 3) {
-  # FIXME: Handle cases when we don't want to output co2_footprint
-  withr::local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
-
-  raw <- profile_emissions_impl(
+  out <- profile_emissions_impl(
     companies = companies,
     co2 = co2,
     europages_companies = europages_companies,
@@ -24,13 +21,17 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
-  final <- raw |>
-    summarize_co2_range() |>
-    jitter_co2_range(amount = 1) |>
-    polish_co2_range() |>
-    join_to(raw |> exclude("co2_footprint"))
+  # TODO: consider overwrite optionally_output_co2_footprint()
+  if (output_co2_footprint()) {
+    out <- out |>
+      summarize_co2_range() |>
+      # TODO consider set_jitter_amount()?
+      jitter_co2_range(amount = 1) |>
+      polish_co2_range() |>
+      join_to(out |> exclude("co2_footprint"))
+  }
 
-  final
+  out
 }
 
 #' @rdname composable_friends
@@ -69,6 +70,7 @@ profile_emissions_impl <- function(companies,
     isic
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
+    # FIXME: Move outside _impl()
     optionally_output_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
     tilt_profile()
 }

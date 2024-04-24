@@ -6,7 +6,7 @@ test_that("yields a 'tilt_profile'", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -26,7 +26,7 @@ test_that("characterize columns", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -48,7 +48,7 @@ test_that("the output at product level has columns matching isic and sector", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -75,7 +75,7 @@ test_that("doesn't pad `*isic*`", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -96,7 +96,7 @@ test_that("`ei_geography` column is present at product level output", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -117,7 +117,7 @@ test_that("total number of rows for a comapny is either 1 or 6", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -141,7 +141,7 @@ test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   isic_name <- read_csv(toy_isic_name())
 
   expect_no_error(
-    profile_emissions(
+    profile_emissions_impl(
       companies,
       co2,
       europages_companies = europages_companies,
@@ -160,7 +160,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  product <- profile_emissions(
+  product <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -189,7 +189,7 @@ test_that("total number of rows for a comapny is either 1 or 4", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -214,7 +214,7 @@ test_that("handles numeric `isic*` in `co2`", {
   isic_name <- read_csv(toy_isic_name())
 
   expect_no_error(
-    profile_emissions(
+    profile_emissions_impl(
       companies,
       co2 |> modify_col("isic", unquote) |> modify_col("isic", as.numeric),
       europages_companies = europages_companies,
@@ -233,7 +233,7 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  company <- profile_emissions(
+  company <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -260,7 +260,7 @@ test_that("the output at product and company level has columns `co2e_lower` and 
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -286,7 +286,7 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   isic_name <- read_csv(toy_isic_name())
 
   local_seed(111)
-  out_first <- profile_emissions(
+  out_first <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -299,7 +299,7 @@ test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after
   company_first <- unnest_company(out_first)
 
   local_seed(111)
-  out_second <- profile_emissions(
+  out_second <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -325,7 +325,7 @@ test_that("allows controlling the amount of noise", {
 
   local_seed(111)
   local_options(tiltIndicatorAfter.set_jitter_amount = 0.1)
-  out1 <- profile_emissions(
+  out1 <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -336,7 +336,7 @@ test_that("allows controlling the amount of noise", {
 
   local_seed(111)
   local_options(tiltIndicatorAfter.set_jitter_amount = 0.9)
-  out2 <- profile_emissions(
+  out2 <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -361,7 +361,7 @@ test_that("informs the mean noise percent", {
   isic_name <- read_csv(toy_isic_name())
 
   expect_snapshot(
-    invisible <- profile_emissions(
+    invisible <- profile_emissions_impl(
       companies,
       co2,
       europages_companies,
@@ -382,7 +382,7 @@ test_that("can optionally output `min` and `max`", {
 
   local_seed(111)
   local_options(tiltIndicatorAfter.output_co2_footprint_min_max = TRUE)
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -406,7 +406,7 @@ test_that("can optionally output `co2_footprint` at product level", {
   isic_name <- read_csv(toy_isic_name())
 
   local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -443,7 +443,7 @@ test_that("with some match preserves unmatched products (#193)", {
   isic_name <- read_csv(toy_isic_name()) |>
     filter(isic_4digit == co2$isic_4digit)
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -467,7 +467,7 @@ test_that("with no match preserves unmatched products (#193)", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -504,7 +504,7 @@ test_that("at product level, preserves missing benchmarks (#153#issuecomment-201
   isic_name <- read_csv(toy_isic_name()) |>
     filter(isic_4digit == co2$isic_4digit)
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -525,7 +525,7 @@ test_that("can optionally output `co2_avg` at company level", {
   isic_name <- read_csv(toy_isic_name())
 
   local_options(tiltIndicatorAfter.output_co2_footprint = TRUE)
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -545,7 +545,7 @@ test_that("outputs `profile_ranking_avg` at company level", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -567,7 +567,7 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  out <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -597,7 +597,7 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk co
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  result <- profile_emissions(
+  result <- profile_emissions_impl(
     companies,
     co2,
     europages_companies,
@@ -631,7 +631,7 @@ test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", 
   withr::local_seed(1)
   # Before this fix the message was "NA% and NA%"
   expect_snapshot(
-    profile_emissions(
+    profile_emissions_impl(
       companies,
       products,
       europages_companies = europages_companies,
