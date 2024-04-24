@@ -10,6 +10,8 @@
 #' @family functions to handle CO2 range
 #'
 #' @examples
+#' library(tibble)
+#'
 #' data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 #'
 #' data |> polish_co2_range()

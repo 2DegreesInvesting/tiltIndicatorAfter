@@ -16,6 +16,8 @@ An object of the same class as \code{data}.
 Polish the jittered range of CO2 values
 }
 \examples{
+library(tibble)
+
 data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 
 data |> polish_co2_range()
