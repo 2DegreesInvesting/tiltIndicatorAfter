@@ -93,6 +93,7 @@ options(restore)
 Other composable friends: 
 \code{\link{add_co2_range}()},
 \code{\link{jitter_co2_range}()},
+\code{\link{polish_co2_range}()},
 \code{\link{summarize_co2_range}()}
 }
 \concept{composable friends}
