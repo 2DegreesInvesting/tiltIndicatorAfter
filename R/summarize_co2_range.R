@@ -34,11 +34,11 @@
 #' )
 #'
 #' tilt_profile |>
+#'   unnest_product() |>
 #'   summarize_co2_range()
 #'
 #' # Same
 #' tilt_profile |>
-#'   unnest_product() |>
 #'   summarize_co2_range()
 #'
 #' # Cleanup

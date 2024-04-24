@@ -29,19 +29,23 @@
 #' ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 #' isic_name <- read_csv(toy_isic_name())
 #'
-#' out <- profile_emissions_impl(
+#' tilt_profile <- profile_emissions_impl(
 #'   companies,
 #'   co2,
 #'   europages_companies = europages_companies,
 #'   ecoinvent_activities = ecoinvent_activities,
 #'   ecoinvent_europages = ecoinvent_europages,
 #'   isic = isic_name
-#' ) |>
-#' add_co2_range()
+#' )
 #'
-#' out |> unnest_product() |> relocate(matches("co2"))
+#' tilt_profile |>
+#'   unnest_product() |>
+#'   add_co2_range()
 #'
-#' out |> unnest_company() |> relocate(matches("co2"))
+#' # Same
+#' tilt_profile |>
+#'   add_co2_range() |>
+#'   unnest_product()
 #'
 #' # Cleanup
 #' options(restore)
