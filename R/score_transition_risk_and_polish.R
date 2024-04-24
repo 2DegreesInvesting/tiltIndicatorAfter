@@ -11,6 +11,7 @@
 #'   level.
 #' @export
 #' @keywords internal
+#' @family composable friends
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
@@ -33,7 +34,7 @@
 #' toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
 #' toy_isic_name <- read_csv(toy_isic_name())
 #'
-#' emissions_profile <- profile_emissions(
+#' emissions_profile <- profile_emissions_impl(
 #'   companies = toy_emissions_profile_any_companies,
 #'   co2 = toy_emissions_profile_products_ecoinvent,
 #'   europages_companies = toy_europages_companies,
