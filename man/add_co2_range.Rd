@@ -2,13 +2,16 @@
 % Please edit documentation in R/add_co2_range.R
 \name{add_co2_range}
 \alias{add_co2_range}
-\title{Add a jittered range of CO2}
+\title{Add a the jittered range of CO2 values}
 \usage{
 add_co2_range(data, ...)
 }
 \arguments{
-\item{data}{The output of \code{\link[=profile_emissions]{profile_emissions()}} at product level but you can
-conveniently pipe the entire result "as is".}
+\item{data}{Depends on the class:
+\itemize{
+\item \code{data.frame}: The \code{product} data frame of a \code{tilt_profile}.
+\item \code{tilt_profile}: A data frame with the column \code{companies_id}, and the list columns \code{product} and \code{company} holding the outputs at product and company level..
+}}
 
 \item{...}{Arguments passed to \link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range}.}
 }
@@ -16,7 +19,8 @@ conveniently pipe the entire result "as is".}
 A dataframe
 }
 \description{
-\code{add_co2_range()} is a shortcut for all other \verb{*co2_range()} functions.
+\code{add_co2_range()} is a shortcut for piping \code{data} into all other
+\verb{*co2_range()} functions, and then into \code{\link[tiltIndicator:join_to]{tiltIndicator::join_to()}}.
 }
 \examples{
 library(readr, warn.conflicts = FALSE)

@@ -1,3 +1,7 @@
+#' Summarize the range of CO2 values
+#'
+#' @param data
+#'
 #' @keywords internal
 #'
 #' @return A dataframe

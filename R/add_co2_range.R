@@ -1,9 +1,11 @@
-#' Add a jittered range of CO2
+#' Add a the jittered range of CO2 values
 #'
-#' `add_co2_range()` is a shortcut for all other `*co2_range()` functions.
+#' `add_co2_range()` is a shortcut for piping `data` into all other
+#' `*co2_range()` functions, and then into [tiltIndicator::join_to()].
 #'
-#' @param data The output of [profile_emissions()] at product level but you can
-#'   conveniently pipe the entire result "as is".
+#' @param data Depends on the class:
+#' * `data.frame`: The `product` data frame of a `tilt_profile`.
+#' * `tilt_profile`: `r document_tilt_profile()`.
 #' @param ... Arguments passed to [tiltIndicator::jitter_range].
 #' @keywords internal
 #'
