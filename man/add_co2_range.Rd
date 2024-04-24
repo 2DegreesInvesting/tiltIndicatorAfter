@@ -16,7 +16,7 @@ add_co2_range(data, ...)
 \item{...}{Arguments passed to \link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range}.}
 }
 \value{
-A dataframe
+An object of the same class as \code{data}.
 }
 \description{
 \code{add_co2_range()} is a shortcut for piping \code{data} into all other

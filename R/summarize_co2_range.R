@@ -1,48 +1,35 @@
 #' Summarize the range of CO2 values
 #'
-#' @param data
+#' @param data Depends on the class:
+#' * `data.frame`: The `product` data frame of a `tilt_profile`.
+#' * `tilt_profile`: `r document_tilt_profile()`.
 #'
 #' @keywords internal
 #'
-#' @return A dataframe
+#' @return A data frame.
 #' @export
 #' @family composable friends
 #'
 #' @examples
-#' library(readr, warn.conflicts = FALSE)
-#' library(tiltToyData)
-#'
-#' restore <- options(list(
-#'   readr.show_col_types = FALSE,
-#'   tiltIndicatorAfter.output_co2_footprint = TRUE
-#' ))
-#'
-#' companies <- read_csv(toy_emissions_profile_any_companies())
-#' co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-#' europages_companies <- read_csv(toy_europages_companies())
-#' ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-#' ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-#' isic_name <- read_csv(toy_isic_name())
-#'
-#' tilt_profile <- profile_emissions_impl(
-#'   companies,
-#'   co2,
-#'   europages_companies = europages_companies,
-#'   ecoinvent_activities = ecoinvent_activities,
-#'   ecoinvent_europages = ecoinvent_europages,
-#'   isic = isic_name
+#' x <- tidyr::expand_grid(
+#'   benchmark = c("all", "unit", "tilt_sector", "unit_tilt_sector"),
+#'   emission_profile = c("low", "medium", "high"),
+#'   unit = c("m2", "kg"),
+#'   tilt_sector = c("sector1", "sector2"),
+#'   tilt_subsector = c("subsector1", "subsector2"),
 #' )
+#' y <- tibble(
+#'   emission_profile = c("low", "medium", "high"),
+#'   isic_4digit = "'1234'",
+#'   co2_footprint = 1:3,
+#' )
+#' data <- left_join(x, y, by = "emission_profile", relationship = "many-to-many")
+#' data |>
+#'   print(n = Inf)
 #'
-#' tilt_profile |>
-#'   unnest_product() |>
-#'   summarize_co2_range()
-#'
-#' # Same
-#' tilt_profile |>
-#'   summarize_co2_range()
-#'
-#' # Cleanup
-#' options(restore)
+#' data |>
+#'   summarize_co2_range() |>
+#'   print(n = Inf)
 summarize_co2_range <- function(data) {
   UseMethod("summarize_co2_range")
 }

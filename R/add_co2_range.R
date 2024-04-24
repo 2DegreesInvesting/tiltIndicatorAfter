@@ -9,7 +9,7 @@
 #' @param ... Arguments passed to [tiltIndicator::jitter_range].
 #' @keywords internal
 #'
-#' @return A dataframe
+#' @return An object of the same class as `data`.
 #' @export
 #' @family composable friends
 #'
