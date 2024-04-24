@@ -26,6 +26,11 @@ Other composable friends:
 \code{\link{jitter_co2_range}()},
 \code{\link{score_transition_risk_and_polish}()},
 \code{\link{summarize_co2_range}()}
+
+Other functions to handle CO2 range: 
+\code{\link{jitter_co2_range}()},
+\code{\link{summarize_co2_range}()}
 }
 \concept{composable friends}
+\concept{functions to handle CO2 range}
 \keyword{internal}
