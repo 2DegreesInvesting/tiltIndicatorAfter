@@ -20,6 +20,9 @@ A data frame.
 Summarize the range of CO2 values
 }
 \examples{
+library(dplyr, warn.conflicts = FALSE)
+library(tidyr, warn.conflicts = FALSE)
+
 x <- tidyr::expand_grid(
   benchmark = c("all", "unit", "tilt_sector", "unit_tilt_sector"),
   emission_profile = c("low", "medium", "high"),
