@@ -1,6 +1,8 @@
-group_benchmark <- function(x, all) {
+group_benchmark <- function(x, all, na.rm = FALSE) {
   out <- lapply(x, group_benchmark_impl, all = all)
   names(out) <- x
+
+  if (na.rm) out <- rm_na(out)
   out
 }
 
