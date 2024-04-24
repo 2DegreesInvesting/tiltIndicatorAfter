@@ -25,10 +25,9 @@ profile_emissions <- function(companies,
   if (output_co2_footprint()) {
     out <- out |>
       summarize_co2_range() |>
-      # TODO consider set_jitter_amount()?
-      jitter_co2_range(amount = 1) |>
+      jitter_co2_range(amount = set_jitter_amount()) |>
       polish_co2_range() |>
-      join_to(out |> exclude("co2_footprint"))
+      join_to(out)
   }
 
   out
