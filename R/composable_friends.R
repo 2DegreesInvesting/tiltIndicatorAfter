@@ -1,9 +1,7 @@
 #' Composable friends
 #'
 #' These functions are designed to work well together. Each does something
-#' small. Compose them to create complex results. `add_co2_range()` is a
-#' shortcut for all other `*co2_range()` functions followed by a
-#' [tiltIndicator::join_to()].
+#' small. Compose them to create complex results.
 #'
 #' @name composable_friends
 #' @examples
