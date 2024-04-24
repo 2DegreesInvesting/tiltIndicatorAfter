@@ -9,7 +9,6 @@
 #'
 #' @examples
 #' library(tibble)
-#' library(withr)
 #'
 #' min <- 1:3
 #' max <- 4:6
@@ -18,8 +17,6 @@
 #' # Add 50% noise
 #' max_jitter <- max * 1.5
 #' data <- tibble(min_jitter, min, max, max_jitter)
-#'
-#' local_options(tiltIndicatorAfter.verbose = TRUE)
 #'
 #' inform_noise_in_co2_range(data)
 inform_noise_in_co2_range <- function(data) {
