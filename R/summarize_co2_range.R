@@ -1,5 +1,5 @@
 #' @export
-#' @rdname add_co2_range
+#' @rdname composable_friends
 summarize_co2_range <- function(data) {
   UseMethod("summarize_co2_range")
 }

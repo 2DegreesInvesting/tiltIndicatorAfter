@@ -1,5 +1,5 @@
 #' @export
-#' @rdname add_co2_range
+#' @rdname composable_friends
 polish_co2_range <- function(data) {
   data |>
     rename(co2_lower = "min_jitter", co2_upper = "max_jitter") |>
