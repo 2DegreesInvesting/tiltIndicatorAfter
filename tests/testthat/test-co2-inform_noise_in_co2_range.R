@@ -27,5 +27,3 @@ test_that("if not verbose, returns invisibly", {
     expect_invisible(inform_noise_in_co2_range(data))
   )
 })
-
-
