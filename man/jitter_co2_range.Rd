@@ -7,12 +7,12 @@
 jitter_co2_range(data, ...)
 }
 \arguments{
-\item{data}{FIXME}
+\item{data}{A data frame.}
 
-\item{...}{FIXME}
+\item{...}{Arguments passed to \code{\link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range()}}.}
 }
 \value{
-FIXME
+A data frame.
 }
 \description{
 This function expands a range by adding noise to the left of the minimum
@@ -38,6 +38,7 @@ data |> jitter_co2_range(amount = 20)
 
 # Same
 local_seed(1)
+# See `?tiltIndicatorAfter_options`
 local_options(tiltIndicatorAfter.set_jitter_amount = 20)
 data |> jitter_co2_range(amount = set_jitter_amount())
 }

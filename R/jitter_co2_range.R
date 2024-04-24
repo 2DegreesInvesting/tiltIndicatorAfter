@@ -3,12 +3,12 @@
 #' This function expands a range by adding noise to the left of the minimum
 #' values and to the right of the maximum values.
 #'
-#' @param data FIXME
-#' @param ... FIXME
+#' @param data A data frame.
+#' @param ... Arguments passed to [tiltIndicator::jitter_range()].
 #'
 #' @keywords internal
 #'
-#' @return FIXME
+#' @return A data frame.
 #' @export
 #' @family composable friends
 #'
@@ -32,6 +32,7 @@
 #'
 #' # Same
 #' local_seed(1)
+#' # See `?tiltIndicatorAfter_options`
 #' local_options(tiltIndicatorAfter.set_jitter_amount = 20)
 #' data |> jitter_co2_range(amount = set_jitter_amount())
 jitter_co2_range <- function(data, ...) {
