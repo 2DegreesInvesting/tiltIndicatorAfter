@@ -4,7 +4,7 @@
 \alias{add_co2_range}
 \title{Add a the jittered range of CO2 values}
 \usage{
-add_co2_range(data, ...)
+add_co2_range(data, ..., jitter_amount = set_jitter_amount())
 }
 \arguments{
 \item{data}{Depends on the class:

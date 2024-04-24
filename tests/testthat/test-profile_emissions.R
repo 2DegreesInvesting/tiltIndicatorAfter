@@ -327,7 +327,7 @@ test_that("allows controlling the amount of noise", {
 
   local_seed(111)
   local_options(tiltIndicatorAfter.set_jitter_amount = 0.1)
-  out1 <- profile_emissions_impl(
+  out1 <- profile_emissions(
     companies,
     co2,
     europages_companies,
@@ -338,7 +338,7 @@ test_that("allows controlling the amount of noise", {
 
   local_seed(111)
   local_options(tiltIndicatorAfter.set_jitter_amount = 0.9)
-  out2 <- profile_emissions_impl(
+  out2 <- profile_emissions(
     companies,
     co2,
     europages_companies,

@@ -50,10 +50,10 @@
 #'
 #' # Cleanup
 #' options(restore)
-add_co2_range <- function(data, ...) {
+add_co2_range <- function(data, ..., jitter_amount = set_jitter_amount()) {
   data |>
     summarize_co2_range() |>
-    jitter_co2_range(...) |>
+    jitter_co2_range(amount = jitter_amount, ...) |>
     polish_co2_range() |>
     join_to(data)
 }

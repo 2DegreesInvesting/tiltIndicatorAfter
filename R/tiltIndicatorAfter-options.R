@@ -58,18 +58,6 @@
 #'   select(matches(c("min", "max", "co2")))
 NULL
 
-#' Help set the `amount` of jitter via `options()`
-#'
-#' @export
-#' @return Numeric.
-#' @keywords internal
-#' @seealso [jitter_co2_range()]
-#' @examples
-#' set_jitter_amount()
-set_jitter_amount <- function() {
-  getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
-}
-
 output_co2_footprint_min_max <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint_min_max", default = FALSE)
 }

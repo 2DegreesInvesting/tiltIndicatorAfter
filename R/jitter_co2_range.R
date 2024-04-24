@@ -45,3 +45,15 @@ jitter_co2_range <- function(data, ...) {
     map(jitter_range, ...) |>
     reduce(bind_rows)
 }
+
+#' Help set the `amount` of jitter via `options()`
+#'
+#' @export
+#' @return Numeric.
+#' @keywords internal
+#' @seealso [jitter_co2_range()], [tiltIndicatorAfter_options]
+#' @examples
+#' set_jitter_amount()
+set_jitter_amount <- function() {
+  getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
+}
