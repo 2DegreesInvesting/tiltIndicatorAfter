@@ -53,7 +53,8 @@ options(restore)
 }
 \seealso{
 Other composable friends: 
-\code{\link{score_transition_risk_and_polish}()}
+\code{\link{score_transition_risk_and_polish}()},
+\code{\link{summarize_co2_range}()}
 }
 \concept{composable friends}
 \keyword{internal}
