@@ -47,6 +47,7 @@
 #'
 #' # TODO: Use the class 'tilt_profile'?
 #' result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
+#' result
 #'
 #' # Cleanup
 #' options(restore)

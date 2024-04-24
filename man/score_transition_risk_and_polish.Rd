@@ -91,7 +91,7 @@ options(restore)
 }
 \seealso{
 Other composable friends: 
-\code{\link{jitter_co2_range}()}
+\code{\link{add_co2_range}()}
 }
 \concept{composable friends}
 \keyword{internal}
