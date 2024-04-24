@@ -110,7 +110,7 @@ emissions_profile <- profile_emissions_impl(
   isic = toy_isic_name
 ) |>
   add_co2_range()
-  # TODO: Add `co2_avg`
+# TODO: Add `co2_avg`
 
 sector_profile <- profile_sector(
   companies = toy_sector_profile_companies,
