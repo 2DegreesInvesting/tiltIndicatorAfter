@@ -9,7 +9,7 @@ profile_emissions <- function(companies,
                               isic_tilt = lifecycle::deprecated(),
                               low_threshold = 1 / 3,
                               high_threshold = 2 / 3) {
-  out <- profile_emissions_impl(
+  tilt_profile <- profile_emissions_impl(
     companies = companies,
     co2 = co2,
     europages_companies = europages_companies,
@@ -21,9 +21,12 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
-  # TODO: Prune optionally_output_co2_footprint()
-  if (output_co2_footprint()) out <- add_co2_range(out)
-  out
+  if (!output_co2_footprint()) {
+    return(tilt_profile)
+  }
+
+  tilt_profile |>
+    add_co2_range()
 }
 
 #' @rdname profile_impl
