@@ -50,7 +50,6 @@ add_co2.tilt_profile <- function(data,
                                  jitter_amount = option_jitter_amount(),
                                  output_min_max = option_output_min_max(),
                                  output_co2_footprint = option_output_co2_footprint()) {
-  # TODO: Move to add_co2_range()
   out <- data |> add_co2_footprint_and_co2_avg(co2)
 
   out |>
@@ -58,8 +57,7 @@ add_co2.tilt_profile <- function(data,
     jitter_co2_range(amount = jitter_amount) |>
     polish_co2_range(
       output_min_max = output_min_max,
-    # TODO: Create issue: Should default to TRUE instead? The package is not
-    # useful for external users without a licence to co2_footprint
+    # TODO open issue: Should always be TRUE? Not useful without a license
       output_co2_footprint = output_co2_footprint
     ) |>
     join_to(out)
