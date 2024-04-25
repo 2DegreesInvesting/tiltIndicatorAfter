@@ -56,8 +56,7 @@
 #' # Default
 #' get_jitter_amount()
 #'
-#' less_noise <- 1
-#' restore <- options(tiltIndicatorAfter.get_jitter_amount = less_noise)
+#' restore <- options(tiltIndicatorAfter.get_jitter_amount = 1)
 #' get_jitter_amount()
 #'
 #' # Cleanup
