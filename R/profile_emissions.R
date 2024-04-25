@@ -21,7 +21,8 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
-  tilt_profile |> add_co2(co2)
+  tilt_profile |>
+    add_co2(co2)
 }
 
 #' @rdname profile_impl
