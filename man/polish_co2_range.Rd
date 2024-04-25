@@ -4,7 +4,7 @@
 \alias{polish_co2_range}
 \title{Polish the jittered range of CO2 values}
 \usage{
-polish_co2_range(data, output_min_max = FALSE, output_co2_footprint = FALSE)
+polish_co2_range(data, ...)
 }
 \arguments{
 \item{data}{A data frame.}

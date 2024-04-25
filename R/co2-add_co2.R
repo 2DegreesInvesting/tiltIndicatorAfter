@@ -45,6 +45,8 @@
 #' # Cleanup
 #' options(restore)
 add_co2 <- function(data, ...) UseMethod("add_co2")
+
+#' @export
 add_co2.tilt_profile <- function(data,
                                  co2,
                                  jitter_amount = option_jitter_amount(),
@@ -52,15 +54,20 @@ add_co2.tilt_profile <- function(data,
                                  output_co2_footprint = option_output_co2_footprint()) {
   out <- data |> add_co2_footprint_and_co2_avg(co2)
 
-  out |>
+  result <- out |>
     summarize_co2_range() |>
     jitter_co2_range(amount = jitter_amount) |>
+    join_to(out)
+
+
+  result |>
     polish_co2_range(
       output_min_max = output_min_max,
     # TODO open issue: Should always be TRUE? Not useful without a license
       output_co2_footprint = output_co2_footprint
-    ) |>
-    join_to(out)
+    )
+
+  result
 }
 
 add_co2_footprint_and_co2_avg <- function(data, co2) {

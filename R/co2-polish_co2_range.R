@@ -17,13 +17,16 @@
 #' data |> polish_co2_range()
 #'
 #' data |> polish_co2_range(output_min_max = TRUE)
-polish_co2_range <- function(data,
-                             output_min_max = FALSE,
-                             output_co2_footprint = FALSE) {
+polish_co2_range <- function(data, ...) UseMethod("polish_co2_range")
+
+#' @export
+polish_co2_range.data.frame <- function(data,
+                                        output_min_max = FALSE,
+                                        output_co2_footprint = FALSE) {
   out <- data |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
   if (!output_min_max) {
-    out <- out |> select(-c("min", "max"))
+    out <- out |> exclude(c("^min$", "^max$"))
   }
 
   if (!output_co2_footprint) {
@@ -31,4 +34,25 @@ polish_co2_range <- function(data,
   }
 
   out
+}
+
+#' @export
+polish_co2_range.tilt_profile <- function(data,
+                                          output_min_max = FALSE,
+                                          output_co2_footprint = FALSE) {
+  product <- data |>
+    unnest_product() |>
+    polish_co2_range(
+      output_min_max = output_min_max,
+      output_co2_footprint = output_co2_footprint
+    )
+
+  company <- data |>
+    unnest_product() |>
+    polish_co2_range(
+      output_min_max = output_min_max,
+      output_co2_footprint = output_co2_footprint
+    )
+
+  tilt_profile(nest_levels(product, company))
 }
