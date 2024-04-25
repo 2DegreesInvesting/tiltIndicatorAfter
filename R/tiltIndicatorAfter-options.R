@@ -3,7 +3,7 @@
 #' @description
 #' These options are meant to be used mainly by developers or analysts while
 #' testing the code or creating data:
-#' * `tiltIndicatorAfter.set_jitter_amount`: Controls the amount of random noise
+#' * `tiltIndicatorAfter.get_jitter_amount`: Controls the amount of random noise
 #' in the columns `co2*`.
 #' * `tiltIndicatorAfter.output_co2_footprint_min_max`: Outputs the columns `min`
 #' and `max` (calculated from `co2_footprint`), which yield the noisy `co2*`
@@ -28,7 +28,7 @@
 #'
 #' restore <- options(list(
 #'   readr.show_col_types = FALSE,
-#'   tiltIndicatorAfter.set_jitter_amount = 1,
+#'   tiltIndicatorAfter.get_jitter_amount = 1,
 #'   tiltIndicatorAfter.verbose = TRUE,
 #'   tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
 #' ))

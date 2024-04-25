@@ -249,7 +249,7 @@ test_that("allows controlling the amount of noise", {
   isic_name <- read_csv(toy_isic_name())
 
   local_seed(111)
-  local_options(tiltIndicatorAfter.set_jitter_amount = 0.1)
+  local_options(tiltIndicatorAfter.get_jitter_amount = 0.1)
   out1 <- profile_emissions_upstream(
     companies,
     co2,
@@ -261,7 +261,7 @@ test_that("allows controlling the amount of noise", {
   )
 
   local_seed(111)
-  local_options(tiltIndicatorAfter.set_jitter_amount = 0.9)
+  local_options(tiltIndicatorAfter.get_jitter_amount = 0.9)
   out2 <- profile_emissions_upstream(
     companies,
     co2,
@@ -278,7 +278,7 @@ test_that("allows controlling the amount of noise", {
 test_that("informs the mean noise percent", {
   local_seed(1)
   local_options(tiltIndicatorAfter.verbose = TRUE)
-  local_options(tiltIndicatorAfter.set_jitter_amount = 2)
+  local_options(tiltIndicatorAfter.get_jitter_amount = 2)
 
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())

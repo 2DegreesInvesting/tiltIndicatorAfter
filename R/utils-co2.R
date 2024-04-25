@@ -1,4 +1,4 @@
-create_co2_range <- function(data, amount = set_jitter_amount()) {
+create_co2_range <- function(data, amount = get_jitter_amount()) {
   col <- extract_name(data, "co2_footprint")
   .by <- c("grouped_by", "risk_category")
 

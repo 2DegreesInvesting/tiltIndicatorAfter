@@ -34,8 +34,8 @@
 #' # Same
 #' local_seed(1)
 #' # See `?tiltIndicatorAfter_options`
-#' local_options(tiltIndicatorAfter.set_jitter_amount = 20)
-#' data |> jitter_co2_range(amount = set_jitter_amount())
+#' local_options(tiltIndicatorAfter.get_jitter_amount = 20)
+#' data |> jitter_co2_range(amount = get_jitter_amount())
 jitter_co2_range <- function(data, ...) {
   col <- "benchmark"
 
@@ -44,16 +44,4 @@ jitter_co2_range <- function(data, ...) {
     group_split() |>
     map(jitter_range, ...) |>
     reduce(bind_rows)
-}
-
-#' Help set the `amount` of jitter via `options()`
-#'
-#' @export
-#' @return Numeric.
-#' @keywords internal
-#' @seealso [jitter_co2_range()], [tiltIndicatorAfter_options]
-#' @examples
-#' set_jitter_amount()
-set_jitter_amount <- function() {
-  getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
 }

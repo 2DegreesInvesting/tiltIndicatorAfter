@@ -2,9 +2,12 @@
 % Please edit documentation in R/co2-add_co2_range.R
 \name{add_co2_range}
 \alias{add_co2_range}
+\alias{get_jitter_amount}
 \title{Add a the jittered range of CO2 values}
 \usage{
-add_co2_range(data, ..., jitter_amount = set_jitter_amount())
+add_co2_range(data, ..., jitter_amount = get_jitter_amount())
+
+get_jitter_amount()
 }
 \arguments{
 \item{data}{Depends on the class:
@@ -14,6 +17,8 @@ add_co2_range(data, ..., jitter_amount = set_jitter_amount())
 }}
 
 \item{...}{Arguments passed to \link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range}.}
+
+\item{jitter_amount}{Passed to \code{amount} in \code{\link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range()}}.}
 }
 \value{
 An object of the same class as \code{data}.
@@ -58,8 +63,21 @@ tilt_profile |>
 
 # Cleanup
 options(restore)
+
+# The argument `jitter_amount` can also be controlled via `options()`
+# Default
+get_jitter_amount()
+
+less_noise <- 1
+restore <- options(tiltIndicatorAfter.get_jitter_amount = less_noise)
+get_jitter_amount()
+
+# Cleanup
+options(restore)
 }
 \seealso{
+\code{\link[=jitter_co2_range]{jitter_co2_range()}}, \link{tiltIndicatorAfter_options}
+
 Other composable friends: 
 \code{\link{inform_noise_in_co2_range}()},
 \code{\link{jitter_co2_range}()},

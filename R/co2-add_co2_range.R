@@ -7,6 +7,7 @@
 #' * `data.frame`: The `product` data frame of a `tilt_profile`.
 #' * `tilt_profile`: `r document_tilt_profile()`.
 #' @param ... Arguments passed to [tiltIndicator::jitter_range].
+#' @param jitter_amount Passed to `amount` in [tiltIndicator::jitter_range()].
 #' @keywords internal
 #'
 #' @return An object of the same class as `data`.
@@ -50,10 +51,28 @@
 #'
 #' # Cleanup
 #' options(restore)
-add_co2_range <- function(data, ..., jitter_amount = set_jitter_amount()) {
+#'
+#' # The argument `jitter_amount` can also be controlled via `options()`
+#' # Default
+#' get_jitter_amount()
+#'
+#' less_noise <- 1
+#' restore <- options(tiltIndicatorAfter.get_jitter_amount = less_noise)
+#' get_jitter_amount()
+#'
+#' # Cleanup
+#' options(restore)
+add_co2_range <- function(data, ..., jitter_amount = get_jitter_amount()) {
   data |>
     summarize_co2_range() |>
     jitter_co2_range(amount = jitter_amount, ...) |>
     polish_co2_range() |>
     join_to(data)
+}
+
+#' @rdname add_co2_range
+#' @seealso [jitter_co2_range()], [tiltIndicatorAfter_options]
+#' @export
+get_jitter_amount <- function() {
+  getOption("tiltIndicatorAfter.get_jitter_amount", default = 2)
 }
