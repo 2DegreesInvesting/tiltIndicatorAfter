@@ -64,6 +64,23 @@ add_co2_range <- function(data, ...,
     join_to(data)
 }
 
+add_co2 <- function(data, ...) UseMethod("add_co2")
+add_co2.tilt_profile <- function(data, co2) {
+  # TODO: Move to add_co2_range()
+  out <- data |> add_co2_footprint_and_co2_avg(co2)
+
+  out |>
+    summarize_co2_range() |>
+    jitter_co2_range(amount = option_jitter_amount()) |>
+    # TODO: Create issue: Should default to TRUE instead? The package is not
+    # useful for external users without a licence to co2_footprint
+    polish_co2_range(
+      output_min_max = option_output_min_max(),
+      output_co2_footprint = option_output_co2_footprint()
+    ) |>
+    join_to(out)
+}
+
 add_co2_footprint_and_co2_avg <- function(data, co2) {
   co2 <- select(co2, matches(c("_uuid", "co2_footprint")))
 

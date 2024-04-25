@@ -21,19 +21,7 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
-  # TODO: Move to add_co2_range()
-  with_co2_footprint <- tilt_profile |>
-    add_co2_footprint_and_co2_avg(co2)
-  with_co2_footprint |>
-    summarize_co2_range() |>
-    jitter_co2_range(amount = option_jitter_amount()) |>
-    # TODO: Create issue: Should default to TRUE instead? The package is not
-    # useful for externals withour licence to co2_footprint
-    polish_co2_range(
-      output_min_max = option_output_min_max(),
-      output_co2_footprint = option_output_co2_footprint()
-    ) |>
-    join_to(with_co2_footprint)
+  tilt_profile |> add_co2(co2)
 }
 
 #' @rdname profile_impl
