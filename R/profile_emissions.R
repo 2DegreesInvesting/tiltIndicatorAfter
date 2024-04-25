@@ -71,6 +71,6 @@ profile_emissions_impl <- function(companies,
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
     # FIXME: Move to the edge
-    output_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
+    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
     tilt_profile()
 }
