@@ -57,10 +57,7 @@ add_co2.tilt_profile <- function(data,
   result <- out |>
     summarize_co2_range() |>
     jitter_co2_range(amount = jitter_amount) |>
-    join_to(out)
-
-
-  result |>
+    join_to(out) |>
     polish_co2_range(
       output_min_max = output_min_max,
     # TODO open issue: Should always be TRUE? Not useful without a license

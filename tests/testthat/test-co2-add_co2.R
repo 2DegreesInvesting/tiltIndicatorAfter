@@ -17,10 +17,11 @@ test_that("can output `co2_footprint` and `co2_avg`", {
     add_co2(co2, output_co2_footprint = TRUE)
 
   expect_true(hasName(out |> unnest_product(), "co2_footprint"))
-  expect_false(hasName(out |> unnest_company(), "co2_footprint"))
-  expect_true(hasName(out |> unnest_company(), "co2_avg"))
 
+  # Never
+  expect_false(hasName(out |> unnest_company(), "co2_footprint"))
   # Always
+  expect_true(hasName(out |> unnest_company(), "co2_avg"))
   expect_true(hasName(out |> unnest_product(), "co2e_lower"))
   expect_true(hasName(out |> unnest_product(), "co2e_upper"))
   expect_true(hasName(out |> unnest_company(), "co2e_lower"))
@@ -46,13 +47,13 @@ test_that("can exclude `co2_footprint` and `co2_avg`", {
     add_co2(co2, output_co2_footprint = FALSE)
 
   expect_false(hasName(out |> unnest_product(), "co2_footprint"))
-  expect_false(hasName(out |> unnest_company(), "co2_footprint"))
-  expect_false(hasName(out |> unnest_company(), "co2_avg"))
 
+  # Never
+  expect_false(hasName(out |> unnest_company(), "co2_footprint"))
   # Always
+  expect_true(hasName(out |> unnest_company(), "co2_avg"))
   expect_true(hasName(out |> unnest_product(), "co2e_lower"))
   expect_true(hasName(out |> unnest_product(), "co2e_upper"))
   expect_true(hasName(out |> unnest_company(), "co2e_lower"))
   expect_true(hasName(out |> unnest_company(), "co2e_upper"))
 })
-
