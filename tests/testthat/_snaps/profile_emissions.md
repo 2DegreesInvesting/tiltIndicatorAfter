@@ -49,5 +49,5 @@
       # A tibble: 1 x 3
         companies_id        product           company           
       * <chr>               <list>            <list>            
-      1 antimonarchy_canine <tibble [7 x 25]> <tibble [24 x 18]>
+      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 18]>
 
