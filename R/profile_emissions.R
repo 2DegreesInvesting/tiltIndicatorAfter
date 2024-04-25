@@ -21,6 +21,7 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
+  # TODO: Move to add_co2_range()
   tilt_profile |>
     summarize_co2_range() |>
     jitter_co2_range(amount = option_jitter_amount()) |>
