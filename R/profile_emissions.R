@@ -19,11 +19,12 @@ profile_emissions <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  ) |>
-    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
+  )
 
   # TODO: Move to add_co2_range()
-  tilt_profile |>
+  with_co2_footprint <- tilt_profile |>
+    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
+  with_co2_footprint |>
     summarize_co2_range() |>
     jitter_co2_range(amount = option_jitter_amount()) |>
     # TODO: Create issue: Should default to TRUE instead? The package is not
@@ -32,7 +33,7 @@ profile_emissions <- function(companies,
       output_min_max = option_output_min_max(),
       output_co2_footprint = option_output_co2_footprint()
     ) |>
-    join_to(tilt_profile)
+    join_to(with_co2_footprint)
 }
 
 #' @rdname profile_impl
