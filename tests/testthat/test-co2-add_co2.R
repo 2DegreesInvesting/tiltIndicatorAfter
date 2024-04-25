@@ -1,4 +1,5 @@
 test_that("can output `co2_footprint` and `co2_avg`", {
+  # TODO extract and memoise
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
