@@ -16,13 +16,26 @@ test_that("without crucial columns errors gracefully", {
   expect_error(polish_co2_range(select(data, -max_jitter)), "max_jitter")
 })
 
-test_that("is sensitive to `output_min_max`", {
+test_that("outputs co2e* by default", {
   data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 
   expect_named(polish_co2_range(data), c("co2e_lower", "co2e_upper"))
+})
+
+test_that("can output `min`, `max`", {
+  data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 
   expect_named(
     polish_co2_range(data, output_min_max = TRUE),
     c("min", "max", "co2e_lower", "co2e_upper")
+  )
+})
+
+test_that("can output `output_co2_footprint`", {
+  data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
+--
+  expect_named(
+    polish_co2_range(data, output_co2_footprint = TRUE),
+    c("co2e_lower", "co2e_upper")
   )
 })
