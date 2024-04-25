@@ -21,19 +21,16 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
-  out <- tilt_profile |>
+  tilt_profile |>
     summarize_co2_range() |>
     jitter_co2_range(amount = option_jitter_amount()) |>
-    polish_co2_range(output_min_max = option_output_min_max()) |>
+    # TODO: Create issue: Should default to TRUE instead? The package is not
+    # useful for externals withour licence to co2_footprint
+    polish_co2_range(
+      output_min_max = option_output_min_max(),
+      output_co2_footprint = option_output_co2_footprint()
+    ) |>
     join_to(tilt_profile)
-
-  # TODO Move to polish
-  if (!option_output_co2_footprint()) {
-    out <- out |> exclude("co2_footprint")
-  }
-
-  out
-
 }
 
 #' @rdname profile_impl
