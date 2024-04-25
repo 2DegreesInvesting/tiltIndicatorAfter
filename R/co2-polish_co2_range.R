@@ -17,11 +17,17 @@
 #' data |> polish_co2_range()
 #'
 #' data |> polish_co2_range(output_min_max = TRUE)
-polish_co2_range <- function(data, output_min_max = FALSE) {
+polish_co2_range <- function(data,
+                             output_min_max = FALSE,
+                             output_co2_footprint = FALSE) {
   out <- data |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
   if (!output_min_max) {
     out <- out |> select(-c("min", "max"))
+  }
+
+  if (!output_co2_footprint) {
+    out <- out |> exclude("co2_footprint")
   }
 
   out
