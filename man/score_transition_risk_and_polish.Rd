@@ -91,7 +91,7 @@ options(restore)
 }
 \seealso{
 Other composable friends: 
-\code{\link{add_co2_range}()},
+\code{\link{add_co2}()},
 \code{\link{inform_noise_in_co2_range}()},
 \code{\link{jitter_co2_range}()},
 \code{\link{polish_co2_range}()},

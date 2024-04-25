@@ -4,7 +4,7 @@
 \alias{polish_co2_range}
 \title{Polish the jittered range of CO2 values}
 \usage{
-polish_co2_range(data, output_min_max = FALSE)
+polish_co2_range(data, output_min_max = FALSE, output_co2_footprint = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -26,14 +26,14 @@ data |> polish_co2_range(output_min_max = TRUE)
 }
 \seealso{
 Other composable friends: 
-\code{\link{add_co2_range}()},
+\code{\link{add_co2}()},
 \code{\link{inform_noise_in_co2_range}()},
 \code{\link{jitter_co2_range}()},
 \code{\link{score_transition_risk_and_polish}()},
 \code{\link{summarize_co2_range}()}
 
 Other functions to handle CO2 range: 
-\code{\link{add_co2_range}()},
+\code{\link{add_co2}()},
 \code{\link{jitter_co2_range}()},
 \code{\link{summarize_co2_range}()}
 }
