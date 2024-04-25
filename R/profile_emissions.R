@@ -19,7 +19,9 @@ profile_emissions <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  )
+  ) |>
+    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
+    tilt_profile()
 
   # TODO: Move to add_co2_range()
   tilt_profile |>
@@ -70,7 +72,5 @@ profile_emissions_impl <- function(companies,
     isic
   )
   exec_profile("emissions_profile", indicator, indicator_after) |>
-    # FIXME: Move to the edge
-    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
     tilt_profile()
 }
