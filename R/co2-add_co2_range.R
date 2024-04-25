@@ -54,7 +54,6 @@
 #'
 #' # Cleanup
 #' options(restore)
-#' @family controller
 add_co2_range <- function(data, ...,
                           jitter_amount = option_jitter_amount(),
                           output_min_max = option_output_min_max()) {
