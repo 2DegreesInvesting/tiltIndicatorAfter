@@ -40,5 +40,5 @@ add_co2_footprint <- function(data, co2) {
     unnest_company() |>
     left_join(co2_avg, by = by, relationship = "many-to-many")
 
-  nest_levels(product, company)
+  tilt_profile(nest_levels(product, company))
 }

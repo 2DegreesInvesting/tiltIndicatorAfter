@@ -20,8 +20,7 @@ profile_emissions <- function(companies,
     low_threshold = low_threshold,
     high_threshold = high_threshold
   ) |>
-    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint")))) |>
-    tilt_profile()
+    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
 
   # TODO: Move to add_co2_range()
   tilt_profile |>
