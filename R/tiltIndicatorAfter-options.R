@@ -3,7 +3,7 @@
 #' @description
 #' These options are meant to be used mainly by developers or analysts while
 #' testing the code or creating data:
-#' * `tiltIndicatorAfter.get_jitter_amount`: Controls the amount of random noise
+#' * `tiltIndicatorAfter.set_jitter_amount`: Controls the amount of random noise
 #' in the columns `co2*`.
 #' * `tiltIndicatorAfter.output_co2_footprint_min_max`: Outputs the columns `min`
 #' and `max` (calculated from `co2_footprint`), which yield the noisy `co2*`
@@ -28,7 +28,7 @@
 #'
 #' restore <- options(list(
 #'   readr.show_col_types = FALSE,
-#'   tiltIndicatorAfter.get_jitter_amount = 1,
+#'   tiltIndicatorAfter.set_jitter_amount = 1,
 #'   tiltIndicatorAfter.verbose = TRUE,
 #'   tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
 #' ))
@@ -58,14 +58,42 @@
 #'   select(matches(c("min", "max", "co2")))
 NULL
 
-output_co2_footprint_min_max <- function() {
+#' Functions to get options
+#'
+#' @seealso [jitter_co2_range()], [tiltIndicatorAfter_options]
+#'
+#' @export
+#' @keywords internal
+#' @examples
+#'
+#' option_jitter_amount()
+option_jitter_amount <- function() {
+  getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
+}
+
+#' @rdname option_jitter_amount
+#' @export
+#' @examples
+#'
+#' option_jitter_amount()
+option_output_min_max <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint_min_max", default = FALSE)
 }
 
-output_co2_footprint <- function() {
+#' @rdname option_jitter_amount
+#' @export
+#' @examples
+#'
+#' option_output_co2_footprint()
+option_output_co2_footprint <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint", default = FALSE)
 }
 
-verbose <- function() {
+#' @rdname option_jitter_amount
+#' @export
+#' @examples
+#'
+#' option_verbose()
+option_verbose <- function() {
   getOption("tiltIndicatorAfter.verbose", default = TRUE)
 }

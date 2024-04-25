@@ -20,7 +20,7 @@
 #'
 #' inform_noise_in_co2_range(data)
 inform_noise_in_co2_range <- function(data) {
-  if (!verbose()) {
+  if (!option_verbose()) {
     return(invisible(data))
   }
 

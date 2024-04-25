@@ -15,8 +15,14 @@
 #' data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 #'
 #' data |> polish_co2_range()
-polish_co2_range <- function(data) {
-  data |>
-    rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter") |>
-    select(-c("min", "max"))
+#'
+#' data |> polish_co2_range(output_min_max = TRUE)
+polish_co2_range <- function(data, output_min_max = FALSE) {
+  out <- data |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
+
+  if (!output_min_max) {
+    out <- out |> select(-c("min", "max"))
+  }
+
+  out
 }

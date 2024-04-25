@@ -7,7 +7,10 @@
 #' * `data.frame`: The `product` data frame of a `tilt_profile`.
 #' * `tilt_profile`: `r document_tilt_profile()`.
 #' @param ... Arguments passed to [tiltIndicator::jitter_range].
-#' @param jitter_amount Passed to `amount` in [tiltIndicator::jitter_range()].
+#' @param jitter_amount Numeric. Controls the amount of noise. Passed to
+#'   `amount` in [tiltIndicator::jitter_range()].
+#' @param output_min_max Logical. Output the columns `min` and `max`?
+#'
 #' @keywords internal
 #'
 #' @return An object of the same class as `data`.
@@ -51,27 +54,13 @@
 #'
 #' # Cleanup
 #' options(restore)
-#'
-#' # The argument `jitter_amount` can also be controlled via `options()`
-#' # Default
-#' get_jitter_amount()
-#'
-#' restore <- options(tiltIndicatorAfter.get_jitter_amount = 1)
-#' get_jitter_amount()
-#'
-#' # Cleanup
-#' options(restore)
-add_co2_range <- function(data, ..., jitter_amount = get_jitter_amount()) {
+#' @family controller
+add_co2_range <- function(data, ...,
+                          jitter_amount = option_jitter_amount(),
+                          output_min_max = option_output_min_max()) {
   data |>
     summarize_co2_range() |>
     jitter_co2_range(amount = jitter_amount, ...) |>
-    polish_co2_range() |>
+    polish_co2_range(output_min_max = output_min_max) |>
     join_to(data)
-}
-
-#' @rdname add_co2_range
-#' @seealso [jitter_co2_range()], [tiltIndicatorAfter_options]
-#' @export
-get_jitter_amount <- function() {
-  getOption("tiltIndicatorAfter.get_jitter_amount", default = 2)
 }

@@ -46,8 +46,8 @@ data |> jitter_co2_range(amount = 20)
 # Same
 local_seed(1)
 # See `?tiltIndicatorAfter_options`
-local_options(tiltIndicatorAfter.get_jitter_amount = 20)
-data |> jitter_co2_range(amount = get_jitter_amount())
+local_options(tiltIndicatorAfter.set_jitter_amount = 20)
+data |> jitter_co2_range(amount = option_jitter_amount())
 library(tibble)
 library(withr)
 
@@ -68,8 +68,8 @@ data |> jitter_co2_range(amount = 20)
 # Same
 local_seed(1)
 # See `?tiltIndicatorAfter_options`
-local_options(tiltIndicatorAfter.get_jitter_amount = 20)
-data |> jitter_co2_range(amount = get_jitter_amount())
+local_options(tiltIndicatorAfter.set_jitter_amount = 20)
+data |> jitter_co2_range(amount = option_jitter_amount())
 }
 \seealso{
 Other composable friends: 

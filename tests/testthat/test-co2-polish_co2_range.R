@@ -15,3 +15,14 @@ test_that("without crucial columns errors gracefully", {
   expect_error(polish_co2_range(select(data, -min_jitter)), "min_jitter")
   expect_error(polish_co2_range(select(data, -max_jitter)), "max_jitter")
 })
+
+test_that("is sensitive to `output_min_max`", {
+  data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
+
+  expect_named(polish_co2_range(data), c("co2e_lower", "co2e_upper"))
+
+  expect_named(
+    polish_co2_range(data, output_min_max = TRUE),
+    c("min", "max", "co2e_lower", "co2e_upper")
+  )
+})

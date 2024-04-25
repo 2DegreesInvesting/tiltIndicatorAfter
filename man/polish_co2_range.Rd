@@ -4,7 +4,7 @@
 \alias{polish_co2_range}
 \title{Polish the jittered range of CO2 values}
 \usage{
-polish_co2_range(data)
+polish_co2_range(data, output_min_max = FALSE)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -21,6 +21,8 @@ library(tibble)
 data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 
 data |> polish_co2_range()
+
+data |> polish_co2_range(output_min_max = TRUE)
 }
 \seealso{
 Other composable friends: 

@@ -7,7 +7,7 @@
 These options are meant to be used mainly by developers or analysts while
 testing the code or creating data:
 \itemize{
-\item \code{tiltIndicatorAfter.get_jitter_amount}: Controls the amount of random noise
+\item \code{tiltIndicatorAfter.set_jitter_amount}: Controls the amount of random noise
 in the columns \verb{co2*}.
 \item \code{tiltIndicatorAfter.output_co2_footprint_min_max}: Outputs the columns \code{min}
 and \code{max} (calculated from \code{co2_footprint}), which yield the noisy \verb{co2*}
@@ -32,7 +32,7 @@ set.seed(1)
 
 restore <- options(list(
   readr.show_col_types = FALSE,
-  tiltIndicatorAfter.get_jitter_amount = 1,
+  tiltIndicatorAfter.set_jitter_amount = 1,
   tiltIndicatorAfter.verbose = TRUE,
   tiltIndicatorAfter.output_co2_footprint_min_max = TRUE
 ))

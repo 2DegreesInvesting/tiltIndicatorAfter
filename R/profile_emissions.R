@@ -22,7 +22,7 @@ profile_emissions <- function(companies,
   )
 
   # TODO ensure to test
-  if (!output_co2_footprint()) {
+  if (!option_output_co2_footprint()) {
     return(tilt_profile)
   }
 
