@@ -21,11 +21,11 @@ add_co2_upper_lower <- function(data, co2_range) {
   left_join(data, co2_range, by = join_by("grouped_by", "risk_category"))
 }
 
-output_co2_footprint <- function(out, co2_footprint) {
-  product <- out |>
+output_co2_footprint <- function(data, co2) {
+  product <- data |>
     unnest_product() |>
     left_join(
-      co2_footprint,
+      co2,
       by = "activity_uuid_product_uuid"
     )
 
@@ -36,7 +36,7 @@ output_co2_footprint <- function(out, co2_footprint) {
       co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
       .by = all_of(by)
     )
-  company <- out |>
+  company <- data |>
     unnest_company() |>
     left_join(co2_avg, by = by, relationship = "many-to-many")
 
