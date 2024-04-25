@@ -23,7 +23,7 @@ profile_emissions <- function(companies,
 
   # TODO: Move to add_co2_range()
   with_co2_footprint <- tilt_profile |>
-    add_co2_footprint(select(co2, matches(c("_uuid", "co2_footprint"))))
+    add_co2_footprint_and_co2_avg(co2)
   with_co2_footprint |>
     summarize_co2_range() |>
     jitter_co2_range(amount = option_jitter_amount()) |>

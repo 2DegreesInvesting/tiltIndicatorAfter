@@ -63,3 +63,27 @@ add_co2_range <- function(data, ...,
     polish_co2_range(output_min_max = output_min_max) |>
     join_to(data)
 }
+
+add_co2_footprint_and_co2_avg <- function(data, co2) {
+  co2 <- select(co2, matches(c("_uuid", "co2_footprint")))
+
+  product <- data |>
+    unnest_product() |>
+    left_join(
+      co2,
+      by = "activity_uuid_product_uuid"
+    )
+
+  by <- c("companies_id", "benchmark")
+  co2_avg <- product |>
+    select(all_of(c(by, "co2_footprint"))) |>
+    summarise(
+      co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
+      .by = all_of(by)
+    )
+  company <- data |>
+    unnest_company() |>
+    left_join(co2_avg, by = by, relationship = "many-to-many")
+
+  tilt_profile(nest_levels(product, company))
+}
