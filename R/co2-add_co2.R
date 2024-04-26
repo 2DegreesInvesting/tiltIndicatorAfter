@@ -71,7 +71,7 @@ add_co2.tilt_profile <- function(data,
 }
 
 add_co2_footprint_and_co2_avg <- function(data, co2) {
-  co2 <- select(co2, matches(c("_uuid", "co2_footprint")))
+  co2 <- select(co2, matches(c("_uuid", col_footprint())))
 
   product <- data |>
     unnest_product() |>
@@ -85,7 +85,7 @@ add_co2_footprint_and_co2_avg <- function(data, co2) {
   footprint_col <- extract_name(co2, "co2_footprint$")
 
   co2_avg <- product |>
-    select(all_of(by), matches("co2_footprint")) |>
+    select(all_of(by), matches(col_footprint())) |>
     summarise(
       co2_avg = round(mean(.data[[footprint_col]], na.rm = TRUE), 3),
       .by = all_of(by)

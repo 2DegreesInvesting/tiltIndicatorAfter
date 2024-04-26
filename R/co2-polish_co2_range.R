@@ -34,7 +34,7 @@ polish_co2_range.data.frame <- function(data,
   }
 
   if (!output_co2_footprint) {
-    out <- out |> exclude("co2_footprint")
+    out <- out |> exclude(col_footprint())
   }
 
   out
