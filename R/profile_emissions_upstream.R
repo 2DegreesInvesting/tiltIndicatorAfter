@@ -85,7 +85,8 @@ profile_emissions_upstream <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  )
+  ) |>
+    add_co2(co2)
 }
 
 #' @rdname profile_impl

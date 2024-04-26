@@ -31,25 +31,25 @@
       $all
       [1] "benchmark"                 "emission_upstream_profile"
       
-      $input_unit
+      $input_isic_4digit
       [1] "benchmark"                 "emission_upstream_profile"
-      [3] "input_unit"               
+      [3] "input_isic_4digit"        
       
       $input_tilt_sector
       [1] "benchmark"                 "emission_upstream_profile"
       [3] "input_tilt_sector"         "input_tilt_subsector"     
       
-      $input_unit_tilt_sector
+      $input_unit
+      [1] "benchmark"                 "emission_upstream_profile"
+      [3] "input_unit"               
+      
+      $input_unit_input_isic_4digit
+      [1] "benchmark"                 "emission_upstream_profile"
+      [3] "input_isic_4digit"         "input_unit"               
+      
+      $input_unit_input_tilt_sector
       [1] "benchmark"                 "emission_upstream_profile"
       [3] "input_tilt_sector"         "input_tilt_subsector"     
       [5] "input_unit"               
-      
-      $input_isic_4digit
-      [1] "benchmark"                 "emission_upstream_profile"
-      [3] "input_isic_4digit"        
-      
-      $input_unit_isic_4digit
-      [1] "benchmark"                 "emission_upstream_profile"
-      [3] "input_isic_4digit"         "input_unit"               
       
 

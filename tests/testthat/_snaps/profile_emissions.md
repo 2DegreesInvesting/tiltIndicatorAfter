@@ -38,6 +38,8 @@
     Code
       invisible <- profile_emissions(companies, co2, europages_companies,
         ecoinvent_activities, ecoinvent_europages, isic_name)
+    Message
+      i Adding 49% and 103% noise to `co2e_lower` and `co2e_upper`, respectively.
 
 # informs a useful percent noise (not 'Adding NA% ... noise') (#188)
 
@@ -45,6 +47,8 @@
       profile_emissions(companies, products, europages_companies = europages_companies,
         ecoinvent_activities = ecoinvent_activities, ecoinvent_europages = ecoinvent_europages,
         isic = isic_name)
+    Message
+      i Adding 60% and 124% noise to `co2e_lower` and `co2e_upper`, respectively.
     Output
       # A tibble: 1 x 3
         companies_id        product           company           

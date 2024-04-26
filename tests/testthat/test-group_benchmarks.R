@@ -14,13 +14,14 @@ test_that("with products-benchmarks, outpts the expected groups", {
 test_that("with inputs-benchmarks, outpts the expected groups", {
   input_benchmark <- c(
     "all",
-    "input_unit",
-    "input_tilt_sector",
-    "input_unit_tilt_sector",
     "input_isic_4digit",
-    "input_unit_isic_4digit"
+    "input_tilt_sector",
+    "input_unit",
+    "input_unit_input_isic_4digit",
+    "input_unit_input_tilt_sector"
   )
   all <- c("benchmark", "emission_upstream_profile")
+
   expect_snapshot(group_benchmark(input_benchmark, all))
 })
 

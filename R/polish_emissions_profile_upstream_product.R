@@ -50,7 +50,7 @@ relocate_emissions_profile_upstream_product <- function(data) {
   data |>
     relocate(
       "companies_id", "company_name", "country", "risk_category", "grouped_by",
-      "clustered", "activity_name", "reference_product_name", "co2e_lower", "co2e_upper",
+      "clustered", "activity_name", "reference_product_name",
       "unit", "multi_match", "matching_certainty", "avg_matching_certainty", "exchange_name",
       "exchange_unit_name", "input_tilt_sector", "input_tilt_subsector", "input_isic_4digit", "isic_4digit_name_ecoinvent",
       "company_city", "postcode", "address", "main_activity", "activity_uuid_product_uuid"

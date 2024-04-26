@@ -11,7 +11,7 @@ test_that("outputs results both at product and company level", {
   toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
   toy_isic_name <- read_csv(toy_isic_name())
 
-  emissions_profile <- profile_emissions_impl(
+  emissions_profile <- profile_emissions(
     companies = toy_emissions_profile_any_companies,
     co2 = toy_emissions_profile_products_ecoinvent,
     europages_companies = toy_europages_companies,
@@ -46,7 +46,7 @@ test_that("is sensitive to `pivot_wider`", {
   toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
   toy_isic_name <- read_csv(toy_isic_name())
 
-  emissions_profile <- profile_emissions_impl(
+  emissions_profile <- profile_emissions(
     companies = toy_emissions_profile_any_companies,
     co2 = toy_emissions_profile_products_ecoinvent,
     europages_companies = toy_europages_companies,

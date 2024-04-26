@@ -84,11 +84,11 @@ test_that("without crucial columns errors gracefully", {
 
   crucial <- "benchmark"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_co2_range(bad), class = "check_matches_name")
 
   crucial <- "emission_profile"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_co2_range(bad), class = "check_matches_name")
 
   crucial <- "unit"
   bad <- select(data, -all_of(crucial))

@@ -5,5 +5,5 @@
         ecoinvent_activities = ecoinvent_activities, ecoinvent_inputs = ecoinvent_inputs,
         ecoinvent_europages = ecoinvent_europages, isic = isic_name)
     Message
-      i Adding 48% and 72% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 53% and 87% noise to `co2e_lower` and `co2e_upper`, respectively.
 

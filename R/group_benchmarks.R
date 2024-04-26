@@ -35,6 +35,7 @@ group_benchmark_impl <- function(x, all) {
   out <- gsub("^_", "", out)
   out <- out[!grepl("^input_$", out)]
   out <- out[nzchar(out)]
+  out <- gsub("input_input_", "input_", out)
 
   # tilt_sector groups on tilt subsector
   # https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/194#issuecomment-2050573259

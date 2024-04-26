@@ -54,17 +54,16 @@ add_co2.tilt_profile <- function(data,
                                  output_co2_footprint = option_output_co2_footprint()) {
   out <- data |> add_co2_footprint_and_co2_avg(co2)
 
-  result <- out |>
+  out |>
     summarize_co2_range() |>
     jitter_co2_range(amount = jitter_amount) |>
+    inform_noise_in_co2_range() |>
     join_to(out) |>
     polish_co2_range(
       output_min_max = output_min_max,
-    # TODO open issue: Should always be TRUE? Not useful without a license
+      # TODO open issue: Should always be TRUE? Not useful without a license
       output_co2_footprint = output_co2_footprint
     )
-
-  result
 }
 
 add_co2_footprint_and_co2_avg <- function(data, co2) {
@@ -74,14 +73,17 @@ add_co2_footprint_and_co2_avg <- function(data, co2) {
     unnest_product() |>
     left_join(
       co2,
-      by = "activity_uuid_product_uuid"
+      by = "activity_uuid_product_uuid",
+      relationship = "many-to-many"
     )
 
+
   by <- c("companies_id", "benchmark")
+  nm <- extract_name(co2, "co2_footprint$")
   co2_avg <- product |>
-    select(all_of(c(by, "co2_footprint"))) |>
+    select(all_of(by), matches("co2_footprint")) |>
     summarise(
-      co2_avg = round(mean(co2_footprint, na.rm = TRUE), 3),
+      co2_avg = round(mean(.data[[nm]], na.rm = TRUE), 3),
       .by = all_of(by)
     )
   company <- data |>
