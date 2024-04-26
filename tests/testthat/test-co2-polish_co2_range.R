@@ -16,9 +16,17 @@ test_that("outputs co2e* by default", {
 test_that("can output `min`, `max`", {
   data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 
+  out <- polish_co2_range(data, output_min_max = TRUE)
+  expect_true(hasName(out, "min"))
+  expect_true(hasName(out, "max"))
+})
+
+test_that("relocates `co2e` before `unit`", {
+  data <- tibble(min = 1, unit = 1, max = 2, min_jitter = 0, max_jitter = 4)
+
   expect_named(
     polish_co2_range(data, output_min_max = TRUE),
-    c("min", "max", "co2e_lower", "co2e_upper")
+    c("min", "co2e_lower", "co2e_upper", "unit", "max")
   )
 })
 

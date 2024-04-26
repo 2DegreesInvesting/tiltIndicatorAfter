@@ -7,15 +7,15 @@
        [3] "country"                            "emission_profile"                  
        [5] "benchmark"                          "ep_product"                        
        [7] "matched_activity_name"              "matched_reference_product"         
-       [9] "unit"                               "multi_match"                       
-      [11] "matching_certainty"                 "matching_certainty_company_average"
-      [13] "tilt_sector"                        "tilt_subsector"                    
-      [15] "isic_4digit"                        "isic_4digit_name"                  
-      [17] "company_city"                       "postcode"                          
-      [19] "address"                            "main_activity"                     
-      [21] "activity_uuid_product_uuid"         "profile_ranking"                   
-      [23] "ei_geography"                       "co2_footprint"                     
-      [25] "co2e_lower"                         "co2e_upper"                        
+       [9] "co2e_lower"                         "co2e_upper"                        
+      [11] "unit"                               "multi_match"                       
+      [13] "matching_certainty"                 "matching_certainty_company_average"
+      [15] "tilt_sector"                        "tilt_subsector"                    
+      [17] "isic_4digit"                        "isic_4digit_name"                  
+      [19] "company_city"                       "postcode"                          
+      [21] "address"                            "main_activity"                     
+      [23] "activity_uuid_product_uuid"         "profile_ranking"                   
+      [25] "ei_geography"                       "co2_footprint"                     
 
 ---
 
@@ -30,8 +30,8 @@
       [11] "main_activity"                      "profile_ranking_avg"               
       [13] "co2_avg"                            "isic_4digit"                       
       [15] "tilt_sector"                        "tilt_subsector"                    
-      [17] "unit"                               "co2e_lower"                        
-      [19] "co2e_upper"                        
+      [17] "co2e_lower"                         "co2e_upper"                        
+      [19] "unit"                              
 
 # informs the mean noise percent
 
@@ -53,5 +53,5 @@
       # A tibble: 1 x 3
         companies_id        product           company           
       * <chr>               <list>            <list>            
-      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 18]>
+      1 antimonarchy_canine <tibble [7 x 25]> <tibble [24 x 18]>
 

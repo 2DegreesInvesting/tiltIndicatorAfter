@@ -37,7 +37,7 @@ polish_co2_range.data.frame <- function(data,
     out <- out |> exclude("co2_footprint")
   }
 
-  out
+  out |> relocate(matches("co2e"), .before = matches("unit"))
 }
 
 #' @export
