@@ -57,17 +57,17 @@ summarize_co2_range.data.frame <- function(data) {
 
 #' @export
 summarize_co2_range.tilt_profile <- function(data) {
-  product <- unnest_product(data)
-  summarize_co2_range(product)
+  data |>
+    unnest_product() |>
+    summarize_co2_range()
 }
 
 check_summarize_co2_range <- function(data, benchmark_cols) {
-  .benchmark <- "benchmark"
-  c(.benchmark(), "co2_footprint", "emission.*profile", benchmark_cols) |>
+  c(col_benchmark(), col_footprint(), pattern_emission_profile(), benchmark_cols) |>
     walk(function(pattern) check_matches_name(data, pattern))
 
-  if (all(is.na(data[[.benchmark()]]))) {
-    msg <- "Can't handle data where all `benchmar` is `NA`."
+  if (all(is.na(data[[col_benchmark()]]))) {
+    msg <- glue("Can't handle data where all `{col_benchmark()}` is `NA`.")
     abort(msg, class = "all_benchmark_is_na")
   }
 
