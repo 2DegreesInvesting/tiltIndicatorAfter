@@ -62,7 +62,7 @@ summarize_co2_range.tilt_profile <- function(data) {
 }
 
 check_summarize_co2_range <- function(data, benchmark_cols) {
-  c(col_benchmark(), col_footprint(), pattern_emission_profile(), benchmark_cols) |>
+  c(col_benchmark(), col_footprint(), pattern_risk_category(), benchmark_cols) |>
     walk(function(pattern) check_matches_name(data, pattern))
 
   if (all(is.na(data[[col_benchmark()]]))) {

@@ -1,3 +1,5 @@
 col_benchmark <- function() "benchmark"
 col_footprint <- function() "co2_footprint"
-pattern_emission_profile <- function() "emission.*profile"
+col_risk_category <- function() "emission_profile"
+
+pattern_risk_category <- function() "emission.*profile"
