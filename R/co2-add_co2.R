@@ -81,15 +81,16 @@ add_co2_footprint_and_co2_avg <- function(data, co2) {
       relationship = "many-to-many"
     )
 
-
   by <- c("companies_id", "benchmark")
-  nm <- extract_name(co2, "co2_footprint$")
+  footprint_col <- extract_name(co2, "co2_footprint$")
+
   co2_avg <- product |>
     select(all_of(by), matches("co2_footprint")) |>
     summarise(
-      co2_avg = round(mean(.data[[nm]], na.rm = TRUE), 3),
+      co2_avg = round(mean(.data[[footprint_col]], na.rm = TRUE), 3),
       .by = all_of(by)
     )
+
   company <- data |>
     unnest_company() |>
     left_join(co2_avg, by = by, relationship = "many-to-many")
