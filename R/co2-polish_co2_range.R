@@ -1,6 +1,7 @@
 #' Polish the jittered range of CO2 values
 #'
 #' @param data A data frame.
+#' @param ... Unused but necessary for compatibility across methods.
 #'
 #' @keywords internal
 #'
@@ -17,10 +18,13 @@
 #' data |> polish_co2_range()
 #'
 #' data |> polish_co2_range(output_min_max = TRUE)
-polish_co2_range <- function(data, ...) UseMethod("polish_co2_range")
+polish_co2_range <- function(data, ...) {
+  UseMethod("polish_co2_range")
+}
 
 #' @export
 polish_co2_range.data.frame <- function(data,
+                                        ...,
                                         output_min_max = FALSE,
                                         output_co2_footprint = FALSE) {
   out <- data |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
@@ -38,6 +42,7 @@ polish_co2_range.data.frame <- function(data,
 
 #' @export
 polish_co2_range.tilt_profile <- function(data,
+                                          ...,
                                           output_min_max = FALSE,
                                           output_co2_footprint = FALSE) {
   product <- data |>

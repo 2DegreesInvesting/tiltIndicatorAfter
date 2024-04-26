@@ -4,10 +4,10 @@
 \alias{add_co2}
 \title{Add a the jittered range of CO2 values}
 \usage{
-add_co2(data, ...)
+add_co2(data, co2, ...)
 }
 \arguments{
-\item{data}{A 'tilt_profile'. A data frame with the column \code{companies_id}, and the list columns \code{product} and \code{company} holding the outputs at product and company level..}
+\item{...}{Unused but necessary for compatibility across methods.}
 
 \item{jitter_amount}{Numeric. Controls the amount of noise. Passed to
 \code{amount} in \code{\link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range()}}.}

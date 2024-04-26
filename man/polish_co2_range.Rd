@@ -8,6 +8,8 @@ polish_co2_range(data, ...)
 }
 \arguments{
 \item{data}{A data frame.}
+
+\item{...}{Unused but necessary for compatibility across methods.}
 }
 \value{
 An object of the same class as \code{data}.
