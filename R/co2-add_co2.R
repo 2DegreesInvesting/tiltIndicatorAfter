@@ -56,13 +56,13 @@ add_co2.tilt_profile <- function(data,
                                  jitter_amount = option_jitter_amount(),
                                  output_min_max = option_output_min_max(),
                                  output_co2_footprint = option_output_co2_footprint()) {
-  out <- data |> add_co2_footprint_and_co2_avg(co2)
+  data_co2 <- data |> add_co2_footprint_and_co2_avg(co2)
 
-  out |>
+  data_co2 |>
     summarize_co2_range() |>
     jitter_co2_range(amount = jitter_amount) |>
     inform_noise_in_co2_range() |>
-    join_to(out) |>
+    join_to(data_co2) |>
     polish_co2_range(
       output_min_max = output_min_max,
       # TODO open issue: Should always be TRUE? Not useful without a license
