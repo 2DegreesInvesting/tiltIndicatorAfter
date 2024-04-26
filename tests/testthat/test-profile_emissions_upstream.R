@@ -310,7 +310,7 @@ test_that("outputs `profile_ranking_avg` at company level", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions_upstream_impl(
+  out <- profile_emissions_upstream(
     companies,
     co2,
     europages_companies = europages_companies,
