@@ -20,4 +20,3 @@ create_co2_range <- function(data, amount = option_jitter_amount()) {
 add_co2_upper_lower <- function(data, co2_range) {
   left_join(data, co2_range, by = join_by("grouped_by", "risk_category"))
 }
-
