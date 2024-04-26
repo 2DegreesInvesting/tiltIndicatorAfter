@@ -3,14 +3,14 @@ test_that("yields the expected names", {
 
   out <- polish_co2_range(data)
 
-  expected <- c("co2e_lower", "co2e_upper")
+  expected <- c(col_min_jitter(), col_max_jitter())
   expect_named(out, expected)
 })
 
 test_that("outputs co2e* by default", {
   data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
 
-  expect_named(polish_co2_range(data), c("co2e_lower", "co2e_upper"))
+  expect_named(polish_co2_range(data), c(col_min_jitter(), col_max_jitter()))
 })
 
 test_that("can output `min`, `max`", {
@@ -23,9 +23,9 @@ test_that("can output `min`, `max`", {
 
 test_that("can output `output_co2_footprint`", {
   data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
-  --
+
     expect_named(
       polish_co2_range(data, output_co2_footprint = TRUE),
-      c("co2e_lower", "co2e_upper")
+      c(col_min_jitter(), col_max_jitter())
     )
 })
