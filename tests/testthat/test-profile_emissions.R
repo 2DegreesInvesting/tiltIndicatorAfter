@@ -433,7 +433,7 @@ test_that("with some match preserves unmatched products (#193)", {
   expect_equal(unique(product$activity_uuid_product_uuid), c("unmatched", uuid))
 })
 
-test_that("with no match preserves unmatched products (#193)", {
+test_that("with no match errors gracefully (#193)", {
   companies <- read_csv(toy_emissions_profile_any_companies()) |>
     filter(companies_id %in% dplyr::first(companies_id)) |>
     mutate(activity_uuid_product_uuid = "unmatched")
@@ -444,21 +444,14 @@ test_that("with no match preserves unmatched products (#193)", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  # FIXME: Investigate. profile_emissions_impl() preserves matches but
-  # profile_emissions() apparently not?
-  out <- profile_emissions_impl(
+  expect_error(profile_emissions(
     companies,
     co2,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
     isic_name
-  )
-
-  expect_equal(out$companies_id, unique(companies$companies_id))
-
-  product <- unnest_product(out)
-  expect_true("unmatched" %in% product$activity_uuid_product_uuid)
+  ), class = "all_benchmark_is_na")
 })
 
 test_that("at product level, preserves missing benchmarks (#153#issuecomment-2010043596)", {

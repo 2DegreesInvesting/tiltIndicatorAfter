@@ -62,6 +62,14 @@ summarize_co2_range.tilt_profile <- function(data) {
 }
 
 check_summarize_co2_range <- function(data, benchmark_cols) {
-  c("benchmark", "co2_footprint", "emission.*profile", benchmark_cols) |>
+  .benchmark <- "benchmark"
+  c(.benchmark(), "co2_footprint", "emission.*profile", benchmark_cols) |>
     walk(function(pattern) check_matches_name(data, pattern))
+
+  if (all(is.na(data[[.benchmark()]]))) {
+    msg <- "Can't handle data where all `benchmar` is `NA`."
+    abort(msg, class = "all_benchmark_is_na")
+  }
+
+  invisible(data)
 }
