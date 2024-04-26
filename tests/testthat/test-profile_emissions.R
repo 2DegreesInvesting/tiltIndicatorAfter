@@ -392,7 +392,7 @@ test_that("can optionally output `co2_footprint` at product level", {
     isic_name
   )
 
-  expect_true(hasName(unnest_product(out), "co2_footprint"))
+  expect_true(hasName(unnest_product(out), col_footprint()))
 })
 
 test_that("with some match preserves unmatched products (#193)", {

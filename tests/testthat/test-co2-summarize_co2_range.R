@@ -48,7 +48,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
   # styler: on
 
   expect_equal(
-    summarize_range(data, "co2_footprint", .by = c("benchmark", "emission_profile")),
+    summarize_range(data, col_footprint(), .by = c("benchmark", "emission_profile")),
     summarize_co2_range(data)
   )
 })
@@ -78,7 +78,7 @@ test_that("without crucial columns errors gracefully", {
   )
   # styler: on
 
-  crucial <- "co2_footprint"
+  crucial <- col_footprint()
   bad <- select(data, -all_of(crucial))
   expect_error(summarize_co2_range(bad), crucial)
 
