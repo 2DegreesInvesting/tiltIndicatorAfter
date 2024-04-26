@@ -37,10 +37,8 @@
 #' local_options(tiltIndicatorAfter.set_jitter_amount = 20)
 #' data |> jitter_co2_range(amount = option_jitter_amount())
 jitter_co2_range <- function(data, ...) {
-  col <- "benchmark"
-
   data |>
-    group_by(.data[[col]]) |>
+    group_by(.data[[col_benchmark()]]) |>
     group_split() |>
     map(jitter_range, ...) |>
     reduce(bind_rows)

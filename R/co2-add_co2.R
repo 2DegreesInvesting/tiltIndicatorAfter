@@ -81,7 +81,7 @@ add_co2_footprint_and_co2_avg <- function(data, co2) {
       relationship = "many-to-many"
     )
 
-  by <- c("companies_id", "benchmark")
+  by <- c("companies_id", col_benchmark())
   footprint_col <- extract_name(co2, "co2_footprint$")
 
   co2_avg <- product |>
