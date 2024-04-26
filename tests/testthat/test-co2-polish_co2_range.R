@@ -21,15 +21,6 @@ test_that("can output `min`, `max`", {
   expect_true(hasName(out, "max"))
 })
 
-test_that("relocates `co2e` before `unit`", {
-  data <- tibble(min = 1, unit = 1, max = 2, min_jitter = 0, max_jitter = 4)
-
-  expect_named(
-    polish_co2_range(data, output_min_max = TRUE),
-    c("min", "co2e_lower", "co2e_upper", "unit", "max")
-  )
-})
-
 test_that("can output `output_co2_footprint`", {
   data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
   --

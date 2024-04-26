@@ -5,9 +5,9 @@
     Output
        [1] "companies_id"                       "company_name"                      
        [3] "country"                            "emission_profile"                  
-       [5] "benchmark"                          "ep_product"                        
-       [7] "matched_activity_name"              "matched_reference_product"         
-       [9] "co2e_lower"                         "co2e_upper"                        
+       [5] "benchmark"                          "co2e_lower"                        
+       [7] "co2e_upper"                         "ep_product"                        
+       [9] "matched_activity_name"              "matched_reference_product"         
       [11] "unit"                               "multi_match"                       
       [13] "matching_certainty"                 "matching_certainty_company_average"
       [15] "tilt_sector"                        "tilt_subsector"                    
@@ -15,7 +15,7 @@
       [19] "company_city"                       "postcode"                          
       [21] "address"                            "main_activity"                     
       [23] "activity_uuid_product_uuid"         "profile_ranking"                   
-      [25] "ei_geography"                      
+      [25] "ei_geography"                       "co2_footprint"                     
 
 ---
 
@@ -25,12 +25,12 @@
        [1] "companies_id"                       "company_name"                      
        [3] "country"                            "emission_profile_share"            
        [5] "emission_profile"                   "benchmark"                         
-       [7] "matching_certainty_company_average" "company_city"                      
-       [9] "postcode"                           "address"                           
-      [11] "main_activity"                      "profile_ranking_avg"               
-      [13] "co2_avg"                            "isic_4digit"                       
-      [15] "tilt_sector"                        "tilt_subsector"                    
-      [17] "co2e_lower"                         "co2e_upper"                        
+       [7] "co2e_lower"                         "co2e_upper"                        
+       [9] "matching_certainty_company_average" "company_city"                      
+      [11] "postcode"                           "address"                           
+      [13] "main_activity"                      "profile_ranking_avg"               
+      [15] "co2_avg"                            "isic_4digit"                       
+      [17] "tilt_sector"                        "tilt_subsector"                    
       [19] "unit"                              
 
 # informs the mean noise percent
