@@ -7,7 +7,7 @@ test_that("with products-benchmarks, outpts the expected groups", {
     "isic_4digit",
     "unit_isic_4digit"
   )
-  all <- c(col_benchmark(), "emission_profile")
+  all <- c(col_grouped_by(), "emission_profile")
   expect_snapshot(group_benchmark(product_benchmarks, all))
 })
 
@@ -20,7 +20,7 @@ test_that("with inputs-benchmarks, outpts the expected groups", {
     "input_unit_input_isic_4digit",
     "input_unit_input_tilt_sector"
   )
-  all <- c(col_benchmark(), "emission_upstream_profile")
+  all <- c(col_grouped_by(), "emission_upstream_profile")
 
   expect_snapshot(group_benchmark(input_benchmark, all))
 })

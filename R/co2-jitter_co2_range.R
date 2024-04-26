@@ -38,7 +38,7 @@
 #' data |> jitter_co2_range(amount = option_jitter_amount())
 jitter_co2_range <- function(data, ...) {
   data |>
-    group_by(.data[[col_benchmark()]]) |>
+    group_by(.data[[col_grouped_by()]]) |>
     group_split() |>
     map(jitter_range, ...) |>
     reduce(bind_rows)
