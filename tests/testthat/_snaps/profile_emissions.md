@@ -15,7 +15,7 @@
       [19] "company_city"                       "postcode"                          
       [21] "address"                            "main_activity"                     
       [23] "activity_uuid_product_uuid"         "profile_ranking"                   
-      [25] "ei_geography"                       "co2_footprint"                     
+      [25] "ei_geography"                      
 
 ---
 
