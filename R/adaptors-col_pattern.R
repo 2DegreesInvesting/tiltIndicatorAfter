@@ -1,5 +1,4 @@
-# Avoid depending on volatile names. Instead reuse more stable, consistent names
-# from higher level components
+# Reuse stable, consistent names from higher level components
 
 # Reuse ubiquitous column names, and the pattern <indicator>_profile[_upstream]
 # (see tiltIndicator::document_default_value())
@@ -32,7 +31,6 @@ col_min_jitter <- function() {
 }
 
 # Other adapters to reduce fragility
-
 col_footprint <- function() {
   "co2_footprint"
 }
