@@ -98,6 +98,11 @@ options(restore)
 \seealso{
 Other composable friends: 
 \code{\link{add_co2}()}
+
+Other profile functions: 
+\code{\link{profile_emissions}()},
+\code{\link{profile_sector}()}
 }
 \concept{composable friends}
+\concept{profile functions}
 \keyword{internal}

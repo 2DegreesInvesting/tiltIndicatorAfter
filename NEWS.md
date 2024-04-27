@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9035 (2024-04-27)
+
+* Link to `profile_impl` from top-level functions (#227). This helps to discover
+the developer-oriented composable friends.
+
 # tiltIndicatorAfter 0.0.0.9034 (2024-04-27)
 
 * The internal topic `?composable_friends` is now removed (#225). Instead you may

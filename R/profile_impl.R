@@ -5,6 +5,7 @@
 #'
 #' @name profile_impl
 #' @family composable friends
+#' @family profile functions
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
 #' library(tiltToyData)

@@ -119,5 +119,10 @@ options(restore)
 Other top-level functions: 
 \code{\link{profile_sector}()},
 \code{\link{score_transition_risk}()}
+
+Other profile functions: 
+\code{\link{profile_emissions_impl}()},
+\code{\link{profile_sector}()}
 }
+\concept{profile functions}
 \concept{top-level functions}
