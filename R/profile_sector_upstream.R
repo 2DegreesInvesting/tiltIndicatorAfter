@@ -96,7 +96,7 @@ profile_sector_upstream <- function(companies,
   )
 }
 
-#' @rdname profile_impl
+#' @rdname composable_friends
 #' @export
 #' @keywords internal
 profile_sector_upstream_impl <- function(companies,

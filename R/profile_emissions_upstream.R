@@ -89,7 +89,7 @@ profile_emissions_upstream <- function(companies,
     add_co2(co2)
 }
 
-#' @rdname profile_impl
+#' @rdname composable_friends
 #' @export
 #' @keywords internal
 profile_emissions_upstream_impl <- function(companies,
