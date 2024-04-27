@@ -9,7 +9,7 @@ profile_emissions <- function(companies,
                               isic_tilt = lifecycle::deprecated(),
                               low_threshold = 1 / 3,
                               high_threshold = 2 / 3) {
-  tilt_profile <- profile_emissions_impl(
+  profile_emissions_impl(
     companies = companies,
     co2 = co2,
     europages_companies = europages_companies,
@@ -19,13 +19,11 @@ profile_emissions <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  )
-
-  tilt_profile |>
+  ) |>
     add_co2(co2)
 }
 
-#' @rdname profile_impl
+#' @rdname composable_friends
 #' @export
 #' @keywords internal
 profile_emissions_impl <- function(companies,

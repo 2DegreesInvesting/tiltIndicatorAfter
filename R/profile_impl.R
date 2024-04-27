@@ -4,7 +4,7 @@
 #' composable friends. Compose them to create complex results.
 #'
 #' @family composable_friends
-#' @name profile_impl
+#' @name composable_friends
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
 #' library(dplyr, warn.conflicts = FALSE)
