@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9034 (2024-04-27)
+
+* The internal topic `?composable_friends` is now removed (#225). Instead you may
+see `?profile_impl` and follow linked topics.
+
 # tiltIndicatorAfter 0.0.0.9033 (2024-04-23)
 
 * The documented 'Value' of each `profile_*()` no longer refers to columns that
