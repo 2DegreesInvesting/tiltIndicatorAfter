@@ -3,7 +3,7 @@
 #' These functions are designed to work well together. Each does something
 #' small. Compose them to create complex results.
 #'
-#' @name composable_friends
+#' @name profile_impl
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
 #' library(tiltToyData)
