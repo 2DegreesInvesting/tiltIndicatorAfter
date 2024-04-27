@@ -58,42 +58,18 @@
 #'   select(matches(c("min", "max", "co2")))
 NULL
 
-#' Functions to get options
-#'
-#' @seealso [jitter_co2_range()], [tiltIndicatorAfter_options]
-#'
-#' @export
-#' @keywords internal
-#' @examples
-#'
-#' option_jitter_amount()
 option_jitter_amount <- function() {
   getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
 }
 
-#' @rdname option_jitter_amount
-#' @export
-#' @examples
-#'
-#' option_jitter_amount()
 option_output_min_max <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint_min_max", default = FALSE)
 }
 
-#' @rdname option_jitter_amount
-#' @export
-#' @examples
-#'
-#' option_output_co2_footprint()
 option_output_co2_footprint <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint", default = FALSE)
 }
 
-#' @rdname option_jitter_amount
-#' @export
-#' @examples
-#'
-#' option_verbose()
 option_verbose <- function() {
   getOption("tiltIndicatorAfter.verbose", default = TRUE)
 }
