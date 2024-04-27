@@ -1,4 +1,4 @@
-create_co2_range <- function(data, amount = set_jitter_amount()) {
+create_co2_range <- function(data, amount = option_jitter_amount()) {
   col <- extract_name(data, "co2_footprint")
   .by <- c("grouped_by", "risk_category")
 
@@ -10,7 +10,7 @@ create_co2_range <- function(data, amount = set_jitter_amount()) {
 
   out <- out |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
-  if (output_co2_footprint_min_max()) {
+  if (option_output_min_max()) {
     return(out)
   }
 
@@ -22,7 +22,7 @@ add_co2_upper_lower <- function(data, co2_range) {
 }
 
 inform_mean_percent_noise <- function(data) {
-  if (!verbose()) {
+  if (!option_verbose()) {
     return(data)
   }
 
@@ -36,7 +36,7 @@ inform_mean_percent_noise <- function(data) {
 }
 
 optionally_output_co2_footprint <- function(out, co2_footprint) {
-  if (!output_co2_footprint()) {
+  if (!option_output_co2_footprint()) {
     return(out)
   }
 
