@@ -95,6 +95,7 @@ Other composable friends:
 \code{\link{inform_noise_in_co2_range}()},
 \code{\link{jitter_co2_range}()},
 \code{\link{polish_co2_range}()},
+\code{\link{profile_emissions_impl}()},
 \code{\link{summarize_co2_range}()}
 }
 \concept{composable friends}

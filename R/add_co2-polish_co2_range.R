@@ -8,7 +8,7 @@
 #' @return An object of the same class as `data`.
 #' @export
 #' @family composable friends
-#' @family functions to handle CO2 range
+#'
 #'
 #' @examples
 #' library(tibble)

@@ -9,7 +9,7 @@
 #' @return A data frame.
 #' @export
 #' @family composable friends
-#' @family functions to handle CO2 range
+#'
 #'
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)

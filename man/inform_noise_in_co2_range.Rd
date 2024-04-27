@@ -33,6 +33,7 @@ Other composable friends:
 \code{\link{add_co2}()},
 \code{\link{jitter_co2_range}()},
 \code{\link{polish_co2_range}()},
+\code{\link{profile_emissions_impl}()},
 \code{\link{score_transition_risk_and_polish}()},
 \code{\link{summarize_co2_range}()}
 }
