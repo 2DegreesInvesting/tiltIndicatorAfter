@@ -96,12 +96,12 @@ result
 options(restore)
 }
 \seealso{
-Other composable friends: 
-\code{\link{add_co2}()}
-
 Other profile functions: 
 \code{\link{profile_emissions}()},
 \code{\link{profile_sector}()}
+
+Other composable friends: 
+\code{\link{add_co2}()}
 }
 \concept{composable friends}
 \concept{profile functions}

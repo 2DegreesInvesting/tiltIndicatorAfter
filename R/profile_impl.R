@@ -4,8 +4,8 @@
 #' small. Compose them to create complex results.
 #'
 #' @name profile_impl
-#' @family composable friends
 #' @family profile functions
+#' @family composable friends
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
 #' library(tiltToyData)
