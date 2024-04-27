@@ -65,12 +65,8 @@ options(restore)
 }
 \seealso{
 Other composable friends: 
-\code{\link{inform_noise_in_co2_range}()},
-\code{\link{jitter_co2_range}()},
-\code{\link{polish_co2_range}()},
 \code{\link{profile_emissions_impl}()},
-\code{\link{score_transition_risk_and_polish}()},
-\code{\link{summarize_co2_range}()}
+\code{\link{score_transition_risk_and_polish}()}
 }
 \concept{composable friends}
 \keyword{internal}

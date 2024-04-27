@@ -1,23 +1,3 @@
-#' Polish the jittered range of CO2 values
-#'
-#' @param data A data frame.
-#' @param ... Unused but necessary for compatibility across methods.
-#'
-#' @keywords internal
-#'
-#' @return An object of the same class as `data`.
-#' @export
-#' @family composable friends
-#'
-#'
-#' @examples
-#' library(tibble)
-#'
-#' data <- tibble(min = 1, max = 2, min_jitter = 0, max_jitter = 4)
-#'
-#' data |> polish_co2_range()
-#'
-#' data |> polish_co2_range(output_min_max = TRUE)
 polish_co2_range <- function(data, ...) {
   UseMethod("polish_co2_range")
 }

@@ -1,39 +1,3 @@
-#' Summarize the range of CO2 values
-#'
-#' @param data Depends on the class:
-#' * `data.frame`: The `product` data frame of a `tilt_profile`.
-#' * `tilt_profile`: `r document_tilt_profile()`.
-#'
-#' @keywords internal
-#'
-#' @return A data frame.
-#' @export
-#' @family composable friends
-#'
-#'
-#' @examples
-#' library(dplyr, warn.conflicts = FALSE)
-#' library(tidyr, warn.conflicts = FALSE)
-#'
-#' x <- tidyr::expand_grid(
-#'   benchmark = c("all", "unit", "tilt_sector", "unit_tilt_sector"),
-#'   emission_profile = c("low", "medium", "high"),
-#'   unit = c("m2", "kg"),
-#'   tilt_sector = c("sector1", "sector2"),
-#'   tilt_subsector = c("subsector1", "subsector2"),
-#' )
-#' y <- tibble(
-#'   emission_profile = c("low", "medium", "high"),
-#'   isic_4digit = "'1234'",
-#'   co2_footprint = 1:3,
-#' )
-#' data <- left_join(x, y, by = "emission_profile", relationship = "many-to-many")
-#' data |>
-#'   print(n = Inf)
-#'
-#' data |>
-#'   summarize_co2_range() |>
-#'   print(n = Inf)
 summarize_co2_range <- function(data) {
   UseMethod("summarize_co2_range")
 }
