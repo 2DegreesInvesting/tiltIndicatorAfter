@@ -89,9 +89,4 @@ wide
 # Cleanup
 options(restore)
 }
-\seealso{
-Other composable friends: 
-\code{\link{add_co2}()}
-}
-\concept{composable friends}
 \keyword{internal}

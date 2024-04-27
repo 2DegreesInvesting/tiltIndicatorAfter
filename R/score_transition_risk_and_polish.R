@@ -11,7 +11,6 @@
 #'   level.
 #' @export
 #' @keywords internal
-#' @family composable friends
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)

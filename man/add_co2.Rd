@@ -65,7 +65,7 @@ options(restore)
 }
 \seealso{
 Other composable friends: 
-\code{\link{score_transition_risk_and_polish}()}
+\code{\link{profile_emissions_impl}()}
 }
 \concept{composable friends}
 \keyword{internal}
