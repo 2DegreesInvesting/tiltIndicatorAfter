@@ -4,5 +4,6 @@
 #' composable friends. Compose them to create complex results.
 #'
 #' @family composable friends
+#' @keywords internal
 #' @name profile_impl
 NULL
