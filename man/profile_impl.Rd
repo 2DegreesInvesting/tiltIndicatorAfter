@@ -95,4 +95,10 @@ result
 # Cleanup
 options(restore)
 }
+\seealso{
+Other profile functions: 
+\code{\link{profile_emissions}()},
+\code{\link{profile_sector}()}
+}
+\concept{profile functions}
 \keyword{internal}

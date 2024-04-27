@@ -15,6 +15,7 @@
 #' @export
 #'
 #' @family top-level functions
+#' @family profile functions
 #'
 #' @examples
 #' library(tiltToyData)

@@ -4,6 +4,7 @@
 #' small. Compose them to create complex results.
 #'
 #' @name profile_impl
+#' @family profile functions
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
 #' library(tiltToyData)

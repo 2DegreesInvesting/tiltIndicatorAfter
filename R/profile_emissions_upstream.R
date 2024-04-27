@@ -4,6 +4,7 @@
 #' @inheritParams tiltIndicator::emissions_profile_upstream
 #'
 #' @family top-level functions
+#' @family profile functions
 #'
 #' @return `r document_tilt_profile()`
 #'
