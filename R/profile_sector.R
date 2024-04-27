@@ -22,7 +22,7 @@ profile_sector <- function(companies,
   )
 }
 
-#' @rdname composable_friends
+#' @rdname profile_impl
 #' @export
 #' @keywords internal
 profile_sector_impl <- function(companies,
