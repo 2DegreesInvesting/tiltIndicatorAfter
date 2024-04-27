@@ -9,11 +9,10 @@
 #'   product and company levels) and `co2_avg` (at company level only)?
 #'
 #' @keywords internal
+#' @family composable friends
 #'
 #' @return An object of the same class as `data`.
 #' @export
-#' @family composable friends
-#'
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
