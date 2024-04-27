@@ -11,7 +11,7 @@ test_that("different benchmarks output different number of rows", {
     isic_4digit = "'1234'",
     co2_footprint = 1:3,
   )
-  data <- left_join(x, y, by = col_risk_emissions(), relationship = "many-to-many")
+  data <- left_join(x, y, by = col_risk_category_emissions_profile(), relationship = "many-to-many")
 
   benchmark <- "all"
   expected <- 3
@@ -51,7 +51,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
     summarize_range(
       data,
       col_footprint(),
-      .by = c(col_grouped_by(), col_risk_emissions())
+      .by = c(col_grouped_by(), col_risk_category_emissions_profile())
     ),
     summarize_co2_range(data)
   )
