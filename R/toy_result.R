@@ -75,3 +75,23 @@ FIXME_mutate_product <- function(data, ...) {
   data |>
     mutate(product = lapply(.data$product, \(x) mutate(x, ...)))
 }
+
+#' @export
+#' @rdname toy_output
+#'
+#' @examples
+#'
+#' toy_profile_emissions_impl_output()
+toy_profile_emissions_impl_output <- function() {
+  toy_output(
+    profile_emissions_impl,
+    list(
+      toy_emissions_profile_any_companies(),
+      toy_emissions_profile_products_ecoinvent(),
+      toy_europages_companies(),
+      toy_ecoinvent_activities(),
+      toy_ecoinvent_europages(),
+      toy_isic_name()
+    )
+  )
+}
