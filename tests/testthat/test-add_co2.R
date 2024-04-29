@@ -1,21 +1,8 @@
 test_that("can output `co2_footprint` and `co2_avg`", {
-  # TODO extract and memoise
-  companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
+  tilt_profile <- toy_profile_emissions_impl_output()
 
-  out <- profile_emissions_impl(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  ) |>
-    add_co2(co2, output_co2_footprint = TRUE)
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
 
   expect_true(hasName(out |> unnest_product(), col_footprint()))
 
@@ -30,22 +17,10 @@ test_that("can output `co2_footprint` and `co2_avg`", {
 })
 
 test_that("can exclude `co2_footprint` and `co2_avg`", {
-  companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
+  tilt_profile <- toy_profile_emissions_impl_output()
 
-  out <- profile_emissions_impl(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  ) |>
-    add_co2(co2, output_co2_footprint = FALSE)
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
 
   expect_false(hasName(out |> unnest_product(), col_footprint()))
 
