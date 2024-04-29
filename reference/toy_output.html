@@ -60,7 +60,9 @@ and tiltIndicator.</p>
 <span></span>
 <span><span class="fu">toy_sector_profile_output</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">toy_sector_profile_upstream_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">toy_sector_profile_upstream_output</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">toy_profile_emissions_impl_output</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,10 +78,27 @@ with data from tiltToyData.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># All datasets are momoised</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu">toy_sector_profile_output</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.378   0.004   0.382 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.362   0.000   0.363 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu">toy_sector_profile_output</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.370   0.000   0.369 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.352   0.000   0.352 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">toy_profile_emissions_impl_output</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> Adding 33% and 47% noise to `co2e_lower` and `co2e_upper`, respectively.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id                              product           company </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotomusquinquespinosus        <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> skarn_gallinule                           <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> relegable_southernhairnosedwombat         <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> psychodelic_airedale                      <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ergophilic_fieldspaniel                   <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> preexistent_africanmolesnake              <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> wealthy_ocelot                            <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> fulltime_mollusk                          <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gentlemanlike_asiaticlesserfreshwaterclam <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> frowsy_metalmarkbutterfly                 <span style="color: #949494;">&lt;tibble [6 × 26]&gt;</span> <span style="color: #949494;">&lt;tibble&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 62 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
