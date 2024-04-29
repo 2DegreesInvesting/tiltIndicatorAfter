@@ -84,3 +84,18 @@ test_that("with 'unit' yields the expected number of rows", {
 
   expect_equal(n_row, expected)
 })
+
+test_that("the `co2e*` columns are not full of `NA`s", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+
+  out <- toy_profile_emissions_impl_output() |>
+    add_co2(co2)
+
+  product <- unnest_product(out)
+  expect_false(all(is.na(product[[col_min_jitter()]])))
+  expect_false(all(is.na(product[[col_max_jitter()]])))
+
+  company <- unnest_company(out)
+  expect_false(all(is.na(company[[col_min_jitter()]])))
+  expect_false(all(is.na(company[[col_max_jitter()]])))
+})
