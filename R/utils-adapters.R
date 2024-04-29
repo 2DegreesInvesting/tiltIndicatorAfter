@@ -35,6 +35,6 @@ col_footprint <- function() {
   "co2_footprint"
 }
 
-col_footprint_mean <- function()  {
+col_footprint_mean <- function() {
   "co2_avg"
 }
