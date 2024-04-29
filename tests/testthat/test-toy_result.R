@@ -63,7 +63,9 @@ test_that("toy_profile_emissions_impl_output() yields is a trustworthy shortcut"
   ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
-  out1 <- profile_emissions(
+
+  withr::local_seed(1)
+  out1 <- profile_emissions_impl(
     companies,
     co2,
     europages_companies = europages_companies,
@@ -72,6 +74,7 @@ test_that("toy_profile_emissions_impl_output() yields is a trustworthy shortcut"
     isic = isic_name
   )
 
+  withr::local_seed(1)
   out2 <- toy_profile_emissions_impl_output()
 
   expect_equal(out1, out2)
