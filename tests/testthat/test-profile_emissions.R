@@ -535,7 +535,6 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
 })
 
 test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk column", {
-  withr::local_options()
   companies <- read_csv(toy_emissions_profile_any_companies()) |>
     filter(companies_id %in% c("nonphilosophical_llama"))
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
