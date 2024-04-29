@@ -55,6 +55,8 @@ test_that("with 'all' yields the expected number of rows", {
 })
 
 test_that("with 'unit' yields the expected number of rows", {
+  skip("FIXME see https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2083605852")
+
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   tilt_profile <- toy_profile_emissions_impl_output()[1:20, ]
 

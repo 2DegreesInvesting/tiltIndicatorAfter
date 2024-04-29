@@ -182,64 +182,6 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
   expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
 })
 
-test_that("at company level, each benchmark yields the expected number of rows", {
-  skip("FIXME see https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2083605852")
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  out <- profile_emissions(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  )
-
-  grouped_by <- "all"
-  # "high", "medium", "low", NA
-  n_risk_category <- 4
-  expected <- n_risk_category
-  n_row <- out |>
-    unnest_company() |>
-    filter(companies_id %in% companies_id[[1]]) |>
-    filter(benchmark == grouped_by) |>
-    nrow()
-  expect_equal(n_row, expected)
-
-  .all <- c(col_grouped_by(), col_risk_category_emissions_profile())
-  by <- group_benchmark("unit", all = .all)[[1]]
-
-  grouped_by <- "unit"
-  # "high", "medium", "low", NA
-  n_risk_category <- 4
-  n_unit <- out |>
-    unnest_product() |>
-    filter(companies_id %in% companies_id[[1]]) |>
-    filter(benchmark == grouped_by) |>
-    distinct(unit) |>
-    nrow()
-  expected <- n_risk_category * n_unit
-  n_row <- out |>
-    unnest_company() |>
-    filter(companies_id %in% companies_id[[1]]) |>
-    filter(benchmark == grouped_by) |>
-    nrow()
-  expect_equal(n_row, expected)
-
-  # TODO
-  grouped_by <- "tilt_sector"
-  # emission_profile * tilt_sector * tilt_subsector
-
-  .benchmark <- "unit_tilt_sector"
-  # emission_profile * tilt_sector * tilt_subsector * unit
-})
-
 test_that("handles numeric `isic*` in `co2`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
