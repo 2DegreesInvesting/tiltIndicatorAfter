@@ -57,8 +57,17 @@ add_co2.tilt_profile <- function(data,
                                  output_co2_footprint = option_output_co2_footprint()) {
   data_co2 <- data |> add_co2_footprint_and_co2_avg(co2)
 
-  data_co2 |>
+  match <- c(
+    col_grouped_by(),
+    pattern_risk_category_emissions_profile_any(),
+    "min",
+    "max"
+  )
+
+  out <- data_co2 |>
     summarize_co2_range() |>
+    # Remove columns that introduce NAs
+    select(matches(match)) |>
     jitter_co2_range(amount = jitter_amount) |>
     inform_noise_in_co2_range() |>
     join_to(data_co2) |>
@@ -67,6 +76,8 @@ add_co2.tilt_profile <- function(data,
       # TODO open issue: Should always be TRUE? Not useful without a license
       output_co2_footprint = output_co2_footprint
     )
+
+  out
 }
 
 add_co2_footprint_and_co2_avg <- function(data, co2) {

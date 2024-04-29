@@ -28,10 +28,8 @@
        [7] "matching_certainty_company_average" "company_city"                      
        [9] "postcode"                           "address"                           
       [11] "main_activity"                      "profile_ranking_avg"               
-      [13] "co2_avg"                            "isic_4digit"                       
-      [15] "tilt_sector"                        "tilt_subsector"                    
-      [17] "unit"                               "co2e_lower"                        
-      [19] "co2e_upper"                        
+      [13] "co2_avg"                            "co2e_lower"                        
+      [15] "co2e_upper"                        
 
 # informs the mean noise percent
 
@@ -53,5 +51,5 @@
       # A tibble: 1 x 3
         companies_id        product           company           
       * <chr>               <list>            <list>            
-      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 18]>
+      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 14]>
 
