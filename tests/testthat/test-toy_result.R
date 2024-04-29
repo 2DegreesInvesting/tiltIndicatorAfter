@@ -55,3 +55,24 @@ test_that("toy_sector_profile_upstream_output hasn't changed", {
   expect_snapshot(format_minimal_snapshot(unnest_product(out)))
   expect_snapshot(format_minimal_snapshot(unnest_company(out)))
 })
+
+test_that("toy_profile_emissions_impl_output() yields is a trustworthy shortcut", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+  out1 <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  )
+
+  out2 <- toy_profile_emissions_impl_output()
+
+  expect_equal(out1, out2)
+})
