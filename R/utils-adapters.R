@@ -1,4 +1,12 @@
-# Reuse stable, consistent names from higher level components
+# Define reusable names and patterns
+
+col_company_id <- function() {
+  "companies_id"
+}
+
+col_product_id <- function() {
+  "activity_uuid_product_uuid"
+}
 
 # Reuse ubiquitous column names, and the pattern <indicator>_profile[_upstream]
 # (see tiltIndicator::document_default_value())
