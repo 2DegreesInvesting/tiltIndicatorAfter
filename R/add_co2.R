@@ -92,7 +92,7 @@ add_co2_footprint_and_co2_avg <- function(data, co2) {
     )
 
   by <- c("companies_id", col_grouped_by())
-  footprint_col <- extract_name(co2, "co2_footprint$")
+  footprint_col <- extract_name(co2, col_footprint())
 
   co2_avg <- product |>
     select(all_of(by), matches(col_footprint())) |>
