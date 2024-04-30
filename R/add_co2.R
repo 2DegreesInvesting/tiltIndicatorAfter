@@ -73,7 +73,6 @@ add_co2.tilt_profile <- function(data,
     join_to(data_co2) |>
     polish_co2_range(
       output_min_max = output_min_max,
-      # TODO open issue: Should always be TRUE? Not useful without a license
       output_co2_footprint = output_co2_footprint
     )
 
