@@ -386,7 +386,7 @@ test_that("with some match preserves unmatched products (#193)", {
   expect_equal(unique(product$activity_uuid_product_uuid), c("unmatched", uuid))
 })
 
-test_that("with no match errors gracefully (#193)", {
+test_that("with no match errors gracefully", {
   companies <- read_csv(toy_emissions_profile_any_companies()) |>
     filter(companies_id %in% dplyr::first(companies_id)) |>
     mutate(activity_uuid_product_uuid = "unmatched")
