@@ -4,7 +4,7 @@ summarize_co2_range <- function(data) {
 
 #' @export
 summarize_co2_range.data.frame <- function(data) {
-  .emission_profile <- extract_name(data, "emission_.*profile$")
+  .emission_profile <- extract_name(data, pattern_risk_category_emissions_profile_any())
   .all <- c(col_grouped_by(), .emission_profile)
   # `split()` drops `NA`s in `.x`, so it makes sense to also drop them in `.by`
   .by <- group_benchmark(unique(data[[col_grouped_by()]]), .all, na.rm = TRUE)
