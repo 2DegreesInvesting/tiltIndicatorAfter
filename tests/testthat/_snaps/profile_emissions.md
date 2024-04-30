@@ -31,14 +31,6 @@
       [13] "co2_avg"                            "co2e_lower"                        
       [15] "co2e_upper"                        
 
-# informs the mean noise percent
-
-    Code
-      invisible <- profile_emissions(companies, co2, europages_companies,
-        ecoinvent_activities, ecoinvent_europages, isic_name)
-    Message
-      i Adding 49% and 103% noise to `co2e_lower` and `co2e_upper`, respectively.
-
 # informs a useful percent noise (not 'Adding NA% ... noise') (#188)
 
     Code

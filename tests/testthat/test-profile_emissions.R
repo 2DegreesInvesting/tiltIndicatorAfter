@@ -539,6 +539,8 @@ test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk co
 })
 
 test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", {
+  # It's more maintainable to test this in the add_co2() module, but I'm leaving
+  # this one here to more strongly ensure there is no regression to the bug
   withr::local_options(tiltIndicatorAfter.verbose = TRUE)
 
   companies <- read_csv(toy_emissions_profile_any_companies(), n_max = 1)
