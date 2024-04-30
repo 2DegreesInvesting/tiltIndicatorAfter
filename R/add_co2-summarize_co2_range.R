@@ -4,18 +4,20 @@ summarize_co2_range <- function(data) {
 
 #' @export
 summarize_co2_range.data.frame <- function(data) {
-  .emission_profile <- extract_name(data, pattern_risk_category_emissions_profile_any())
-  .all <- c(col_grouped_by(), .emission_profile)
+  .all <- c(
+    col_grouped_by(),
+    extract_name(data, pattern_risk_category_emissions_profile_any())
+  )
   # `split()` drops `NA`s in `.x`, so it makes sense to also drop them in `.by`
-  .by <- group_benchmark(unique(data[[col_grouped_by()]]), .all, na.rm = TRUE)
+  .na.rm <- TRUE
+  .by <- group_benchmark(unique(data[[col_grouped_by()]]), .all, na.rm = .na.rm)
 
   check_summarize_co2_range(data, benchmark_cols = unique(unlist(.by)))
 
   .x <- split(data, data[[col_grouped_by()]])
-  col <- extract_name(data, col_footprint())
-  out <- summarize_range(.x, col = !!ensym(col), .by = .by)
-  out <- reduce(out, bind_rows)
-  out
+  .footprint <- extract_name(data, col_footprint())
+  out <- summarize_range(.x, col = !!ensym(.footprint), .by = .by)
+  reduce(out, bind_rows)
 }
 
 #' @export
