@@ -107,7 +107,7 @@ test_that("jittered values are grouped by unit, i.e. units with different footpr
   profile <- basic |> filter(companies_id %in% .id)
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
-  out <- profile |> add_co2(co2)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
 
   cols <- c("companies_id", "co2", "unit", "benchmark", "emission_profile", "unit", "tilt_sector", "tilt_subsector", "isic_4digit", "co2_footprint")
   pick <- out |>
@@ -127,4 +127,20 @@ test_that("jittered values are grouped by unit, i.e. units with different footpr
     pull(filter(pick, unit == "kg"), "co2e_lower"),
     pull(filter(pick, unit == "m2"), "co2e_lower")
   ))
+})
+
+test_that("characterize columns at product level", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  tilt_profile <- toy_profile_emissions_impl_output()
+
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  expect_snapshot(names(unnest_product(out)))
+})
+
+test_that("characterize columns at company level", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  tilt_profile <- toy_profile_emissions_impl_output()
+
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  expect_snapshot(names(unnest_company(out)))
 })
