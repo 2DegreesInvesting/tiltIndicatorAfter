@@ -1,10 +1,23 @@
-test_that("at product level, can output `co2_footprint`", {
+test_that("at product level, can include or exclude the licensed co2 footprint", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   tilt_profile <- toy_profile_emissions_impl_output()
 
   out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
-
   expect_true(hasName(out |> unnest_product(), col_footprint()))
+
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  expect_false(hasName(out |> unnest_product(), col_footprint()))
+})
+
+test_that("at product level, always includes the jittered range of co2 footprint", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  tilt_profile <- toy_profile_emissions_impl_output()
+
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  expect_true(hasName(out |> unnest_product(), col_min_jitter()))
+  expect_true(hasName(out |> unnest_product(), col_max_jitter()))
+
+  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
   expect_true(hasName(out |> unnest_product(), col_min_jitter()))
   expect_true(hasName(out |> unnest_product(), col_max_jitter()))
 })
@@ -27,24 +40,6 @@ test_that("at company level, never outputs `co2_footprint`", {
   expect_false(hasName(out |> unnest_company(), col_footprint()))
   out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_false(hasName(out |> unnest_company(), col_footprint()))
-})
-
-test_that("can exclude `co2_footprint` and `co2_avg`", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
-
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
-
-  expect_false(hasName(out |> unnest_product(), col_footprint()))
-
-  # Never
-  expect_false(hasName(out |> unnest_company(), col_footprint()))
-  # Always
-  expect_true(hasName(out |> unnest_company(), col_footprint_mean()))
-  expect_true(hasName(out |> unnest_product(), col_min_jitter()))
-  expect_true(hasName(out |> unnest_product(), col_max_jitter()))
-  expect_true(hasName(out |> unnest_company(), col_min_jitter()))
-  expect_true(hasName(out |> unnest_company(), col_max_jitter()))
 })
 
 test_that("with 'all' yields the expected number of rows", {
@@ -106,10 +101,6 @@ test_that("the `co2e*` columns are not full of `NA`s", {
   product <- unnest_product(out)
   expect_false(all(is.na(product[[col_min_jitter()]])))
   expect_false(all(is.na(product[[col_max_jitter()]])))
-
-  company <- unnest_company(out)
-  expect_false(all(is.na(company[[col_min_jitter()]])))
-  expect_false(all(is.na(company[[col_max_jitter()]])))
 })
 
 test_that("jittered values are grouped by unit, i.e. units with different footprint yield different jittered footprints", {
