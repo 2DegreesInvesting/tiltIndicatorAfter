@@ -9,7 +9,7 @@ test_that("at product level, can include or exclude the licensed co2 footprint",
   expect_false(hasName(out |> unnest_product(), col_footprint()))
 })
 
-test_that("at product level, always includes the jittered range of co2 footprint", {
+test_that("at product level, the jittered range of co2 footprint can be included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   tilt_profile <- toy_profile_emissions_impl_output()
 
@@ -22,7 +22,18 @@ test_that("at product level, always includes the jittered range of co2 footprint
   expect_true(hasName(out |> unnest_product(), col_max_jitter()))
 })
 
-test_that("at company level, can output the mean of co2_footprint", {
+test_that("at product level, the jittered range of co2 footprint isn't full of `NA`s", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+
+  out <- toy_profile_emissions_impl_output() |>
+    add_co2(co2)
+
+  product <- unnest_product(out)
+  expect_false(all(is.na(product[[col_min_jitter()]])))
+  expect_false(all(is.na(product[[col_max_jitter()]])))
+})
+
+test_that("at company level, always includes the average co2 footprint", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   tilt_profile <- toy_profile_emissions_impl_output()
 
@@ -42,7 +53,7 @@ test_that("at company level, never outputs `co2_footprint`", {
   expect_false(hasName(out |> unnest_company(), col_footprint()))
 })
 
-test_that("with 'all' yields the expected number of rows", {
+test_that("with benchmark 'all' yields the expected number of rows", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   tilt_profile <- toy_profile_emissions_impl_output()[1:2, ]
 
@@ -61,7 +72,7 @@ test_that("with 'all' yields the expected number of rows", {
   expect_equal(nrow(pick), expected)
 })
 
-test_that("with 'unit' yields the expected number of rows", {
+test_that("with benchmark 'unit' yields the expected number of rows", {
   skip("FIXME see https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2083605852")
 
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -90,17 +101,6 @@ test_that("with 'unit' yields the expected number of rows", {
     nrow()
 
   expect_equal(n_row, expected)
-})
-
-test_that("the `co2e*` columns are not full of `NA`s", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-
-  out <- toy_profile_emissions_impl_output() |>
-    add_co2(co2)
-
-  product <- unnest_product(out)
-  expect_false(all(is.na(product[[col_min_jitter()]])))
-  expect_false(all(is.na(product[[col_max_jitter()]])))
 })
 
 test_that("jittered values are grouped by unit, i.e. units with different footprint yield different jittered footprints", {
