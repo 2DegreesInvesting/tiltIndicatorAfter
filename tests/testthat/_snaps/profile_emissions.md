@@ -36,13 +36,6 @@
       profile_emissions(companies, products, europages_companies = europages_companies,
         ecoinvent_activities = ecoinvent_activities, ecoinvent_europages = ecoinvent_europages,
         isic = isic_name)
-    Message
-      i Adding 94% and 51% noise to `co2e_lower` and `co2e_upper`, respectively.
-      i Adding 29% and 163% noise to `co2e_lower` and `co2e_upper`, respectively.
-      i Adding 81% and 159% noise to `co2e_lower` and `co2e_upper`, respectively.
-      i Adding 22% and 64% noise to `co2e_lower` and `co2e_upper`, respectively.
-      i Adding 52% and 175% noise to `co2e_lower` and `co2e_upper`, respectively.
-      i Adding 82% and 129% noise to `co2e_lower` and `co2e_upper`, respectively.
     Output
       # A tibble: 1 x 3
         companies_id        product           company           
