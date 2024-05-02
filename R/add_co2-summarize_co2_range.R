@@ -4,6 +4,11 @@ summarize_co2_range <- function(data) {
 
 #' @export
 summarize_co2_range.data.frame <- function(data) {
+  out <- summarize_co2_range_list(data)
+  reduce(out, bind_rows)
+}
+
+summarize_co2_range_list <- function(data) {
   .all <- c(
     col_grouped_by(),
     extract_name(data, pattern_risk_category_emissions_profile_any())
@@ -17,7 +22,7 @@ summarize_co2_range.data.frame <- function(data) {
   .x <- split(data, data[[col_grouped_by()]])
   .footprint <- extract_name(data, col_footprint())
   out <- summarize_range(.x, col = !!ensym(.footprint), .by = .by)
-  reduce(out, bind_rows)
+  out
 }
 
 #' @export
