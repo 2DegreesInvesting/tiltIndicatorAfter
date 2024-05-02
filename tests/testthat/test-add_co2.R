@@ -1,58 +1,58 @@
 test_that("at product level, characterize columns ", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_snapshot(names(unnest_product(out)))
 })
 
 test_that("at company level, characterize columns", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_snapshot(names(unnest_company(out)))
 })
 
 test_that("at product level, the co2 footprint", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_true(hasName(out |> unnest_product(), col_footprint()))
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
   expect_false(hasName(out |> unnest_product(), col_footprint()))
 })
 
 test_that("at company level, the co2 footprint is optionally included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
   expect_false(hasName(out |> unnest_company(), col_footprint()))
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_false(hasName(out |> unnest_company(), col_footprint()))
 })
 
 test_that("at product level, the jittered range of co2 footprint can be included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_true(hasName(out |> unnest_product(), col_min_jitter()))
   expect_true(hasName(out |> unnest_product(), col_max_jitter()))
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
   expect_true(hasName(out |> unnest_product(), col_min_jitter()))
   expect_true(hasName(out |> unnest_product(), col_max_jitter()))
 })
 
 test_that("at product level, the jittered range of co2 footprint isn't full of `NA`s", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- toy_profile_emissions_impl_output() |>
-    add_co2(co2)
+  out <- profile |> add_co2(co2)
 
   product <- unnest_product(out)
   expect_false(all(is.na(product[[col_min_jitter()]])))
@@ -61,11 +61,11 @@ test_that("at product level, the jittered range of co2 footprint isn't full of `
 
 test_that("at company level, the average co2 footprint is always included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()
+  profile <- toy_profile_emissions_impl_output()
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
   expect_true(hasName(out |> unnest_company(), col_footprint_mean()))
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_true(hasName(out |> unnest_company(), col_footprint_mean()))
 })
 
