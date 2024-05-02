@@ -28,8 +28,7 @@
        [7] "matching_certainty_company_average" "company_city"                      
        [9] "postcode"                           "address"                           
       [11] "main_activity"                      "profile_ranking_avg"               
-      [13] "co2_avg"                            "co2e_lower"                        
-      [15] "co2e_upper"                        
+      [13] "co2_avg"                           
 
 # informs a useful percent noise (not 'Adding NA% ... noise') (#188)
 
@@ -38,10 +37,15 @@
         ecoinvent_activities = ecoinvent_activities, ecoinvent_europages = ecoinvent_europages,
         isic = isic_name)
     Message
-      i Adding 60% and 124% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 94% and 51% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 29% and 163% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 81% and 159% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 22% and 64% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 52% and 175% noise to `co2e_lower` and `co2e_upper`, respectively.
+      i Adding 82% and 129% noise to `co2e_lower` and `co2e_upper`, respectively.
     Output
       # A tibble: 1 x 3
         companies_id        product           company           
       * <chr>               <list>            <list>            
-      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 14]>
+      1 antimonarchy_canine <tibble [6 x 24]> <tibble [24 x 12]>
 

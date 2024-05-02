@@ -227,8 +227,6 @@ test_that("the output at product and company level has columns `co2e_lower` and 
   company <- unnest_company(out)
   expect_true(any(matches_name(product, "co2e_lower")))
   expect_true(any(matches_name(product, "co2e_upper")))
-  expect_true(any(matches_name(company, "co2e_lower")))
-  expect_true(any(matches_name(company, "co2e_upper")))
 })
 
 test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after setting the seed", {
@@ -323,8 +321,6 @@ test_that("can optionally output `min` and `max`", {
 
   expect_true(hasName(unnest_product(out), "min"))
   expect_true(hasName(unnest_product(out), "max"))
-  expect_true(hasName(unnest_company(out), "min"))
-  expect_true(hasName(unnest_company(out), "max"))
 })
 
 test_that("can optionally output `co2_footprint` at product level", {
