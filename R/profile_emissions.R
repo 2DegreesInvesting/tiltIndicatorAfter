@@ -26,20 +26,6 @@ profile_emissions <- function(companies,
     restore_missing_products_from(profile)
 }
 
-restore_missing_products_from <- function(data, profile) {
-  product <- unnest_product(profile)
-  product_missing <- pick_missing_risk_category(product)
-  .product <- bind_rows(unnest_product(data), product_missing)
-  company <- unnest_company(data)
-
-  tilt_profile(nest_levels(.product, company))
-}
-
-pick_missing_risk_category <- function(data) {
-  .col <- extract_name(data, pattern_risk_category_emissions_profile_any())
-  filter(data, is.na(.data[[.col]]))
-}
-
 #' @rdname profile_impl
 #' @export
 #' @keywords internal
@@ -78,3 +64,19 @@ profile_emissions_impl <- function(companies,
   exec_profile("emissions_profile", indicator, indicator_after) |>
     tilt_profile()
 }
+
+
+restore_missing_products_from <- function(data, profile) {
+  product <- unnest_product(profile)
+  product_missing <- pick_missing_risk_category(product)
+  .product <- bind_rows(unnest_product(data), product_missing)
+  company <- unnest_company(data)
+
+  tilt_profile(nest_levels(.product, company))
+}
+
+pick_missing_risk_category <- function(data) {
+  .col <- extract_name(data, pattern_risk_category_emissions_profile_any())
+  filter(data, is.na(.data[[.col]]))
+}
+
