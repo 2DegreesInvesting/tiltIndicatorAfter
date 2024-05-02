@@ -604,7 +604,7 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
   expect_equal(unique(company$profile_ranking_avg), expected_value)
 })
 
-test_that("yields NA in `*tilt_sector` and `*tilt_subsector` when it also yields NA in the *profile$ risk column", {
+test_that("if `*profile$` column has NA then `tilt_sector` and `tilt_subsector` should always have NA", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   id <- unique(companies$companies_id)[[1]]
   uuid <- unique(companies$activity_uuid_product_uuid)[[1]]
