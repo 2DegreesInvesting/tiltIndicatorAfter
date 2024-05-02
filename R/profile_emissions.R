@@ -9,7 +9,7 @@ profile_emissions <- function(companies,
                               isic_tilt = lifecycle::deprecated(),
                               low_threshold = 1 / 3,
                               high_threshold = 2 / 3) {
-  profile_emissions_impl(
+  profile <- profile_emissions_impl(
     companies = companies,
     co2 = co2,
     europages_companies = europages_companies,
@@ -19,8 +19,25 @@ profile_emissions <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  ) |>
+  )
+
+  product <- unnest_product(profile)
+  col <- extract_name(product, pattern_risk_category_emissions_profile_any())
+  missing_profile <- profile |>
+    unnest_product() |>
+    filter(is.na(.data[[col]]))
+
+  out <- profile |>
     add_co2(co2)
+
+  product <- out |>
+    unnest_product() |>
+    bind_rows(missing_profile)
+
+  company <- out |>
+    unnest_company()
+
+  tilt_profile(nest_levels(product, company))
 }
 
 #' @rdname profile_impl

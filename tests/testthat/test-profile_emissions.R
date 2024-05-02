@@ -345,8 +345,6 @@ test_that("can optionally output `co2_footprint` at product level", {
 })
 
 test_that("with some match preserves unmatched products (#193)", {
-  skip("FIXME: This PR introduces a regression. We now loose unmatch products!")
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   id <- unique(companies$companies_id)[[1]]
   uuid <- unique(companies$activity_uuid_product_uuid)[[1]]
@@ -381,7 +379,7 @@ test_that("with some match preserves unmatched products (#193)", {
   )
 
   product <- unnest_product(out)
-  expect_equal(unique(product$activity_uuid_product_uuid), c("unmatched", uuid))
+  expect_equal(unique(product$activity_uuid_product_uuid), c(uuid, "unmatched"))
 })
 
 test_that("with no match errors gracefully", {
