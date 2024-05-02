@@ -69,32 +69,32 @@ test_that("at company level, the average co2 footprint is always included", {
   expect_true(hasName(out |> unnest_company(), col_footprint_mean()))
 })
 
-test_that("yields the expected number of rows with benchmark 'all' ", {
+test_that("at company level, yields the expected number of rows with benchmark 'all' ", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()[1:2, ]
+  profile <- toy_profile_emissions_impl_output()[1:2, ]
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
 
   grouped_by <- "all"
   # "high", "medium", "low", NA
   n_risk_category <- 4
   expected <- n_risk_category
 
-  pick <- out |>
+  company <- out |>
     unnest_company() |>
     filter(companies_id %in% companies_id[[1]]) |>
     filter(benchmark == grouped_by)
 
-  expect_equal(nrow(pick), expected)
+  expect_equal(nrow(company), expected)
 })
 
 test_that("yields the expected number of rows with benchmark 'unit'", {
   skip("FIXME see https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2083605852")
 
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  tilt_profile <- toy_profile_emissions_impl_output()[1:20, ]
+  profile <- toy_profile_emissions_impl_output()[1:20, ]
 
-  out <- tilt_profile |> add_co2(co2, output_co2_footprint = FALSE)
+  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
 
   grouped_by <- "unit"
   # "high", "medium", "low", NA
@@ -110,26 +110,25 @@ test_that("yields the expected number of rows with benchmark 'unit'", {
     nrow()
   expected <- n_risk_category * n_unit
 
-  n_row <- out |>
+  company <- out |>
     unnest_company() |>
     filter(companies_id %in% companies_id[[1]]) |>
-    filter(benchmark == grouped_by) |>
-    nrow()
+    filter(benchmark == grouped_by)
 
-  expect_equal(n_row, expected)
+  expect_equal(nrow(company), expected)
 })
 
 test_that("at product level, different values of co2 footprint yield different values in the jittered range of co2 footprint", {
-  basic <- toy_profile_emissions_impl_output()
   # From reprex 2 at https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2086975144
   .id <- c("ironhearted_tarpan", "epitaphic_yellowhammer")
-  profile <- basic |> filter(companies_id %in% .id)
+  profile <- toy_profile_emissions_impl_output() |>
+    filter(companies_id %in% .id)
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
 
   out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
 
   cols <- c("companies_id", "co2", "unit", "benchmark", "emission_profile", "unit", "tilt_sector", "tilt_subsector", "isic_4digit", "co2_footprint")
-  product_pick <- out |>
+  product <- out |>
     unnest_product() |>
     filter(benchmark == "unit") |>
     filter(emission_profile == "high") |>
@@ -137,14 +136,14 @@ test_that("at product level, different values of co2 footprint yield different v
 
   # Units with different footprint ...
   expect_false(identical(
-    pull(filter(product_pick, unit == "kg"), "co2_footprint"),
-    pull(filter(product_pick, unit == "m2"), "co2_footprint")
+    pull(filter(product, unit == "kg"), "co2_footprint"),
+    pull(filter(product, unit == "m2"), "co2_footprint")
   ))
 
   # yield different jittered footprint
   expect_false(identical(
-    pull(filter(product_pick, unit == "kg"), "co2e_lower"),
-    pull(filter(product_pick, unit == "m2"), "co2e_lower")
+    pull(filter(product, unit == "kg"), "co2e_lower"),
+    pull(filter(product, unit == "m2"), "co2e_lower")
   ))
 })
 
