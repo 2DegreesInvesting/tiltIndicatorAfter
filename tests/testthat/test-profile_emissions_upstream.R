@@ -143,7 +143,7 @@ test_that("handles numeric `isic*` in `co2`", {
   )
 })
 
-test_that("the output at product and company level has columns `co2e_lower` and `co2e_upper`", {
+test_that("the output at product level has columns `co2e_lower` and `co2e_upper`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -163,11 +163,8 @@ test_that("the output at product and company level has columns `co2e_lower` and 
   )
 
   product <- unnest_product(out)
-  company <- unnest_company(out)
   expect_true(any(matches_name(product, "co2e_lower")))
   expect_true(any(matches_name(product, "co2e_upper")))
-  expect_true(any(matches_name(company, "co2e_lower")))
-  expect_true(any(matches_name(company, "co2e_upper")))
 })
 
 test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after setting the seed", {
@@ -247,33 +244,7 @@ test_that("allows controlling the amount of noise", {
   expect_false(identical(out1, out2))
 })
 
-test_that("informs the mean noise percent", {
-  local_seed(1)
-  local_options(tiltIndicatorAfter.verbose = TRUE)
-  local_options(tiltIndicatorAfter.set_jitter_amount = 2)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  expect_snapshot(
-    invisible <- profile_emissions_upstream(
-      companies,
-      co2,
-      europages_companies = europages_companies,
-      ecoinvent_activities = ecoinvent_activities,
-      ecoinvent_inputs = ecoinvent_inputs,
-      ecoinvent_europages = ecoinvent_europages,
-      isic = isic_name
-    )
-  )
-})
-
-test_that("can optionally output `min` and `max`", {
+test_that("at product level, can optionally output `min` and `max`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -297,8 +268,6 @@ test_that("can optionally output `min` and `max`", {
 
   expect_true(hasName(unnest_product(out), "min"))
   expect_true(hasName(unnest_product(out), "max"))
-  expect_true(hasName(unnest_company(out), "min"))
-  expect_true(hasName(unnest_company(out), "max"))
 })
 
 test_that("outputs `profile_ranking_avg` at company level", {
