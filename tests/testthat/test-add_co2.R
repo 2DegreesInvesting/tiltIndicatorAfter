@@ -45,13 +45,12 @@ test_that("with 'all' yields the expected number of rows", {
   n_risk_category <- 4
   expected <- n_risk_category
 
-  n_row <- out |>
+  pick <- out |>
     unnest_company() |>
     filter(companies_id %in% companies_id[[1]]) |>
-    filter(benchmark == grouped_by) |>
-    nrow()
+    filter(benchmark == grouped_by)
 
-  expect_equal(n_row, expected)
+  expect_equal(nrow(pick), expected)
 })
 
 test_that("with 'unit' yields the expected number of rows", {

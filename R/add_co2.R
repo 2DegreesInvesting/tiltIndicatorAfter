@@ -58,35 +58,71 @@ add_co2.tilt_profile <- function(data,
   data_co2 <- data |> add_co2_footprint_and_co2_avg(co2)
 
   product <- unnest_product(data_co2)
-  lst <- summarize_co2_range_list(product)
+  .list <- summarize_co2_range_list(product)
 
-  match <- c(
-    col_grouped_by(),
-    pattern_risk_category_emissions_profile_any(),
-    "min",
-    "max"
-  )
+  summary <- map(.list, function(.x) jitter_co2_range(.x, amount = jitter_amount))
 
-  out <- data_co2 |>
-    summarize_co2_range() |>
-    # Remove columns that introduce NAs
-    select(matches(match)) |>
-    # FIXME: The select() above removes makes jitter_co2_range() work
-    # beyond the limits of the required groupings. The fix may be to
-    # move jitter_co2_range() to inside summarize_co2_range()?
-    # Alternatively see if I can remove the call to select() in such a
-    # wasy that I can still avoid undesireble NAs (are they really
-    # undesirable?). OR, maybe I can work with the list-output of
-    # summarize_range() so the jitter is applied to each split.
-    jitter_co2_range(amount = jitter_amount) |>
-    inform_noise_in_co2_range() |>
-    join_to(data_co2) |>
-    polish_co2_range(
+  out_product <- summary |>
+    map(~tiltIndicator:::join_to.data.frame(.x, product)) |>
+    map(~polish_co2_range.data.frame(.x,
       output_min_max = output_min_max,
       output_co2_footprint = output_co2_footprint
+    )) |>
+    reduce(bind_rows) |>
+    filter(
+      !is.na(.data[[col_min_jitter()]]) |
+      !is.na(.data[[col_min_jitter()]])
     )
 
-  out
+  browser()
+  company <- unnest_company(data_co2)
+
+  tmp <- summary |>
+    map(~tiltIndicator:::join_to.data.frame(.x, company))
+
+
+    out_company <- tmp |>
+    map(~polish_co2_range.data.frame(.x,
+      output_min_max = output_min_max,
+      output_co2_footprint = output_co2_footprint
+    )) |>
+    reduce(bind_rows) |>
+    filter(
+      !is.na(.data[[col_min_jitter()]]) |
+      !is.na(.data[[col_min_jitter()]])
+    )
+
+  tilt_profile(nest_levels(out_product, out_company))
+
+
+  # FIXME : delete?
+  # match <- c(
+  #   col_grouped_by(),
+  #   pattern_risk_category_emissions_profile_any(),
+  #   "min",
+  #   "max"
+  # )
+  #
+  # out <- data_co2 |>
+  #   summarize_co2_range() |>
+  #   # Remove columns that introduce NAs
+  #   select(matches(match)) |>
+  #   # FIXME: The select() above removes makes jitter_co2_range() work
+  #   # beyond the limits of the required groupings. The fix may be to
+  #   # move jitter_co2_range() to inside summarize_co2_range()?
+  #   # Alternatively see if I can remove the call to select() in such a
+  #   # wasy that I can still avoid undesireble NAs (are they really
+  #   # undesirable?). OR, maybe I can work with the list-output of
+  #   # summarize_range() so the jitter is applied to each split.
+  #   jitter_co2_range(amount = jitter_amount) |>
+  #   inform_noise_in_co2_range() |>
+  #   join_to(data_co2) |>
+  #   polish_co2_range(
+  #     output_min_max = output_min_max,
+  #     output_co2_footprint = output_co2_footprint
+  #   )
+
+  # out
 }
 
 add_co2_footprint_and_co2_avg <- function(data, co2) {
