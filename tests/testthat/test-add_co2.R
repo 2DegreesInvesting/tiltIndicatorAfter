@@ -99,3 +99,32 @@ test_that("the `co2e*` columns are not full of `NA`s", {
   expect_false(all(is.na(company[[col_min_jitter()]])))
   expect_false(all(is.na(company[[col_max_jitter()]])))
 })
+
+test_that("jittered values are grouped by unit, i.e. units with different footprint yield different jittered footprints", {
+  basic <- toy_profile_emissions_impl_output()
+  # From reprex 2 at https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2086975144
+  .id <- c("ironhearted_tarpan", "epitaphic_yellowhammer")
+  profile <- basic |> filter(companies_id %in% .id)
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+
+  out <- profile |> add_co2(co2)
+
+  cols <- c("companies_id", "co2", "unit", "benchmark", "emission_profile", "unit", "tilt_sector", "tilt_subsector", "isic_4digit", "co2_footprint")
+  pick <- out |>
+    unnest_product() |>
+    filter(benchmark == "unit") |>
+    filter(emission_profile == "high") |>
+    select(matches(cols))
+
+  # Units with different footprint ...
+  expect_false(identical(
+    pull(filter(pick, unit == "kg"), "co2_footprint"),
+    pull(filter(pick, unit == "m2"), "co2_footprint")
+  ))
+
+  # yield different jittered footprint
+  expect_false(identical(
+    pull(filter(pick, unit == "kg"), "co2e_lower"),
+    pull(filter(pick, unit == "m2"), "co2e_lower")
+  ))
+})

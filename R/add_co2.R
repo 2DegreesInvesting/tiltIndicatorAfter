@@ -68,6 +68,13 @@ add_co2.tilt_profile <- function(data,
     summarize_co2_range() |>
     # Remove columns that introduce NAs
     select(matches(match)) |>
+    # FIXME: The select() above removes makes jitter_co2_range() work
+    # beyond the limits of the required groupings. The fix may be to
+    # move jitter_co2_range() to inside summarize_co2_range()?
+    # Alternatively see if I can remove the call to select() in such a
+    # wasy that I can still avoid undesireble NAs (are they really
+    # undesirable?). OR, maybe I can work with the list-output of
+    # summarize_range() so the jitter is applied to each split.
     jitter_co2_range(amount = jitter_amount) |>
     inform_noise_in_co2_range() |>
     join_to(data_co2) |>
