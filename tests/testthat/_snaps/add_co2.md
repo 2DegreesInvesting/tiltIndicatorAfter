@@ -1,4 +1,4 @@
-# characterize columns at product level
+# at product level, characterize columns 
 
     Code
       names(unnest_product(out))
@@ -17,7 +17,7 @@
       [23] "ei_geography"                       "co2_footprint"                     
       [25] "co2e_lower"                         "co2e_upper"                        
 
-# characterize columns at company level
+# at company level, characterize columns
 
     Code
       names(unnest_company(out))
