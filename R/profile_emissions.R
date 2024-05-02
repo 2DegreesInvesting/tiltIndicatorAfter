@@ -21,23 +21,23 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   )
 
+  profile |>
+    add_co2(co2) |>
+    restore_missing_products_from(profile)
+}
+
+restore_missing_products_from <- function(data, profile) {
   product <- unnest_product(profile)
-  col <- extract_name(product, pattern_risk_category_emissions_profile_any())
-  missing_profile <- profile |>
-    unnest_product() |>
-    filter(is.na(.data[[col]]))
+  product_missing <- pick_missing_risk_category(product)
+  .product <- bind_rows(unnest_product(data), product_missing)
+  company <- unnest_company(data)
 
-  out <- profile |>
-    add_co2(co2)
+  tilt_profile(nest_levels(.product, company))
+}
 
-  product <- out |>
-    unnest_product() |>
-    bind_rows(missing_profile)
-
-  company <- out |>
-    unnest_company()
-
-  tilt_profile(nest_levels(product, company))
+pick_missing_risk_category <- function(data) {
+  .col <- extract_name(data, pattern_risk_category_emissions_profile_any())
+  filter(data, is.na(.data[[.col]]))
 }
 
 #' @rdname profile_impl
