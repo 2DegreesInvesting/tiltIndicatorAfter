@@ -30,15 +30,3 @@
       [11] "main_activity"                      "profile_ranking_avg"               
       [13] "co2_avg"                           
 
-# informs a useful percent noise (not 'Adding NA% ... noise') (#188)
-
-    Code
-      profile_emissions(companies, products, europages_companies = europages_companies,
-        ecoinvent_activities = ecoinvent_activities, ecoinvent_europages = ecoinvent_europages,
-        isic = isic_name)
-    Output
-      # A tibble: 1 x 3
-        companies_id        product           company           
-      * <chr>               <list>            <list>            
-      1 antimonarchy_canine <tibble [6 x 24]> <tibble [24 x 12]>
-

@@ -89,8 +89,6 @@ test_that("at company level, yields the expected number of rows with benchmark '
 })
 
 test_that("yields the expected number of rows with benchmark 'unit'", {
-  skip("FIXME see https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2083605852")
-
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()[1:20, ]
 
