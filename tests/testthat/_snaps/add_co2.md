@@ -28,6 +28,5 @@
        [7] "matching_certainty_company_average" "company_city"                      
        [9] "postcode"                           "address"                           
       [11] "main_activity"                      "profile_ranking_avg"               
-      [13] "co2_avg"                            "co2e_lower"                        
-      [15] "co2e_upper"                        
+      [13] "co2_avg"                           
 

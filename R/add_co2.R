@@ -74,23 +74,7 @@ add_co2.tilt_profile <- function(data,
       !is.na(.data[[col_min_jitter()]])
     )
 
-  browser()
-  company <- unnest_company(data_co2)
-
-  tmp <- summary |>
-    map(~tiltIndicator:::join_to.data.frame(.x, company))
-
-
-    out_company <- tmp |>
-    map(~polish_co2_range.data.frame(.x,
-      output_min_max = output_min_max,
-      output_co2_footprint = output_co2_footprint
-    )) |>
-    reduce(bind_rows) |>
-    filter(
-      !is.na(.data[[col_min_jitter()]]) |
-      !is.na(.data[[col_min_jitter()]])
-    )
+  out_company <- unnest_company(data_co2)
 
   tilt_profile(nest_levels(out_product, out_company))
 
