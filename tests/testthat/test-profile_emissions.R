@@ -604,31 +604,49 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
   expect_equal(unique(company$profile_ranking_avg), expected_value)
 })
 
-test_that("yield NA in `*tilt_sector` and `*tilt_subsector` in *profile$ risk column", {
-  companies <- read_csv(toy_emissions_profile_any_companies()) |>
-    filter(companies_id %in% c("nonphilosophical_llama"))
+test_that("if `*profile$` column has NA then `tilt_sector` and `tilt_subsector` should always have NA", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  id <- unique(companies$companies_id)[[1]]
+  uuid <- unique(companies$activity_uuid_product_uuid)[[1]]
+  companies <- companies |>
+    filter(companies_id == id) |>
+    filter(activity_uuid_product_uuid == uuid)
+  companies <- bind_rows(companies, companies)
+  companies[1, "activity_uuid_product_uuid"] <- "unmatched"
+
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
-    filter(activity_uuid_product_uuid == "bf94b5a7-b7a2-46d1-bb95-84bc560b12fb")
+    filter(activity_uuid_product_uuid == uuid)
 
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
+  europages_companies <- read_csv(toy_europages_companies()) |>
+    filter(companies_id == id)
 
-  result <- profile_emissions(
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities()) |>
+    filter(activity_uuid_product_uuid == uuid)
+
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |>
+    filter(activity_uuid_product_uuid == uuid)
+
+  isic_name <- read_csv(toy_isic_name()) |>
+    filter(isic_4digit == co2$isic_4digit)
+
+  out <- profile_emissions(
     companies,
     co2,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
     isic_name
-  ) |>
-    unnest_product() |>
-    suppressWarnings()
+  )
 
-  na <- filter(result, is.na(get_column(result, "profile$")))
-  these_cols_are_full_of_na <- all(is.na(select(na, tilt_sector, tilt_subsector)))
-  expect_true(these_cols_are_full_of_na)
+  product <- unnest_product(out)
+  where_risk_category_is_na <- product |>
+    filter(is.na(get_column(product, "profile$")))
+
+  tilt_sector <- where_risk_category_is_na |> get_column("tilt_sector")
+  expect_true(all(is.na(tilt_sector)))
+
+  tilt_subsector <- where_risk_category_is_na |> get_column("tilt_subsector")
+  expect_true(all(is.na(tilt_subsector)))
 })
 
 test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", {
