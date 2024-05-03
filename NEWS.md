@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9037 (2024-05-03)
+
+* `profile_emissions*()` at company level no longer outputs the columns
+`co2e_lower` and `co2e_upper` (#231).
+
 # tiltIndicatorAfter 0.0.0.9036 (2024-04-29)
 
 * New developer-oriented `toy_profile_emissions_impl_output()`, makes tests easier

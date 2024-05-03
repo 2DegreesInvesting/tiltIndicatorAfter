@@ -167,6 +167,30 @@ test_that("the output at product level has columns `co2e_lower` and `co2e_upper`
   expect_true(any(matches_name(product, "co2e_upper")))
 })
 
+test_that("the output at company level lacks columns `co2e_lower` and `co2e_upper` (#230)", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  out <- profile_emissions_upstream(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_inputs = ecoinvent_inputs,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  )
+
+  company <- unnest_company(out)
+  expect_false(any(matches_name(company, "co2e_lower")))
+  expect_false(any(matches_name(company, "co2e_upper")))
+})
+
 test_that("columns `co2e_lower` and `co2e_upper` give reproducible results after setting the seed", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
@@ -244,7 +268,7 @@ test_that("allows controlling the amount of noise", {
   expect_false(identical(out1, out2))
 })
 
-test_that("at product level, can optionally output `min` and `max`", {
+test_that("can optionally output `min` and `max` at product level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())

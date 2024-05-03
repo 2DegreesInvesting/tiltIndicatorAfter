@@ -28,5 +28,30 @@
        [7] "matching_certainty_company_average" "company_city"                      
        [9] "postcode"                           "address"                           
       [11] "main_activity"                      "profile_ranking_avg"               
+<<<<<<< HEAD
       [13] "co2_avg"                           
+=======
+
+# informs the mean noise percent
+
+    Code
+      invisible <- profile_emissions(companies, co2, europages_companies,
+        ecoinvent_activities, ecoinvent_europages, isic_name)
+    Message
+      i Adding 48% and 99% noise to `co2e_lower` and `co2e_upper`, respectively.
+
+# informs a useful percent noise (not 'Adding NA% ... noise') (#188)
+
+    Code
+      profile_emissions(companies, products, europages_companies = europages_companies,
+        ecoinvent_activities = ecoinvent_activities, ecoinvent_europages = ecoinvent_europages,
+        isic = isic_name)
+    Message
+      i Adding 43% and 99% noise to `co2e_lower` and `co2e_upper`, respectively.
+    Output
+      # A tibble: 1 x 3
+        companies_id        product           company           
+      * <chr>               <list>            <list>            
+      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 11]>
+>>>>>>> main
 
