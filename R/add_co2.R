@@ -90,8 +90,8 @@ add_co2_footprint <- function(data, co2) {
   tilt_profile(nest_levels(product, company))
 }
 
-select_product_id_and_footprint <- function(co2) {
-  select(co2, matches(c(col_product_id(), col_footprint())))
+select_product_id_and_footprint <- function(data) {
+  select(data, matches(c(col_product_id(), col_footprint())))
 }
 
 add_co2_avg <- function(data) {
