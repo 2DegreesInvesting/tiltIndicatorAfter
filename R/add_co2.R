@@ -97,3 +97,37 @@ add_co2_footprint_and_co2_avg <- function(data, co2) {
 
   tilt_profile(nest_levels(product, company))
 }
+
+add_co2_footprint.tilt_profile <- function(data, co2) {
+  co2 <- select(co2, matches(c(col_product_id(), col_footprint())))
+
+  product <- data |>
+    unnest_product() |>
+    left_join(co2, by = col_product_id(), relationship = "many-to-many")
+  company <- data |>
+    unnest_company()
+
+  tilt_profile(nest_levels(product, company))
+}
+
+add_co2_avg.tilt_profile <- function(data, co2) {
+  co2 <- select(co2, matches(c(col_product_id(), col_footprint())))
+
+  by <- c(col_company_id(), col_grouped_by())
+  footprint <- extract_name(co2, col_footprint())
+
+  product <- data |>
+    unnest_product()
+
+  co2_avg <- product |>
+    select(all_of(by), matches(col_footprint())) |>
+    summarise(
+      co2_avg = round(mean(.data[[footprint]], na.rm = TRUE), 3),
+      .by = all_of(by)
+    )
+  company <- data |>
+    unnest_company() |>
+    left_join(co2_avg, by = by, relationship = "many-to-many")
+
+  tilt_profile(nest_levels(product, company))
+}
