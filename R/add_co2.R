@@ -57,13 +57,13 @@ add_co2.tilt_profile <- function(data,
                                  output_co2_footprint = option_output_co2_footprint()) {
   data_co2 <- data |> add_co2_footprint_and_co2_avg(co2)
 
-  product <- unnest_product(data_co2)
-  .list <- summarize_co2_range_list(product)
+  summary <- data_co2 |>
+    unnest_product() |>
+    summarize_co2_range_list() |>
+    map(function(.x) jitter_co2_range(.x, amount = jitter_amount))
 
-  summary <- map(.list, function(.x) jitter_co2_range(.x, amount = jitter_amount))
-
-  out_product <- summary |>
-    map(function(.x) join_to(.x, product)) |>
+  product <- summary |>
+    map(function(.x) join_to(.x, unnest_product(data_co2))) |>
     map(function(.x) polish_co2_range(.x,
       output_min_max = output_min_max,
       output_co2_footprint = output_co2_footprint
@@ -74,9 +74,9 @@ add_co2.tilt_profile <- function(data,
         !is.na(.data[[col_min_jitter()]])
     )
 
-  out_company <- unnest_company(data_co2)
+  company <- unnest_company(data_co2)
 
-  tilt_profile(nest_levels(out_product, out_company))
+  tilt_profile(nest_levels(product, company))
 }
 
 add_co2_footprint_and_co2_avg <- function(data, co2) {
