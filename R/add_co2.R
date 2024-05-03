@@ -15,34 +15,10 @@
 #' @export
 #'
 #' @examples
-#' library(readr, warn.conflicts = FALSE)
-#' library(tiltToyData)
+#' co2 <- readr::read_csv(tiltToyData::toy_emissions_profile_products_ecoinvent())
 #'
-#' restore <- options(list(
-#'   readr.show_col_types = FALSE,
-#'   tiltIndicatorAfter.output_co2_footprint = TRUE
-#' ))
-#'
-#' companies <- read_csv(toy_emissions_profile_any_companies())
-#' co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-#' europages_companies <- read_csv(toy_europages_companies())
-#' ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-#' ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-#' isic_name <- read_csv(toy_isic_name())
-#'
-#' tilt_profile <- profile_emissions_impl(
-#'   companies,
-#'   co2,
-#'   europages_companies = europages_companies,
-#'   ecoinvent_activities = ecoinvent_activities,
-#'   ecoinvent_europages = ecoinvent_europages,
-#'   isic = isic_name
-#' )
-#'
-#' tilt_profile |> add_co2(co2)
-#'
-#' # Cleanup
-#' options(restore)
+#' toy_profile_emissions_impl_output() |>
+#'   add_co2(co2)
 add_co2 <- function(data, co2, ...) {
   UseMethod("add_co2")
 }
