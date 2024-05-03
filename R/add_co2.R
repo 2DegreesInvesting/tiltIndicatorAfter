@@ -55,7 +55,7 @@ add_co2.tilt_profile <- function(data,
                                  jitter_amount = option_jitter_amount(),
                                  output_min_max = option_output_min_max(),
                                  output_co2_footprint = option_output_co2_footprint()) {
-  data_co2 <- data |> add_co2_footprint_and_co2_avg(co2)
+  data_co2 <- add_co2_footprint_and_co2_avg(data, co2)
 
   product <- data_co2 |>
     unnest_product() |>
