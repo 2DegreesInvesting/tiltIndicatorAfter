@@ -64,7 +64,7 @@ add_co2.tilt_profile <- function(data,
 
   out_product <- summary |>
     map(function(.x) join_to(.x, product)) |>
-    map(~ polish_co2_range.data.frame(.x,
+    map(function(.x) polish_co2_range(.x,
       output_min_max = output_min_max,
       output_co2_footprint = output_co2_footprint
     )) |>
