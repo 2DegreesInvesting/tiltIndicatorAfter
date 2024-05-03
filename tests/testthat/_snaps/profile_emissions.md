@@ -25,10 +25,9 @@
        [1] "companies_id"                       "company_name"                      
        [3] "country"                            "emission_profile_share"            
        [5] "emission_profile"                   "benchmark"                         
-       [7] "co2e_lower"                         "co2e_upper"                        
-       [9] "matching_certainty_company_average" "company_city"                      
-      [11] "postcode"                           "address"                           
-      [13] "main_activity"                      "profile_ranking_avg"               
+       [7] "matching_certainty_company_average" "company_city"                      
+       [9] "postcode"                           "address"                           
+      [11] "main_activity"                      "profile_ranking_avg"               
 
 # informs the mean noise percent
 
@@ -50,5 +49,5 @@
       # A tibble: 1 x 3
         companies_id        product           company           
       * <chr>               <list>            <list>            
-      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 13]>
+      1 antimonarchy_canine <tibble [7 x 24]> <tibble [24 x 11]>
 
