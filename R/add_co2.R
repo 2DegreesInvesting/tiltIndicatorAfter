@@ -57,11 +57,10 @@ add_co2.tilt_profile <- function(data,
                                  output_co2_footprint = option_output_co2_footprint()) {
   data_co2 <- data |> add_co2_footprint_and_co2_avg(co2)
 
-  summary <- data_co2 |>
+  product <- data_co2 |>
     unnest_product() |>
     summarize_co2_range_list() |>
-    map(function(.x) jitter_co2_range(.x, amount = jitter_amount))
-  product <- summary |>
+    map(function(.x) jitter_co2_range(.x, amount = jitter_amount)) |>
     map(function(.x) join_to(.x, unnest_product(data_co2))) |>
     map(function(.x) polish_co2_range(.x,
       output_min_max = output_min_max,
