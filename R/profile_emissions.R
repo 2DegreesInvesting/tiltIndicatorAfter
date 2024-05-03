@@ -79,4 +79,3 @@ pick_missing_risk_category <- function(data) {
   .col <- extract_name(data, pattern_risk_category_emissions_profile_any())
   filter(data, is.na(.data[[.col]]))
 }
-

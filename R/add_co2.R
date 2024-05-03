@@ -63,15 +63,15 @@ add_co2.tilt_profile <- function(data,
   summary <- map(.list, function(.x) jitter_co2_range(.x, amount = jitter_amount))
 
   out_product <- summary |>
-    map(~tiltIndicator:::join_to.data.frame(.x, product)) |>
-    map(~polish_co2_range.data.frame(.x,
+    map(~ tiltIndicator:::join_to.data.frame(.x, product)) |>
+    map(~ polish_co2_range.data.frame(.x,
       output_min_max = output_min_max,
       output_co2_footprint = output_co2_footprint
     )) |>
     reduce(bind_rows) |>
     filter(
       !is.na(.data[[col_min_jitter()]]) |
-      !is.na(.data[[col_min_jitter()]])
+        !is.na(.data[[col_min_jitter()]])
     )
 
   out_company <- unnest_company(data_co2)

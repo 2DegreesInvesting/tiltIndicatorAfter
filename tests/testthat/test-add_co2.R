@@ -144,4 +144,3 @@ test_that("at product level, different values of co2 footprint yield different v
     pull(filter(product, unit == "m2"), "co2e_lower")
   ))
 })
-
