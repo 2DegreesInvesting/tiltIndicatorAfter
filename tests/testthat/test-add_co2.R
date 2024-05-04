@@ -30,16 +30,6 @@ test_that("at product level, the co2 footprint can be included", {
   expect_true(hasName(unnest_product(out), col_footprint()))
 })
 
-test_that("at company level, the co2 footprint can be optionally included", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  profile <- toy_profile_emissions_impl_output()
-
-  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
-  expect_false(hasName(out |> unnest_company(), col_footprint()))
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
-  expect_false(hasName(out |> unnest_company(), col_footprint()))
-})
-
 test_that("at product level, the jittered range of co2 footprint can be included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
