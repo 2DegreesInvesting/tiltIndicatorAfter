@@ -43,7 +43,47 @@ test_that("at company level, the co2 footprint can be included", {
   profile <- toy_profile_emissions_impl_output()
 
   out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
-  expect_true(hasName(unnest_product(out), col_footprint()))
+  expect_true(hasName(unnest_company(out), col_footprint()))
+})
+
+test_that("at product level, min and max are excluded by default", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  out <- profile |> add_co2(co2)
+  expect_false(hasName(unnest_product(out), "min"))
+  expect_false(hasName(unnest_product(out), "max"))
+})
+
+test_that("at company level, min and max are excluded by default", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  out <- profile |> add_co2(co2)
+  expect_false(hasName(unnest_company(out), "min"))
+  expect_false(hasName(unnest_company(out), "max"))
+})
+
+test_that("at product level, min and max can be included", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  out <- profile |> add_co2(co2, output_min_max = TRUE)
+  expect_true(hasName(unnest_product(out), "min"))
+  expect_true(hasName(unnest_product(out), "max"))
+})
+
+test_that("at company level, min and max are never included", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  out <- profile |> add_co2(co2)
+  expect_false(hasName(unnest_company(out), "min"))
+  expect_false(hasName(unnest_company(out), "max"))
+
+  out <- profile |> add_co2(co2, output_min_max = TRUE)
+  expect_false(hasName(unnest_company(out), "min"))
+  expect_false(hasName(unnest_company(out), "max"))
 })
 
 test_that("at product level, the jittered range of co2 footprint can be included", {
