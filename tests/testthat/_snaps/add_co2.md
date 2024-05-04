@@ -1,4 +1,4 @@
-# at product level, characterize default output 
+# at product level, characterize default columns
 
     Code
       names(unnest_product(out))
@@ -17,7 +17,7 @@
       [23] "ei_geography"                       "co2e_lower"                        
       [25] "co2e_upper"                        
 
-# at company level, characterize default output
+# at company level, characterize default columns
 
     Code
       names(unnest_company(out))

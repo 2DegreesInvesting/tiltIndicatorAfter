@@ -1,4 +1,4 @@
-test_that("at product level, characterize default output ", {
+test_that("at product level, characterize default columns", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
@@ -6,7 +6,7 @@ test_that("at product level, characterize default output ", {
   expect_snapshot(names(unnest_product(out)))
 })
 
-test_that("at company level, characterize default output", {
+test_that("at company level, characterize default columns", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
@@ -14,18 +14,23 @@ test_that("at company level, characterize default output", {
   expect_snapshot(names(unnest_company(out)))
 })
 
-test_that("at product level, the co2 footprint", {
+test_that("at product level, the co2 footprint is excluded by default", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  out <- profile |> add_co2(co2)
+  expect_false(hasName(unnest_product(out), col_footprint()))
+})
+
+test_that("at product level, the co2 footprint can be included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
   out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
-  expect_true(hasName(out |> unnest_product(), col_footprint()))
-
-  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
-  expect_false(hasName(out |> unnest_product(), col_footprint()))
+  expect_true(hasName(unnest_product(out), col_footprint()))
 })
 
-test_that("at company level, the co2 footprint is optionally included", {
+test_that("at company level, the co2 footprint can be optionally included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
