@@ -38,12 +38,15 @@ test_that("at company level, the co2 footprint is excluded by default", {
   expect_false(hasName(unnest_company(out), col_footprint()))
 })
 
-test_that("at company level, the co2 footprint can be included", {
+test_that("at company level, the co2 footprint is never included", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
+  out <- profile |> add_co2(co2)
+  expect_false(hasName(unnest_company(out), col_footprint()))
+
   out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
-  expect_true(hasName(unnest_company(out), col_footprint()))
+  expect_false(hasName(unnest_company(out), col_footprint()))
 })
 
 test_that("at product level, min and max are excluded by default", {
