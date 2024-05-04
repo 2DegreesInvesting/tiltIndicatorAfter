@@ -1,4 +1,4 @@
-# at product level, characterize columns 
+# at product level, characterize default output 
 
     Code
       names(unnest_product(out))
@@ -14,10 +14,10 @@
       [17] "company_city"                       "postcode"                          
       [19] "address"                            "main_activity"                     
       [21] "activity_uuid_product_uuid"         "profile_ranking"                   
-      [23] "ei_geography"                       "co2_footprint"                     
-      [25] "co2e_lower"                         "co2e_upper"                        
+      [23] "ei_geography"                       "co2e_lower"                        
+      [25] "co2e_upper"                        
 
-# at company level, characterize columns
+# at company level, characterize default output
 
     Code
       names(unnest_company(out))

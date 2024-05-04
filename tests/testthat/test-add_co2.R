@@ -1,16 +1,16 @@
-test_that("at product level, characterize columns ", {
+test_that("at product level, characterize default output ", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2)
   expect_snapshot(names(unnest_product(out)))
 })
 
-test_that("at company level, characterize columns", {
+test_that("at company level, characterize default output", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2)
   expect_snapshot(names(unnest_company(out)))
 })
 
