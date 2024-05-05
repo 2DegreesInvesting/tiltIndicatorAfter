@@ -33,11 +33,7 @@ polish_co2_range.tilt_profile <- function(data,
     )
 
   company <- data |>
-    unnest_company() |>
-    polish_co2_range(
-      output_min_max = output_min_max,
-      output_co2_footprint = output_co2_footprint
-    )
+    unnest_company()
 
   tilt_profile(nest_levels(product, company))
 }
