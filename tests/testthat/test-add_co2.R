@@ -1,88 +1,44 @@
-test_that("at company level, the co2 footprint is never included", {
+test_that("at product level, has co2 footprint", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
   out <- profile |> add_co2(co2)
-  expect_false(hasName(unnest_company(out), col_footprint()))
-
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
-  expect_false(hasName(unnest_company(out), col_footprint()))
-})
-
-test_that("at company level, min and max are never included", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  profile <- toy_profile_emissions_impl_output()
-
-  out <- profile |> add_co2(co2)
-  expect_false(hasName(unnest_company(out), "min"))
-  expect_false(hasName(unnest_company(out), "max"))
-
-  out <- profile |> add_co2(co2, output_min_max = TRUE)
-  expect_false(hasName(unnest_company(out), "min"))
-  expect_false(hasName(unnest_company(out), "max"))
-})
-
-test_that("at product level, characterize default columns", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  profile <- toy_profile_emissions_impl_output()
-
-  out <- profile |> add_co2(co2)
-  expect_snapshot(names(unnest_product(out)))
-})
-
-test_that("at company level, characterize default columns", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  profile <- toy_profile_emissions_impl_output()
-
-  out <- profile |> add_co2(co2)
-  expect_snapshot(names(unnest_company(out)))
-})
-
-test_that("at product level, the co2 footprint is excluded by default", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  profile <- toy_profile_emissions_impl_output()
-
-  out <- profile |> add_co2(co2)
-  expect_false(hasName(unnest_product(out), col_footprint()))
-})
-
-test_that("at product level, the co2 footprint can be included", {
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  profile <- toy_profile_emissions_impl_output()
-
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
   expect_true(hasName(unnest_product(out), col_footprint()))
 })
 
-test_that("at product level, min and max are excluded by default", {
+test_that("at company level, lacks co2 footprint", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
   out <- profile |> add_co2(co2)
-  expect_false(hasName(unnest_product(out), "min"))
-  expect_false(hasName(unnest_product(out), "max"))
+  expect_false(hasName(unnest_company(out), col_footprint()))
 })
 
-test_that("at product level, min and max can be included", {
+test_that("at product level, has min and max", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
-  out <- profile |> add_co2(co2, output_min_max = TRUE)
+  out <- profile |> add_co2(co2)
   expect_true(hasName(unnest_product(out), "min"))
   expect_true(hasName(unnest_product(out), "max"))
 })
 
-test_that("at product level, the jittered range of co2 footprint can be included", {
+test_that("at company level, lacks min and max", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
-  expect_true(hasName(out |> unnest_product(), col_min_jitter()))
-  expect_true(hasName(out |> unnest_product(), col_max_jitter()))
+  out <- profile |> add_co2(co2)
+  expect_false(hasName(unnest_company(out), "min"))
+  expect_false(hasName(unnest_company(out), "max"))
+})
 
-  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
-  expect_true(hasName(out |> unnest_product(), col_min_jitter()))
-  expect_true(hasName(out |> unnest_product(), col_max_jitter()))
+test_that("at product level, has the jittered range of co2 footprint", {
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  out <- profile |> add_co2(co2)
+  expect_true(hasName(out |> unnest_product(), "min_jitter"))
+  expect_true(hasName(out |> unnest_product(), "max_jitter"))
 })
 
 test_that("at product level, the jittered range of co2 footprint isn't full of `NA`s", {
@@ -92,17 +48,15 @@ test_that("at product level, the jittered range of co2 footprint isn't full of `
   out <- profile |> add_co2(co2)
 
   product <- unnest_product(out)
-  expect_false(all(is.na(product[[col_min_jitter()]])))
-  expect_false(all(is.na(product[[col_max_jitter()]])))
+  expect_false(all(is.na(product[["min_jitter"]])))
+  expect_false(all(is.na(product[["max_jitter"]])))
 })
 
-test_that("at company level, the average co2 footprint is always included", {
+test_that("at company level, has the average co2 footprint", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()
 
-  out <- profile |> add_co2(co2, output_co2_footprint = FALSE)
-  expect_true(hasName(out |> unnest_company(), col_footprint_mean()))
-  out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
+  out <- profile |> add_co2(co2)
   expect_true(hasName(out |> unnest_company(), col_footprint_mean()))
 })
 
@@ -162,7 +116,7 @@ test_that("at product level, different values of co2 footprint yield different v
 
   out <- profile |> add_co2(co2, output_co2_footprint = TRUE)
 
-  cols <- c("companies_id", "co2", "unit", "benchmark", "emission_profile", "unit", "tilt_sector", "tilt_subsector", "isic_4digit", "co2_footprint")
+  cols <- c("companies_id", "^min", "^max", "unit", "benchmark", "emission_profile", "unit", "tilt_sector", "tilt_subsector", "isic_4digit", "co2_footprint")
   product <- out |>
     unnest_product() |>
     filter(benchmark == "unit") |>
@@ -177,7 +131,7 @@ test_that("at product level, different values of co2 footprint yield different v
 
   # yield different jittered footprint
   expect_false(identical(
-    pull(filter(product, unit == "kg"), "co2e_lower"),
-    pull(filter(product, unit == "m2"), "co2e_lower")
+    pull(filter(product, unit == "kg"), "min_jitter"),
+    pull(filter(product, unit == "m2"), "min_jitter")
   ))
 })

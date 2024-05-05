@@ -75,7 +75,7 @@ profile_emissions_upstream <- function(companies,
                                        isic_tilt = lifecycle::deprecated(),
                                        low_threshold = 1 / 3,
                                        high_threshold = 2 / 3) {
-  profile_emissions_upstream_impl(
+  profile <- profile_emissions_upstream_impl(
     companies = companies,
     co2 = co2,
     europages_companies = europages_companies,
@@ -86,8 +86,15 @@ profile_emissions_upstream <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  ) |>
-    add_co2(co2)
+  )
+
+  profile |>
+    add_co2(co2) |>
+    polish_co2_range(
+      output_min_max = option_output_min_max(),
+      output_co2_footprint = option_output_co2_footprint()
+    ) |>
+    restore_missing_products_from(profile)
 }
 
 #' @rdname profile_impl
