@@ -30,9 +30,3 @@
       [11] "main_activity"                      "profile_ranking_avg"               
       [13] "co2_avg"                           
 
-# informs the mean noise percent
-
-    Code
-      invisible <- profile_emissions(companies, co2, europages_companies,
-        ecoinvent_activities, ecoinvent_europages, isic_name)
-
