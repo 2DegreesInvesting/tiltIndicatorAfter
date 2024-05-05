@@ -391,7 +391,7 @@ test_that("informs the mean noise percent", {
   )
 })
 
-test_that("can optionally output `min` and `max` at product level", {
+test_that("at product level, can optionally output `min` and `max`", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -412,6 +412,29 @@ test_that("can optionally output `min` and `max` at product level", {
 
   expect_true(hasName(unnest_product(out), "min"))
   expect_true(hasName(unnest_product(out), "max"))
+})
+
+test_that("at company level, never outputs `min` and `max`", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  local_seed(111)
+  local_options(tiltIndicatorAfter.output_co2_footprint_min_max = TRUE)
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  )
+
+  expect_false(hasName(unnest_company(out), "min"))
+  expect_false(hasName(unnest_company(out), "max"))
 })
 
 test_that("can optionally output `co2_footprint` at product level", {
