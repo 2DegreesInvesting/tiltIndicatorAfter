@@ -3,7 +3,9 @@
 # tiltIndicatorAfter 0.0.0.9037 (2024-05-03)
 
 * `profile_emissions*()` at company level no longer outputs the columns
-`co2e_lower` and `co2e_upper` (#231).
+`co2e_lower` and `co2e_upper` (#231). Also, the company level output no longer
+includes the licensed `min` and `max` columns. If necessary, the `min` and `max`
+columns can still be demanded a product level.
 
 # tiltIndicatorAfter 0.0.0.9036 (2024-04-29)
 
