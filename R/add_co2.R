@@ -40,7 +40,8 @@ add_co2.tilt_profile <- function(data,
 
   company <- unnest_company(data_co2)
 
-  tilt_profile(nest_levels(product, company))
+  tilt_profile(nest_levels(product, company)) |>
+    restore_missing_products_from(data)
 }
 
 add_co2_footprint <- function(data, co2) {
@@ -80,3 +81,18 @@ add_co2_avg <- function(data) {
 
   tilt_profile(nest_levels(product, company))
 }
+
+restore_missing_products_from <- function(data, profile) {
+  product <- unnest_product(profile)
+  product_missing <- pick_missing_risk_category(product)
+  .product <- bind_rows(unnest_product(data), product_missing)
+  company <- unnest_company(data)
+
+  tilt_profile(nest_levels(.product, company))
+}
+
+pick_missing_risk_category <- function(data) {
+  .col <- extract_name(data, pattern_risk_category_emissions_profile_any())
+  filter(data, is.na(.data[[.col]]))
+}
+
