@@ -4,9 +4,6 @@
 #' @param ... Unused but necessary for compatibility across methods.
 #' @param jitter_amount Numeric. Controls the amount of noise. Passed to
 #'   `amount` in [tiltIndicator::jitter_range()].
-#' @param output_min_max Logical. Output the columns `min` and `max`?
-#' @param output_co2_footprint Logical. Output the columns `co2_footprint` (at
-#'   product and company levels) and `co2_avg` (at company level only)?
 #'
 #' @keywords internal
 #' @family composable friends
@@ -28,9 +25,7 @@ add_co2 <- function(data, co2, ...) {
 add_co2.tilt_profile <- function(data,
                                  co2,
                                  ...,
-                                 jitter_amount = option_jitter_amount(),
-                                 output_min_max = option_output_min_max(),
-                                 output_co2_footprint = option_output_co2_footprint()) {
+                                 jitter_amount = option_jitter_amount()) {
   data_co2 <- data |>
     add_co2_footprint(co2) |>
     add_co2_avg()

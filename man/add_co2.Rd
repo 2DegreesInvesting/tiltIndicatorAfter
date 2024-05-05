@@ -7,25 +7,13 @@
 \usage{
 add_co2(data, co2, ...)
 
-\method{add_co2}{tilt_profile}(
-  data,
-  co2,
-  ...,
-  jitter_amount = option_jitter_amount(),
-  output_min_max = option_output_min_max(),
-  output_co2_footprint = option_output_co2_footprint()
-)
+\method{add_co2}{tilt_profile}(data, co2, ..., jitter_amount = option_jitter_amount())
 }
 \arguments{
 \item{...}{Unused but necessary for compatibility across methods.}
 
 \item{jitter_amount}{Numeric. Controls the amount of noise. Passed to
 \code{amount} in \code{\link[tiltIndicator:jitter_range]{tiltIndicator::jitter_range()}}.}
-
-\item{output_min_max}{Logical. Output the columns \code{min} and \code{max}?}
-
-\item{output_co2_footprint}{Logical. Output the columns \code{co2_footprint} (at
-product and company levels) and \code{co2_avg} (at company level only)?}
 }
 \value{
 An object of the same class as \code{data}.
