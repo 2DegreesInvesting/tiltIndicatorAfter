@@ -4,9 +4,9 @@ polish_emissions_any <- function(data, ...) {
 
 #' @export
 polish_emissions_any.data.frame <- function(data,
-                                        ...,
-                                        output_min_max = FALSE,
-                                        output_co2_footprint = FALSE) {
+                                            ...,
+                                            output_min_max = FALSE,
+                                            output_co2_footprint = FALSE) {
   out <- data |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
   if (!output_min_max) {
@@ -22,9 +22,9 @@ polish_emissions_any.data.frame <- function(data,
 
 #' @export
 polish_emissions_any.tilt_profile <- function(data,
-                                          ...,
-                                          output_min_max = FALSE,
-                                          output_co2_footprint = FALSE) {
+                                              ...,
+                                              output_min_max = FALSE,
+                                              output_co2_footprint = FALSE) {
   product <- data |>
     unnest_product() |>
     polish_emissions_any(
