@@ -23,11 +23,11 @@ profile_emissions <- function(companies,
 
   profile |>
     add_co2(co2) |>
+    restore_missing_products_from(profile) |>
     polish_co2_range(
       output_min_max = option_output_min_max(),
       output_co2_footprint = option_output_co2_footprint()
-    ) |>
-    restore_missing_products_from(profile)
+    )
 }
 
 #' @rdname profile_impl
@@ -68,7 +68,6 @@ profile_emissions_impl <- function(companies,
   exec_profile("emissions_profile", indicator, indicator_after) |>
     tilt_profile()
 }
-
 
 restore_missing_products_from <- function(data, profile) {
   product <- unnest_product(profile)

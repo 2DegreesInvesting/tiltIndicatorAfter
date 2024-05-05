@@ -90,11 +90,11 @@ profile_emissions_upstream <- function(companies,
 
   profile |>
     add_co2(co2) |>
+    restore_missing_products_from(profile) |>
     polish_co2_range(
       output_min_max = option_output_min_max(),
       output_co2_footprint = option_output_co2_footprint()
-    ) |>
-    restore_missing_products_from(profile)
+    )
 }
 
 #' @rdname profile_impl
