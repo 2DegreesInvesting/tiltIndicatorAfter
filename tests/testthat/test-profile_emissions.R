@@ -321,7 +321,7 @@ test_that("allows controlling the amount of noise", {
   expect_false(identical(out1, out2))
 })
 
-test_that("can optionally output `min` and `max` at product level", {
+test_that("at product level, can optionally output `min` and `max` but not at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -342,9 +342,11 @@ test_that("can optionally output `min` and `max` at product level", {
 
   expect_true(hasName(unnest_product(out), "min"))
   expect_true(hasName(unnest_product(out), "max"))
+  expect_false(hasName(unnest_company(out), "min"))
+  expect_false(hasName(unnest_company(out), "max"))
 })
 
-test_that("can optionally output `co2_footprint` at product level", {
+test_that("at product level, can optionally output `co2_footprint` but not at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
@@ -363,6 +365,7 @@ test_that("can optionally output `co2_footprint` at product level", {
   )
 
   expect_true(hasName(unnest_product(out), "co2_footprint"))
+  expect_false(hasName(unnest_company(out), "co2_footprint"))
 })
 
 test_that("with some match preserves unmatched products (#193)", {
