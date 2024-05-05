@@ -36,12 +36,12 @@ add_co2.tilt_profile <- function(data,
     map(\(.x) jitter_co2_range(.x, amount = jitter_amount)) |>
     map(\(.x) join_to(.x, unnest_product(data_co2))) |>
     reduce(bind_rows) |>
-    filter(!is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]]))
+    filter(!is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]])) |>
+    restore_missing_products_from(profile = data)
 
   company <- unnest_company(data_co2)
 
-  tilt_profile(nest_levels(product, company)) |>
-    restore_missing_products_from(data)
+  tilt_profile(nest_levels(product, company))
 }
 
 add_co2_footprint <- function(data, co2) {
@@ -85,14 +85,10 @@ add_co2_avg <- function(data) {
 restore_missing_products_from <- function(data, profile) {
   product <- unnest_product(profile)
   product_missing <- pick_missing_risk_category(product)
-  .product <- bind_rows(unnest_product(data), product_missing)
-  company <- unnest_company(data)
-
-  tilt_profile(nest_levels(.product, company))
+  bind_rows(data, product_missing)
 }
 
 pick_missing_risk_category <- function(data) {
   .col <- extract_name(data, pattern_risk_category_emissions_profile_any())
   filter(data, is.na(.data[[.col]]))
 }
-

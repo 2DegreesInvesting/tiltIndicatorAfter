@@ -90,7 +90,7 @@ profile_emissions_upstream <- function(companies,
 
   profile |>
     add_co2(co2) |>
-    polish_co2_range(
+    polish_emissions_any(
       output_min_max = option_output_min_max(),
       output_co2_footprint = option_output_co2_footprint()
     )

@@ -1,9 +1,9 @@
-polish_co2_range <- function(data, ...) {
-  UseMethod("polish_co2_range")
+polish_emissions_any <- function(data, ...) {
+  UseMethod("polish_emissions_any")
 }
 
 #' @export
-polish_co2_range.data.frame <- function(data,
+polish_emissions_any.data.frame <- function(data,
                                         ...,
                                         output_min_max = FALSE,
                                         output_co2_footprint = FALSE) {
@@ -21,13 +21,13 @@ polish_co2_range.data.frame <- function(data,
 }
 
 #' @export
-polish_co2_range.tilt_profile <- function(data,
+polish_emissions_any.tilt_profile <- function(data,
                                           ...,
                                           output_min_max = FALSE,
                                           output_co2_footprint = FALSE) {
   product <- data |>
     unnest_product() |>
-    polish_co2_range(
+    polish_emissions_any(
       output_min_max = output_min_max,
       output_co2_footprint = output_co2_footprint
     )
