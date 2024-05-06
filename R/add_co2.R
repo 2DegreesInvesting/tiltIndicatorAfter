@@ -36,13 +36,17 @@ add_co2.tilt_profile <- function(data,
     map(\(.x) jitter_range_by_benchmark(.x, amount = jitter_amount)) |>
     map(\(.x) join_to(.x, unnest_product(data_co2))) |>
     reduce(bind_rows) |>
-    filter(!is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]])) |>
+    prune_na_introduced_when_binding_disparate_columns() |>
     restore_missing_products_from(profile = data)
 
   company <- data_co2 |>
     unnest_company()
 
   tilt_profile(nest_levels(product, company))
+}
+
+prune_na_introduced_when_binding_disparate_columns <- function(data) {
+  data |> filter(!is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]]))
 }
 
 add_co2_footprint <- function(data, co2) {
