@@ -30,7 +30,7 @@ add_co2 <- function(data,
     map(\(.x) jitter_range_by_benchmark(.x, amount = jitter_amount)) |>
     map(\(.x) join_to(.x, unnest_product(data_co2))) |>
     reduce(bind_rows) |>
-    prune_na_introduced_when_binding_disparate_columns() |>
+    prune_useless_rows_introduced_when_binding_disparate_columns() |>
     restore_missing_products_from(profile = data)
 
   company <- data_co2 |>
@@ -77,7 +77,7 @@ add_co2_avg <- function(data) {
   tilt_profile(nest_levels(product, company))
 }
 
-prune_na_introduced_when_binding_disparate_columns <- function(data) {
+prune_useless_rows_introduced_when_binding_disparate_columns <- function(data) {
   filter(data, !is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]]))
 }
 

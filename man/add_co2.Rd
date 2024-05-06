@@ -2,12 +2,9 @@
 % Please edit documentation in R/add_co2.R
 \name{add_co2}
 \alias{add_co2}
-\alias{add_co2.tilt_profile}
 \title{Add a the jittered range of CO2 values}
 \usage{
-add_co2(data, co2, ...)
-
-\method{add_co2}{tilt_profile}(data, co2, ..., jitter_amount = option_jitter_amount())
+add_co2(data, co2, ..., jitter_amount = option_jitter_amount())
 }
 \arguments{
 \item{...}{Unused but necessary for compatibility across methods.}
