@@ -1,41 +1,4 @@
-test_that("adds columns `min_jitter` and `max_jitter`", {
-  # styler: off
-  data <- tribble(
-  ~benchmark, ~emission_profile, ~min, ~max,
-       "all",             "low",   1L,   1L
-  )
-  # styler: on
-
-  out <- jitter_range_by_benchmark(data)
-  expect_named(out, c(names(data), c("min_jitter", "max_jitter")))
-})
-
-test_that("without crucial columns errors gracefully", {
-  # styler: off
-  data <- tribble(
-    ~benchmark, ~emission_profile, ~min, ~max,
-         "all",             "low",   1L,   1L
-  )
-  # styler: on
-
-  expect_error(jitter_range_by_benchmark(data |> select(-benchmark)), "benchmark.*not")
-  expect_error(jitter_range_by_benchmark(data |> select(-min)), "missing.*min")
-  expect_error(jitter_range_by_benchmark(data |> select(-max)), "missing.*max")
-})
-
-test_that("yields `min*` smaller than `max*`", {
-  # styler: off
-  data <- tribble(
-    ~benchmark, ~emission_profile, ~min, ~max,
-         "all",             "low",   1L,   2L
-  )
-  # styler: on
-
-  out <- jitter_range_by_benchmark(data)
-  expect_true(all(out$min_jitter < out$max_jitter))
-})
-
-test_that("if min/max increases across risk categories, *jittered increases too (214#issuecomment-2061180499)", {
+test_that("if min/max increases across risk categories, *jittered increases too (#214#issuecomment-2061180499)", {
   # styler: off
   data <- tribble(
     ~benchmark, ~emission_profile, ~min, ~max,
@@ -71,6 +34,43 @@ test_that("if min/max increases across benchmarks, *jittered increases too (214#
 
   expect_true(strictly_increasing(out$min_jitter))
   expect_true(strictly_increasing(out$max_jitter))
+})
+
+test_that("adds columns `min_jitter` and `max_jitter`", {
+  # styler: off
+  data <- tribble(
+  ~benchmark, ~emission_profile, ~min, ~max,
+       "all",             "low",   1L,   1L
+  )
+  # styler: on
+
+  out <- jitter_range_by_benchmark(data)
+  expect_named(out, c(names(data), c("min_jitter", "max_jitter")))
+})
+
+test_that("without crucial columns errors gracefully", {
+  # styler: off
+  data <- tribble(
+    ~benchmark, ~emission_profile, ~min, ~max,
+         "all",             "low",   1L,   1L
+  )
+  # styler: on
+
+  expect_error(jitter_range_by_benchmark(data |> select(-benchmark)), "benchmark.*not")
+  expect_error(jitter_range_by_benchmark(data |> select(-min)), "missing.*min")
+  expect_error(jitter_range_by_benchmark(data |> select(-max)), "missing.*max")
+})
+
+test_that("yields `min*` smaller than `max*`", {
+  # styler: off
+  data <- tribble(
+    ~benchmark, ~emission_profile, ~min, ~max,
+         "all",             "low",   1L,   2L
+  )
+  # styler: on
+
+  out <- jitter_range_by_benchmark(data)
+  expect_true(all(out$min_jitter < out$max_jitter))
 })
 
 test_that("is sensitive to `amount`", {
