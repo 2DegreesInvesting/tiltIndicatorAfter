@@ -13,10 +13,13 @@
 #' @export
 #'
 #' @examples
-#' co2 <- readr::read_csv(tiltToyData::toy_emissions_profile_products_ecoinvent())
+#' library(readr)
+#' library(tiltToyData)
 #'
-#' toy_profile_emissions_impl_output() |>
-#'   add_co2(co2)
+#' co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+#' basic_result <- toy_profile_emissions_impl_output()
+#'
+#' basic_result |> add_co2(co2)
 add_co2 <- function(data,
                     co2,
                     ...,
