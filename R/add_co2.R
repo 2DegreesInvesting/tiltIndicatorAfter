@@ -16,13 +16,7 @@
 #'
 #' toy_profile_emissions_impl_output() |>
 #'   add_co2(co2)
-add_co2 <- function(data, co2, ...) {
-  UseMethod("add_co2")
-}
-
-#' @rdname add_co2
-#' @export
-add_co2.tilt_profile <- function(data,
+add_co2 <- function(data,
                                  co2,
                                  ...,
                                  jitter_amount = option_jitter_amount()) {
