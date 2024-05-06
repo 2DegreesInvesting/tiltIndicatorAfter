@@ -16,25 +16,25 @@ test_that("different benchmarks output different number of rows", {
   benchmark <- "all"
   expected <- 3
   # 3 = 3 emission_profile
-  out <- summarize_co2_range(data)
+  out <- summarize_range_by_benchmark(data)
   expect_equal(nrow(filter(out, benchmark == .env$benchmark)), expected)
 
   benchmark <- "unit"
   expected <- 6
   # 6 = 3 emission_profile * 2 unit
-  out <- summarize_co2_range(data)
+  out <- summarize_range_by_benchmark(data)
   expect_equal(nrow(filter(out, benchmark == .env$benchmark)), expected)
 
   benchmark <- "tilt_sector"
   expected <- 12
   # 12 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector
-  out <- summarize_co2_range(data)
+  out <- summarize_range_by_benchmark(data)
   expect_equal(nrow(filter(out, benchmark == .env$benchmark)), expected)
 
   benchmark <- "unit_tilt_sector"
   expected <- 24
   # 24 = 3 emission_profile * 2 tilt_sector * 2 tilt_subsector * 2 unit
-  out <- summarize_co2_range(data)
+  out <- summarize_range_by_benchmark(data)
   expect_equal(nrow(filter(out, benchmark == .env$benchmark)), expected)
 })
 
@@ -53,7 +53,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
       col_footprint(),
       .by = c(col_grouped_by(), col_risk_category_emissions_profile())
     ),
-    summarize_co2_range(data)
+    summarize_range_by_benchmark(data)
   )
 })
 
@@ -66,7 +66,7 @@ test_that("is vectorized over `benchmark`", {
   )
   # styler: on
 
-  out <- summarize_co2_range(data)
+  out <- summarize_range_by_benchmark(data)
   expect_equal(unique(out$benchmark), c("all", "unit"))
 })
 
@@ -84,34 +84,34 @@ test_that("without crucial columns errors gracefully", {
 
   crucial <- col_footprint()
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_range_by_benchmark(bad), crucial)
 
   crucial <- col_grouped_by()
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), class = "check_matches_name")
+  expect_error(summarize_range_by_benchmark(bad), class = "check_matches_name")
 
   crucial <- "emission_profile"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), class = "check_matches_name")
+  expect_error(summarize_range_by_benchmark(bad), class = "check_matches_name")
 
   crucial <- "unit"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_range_by_benchmark(bad), crucial)
 
   crucial <- "tilt_sector"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_range_by_benchmark(bad), crucial)
 
   crucial <- "tilt_subsector"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_range_by_benchmark(bad), crucial)
 
   crucial <- "tilt_subsector"
   bad <- select(data, -all_of(crucial))
-  # summarize_co2_range(bad)
-  expect_error(summarize_co2_range(bad), crucial)
+  # summarize_range_by_benchmark(bad)
+  expect_error(summarize_range_by_benchmark(bad), crucial)
 
   crucial <- "isic_4digit"
   bad <- select(data, -all_of(crucial))
-  expect_error(summarize_co2_range(bad), crucial)
+  expect_error(summarize_range_by_benchmark(bad), crucial)
 })

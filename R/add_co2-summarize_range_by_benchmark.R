@@ -1,9 +1,9 @@
-summarize_co2_range <- function(data) {
-  out <- summarize_co2_range_split_by_benchmark(data)
+summarize_range_by_benchmark <- function(data) {
+  out <- split_summarize_range_by_benchmark(data)
   reduce(out, bind_rows)
 }
 
-summarize_co2_range_split_by_benchmark <- function(data) {
+split_summarize_range_by_benchmark <- function(data) {
   .all <- c(
     col_grouped_by(),
     extract_name(data, pattern_risk_category_emissions_profile_any())
@@ -12,7 +12,7 @@ summarize_co2_range_split_by_benchmark <- function(data) {
   .na.rm <- TRUE
   .by <- group_benchmark(unique(data[[col_grouped_by()]]), .all, na.rm = .na.rm)
 
-  check_summarize_co2_range(data, benchmark_cols = unique(unlist(.by)))
+  check_summarize_range_by_benchmark(data, benchmark_cols = unique(unlist(.by)))
 
   .x <- split(data, data[[col_grouped_by()]])
   .footprint <- extract_name(data, col_footprint())
@@ -20,7 +20,7 @@ summarize_co2_range_split_by_benchmark <- function(data) {
   out
 }
 
-check_summarize_co2_range <- function(data, benchmark_cols) {
+check_summarize_range_by_benchmark <- function(data, benchmark_cols) {
   c(col_grouped_by(), col_footprint(), pattern_risk_category_emissions_profile_any(), benchmark_cols) |>
     walk(function(pattern) check_matches_name(data, pattern))
 
