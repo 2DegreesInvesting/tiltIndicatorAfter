@@ -22,7 +22,7 @@ add_co2 <- function(data,
                     jitter_amount = option_jitter_amount()) {
   data_co2 <- data |>
     add_co2_footprint(co2) |>
-    add_co2_footprint_average()
+    add_co2_footprint_mean(name = "co2_avg")
 
   product <- data_co2 |>
     unnest_product() |>
@@ -57,22 +57,22 @@ select_product_id_and_footprint <- function(data) {
   select(data, matches(c(col_product_id(), col_footprint())))
 }
 
-add_co2_footprint_average <- function(data) {
+add_co2_footprint_mean <- function(data, name = "name") {
   product <- data |>
     unnest_product()
 
   by <- c(col_company_id(), col_grouped_by())
   footprint <- extract_name(product, col_footprint())
 
-  footprint_average <- product |>
+  footprint_mean <- product |>
     select(all_of(by), matches(col_footprint())) |>
     summarise(
-      co2_avg = round(mean(.data[[footprint]], na.rm = TRUE), 3),
+      {{ name }} := round(mean(.data[[footprint]], na.rm = TRUE), 3),
       .by = all_of(by)
     )
   company <- data |>
     unnest_company() |>
-    left_join(footprint_average, by = by, relationship = "many-to-many")
+    left_join(footprint_mean, by = by, relationship = "many-to-many")
 
   tilt_profile(nest_levels(product, company))
 }
