@@ -27,6 +27,61 @@ test_that("at product level, different values of co2 footprint yield different v
   ))
 })
 
+test_that("different risk categories yield different min and max (214#issuecomment-2059645683)", {
+  # https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2059645683
+  # > it should actually vary across risk categories (the idea is that the
+  # > co2e_lower and _upper shows the lowest/highest value in each risk_category).
+  # > -- Tilman
+  #
+  # Instead of the jittered columns, I test min/max because testing equality for
+  # jittered values is impossible, and testing proximity (e.g. with
+  # `dplyr::near()`) is hard. This simpler test is most likely enough to avoid
+  # a regression.
+
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  profile <- toy_profile_emissions_impl_output()
+
+  .benchmark <- "all"
+  pick <- profile |>
+    add_co2(co2, output_co2_footprint = TRUE) |>
+    unnest_product() |>
+    filter(benchmark %in% .benchmark) |>
+    filter(emission_profile == c("high", "low")) |>
+    select(matches(c("benchmark", "profile$", "co2", "min$", "max$"))) |>
+    distinct()
+
+  # different risk category has different min
+  col <- col_risk_category_emissions_profile()
+  low_min <- pick |> filter(.data[[col]] == "low") |> pull(min)
+  high_min <- pick |> filter(.data[[col]] == "high") |> pull(min)
+  expect_false(identical(low_min, high_min))
+
+  # different risk category has different max
+  low_max <- pick |> filter(.data[[col]] == "low") |> pull(max)
+  high_max <- pick |> filter(.data[[col]] == "high") |> pull(max)
+  expect_false(identical(low_max, high_max))
+
+  .benchmark <- "unit"
+  pick <- profile |>
+    add_co2(co2, output_co2_footprint = TRUE) |>
+    unnest_product() |>
+    filter(benchmark %in% .benchmark) |>
+    filter(emission_profile == c("high", "low")) |>
+    select(matches(c("benchmark", "profile$", "co2", "min$", "max$"))) |>
+    distinct()
+
+  # different risk category has different min
+  col <- col_risk_category_emissions_profile()
+  low_min <- pick |> filter(.data[[col]] == "low") |> pull(min)
+  high_min <- pick |> filter(.data[[col]] == "high") |> pull(min)
+  expect_false(identical(low_min, high_min))
+
+  # different risk category has different max
+  low_max <- pick |> filter(.data[[col]] == "low") |> pull(max)
+  high_max <- pick |> filter(.data[[col]] == "high") |> pull(max)
+  expect_false(identical(low_max, high_max))
+})
+
 test_that("at company level, yields the expected number of rows with benchmark 'all' ", {
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   profile <- toy_profile_emissions_impl_output()[1:2, ]
