@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9038 (2024-05-06)
+
+* `profile_emission*()` no longer informs percent noise (#239). This was a
+developer facing feature that caused more trouble than benefits. Also there are
+better, simpler ways to achieve the same.
+
 # tiltIndicatorAfter 0.0.0.9037 (2024-05-03)
 
 * `profile_emissions*()` at company level no longer outputs the columns
