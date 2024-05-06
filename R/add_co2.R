@@ -17,9 +17,9 @@
 #' toy_profile_emissions_impl_output() |>
 #'   add_co2(co2)
 add_co2 <- function(data,
-                                 co2,
-                                 ...,
-                                 jitter_amount = option_jitter_amount()) {
+                    co2,
+                    ...,
+                    jitter_amount = option_jitter_amount()) {
   data_co2 <- data |>
     add_co2_footprint(co2) |>
     add_co2_avg()
