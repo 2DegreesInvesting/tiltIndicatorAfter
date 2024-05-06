@@ -3,8 +3,6 @@
 S3method(add_co2,tilt_profile)
 S3method(polish_emissions_any,data.frame)
 S3method(polish_emissions_any,tilt_profile)
-S3method(summarize_co2_range,data.frame)
-S3method(summarize_co2_range,tilt_profile)
 export(add_co2)
 export(example_emissions_profile_at_product_level)
 export(example_sector_profile_at_product_level)

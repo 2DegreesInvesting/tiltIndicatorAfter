@@ -1,14 +1,9 @@
 summarize_co2_range <- function(data) {
-  UseMethod("summarize_co2_range")
-}
-
-#' @export
-summarize_co2_range.data.frame <- function(data) {
-  out <- summarize_co2_range_list(data)
+  out <- summarize_co2_range_split_by_benchmark(data)
   reduce(out, bind_rows)
 }
 
-summarize_co2_range_list <- function(data) {
+summarize_co2_range_split_by_benchmark <- function(data) {
   .all <- c(
     col_grouped_by(),
     extract_name(data, pattern_risk_category_emissions_profile_any())
@@ -23,13 +18,6 @@ summarize_co2_range_list <- function(data) {
   .footprint <- extract_name(data, col_footprint())
   out <- summarize_range(.x, col = !!ensym(.footprint), .by = .by)
   out
-}
-
-#' @export
-summarize_co2_range.tilt_profile <- function(data) {
-  data |>
-    unnest_product() |>
-    summarize_co2_range()
 }
 
 check_summarize_co2_range <- function(data, benchmark_cols) {

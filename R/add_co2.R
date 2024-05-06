@@ -32,7 +32,7 @@ add_co2.tilt_profile <- function(data,
 
   product <- data_co2 |>
     unnest_product() |>
-    summarize_co2_range_list() |>
+    summarize_co2_range_split_by_benchmark() |>
     map(\(.x) jitter_co2_range(.x, amount = jitter_amount)) |>
     map(\(.x) join_to(.x, unnest_product(data_co2))) |>
     reduce(bind_rows) |>
