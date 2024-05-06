@@ -7,6 +7,7 @@
 #'
 #' @keywords internal
 #' @family composable friends
+#' @family modules
 #'
 #' @return An object of the same class as `data`.
 #' @export

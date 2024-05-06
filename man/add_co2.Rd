@@ -29,4 +29,5 @@ Other composable friends:
 \code{\link{profile_emissions_impl}()}
 }
 \concept{composable friends}
+\concept{modules}
 \keyword{internal}
