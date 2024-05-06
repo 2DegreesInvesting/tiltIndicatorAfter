@@ -39,7 +39,8 @@ add_co2.tilt_profile <- function(data,
     filter(!is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]])) |>
     restore_missing_products_from(profile = data)
 
-  company <- unnest_company(data_co2)
+  company <- data_co2 |>
+    unnest_company()
 
   tilt_profile(nest_levels(product, company))
 }
