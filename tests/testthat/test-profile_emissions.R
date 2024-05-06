@@ -19,8 +19,6 @@ test_that("yields a 'tilt_profile'", {
 })
 
 test_that("characterize columns", {
-  withr::local_options(tiltIndicatorAfter.output_co2_footprint = FALSE)
-
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
   europages_companies <- read_csv(toy_europages_companies())
