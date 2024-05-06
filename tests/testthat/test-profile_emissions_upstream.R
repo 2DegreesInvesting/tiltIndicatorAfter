@@ -296,32 +296,6 @@ test_that("allows controlling the amount of noise", {
   expect_false(identical(out1, out2))
 })
 
-test_that("informs the mean noise percent", {
-  local_seed(1)
-  local_options(tiltIndicatorAfter.verbose = TRUE)
-  local_options(tiltIndicatorAfter.set_jitter_amount = 2)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  expect_snapshot(
-    invisible <- profile_emissions_upstream(
-      companies,
-      co2,
-      europages_companies = europages_companies,
-      ecoinvent_activities = ecoinvent_activities,
-      ecoinvent_inputs = ecoinvent_inputs,
-      ecoinvent_europages = ecoinvent_europages,
-      isic = isic_name
-    )
-  )
-})
-
 test_that("can optionally output `min` and `max` at product level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_upstream_products_ecoinvent())

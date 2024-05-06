@@ -6,8 +6,6 @@ create_co2_range <- function(data, amount = option_jitter_amount()) {
     summarize_range(!!ensym(col), .by = all_of(.by)) |>
     jitter_range(amount = amount)
 
-  out |> inform_mean_percent_noise()
-
   out <- out |> rename(co2e_lower = "min_jitter", co2e_upper = "max_jitter")
 
   if (option_output_min_max()) {
