@@ -34,6 +34,7 @@
 #' @importFrom purrr reduce
 #' @importFrom purrr walk
 #' @importFrom readr read_csv
+#' @importFrom rlang :=
 #' @importFrom rlang .data
 #' @importFrom rlang abort
 #' @importFrom rlang ensym
