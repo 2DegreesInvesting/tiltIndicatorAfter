@@ -28,9 +28,8 @@ basic_result <- toy_profile_emissions_impl_output()
 basic_result |> add_co2(co2)
 }
 \seealso{
-Other composable friends: 
+Other modules: 
 \code{\link{profile_emissions_impl}()}
 }
-\concept{composable friends}
 \concept{modules}
 \keyword{internal}

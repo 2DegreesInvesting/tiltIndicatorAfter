@@ -100,9 +100,9 @@ Other profile functions:
 \code{\link{profile_emissions}()},
 \code{\link{profile_sector}()}
 
-Other composable friends: 
+Other modules: 
 \code{\link{add_co2}()}
 }
-\concept{composable friends}
+\concept{modules}
 \concept{profile functions}
 \keyword{internal}

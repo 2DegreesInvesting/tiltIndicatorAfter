@@ -6,7 +6,6 @@
 #'   `amount` in [tiltIndicator::jitter_range()].
 #'
 #' @keywords internal
-#' @family composable friends
 #' @family modules
 #'
 #' @return An object of the same class as `data`.
