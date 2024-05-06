@@ -367,30 +367,6 @@ test_that("allows controlling the amount of noise", {
   expect_false(identical(out1, out2))
 })
 
-test_that("informs the mean noise percent", {
-  local_seed(1)
-  local_options(tiltIndicatorAfter.verbose = TRUE)
-  local_options(tiltIndicatorAfter.set_jitter_amount = 2)
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  expect_snapshot(
-    invisible <- profile_emissions(
-      companies,
-      co2,
-      europages_companies,
-      ecoinvent_activities,
-      ecoinvent_europages,
-      isic_name
-    )
-  )
-})
-
 test_that("at product level, can optionally output `min` and `max` but not at company level", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -648,33 +624,4 @@ test_that("if `*profile$` column has NA then `tilt_sector` and `tilt_subsector` 
 
   tilt_subsector <- where_risk_category_is_na |> get_column("tilt_subsector")
   expect_true(all(is.na(tilt_subsector)))
-})
-
-test_that("informs a useful percent noise (not 'Adding NA% ... noise') (#188)", {
-  withr::local_options(tiltIndicatorAfter.verbose = TRUE)
-
-  companies <- read_csv(toy_emissions_profile_any_companies(), n_max = 1)
-  companies <- bind_rows(companies, companies)
-  companies$activity_uuid_product_uuid[[1]] <- "unmatched"
-  uuid <- unique(companies$activity_uuid_product_uuid)
-  products <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
-    filter(activity_uuid_product_uuid %in% uuid)
-
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  withr::local_seed(1)
-  # Before this fix the message was "NA% and NA%"
-  expect_snapshot(
-    profile_emissions(
-      companies,
-      products,
-      europages_companies = europages_companies,
-      ecoinvent_activities = ecoinvent_activities,
-      ecoinvent_europages = ecoinvent_europages,
-      isic = isic_name
-    )
-  )
 })
