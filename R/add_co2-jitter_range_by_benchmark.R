@@ -1,4 +1,4 @@
-jitter_co2_range <- function(data, ...) {
+jitter_range_by_benchmark <- function(data, ...) {
   data |>
     group_by(.data[[col_grouped_by()]]) |>
     group_split() |>

@@ -6,7 +6,7 @@ test_that("adds columns `min_jitter` and `max_jitter`", {
   )
   # styler: on
 
-  out <- jitter_co2_range(data)
+  out <- jitter_range_by_benchmark(data)
   expect_named(out, c(names(data), c("min_jitter", "max_jitter")))
 })
 
@@ -18,9 +18,9 @@ test_that("without crucial columns errors gracefully", {
   )
   # styler: on
 
-  expect_error(jitter_co2_range(data |> select(-benchmark)), "benchmark.*not")
-  expect_error(jitter_co2_range(data |> select(-min)), "missing.*min")
-  expect_error(jitter_co2_range(data |> select(-max)), "missing.*max")
+  expect_error(jitter_range_by_benchmark(data |> select(-benchmark)), "benchmark.*not")
+  expect_error(jitter_range_by_benchmark(data |> select(-min)), "missing.*min")
+  expect_error(jitter_range_by_benchmark(data |> select(-max)), "missing.*max")
 })
 
 test_that("yields `min*` smaller than `max*`", {
@@ -31,7 +31,7 @@ test_that("yields `min*` smaller than `max*`", {
   )
   # styler: on
 
-  out <- jitter_co2_range(data)
+  out <- jitter_range_by_benchmark(data)
   expect_true(all(out$min_jitter < out$max_jitter))
 })
 
@@ -44,7 +44,7 @@ test_that("if min/max increases across risk categories, *jittered increases too 
   )
   # styler: on
 
-  out <- jitter_co2_range(data)
+  out <- jitter_range_by_benchmark(data)
 
   # Ensure min and max are strictly increasing
   strictly_increasing <- function(x) all(diff(x) > 0)
@@ -63,7 +63,7 @@ test_that("if min/max increases across benchmarks, *jittered increases too (214#
   )
   # styler: on
 
-  out <- jitter_co2_range(data)
+  out <- jitter_range_by_benchmark(data)
 
   # Ensure min and max are strictly increasing
   strictly_increasing <- function(x) all(diff(x) > 0)
@@ -82,8 +82,8 @@ test_that("is sensitive to `amount`", {
   # styler: on
 
   withr::local_seed(1)
-  small <- jitter_co2_range(data, amount = 0.1)
-  large <- jitter_co2_range(data, amount = 100)
+  small <- jitter_range_by_benchmark(data, amount = 0.1)
+  large <- jitter_range_by_benchmark(data, amount = 100)
 
   # Increase `amount` to get more extreeme min/max_jitter
   expect_true(large$min_jitter < small$min_jitter)
