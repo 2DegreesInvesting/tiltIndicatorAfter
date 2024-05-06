@@ -88,7 +88,7 @@ test_that("yields the expected number of rows with benchmark 'unit'", {
   grouped_by <- "unit"
   # "high", "medium", "low", NA
   n_risk_category <- 4
-  all <- c(col_grouped_by(), col_risk_category_emissions_profile())
+  all <- c(col_benchmark(), col_risk_category_emissions_profile())
   groups <- group_benchmark("unit", all)[[1]]
   n_unit <- out |>
     unnest_product() |>

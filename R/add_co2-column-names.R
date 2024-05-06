@@ -1,5 +1,3 @@
-# Define reusable names and patterns
-
 col_company_id <- function() {
   "companies_id"
 }
@@ -8,9 +6,7 @@ col_product_id <- function() {
   "activity_uuid_product_uuid"
 }
 
-# Reuse ubiquitous column names, and the pattern <indicator>_profile[_upstream]
-# (see tiltIndicator::document_default_value())
-col_grouped_by <- function() {
+col_benchmark <- function() {
   "benchmark"
 }
 
@@ -26,10 +22,6 @@ pattern_risk_category_emissions_profile_any <- function() {
   "^emission.*profile$"
 }
 
-# Reuse min, max, and jitter from `tiltIndicator::summarize_range()` and
-# `tiltIndicator::summarize_range()` -- which in turn reuses:
-# * min and max from `base::min()` and `base::max()`
-# * jitter from `base::jitter()`
 col_max_jitter <- function() {
   "co2e_upper"
 }
@@ -38,7 +30,6 @@ col_min_jitter <- function() {
   "co2e_lower"
 }
 
-# Other adapters to reduce fragility
 col_footprint <- function() {
   "co2_footprint"
 }

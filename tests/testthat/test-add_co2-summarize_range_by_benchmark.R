@@ -51,7 +51,7 @@ test_that("with a simple case yields the same as `summarize_range()` (214#issuec
     summarize_range(
       data,
       col_footprint(),
-      .by = c(col_grouped_by(), col_risk_category_emissions_profile())
+      .by = c(col_benchmark(), col_risk_category_emissions_profile())
     ),
     summarize_range_by_benchmark(data)
   )
@@ -86,7 +86,7 @@ test_that("without crucial columns errors gracefully", {
   bad <- select(data, -all_of(crucial))
   expect_error(summarize_range_by_benchmark(bad), crucial)
 
-  crucial <- col_grouped_by()
+  crucial <- col_benchmark()
   bad <- select(data, -all_of(crucial))
   expect_error(summarize_range_by_benchmark(bad), class = "check_matches_name")
 

@@ -62,7 +62,7 @@ add_co2_footprint_mean <- function(data, name = "co2_avg") {
   product <- data |>
     unnest_product()
 
-  by <- c(col_company_id(), col_grouped_by())
+  by <- c(col_company_id(), col_benchmark())
   footprint <- extract_name(product, col_footprint())
 
   footprint_mean <- product |>
