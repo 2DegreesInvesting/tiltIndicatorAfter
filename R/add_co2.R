@@ -64,7 +64,7 @@ add_co2_footprint_average <- function(data) {
   by <- c(col_company_id(), col_grouped_by())
   footprint <- extract_name(product, col_footprint())
 
-  mean_footprint <- product |>
+  footprint_average <- product |>
     select(all_of(by), matches(col_footprint())) |>
     summarise(
       co2_avg = round(mean(.data[[footprint]], na.rm = TRUE), 3),
@@ -72,7 +72,7 @@ add_co2_footprint_average <- function(data) {
     )
   company <- data |>
     unnest_company() |>
-    left_join(mean_footprint, by = by, relationship = "many-to-many")
+    left_join(footprint_average, by = by, relationship = "many-to-many")
 
   tilt_profile(nest_levels(product, company))
 }
