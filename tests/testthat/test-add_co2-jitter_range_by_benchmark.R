@@ -17,7 +17,7 @@ test_that("if min/max increases across risk categories, *jittered increases too 
   expect_true(strictly_increasing(out$max_jitter))
 })
 
-test_that("if min/max increases across benchmarks, *jittered increases too (214#issuecomment-2061180499)  ", {
+test_that("if min/max increases across benchmarks, *jittered increases too (#214#issuecomment-2061180499)  ", {
   # styler: off
   data <- tribble(
     ~benchmark, ~emission_profile, ~min, ~max, ~unit,

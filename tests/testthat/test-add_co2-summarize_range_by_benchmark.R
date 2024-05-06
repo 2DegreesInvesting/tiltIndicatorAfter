@@ -38,7 +38,7 @@ test_that("different benchmarks output different number of rows", {
   expect_equal(nrow(filter(out, benchmark == .env$benchmark)), expected)
 })
 
-test_that("with a simple case yields the same as `summarize_range()` (214#issuecomment-2061180499)", {
+test_that("with a simple case yields the same as `summarize_range()` (#214#issuecomment-2061180499)", {
   # styler: off
   data <- tribble(
     ~benchmark, ~emission_profile, ~co2_footprint, ~unit, ~tilt_sector, ~tilt_subsector, ~isic_4digit,
