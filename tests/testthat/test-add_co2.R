@@ -52,13 +52,21 @@ test_that("different risk categories yield different min and max (#214#issuecomm
 
   # different risk category has different min
   col <- col_risk_category_emissions_profile()
-  low_min <- pick |> filter(.data[[col]] == "low") |> pull(min)
-  high_min <- pick |> filter(.data[[col]] == "high") |> pull(min)
+  low_min <- pick |>
+    filter(.data[[col]] == "low") |>
+    pull(min)
+  high_min <- pick |>
+    filter(.data[[col]] == "high") |>
+    pull(min)
   expect_false(identical(low_min, high_min))
 
   # different risk category has different max
-  low_max <- pick |> filter(.data[[col]] == "low") |> pull(max)
-  high_max <- pick |> filter(.data[[col]] == "high") |> pull(max)
+  low_max <- pick |>
+    filter(.data[[col]] == "low") |>
+    pull(max)
+  high_max <- pick |>
+    filter(.data[[col]] == "high") |>
+    pull(max)
   expect_false(identical(low_max, high_max))
 
   .benchmark <- "unit"
@@ -72,13 +80,21 @@ test_that("different risk categories yield different min and max (#214#issuecomm
 
   # different risk category has different min
   col <- col_risk_category_emissions_profile()
-  low_min <- pick |> filter(.data[[col]] == "low") |> pull(min)
-  high_min <- pick |> filter(.data[[col]] == "high") |> pull(min)
+  low_min <- pick |>
+    filter(.data[[col]] == "low") |>
+    pull(min)
+  high_min <- pick |>
+    filter(.data[[col]] == "high") |>
+    pull(min)
   expect_false(identical(low_min, high_min))
 
   # different risk category has different max
-  low_max <- pick |> filter(.data[[col]] == "low") |> pull(max)
-  high_max <- pick |> filter(.data[[col]] == "high") |> pull(max)
+  low_max <- pick |>
+    filter(.data[[col]] == "low") |>
+    pull(max)
+  high_max <- pick |>
+    filter(.data[[col]] == "high") |>
+    pull(max)
   expect_false(identical(low_max, high_max))
 })
 
