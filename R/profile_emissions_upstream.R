@@ -75,7 +75,7 @@ profile_emissions_upstream <- function(companies,
                                        isic_tilt = lifecycle::deprecated(),
                                        low_threshold = 1 / 3,
                                        high_threshold = 2 / 3) {
-  profile <- profile_emissions_upstream_impl(
+  profile_emissions_upstream_impl(
     companies = companies,
     co2 = co2,
     europages_companies = europages_companies,
@@ -86,9 +86,7 @@ profile_emissions_upstream <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  )
-
-  profile |>
+  ) |>
     add_co2(co2) |>
     polish_emissions_any(
       output_min_max = option_output_min_max(),
