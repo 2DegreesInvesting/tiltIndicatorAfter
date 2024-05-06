@@ -1,4 +1,4 @@
-test_that("at product level, different values of co2 footprint yield different values in the jittered range of co2 footprint", {
+test_that("at product level, different values of co2 footprint yield different values in the jittered range of co2 footprint (#214#issuecomment-2086975144)", {
   # From reprex 2 at https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2086975144
   .id <- c("ironhearted_tarpan", "epitaphic_yellowhammer")
   profile <- toy_profile_emissions_impl_output() |>
@@ -27,7 +27,7 @@ test_that("at product level, different values of co2 footprint yield different v
   ))
 })
 
-test_that("different risk categories yield different min and max (214#issuecomment-2059645683)", {
+test_that("different risk categories yield different min and max (#214#issuecomment-2059645683)", {
   # https://github.com/2DegreesInvesting/tiltIndicatorAfter/pull/214#issuecomment-2059645683
   # > it should actually vary across risk categories (the idea is that the
   # > co2e_lower and _upper shows the lowest/highest value in each risk_category).
