@@ -22,7 +22,7 @@ add_co2 <- function(data,
                     jitter_amount = option_jitter_amount()) {
   data_co2 <- data |>
     add_co2_footprint(co2) |>
-    add_co2_footprint_mean(name = "co2_avg")
+    add_co2_footprint_mean()
 
   product <- data_co2 |>
     unnest_product() |>
@@ -57,7 +57,7 @@ select_product_id_and_footprint <- function(data) {
   select(data, matches(c(col_product_id(), col_footprint())))
 }
 
-add_co2_footprint_mean <- function(data, name = "name") {
+add_co2_footprint_mean <- function(data, name = "co2_avg") {
   product <- data |>
     unnest_product()
 
