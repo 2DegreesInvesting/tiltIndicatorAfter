@@ -45,10 +45,6 @@ add_co2.tilt_profile <- function(data,
   tilt_profile(nest_levels(product, company))
 }
 
-prune_na_introduced_when_binding_disparate_columns <- function(data) {
-  data |> filter(!is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]]))
-}
-
 add_co2_footprint <- function(data, co2) {
   product <- data |>
     unnest_product() |>
@@ -85,6 +81,10 @@ add_co2_avg <- function(data) {
     left_join(co2_avg, by = by, relationship = "many-to-many")
 
   tilt_profile(nest_levels(product, company))
+}
+
+prune_na_introduced_when_binding_disparate_columns <- function(data) {
+  filter(data, !is.na(.data[["min_jitter"]]) | !is.na(.data[["max_jitter"]]))
 }
 
 restore_missing_products_from <- function(data, profile) {
