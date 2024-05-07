@@ -5,7 +5,6 @@
 #'
 #' @name profile_impl
 #' @family profile functions
-#' @family modules
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
 #' library(tiltToyData)

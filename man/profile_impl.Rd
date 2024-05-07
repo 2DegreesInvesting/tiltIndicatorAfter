@@ -100,6 +100,5 @@ Other profile functions:
 \code{\link{profile_emissions}()},
 \code{\link{profile_sector}()}
 }
-\concept{modules}
 \concept{profile functions}
 \keyword{internal}
