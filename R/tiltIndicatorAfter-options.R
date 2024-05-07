@@ -58,6 +58,10 @@
 #'   select(matches(c("min", "max", "co2")))
 NULL
 
+option_verbose <- function() {
+  getOption("tiltIndicatorAfter.verbose", default = TRUE)
+}
+
 option_jitter_amount <- function() {
   getOption("tiltIndicatorAfter.set_jitter_amount", default = 2)
 }
@@ -68,8 +72,4 @@ option_output_min_max <- function() {
 
 option_output_co2_footprint <- function() {
   getOption("tiltIndicatorAfter.output_co2_footprint", default = FALSE)
-}
-
-option_verbose <- function() {
-  getOption("tiltIndicatorAfter.verbose", default = TRUE)
 }

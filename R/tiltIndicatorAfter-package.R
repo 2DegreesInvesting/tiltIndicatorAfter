@@ -52,6 +52,7 @@
 #' @importFrom tidyselect all_of
 #' @importFrom tidyselect any_of
 #' @importFrom tidyselect matches
+#' @importFrom tiltAddCO2 add_co2
 #' @importFrom tiltIndicator document_tilt_profile
 #' @importFrom tiltIndicator emissions_profile
 #' @importFrom tiltIndicator emissions_profile_upstream

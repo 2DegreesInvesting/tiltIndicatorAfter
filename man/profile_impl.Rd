@@ -99,9 +99,6 @@ options(restore)
 Other profile functions: 
 \code{\link{profile_emissions}()},
 \code{\link{profile_sector}()}
-
-Other modules: 
-\code{\link{add_co2}()}
 }
 \concept{modules}
 \concept{profile functions}

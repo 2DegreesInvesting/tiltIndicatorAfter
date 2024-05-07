@@ -26,7 +26,7 @@ polish_emissions_any_impl <- function(data,
   }
 
   if (!output_co2_footprint) {
-    out <- out |> exclude(col_footprint())
+    out <- out |> exclude("co2_footprint")
   }
 
   out
