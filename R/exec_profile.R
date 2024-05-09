@@ -1,11 +1,8 @@
 exec_profile <- function(.fn, indicator, indicator_after) {
   tilt_indicator_output <- exec(get(.fn), !!!indicator)
   if (.fn %in% c("emissions_profile", "emissions_profile_upstream")) {
-    product_raw <- unnest_product(tilt_indicator_output) |>
+    product <- unnest_product(tilt_indicator_output) |>
       extend_with_columns_from_arguments_of_tilt_indicator(indicator, .fn)
-
-    co2_range <- create_co2_range(product_raw)
-    product <- add_co2_upper_lower(product_raw, co2_range)
 
     company <- unnest_company(tilt_indicator_output)
   } else {

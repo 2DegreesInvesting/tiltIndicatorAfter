@@ -11,6 +11,7 @@
 #' system.time(toy_sector_profile_output())
 #' system.time(toy_sector_profile_output())
 #' @keywords internal
+#' @family toy outputs
 #' @name toy_output
 NULL
 
@@ -76,8 +77,10 @@ FIXME_mutate_product <- function(data, ...) {
     mutate(product = lapply(.data$product, \(x) mutate(x, ...)))
 }
 
+#' Toy output of `profile_emissions_impl()`
 #' @export
-#' @rdname toy_output
+#' @keywords internal
+#' @family toy outputs
 #'
 #' @examples
 #'

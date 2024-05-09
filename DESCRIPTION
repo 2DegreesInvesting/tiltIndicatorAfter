@@ -23,6 +23,7 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
+    tiltAddCO2 (>= 0.0.0.9000),
     tiltIndicator (>= 0.0.0.9094),
     tiltToyData (>= 0.0.0.9002),
     utils,
@@ -34,9 +35,10 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Remotes: 
+Remotes:  
     2DegreesInvesting/tiltIndicator,
-    2degreesinvesting/tiltToyData
+    2degreesinvesting/tiltToyData,
+    2DegreesInvesting/tiltAddCO2
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

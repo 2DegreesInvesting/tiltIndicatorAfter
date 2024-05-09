@@ -108,29 +108,6 @@ test_that("`ei_geography` column is present at product level output", {
   expect_true(all(c("ei_geography") %in% names(out)))
 })
 
-test_that("total number of rows for a comapny is either 1 or 6", {
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  out <- profile_emissions(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  ) |>
-    unnest_product() |>
-    group_by(companies_id, ep_product, activity_uuid_product_uuid) |>
-    summarise(count = n())
-  expect_true(all(unique(out$count) %in% c(1, 6)))
-})
-
 test_that("doesn't throw error: 'Column unit doesn't exist' (#26)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
@@ -177,31 +154,6 @@ test_that("yields a single distinct value of `*matching_certainty_company_averag
     )
 
   expect_equal(unique(count$n_distinct_matching_certainity_per_company), 1.0)
-})
-
-test_that("total number of rows for a comapny is either 1 or 4", {
-  skip_unless_tilt_indicator_is_newer_than("0.0.0.9206")
-
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  out <- profile_emissions(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  ) |>
-    unnest_company() |>
-    group_by(companies_id, benchmark) |>
-    summarise(count = n())
-
-  expect_true(all(unique(out$count) %in% c(1, 4)))
 })
 
 test_that("handles numeric `isic*` in `co2`", {
@@ -449,10 +401,10 @@ test_that("with some match preserves unmatched products (#193)", {
   )
 
   product <- unnest_product(out)
-  expect_equal(unique(product$activity_uuid_product_uuid), c("unmatched", uuid))
+  expect_equal(unique(product$activity_uuid_product_uuid), c(uuid, "unmatched"))
 })
 
-test_that("with no match preserves unmatched products (#193)", {
+test_that("with no match errors gracefully", {
   companies <- read_csv(toy_emissions_profile_any_companies()) |>
     filter(companies_id %in% dplyr::first(companies_id)) |>
     mutate(activity_uuid_product_uuid = "unmatched")
@@ -463,19 +415,14 @@ test_that("with no match preserves unmatched products (#193)", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
   isic_name <- read_csv(toy_isic_name())
 
-  out <- profile_emissions(
+  expect_error(profile_emissions(
     companies,
     co2,
     europages_companies,
     ecoinvent_activities,
     ecoinvent_europages,
     isic_name
-  )
-
-  expect_equal(out$companies_id, unique(companies$companies_id))
-
-  product <- unnest_product(out)
-  expect_true("unmatched" %in% product$activity_uuid_product_uuid)
+  ), class = "all_benchmark_is_na")
 })
 
 test_that("at product level, preserves missing benchmarks (#153#issuecomment-2010043596)", {

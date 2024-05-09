@@ -6,7 +6,6 @@
 \alias{toy_emissions_profile_upstream_output}
 \alias{toy_sector_profile_output}
 \alias{toy_sector_profile_upstream_output}
-\alias{toy_profile_emissions_impl_output}
 \title{Example datasets craeted from tiltToyData and tiltIndicator}
 \usage{
 toy_emissions_profile_output()
@@ -16,8 +15,6 @@ toy_emissions_profile_upstream_output()
 toy_sector_profile_output()
 
 toy_sector_profile_upstream_output()
-
-toy_profile_emissions_impl_output()
 }
 \value{
 A dataframe that results from applying a function from tiltIndicator
@@ -31,7 +28,10 @@ and tiltIndicator.
 # All datasets are momoised
 system.time(toy_sector_profile_output())
 system.time(toy_sector_profile_output())
-
-toy_profile_emissions_impl_output()
 }
+\seealso{
+Other toy outputs: 
+\code{\link{toy_profile_emissions_impl_output}()}
+}
+\concept{toy outputs}
 \keyword{internal}
