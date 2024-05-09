@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tiltIndicatorAfter 0.0.0.9039 (2024-05-09)
+
+* The columns `co2e_lower` and `co2e_upper` are now calculated using correct
+grouping (#214).
+
 # tiltIndicatorAfter 0.0.0.9038 (2024-05-06)
 
 * `profile_emission*()` no longer informs percent noise (#239). This was a

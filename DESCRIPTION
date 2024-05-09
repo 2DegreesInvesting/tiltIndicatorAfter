@@ -1,6 +1,6 @@
 Package: tiltIndicatorAfter
 Title: Create user facing outputs of tiltIndicators
-Version: 0.0.0.9038
+Version: 0.0.0.9039
 Authors@R: c(
     person("Kalash", "Singhal", , "kalash@2degrees-investing.org", role = c("aut", "cre")),
     person("Mauro", "Lepore", role = "ctb",
@@ -35,7 +35,7 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Remotes:  
+Remotes: 
     2DegreesInvesting/tiltIndicator,
     2degreesinvesting/tiltToyData,
     2DegreesInvesting/tiltAddCO2
