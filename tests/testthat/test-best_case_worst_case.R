@@ -63,7 +63,6 @@ test_that("if `emission_profile_at_product_level` lacks crucial columns, errors 
   expect_error(best_case_worst_case(bad), crucial)
 })
 
-
 test_that("gives `NA` in `best_case` and `worst_case` if count of best and worst cases is `0`", {
   emission_profile_at_product_level_sample <- emission_profile_at_product_level_sample()
   emission_profile_at_product_level_sample$ep_product <- NA_character_
