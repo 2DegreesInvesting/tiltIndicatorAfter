@@ -97,17 +97,6 @@ highest_risk_category_per_company_benchmark <- function(data, .by) {
   )
 }
 
-check_matches_col_names <- function(data, cols) {
-  if (!any(cols %in% names(data))) {
-    pattern <- cols[!(cols %in% names(data))]
-    abort(c(
-      glue("The data lacks column '{pattern}'."),
-      i = "Are you using the correct data?"
-    ), class = "check_matches_name")
-  }
-  invisible(data)
-}
-
 risk_first_occurance <- function(data, risk_order) {
   risk_order[which(risk_order %in% data[[col_emission_profile()]])[1]]
 }
