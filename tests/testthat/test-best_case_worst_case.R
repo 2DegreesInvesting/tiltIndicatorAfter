@@ -6,7 +6,7 @@ test_that("Three `ep_products` with the same `benchmark` but with different `emi
     emission_profile = c("low", "medium", "high")
   )
 
-  out <- best_and_worst_cases(emission_profile_at_product_level_sample)
+  out <- best_case_worst_case(emission_profile_at_product_level_sample)
 
   only_one_best_case <- 1
   expect_equal(nrow(filter(out, best_case == 1)), only_one_best_case)
@@ -31,7 +31,7 @@ test_that("`NA` in `emission_profile` gives `0` in `best_case` and `worst_case`"
     emission_profile = c("low", "medium", NA_character_)
   )
 
-  out <- best_and_worst_cases(emission_profile_at_product_level_sample)
+  out <- best_case_worst_case(emission_profile_at_product_level_sample)
 
   # Expected best case for NA in `emission_profile`
   expected_best_case <- 0
@@ -50,7 +50,7 @@ test_that("gives `NA` in `equal_weight`, `best_case`, and `worst_case` if a comp
     emission_profile = NA_character_
   )
 
-  out <- best_and_worst_cases(emission_profile_at_product_level_sample)
+  out <- best_case_worst_case(emission_profile_at_product_level_sample)
 
   expect_true(is.na(out$equal_weight))
   expect_true(is.na(out$best_case))
@@ -67,17 +67,17 @@ test_that("if `emission_profile_at_product_level` lacks crucial columns, errors 
 
   crucial <- c("companies_id")
   bad <- select(emission_profile_at_product_level_sample, -all_of(crucial))
-  expect_error(best_and_worst_cases(bad), crucial)
+  expect_error(best_case_worst_case(bad), crucial)
 
   crucial <- c("ep_product")
   bad <- select(emission_profile_at_product_level_sample, -all_of(crucial))
-  expect_error(best_and_worst_cases(bad), crucial)
+  expect_error(best_case_worst_case(bad), crucial)
 
   crucial <- c("benchmark")
   bad <- select(emission_profile_at_product_level_sample, -all_of(crucial))
-  expect_error(best_and_worst_cases(bad), crucial)
+  expect_error(best_case_worst_case(bad), crucial)
 
   crucial <- c("emission_profile")
   bad <- select(emission_profile_at_product_level_sample, -all_of(crucial))
-  expect_error(best_and_worst_cases(bad), crucial)
+  expect_error(best_case_worst_case(bad), crucial)
 })
