@@ -44,7 +44,7 @@ check_col <- function(data, col, hint = NULL) {
   invisible(data)
 }
 
-emission_profile_at_product_level_sample <- function() {
+best_case_worst_case_emission_profile_sample <- function() {
   tibble::tibble(
     companies_id = "any",
     ep_product = c("one", "two", "three"),
