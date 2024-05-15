@@ -2,11 +2,11 @@ col_companies_id <- function() {
   "companies_id"
 }
 
-col_ep_product <- function() {
+col_europages_product <- function() {
   "ep_product"
 }
 
-col_benchmark <- function() {
+col_grouped_by <- function() {
   "benchmark"
 }
 

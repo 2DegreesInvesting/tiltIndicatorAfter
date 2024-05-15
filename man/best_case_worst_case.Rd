@@ -2,7 +2,7 @@
 % Please edit documentation in R/best_case_worst_case.R
 \name{best_case_worst_case}
 \alias{best_case_worst_case}
-\title{Calculates Best case and Worst case for Emission profile at product level}
+\title{Calculates best case and worst case for emission profile at product level}
 \usage{
 best_case_worst_case(data)
 }
@@ -13,7 +13,7 @@ best_case_worst_case(data)
 A dataframe
 }
 \description{
-Calculates Best case and Worst case for Emission profile at product level
+Calculates best case and worst case for emission profile at product level
 }
 \examples{
 library(tiltToyData)

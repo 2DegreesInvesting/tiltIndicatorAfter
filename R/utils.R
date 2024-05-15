@@ -100,23 +100,3 @@ add_profile_ranking_average <- function(data, product) {
 
   data |> left_join(profile_ranking_average, by = c("companies_id", "grouped_by"))
 }
-
-check_matches_col_names <- function(data, cols) {
-  if (!any(cols %in% names(data))) {
-    pattern <- cols[!(cols %in% names(data))]
-    abort(c(
-      glue("The data lacks column '{pattern}'."),
-      i = "Are you using the correct data?"
-    ), class = "check_matches_name")
-  }
-  invisible(data)
-}
-
-emission_profile_at_product_level_sample <- function() {
-  tibble::tibble(
-    companies_id = "any",
-    ep_product = c("one", "two", "three"),
-    benchmark = "all",
-    emission_profile = c("low", "medium", "high")
-  )
-}

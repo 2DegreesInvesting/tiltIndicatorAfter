@@ -26,6 +26,7 @@
 #' @importFrom dplyr ungroup
 #' @importFrom glue glue
 #' @importFrom memoise memoise
+#' @importFrom purrr walk
 #' @importFrom readr read_csv
 #' @importFrom rlang .data
 #' @importFrom rlang abort
