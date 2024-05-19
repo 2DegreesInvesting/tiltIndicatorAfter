@@ -1,6 +1,6 @@
 test_that("Three `ep_products` with the same `benchmark` but with different `emission_profile` will have `best_case` only for the low `emission_profile` product and have `worst_case` only for the high `emission_profile` product", {
   example_data <- best_case_worst_case_emission_profile_sample()
-  out <- best_case_worst_case_emission_profile(example_data)
+  out <- best_case_worst_case_emission_profile(example_data())
 
   only_one_best_case <- 1
   expect_equal(nrow(filter(out, best_case == 1)), only_one_best_case)
@@ -18,9 +18,10 @@ test_that("Three `ep_products` with the same `benchmark` but with different `emi
 })
 
 test_that("`NA` in `emission_profile` gives `0` in `best_case` and `worst_case`", {
-  example_data <- best_case_worst_case_emission_profile_sample()
-  example_data$emission_profile <- c("low", "medium", NA_character_)
-  out <- best_case_worst_case_emission_profile(example_data)
+  example_data <- best_case_worst_case_emission_profile_sample(
+    emission_profile = c("low", "medium", NA_character_)
+  )
+  out <- best_case_worst_case_emission_profile(example_data())
 
   # Expected best case for NA in `emission_profile`
   expected_best_case <- 0
@@ -32,11 +33,11 @@ test_that("`NA` in `emission_profile` gives `0` in `best_case` and `worst_case`"
 })
 
 test_that("gives `NA` in `equal_weight`, `best_case`, and `worst_case` if a company has missing `ep_product`", {
-  example_data <- best_case_worst_case_emission_profile_sample()
-  example_data$ep_product <- NA_character_
-  example_data$emission_profile <- NA_character_
-
-  out <- best_case_worst_case_emission_profile(distinct(example_data))
+  example_data <- best_case_worst_case_emission_profile_sample(
+    emission_profile = NA_character_,
+    ep_product = NA_character_
+  )
+  out <- best_case_worst_case_emission_profile(distinct(example_data()))
 
   expect_true(is.na(out$equal_weight))
   expect_true(is.na(out$best_case))
@@ -47,28 +48,29 @@ test_that("if `emission_profile_at_product_level` lacks crucial columns, errors 
   example_data <- best_case_worst_case_emission_profile_sample()
 
   crucial <- col_companies_id()
-  bad <- select(example_data, -all_of(crucial))
+  bad <- select(example_data(), -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
   crucial <- col_europages_product()
-  bad <- select(example_data, -all_of(crucial))
+  bad <- select(example_data(), -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
   crucial <- col_grouped_by()
-  bad <- select(example_data, -all_of(crucial))
+  bad <- select(example_data(), -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
   crucial <- col_emission_profile()
-  bad <- select(example_data, -all_of(crucial))
+  bad <- select(example_data(), -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 })
 
 test_that("gives `NA` in `best_case` and `worst_case` if count of best and worst cases is `0`", {
-  example_data <- best_case_worst_case_emission_profile_sample()
-  example_data$ep_product <- NA_character_
-  example_data$emission_profile <- NA_character_
+  example_data <- best_case_worst_case_emission_profile_sample(
+    emission_profile = NA_character_,
+    ep_product = NA_character_
+  )
 
-  out <- best_case_worst_case_emission_profile(distinct(example_data))
+  out <- best_case_worst_case_emission_profile(distinct(example_data()))
 
   # Expected best case for `0` in `count_best_case_products_per_company_benchmark`
   expected_best_case <- NA
@@ -83,4 +85,25 @@ test_that("gives `NA` in `best_case` and `worst_case` if count of best and worst
     filter(out, count_worst_case_products_per_company_benchmark == 0)$worst_case,
     expected_worst_case
   )
+})
+
+test_that("outputs user-facing columns for `profile_emissions` function", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_product()
+
+  user_facing_cols <- c("amount_of_distinct_products", "equal_weight", "best_case", "worst_case")
+  expect_true(all(user_facing_cols %in% names(out)))
 })

@@ -45,16 +45,28 @@ best_case_worst_case_emission_profile <- function(data) {
         1 / .data[[col_n_distinct_products()]]
       )
     ) |>
-    get_min_risk_category_per_company_benchmark(.by = c(col_companies_id(), col_grouped_by())) |>
-    get_max_risk_category_per_company_benchmark(.by = c(col_companies_id(), col_grouped_by())) |>
     mutate(
-      best_risk = assign_risk(
+      min_risk_category_per_company_benchmark = risk_first_occurance(
+        .data,
+        risk_order = c("low", "medium", "high")
+      ),
+      .by = c(col_companies_id(), col_grouped_by())
+    ) |>
+    mutate(
+      max_risk_category_per_company_benchmark = risk_first_occurance(
+        .data,
+        risk_order = c("high", "medium", "low")
+      ),
+      .by = c(col_companies_id(), col_grouped_by())
+    ) |>
+    mutate(
+      best_risk = get_risk_match_if_emission_profile_has_no_na(
         .data, col_emission_profile(),
         col_min_risk_category_per_company_benchmark()
       )
     ) |>
     mutate(
-      worst_risk = assign_risk(
+      worst_risk = get_risk_match_if_emission_profile_has_no_na(
         .data, col_emission_profile(),
         col_max_risk_category_per_company_benchmark()
       )
@@ -68,46 +80,30 @@ best_case_worst_case_emission_profile <- function(data) {
       .by = c(col_companies_id(), col_grouped_by())
     ) |>
     mutate(
-      best_case = divide_risk_by_risk_counts(
+      best_case = get_case_if_risk_counts_has_no_zero(
         .data, col_best_risk(),
         col_count_best_case_products_per_company_benchmark()
       )
     ) |>
     mutate(
-      worst_case = divide_risk_by_risk_counts(
+      worst_case = get_case_if_risk_counts_has_no_zero(
         .data, col_worst_risk(),
         col_count_worst_case_products_per_company_benchmark()
       )
     )
 }
 
-get_min_risk_category_per_company_benchmark <- function(data, .by) {
-  risk_order <- c("low", "medium", "high")
-  mutate(data,
-    min_risk_category_per_company_benchmark = risk_first_occurance(.data, risk_order),
-    .by = all_of(.by)
-  )
-}
-
-get_max_risk_category_per_company_benchmark <- function(data, .by) {
-  risk_order <- c("high", "medium", "low")
-  mutate(data,
-    max_risk_category_per_company_benchmark = risk_first_occurance(.data, risk_order),
-    .by = all_of(.by)
-  )
-}
-
 risk_first_occurance <- function(data, risk_order) {
   risk_order[which(risk_order %in% data[[col_emission_profile()]])[1]]
 }
 
-assign_risk <- function(data, emission_profile, risk_category_per_company_benchmark) {
+get_risk_match_if_emission_profile_has_no_na <- function(data, emission_profile, risk_category_per_company_benchmark) {
   ifelse(is.na(data[[emission_profile]]), 0,
     ifelse(data[[emission_profile]] == data[[risk_category_per_company_benchmark]], 1, 0)
   )
 }
 
-divide_risk_by_risk_counts <- function(data, risk, count_risk_cases_per_company_benchmark) {
+get_case_if_risk_counts_has_no_zero <- function(data, risk, count_risk_cases_per_company_benchmark) {
   ifelse(data[[count_risk_cases_per_company_benchmark]] == 0, NA,
     data[[risk]] / data[[count_risk_cases_per_company_benchmark]]
   )

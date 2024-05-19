@@ -48,6 +48,7 @@
 #' @importFrom tiltIndicator document_tilt_profile
 #' @importFrom tiltIndicator emissions_profile
 #' @importFrom tiltIndicator emissions_profile_upstream
+#' @importFrom tiltIndicator example_data_factory
 #' @importFrom tiltIndicator exclude
 #' @importFrom tiltIndicator jitter_range
 #' @importFrom tiltIndicator join_to

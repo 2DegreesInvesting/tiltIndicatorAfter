@@ -44,11 +44,14 @@ check_col <- function(data, col, hint = NULL) {
   invisible(data)
 }
 
-best_case_worst_case_emission_profile_sample <- function() {
-  tibble::tibble(
-    companies_id = "any",
-    ep_product = c("one", "two", "three"),
-    benchmark = "all",
-    emission_profile = c("low", "medium", "high")
-  )
+best_case_worst_case_emission_profile_sample <- function(companies_id = "any",
+                                                         ep_product = c("one", "two", "three"),
+                                                         benchmark = "all",
+                                                         emission_profile = c("low", "medium", "high")) {
+  example_data_factory(tibble::tibble(
+    companies_id = companies_id,
+    ep_product = ep_product,
+    benchmark = benchmark,
+    emission_profile = emission_profile
+  ))
 }

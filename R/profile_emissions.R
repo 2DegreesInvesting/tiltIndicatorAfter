@@ -21,7 +21,7 @@ profile_emissions <- function(companies,
     high_threshold = high_threshold
   ) |>
     add_co2(co2, jitter_amount = option_jitter_amount()) |>
-    best_case_worst_case(best_case_worst_case_emission_profile) |>
+    best_case_worst_case() |>
     polish_emissions_any(
       output_min_max = option_output_min_max(),
       output_co2_footprint = option_output_co2_footprint()
