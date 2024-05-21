@@ -1,6 +1,6 @@
 test_that("Three `ep_products` with the same `benchmark` but with different `emission_profile` will have `best_case` only for the low `emission_profile` product and have `worst_case` only for the high `emission_profile` product", {
-  example_data <- best_case_worst_case_emission_profile_sample()
-  out <- best_case_worst_case_emission_profile(example_data())
+  example_data <- example_best_case_worst_case_emission_profile()
+  out <- best_case_worst_case_emission_profile(example_data)
 
   only_one_best_case <- 1
   expect_equal(nrow(filter(out, best_case == 1)), only_one_best_case)
@@ -18,10 +18,10 @@ test_that("Three `ep_products` with the same `benchmark` but with different `emi
 })
 
 test_that("`NA` in `emission_profile` gives `0` in `best_case` and `worst_case`", {
-  example_data <- best_case_worst_case_emission_profile_sample(
+  example_data <- example_best_case_worst_case_emission_profile(
     emission_profile = c("low", "medium", NA_character_)
   )
-  out <- best_case_worst_case_emission_profile(example_data())
+  out <- best_case_worst_case_emission_profile(example_data)
 
   # Expected best case for NA in `emission_profile`
   expected_best_case <- 0
@@ -33,11 +33,11 @@ test_that("`NA` in `emission_profile` gives `0` in `best_case` and `worst_case`"
 })
 
 test_that("gives `NA` in `equal_weight`, `best_case`, and `worst_case` if a company has missing `ep_product`", {
-  example_data <- best_case_worst_case_emission_profile_sample(
+  example_data <- example_best_case_worst_case_emission_profile(
     emission_profile = NA_character_,
     ep_product = NA_character_
   )
-  out <- best_case_worst_case_emission_profile(distinct(example_data()))
+  out <- best_case_worst_case_emission_profile(distinct(example_data))
 
   expect_true(is.na(out$equal_weight))
   expect_true(is.na(out$best_case))
@@ -45,32 +45,32 @@ test_that("gives `NA` in `equal_weight`, `best_case`, and `worst_case` if a comp
 })
 
 test_that("if `emission_profile_at_product_level` lacks crucial columns, errors gracefully", {
-  example_data <- best_case_worst_case_emission_profile_sample()
+  example_data <- example_best_case_worst_case_emission_profile()
 
   crucial <- col_companies_id()
-  bad <- select(example_data(), -all_of(crucial))
+  bad <- select(example_data, -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
   crucial <- col_europages_product()
-  bad <- select(example_data(), -all_of(crucial))
+  bad <- select(example_data, -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
   crucial <- col_grouped_by()
-  bad <- select(example_data(), -all_of(crucial))
+  bad <- select(example_data, -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
   crucial <- col_emission_profile()
-  bad <- select(example_data(), -all_of(crucial))
+  bad <- select(example_data, -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 })
 
 test_that("gives `NA` in `best_case` and `worst_case` if count of best and worst cases is `0`", {
-  example_data <- best_case_worst_case_emission_profile_sample(
+  example_data <- example_best_case_worst_case_emission_profile(
     emission_profile = NA_character_,
     ep_product = NA_character_
   )
 
-  out <- best_case_worst_case_emission_profile(distinct(example_data()))
+  out <- best_case_worst_case_emission_profile(distinct(example_data))
 
   # Expected best case for `0` in `count_best_case_products_per_company_benchmark`
   expected_best_case <- NA

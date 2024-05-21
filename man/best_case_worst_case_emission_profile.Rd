@@ -16,30 +16,8 @@ A dataframe
 Calculates best case and worst case for emission profile at product level
 }
 \examples{
-library(tiltToyData)
-library(readr)
-restore <- options(readr.show_col_types = FALSE)
+product <- unnest_product(toy_profile_emissions_impl_output())
 
-companies <- read_csv(toy_emissions_profile_any_companies())
-co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-europages_companies <- read_csv(toy_europages_companies())
-ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-isic_name <- read_csv(toy_isic_name())
-profile_emissions_at_product_level <- profile_emissions_impl(
-  companies,
-  co2,
-  europages_companies = europages_companies,
-  ecoinvent_activities = ecoinvent_activities,
-  ecoinvent_europages = ecoinvent_europages,
-  isic = isic_name
-) |>
-  unnest_product()
-
-result <- best_case_worst_case_emission_profile(profile_emissions_at_product_level)
-result
-
-# Cleanup
-options(restore)
+product |> best_case_worst_case_emission_profile()
 }
 \keyword{internal}
