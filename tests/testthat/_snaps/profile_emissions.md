@@ -15,7 +15,9 @@
       [19] "address"                            "main_activity"                     
       [21] "activity_uuid_product_uuid"         "profile_ranking"                   
       [23] "ei_geography"                       "co2e_lower"                        
-      [25] "co2e_upper"                        
+      [25] "co2e_upper"                         "amount_of_distinct_products"       
+      [27] "equal_weight"                       "best_case"                         
+      [29] "worst_case"                        
 
 ---
 

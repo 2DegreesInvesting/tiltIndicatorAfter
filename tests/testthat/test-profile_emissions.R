@@ -572,3 +572,26 @@ test_that("if `*profile$` column has NA then `tilt_sector` and `tilt_subsector` 
   tilt_subsector <- where_risk_category_is_na |> get_column("tilt_subsector")
   expect_true(all(is.na(tilt_subsector)))
 })
+
+test_that("the output at product level has columns matching `amount_of_distinct_products`, `equal_weight`, `best_case`, and `worst_case`", {
+  companies <- read_csv(toy_emissions_profile_any_companies())
+  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+  out <- profile_emissions(
+    companies,
+    co2,
+    europages_companies = europages_companies,
+    ecoinvent_activities = ecoinvent_activities,
+    ecoinvent_europages = ecoinvent_europages,
+    isic = isic_name
+  ) |>
+    unnest_product()
+
+  expect_true(any(matches_name(out, "amount_of_distinct_products")))
+  expect_true(any(matches_name(out, "equal_weight")))
+  expect_true(any(matches_name(out, "best_case")))
+  expect_true(any(matches_name(out, "worst_case")))
+})
