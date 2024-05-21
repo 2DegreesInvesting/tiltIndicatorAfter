@@ -19,8 +19,8 @@ best_case_worst_case_emission_profile <- function(data) {
       .by = col_companies_id()
     ) |>
     mutate(
-      equal_weight = ifelse(.data[[col_n_distinct_products()]] == 0, NA,
-        1 / .data[[col_n_distinct_products()]]
+      equal_weight = ifelse(.data$n_distinct_products == 0, NA,
+        1 / .data$n_distinct_products
       )
     ) |>
     mutate(
@@ -40,33 +40,33 @@ best_case_worst_case_emission_profile <- function(data) {
     mutate(
       best_risk = get_risk_match_if_emission_profile_has_no_na(
         .data, col_emission_profile(),
-        col_min_risk_category_per_company_benchmark()
+        "min_risk_category_per_company_benchmark"
       )
     ) |>
     mutate(
       worst_risk = get_risk_match_if_emission_profile_has_no_na(
         .data, col_emission_profile(),
-        col_max_risk_category_per_company_benchmark()
+        "max_risk_category_per_company_benchmark"
       )
     ) |>
     mutate(
-      count_best_case_products_per_company_benchmark = sum(.data[[col_best_risk()]]),
+      count_best_case_products_per_company_benchmark = sum(.data$best_risk),
       .by = c(col_companies_id(), col_grouped_by())
     ) |>
     mutate(
-      count_worst_case_products_per_company_benchmark = sum(.data[[col_worst_risk()]]),
+      count_worst_case_products_per_company_benchmark = sum(.data$worst_risk),
       .by = c(col_companies_id(), col_grouped_by())
     ) |>
     mutate(
       best_case = get_case_if_risk_counts_has_no_zero(
-        .data, col_best_risk(),
-        col_count_best_case_products_per_company_benchmark()
+        .data, "best_risk",
+        "count_best_case_products_per_company_benchmark"
       )
     ) |>
     mutate(
       worst_case = get_case_if_risk_counts_has_no_zero(
-        .data, col_worst_risk(),
-        col_count_worst_case_products_per_company_benchmark()
+        .data, "worst_risk",
+        "count_worst_case_products_per_company_benchmark"
       )
     )
 }

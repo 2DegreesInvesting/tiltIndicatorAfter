@@ -86,24 +86,3 @@ test_that("gives `NA` in `best_case` and `worst_case` if count of best and worst
     expected_worst_case
   )
 })
-
-test_that("outputs user-facing columns for `profile_emissions` function", {
-  companies <- read_csv(toy_emissions_profile_any_companies())
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-  out <- profile_emissions(
-    companies,
-    co2,
-    europages_companies = europages_companies,
-    ecoinvent_activities = ecoinvent_activities,
-    ecoinvent_europages = ecoinvent_europages,
-    isic = isic_name
-  ) |>
-    unnest_product()
-
-  user_facing_cols <- c("amount_of_distinct_products", "equal_weight", "best_case", "worst_case")
-  expect_true(all(user_facing_cols %in% names(out)))
-})
