@@ -1,0 +1,93 @@
+#' Calculates best case and worst case for emission profile at product level
+#'
+#' @param data Dataframe. Emissions profile product level output
+#'
+#' @return A dataframe
+#' @export
+#' @keywords internal
+#'
+#' @examples
+#' product <- unnest_product(toy_profile_emissions_impl_output())
+#'
+#' product |> best_case_worst_case_emission_profile()
+best_case_worst_case_emission_profile <- function(data) {
+  check_crucial_cols(data)
+
+  data |>
+    mutate(
+      n_distinct_products = n_distinct(.data[[col_europages_product()]], na.rm = TRUE),
+      .by = col_companies_id()
+    ) |>
+    mutate(
+      equal_weight = ifelse(.data[[col_n_distinct_products()]] == 0, NA,
+        1 / .data[[col_n_distinct_products()]]
+      )
+    ) |>
+    mutate(
+      min_risk_category_per_company_benchmark = risk_first_occurance(
+        .data,
+        risk_order = c("low", "medium", "high")
+      ),
+      .by = c(col_companies_id(), col_grouped_by())
+    ) |>
+    mutate(
+      max_risk_category_per_company_benchmark = risk_first_occurance(
+        .data,
+        risk_order = c("high", "medium", "low")
+      ),
+      .by = c(col_companies_id(), col_grouped_by())
+    ) |>
+    mutate(
+      best_risk = get_risk_match_if_emission_profile_has_no_na(
+        .data, col_emission_profile(),
+        col_min_risk_category_per_company_benchmark()
+      )
+    ) |>
+    mutate(
+      worst_risk = get_risk_match_if_emission_profile_has_no_na(
+        .data, col_emission_profile(),
+        col_max_risk_category_per_company_benchmark()
+      )
+    ) |>
+    mutate(
+      count_best_case_products_per_company_benchmark = sum(.data[[col_best_risk()]]),
+      .by = c(col_companies_id(), col_grouped_by())
+    ) |>
+    mutate(
+      count_worst_case_products_per_company_benchmark = sum(.data[[col_worst_risk()]]),
+      .by = c(col_companies_id(), col_grouped_by())
+    ) |>
+    mutate(
+      best_case = get_case_if_risk_counts_has_no_zero(
+        .data, col_best_risk(),
+        col_count_best_case_products_per_company_benchmark()
+      )
+    ) |>
+    mutate(
+      worst_case = get_case_if_risk_counts_has_no_zero(
+        .data, col_worst_risk(),
+        col_count_worst_case_products_per_company_benchmark()
+      )
+    )
+}
+
+risk_first_occurance <- function(data, risk_order) {
+  risk_order[which(risk_order %in% data[[col_emission_profile()]])[1]]
+}
+
+get_risk_match_if_emission_profile_has_no_na <- function(data, emission_profile, risk_category_per_company_benchmark) {
+  ifelse(is.na(data[[emission_profile]]), 0,
+    ifelse(data[[emission_profile]] == data[[risk_category_per_company_benchmark]], 1, 0)
+  )
+}
+
+get_case_if_risk_counts_has_no_zero <- function(data, risk, count_risk_cases_per_company_benchmark) {
+  ifelse(data[[count_risk_cases_per_company_benchmark]] == 0, NA,
+    data[[risk]] / data[[count_risk_cases_per_company_benchmark]]
+  )
+}
+
+check_crucial_cols <- function(data) {
+  crucial_cols <- c(col_companies_id(), col_europages_product(), col_grouped_by(), col_emission_profile())
+  walk(crucial_cols, ~ check_matches_name(data, .x))
+}
