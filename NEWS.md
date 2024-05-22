@@ -2,7 +2,7 @@
 
 # tiltIndicatorAfter 0.0.0.9040 (2024-05-22)
 
-- At product level, `profile_emission*()` not outputs columns `best_case`,
+- At product level, `profile_emission*()` now outputs columns `best_case`,
 `worst_case`, `amount_of_distinct_products`, and `equal_weight` (#243).
 
 # tiltIndicatorAfter 0.0.0.9039 (2024-05-09)
