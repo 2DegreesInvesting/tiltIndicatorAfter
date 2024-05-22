@@ -1,10 +1,5 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# tiltIndicatorAfter 0.0.0.9042 (2024-05-22)
-
-- Same as previous version.
-
-
 # tiltIndicatorAfter 0.0.0.9040 (2024-05-22)
 
 - At product level, `profile_emission*()` now outputs columns `best_case`,
