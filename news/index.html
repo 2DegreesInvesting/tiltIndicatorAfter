@@ -145,10 +145,52 @@
 <li>New columns <code>co2e_lower</code> and <code>co2e_upper</code> in the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions()</a></code> and <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> – both at product and company levels. This columns include some noise that protects the privacy of the licensed CO2 values (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/155" class="external-link">#155</a>).</li>
 <li>New column <code>ei_geography</code> in the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector()</a></code> at product level (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/148" class="external-link">#148</a>).</li>
 <li>New columns <code>ei_geography</code> and <code>ei_input_geography</code> in the output of <code><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream()</a></code> and <code><a href="../reference/profile_sector_upstream.html">profile_sector_upstream()</a></code> at product level (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/148" class="external-link">#148</a>).</li>
-</ul><p>BREAKING CHANGES</p>
-<p>In practice these change should break nothing.</p>
-<ul><li>Retire functions and datasets that have been deprecated for 8 weeks or more (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/157" class="external-link">#157</a>).</li>
 <li>The column <code>extra_rowid</code> was removed from all output files (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/141" class="external-link">#141</a>).</li>
+</ul><p>Renamed Exported Internal Functions (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/157" class="external-link">#157</a>)</p>
+<ul><li>
+<code>prepare_pctr_product</code> -&gt; <code>polish_emissions_profile_product</code>
+</li>
+<li>
+<code>prepare_pctr_company</code> -&gt; <code>polish_emissions_profile_company</code>
+</li>
+<li>
+<code>prepare_ictr_product</code> -&gt; <code>polish_emissions_profile_upstream_product</code>
+</li>
+<li>
+<code>prepare_ictr_company</code> -&gt; <code>polish_emissions_profile_upstream_company</code>
+</li>
+<li>
+<code>prepare_pstr_product</code> -&gt; <code>polish_sector_profile_product</code>
+</li>
+<li>
+<code>prepare_pstr_company</code> -&gt; <code>polish_sector_profile_company</code>
+</li>
+<li>
+<code>prepare_istr_product</code> -&gt; <code>polish_sector_profile_upstream_product</code>
+</li>
+<li>
+<code>prepare_istr_company</code> -&gt; <code>polish_sector_profile_upstream_company</code>
+</li>
+</ul><p>The sample input and output datasets are retired for these functions after we use toy data from <code>tiltToyData</code>. The un-exported functions and variables which are used in above exported functions are also renamed by using this new nomenclature (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/157" class="external-link">#157</a>):</p>
+<ul><li>
+<code>pctr</code> -&gt; <code>emissions_profile</code>
+</li>
+<li>
+<code>ictr</code> -&gt; <code>emissions_profile_upstream</code>
+</li>
+<li>
+<code>pstr</code> -&gt; <code>sector_profile</code>
+</li>
+<li>
+<code>istr</code> -&gt; <code>sector_profile_upstream</code>
+</li>
+</ul><p>Retired datasets that have been deprecated for 8 weeks or more (<a href="https://github.com/kalashsinghal" class="external-link">@kalashsinghal</a> <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter/issues/157" class="external-link">#157</a>):</p>
+<ul><li><code>isic_tilt_mapper</code></li>
+<li><code>ep_companies</code></li>
+<li><code>ecoinvent_activities</code></li>
+<li><code>ecoinvent_inputs</code></li>
+<li><code>matches_mapper</code></li>
+<li><code>isic_name</code></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9019" id="tiltindicatorafter-0009019-2024-01-17">tiltIndicatorAfter 0.0.0.9019 (2024-01-17)<a class="anchor" aria-label="anchor" href="#tiltindicatorafter-0009019-2024-01-17"></a></h2>
