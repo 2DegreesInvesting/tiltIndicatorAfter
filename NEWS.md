@@ -1,4 +1,9 @@
-<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# tiltIndicatorAfter 0.0.0.9042 (2024-05-27)
+
+* Same as before. This is only to fix the odd order of versions and tags
+in the last few commits.
 
 # tiltIndicatorAfter 0.0.0.9040 (2024-05-22)
 
