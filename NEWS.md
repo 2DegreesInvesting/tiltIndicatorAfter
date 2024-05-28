@@ -141,15 +141,38 @@ columns include some noise that protects the privacy of the licensed CO2 values
 * New columns `ei_geography` and `ei_input_geography` in the output of
   `profile_emissions_upstream()` and `profile_sector_upstream()` at product
   level (@kalashsinghal #148).
+* The column `extra_rowid` was removed from all output files (@kalashsinghal #141).
 
-BREAKING CHANGES
+Renamed Exported Internal Functions (@kalashsinghal #157)
 
-In practice these change should break nothing.
+* `prepare_pctr_product` -> `polish_emissions_profile_product`
+* `prepare_pctr_company` -> `polish_emissions_profile_company`
+* `prepare_ictr_product` -> `polish_emissions_profile_upstream_product`
+* `prepare_ictr_company` -> `polish_emissions_profile_upstream_company`
+* `prepare_pstr_product` -> `polish_sector_profile_product`
+* `prepare_pstr_company` -> `polish_sector_profile_company`
+* `prepare_istr_product` -> `polish_sector_profile_upstream_product`
+* `prepare_istr_company` -> `polish_sector_profile_upstream_company`
 
-* Retire functions and datasets that have been deprecated for 8 weeks or more
-(@kalashsinghal #157).
-* The column `extra_rowid` was removed from all output files (@kalashsinghal
-#141).
+The sample input and output datasets are retired for these functions after we 
+use toy data from `tiltToyData`. The un-exported functions and variables which 
+are used in above exported functions are also renamed by using this new 
+nomenclature (@kalashsinghal #157):
+
+* `pctr` -> `emissions_profile`
+* `ictr` -> `emissions_profile_upstream`
+* `pstr` -> `sector_profile`
+* `istr` -> `sector_profile_upstream`
+
+Retired datasets that have been deprecated for 8 weeks or more (@kalashsinghal 
+#157):
+
+* `isic_tilt_mapper`
+* `ep_companies`
+* `ecoinvent_activities`
+* `ecoinvent_inputs`
+* `matches_mapper`
+* `isic_name`
 
 # tiltIndicatorAfter 0.0.0.9019 (2024-01-17)
 
