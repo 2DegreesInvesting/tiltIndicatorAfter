@@ -92,6 +92,11 @@ score_transition_risk <-
     nest_levels(trs_product, trs_company)
   }
 
+#' Calulate `transition_risk_score` and `benchmark_tr_score` columns
+#'
+#' @param data Dataframe.
+#' @keywords internal
+#' @export
 create_tr_benchmarks_tr_score <- function(data) {
   mutate(
     data,
