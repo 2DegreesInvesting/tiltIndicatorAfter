@@ -209,3 +209,69 @@ test_that("with `pivot_wider = TRUE`, at company level the `emission*` column ar
     unique()
   expect_equal(type, "double")
 })
+
+test_that("FIXME outputs `min_headcount` and `max_headcount`", {
+  # FIXME This test is a draft. A test here really should test
+  # score_transitionPrisk_and_polish() but this function won't have columns
+  # that are lacking frrom the input
+  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
+
+  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
+  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies())
+  toy_europages_companies <- read_csv(toy_europages_companies())
+  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  toy_isic_name <- read_csv(toy_isic_name())
+
+  # Passes
+  toy_europages_companies |>
+    matches_name("headcount") |>
+    any() |>
+    expect_true()
+
+  emissions_profile <- profile_emissions(
+    companies = toy_emissions_profile_any_companies,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+
+  # This and every other expectation fails
+  emissions_profile |>
+    unnest_product() |>
+    matches_name("headcount") |>
+    any() |>
+    expect_true()
+
+  emissions_profile |>
+    unnest_company() |>
+    matches_name("headcount") |>
+    any() |>
+    expect_true()
+
+  sector_profile <- profile_sector(
+    companies = toy_sector_profile_companies,
+    scenarios = toy_sector_profile_any_scenarios,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+
+  sector_profile |>
+    unnest_product() |>
+    matches_name("headcount") |>
+    any() |>
+    expect_true()
+
+  sector_profile |>
+    unnest_company() |>
+    matches_name("headcount") |>
+    any() |>
+    expect_true()
+})
