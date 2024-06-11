@@ -27,6 +27,7 @@ Imports:
     tiltAddCO2 (>= 0.0.0.9000),
     tiltIndicator (>= 0.0.0.9094),
     tiltToyData (>= 0.0.0.9002),
+    tiltTransitionRisk,
     utils,
     withr
 Suggests: 
