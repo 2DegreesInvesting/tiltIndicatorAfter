@@ -27,7 +27,7 @@ Imports:
     tiltAddCO2 (>= 0.0.0.9000),
     tiltIndicator (>= 0.0.0.9094),
     tiltToyData (>= 0.0.0.9002),
-    tiltTransitionRisk,
+    tiltTransitionRisk (>= 0.0.0.9003),
     utils,
     withr
 Suggests: 
@@ -37,10 +37,11 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Remotes: 
+Remotes:  
     2DegreesInvesting/tiltIndicator,
     2degreesinvesting/tiltToyData,
-    2DegreesInvesting/tiltAddCO2
+    2DegreesInvesting/tiltAddCO2,
+    2degreesinvesting/tiltTransitionRisk
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
