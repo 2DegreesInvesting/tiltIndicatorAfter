@@ -61,7 +61,8 @@
 #'   isic = toy_isic_name
 #' )
 #'
-#' output <- transition_risk_profile(emissions_profile = toy_emissions_profile,
+#' output <- transition_risk_profile(
+#'   emissions_profile = toy_emissions_profile,
 #'   sector_profile = toy_sector_profile,
 #'   co2 = toy_emissions_profile_products_ecoinvent,
 #'   all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
@@ -102,7 +103,7 @@ transition_risk_profile <- function(emissions_profile,
     unnest_company() |>
     polish_transition_risk_at_company_level()
 
-  nest_levels(product, company)
+  tilt_profile(nest_levels(product, company))
 }
 
 polish_transition_risk_at_product_level <- function(data) {
