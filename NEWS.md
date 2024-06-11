@@ -1,4 +1,9 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# tiltIndicatorAfter 0.0.0.9043 (2024-06-11)
+
+* New external `transition_risk_profile()` indicator at product and company 
+level (#260).
 
 # tiltIndicatorAfter 0.0.0.9042 (2024-05-27)
 
