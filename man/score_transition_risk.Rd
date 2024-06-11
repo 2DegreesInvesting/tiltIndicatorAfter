@@ -67,6 +67,7 @@ options(restore)
 \seealso{
 Other top-level functions: 
 \code{\link{profile_emissions}()},
-\code{\link{profile_sector}()}
+\code{\link{profile_sector}()},
+\code{\link{transition_risk_profile}()}
 }
 \concept{top-level functions}
