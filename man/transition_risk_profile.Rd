@@ -7,8 +7,8 @@
 transition_risk_profile(
   emissions_profile,
   sector_profile,
-  emissions_profile_products,
-  all_uuids_scenario_sectors,
+  co2,
+  all_activities_scenario_sectors,
   scenarios,
   pivot_wider = FALSE
 )
@@ -19,9 +19,9 @@ transition_risk_profile(
 
 \item{sector_profile}{Nested data frame. The output of \code{profile_sector()}.}
 
-\item{emissions_profile_products}{A dataframe}
+\item{co2}{A dataframe}
 
-\item{all_uuids_scenario_sectors}{A dataframe}
+\item{all_activities_scenario_sectors}{A dataframe}
 
 \item{scenarios}{A dataframe}
 
@@ -58,8 +58,9 @@ toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
 toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
 toy_isic_name <- read_csv(toy_isic_name())
+toy_all_activities_scenario_sectors <- read_csv(toy_all_activities_scenario_sectors())
 
-emissions_profile <- profile_emissions(
+toy_emissions_profile <- profile_emissions(
   companies = toy_emissions_profile_any_companies,
   co2 = toy_emissions_profile_products_ecoinvent,
   europages_companies = toy_europages_companies,
@@ -68,7 +69,7 @@ emissions_profile <- profile_emissions(
   isic = toy_isic_name
 )
 
-sector_profile <- profile_sector(
+toy_sector_profile <- profile_sector(
   companies = toy_sector_profile_companies,
   scenarios = toy_sector_profile_any_scenarios,
   europages_companies = toy_europages_companies,
@@ -77,19 +78,28 @@ sector_profile <- profile_sector(
   isic = toy_isic_name
 )
 
-emissions_profile_products <- read_csv(toy_emissions_profile_products_ecoinvent())
-all_uuids_scenario_sectors <- read_csv(toy_all_uuids_scenario_sectors())
-scenarios <- read_csv(toy_sector_profile_any_scenarios())
-
-output <- transition_risk_profile(emissions_profile,
-  sector_profile,
-  pivot_wider = FALSE,
-  emissions_profile_products,
-  all_uuids_scenario_sectors,
-  scenarios
+output <- transition_risk_profile(emissions_profile = toy_emissions_profile,
+  sector_profile = toy_sector_profile,
+  co2 = toy_emissions_profile_products_ecoinvent,
+  all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
+  scenarios = toy_sector_profile_any_scenarios,
+  pivot_wider = FALSE
 )
 
 output |> unnest_product()
 
 output |> unnest_company()
 }
+\seealso{
+Other top-level functions: 
+\code{\link{profile_emissions}()},
+\code{\link{profile_sector}()},
+\code{\link{score_transition_risk}()}
+
+Other profile functions: 
+\code{\link{profile_emissions}()},
+\code{\link{profile_emissions_impl}()},
+\code{\link{profile_sector}()}
+}
+\concept{profile functions}
+\concept{top-level functions}

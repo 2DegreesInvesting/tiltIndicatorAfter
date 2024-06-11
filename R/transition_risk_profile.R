@@ -8,14 +8,17 @@
 #' @param sector_profile Nested data frame. The output of `profile_sector()`.
 #' @param pivot_wider Logical. Pivot the output at company level to a wide
 #'   format?
-#' @param emissions_profile_products A dataframe
-#' @param all_uuids_scenario_sectors A dataframe
+#' @param co2 A dataframe
+#' @param all_activities_scenario_sectors A dataframe
 #' @param scenarios A dataframe
 #'
 #' @return A data frame with the column `companies_id`, and the nested
 #'   columns`product` and `company` holding the outputs at product and company
 #'   level.
 #' @export
+#'
+#' @family top-level functions
+#' @family profile functions
 #'
 #' @examples
 #' library(readr, warn.conflicts = FALSE)
@@ -38,8 +41,9 @@
 #' toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 #' toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
 #' toy_isic_name <- read_csv(toy_isic_name())
+#' toy_all_activities_scenario_sectors <- read_csv(toy_all_activities_scenario_sectors())
 #'
-#' emissions_profile <- profile_emissions(
+#' toy_emissions_profile <- profile_emissions(
 #'   companies = toy_emissions_profile_any_companies,
 #'   co2 = toy_emissions_profile_products_ecoinvent,
 #'   europages_companies = toy_europages_companies,
@@ -48,7 +52,7 @@
 #'   isic = toy_isic_name
 #' )
 #'
-#' sector_profile <- profile_sector(
+#' toy_sector_profile <- profile_sector(
 #'   companies = toy_sector_profile_companies,
 #'   scenarios = toy_sector_profile_any_scenarios,
 #'   europages_companies = toy_europages_companies,
@@ -57,16 +61,12 @@
 #'   isic = toy_isic_name
 #' )
 #'
-#' emissions_profile_products <- read_csv(toy_emissions_profile_products_ecoinvent())
-#' all_uuids_scenario_sectors <- read_csv(toy_all_uuids_scenario_sectors())
-#' scenarios <- read_csv(toy_sector_profile_any_scenarios())
-#'
-#' output <- transition_risk_profile(emissions_profile,
-#'   sector_profile,
-#'   pivot_wider = FALSE,
-#'   emissions_profile_products,
-#'   all_uuids_scenario_sectors,
-#'   scenarios
+#' output <- transition_risk_profile(emissions_profile = toy_emissions_profile,
+#'   sector_profile = toy_sector_profile,
+#'   co2 = toy_emissions_profile_products_ecoinvent,
+#'   all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
+#'   scenarios = toy_sector_profile_any_scenarios,
+#'   pivot_wider = FALSE
 #' )
 #'
 #' output |> unnest_product()
@@ -74,8 +74,8 @@
 #' output |> unnest_company()
 transition_risk_profile <- function(emissions_profile,
                                     sector_profile,
-                                    emissions_profile_products,
-                                    all_uuids_scenario_sectors,
+                                    co2,
+                                    all_activities_scenario_sectors,
                                     scenarios,
                                     pivot_wider = FALSE) {
   transition_risk_scores <- score_transition_risk_and_polish(emissions_profile,
@@ -83,8 +83,8 @@ transition_risk_profile <- function(emissions_profile,
     pivot_wider = FALSE
   )
   transition_risk_thresholds <- add_thresholds_transition_risk(
-    emissions_profile_products,
-    all_uuids_scenario_sectors,
+    co2,
+    all_activities_scenario_sectors,
     scenarios
   ) |>
     select_crucial_threshold_cols()
