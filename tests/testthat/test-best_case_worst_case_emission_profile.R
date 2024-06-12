@@ -55,7 +55,7 @@ test_that("if `emission_profile_at_product_level` lacks crucial columns, errors 
   bad <- select(example_data, -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
-  crucial <- col_grouped_by()
+  crucial <- col_emission_grouped_by()
   bad <- select(example_data, -all_of(crucial))
   expect_error(best_case_worst_case_emission_profile(bad), crucial)
 
