@@ -6,7 +6,7 @@ col_europages_product <- function() {
   "ep_product"
 }
 
-col_grouped_by <- function() {
+col_emission_grouped_by <- function() {
   "benchmark"
 }
 
