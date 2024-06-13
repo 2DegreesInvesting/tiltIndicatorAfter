@@ -97,6 +97,7 @@ transition_risk_profile <- function(emissions_profile,
       "activity_uuid_product_uuid"
     )) |>
     add_transition_risk_category() |>
+    best_case_worst_case_transition_risk_profile() |>
     polish_transition_risk_at_product_level()
 
   company <- transition_risk_scores |>

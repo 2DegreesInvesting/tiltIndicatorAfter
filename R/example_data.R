@@ -8,3 +8,14 @@ example_best_case_worst_case_emission_profile <- example_data_factory(
   )
   # styler: on
 )
+
+example_best_case_worst_case_transition_risk_profile <- example_data_factory(
+  # styler: off
+  tribble(
+    ~companies_id, ~ep_product, ~benchmark_tr_score, ~transition_risk_category,
+            "any",       "one",               "all",                     "low",
+            "any",       "two",               "all",                  "medium",
+            "any",     "three",               "all",                    "high"
+  )
+  # styler: on
+)

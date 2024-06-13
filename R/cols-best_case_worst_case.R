@@ -13,3 +13,11 @@ col_emission_grouped_by <- function() {
 col_emission_profile <- function() {
   "emission_profile"
 }
+
+col_transition_risk_grouped_by <- function() {
+  "benchmark_tr_score"
+}
+
+col_transition_risk_category <- function() {
+  "transition_risk_category"
+}
