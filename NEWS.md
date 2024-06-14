@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9044 (2024-06-14)
+
+- At product level, `transition_risk_profile()` now outputs columns `best_case`,
+`worst_case`, `amount_of_distinct_products`, and `equal_weight` (#264).
+
 # tiltIndicatorAfter 0.0.0.9043 (2024-06-11)
 
 * New external `transition_risk_profile()` indicator at product and company 
