@@ -2,7 +2,7 @@ best_case_worst_case <- function(data) {
   product <- data |>
     unnest_product() |>
     best_case_worst_case_emission_profile() |>
-    polish_best_case_worst_case_emission_profile()
+    polish_best_case_worst_case()
 
   company <- data |>
     unnest_company()
