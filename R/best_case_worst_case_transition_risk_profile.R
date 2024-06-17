@@ -13,7 +13,7 @@ best_case_worst_case_transition_risk_profile <- function(data) {
   check_crucial_cols(data, crucial_cols)
 
   best_case_worst_case_impl(data,
-                            col_risk = col_transition_risk_category(),
-                            col_group_by = col_transition_risk_grouped_by()
+    col_risk = col_transition_risk_category(),
+    col_group_by = col_transition_risk_grouped_by()
   )
 }
