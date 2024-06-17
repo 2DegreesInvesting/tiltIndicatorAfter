@@ -91,14 +91,14 @@ transition_risk_profile <- function(emissions_profile,
 }
 
 transition_risk_profile_impl <- function(emissions_profile,
-                                    sector_profile,
-                                    co2,
-                                    all_activities_scenario_sectors,
-                                    scenarios,
-                                    pivot_wider = FALSE) {
+                                         sector_profile,
+                                         co2,
+                                         all_activities_scenario_sectors,
+                                         scenarios,
+                                         pivot_wider = FALSE) {
   transition_risk_scores <- score_transition_risk_and_polish(emissions_profile,
-                                                             sector_profile,
-                                                             pivot_wider = FALSE
+    sector_profile,
+    pivot_wider = FALSE
   )
   transition_risk_thresholds <- add_thresholds_transition_risk(
     co2,
