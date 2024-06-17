@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9045 (2024-06-17)
+
+* `transition_risk_profile()` outputs columns `transition_risk_category_share` 
+and `transition_risk_category` at company level (#266).
+
 # tiltIndicatorAfter 0.0.0.9044 (2024-06-14)
 
 - At product level, `transition_risk_profile()` now outputs columns `best_case`,
