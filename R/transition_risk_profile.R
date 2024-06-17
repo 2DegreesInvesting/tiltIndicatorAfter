@@ -101,8 +101,11 @@ transition_risk_profile <- function(emissions_profile,
     polish_best_case_worst_case() |>
     polish_transition_risk_at_product_level()
 
+  risk_categories_at_company_level <- add_transition_risk_category_at_company_level(product)
+
   company <- transition_risk_scores |>
     unnest_company() |>
+    join_risk_categories_at_company_level(risk_categories_at_company_level) |>
     polish_transition_risk_at_company_level()
 
   tilt_profile(nest_levels(product, company))
