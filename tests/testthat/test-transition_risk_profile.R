@@ -105,12 +105,6 @@ test_that("outputs `NA` transition risk category for `NA` transition risk score 
 })
 
 test_that("outputs columns `transition_risk_category_share` and `transition_risk_category` at company level", {
-  set.seed(123)
-  restore <- options(list(
-    readr.show_col_types = FALSE,
-    tiltIndicatorAfter.output_co2_footprint = TRUE
-  ))
-
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())

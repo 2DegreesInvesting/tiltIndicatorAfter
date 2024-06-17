@@ -79,9 +79,26 @@ transition_risk_profile <- function(emissions_profile,
                                     all_activities_scenario_sectors,
                                     scenarios,
                                     pivot_wider = FALSE) {
-  transition_risk_scores <- score_transition_risk_and_polish(emissions_profile,
+  transition_risk_profile_impl(
+    emissions_profile,
     sector_profile,
+    co2,
+    all_activities_scenario_sectors,
+    scenarios,
     pivot_wider = FALSE
+  ) |>
+    add_transition_risk_category_at_company_level()
+}
+
+transition_risk_profile_impl <- function(emissions_profile,
+                                    sector_profile,
+                                    co2,
+                                    all_activities_scenario_sectors,
+                                    scenarios,
+                                    pivot_wider = FALSE) {
+  transition_risk_scores <- score_transition_risk_and_polish(emissions_profile,
+                                                             sector_profile,
+                                                             pivot_wider = FALSE
   )
   transition_risk_thresholds <- add_thresholds_transition_risk(
     co2,
@@ -101,11 +118,8 @@ transition_risk_profile <- function(emissions_profile,
     polish_best_case_worst_case() |>
     polish_transition_risk_at_product_level()
 
-  risk_categories_at_company_level <- add_transition_risk_category_at_company_level(product)
-
   company <- transition_risk_scores |>
     unnest_company() |>
-    join_risk_categories_at_company_level(risk_categories_at_company_level) |>
     polish_transition_risk_at_company_level()
 
   tilt_profile(nest_levels(product, company))
