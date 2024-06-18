@@ -78,8 +78,10 @@ sum_transition_risk_categories <- function(data, risk_order) {
 prepare_for_join_at_company_level <- function(data) {
   data |>
     select(-c(
-      col_transition_risk_category(), col_europages_product(),
-      "amount_of_distinct_products", "n_min_risk_category_per_company_benchmark",
+      col_transition_risk_category(),
+      col_europages_product(),
+      "amount_of_distinct_products",
+      "n_min_risk_category_per_company_benchmark",
       "n_max_risk_category_per_company_benchmark"
     )) |>
     distinct()
