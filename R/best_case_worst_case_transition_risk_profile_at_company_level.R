@@ -18,8 +18,10 @@ best_case_worst_case_transition_risk_profile_at_company_level <- function(data) 
 
 create_avg_best_case_worst_case_at_product_level <- function(data) {
   crucial_cols <- c(
-    col_companies_id(), col_europages_product(),
-    col_transition_risk_grouped_by(), col_transition_risk_category(),
+    col_companies_id(),
+    col_europages_product(),
+    col_transition_risk_grouped_by(),
+    col_transition_risk_category(),
     "amount_of_distinct_products"
   )
   check_crucial_cols(data, crucial_cols)
