@@ -87,7 +87,8 @@ transition_risk_profile <- function(emissions_profile,
     scenarios,
     pivot_wider = FALSE
   ) |>
-    add_transition_risk_category_at_company_level()
+    add_transition_risk_category_at_company_level() |>
+    best_case_worst_case_transition_risk_profile_at_company_level()
 }
 
 transition_risk_profile_impl <- function(emissions_profile,
