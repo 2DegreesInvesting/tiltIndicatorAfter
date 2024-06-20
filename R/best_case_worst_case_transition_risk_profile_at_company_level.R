@@ -6,9 +6,19 @@ best_case_worst_case_transition_risk_profile_at_company_level <- function(data) 
     create_avg_best_case_worst_case_at_product_level() |>
     prepare_for_join_at_company_level()
 
+  avg_best_case <- prepare_avg_best_case_join_table(
+    avg_best_case_worst_case_at_product_level
+  )
+  avg_worst_case <- prepare_avg_worst_case_join_table(
+    avg_best_case_worst_case_at_product_level
+  )
+
   company <- data |>
     unnest_company() |>
-    left_join(avg_best_case_worst_case_at_product_level, by = c(col_companies_id(),
+    left_join(avg_best_case, by = c(col_companies_id(),
+      "benchmark_tr_score_avg" = col_transition_risk_grouped_by()
+    )) |>
+    left_join(avg_worst_case, by = c(col_companies_id(),
       "benchmark_tr_score_avg" = col_transition_risk_grouped_by()
     )) |>
     polish_best_case_worst_case_transition_risk_at_company_level()
@@ -22,57 +32,57 @@ create_avg_best_case_worst_case_at_product_level <- function(data) {
     col_europages_product(),
     col_transition_risk_grouped_by(),
     col_transition_risk_category(),
-    "amount_of_distinct_products"
+    "transition_risk_score"
   )
   check_crucial_cols(data, crucial_cols)
 
   data |>
-    select(crucial_cols) |>
-    count_min_risk_category_per_company_benchmark() |>
-    count_max_risk_category_per_company_benchmark() |>
+    select(all_of(crucial_cols)) |>
+    compute_min_risk_category_per_company_benchmark(
+      col_transition_risk_category(),
+      col_transition_risk_grouped_by()
+    ) |>
+    compute_max_risk_category_per_company_benchmark(
+      col_transition_risk_category(),
+      col_transition_risk_grouped_by()
+    ) |>
+    add_avg_transition_risk() |>
     add_avg_transition_risk_best_case() |>
     add_avg_transition_risk_worst_case()
 }
 
-count_min_risk_category_per_company_benchmark <- function(data) {
+add_avg_transition_risk <- function(data) {
   mutate(data,
-    n_min_risk_category_per_company_benchmark =
-      sum_transition_risk_categories(.data, c("low", "medium", "high")),
-    .by = c(col_companies_id(), col_transition_risk_grouped_by())
-  )
-}
-
-count_max_risk_category_per_company_benchmark <- function(data) {
-  mutate(data,
-    n_max_risk_category_per_company_benchmark =
-      sum_transition_risk_categories(.data, c("high", "medium", "low")),
-    .by = c(col_companies_id(), col_transition_risk_grouped_by())
+    avg_transition_risk = ifelse(is.na(.data$transition_risk_score),
+      NA,
+      mean(.data$transition_risk_score, na.rm = TRUE)
+    ),
+    .by = c(
+      col_companies_id(),
+      col_transition_risk_grouped_by(),
+      col_transition_risk_category()
+    )
   )
 }
 
 add_avg_transition_risk_best_case <- function(data) {
   mutate(data,
     avg_transition_risk_best_case =
-      (.data$n_min_risk_category_per_company_benchmark /
-        .data$amount_of_distinct_products)
+      ifelse(.data$transition_risk_category ==
+        .data$min_risk_category_per_company_benchmark,
+        .data$avg_transition_risk, NA
+      )
   )
 }
 
 add_avg_transition_risk_worst_case <- function(data) {
   mutate(data,
     avg_transition_risk_worst_case =
-      (.data$n_max_risk_category_per_company_benchmark /
-        .data$amount_of_distinct_products)
+      ifelse(.data$transition_risk_category ==
+        .data$max_risk_category_per_company_benchmark,
+        .data$avg_transition_risk, NA
+      )
   )
-}
-
-sum_transition_risk_categories <- function(data, risk_order) {
-  sum(data$transition_risk_category ==
-    risk_first_occurance(
-      data,
-      col_transition_risk_category(),
-      risk_order
-    ), na.rm = TRUE)
 }
 
 prepare_for_join_at_company_level <- function(data) {
@@ -80,11 +90,24 @@ prepare_for_join_at_company_level <- function(data) {
     select(-c(
       col_transition_risk_category(),
       col_europages_product(),
-      "amount_of_distinct_products",
-      "n_min_risk_category_per_company_benchmark",
-      "n_max_risk_category_per_company_benchmark"
+      "avg_transition_risk",
+      "transition_risk_score",
+      "max_risk_category_per_company_benchmark",
+      "min_risk_category_per_company_benchmark"
     )) |>
     distinct()
+}
+
+prepare_avg_worst_case_join_table <- function(data) {
+  data |>
+    select(-c("avg_transition_risk_best_case")) |>
+    filter(!is.na(.data$avg_transition_risk_worst_case))
+}
+
+prepare_avg_best_case_join_table <- function(data) {
+  data |>
+    select(-c("avg_transition_risk_worst_case")) |>
+    filter(!is.na(.data$avg_transition_risk_best_case))
 }
 
 polish_best_case_worst_case_transition_risk_at_company_level <- function(data) {
