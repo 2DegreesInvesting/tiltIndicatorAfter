@@ -151,7 +151,7 @@ test_that("outputs columns `transition_risk_category_share` and `transition_risk
   expect_true(all(unique(expected_cols) %in% names(company_level_output)))
 })
 
-test_that("outputs `NA` in `avg_transition_risk_best_case` and `avg_transition_risk_worst_case` for `NA` in `avg_transition_risk_equal_weight` and `transition_risk_category` at company level", {
+test_that("outputs `NA` in `avg_transition_risk_best_case` and `avg_transition_risk_worst_case` for `NA` at company level if `transition_risk_score` and `transition_risk_category` are `NA` at product level", {
   set.seed(123)
   restore <- options(list(
     readr.show_col_types = FALSE,
@@ -159,7 +159,7 @@ test_that("outputs `NA` in `avg_transition_risk_best_case` and `avg_transition_r
   ))
 
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
-    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+    filter(activity_uuid_product_uuid != "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
   toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
   toy_sector_profile_companies <- read_csv(toy_sector_profile_companies()) |>
@@ -189,21 +189,25 @@ test_that("outputs `NA` in `avg_transition_risk_best_case` and `avg_transition_r
     isic = toy_isic_name
   )
 
-  company_level_output <- transition_risk_profile(
+  output <- transition_risk_profile(
     emissions_profile = toy_emissions_profile,
     sector_profile = toy_sector_profile,
     co2 = toy_emissions_profile_products_ecoinvent,
     all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
     scenarios = toy_sector_profile_any_scenarios,
     pivot_wider = FALSE
-  ) |>
-    unnest_company() |>
-    filter(companies_id == "nonphilosophical_llama")
+  )
 
-  # `avg_transition_risk_equal_weight` and `transition_risk_category` are `NA` for company "nonphilosophical_llama"
-  expect_true(is.na(unique(company_level_output$avg_transition_risk_equal_weight)))
-  expect_true(is.na(unique(company_level_output$transition_risk_category)))
-  # `avg_transition_risk_best_case` and `avg_transition_risk_worst_case` are `NA` as well
+  product_level_output <- output |>
+    unnest_product()
+
+  company_level_output <- output |>
+    unnest_company()
+
+  # `avg_transition_risk_equal_weight` and `transition_risk_category` are `NA`at product level
+  expect_true(is.na(unique(product_level_output$transition_risk_score)))
+  expect_true(is.na(unique(product_level_output$transition_risk_category)))
+  # `avg_transition_risk_best_case` and `avg_transition_risk_worst_case` are `NA` are `NA` at company level
   expect_true(is.na(unique(company_level_output$avg_transition_risk_best_case)))
   expect_true(is.na(unique(company_level_output$avg_transition_risk_worst_case)))
 })
