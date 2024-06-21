@@ -54,7 +54,7 @@ create_avg_best_case_worst_case_at_product_level <- function(data) {
 add_avg_transition_risk <- function(data) {
   mutate(data,
     avg_transition_risk = ifelse(is.na(.data$transition_risk_score),
-      NA,
+      NA_real_,
       mean(.data$transition_risk_score, na.rm = TRUE)
     ),
     .by = c(
@@ -70,7 +70,7 @@ add_avg_transition_risk_best_case <- function(data) {
     avg_transition_risk_best_case =
       ifelse(.data$transition_risk_category ==
         .data$min_risk_category_per_company_benchmark,
-        .data$avg_transition_risk, NA
+        .data$avg_transition_risk, NA_real_
       )
   )
 }
@@ -80,7 +80,7 @@ add_avg_transition_risk_worst_case <- function(data) {
     avg_transition_risk_worst_case =
       ifelse(.data$transition_risk_category ==
         .data$max_risk_category_per_company_benchmark,
-        .data$avg_transition_risk, NA
+        .data$avg_transition_risk, NA_real_
       )
   )
 }
