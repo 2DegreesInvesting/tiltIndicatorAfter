@@ -36,7 +36,7 @@ compute_min_risk_category_per_company_benchmark <- function(data, col_risk, col_
       col_risk = col_risk,
       risk_order = c("low", "medium", "high")
     ),
-    .by = c(col_companies_id(), col_group_by)
+    .by = all_of(c(col_companies_id(), col_group_by))
   )
 }
 
@@ -47,7 +47,7 @@ compute_max_risk_category_per_company_benchmark <- function(data, col_risk, col_
       col_risk = col_risk,
       risk_order = c("high", "medium", "low")
     ),
-    .by = c(col_companies_id(), col_group_by)
+    .by = all_of(c(col_companies_id(), col_group_by))
   )
 }
 
@@ -72,14 +72,14 @@ compute_worst_risk <- function(data, col_risk) {
 compute_count_best_case_products_per_company_benchmark <- function(data, col_group_by) {
   mutate(data,
     count_best_case_products_per_company_benchmark = sum(.data$best_risk),
-    .by = c(col_companies_id(), col_group_by)
+    .by = all_of(c(col_companies_id(), col_group_by))
   )
 }
 
 compute_count_worst_case_products_per_company_benchmark <- function(data, col_group_by) {
   mutate(data,
     count_worst_case_products_per_company_benchmark = sum(.data$worst_risk),
-    .by = c(col_companies_id(), col_group_by)
+    .by = all_of(c(col_companies_id(), col_group_by))
   )
 }
 
