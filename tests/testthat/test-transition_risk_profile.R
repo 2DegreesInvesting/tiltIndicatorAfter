@@ -1,5 +1,4 @@
 test_that("yields a 'tilt_profile'", {
-  set.seed(123)
   restore <- options(list(
     readr.show_col_types = FALSE,
     tiltIndicatorAfter.output_co2_footprint = TRUE
@@ -50,7 +49,6 @@ test_that("yields a 'tilt_profile'", {
 
 
 test_that("outputs `NA` transition risk category for `NA` transition risk score at product level", {
-  set.seed(123)
   restore <- options(list(
     readr.show_col_types = FALSE,
     tiltIndicatorAfter.output_co2_footprint = TRUE
@@ -152,7 +150,6 @@ test_that("outputs columns `transition_risk_category_share` and `transition_risk
 })
 
 test_that("outputs `NA` in `avg_transition_risk_best_case` and `avg_transition_risk_worst_case` for `NA` at company level if `transition_risk_score` and `transition_risk_category` are `NA` at product level", {
-  set.seed(123)
   restore <- options(list(
     readr.show_col_types = FALSE,
     tiltIndicatorAfter.output_co2_footprint = TRUE
