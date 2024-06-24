@@ -1,9 +1,5 @@
 test_that("yields a 'tilt_profile'", {
-  restore <- options(list(
-    readr.show_col_types = FALSE,
-    tiltIndicatorAfter.output_co2_footprint = TRUE
-  ))
-
+  restore <- options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid != "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -49,11 +45,7 @@ test_that("yields a 'tilt_profile'", {
 
 
 test_that("outputs `NA` transition risk category for `NA` transition risk score at product level", {
-  restore <- options(list(
-    readr.show_col_types = FALSE,
-    tiltIndicatorAfter.output_co2_footprint = TRUE
-  ))
-
+  restore <- options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid != "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -150,11 +142,7 @@ test_that("outputs columns `transition_risk_category_share` and `transition_risk
 })
 
 test_that("outputs `NA` in `avg_transition_risk_best_case` and `avg_transition_risk_worst_case` for `NA` at company level if `transition_risk_score` and `transition_risk_category` are `NA` at product level", {
-  restore <- options(list(
-    readr.show_col_types = FALSE,
-    tiltIndicatorAfter.output_co2_footprint = TRUE
-  ))
-
+  restore <- options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid != "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
