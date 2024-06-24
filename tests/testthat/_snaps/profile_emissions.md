@@ -14,10 +14,10 @@
       [17] "company_city"                       "postcode"                          
       [19] "address"                            "main_activity"                     
       [21] "activity_uuid_product_uuid"         "profile_ranking"                   
-      [23] "ei_geography"                       "co2_footprint"                     
-      [25] "co2e_lower"                         "co2e_upper"                        
-      [27] "amount_of_distinct_products"        "equal_weight"                      
-      [29] "best_case"                          "worst_case"                        
+      [23] "ei_geography"                       "co2e_lower"                        
+      [25] "co2e_upper"                         "amount_of_distinct_products"       
+      [27] "equal_weight"                       "best_case"                         
+      [29] "worst_case"                        
 
 ---
 
