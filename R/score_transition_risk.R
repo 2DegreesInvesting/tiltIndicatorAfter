@@ -72,7 +72,8 @@ score_transition_risk <-
       select(-c("scenario_year", "benchmark")) |>
       left_join(
         union_emissions_sector_rows,
-        by = c("companies_id", "ep_product", "activity_uuid_product_uuid")
+        by = c("companies_id", "ep_product", "activity_uuid_product_uuid"),
+        relationship = "many-to-many"
       ) |>
       relocate(
         relocate_trs_columns(product_level_trs_column()),
