@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9046 (2024-06-25)
+
+* `transition_risk_profile()` outputs columns `avg_transition_risk_best_case` 
+and `avg_transition_risk_worst_case` at company level. Also, column 
+`transition_risk_score_avg` is renamed to `avg_transition_risk_equal_weight`. (#269)
+
 # tiltIndicatorAfter 0.0.0.9045 (2024-06-17)
 
 * `transition_risk_profile()` outputs columns `transition_risk_category_share` 
