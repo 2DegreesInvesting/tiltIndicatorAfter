@@ -9,7 +9,7 @@ test_that("outputs expected columns at company level", {
   expect_equal(names(out)[seq_along(expected)], expected)
 })
 
-test_that("values sum 1", {
+test_that("`transition_risk_category_share` sums up to 1 per `benchmark_tr_score_avg`", {
   example_data <- example_risk_categories_at_product_level()
   out <- create_risk_categories_at_company_level(example_data)
 
@@ -20,7 +20,7 @@ test_that("values sum 1", {
   expect_equal(sum, 1)
 })
 
-test_that("outputs null `transition_risk_category_share` for null in `benchmark_tr_score` and `transition_risk_category`", {
+test_that("outputs NA `transition_risk_category_share` for NA in `benchmark_tr_score` and `transition_risk_category`", {
   example_data <- example_risk_categories_at_product_level(
     benchmark_tr_score = NA_character_,
     transition_risk_category = NA_character_
