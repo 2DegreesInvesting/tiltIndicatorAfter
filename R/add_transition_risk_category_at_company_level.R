@@ -3,16 +3,21 @@ add_transition_risk_category_at_company_level <- function(data) {
     unnest_product()
 
   risk_categories <- product |>
-    adapt_tr_product_cols_to_tiltIndicator_cols() |>
-    epa_at_company_level() |>
-    insert_row_with_na_in_risk_category() |>
-    adapt_tiltIndicator_cols_to_tr_company_cols()
+    create_risk_categories_at_company_level()
 
   company <- data |>
     unnest_company() |>
     join_risk_categories_at_company_level(risk_categories)
 
   tilt_profile(nest_levels(product, company))
+}
+
+create_risk_categories_at_company_level <- function(data) {
+  data |>
+    adapt_tr_product_cols_to_tiltIndicator_cols() |>
+    epa_at_company_level() |>
+    insert_row_with_na_in_risk_category() |>
+    adapt_tiltIndicator_cols_to_tr_company_cols()
 }
 
 join_risk_categories_at_company_level <- function(data, risk_categories) {
