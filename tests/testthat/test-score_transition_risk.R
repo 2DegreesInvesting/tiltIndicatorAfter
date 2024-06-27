@@ -232,8 +232,8 @@ test_that("limits `transition_risk_score` between 0 and 1", {
     ) |>
     unnest_product()
 
-  # Due to large positive and negative `reduction_targets` values, `transition_risk_score`
-  # should not be more than 1 and less than 0.
+  # Due to large positive and negative `reduction_targets` values,
+  # `transition_risk_score` should not be more than 1 and less than 0.
   expected_values <- c(0, 1)
   expect_equal(unique(out$transition_risk_score), expected_values)
 })
