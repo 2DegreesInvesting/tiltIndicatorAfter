@@ -215,3 +215,25 @@ test_that("characterize commit 663d12", {
     hasName("benchmark_tr_score_avg") |>
     expect_true()
 })
+
+test_that("limits `transition_risk_score` between 0 and 1", {
+  emissions_profile_at_product_level <-
+    example_emissions_profile_at_product_level() |>
+    filter(companies_id == "antimonarchy_canine")
+  sector_profile_at_product_level <-
+    example_sector_profile_at_product_level() |>
+    filter(companies_id == "antimonarchy_canine") |>
+    mutate(reduction_targets = c(-100, -100, 100, 100))
+
+  out <-
+    score_transition_risk(
+      emissions_profile_at_product_level,
+      sector_profile_at_product_level
+    ) |>
+    unnest_product()
+
+  # Due to large positive and negative `reduction_targets` values, `transition_risk_score`
+  # should not be more than 1 and less than 0.
+  expected_values <- c(0, 1)
+  expect_equal(unique(out$transition_risk_score), expected_values)
+})
