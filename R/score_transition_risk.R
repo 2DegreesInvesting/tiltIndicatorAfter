@@ -69,6 +69,7 @@ score_transition_risk <-
     trs_product <-
       full_join_emmissions_sector(trs_emissions, trs_sector) |>
       create_tr_benchmarks_tr_score() |>
+      limit_transition_risk_score_between_0_and_1() |>
       select(-c("scenario_year", "benchmark")) |>
       left_join(
         union_emissions_sector_rows,
@@ -115,4 +116,8 @@ create_trs_average <- function(data) {
     transition_risk_score_avg = round(mean(.data$transition_risk_score, na.rm = TRUE), 3),
     .by = c("companies_id", "benchmark_tr_score")
   )
+}
+
+limit_transition_risk_score_between_0_and_1 <- function(data) {
+  mutate(data, transition_risk_score = pmin(pmax(data$transition_risk_score, 0), 1))
 }
