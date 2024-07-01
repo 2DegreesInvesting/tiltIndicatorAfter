@@ -22,7 +22,7 @@ create_risk_categories_at_company_level <- function(data) {
 
 join_risk_categories_at_company_level <- function(data, risk_categories) {
   data |>
-    create_extra_emission_profile_col() |>
+    create_transition_risk_category_col_at_company_level() |>
     left_join(risk_categories, by = c(
       "companies_id",
       "benchmark_tr_score_avg",
@@ -45,6 +45,9 @@ adapt_tiltIndicator_cols_to_tr_company_cols <- function(data) {
   )
 }
 
-create_extra_emission_profile_col <- function(data) {
-  mutate(data, transition_risk_category = dplyr::coalesce(.data$emission_profile, .data$sector_profile))
+create_transition_risk_category_col_at_company_level <- function(data) {
+  mutate(data, transition_risk_category = dplyr::coalesce(
+    .data$emission_profile,
+    .data$sector_profile
+  ))
 }
