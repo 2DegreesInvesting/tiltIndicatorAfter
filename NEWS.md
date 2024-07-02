@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9048 (2024-07-02)
+
+* `transition_risk_profile()` can convert columns `transition_risk_category` 
+and `sector_profile` in wide format at company level (#278).
+
 # tiltIndicatorAfter 0.0.0.9047 (2024-06-28)
 
 * `transition_risk_score` is limited between 0 and 1 (#274).
