@@ -3,8 +3,7 @@
 #' @param emissions_profile Nested data frame. The output of
 #'   `profile_emissions()`.
 #' @param sector_profile Nested data frame. The output of `profile_sector()`.
-#' @param pivot_wider Logical. Pivot the output at company level to a wide
-#'   format?
+#' @param exclude_co2 Logical. Exclude `co2_*` columns ?
 #'
 #' @return A data frame with the column `companies_id`, and the nested
 #'   columns`product` and `company` holding the outputs at product and company
@@ -55,33 +54,19 @@
 #'
 #' result |> unnest_product()
 #'
-#' # Most banks need company-level results in long format
-#' long <- result |>
-#'   unnest_company() |>
-#'   relocate(matches("emission_"))
-#' long
-#'
-#' # Some banks need company-level results in wide format
-#' wide <- score_transition_risk_and_polish(
-#'   emissions_profile,
-#'   sector_profile,
-#'   pivot_wider = TRUE
-#' ) |>
-#'   unnest_company() |>
-#'   relocate(matches("emission_"))
-#' wide
+#' result |> unnest_company()
 #'
 #' # Cleanup
 #' options(restore)
 score_transition_risk_and_polish <- function(emissions_profile,
                                              sector_profile,
-                                             pivot_wider = FALSE) {
+                                             exclude_co2 = FALSE) {
   transition_risk_score <- score_transition_risk(
     unnest_product(emissions_profile),
     unnest_product(sector_profile)
   )
 
-  if (!pivot_wider) {
+  if (!exclude_co2) {
     hint <- "Do you need `options(tiltIndicatorAfter.output_co2_footprint = TRUE)`?"
     unnest_product(emissions_profile) |> check_col("co2_footprint", hint)
   }
@@ -104,7 +89,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "profile_ranking",
         "tilt_sector",
         "tilt_subsector",
-        if (!pivot_wider) "co2_footprint"
+        if (!exclude_co2) "co2_footprint"
       )
     )
   select_sector_profile_product <- unnest_product(sector_profile) |>
@@ -150,12 +135,12 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "emission_profile",
         "emission_profile_share",
         "profile_ranking_avg",
-        if (!pivot_wider) "co2_avg"
+        if (!exclude_co2) "co2_avg"
       )
     )
 
   select_sector_profile_company <- unnest_company(sector_profile) |>
-    select(c("companies_id", "scenario", "year", "reduction_targets_avg"))
+    select(c("companies_id", "sector_profile", "sector_profile_share", "scenario", "year", "reduction_targets_avg"))
 
   select_transition_risk_score_company <- unnest_company(transition_risk_score) |>
     select(
@@ -166,27 +151,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
       )
     )
 
-  tmp <- select_emissions_profile_company
-  if (pivot_wider) {
-    tmp <- tmp |>
-      exclude_cols_then_pivot_wider(
-        exclude_cols = "co2e",
-        avoid_list_cols = TRUE,
-        id_cols = c(
-          "companies_id",
-          "country",
-          "main_activity",
-          "benchmark",
-          "profile_ranking_avg",
-          if (!pivot_wider) "co2_avg"
-        ),
-        names_from = "emission_profile",
-        names_prefix = "emission_category_",
-        values_from = "emission_profile_share"
-      )
-  }
-
-  out_company <- tmp |>
+  out_company <- select_emissions_profile_company |>
     left_join(
       select_sector_profile_company,
       relationship = "many-to-many",

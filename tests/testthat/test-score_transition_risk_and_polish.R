@@ -33,61 +33,7 @@ test_that("outputs results both at product and company level", {
   expect_named(out, c("companies_id", "product", "company"))
 })
 
-test_that("is sensitive to `pivot_wider`", {
-  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
-
-  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
-  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
-  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies())
-  toy_europages_companies <- read_csv(toy_europages_companies())
-  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
-  toy_isic_name <- read_csv(toy_isic_name())
-
-  emissions_profile <- profile_emissions(
-    companies = toy_emissions_profile_any_companies,
-    co2 = toy_emissions_profile_products_ecoinvent,
-    europages_companies = toy_europages_companies,
-    ecoinvent_activities = toy_ecoinvent_activities,
-    ecoinvent_europages = toy_ecoinvent_europages,
-    isic = toy_isic_name
-  )
-
-  sector_profile <- profile_sector(
-    companies = toy_sector_profile_companies,
-    scenarios = toy_sector_profile_any_scenarios,
-    europages_companies = toy_europages_companies,
-    ecoinvent_activities = toy_ecoinvent_activities,
-    ecoinvent_europages = toy_ecoinvent_europages,
-    isic = toy_isic_name
-  )
-
-  long <- score_transition_risk_and_polish(
-    emissions_profile,
-    sector_profile
-  )
-
-  wide <- score_transition_risk_and_polish(
-    emissions_profile,
-    sector_profile,
-    pivot_wider = TRUE
-  )
-
-  expect_equal(names(long), names(wide))
-  long_cols <- long |>
-    unnest_company() |>
-    select(matches("emission")) |>
-    ncol()
-  wide_cols <- wide |>
-    unnest_company() |>
-    select(matches("emission")) |>
-    ncol()
-  expect_true(long_cols < wide_cols)
-})
-
-test_that("with `*.output_co2_footprint` unset, `pivot_wider = FALSE` yields an error", {
+test_that("with `*.output_co2_footprint` unset, `exclude_co2 = FALSE` yields an error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -125,7 +71,7 @@ test_that("with `*.output_co2_footprint` unset, `pivot_wider = FALSE` yields an 
   )
 })
 
-test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yields no error", {
+test_that("with `*.output_co2_footprint` unset, `exclude_co2 = TRUE` yields no error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -161,51 +107,7 @@ test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yields no e
     score_transition_risk_and_polish(
       emissions_profile,
       sector_profile,
-      pivot_wider = TRUE
+      exclude_co2 = TRUE
     )
   )
-})
-
-test_that("with `pivot_wider = TRUE`, at company level the `emission*` column are of type double", {
-  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
-
-  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent())
-  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
-  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
-  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies())
-  toy_europages_companies <- read_csv(toy_europages_companies())
-  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
-  toy_isic_name <- read_csv(toy_isic_name())
-
-  emissions_profile <- profile_emissions(
-    companies = toy_emissions_profile_any_companies,
-    co2 = toy_emissions_profile_products_ecoinvent,
-    europages_companies = toy_europages_companies,
-    ecoinvent_activities = toy_ecoinvent_activities,
-    ecoinvent_europages = toy_ecoinvent_europages,
-    isic = toy_isic_name
-  )
-
-  sector_profile <- profile_sector(
-    companies = toy_sector_profile_companies,
-    scenarios = toy_sector_profile_any_scenarios,
-    europages_companies = toy_europages_companies,
-    ecoinvent_activities = toy_ecoinvent_activities,
-    ecoinvent_europages = toy_ecoinvent_europages,
-    isic = toy_isic_name
-  )
-
-  type <- score_transition_risk_and_polish(
-    emissions_profile,
-    sector_profile,
-    pivot_wider = TRUE
-  ) |>
-    unnest_company() |>
-    select(matches("emission")) |>
-    lapply(typeof) |>
-    unlist() |>
-    unique()
-  expect_equal(type, "double")
 })

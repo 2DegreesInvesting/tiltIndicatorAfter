@@ -7,7 +7,7 @@
 score_transition_risk_and_polish(
   emissions_profile,
   sector_profile,
-  pivot_wider = FALSE
+  exclude_co2 = FALSE
 )
 }
 \arguments{
@@ -16,8 +16,7 @@ score_transition_risk_and_polish(
 
 \item{sector_profile}{Nested data frame. The output of \code{profile_sector()}.}
 
-\item{pivot_wider}{Logical. Pivot the output at company level to a wide
-format?}
+\item{exclude_co2}{Logical. Exclude \verb{co2_*} columns ?}
 }
 \value{
 A data frame with the column \code{companies_id}, and the nested
@@ -70,21 +69,7 @@ result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
 
 result |> unnest_product()
 
-# Most banks need company-level results in long format
-long <- result |>
-  unnest_company() |>
-  relocate(matches("emission_"))
-long
-
-# Some banks need company-level results in wide format
-wide <- score_transition_risk_and_polish(
-  emissions_profile,
-  sector_profile,
-  pivot_wider = TRUE
-) |>
-  unnest_company() |>
-  relocate(matches("emission_"))
-wide
+result |> unnest_company()
 
 # Cleanup
 options(restore)
