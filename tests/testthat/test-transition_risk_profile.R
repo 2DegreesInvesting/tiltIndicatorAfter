@@ -249,15 +249,39 @@ test_that("is sensitive to `pivot_wider`", {
   )
 
   expect_equal(names(long), names(wide))
-  long_cols <- long |>
+
+  #Emissions profile
+  long_emission_cols <- long |>
     unnest_company() |>
     select(matches("emission")) |>
     ncol()
-  wide_cols <- wide |>
+  wide_emission_cols <- wide |>
     unnest_company() |>
     select(matches("emission")) |>
     ncol()
-  expect_true(long_cols < wide_cols)
+  expect_true(long_emission_cols < wide_emission_cols)
+
+  #Sector profile
+  long_sector_cols <- long |>
+    unnest_company() |>
+    select(matches("sector")) |>
+    ncol()
+  wide_sector_cols <- wide |>
+    unnest_company() |>
+    select(matches("sector")) |>
+    ncol()
+  expect_true(long_sector_cols < wide_sector_cols)
+
+  #Transition risk profile
+  long_transition_risk_cols <- long |>
+    unnest_company() |>
+    select(matches("transition_risk")) |>
+    ncol()
+  wide_transition_risk_cols <- wide |>
+    unnest_company() |>
+    select(matches("transition_risk")) |>
+    ncol()
+  expect_true(long_transition_risk_cols < wide_transition_risk_cols)
 })
 
 
