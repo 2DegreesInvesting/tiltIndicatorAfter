@@ -9,7 +9,7 @@ polish_emissions_profile_company <- function(ep_comp, ep_prod, europages_compani
   ep_prod <- sanitize_isic(ep_prod)
 
   inter_result <- prepare_inter_emissions_profile(ep_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, isic) |>
-    select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>
+    select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty", "min_headcount", "max_headcount") |>
     distinct()
 
   ep_comp |>

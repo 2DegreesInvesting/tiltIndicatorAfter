@@ -118,6 +118,7 @@ transition_risk_profile_impl <- function(emissions_profile,
     add_transition_risk_category() |>
     best_case_worst_case_transition_risk_profile() |>
     polish_best_case_worst_case() |>
+    polish_best_case_worst_case_transition_risk_profile() |>
     polish_transition_risk_at_product_level()
 
   company <- transition_risk_scores |>
