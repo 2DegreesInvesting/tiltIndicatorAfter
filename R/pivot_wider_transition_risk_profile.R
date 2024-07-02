@@ -3,9 +3,7 @@
 #' @param pivot_wider Logical. Pivot the output at company level to a wide
 #'   format?
 #'
-#' @return A data frame with the column `companies_id`, and the nested
-#'   columns`product` and `company` holding the outputs at product and company
-#'   level.
+#' @return `r document_tilt_profile()`
 #' @export
 #' @keywords internal
 #'
@@ -16,7 +14,6 @@
 #' library(tiltToyData, warn.conflicts = FALSE)
 #' library(tiltTransitionRisk, warn.conflicts = FALSE)
 #'
-#' set.seed(123)
 #' restore <- options(list(
 #'   readr.show_col_types = FALSE,
 #'   tiltIndicatorAfter.output_co2_footprint = TRUE

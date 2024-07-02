@@ -11,9 +11,7 @@ pivot_wider_transition_risk_profile(data, pivot_wider = FALSE)
 format?}
 }
 \value{
-A data frame with the column \code{companies_id}, and the nested
-columns\code{product} and \code{company} holding the outputs at product and company
-level.
+A data frame with the column \code{companies_id}, and the list columns \code{product} and \code{company} holding the outputs at product and company level.
 }
 \description{
 Calculate the indicator "transition risk profile"
@@ -25,7 +23,6 @@ library(dplyr, warn.conflicts = FALSE)
 library(tiltToyData, warn.conflicts = FALSE)
 library(tiltTransitionRisk, warn.conflicts = FALSE)
 
-set.seed(123)
 restore <- options(list(
   readr.show_col_types = FALSE,
   tiltIndicatorAfter.output_co2_footprint = TRUE
