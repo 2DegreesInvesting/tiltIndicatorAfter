@@ -297,10 +297,11 @@ test_that("given a product in 'ipr', when scenarios has also 'weo', then the pro
   ) |>
     unnest_product()
 
-  actual <- product |>
-    distinct(scenario) |>
-    left_join(distinct(scenarios, scenario, type), by = "scenario")
+  # `product` results include `scanario` coming from both "ipr" and "weo"
+  expect_true(any(grepl(c(ipr = "1.5"), product$scenario)))
+  expect_true(any(grepl(c(weo = "nz"), product$scenario)))
 
-  expect_equal(sort(unique(actual$type)), c("ipr", "weo"))
-  expect_true(anyNA(product$sector_profile))
+  # All rows where `scenario` comes from "weo" map to `NA` in `sector_profile`
+  weo <- product |> filter(grepl(c(weo = "nz"), scenario))
+  expect_true(all(is.na(weo$sector_profile)))
 })
