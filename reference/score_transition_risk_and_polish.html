@@ -54,7 +54,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">score_transition_risk_and_polish</span><span class="op">(</span></span>
 <span>  <span class="va">emissions_profile</span>,</span>
 <span>  <span class="va">sector_profile</span>,</span>
-<span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  exclude_co2 <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -69,9 +69,8 @@
 <dd><p>Nested data frame. The output of <code><a href="profile_sector_upstream.html">profile_sector()</a></code>.</p></dd>
 
 
-<dt>pivot_wider</dt>
-<dd><p>Logical. Pivot the output at company level to a wide
-format?</p></dd>
+<dt>exclude_co2</dt>
+<dd><p>Logical. Exclude <code>co2_*</code> columns ?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -147,55 +146,24 @@ level.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   benchmark &lt;chr&gt;, profile_ranking &lt;dbl&gt;, tilt_sector &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tilt_subsector &lt;chr&gt;, co2_footprint &lt;dbl&gt;, sector_profile &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Most banks need company-level results in long format</span></span></span>
-<span class="r-in"><span><span class="va">long</span> <span class="op">&lt;-</span> <span class="va">result</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">matches</a></span><span class="op">(</span><span class="st">"emission_"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">long</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,912 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    emission_profile emission_profile_share companies_id    country main_activity</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> high                                  1 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> high                                  1 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> high                                  1 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> high                                  1 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> medium                                0 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> medium                                0 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> medium                                0 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> medium                                0 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> low                                   0 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> low                                   0 asteria_megalo… austria wholesaler   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6,902 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: benchmark_tr_score_avg &lt;chr&gt;, benchmark &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   profile_ranking_avg &lt;dbl&gt;, co2_avg &lt;dbl&gt;, scenario &lt;chr&gt;, year &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reduction_targets_avg &lt;dbl&gt;, transition_risk_score_avg &lt;dbl&gt;</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Some banks need company-level results in wide format</span></span></span>
-<span class="r-in"><span><span class="va">wide</span> <span class="op">&lt;-</span> <span class="fu">score_transition_risk_and_polish</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">emissions_profile</span>,</span></span>
-<span class="r-in"><span>  <span class="va">sector_profile</span>,</span></span>
-<span class="r-in"><span>  pivot_wider <span class="op">=</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">matches</a></span><span class="op">(</span><span class="st">"emission_"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">wide</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,728 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    emission_category_high emission_category_medium emission_category_low</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>                      1                        0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,718 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: emission_category_NA &lt;dbl&gt;, companies_id &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   country &lt;chr&gt;, main_activity &lt;chr&gt;, benchmark_tr_score_avg &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   benchmark &lt;chr&gt;, profile_ranking_avg &lt;dbl&gt;, scenario &lt;chr&gt;, year &lt;chr&gt;,</span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27,648 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id           country main_activity benchmark_tr_score_avg benchmark</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2030_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2030_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2030_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2030_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2050_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2050_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2050_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotomusqu… austria wholesaler    1.5C RPS_2050_all      all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megalotomusqu… austria wholesaler    NZ 2050_2030_all       all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megalotomusqu… austria wholesaler    NZ 2050_2030_all       all      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27,638 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: emission_profile &lt;chr&gt;, emission_profile_share &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   profile_ranking_avg &lt;dbl&gt;, co2_avg &lt;dbl&gt;, sector_profile &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_profile_share &lt;dbl&gt;, scenario &lt;chr&gt;, year &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reduction_targets_avg &lt;dbl&gt;, transition_risk_score_avg &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleanup</span></span></span>
