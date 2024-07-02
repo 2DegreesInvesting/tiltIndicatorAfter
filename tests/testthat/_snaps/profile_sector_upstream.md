@@ -17,7 +17,8 @@
       [23] "main_activity"                      "activity_uuid_product_uuid"        
       [25] "input_isic_4digit"                  "sector_scenario"                   
       [27] "subsector_scenario"                 "ei_input_geography"                
-      [29] "input_isic_4digit_name"             "ei_geography"                      
+      [29] "min_headcount"                      "max_headcount"                     
+      [31] "input_isic_4digit_name"             "ei_geography"                      
 
 ---
 

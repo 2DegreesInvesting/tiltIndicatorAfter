@@ -126,7 +126,8 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
         "companies_id",
         "country",
         "main_activity"
-      )
+      ),
+      relationship = "many-to-many"
     ) |>
       unite("benchmark_tr_score_avg", all_of(benchmark_cols()), remove = FALSE) |>
       full_join(transition_risk_profile_company,
@@ -135,8 +136,10 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
           "country",
           "main_activity",
           "benchmark_tr_score_avg"
-        )
-      )
+        ),
+        relationship = "many-to-many"
+      ) |>
+      distinct()
   }
 
   tilt_profile(nest_levels(product, company))
@@ -164,7 +167,11 @@ select_subset_emissions_profile_id_cols <- function(data) {
     "country",
     "main_activity",
     "benchmark",
-    "profile_ranking_avg"
+    "profile_ranking_avg",
+    "postcode",
+    "address",
+    "min_headcount",
+    "max_headcount"
   )
 }
 
