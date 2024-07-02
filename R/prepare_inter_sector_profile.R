@@ -9,5 +9,6 @@ prepare_inter_sector_profile <- function(sp_prod, europages_companies, ecoinvent
     left_join(ecoinvent_europages, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     left_join(isic, by = "isic_4digit") |>
     add_avg_matching_certainty("completion") |>
+    # FIXME: Do we need to remove this and/or other calls to exclude_rows()?
     exclude_rows("risk_category")
 }
