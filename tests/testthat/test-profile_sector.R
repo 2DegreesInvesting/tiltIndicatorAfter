@@ -271,3 +271,36 @@ test_that("outputs `profile_ranking_avg` at company level", {
   company <- unnest_company(out)
   expect_true(hasName(company, "reduction_targets_avg"))
 })
+
+test_that("given a product in 'ipr', when scenarios has also 'weo', then the product-result includes a 'weo*' `scenario` and maps to `NA` in `sector_profile` (#279, tiltIndicator#739)", {
+  one_type <- "ipr"
+  companies <- read_csv(toy_sector_profile_companies()) |>
+    filter(type == one_type) |>
+    head(1)
+
+  scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  has_two_types <- all(sort(unique(scenarios$type)) %in% c("ipr", "weo"))
+  stopifnot(has_two_types)
+
+  europages_companies <- read_csv(toy_europages_companies())
+  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  isic_name <- read_csv(toy_isic_name())
+
+  product <- profile_sector(
+    companies,
+    scenarios,
+    europages_companies,
+    ecoinvent_activities,
+    ecoinvent_europages,
+    isic_name
+  ) |>
+    unnest_product()
+
+  actual <- product |>
+    distinct(scenario) |>
+    left_join(distinct(scenarios, scenario, type), by = "scenario")
+
+  expect_equal(sort(unique(actual$type)), c("ipr", "weo"))
+  expect_true(anyNA(product$sector_profile))
+})
