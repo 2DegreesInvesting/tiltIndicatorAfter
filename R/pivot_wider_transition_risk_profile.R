@@ -95,16 +95,8 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
   if (pivot_wider) {
     emission_profile_company <- company |>
       select_emissions_profile_pivot_cols() |>
-      exclude_cols_then_pivot_wider(
-        exclude_cols = "co2e",
-        avoid_list_cols = TRUE,
-        id_cols = c(
-          "companies_id",
-          "country",
-          "main_activity",
-          "benchmark",
-          "profile_ranking_avg"
-        ),
+      exclude_subset_cols_then_pivot_wider(
+        subset_cols = select_subset_emissions_profile_id_cols(),
         names_from = "emission_profile",
         names_prefix = "emission_category_",
         values_from = "emission_profile_share"
@@ -112,17 +104,8 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
 
     sector_profile_company <- company |>
       select_sector_profile_pivot_cols() |>
-      exclude_cols_then_pivot_wider(
-        exclude_cols = "co2e",
-        avoid_list_cols = TRUE,
-        id_cols = c(
-          "companies_id",
-          "country",
-          "main_activity",
-          "scenario",
-          "year",
-          "reduction_targets_avg"
-        ),
+      exclude_subset_cols_then_pivot_wider(
+        subset_cols = select_subset_sector_profile_id_cols(),
         names_from = "sector_profile",
         names_prefix = "sector_category_",
         values_from = "sector_profile_share"
@@ -130,18 +113,8 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
 
     transition_risk_profile_company <- company |>
       select_transition_risk_profile_pivot_cols() |>
-      exclude_cols_then_pivot_wider(
-        exclude_cols = "co2e",
-        avoid_list_cols = TRUE,
-        id_cols = c(
-          "companies_id",
-          "country",
-          "main_activity",
-          "benchmark_tr_score_avg",
-          "avg_transition_risk_equal_weight",
-          "avg_transition_risk_best_case",
-          "avg_transition_risk_worst_case"
-        ),
+      exclude_subset_cols_then_pivot_wider(
+        subset_cols = select_subset_transition_risk_profile_id_cols(),
         names_from = "transition_risk_category",
         names_prefix = "transition_risk_category_",
         values_from = "transition_risk_category_share"
@@ -169,41 +142,75 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
   tilt_profile(nest_levels(product, company))
 }
 
-select_emissions_profile_pivot_cols <- function(data) {
-  select(data, c(
+exclude_subset_cols_then_pivot_wider <- function(data,
+                                                 subset_cols,
+                                                 names_from,
+                                                 names_prefix,
+                                                 values_from) {
+  data |>
+    exclude_cols_then_pivot_wider(
+      exclude_cols = "co2e",
+      avoid_list_cols = TRUE,
+      id_cols = subset_cols,
+      names_from = names_from,
+      names_prefix = names_prefix,
+      values_from = values_from
+    )
+}
+
+select_subset_emissions_profile_id_cols <- function(data) {
+  c(
     "companies_id",
     "country",
     "main_activity",
     "benchmark",
-    "profile_ranking_avg",
+    "profile_ranking_avg"
+  )
+}
+
+select_emissions_profile_pivot_cols <- function(data) {
+  select(data, c(
+    select_subset_emissions_profile_id_cols(),
     "emission_profile",
     "emission_profile_share"
   ))
 }
 
-select_sector_profile_pivot_cols <- function(data) {
-  select(data, c(
+select_subset_sector_profile_id_cols <- function(data) {
+  c(
     "companies_id",
     "country",
     "main_activity",
     "scenario",
     "year",
-    "reduction_targets_avg",
+    "reduction_targets_avg"
+  )
+}
+
+select_sector_profile_pivot_cols <- function(data) {
+  select(data, c(
+    select_subset_sector_profile_id_cols(),
     "sector_profile",
     "sector_profile_share"
   ))
 }
 
-select_transition_risk_profile_pivot_cols <- function(data) {
-  select(data, c(
+select_subset_transition_risk_profile_id_cols <- function(data) {
+  c(
     "companies_id",
     "country",
     "main_activity",
     "benchmark_tr_score_avg",
     "avg_transition_risk_equal_weight",
-    "transition_risk_category",
-    "transition_risk_category_share",
     "avg_transition_risk_best_case",
     "avg_transition_risk_worst_case"
+  )
+}
+
+select_transition_risk_profile_pivot_cols <- function(data) {
+  select(data, c(
+    select_subset_transition_risk_profile_id_cols(),
+    "transition_risk_category",
+    "transition_risk_category_share"
   ))
 }
