@@ -7,7 +7,9 @@ select_europages_companies <- function(data) {
       "postcode",
       "address",
       "main_activity",
-      "companies_id"
+      "companies_id",
+      "min_headcount",
+      "max_headcount"
     ) |>
     distinct()
 }

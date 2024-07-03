@@ -126,17 +126,24 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
         "companies_id",
         "country",
         "main_activity"
-      )
+      ),
+      relationship = "many-to-many"
     ) |>
-      unite("benchmark_tr_score_avg", all_of(benchmark_cols()), remove = FALSE) |>
+      mutate(benchmark_tr_score_avg = ifelse(
+        is.na(.data$profile_ranking_avg) | is.na(.data$reduction_targets_avg),
+        NA_character_,
+        paste(.data$scenario, .data$year, .data$benchmark, sep = "_")
+      )) |>
       full_join(transition_risk_profile_company,
         by = c(
           "companies_id",
           "country",
           "main_activity",
           "benchmark_tr_score_avg"
-        )
-      )
+        ),
+        relationship = "many-to-many"
+      ) |>
+      distinct()
   }
 
   tilt_profile(nest_levels(product, company))
@@ -164,7 +171,11 @@ select_subset_emissions_profile_id_cols <- function(data) {
     "country",
     "main_activity",
     "benchmark",
-    "profile_ranking_avg"
+    "profile_ranking_avg",
+    "postcode",
+    "address",
+    "min_headcount",
+    "max_headcount"
   )
 }
 

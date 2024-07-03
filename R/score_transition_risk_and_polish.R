@@ -78,6 +78,8 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "country",
         "main_activity",
         "ep_product",
+        "postcode",
+        "address",
         "activity_uuid_product_uuid",
         "matched_activity_name",
         "matched_reference_product",
@@ -89,6 +91,10 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "profile_ranking",
         "tilt_sector",
         "tilt_subsector",
+        "min_headcount",
+        "max_headcount",
+        "emissions_profile_best_case",
+        "emissions_profile_worst_case",
         if (!exclude_co2) "co2_footprint"
       )
     )
@@ -118,7 +124,11 @@ score_transition_risk_and_polish <- function(emissions_profile,
       relationship = "many-to-many",
       by = c("companies_id", "ep_product")
     ) |>
-    unite("benchmark_tr_score", all_of(benchmark_cols()), remove = FALSE) |>
+    mutate(benchmark_tr_score = ifelse(
+      is.na(.data$profile_ranking) | is.na(.data$reduction_targets),
+      NA_character_,
+      paste(.data$scenario, .data$year, .data$benchmark, sep = "_")
+    )) |>
     left_join(
       select_transition_risk_score_product,
       by = c("companies_id", "ep_product", "benchmark_tr_score")
@@ -131,7 +141,11 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "companies_id",
         "country",
         "main_activity",
+        "postcode",
+        "address",
         "benchmark",
+        "min_headcount",
+        "max_headcount",
         "emission_profile",
         "emission_profile_share",
         "profile_ranking_avg",

@@ -14,10 +14,11 @@
       [17] "company_city"                       "postcode"                          
       [19] "address"                            "main_activity"                     
       [21] "activity_uuid_product_uuid"         "profile_ranking"                   
-      [23] "ei_geography"                       "co2e_lower"                        
-      [25] "co2e_upper"                         "amount_of_distinct_products"       
-      [27] "equal_weight"                       "best_case"                         
-      [29] "worst_case"                        
+      [23] "min_headcount"                      "max_headcount"                     
+      [25] "ei_geography"                       "co2e_lower"                        
+      [27] "co2e_upper"                         "amount_of_distinct_products"       
+      [29] "emissions_profile_equal_weight"     "emissions_profile_best_case"       
+      [31] "emissions_profile_worst_case"      
 
 ---
 
@@ -30,5 +31,6 @@
        [7] "matching_certainty_company_average" "company_city"                      
        [9] "postcode"                           "address"                           
       [11] "main_activity"                      "profile_ranking_avg"               
-      [13] "co2_avg"                           
+      [13] "min_headcount"                      "max_headcount"                     
+      [15] "co2_avg"                           
 
