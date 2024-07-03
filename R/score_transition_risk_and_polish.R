@@ -124,7 +124,11 @@ score_transition_risk_and_polish <- function(emissions_profile,
       relationship = "many-to-many",
       by = c("companies_id", "ep_product")
     ) |>
-    unite("benchmark_tr_score", all_of(benchmark_cols()), remove = FALSE) |>
+    mutate(benchmark_tr_score = ifelse(
+      is.na(.data$profile_ranking) | is.na(.data$reduction_targets),
+      NA_character_,
+      paste(.data$scenario, .data$year, .data$benchmark, sep = "_")
+    )) |>
     left_join(
       select_transition_risk_score_product,
       by = c("companies_id", "ep_product", "benchmark_tr_score")

@@ -478,8 +478,6 @@ test_that("outputs `co2_footprint` at product level and `co2_avg` at company lev
 })
 
 test_that("the output at product level has columns matching `postcode`, `address`, `min_headcount`, `max_headcount`, `emissions_profile_best_case`, `emissions_profile_worst_case`, `transition_risk_profile_best_case`, and `transition_risk_profile_worst_case`", {
-  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
-
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -532,8 +530,6 @@ test_that("the output at product level has columns matching `postcode`, `address
 })
 
 test_that("the output at company level has columns matching `postcode`, `address`, `min_headcount`, and `max_headcount`", {
-  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
-
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
