@@ -171,7 +171,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
       relationship = "many-to-many",
       by = c("companies_id")
     ) |>
-    unite("benchmark_tr_score_avg", all_of(benchmark_cols()), remove = FALSE) |>
+    add_benchmark_tr_score_avg() |>
     left_join(
       select_transition_risk_score_company,
       by = c("companies_id", "benchmark_tr_score_avg")
@@ -181,6 +181,13 @@ score_transition_risk_and_polish <- function(emissions_profile,
   nest_levels(out_product, out_company)
 }
 
-benchmark_cols <- function() {
-  c("scenario", "year", "benchmark")
+add_benchmark_tr_score_avg <- function(data) {
+  mutate(
+    data,
+    benchmark_tr_score_avg = ifelse(
+      is.na(.data$profile_ranking_avg) | is.na(.data$reduction_targets_avg),
+      NA_character_,
+      paste(.data$scenario, .data$year, .data$benchmark, sep = "_")
+    )
+  )
 }
