@@ -1,5 +1,17 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9049 (2024-07-03)
+
+* `transition_risk_profile()` outputs columns `postcode`, `address`, 
+`min_headcount`, and `max_headcount` at product and company level (#281).
+
+* `transition_risk_profile()` outputs renamed columns at product level (#281):
+
+- `best_case` -> `emissions_profile_best_case`
+- `worst_case` -> `emissions_profile_worst_case`
+- `best_case` -> `transition_risk_profile_best_case`
+- `worst_case` -> `transition_risk_profile_worst_case`
+
 # tiltIndicatorAfter 0.0.0.9048 (2024-07-02)
 
 * `transition_risk_profile()` can convert columns `transition_risk_category` 
