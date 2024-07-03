@@ -129,11 +129,7 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
       ),
       relationship = "many-to-many"
     ) |>
-      mutate(benchmark_tr_score_avg = ifelse(
-        is.na(.data$profile_ranking_avg) | is.na(.data$reduction_targets_avg),
-        NA_character_,
-        paste(.data$scenario, .data$year, .data$benchmark, sep = "_")
-      )) |>
+      add_benchmark_tr_score_avg() |>
       full_join(transition_risk_profile_company,
         by = c(
           "companies_id",
