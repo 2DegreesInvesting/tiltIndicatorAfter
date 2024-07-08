@@ -11,7 +11,8 @@ polish_sector_profile_product <- function(sp_prod, europages_companies, ecoinven
   prepare_inter_sector_profile(sp_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, isic) |>
     relocate_sector_profile_product() |>
     rename_sector_profile_product() |>
-    mutate(scenario = recode(.data$scenario, "1.5c rps" = "IPR 1.5c RPS", "nz 2050" = "WEO NZ 2050")) |>
+    mutate(scenario = ifelse(is.na(scenario), grouped_by, scenario)) |>
+    mutate(scenario = recode_scenario(.data$scenario)) |>
     select(-c("matching_certainty_num", "avg_matching_certainty_num", "grouped_by", "type", "extra_rowid")) |>
     distinct() |>
     rename_118()
