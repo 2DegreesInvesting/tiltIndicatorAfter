@@ -13,16 +13,23 @@ polish_best_case_worst_case <- function(data) {
 }
 
 rename_with_prefix <- function(data, prefix, match = ".") {
-  dplyr::rename_with(data, ~paste0(prefix, .x), .cols = tidyselect::matches(match))
+  rename_with(data, ~ paste0(prefix, .x), .cols = matches(match))
 }
 
 polish_best_case_worst_case_emissions_profile <- function(data) {
   data |>
-    rename_with_prefix("emissions_profile_", match = c("best_case", "worst_case", "equal_weight"))
+    rename_with_prefix("emissions_profile_", match = c(
+      "best_case",
+      "worst_case",
+      "equal_weight"
+    ))
 }
 
 polish_best_case_worst_case_transition_risk_profile <- function(data) {
   data |>
-    rename_with_prefix("transition_risk_profile_", match = c("best_case", "worst_case", "equal_weight"))
+    rename_with_prefix("transition_risk_profile_", match = c(
+      "^best_case$",
+      "^worst_case$",
+      "^equal_weight$"
+    ))
 }
-

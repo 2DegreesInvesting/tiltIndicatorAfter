@@ -20,6 +20,7 @@
 #' @importFrom dplyr recode
 #' @importFrom dplyr relocate
 #' @importFrom dplyr rename
+#' @importFrom dplyr rename_with
 #' @importFrom dplyr row_number
 #' @importFrom dplyr select
 #' @importFrom dplyr summarise
