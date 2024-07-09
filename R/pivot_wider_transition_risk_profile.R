@@ -2,6 +2,7 @@
 #'
 #' @param pivot_wider Logical. Pivot the output at company level to a wide
 #'   format?
+#' @param include_co2 Logical. Include `co2_*` columns ?
 #'
 #' @return `r document_tilt_profile()`
 #' @export
@@ -61,7 +62,10 @@
 #' ) |>
 #'   add_transition_risk_category_at_company_level() |>
 #'   best_case_worst_case_transition_risk_profile_at_company_level() |>
-#'   pivot_wider_transition_risk_profile(pivot_wider = pivot_wider) |>
+#'   pivot_wider_transition_risk_profile(
+#'     pivot_wider = pivot_wider,
+#'     include_co2 = TRUE
+#'   ) |>
 #'   unnest_company()
 #' long
 #'
@@ -78,14 +82,19 @@
 #' ) |>
 #'   add_transition_risk_category_at_company_level() |>
 #'   best_case_worst_case_transition_risk_profile_at_company_level() |>
-#'   pivot_wider_transition_risk_profile(pivot_wider = pivot_wider) |>
+#'   pivot_wider_transition_risk_profile(
+#'     pivot_wider = pivot_wider,
+#'     include_co2 = TRUE
+#'   ) |>
 #'   unnest_company()
 #' wide
 #'
 #' # Cleanup
 #' options(restore)
 #' }
-pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
+pivot_wider_transition_risk_profile <- function(data,
+                                                pivot_wider = FALSE,
+                                                include_co2 = FALSE) {
   product <- data |>
     unnest_product()
 
@@ -94,9 +103,11 @@ pivot_wider_transition_risk_profile <- function(data, pivot_wider = FALSE) {
 
   if (pivot_wider) {
     emission_profile_company <- company |>
-      select_emissions_profile_pivot_cols() |>
+      select_emissions_profile_pivot_cols(include_co2 = include_co2) |>
       exclude_subset_cols_then_pivot_wider(
-        subset_cols = select_subset_emissions_profile_id_cols(),
+        subset_cols = select_subset_emissions_profile_id_cols(
+          include_co2 = include_co2
+        ),
         names_from = "emission_profile",
         names_prefix = "emission_category_",
         values_from = "emission_profile_share"
@@ -161,7 +172,7 @@ exclude_subset_cols_then_pivot_wider <- function(data,
     )
 }
 
-select_subset_emissions_profile_id_cols <- function(data) {
+select_subset_emissions_profile_id_cols <- function(data, include_co2 = FALSE) {
   c(
     "companies_id",
     "country",
@@ -170,14 +181,15 @@ select_subset_emissions_profile_id_cols <- function(data) {
     "profile_ranking_avg",
     "postcode",
     "address",
+    if (include_co2) "co2_avg",
     "min_headcount",
     "max_headcount"
   )
 }
 
-select_emissions_profile_pivot_cols <- function(data) {
+select_emissions_profile_pivot_cols <- function(data, include_co2 = FALSE) {
   select(data, c(
-    select_subset_emissions_profile_id_cols(),
+    select_subset_emissions_profile_id_cols(include_co2 = include_co2),
     "emission_profile",
     "emission_profile_share"
   ))

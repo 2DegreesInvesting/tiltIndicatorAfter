@@ -3,7 +3,7 @@
 #' @param emissions_profile Nested data frame. The output of
 #'   `profile_emissions()`.
 #' @param sector_profile Nested data frame. The output of `profile_sector()`.
-#' @param exclude_co2 Logical. Exclude `co2_*` columns ?
+#' @param include_co2 Logical. Include `co2_*` columns ?
 #'
 #' @return A data frame with the column `companies_id`, and the nested
 #'   columns`product` and `company` holding the outputs at product and company
@@ -50,7 +50,10 @@
 #'   isic = toy_isic_name
 #' )
 #'
-#' result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
+#' result <- score_transition_risk_and_polish(emissions_profile,
+#'   sector_profile,
+#'   include_co2 = TRUE
+#' )
 #'
 #' result |> unnest_product()
 #'
@@ -60,13 +63,13 @@
 #' options(restore)
 score_transition_risk_and_polish <- function(emissions_profile,
                                              sector_profile,
-                                             exclude_co2 = FALSE) {
+                                             include_co2 = FALSE) {
   transition_risk_score <- score_transition_risk(
     unnest_product(emissions_profile),
     unnest_product(sector_profile)
   )
 
-  if (!exclude_co2) {
+  if (include_co2) {
     hint <- "Do you need `options(tiltIndicatorAfter.output_co2_footprint = TRUE)`?"
     unnest_product(emissions_profile) |> check_col("co2_footprint", hint)
   }
@@ -95,7 +98,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "max_headcount",
         "emissions_profile_best_case",
         "emissions_profile_worst_case",
-        if (!exclude_co2) "co2_footprint"
+        if (include_co2) "co2_footprint"
       )
     )
   select_sector_profile_product <- unnest_product(sector_profile) |>
@@ -149,7 +152,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "emission_profile",
         "emission_profile_share",
         "profile_ranking_avg",
-        if (!exclude_co2) "co2_avg"
+        if (include_co2) "co2_avg"
       )
     )
 
