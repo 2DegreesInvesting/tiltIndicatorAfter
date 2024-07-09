@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9050 (2024-07-09)
+
+* `transition_risk_profile()` outputs columns `co2_footprint` at product level 
+and `co2_avg` at company level if option `*.output_co2_footprint` is set to TRUE
+
 # tiltIndicatorAfter 0.0.0.9049 (2024-07-03)
 
 * `transition_risk_profile()` outputs columns `postcode`, `address`, 
