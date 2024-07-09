@@ -7,7 +7,7 @@
 score_transition_risk_and_polish(
   emissions_profile,
   sector_profile,
-  exclude_co2 = FALSE
+  include_co2 = FALSE
 )
 }
 \arguments{
@@ -16,7 +16,7 @@ score_transition_risk_and_polish(
 
 \item{sector_profile}{Nested data frame. The output of \code{profile_sector()}.}
 
-\item{exclude_co2}{Logical. Exclude \verb{co2_*} columns ?}
+\item{include_co2}{Logical. Include \verb{co2_*} columns ?}
 }
 \value{
 A data frame with the column \code{companies_id}, and the nested
@@ -65,7 +65,10 @@ sector_profile <- profile_sector(
   isic = toy_isic_name
 )
 
-result <- score_transition_risk_and_polish(emissions_profile, sector_profile)
+result <- score_transition_risk_and_polish(emissions_profile,
+  sector_profile,
+  include_co2 = TRUE
+)
 
 result |> unnest_product()
 

@@ -4,11 +4,17 @@
 \alias{pivot_wider_transition_risk_profile}
 \title{Calculate the indicator "transition risk profile"}
 \usage{
-pivot_wider_transition_risk_profile(data, pivot_wider = FALSE)
+pivot_wider_transition_risk_profile(
+  data,
+  pivot_wider = FALSE,
+  include_co2 = FALSE
+)
 }
 \arguments{
 \item{pivot_wider}{Logical. Pivot the output at company level to a wide
 format?}
+
+\item{include_co2}{Logical. Include \verb{co2_*} columns ?}
 }
 \value{
 A data frame with the column \code{companies_id}, and the list columns \code{product} and \code{company} holding the outputs at product and company level.
@@ -70,7 +76,10 @@ long <- transition_risk_profile_impl(
 ) |>
   add_transition_risk_category_at_company_level() |>
   best_case_worst_case_transition_risk_profile_at_company_level() |>
-  pivot_wider_transition_risk_profile(pivot_wider = pivot_wider) |>
+  pivot_wider_transition_risk_profile(
+    pivot_wider = pivot_wider,
+    include_co2 = TRUE
+  ) |>
   unnest_company()
 long
 
@@ -87,7 +96,10 @@ wide <- transition_risk_profile_impl(
 ) |>
   add_transition_risk_category_at_company_level() |>
   best_case_worst_case_transition_risk_profile_at_company_level() |>
-  pivot_wider_transition_risk_profile(pivot_wider = pivot_wider) |>
+  pivot_wider_transition_risk_profile(
+    pivot_wider = pivot_wider,
+    include_co2 = TRUE
+  ) |>
   unnest_company()
 wide
 

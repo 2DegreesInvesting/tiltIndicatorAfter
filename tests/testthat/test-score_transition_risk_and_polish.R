@@ -33,7 +33,7 @@ test_that("outputs results both at product and company level", {
   expect_named(out, c("companies_id", "product", "company"))
 })
 
-test_that("with `*.output_co2_footprint` unset, `exclude_co2 = FALSE` yields an error", {
+test_that("with `*.output_co2_footprint` unset, `include_co2 = TRUE` yields an error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -66,12 +66,12 @@ test_that("with `*.output_co2_footprint` unset, `exclude_co2 = FALSE` yields an 
   )
 
   expect_error(
-    score_transition_risk_and_polish(emissions_profile, sector_profile),
+    score_transition_risk_and_polish(emissions_profile, sector_profile, include_co2 = TRUE),
     "tiltIndicatorAfter.output_co2_footprint"
   )
 })
 
-test_that("with `*.output_co2_footprint` unset, `exclude_co2 = TRUE` yields no error", {
+test_that("with `*.output_co2_footprint` unset, `include_co2 = FALSE` yields no error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -106,8 +106,7 @@ test_that("with `*.output_co2_footprint` unset, `exclude_co2 = TRUE` yields no e
   expect_no_error(
     score_transition_risk_and_polish(
       emissions_profile,
-      sector_profile,
-      exclude_co2 = TRUE
+      sector_profile
     )
   )
 })

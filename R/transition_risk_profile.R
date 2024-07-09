@@ -84,23 +84,22 @@ transition_risk_profile <- function(emissions_profile,
     sector_profile,
     co2,
     all_activities_scenario_sectors,
-    scenarios,
-    exclude_co2 = pivot_wider
+    scenarios
   ) |>
     add_transition_risk_category_at_company_level() |>
     best_case_worst_case_transition_risk_profile_at_company_level() |>
-    pivot_wider_transition_risk_profile(pivot_wider = pivot_wider)
+    pivot_wider_transition_risk_profile(pivot_wider = pivot_wider,
+                                        include_co2 = option_output_co2_footprint())
 }
 
 transition_risk_profile_impl <- function(emissions_profile,
                                          sector_profile,
                                          co2,
                                          all_activities_scenario_sectors,
-                                         scenarios,
-                                         exclude_co2 = FALSE) {
+                                         scenarios) {
   transition_risk_scores <- score_transition_risk_and_polish(emissions_profile,
     sector_profile,
-    exclude_co2 = exclude_co2
+    include_co2 = option_output_co2_footprint()
   )
   transition_risk_thresholds <- add_thresholds_transition_risk(
     co2,
