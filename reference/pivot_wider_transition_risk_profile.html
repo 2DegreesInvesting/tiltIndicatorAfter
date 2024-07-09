@@ -39,7 +39,11 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pivot_wider_transition_risk_profile</span><span class="op">(</span><span class="va">data</span>, pivot_wider <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pivot_wider_transition_risk_profile</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  include_co2 <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -49,6 +53,10 @@
 <dl><dt id="arg-pivot-wider">pivot_wider<a class="anchor" aria-label="anchor" href="#arg-pivot-wider"></a></dt>
 <dd><p>Logical. Pivot the output at company level to a wide
 format?</p></dd>
+
+
+<dt id="arg-include-co-">include_co2<a class="anchor" aria-label="anchor" href="#arg-include-co-"></a></dt>
+<dd><p>Logical. Include <code>co2_*</code> columns ?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -111,7 +119,10 @@ format?</p></dd>
 <span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">add_transition_risk_category_at_company_level</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">best_case_worst_case_transition_risk_profile_at_company_level</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">pivot_wider_transition_risk_profile</span><span class="op">(</span>pivot_wider <span class="op">=</span> <span class="va">pivot_wider</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">pivot_wider_transition_risk_profile</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    pivot_wider <span class="op">=</span> <span class="va">pivot_wider</span>,</span></span>
+<span class="r-in"><span>    include_co2 <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">long</span></span></span>
 <span class="r-in"><span></span></span>
@@ -128,7 +139,10 @@ format?</p></dd>
 <span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">add_transition_risk_category_at_company_level</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">best_case_worst_case_transition_risk_profile_at_company_level</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">pivot_wider_transition_risk_profile</span><span class="op">(</span>pivot_wider <span class="op">=</span> <span class="va">pivot_wider</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">pivot_wider_transition_risk_profile</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    pivot_wider <span class="op">=</span> <span class="va">pivot_wider</span>,</span></span>
+<span class="r-in"><span>    include_co2 <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">wide</span></span></span>
 <span class="r-in"><span></span></span>

@@ -42,7 +42,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">score_transition_risk_and_polish</span><span class="op">(</span></span>
 <span>  <span class="va">emissions_profile</span>,</span>
 <span>  <span class="va">sector_profile</span>,</span>
-<span>  exclude_co2 <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  include_co2 <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -59,8 +59,8 @@
 <dd><p>Nested data frame. The output of <code><a href="profile_sector_upstream.html">profile_sector()</a></code>.</p></dd>
 
 
-<dt id="arg-exclude-co-">exclude_co2<a class="anchor" aria-label="anchor" href="#arg-exclude-co-"></a></dt>
-<dd><p>Logical. Exclude <code>co2_*</code> columns ?</p></dd>
+<dt id="arg-include-co-">include_co2<a class="anchor" aria-label="anchor" href="#arg-include-co-"></a></dt>
+<dd><p>Logical. Include <code>co2_*</code> columns ?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -110,7 +110,10 @@ level.</p>
 <span class="r-in"><span>  isic <span class="op">=</span> <span class="va">toy_isic_name</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">score_transition_risk_and_polish</span><span class="op">(</span><span class="va">emissions_profile</span>, <span class="va">sector_profile</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">score_transition_risk_and_polish</span><span class="op">(</span><span class="va">emissions_profile</span>,</span></span>
+<span class="r-in"><span>  <span class="va">sector_profile</span>,</span></span>
+<span class="r-in"><span>  include_co2 <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,824 × 28</span></span>
