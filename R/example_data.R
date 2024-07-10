@@ -31,6 +31,17 @@ example_best_case_worst_case_transition_risk_profile_product_level <- example_da
   # styler: on
 )
 
+example_best_case_worst_case_profile_ranking_product_level <- example_data_factory(
+  # styler: off
+  tribble(
+    ~companies_id, ~ep_product, ~benchmark, ~emission_profile, ~profile_ranking,
+            "any",       "one",      "all",             "low",              1.0,
+            "any",       "two",      "all",          "medium",              2.0,
+            "any",     "three",      "all",            "high",              3.0,
+  )
+  # styler: on
+)
+
 example_risk_categories_at_product_level <- example_data_factory(
   # styler: off
   tribble(
