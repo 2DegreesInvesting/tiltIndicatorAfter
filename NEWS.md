@@ -1,9 +1,15 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9051 (2024-07-10)
+
+* `transition_risk_profile()` outputs columns `avg_profile_ranking_best_case` 
+and `avg_profile_ranking_worst_case` at company level (#293).
+
 # tiltIndicatorAfter 0.0.0.9050 (2024-07-09)
 
 * `transition_risk_profile()` outputs columns `co2_footprint` at product level 
-and `co2_avg` at company level if option `*.output_co2_footprint` is set to TRUE
+and `co2_avg` at company level if option `*.output_co2_footprint` is set to 
+TRUE (#288).
 
 # tiltIndicatorAfter 0.0.0.9049 (2024-07-03)
 
