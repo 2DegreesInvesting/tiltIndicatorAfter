@@ -4,7 +4,7 @@ test_that("`NA` in `transition_risk_category` and `transition_risk_score` gives 
     transition_risk_score = c(1.0, 2.0, NA)
   )
 
-  out <- create_avg_best_case_worst_case_at_product_level(example_data)
+  out <- create_avg_transition_risk_best_case_worst_case_at_product_level(example_data)
 
   expected_best_case <- c(3 / 2, NA)
   expected_worst_case <- c(3 / 2, NA)
@@ -18,7 +18,7 @@ test_that("only `NA` in `transition_risk_category` and `transition_risk_score` g
     transition_risk_score = NA_character_
   )
 
-  out <- create_avg_best_case_worst_case_at_product_level(example_data)
+  out <- create_avg_transition_risk_best_case_worst_case_at_product_level(example_data)
 
   expected_best_case <- NA
   expected_worst_case <- NA
@@ -32,21 +32,36 @@ test_that("if `transition_profile_at_product_level` lacks crucial columns, error
 
   crucial <- col_companies_id()
   bad <- select(example_data, -all_of(crucial))
-  expect_error(create_avg_best_case_worst_case_at_product_level(bad), crucial)
+  expect_error(
+    create_avg_transition_risk_best_case_worst_case_at_product_level(bad),
+    crucial
+  )
 
   crucial <- col_europages_product()
   bad <- select(example_data, -all_of(crucial))
-  expect_error(create_avg_best_case_worst_case_at_product_level(bad), crucial)
+  expect_error(
+    create_avg_transition_risk_best_case_worst_case_at_product_level(bad),
+    crucial
+  )
 
   crucial <- col_transition_risk_grouped_by()
   bad <- select(example_data, -all_of(crucial))
-  expect_error(create_avg_best_case_worst_case_at_product_level(bad), crucial)
+  expect_error(
+    create_avg_transition_risk_best_case_worst_case_at_product_level(bad),
+    crucial
+  )
 
   crucial <- col_transition_risk_category()
   bad <- select(example_data, -all_of(crucial))
-  expect_error(create_avg_best_case_worst_case_at_product_level(bad), crucial)
+  expect_error(
+    create_avg_transition_risk_best_case_worst_case_at_product_level(bad),
+    crucial
+  )
 
   crucial <- "transition_risk_score"
   bad <- select(example_data, -all_of(crucial))
-  expect_error(create_avg_best_case_worst_case_at_product_level(bad), crucial)
+  expect_error(
+    create_avg_transition_risk_best_case_worst_case_at_product_level(bad),
+    crucial
+  )
 })
