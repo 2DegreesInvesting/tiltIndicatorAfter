@@ -140,8 +140,8 @@ add_avg_case_col_if_risk_category_match <- function(data,
   mutate(
     data,
     {{ avg_case_col }} :=
-      ifelse(data[[risk_category]] == data[[min_max_risk_category]],
-        data[[avg_col]],
+      ifelse(.data[[risk_category]] == .data[[min_max_risk_category]],
+        .data[[avg_col]],
         NA_real_
       )
   )

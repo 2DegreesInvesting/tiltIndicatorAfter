@@ -88,8 +88,10 @@ transition_risk_profile <- function(emissions_profile,
   ) |>
     add_transition_risk_category_at_company_level() |>
     best_case_worst_case_transition_risk_profile_at_company_level() |>
-    pivot_wider_transition_risk_profile(pivot_wider = pivot_wider,
-                                        include_co2 = option_output_co2_footprint()) |>
+    pivot_wider_transition_risk_profile(
+      pivot_wider = pivot_wider,
+      include_co2 = option_output_co2_footprint()
+    ) |>
     best_case_worst_case_avg_profile_ranking()
 }
 
