@@ -98,6 +98,10 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "max_headcount",
         "emissions_profile_best_case",
         "emissions_profile_worst_case",
+        "isic_4digit",
+        "matching_certainty",
+        "company_name",
+        "emissions_profile_equal_weight",
         if (include_co2) "co2_footprint"
       )
     )
@@ -142,6 +146,7 @@ score_transition_risk_and_polish <- function(emissions_profile,
     select(
       c(
         "companies_id",
+        "company_name",
         "country",
         "main_activity",
         "postcode",

@@ -175,6 +175,7 @@ exclude_subset_cols_then_pivot_wider <- function(data,
 select_subset_emissions_profile_id_cols <- function(data, include_co2 = FALSE) {
   c(
     "companies_id",
+    "company_name",
     "country",
     "main_activity",
     "benchmark",

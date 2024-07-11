@@ -497,7 +497,7 @@ test_that("with `pivot_wider = TRUE`, at company level the `emission*` column ar
   expect_equal(type, "double")
 })
 
-test_that("the output at product level has columns matching `postcode`, `address`, `min_headcount`, `max_headcount`, `emissions_profile_best_case`, `emissions_profile_worst_case`, `transition_risk_profile_best_case`, and `transition_risk_profile_worst_case`", {
+test_that("the output at product level has all the new required columns (#189)", {
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -547,9 +547,13 @@ test_that("the output at product level has columns matching `postcode`, `address
   expect_true(any(matches_name(product, "emissions_profile_worst_case")))
   expect_true(any(matches_name(product, "transition_risk_profile_best_case")))
   expect_true(any(matches_name(product, "transition_risk_profile_worst_case")))
+  expect_true(any(matches_name(product, "isic_4digit")))
+  expect_true(any(matches_name(product, "matching_certainty")))
+  expect_true(any(matches_name(product, "company_name")))
+  expect_true(any(matches_name(product, "emissions_profile_equal_weight")))
 })
 
-test_that("the output at company level has columns matching `postcode`, `address`, `min_headcount`, and `max_headcount`", {
+test_that("the output at company level has has all the new required columns (#189)", {
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -595,4 +599,5 @@ test_that("the output at company level has columns matching `postcode`, `address
   expect_true(any(matches_name(company, "address")))
   expect_true(any(matches_name(company, "min_headcount")))
   expect_true(any(matches_name(company, "max_headcount")))
+  expect_true(any(matches_name(company, "company")))
 })
