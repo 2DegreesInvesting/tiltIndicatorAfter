@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9052 (2024-07-11)
+
+* `transition_risk_profile()` outputs columns `isic_4digit`, `matching_certainty`,
+`company_name`, and `emissions_profile_equal_weight` at product level (#294).
+
+* `transition_risk_profile()` outputs column `company_name` at company level (#294).
+
 # tiltIndicatorAfter 0.0.0.9051 (2024-07-10)
 
 * `transition_risk_profile()` outputs columns `avg_profile_ranking_best_case` 
