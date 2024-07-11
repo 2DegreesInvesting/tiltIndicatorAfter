@@ -92,7 +92,11 @@ transition_risk_profile <- function(emissions_profile,
       pivot_wider = pivot_wider,
       include_co2 = option_output_co2_footprint()
     ) |>
-    best_case_worst_case_avg_profile_ranking()
+    best_case_worst_case_avg_profile_ranking() |>
+    relocate_transition_risk_profile_cols(
+      pivot_wider = pivot_wider,
+      include_co2 = option_output_co2_footprint()
+    )
 }
 
 transition_risk_profile_impl <- function(emissions_profile,
