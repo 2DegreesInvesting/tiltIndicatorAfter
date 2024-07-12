@@ -1,6 +1,6 @@
 best_case_worst_case_impl <- function(data, col_risk, col_group_by) {
   data |>
-    compute_n_distinct_products() |>
+    compute_n_distinct_products(col_risk, col_group_by) |>
     compute_equal_weight() |>
     compute_min_risk_category_per_company_benchmark(col_risk, col_group_by) |>
     compute_max_risk_category_per_company_benchmark(col_risk, col_group_by) |>
