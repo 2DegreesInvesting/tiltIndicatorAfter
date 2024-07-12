@@ -86,3 +86,26 @@ test_that("gives `NA` in `best_case` and `worst_case` if count of best and worst
     expected_worst_case
   )
 })
+
+test_that("`equal_weight` does not count unmatched `ep_product` after grouping by `companies_id` and `benchmark`", {
+  example_data <- example_best_case_worst_case_emission_profile(
+    companies_id = c("any", "any", "any", "any", "any"),
+    ep_product = c("one", "two", "three", "four", "five"),
+    benchmark = c("all", "all", "all", "tilt_sector", NA_character_),
+    emission_profile = c("low", "medium", NA_character_, "low", NA_character_)
+  )
+
+  out <- best_case_worst_case_emission_profile(example_data)
+
+  out_all <- filter(out, benchmark == "all")
+  expected_equal_weight_all <- 0.5
+  expect_equal(unique(out_all$equal_weight), expected_equal_weight_all)
+
+  out_tilt_sec <- filter(out, benchmark == "tilt_sector")
+  expected_equal_weight_tilt_sec <- 1.0
+  expect_equal(unique(out_tilt_sec$equal_weight), expected_equal_weight_tilt_sec)
+
+  out_NA <- filter(out, is.na(benchmark))
+  expected_equal_weight_NA <- NA_real_
+  expect_equal(unique(out_NA$equal_weight), expected_equal_weight_NA)
+})
