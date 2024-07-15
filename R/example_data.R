@@ -55,3 +55,14 @@ example_risk_categories_at_product_level <- example_data_factory(
   )
   # styler: on
 )
+
+example_best_case_worst_case_reduction_targets_product_level <- example_data_factory(
+  # styler: off
+  tribble(
+    ~companies_id, ~ep_product,  ~scenario, ~year, ~sector_profile, ~reduction_targets,
+            "any",       "one", "1.5C RPS",  2030,           "low",                1.0,
+            "any",       "two", "1.5C RPS",  2030,        "medium",                2.0,
+            "any",     "three", "1.5C RPS",  2030,          "high",                3.0,
+  )
+  # styler: on
+)

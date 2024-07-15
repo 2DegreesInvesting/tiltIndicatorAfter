@@ -9,7 +9,8 @@ polish_sector_profile_upstream_company <- function(spu_comp, spu_prod, europages
   spu_prod <- sanitize_isic(spu_prod)
   spu_comp <- spu_comp |>
     add_profile_ranking_average(spu_prod) |>
-    sector_profile_any_polish_output_at_company_level()
+    sector_profile_any_polish_output_at_company_level() |>
+    mutate(year = as.numeric(.data$year))
 
   inter_result <- polish_sector_profile_upstream_product(spu_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, ecoinvent_inputs, isic) |>
     select(

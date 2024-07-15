@@ -21,3 +21,15 @@ col_transition_risk_grouped_by <- function() {
 col_transition_risk_category <- function() {
   "transition_risk_category"
 }
+
+col_scenario <- function() {
+  "scenario"
+}
+
+col_year <- function() {
+  "year"
+}
+
+col_sector_profile <- function() {
+  "sector_profile"
+}
