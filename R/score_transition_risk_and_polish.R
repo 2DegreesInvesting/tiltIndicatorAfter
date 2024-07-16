@@ -113,7 +113,10 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "sector_profile",
         "scenario",
         "year",
-        "reduction_targets"
+        "reduction_targets",
+        "tilt_sector",
+        "tilt_subsector",
+        "isic_4digit"
       )
     )
 
@@ -129,8 +132,12 @@ score_transition_risk_and_polish <- function(emissions_profile,
     left_join(
       select_sector_profile_product,
       relationship = "many-to-many",
-      by = c("companies_id", "ep_product")
+      by = c("companies_id", "ep_product"),
+      suffix = c(".emissions", ".sector")
     ) |>
+    coalesce_common_col("tilt_sector", "emissions", "sector") |>
+    coalesce_common_col("tilt_subsector", "emissions", "sector") |>
+    coalesce_common_col("isic_4digit", "emissions", "sector") |>
     mutate(benchmark_tr_score = ifelse(
       is.na(.data$profile_ranking) | is.na(.data$reduction_targets),
       NA_character_,
@@ -198,4 +205,12 @@ add_benchmark_tr_score_avg <- function(data) {
       paste(.data$scenario, .data$year, .data$benchmark, sep = "_")
     )
   )
+}
+
+coalesce_common_col <- function(data, col, suffix1, suffix2) {
+  col_suffix1 = paste(col, suffix1, sep = ".")
+  col_suffix2 = paste(col, suffix2, sep = ".")
+  data |>
+    mutate({{ col }} := coalesce(.data[[col_suffix1]], .data[[col_suffix2]])) |>
+    select(-c(col_suffix1, col_suffix2))
 }

@@ -605,3 +605,57 @@ test_that("the output at company level has has all the new required columns (#18
   expect_true(any(matches_name(company, "avg_reduction_targets_best_case")))
   expect_true(any(matches_name(company, "avg_reduction_targets_worst_case")))
 })
+
+test_that("At product level, tilt and isic sectors are assigned based on both `emission_profile` and `sector_profile` results for the null cases", {
+  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
+    filter(activity_uuid_product_uuid != "76269c17-78d6-420b-991a-aa38c51b45b7")
+  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+  toy_europages_companies <- read_csv(toy_europages_companies())
+  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  toy_isic_name <- read_csv(toy_isic_name())
+  toy_all_activities_scenario_sectors <- read_csv(toy_all_activities_scenario_sectors()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+
+  toy_emissions_profile <- profile_emissions(
+    companies = toy_emissions_profile_any_companies,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+  toy_sector_profile <- profile_sector(
+    companies = toy_sector_profile_companies,
+    scenarios = toy_sector_profile_any_scenarios,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+
+  output_product <- transition_risk_profile(
+    emissions_profile = toy_emissions_profile,
+    sector_profile = toy_sector_profile,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
+    scenarios = toy_sector_profile_any_scenarios,
+    pivot_wider = TRUE
+  ) |> unnest_product()
+
+  # when `sector_profile` is NA then, tilt and isic sectors are not NA
+  out_sector_na <- filter(output_product, is.na(sector_profile))
+  expect_true(nrow(filter(out_sector_na, is.na(out_sector_na$tilt_sector))) == 0)
+  expect_true(nrow(filter(out_sector_na, is.na(out_sector_na$tilt_subsector))) == 0)
+  expect_true(nrow(filter(out_sector_na, is.na(out_sector_na$isic_4digit))) == 0)
+
+  # when `emission_profile` is NA then, tilt and isic sectors are not NA
+  out_emissions_na <- filter(output_product, is.na(emission_profile))
+  expect_true(nrow(filter(out_emissions_na, is.na(out_emissions_na$tilt_sector))) == 0)
+  expect_true(nrow(filter(out_emissions_na, is.na(out_emissions_na$tilt_subsector))) == 0)
+  expect_true(nrow(filter(out_emissions_na, is.na(out_emissions_na$isic_4digit))) == 0)
+})
