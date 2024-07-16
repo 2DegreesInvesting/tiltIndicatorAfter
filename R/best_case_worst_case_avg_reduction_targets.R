@@ -58,10 +58,12 @@ create_avg_reduction_targets_best_case_worst_case_at_product_level <- function(d
 
 add_avg_reduction_targets <- function(data) {
   data |>
-    add_avg_col("avg_reduction_targets",
-                "reduction_targets",
-                "scenario_year",
-                col_sector_profile())
+    add_avg_col(
+      "avg_reduction_targets",
+      "reduction_targets",
+      "scenario_year",
+      col_sector_profile()
+    )
 }
 
 add_avg_reduction_targets_best_case <- function(data) {
