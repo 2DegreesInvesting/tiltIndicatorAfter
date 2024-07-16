@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9053 (2024-07-16)
+
+* `transition_risk_profile()` outputs columns `avg_reduction_targets_best_case` 
+and `avg_reduction_targets_worst_case` at company level (#297).
+
 # tiltIndicatorAfter 0.0.0.9052 (2024-07-11)
 
 * `transition_risk_profile()` outputs columns `isic_4digit`, `matching_certainty`,
