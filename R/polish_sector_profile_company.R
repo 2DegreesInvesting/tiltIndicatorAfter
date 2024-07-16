@@ -9,7 +9,8 @@ polish_sector_profile_company <- function(sp_comp, sp_prod, europages_companies,
   sp_prod <- sanitize_isic(sp_prod)
   sp_comp <- sp_comp |>
     add_profile_ranking_average(sp_prod) |>
-    sector_profile_any_polish_output_at_company_level()
+    sector_profile_any_polish_output_at_company_level() |>
+    mutate(year = as.numeric(.data$year))
 
   inter_result <- prepare_inter_sector_profile(sp_prod, europages_companies, ecoinvent_activities, ecoinvent_europages, isic) |>
     select("companies_id", "company_name", "company_city", "country", "postcode", "address", "main_activity", "avg_matching_certainty") |>

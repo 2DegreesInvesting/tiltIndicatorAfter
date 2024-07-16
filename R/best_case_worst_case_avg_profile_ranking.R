@@ -54,10 +54,12 @@ create_avg_profile_ranking_best_case_worst_case_at_product_level <- function(dat
 
 add_avg_profile_ranking <- function(data) {
   data |>
-    add_avg_col("avg_profile_ranking",
-                "profile_ranking",
-                col_emission_grouped_by(),
-                col_emission_profile())
+    add_avg_col(
+      "avg_profile_ranking",
+      "profile_ranking",
+      col_emission_grouped_by(),
+      col_emission_profile()
+    )
 }
 
 add_avg_profile_ranking_best_case <- function(data) {

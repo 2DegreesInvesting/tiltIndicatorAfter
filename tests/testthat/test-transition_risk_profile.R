@@ -553,7 +553,7 @@ test_that("the output at product level has all the new required columns (#189)",
   expect_true(any(matches_name(product, "emissions_profile_equal_weight")))
 })
 
-test_that("the output at company level has has all the new required columns (#189)", {
+test_that("the output at company level has has all the new required columns (#189, #290)", {
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
     filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
   toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
@@ -600,4 +600,8 @@ test_that("the output at company level has has all the new required columns (#18
   expect_true(any(matches_name(company, "min_headcount")))
   expect_true(any(matches_name(company, "max_headcount")))
   expect_true(any(matches_name(company, "company")))
+  expect_true(any(matches_name(company, "avg_profile_ranking_best_case")))
+  expect_true(any(matches_name(company, "avg_profile_ranking_worst_case")))
+  expect_true(any(matches_name(company, "avg_reduction_targets_best_case")))
+  expect_true(any(matches_name(company, "avg_reduction_targets_worst_case")))
 })
