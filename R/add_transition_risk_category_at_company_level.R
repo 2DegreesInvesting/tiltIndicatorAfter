@@ -46,7 +46,7 @@ adapt_tiltIndicator_cols_to_tr_company_cols <- function(data) {
 }
 
 create_transition_risk_category_col_at_company_level <- function(data) {
-  mutate(data, transition_risk_category = dplyr::coalesce(
+  mutate(data, transition_risk_category = coalesce(
     .data$emission_profile,
     .data$sector_profile
   ))
