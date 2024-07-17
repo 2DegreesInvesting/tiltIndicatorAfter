@@ -99,14 +99,14 @@ prepare_avg_best_case_join_table_transition_risk <- function(data) {
 
 prepare_for_join_at_company_level_transition_risk <- function(data) {
   data |>
-    select(-c(
+    select(-all_of(c(
       col_transition_risk_category(),
       col_europages_product(),
       "avg_transition_risk",
       "transition_risk_score",
       "max_risk_category_per_company_benchmark",
       "min_risk_category_per_company_benchmark"
-    )) |>
+    ))) |>
     distinct()
 }
 
@@ -124,11 +124,11 @@ add_avg_col <- function(data,
       NA_real_,
       mean(.data[[col]], na.rm = TRUE)
     ),
-    .by = c(
+    .by = all_of(c(
       col_companies_id(),
       group_by,
       risk_category
-    )
+    ))
   )
 }
 
@@ -149,6 +149,6 @@ add_avg_case_col_if_risk_category_match <- function(data,
 
 prepare_avg_best_case_join_table <- function(data, case1_col, case2_col) {
   data |>
-    select(-c(case1_col)) |>
+    select(-all_of(c(case1_col))) |>
     filter(!is.na(.data[[case2_col]]))
 }

@@ -125,24 +125,13 @@ transition_risk_profile_impl <- function(emissions_profile,
     add_transition_risk_category() |>
     best_case_worst_case_transition_risk_profile() |>
     polish_best_case_worst_case() |>
-    polish_best_case_worst_case_transition_risk_profile() |>
-    polish_transition_risk_at_product_level()
+    polish_best_case_worst_case_transition_risk_profile()
 
   company <- transition_risk_scores |>
     unnest_company() |>
     polish_transition_risk_at_company_level()
 
   tilt_profile(nest_levels(product, company))
-}
-
-polish_transition_risk_at_product_level <- function(data) {
-  data |>
-    relocate(c(
-      "activity_uuid_product_uuid", "transition_risk_score",
-      "transition_risk_low_threshold", "transition_risk_high_threshold",
-      "transition_risk_category", "benchmark_tr_score", "profile_ranking",
-      "reduction_targets"
-    ))
 }
 
 polish_transition_risk_at_company_level <- function(data) {

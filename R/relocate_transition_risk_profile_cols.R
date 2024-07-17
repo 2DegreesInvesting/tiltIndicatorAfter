@@ -59,6 +59,7 @@ relocate_transition_risk_profile_cols_at_product_level <- function(
       "transition_risk_profile_best_case",
       "transition_risk_profile_worst_case",
       "amount_of_distinct_products",
+      "amount_of_distinct_products_matched",
       "min_headcount",
       "max_headcount"
     )

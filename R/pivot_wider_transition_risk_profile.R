@@ -189,11 +189,11 @@ select_subset_emissions_profile_id_cols <- function(data, include_co2 = FALSE) {
 }
 
 select_emissions_profile_pivot_cols <- function(data, include_co2 = FALSE) {
-  select(data, c(
+  select(data, all_of(c(
     select_subset_emissions_profile_id_cols(include_co2 = include_co2),
     "emission_profile",
     "emission_profile_share"
-  ))
+  )))
 }
 
 select_subset_sector_profile_id_cols <- function(data) {
@@ -208,11 +208,11 @@ select_subset_sector_profile_id_cols <- function(data) {
 }
 
 select_sector_profile_pivot_cols <- function(data) {
-  select(data, c(
+  select(data, all_of(c(
     select_subset_sector_profile_id_cols(),
     "sector_profile",
     "sector_profile_share"
-  ))
+  )))
 }
 
 select_subset_transition_risk_profile_id_cols <- function(data) {
@@ -228,9 +228,9 @@ select_subset_transition_risk_profile_id_cols <- function(data) {
 }
 
 select_transition_risk_profile_pivot_cols <- function(data) {
-  select(data, c(
+  select(data, all_of(c(
     select_subset_transition_risk_profile_id_cols(),
     "transition_risk_category",
     "transition_risk_category_share"
-  ))
+  )))
 }

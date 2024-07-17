@@ -145,7 +145,8 @@ score_transition_risk_and_polish <- function(emissions_profile,
     )) |>
     left_join(
       select_transition_risk_score_product,
-      by = c("companies_id", "ep_product", "benchmark_tr_score")
+      by = c("companies_id", "ep_product", "benchmark_tr_score"),
+      relationship = "many-to-many"
     ) |>
     distinct()
 
@@ -212,5 +213,5 @@ coalesce_common_col <- function(data, col, suffix1, suffix2) {
   col_suffix2 = paste(col, suffix2, sep = ".")
   data |>
     mutate({{ col }} := coalesce(.data[[col_suffix1]], .data[[col_suffix2]])) |>
-    select(-c(col_suffix1, col_suffix2))
+    select(-all_of(c(col_suffix1, col_suffix2)))
 }
