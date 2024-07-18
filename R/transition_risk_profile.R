@@ -94,6 +94,7 @@ transition_risk_profile <- function(emissions_profile,
     ) |>
     best_case_worst_case_avg_profile_ranking() |>
     best_case_worst_case_avg_reduction_targets() |>
+    add_transition_risk_NA_share() |>
     relocate_transition_risk_profile_cols(
       pivot_wider = pivot_wider,
       include_co2 = option_output_co2_footprint()

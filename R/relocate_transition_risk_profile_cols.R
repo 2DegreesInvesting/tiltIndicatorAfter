@@ -60,6 +60,8 @@ relocate_transition_risk_profile_cols_at_product_level <- function(
       "transition_risk_profile_worst_case",
       "amount_of_distinct_products",
       "amount_of_distinct_products_matched",
+      "transition_risk_NA_total",
+      "transition_risk_NA_share",
       "min_headcount",
       "max_headcount"
     )
@@ -97,6 +99,7 @@ relocate_transition_risk_profile_cols_at_company_level <- function(
         "avg_transition_risk_equal_weight",
         "avg_transition_risk_best_case",
         "avg_transition_risk_worst_case",
+        "transition_risk_NA_share",
         "postcode",
         "address",
         "main_activity",
@@ -127,6 +130,7 @@ relocate_transition_risk_profile_cols_at_company_level <- function(
         "avg_transition_risk_equal_weight",
         "avg_transition_risk_best_case",
         "avg_transition_risk_worst_case",
+        "transition_risk_NA_share",
         "postcode",
         "address",
         "main_activity",

@@ -660,3 +660,102 @@ test_that("At product level, when either `sector_profile` is NA or `emission_pro
   expect_true(nrow(filter(out_emissions_na, is.na(out_emissions_na$tilt_subsector))) == 0)
   expect_true(nrow(filter(out_emissions_na, is.na(out_emissions_na$isic_4digit))) == 0)
 })
+
+test_that("`transition_risk_NA_share` is not NA for all cases of benchmark combinations", {
+  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
+    filter(activity_uuid_product_uuid != "833caa78-30df-4374-900f-7f88ab44075b")
+  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+  toy_europages_companies <- read_csv(toy_europages_companies())
+  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  toy_isic_name <- read_csv(toy_isic_name())
+  toy_all_activities_scenario_sectors <- read_csv(toy_all_activities_scenario_sectors()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+
+  toy_emissions_profile <- profile_emissions(
+    companies = toy_emissions_profile_any_companies,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+  toy_sector_profile <- profile_sector(
+    companies = toy_sector_profile_companies,
+    scenarios = toy_sector_profile_any_scenarios,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+
+  output <- transition_risk_profile(
+    emissions_profile = toy_emissions_profile,
+    sector_profile = toy_sector_profile,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
+    scenarios = toy_sector_profile_any_scenarios,
+    pivot_wider = FALSE
+  )
+
+  output_product <- output |> unnest_product()
+  benchmark_cases <- c("1.5C RPS_2030_all", "NA_NA_all", "NA_NA_NA")
+  expect_true(all(benchmark_cases %in% unique(output_product$benchmark_tr_score)))
+
+  out_na <- filter(output_product, is.na(transition_risk_NA_share))
+  expect_true(nrow(out_na) == 0)
+})
+
+test_that("`transition_risk_NA_share` is not greater than 1 and not less than 0 for all cases of benchmark combinations", {
+  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
+    filter(activity_uuid_product_uuid != "833caa78-30df-4374-900f-7f88ab44075b")
+  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+  toy_europages_companies <- read_csv(toy_europages_companies())
+  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  toy_isic_name <- read_csv(toy_isic_name())
+  toy_all_activities_scenario_sectors <- read_csv(toy_all_activities_scenario_sectors()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+
+  toy_emissions_profile <- profile_emissions(
+    companies = toy_emissions_profile_any_companies,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+  toy_sector_profile <- profile_sector(
+    companies = toy_sector_profile_companies,
+    scenarios = toy_sector_profile_any_scenarios,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+
+  output <- transition_risk_profile(
+    emissions_profile = toy_emissions_profile,
+    sector_profile = toy_sector_profile,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
+    scenarios = toy_sector_profile_any_scenarios,
+    pivot_wider = FALSE
+  )
+
+  output_product <- output |> unnest_product()
+  benchmark_cases <- c("1.5C RPS_2030_all", "NA_NA_all", "NA_NA_NA")
+  expect_true(all(benchmark_cases %in% unique(output_product$benchmark_tr_score)))
+
+  out_na <- unique(output_product$transition_risk_NA_share)
+  expect_false(all(out_na < 0))
+  expect_false(all(out_na > 1))
+})
