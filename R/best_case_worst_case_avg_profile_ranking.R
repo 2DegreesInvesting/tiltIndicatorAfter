@@ -84,14 +84,14 @@ add_avg_profile_ranking_worst_case <- function(data) {
 
 prepare_for_join_at_company_level_profile_ranking <- function(data) {
   data |>
-    select(-c(
+    select(-all_of(c(
       col_emission_profile(),
       col_europages_product(),
       "avg_profile_ranking",
       "profile_ranking",
       "max_risk_category_per_company_benchmark",
       "min_risk_category_per_company_benchmark"
-    )) |>
+    ))) |>
     distinct()
 }
 

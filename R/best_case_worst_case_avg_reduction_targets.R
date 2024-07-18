@@ -88,7 +88,7 @@ add_avg_reduction_targets_worst_case <- function(data) {
 
 prepare_for_join_at_company_level_reduction_targets <- function(data) {
   data |>
-    select(-c(
+    select(-all_of(c(
       col_sector_profile(),
       col_europages_product(),
       "scenario_year",
@@ -96,7 +96,7 @@ prepare_for_join_at_company_level_reduction_targets <- function(data) {
       "reduction_targets",
       "max_risk_category_per_company_benchmark",
       "min_risk_category_per_company_benchmark"
-    )) |>
+    ))) |>
     distinct()
 }
 

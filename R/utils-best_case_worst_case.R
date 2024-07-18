@@ -14,18 +14,26 @@ get_case_if_risk_counts_has_no_zero <- function(data, risk, count_risk_cases_per
   )
 }
 
-compute_n_distinct_products <- function(data, col_risk, col_group_by) {
+compute_n_distinct_products <- function(data) {
   data |>
     mutate(
-      n_distinct_products = n_distinct(.data[[col_europages_product()]][!is.na(.data[[col_risk]])], na.rm = TRUE),
+      n_distinct_products = n_distinct(.data[[col_europages_product()]], na.rm = TRUE),
+      .by = col_companies_id()
+    )
+}
+
+compute_n_distinct_products_matched <- function(data, col_risk, col_group_by) {
+  data |>
+    mutate(
+      n_distinct_products_matched = n_distinct(.data[[col_europages_product()]][!is.na(.data[[col_risk]])], na.rm = TRUE),
       .by = all_of(c(col_companies_id(), col_group_by))
     )
 }
 
 compute_equal_weight <- function(data) {
   mutate(data,
-    equal_weight = ifelse(.data$n_distinct_products == 0, NA,
-      1 / .data$n_distinct_products
+    equal_weight = ifelse(.data$n_distinct_products_matched == 0, NA,
+      1 / .data$n_distinct_products_matched
     )
   )
 }

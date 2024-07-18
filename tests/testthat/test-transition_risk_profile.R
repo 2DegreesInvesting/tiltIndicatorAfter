@@ -551,6 +551,7 @@ test_that("the output at product level has all the new required columns (#189)",
   expect_true(any(matches_name(product, "matching_certainty")))
   expect_true(any(matches_name(product, "company_name")))
   expect_true(any(matches_name(product, "emissions_profile_equal_weight")))
+  expect_true(any(matches_name(product, "amount_of_distinct_products_matched")))
 })
 
 test_that("the output at company level has has all the new required columns (#189, #290)", {

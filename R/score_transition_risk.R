@@ -70,7 +70,7 @@ score_transition_risk <-
       full_join_emmissions_sector(trs_emissions, trs_sector) |>
       create_tr_benchmarks_tr_score() |>
       limit_transition_risk_score_between_0_and_1() |>
-      select(-c("scenario_year", "benchmark")) |>
+      select(-all_of(c("scenario_year", "benchmark"))) |>
       left_join(
         union_emissions_sector_rows,
         by = c("companies_id", "ep_product", "activity_uuid_product_uuid"),
