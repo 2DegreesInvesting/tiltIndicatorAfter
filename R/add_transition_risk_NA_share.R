@@ -13,10 +13,10 @@ add_transition_risk_NA_share <- function(data) {
 add_transition_risk_NA_share_at_product_level <- function(data) {
   data |>
     fill_benchmark_tr_score() |>
-    compute_transition_risk_NA_amount_all() |>
-    compute_transition_risk_NA_amount_benchmarks() |>
-    compute_transition_risk_NA_total() |>
-    compute_transition_risk_NA_share() |>
+    transition_risk_NA_amount_all() |>
+    transition_risk_NA_amount_benchmarks() |>
+    transition_risk_NA_total() |>
+    transition_risk_NA_share() |>
     polish_transition_risk_NA_share()
 }
 
@@ -50,7 +50,7 @@ fill_benchmark_tr_score <- function(data) {
   ))
 }
 
-compute_transition_risk_NA_amount_all <- function(data) {
+transition_risk_NA_amount_all <- function(data) {
   mutate(data,
     transition_risk_NA_amount_all = n_distinct(
       .data[[col_europages_product()]][is.na(.data$matched_activity_name) | is.na(.data$reduction_targets)]
@@ -59,7 +59,7 @@ compute_transition_risk_NA_amount_all <- function(data) {
   )
 }
 
-compute_transition_risk_NA_amount_benchmarks <- function(data) {
+transition_risk_NA_amount_benchmarks <- function(data) {
   mutate(data,
     transition_risk_NA_amount_benchmarks = n_distinct(
       .data[[col_europages_product()]][is.na(.data$transition_risk_score)]
@@ -68,7 +68,7 @@ compute_transition_risk_NA_amount_benchmarks <- function(data) {
   )
 }
 
-compute_transition_risk_NA_total <- function(data) {
+transition_risk_NA_total <- function(data) {
   mutate(data,
     transition_risk_NA_total = ifelse(
       is.na(.data$matched_activity_name) | is.na(.data$reduction_targets),
@@ -79,7 +79,7 @@ compute_transition_risk_NA_total <- function(data) {
   )
 }
 
-compute_transition_risk_NA_share <- function(data) {
+transition_risk_NA_share <- function(data) {
   mutate(data,
     transition_risk_NA_share = ifelse(
       .data$amount_of_distinct_products == 0,
