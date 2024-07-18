@@ -1,5 +1,13 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9055 (2024-07-18)
+
+* `transition_risk_profile()` outputs column `transition_risk_NA_share` at 
+product and company level (#300).
+
+* `transition_risk_profile()` outputs column `transition_risk_NA_total` at 
+product level (#300).
+
 # tiltIndicatorAfter 0.0.0.9054 (2024-07-18)
 
 * `transition_risk_profile()` and `profile_emissions()` outputs column 
