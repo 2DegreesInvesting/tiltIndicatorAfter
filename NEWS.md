@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9054 (2024-07-18)
+
+* `transition_risk_profile()` and `profile_emissions()` outputs column 
+`amount_of_distinct_products_matched` at product level (#299).
+
 # tiltIndicatorAfter 0.0.0.9053 (2024-07-16)
 
 * `transition_risk_profile()` outputs columns `avg_reduction_targets_best_case` 
