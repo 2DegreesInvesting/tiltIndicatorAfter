@@ -48,7 +48,8 @@ emission profile and sector profile indicator.</p>
 <span>  <span class="va">co2</span>,</span>
 <span>  <span class="va">all_activities_scenario_sectors</span>,</span>
 <span>  <span class="va">scenarios</span>,</span>
-<span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  for_webtool <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -80,6 +81,10 @@ emission profile and sector profile indicator.</p>
 <dt id="arg-pivot-wider">pivot_wider<a class="anchor" aria-label="anchor" href="#arg-pivot-wider"></a></dt>
 <dd><p>Logical. Pivot the output at company level to a wide
 format?</p></dd>
+
+
+<dt id="arg-for-webtool">for_webtool<a class="anchor" aria-label="anchor" href="#arg-for-webtool"></a></dt>
+<dd><p>Logical. Is it output for webtool or not?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -148,52 +153,53 @@ level.</p>
 <span class="r-in"><span>  co2 <span class="op">=</span> <span class="va">toy_emissions_profile_products_ecoinvent</span>,</span></span>
 <span class="r-in"><span>  all_activities_scenario_sectors <span class="op">=</span> <span class="va">toy_all_activities_scenario_sectors</span>,</span></span>
 <span class="r-in"><span>  scenarios <span class="op">=</span> <span class="va">toy_sector_profile_any_scenarios</span>,</span></span>
-<span class="r-in"><span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  for_webtool <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">output</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,824 × 42</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id   company_name country postcode address main_activity ep_product</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megal… asteria_meg… austria 3150     flesch… wholesaler    tent      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id      company_name country postcode address main_activity product</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megaloto… asteria_meg… austria 3150     flesch… wholesaler    tent   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,814 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 35 more variables: matched_activity_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matched_reference_product &lt;chr&gt;, matching_certainty &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   co2_footprint &lt;dbl&gt;, unit &lt;chr&gt;, isic_4digit &lt;chr&gt;, tilt_sector &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tilt_subsector &lt;chr&gt;, benchmark &lt;chr&gt;, co2e_lower &lt;dbl&gt;, co2e_upper &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   profile_ranking &lt;dbl&gt;, emission_profile &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tilt_subsector &lt;chr&gt;, grouping_emission &lt;chr&gt;, co2e_lower &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   co2e_upper &lt;dbl&gt;, emission_rank &lt;dbl&gt;, emission_category &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emissions_profile_equal_weight &lt;dbl&gt;, emissions_profile_best_case &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">output</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27,648 × 29</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id       company_name country co2_avg benchmark profile_ranking_avg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megalotom… asteria_meg… austria    303. all                         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id                  company_name country co2e_avg grouping_emission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27,638 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 23 more variables: avg_profile_ranking_best_case &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avg_profile_ranking_worst_case &lt;dbl&gt;, emission_profile &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_profile_share &lt;dbl&gt;, scenario &lt;chr&gt;, year &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reduction_targets_avg &lt;dbl&gt;, avg_reduction_targets_best_case &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avg_reduction_targets_worst_case &lt;dbl&gt;, sector_profile &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_profile_share &lt;dbl&gt;, benchmark_tr_score_avg &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 24 more variables: emission_rank_avg_equal_weight &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_rank_avg_best_case &lt;dbl&gt;, emission_rank_avg_worst_case &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_profile &lt;chr&gt;, emission_profile_share &lt;dbl&gt;, scenario &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   year &lt;dbl&gt;, sector_target_avg_equal_weight &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_target_avg_best_case &lt;dbl&gt;, sector_target_avg_worst_case &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_profile &lt;chr&gt;, sector_profile_share &lt;dbl&gt;, …</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
