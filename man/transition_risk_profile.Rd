@@ -10,7 +10,8 @@ transition_risk_profile(
   co2,
   all_activities_scenario_sectors,
   scenarios,
-  pivot_wider = FALSE
+  pivot_wider = FALSE,
+  for_webtool = FALSE
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ transition_risk_profile(
 
 \item{pivot_wider}{Logical. Pivot the output at company level to a wide
 format?}
+
+\item{for_webtool}{Logical. Is it output for webtool or not?}
 }
 \value{
 A data frame with the column \code{companies_id}, and the nested
@@ -84,7 +87,8 @@ output <- transition_risk_profile(
   co2 = toy_emissions_profile_products_ecoinvent,
   all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
   scenarios = toy_sector_profile_any_scenarios,
-  pivot_wider = FALSE
+  pivot_wider = FALSE,
+  for_webtool = FALSE
 )
 
 output |> unnest_product()

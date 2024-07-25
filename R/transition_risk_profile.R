@@ -11,6 +11,7 @@
 #' @param co2 A dataframe
 #' @param all_activities_scenario_sectors A dataframe
 #' @param scenarios A dataframe
+#' @param for_webtool Logical. Is it output for webtool or not?
 #'
 #' @return A data frame with the column `companies_id`, and the nested
 #'   columns`product` and `company` holding the outputs at product and company
@@ -67,7 +68,8 @@
 #'   co2 = toy_emissions_profile_products_ecoinvent,
 #'   all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
 #'   scenarios = toy_sector_profile_any_scenarios,
-#'   pivot_wider = FALSE
+#'   pivot_wider = FALSE,
+#'   for_webtool = FALSE
 #' )
 #'
 #' output |> unnest_product()
@@ -78,7 +80,8 @@ transition_risk_profile <- function(emissions_profile,
                                     co2,
                                     all_activities_scenario_sectors,
                                     scenarios,
-                                    pivot_wider = FALSE) {
+                                    pivot_wider = FALSE,
+                                    for_webtool = FALSE) {
   transition_risk_profile_impl(
     emissions_profile,
     sector_profile,
@@ -98,6 +101,11 @@ transition_risk_profile <- function(emissions_profile,
     relocate_transition_risk_profile_cols(
       pivot_wider = pivot_wider,
       include_co2 = option_output_co2_footprint()
+    ) |>
+    polish_transition_risk_profile() |>
+    prepare_webtool_output(
+      pivot_wider = pivot_wider,
+      for_webtool = for_webtool
     )
 }
 
@@ -130,12 +138,12 @@ transition_risk_profile_impl <- function(emissions_profile,
 
   company <- transition_risk_scores |>
     unnest_company() |>
-    polish_transition_risk_at_company_level()
+    arrange_transition_risk_at_company_level()
 
   tilt_profile(nest_levels(product, company))
 }
 
-polish_transition_risk_at_company_level <- function(data) {
+arrange_transition_risk_at_company_level <- function(data) {
   arrange(data, .data$companies_id, .data$benchmark_tr_score_avg)
 }
 
