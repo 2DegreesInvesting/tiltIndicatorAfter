@@ -102,6 +102,7 @@ transition_risk_profile <- function(emissions_profile,
       pivot_wider = pivot_wider,
       include_co2 = option_output_co2_footprint()
     ) |>
+    add_coefficient_of_variation_transition_risk() |>
     polish_transition_risk_profile() |>
     prepare_webtool_output(
       pivot_wider = pivot_wider,
