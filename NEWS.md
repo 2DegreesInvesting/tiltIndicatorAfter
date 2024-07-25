@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9056 (2024-07-25)
+
+* Product and company level columns from `transition_risk_profile()` are renamed.
+
+* `transition_risk_profile()` gets `for_webtool` parameter to provide the choice 
+of creating webtool data (#302).
+
 # tiltIndicatorAfter 0.0.0.9055 (2024-07-18)
 
 * `transition_risk_profile()` outputs column `transition_risk_NA_share` at 
