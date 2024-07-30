@@ -115,6 +115,8 @@ add_mean_cov <- function(data, mean_col, col1, col2, col3) {
   )
 }
 
+# Denominator is `n` and not `n-1` because we are not calculating the standard
+# deviation of a sample from whole population.
 add_standard_deviation_cov <- function(data, sd_col, mean_col, col1, col2, col3) {
   mutate(
     data,
@@ -123,7 +125,7 @@ add_standard_deviation_cov <- function(data, sd_col, mean_col, col1, col2, col3)
       round(sqrt(
         ((.data[[col1]] - .data[[mean_col]])^2 +
           (.data[[col2]] - .data[[mean_col]])^2 +
-          (.data[[col3]] - .data[[mean_col]])^2) / 2
+          (.data[[col3]] - .data[[mean_col]])^2) / 3
       ), 8)
     )
   )
