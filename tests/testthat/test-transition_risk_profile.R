@@ -605,6 +605,9 @@ test_that("the output at company level has has all the new required columns (#18
   expect_true(any(matches_name(company, "emission_rank_avg_worst_case")))
   expect_true(any(matches_name(company, "sector_target_avg_best_case")))
   expect_true(any(matches_name(company, "sector_target_avg_worst_case")))
+  expect_true(any(matches_name(company, "cov_transition_risk")))
+  expect_true(any(matches_name(company, "cov_emission_rank")))
+  expect_true(any(matches_name(company, "cov_sector_target")))
 })
 
 test_that("At product level, when either `sector_category` is NA or `emission_category` is NA, tilt and isic sectors are not NA", {
