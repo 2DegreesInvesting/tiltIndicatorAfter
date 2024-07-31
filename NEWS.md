@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9057 (2024-07-31)
+
+* `transition_risk_profile()` outputs columns `cov_transition_risk`, 
+`cov_emission_profile`, and `cov_sector_target` at company level (#303).
+
 # tiltIndicatorAfter 0.0.0.9056 (2024-07-25)
 
 * Product and company level columns from `transition_risk_profile()` are renamed.
