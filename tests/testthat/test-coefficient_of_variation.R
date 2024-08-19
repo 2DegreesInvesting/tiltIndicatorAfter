@@ -51,3 +51,39 @@ test_that("`add_coefficient_of_variation_sector_target()` outputs correct `cov_s
   check_na <- filter(out, is.na(reduction_targets_avg))
   expect_true(is.na(check_na$cov_sector_target))
 })
+
+test_that("`add_coefficient_of_variation_sector_target()` outputs zero `cov_sector_target` for zero mean", {
+  sector_target_input <- tibble(
+    reduction_targets_avg = -1,
+    avg_reduction_targets_best_case = 1,
+    avg_reduction_targets_worst_case = 0
+  )
+  out <- add_coefficient_of_variation_sector_target(sector_target_input)
+
+  expected_coefficient_of_variation <- 0.0
+  expect_true(out$cov_sector_target == expected_coefficient_of_variation)
+})
+
+test_that("`add_coefficient_of_variation_emission_rank()` outputs zero `cov_emission_rank` for zero mean", {
+  emission_rank_input <- tibble(
+    profile_ranking_avg = -1,
+    avg_profile_ranking_best_case = 1,
+    avg_profile_ranking_worst_case = 0
+  )
+  out <- add_coefficient_of_variation_emission_rank(emission_rank_input)
+
+  expected_coefficient_of_variation <- 0
+  expect_true(out$cov_emission_rank == expected_coefficient_of_variation)
+})
+
+test_that("`add_coefficient_of_variation_transition_risk()` outputs zero `cov_transition_risk` for zero mean", {
+  transition_risk_input <- tibble(
+    avg_transition_risk_equal_weight = -1,
+    avg_transition_risk_best_case = 1,
+    avg_transition_risk_worst_case = 0
+  )
+  out <- add_coefficient_of_variation_transition_risk(transition_risk_input)
+
+  expected_coefficient_of_variation <- 0
+  expect_true(out$cov_transition_risk == expected_coefficient_of_variation)
+})

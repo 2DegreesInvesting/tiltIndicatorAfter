@@ -98,9 +98,10 @@ polish_coefficient_of_variation_sector_target <- function(data) {
 add_coefficient_of_variation <- function(data, cov_col, sd_col, mean_col) {
   mutate(
     data,
-    {{ cov_col }} := ifelse(is.na(.data[[mean_col]]),
-      NA_real_,
-      (.data[[sd_col]] / .data[[mean_col]]) * 100
+    {{ cov_col }} := case_when(
+      is.na(.data[[mean_col]]) ~ NA_real_,
+      .data[[mean_col]] == 0.0 ~ 0.0,
+      TRUE ~ (.data[[sd_col]] / .data[[mean_col]]) * 100
     )
   )
 }
