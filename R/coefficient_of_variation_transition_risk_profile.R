@@ -100,7 +100,7 @@ add_coefficient_of_variation <- function(data, cov_col, sd_col, mean_col) {
     data,
     {{ cov_col }} := case_when(
       is.na(.data[[mean_col]]) ~ NA_real_,
-      .data[[mean_col]] == 0.0 ~ 0.0,
+      .data[[mean_col]] == 0.0 ~ NA_real_,
       TRUE ~ (.data[[sd_col]] / .data[[mean_col]]) * 100
     )
   )
