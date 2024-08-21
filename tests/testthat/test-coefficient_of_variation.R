@@ -52,7 +52,7 @@ test_that("`add_coefficient_of_variation_sector_target()` outputs correct `cov_s
   expect_true(is.na(check_na$cov_sector_target))
 })
 
-test_that("`add_coefficient_of_variation_sector_target()` outputs zero `cov_sector_target` for zero mean", {
+test_that("`add_coefficient_of_variation_sector_target()` outputs NA `cov_sector_target` for zero mean", {
   sector_target_input <- tibble(
     reduction_targets_avg = -1,
     avg_reduction_targets_best_case = 1,
@@ -60,11 +60,10 @@ test_that("`add_coefficient_of_variation_sector_target()` outputs zero `cov_sect
   )
   out <- add_coefficient_of_variation_sector_target(sector_target_input)
 
-  expected_coefficient_of_variation <- 0.0
-  expect_true(out$cov_sector_target == expected_coefficient_of_variation)
+  expect_true(is.na(out$cov_sector_target))
 })
 
-test_that("`add_coefficient_of_variation_emission_rank()` outputs zero `cov_emission_rank` for zero mean", {
+test_that("`add_coefficient_of_variation_emission_rank()` outputs NA `cov_emission_rank` for zero mean", {
   emission_rank_input <- tibble(
     profile_ranking_avg = -1,
     avg_profile_ranking_best_case = 1,
@@ -72,11 +71,10 @@ test_that("`add_coefficient_of_variation_emission_rank()` outputs zero `cov_emis
   )
   out <- add_coefficient_of_variation_emission_rank(emission_rank_input)
 
-  expected_coefficient_of_variation <- 0
-  expect_true(out$cov_emission_rank == expected_coefficient_of_variation)
+  expect_true(is.na(out$cov_emission_rank))
 })
 
-test_that("`add_coefficient_of_variation_transition_risk()` outputs zero `cov_transition_risk` for zero mean", {
+test_that("`add_coefficient_of_variation_transition_risk()` outputs NA `cov_transition_risk` for zero mean", {
   transition_risk_input <- tibble(
     avg_transition_risk_equal_weight = -1,
     avg_transition_risk_best_case = 1,
@@ -84,6 +82,5 @@ test_that("`add_coefficient_of_variation_transition_risk()` outputs zero `cov_tr
   )
   out <- add_coefficient_of_variation_transition_risk(transition_risk_input)
 
-  expected_coefficient_of_variation <- 0
-  expect_true(out$cov_transition_risk == expected_coefficient_of_variation)
+  expect_true(is.na(out$cov_transition_risk))
 })
