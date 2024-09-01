@@ -284,7 +284,7 @@ test_that("is sensitive to `pivot_wider`", {
   expect_true(long_transition_risk_cols < wide_transition_risk_cols)
 })
 
-test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yields no error", {
+test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` and `for_webtool = TRUE` yields no error", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -326,12 +326,13 @@ test_that("with `*.output_co2_footprint` unset, `pivot_wider = TRUE` yields no e
       co2 = toy_emissions_profile_products_ecoinvent,
       all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
       scenarios = toy_sector_profile_any_scenarios,
-      pivot_wider = TRUE
+      pivot_wider = TRUE,
+      for_webtool = TRUE
     )
   )
 })
 
-test_that("doesn't output `co2_footprint` at product level and `co2e_avg` at company level if `*.output_co2_footprint` unset", {
+test_that("doesn't output `co2_footprint` at product level and `co2e_avg` at company level if `*.output_co2_footprint` unset and `for_webtool = TRUE`", {
   unset <- NULL
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = unset))
 
@@ -371,7 +372,8 @@ test_that("doesn't output `co2_footprint` at product level and `co2e_avg` at com
     sector_profile = toy_sector_profile,
     co2 = toy_emissions_profile_products_ecoinvent,
     all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
-    scenarios = toy_sector_profile_any_scenarios
+    scenarios = toy_sector_profile_any_scenarios,
+    for_webtool = TRUE
   )
 
   wide <- transition_risk_profile(
@@ -380,7 +382,8 @@ test_that("doesn't output `co2_footprint` at product level and `co2e_avg` at com
     co2 = toy_emissions_profile_products_ecoinvent,
     all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
     scenarios = toy_sector_profile_any_scenarios,
-    pivot_wider = TRUE
+    pivot_wider = TRUE,
+    for_webtool = TRUE
   )
 
   expect_false("co2_footprint" %in% names(unnest_product(long)))
@@ -390,7 +393,7 @@ test_that("doesn't output `co2_footprint` at product level and `co2e_avg` at com
 })
 
 
-test_that("outputs `co2_footprint` at product level and `co2e_avg` at company level if `*.output_co2_footprint = TRUE`", {
+test_that("outputs `co2_footprint` at product level and `co2e_avg` at company level if `*.output_co2_footprint = TRUE` and `for_webtool = FALSE`", {
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
 
   toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
@@ -446,6 +449,55 @@ test_that("outputs `co2_footprint` at product level and `co2e_avg` at company le
   expect_true("co2_footprint" %in% names(unnest_product(wide)))
   expect_true("co2e_avg" %in% names(unnest_company(wide)))
 })
+
+test_that("removes `co2_footprint` at product level and `co2e_avg` at company level if `*.output_co2_footprint = TRUE` and `for_webtool = TRUE`", {
+  withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
+
+  toy_emissions_profile_products_ecoinvent <- read_csv(toy_emissions_profile_products_ecoinvent()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+  toy_emissions_profile_any_companies <- read_csv(toy_emissions_profile_any_companies())
+  toy_sector_profile_any_scenarios <- read_csv(toy_sector_profile_any_scenarios())
+  toy_sector_profile_companies <- read_csv(toy_sector_profile_companies()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+  toy_europages_companies <- read_csv(toy_europages_companies())
+  toy_ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
+  toy_ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
+  toy_ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
+  toy_isic_name <- read_csv(toy_isic_name())
+  toy_all_activities_scenario_sectors <- read_csv(toy_all_activities_scenario_sectors()) |>
+    filter(activity_uuid_product_uuid == "76269c17-78d6-420b-991a-aa38c51b45b7")
+
+  toy_emissions_profile <- profile_emissions(
+    companies = toy_emissions_profile_any_companies,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+  toy_sector_profile <- profile_sector(
+    companies = toy_sector_profile_companies,
+    scenarios = toy_sector_profile_any_scenarios,
+    europages_companies = toy_europages_companies,
+    ecoinvent_activities = toy_ecoinvent_activities,
+    ecoinvent_europages = toy_ecoinvent_europages,
+    isic = toy_isic_name
+  )
+
+  wide <- transition_risk_profile(
+    emissions_profile = toy_emissions_profile,
+    sector_profile = toy_sector_profile,
+    co2 = toy_emissions_profile_products_ecoinvent,
+    all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
+    scenarios = toy_sector_profile_any_scenarios,
+    pivot_wider = TRUE,
+    for_webtool = TRUE
+  )
+
+  expect_true(!("co2_footprint" %in% names(unnest_product(wide))))
+  expect_true(!("co2e_avg" %in% names(unnest_company(wide))))
+})
+
 
 test_that("with `pivot_wider = TRUE`, at company level the `emission*` column are of type double", {
   withr::local_options(list(tiltIndicatorAfter.output_co2_footprint = TRUE))
@@ -891,4 +943,24 @@ test_that("we can't have webtool output if `pivot_wider = FALSE` and `for_webtoo
     unnest_company() |>
     ncol()
   expect_false(for_webtool_company == for_webtool_test_company)
+})
+
+test_that("case 3 companies are identified correctly", {
+  # To identify which companies belong to Case 3, please follow this link:
+  # https://github.com/2DegreesInvesting/TiltDevProjectMGMT/issues/169#issuecomment-2284344632
+  case3_companies <- tribble(
+    # styler: off
+    ~companies_id, ~product, ~matched_activity_name, ~sector_target,
+           "comp",      "a", "market for tap water",            2.0,
+           "comp",      "b", "market for tap water",       NA_real_,
+           "comp",      "c",          NA_character_,            2.0,
+           "comp",      "d",          NA_character_,       NA_real_,
+    "case_3_comp",      "a",          NA_character_,       NA_real_,
+    "case_3_comp",      "b",          NA_character_,       NA_real_
+    # styler: on
+  )
+  result <- identify_case3_companies(case3_companies)
+
+  expected_case3_company <- "case_3_comp"
+  expect_true(unique(result$companies_id) == expected_case3_company)
 })

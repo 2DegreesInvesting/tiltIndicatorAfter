@@ -106,8 +106,10 @@ transition_risk_profile <- function(emissions_profile,
     polish_transition_risk_profile() |>
     prepare_webtool_output(
       pivot_wider = pivot_wider,
-      for_webtool = for_webtool
-    )
+      for_webtool = for_webtool,
+      include_co2 = option_output_co2_footprint()
+    ) |>
+    remove_case3_companies()
 }
 
 transition_risk_profile_impl <- function(emissions_profile,
@@ -153,4 +155,36 @@ select_crucial_threshold_cols <- function(data) {
     "activity_uuid_product_uuid", "benchmark_tr_score",
     "transition_risk_low_threshold", "transition_risk_high_threshold"
   )))
+}
+
+remove_case3_companies <- function(data) {
+  product <- data |>
+    unnest_product()
+
+  company <- data |>
+    unnest_company()
+
+  case_3_companies <- identify_case3_companies(product)
+
+  final_product <- product |>
+    filter(!(.data$companies_id %in% unique(case_3_companies$companies_id))) |>
+    distinct()
+
+  final_company <- company |>
+    filter(!(.data$companies_id %in% unique(case_3_companies$companies_id))) |>
+    distinct()
+
+  tilt_profile(nest_levels(final_product, final_company))
+}
+
+identify_case3_companies <- function(data) {
+  # To identify which companies belong to Case 3, please follow this link:
+  # https://github.com/2DegreesInvesting/TiltDevProjectMGMT/issues/169#issuecomment-2284344632
+  data |>
+    mutate(
+      check =
+        all(is.na(.data$sector_target) & is.na(.data$matched_activity_name)),
+      .by = col_companies_id()
+    ) |>
+    filter(.data$check)
 }
