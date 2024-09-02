@@ -1,5 +1,13 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9058 (2024-09-02)
+
+* `transition_risk_profile()` incorporates these following changes:
+
+- Remove case 3 companies for the base output of tiltIndicatorAfter (#308).
+- Remove `co2_footprint` on product level and `co2e_avg` on company level 
+  for the webtool output (#308).
+
 # tiltIndicatorAfter 0.0.0.9057 (2024-07-31)
 
 * `transition_risk_profile()` outputs columns `cov_transition_risk`, 
