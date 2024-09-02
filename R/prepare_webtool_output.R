@@ -1,13 +1,16 @@
-prepare_webtool_output <- function(data, pivot_wider = FALSE, for_webtool = FALSE) {
+prepare_webtool_output <- function(data,
+                                   pivot_wider = FALSE,
+                                   for_webtool = FALSE,
+                                   include_co2 = FALSE) {
   if (pivot_wider & for_webtool) {
-    prepare_webtool_output_impl(data)
+    prepare_webtool_output_impl(data, include_co2 = include_co2)
   }
   else {
     data
   }
 }
 
-prepare_webtool_output_impl <- function(data) {
+prepare_webtool_output_impl <- function(data, include_co2 = FALSE) {
   product <- data |>
     unnest_product() |>
     select_webtool_cols_at_product_level()
@@ -16,6 +19,14 @@ prepare_webtool_output_impl <- function(data) {
     unnest_company() |>
     select_webtool_cols_at_company_level_wide() |>
     rename_webtool_cols_at_company_level_wide()
+
+  if (include_co2) {
+    product <- product |>
+      select(-all_of(c("co2_footprint")))
+
+    company <- company |>
+      select(-all_of(c("co2e_avg")))
+  }
 
   tilt_profile(nest_levels(product, company))
 }
