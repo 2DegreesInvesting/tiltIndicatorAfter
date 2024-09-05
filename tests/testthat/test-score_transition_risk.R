@@ -84,7 +84,7 @@ test_that("calculates `transition_risk_score_avg` correctly", {
       )
     )
 
-  expect_equal(out$transition_risk_score_avg, 0.2117)
+  expect_equal(round(out$transition_risk_score_avg, 4), 0.2117)
 })
 
 test_that(

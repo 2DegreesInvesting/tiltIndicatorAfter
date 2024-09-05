@@ -84,3 +84,24 @@ test_that("`add_coefficient_of_variation_transition_risk()` outputs NA `cov_tran
 
   expect_true(is.na(out$cov_transition_risk))
 })
+
+test_that("round off to 4 decimal places is required to give correct `cov_transition_risk`", {
+  transition_risk_input <- tibble(
+    avg_transition_risk_equal_weight = c(1.23456789, NA_real_),
+    avg_transition_risk_best_case = c(1.234567, NA_real_),
+    avg_transition_risk_worst_case = c(1.234567, NA_real_)
+  )
+
+  with_round_off <- round_off_to_4_decimal_places_impl(transition_risk_input) |>
+    add_coefficient_of_variation_transition_risk()
+  without_round_off <- add_coefficient_of_variation_transition_risk(transition_risk_input)
+
+  zero_cov <- filter(with_round_off, !is.na(avg_transition_risk_equal_weight))
+  non_zero_cov <- filter(without_round_off, !is.na(avg_transition_risk_equal_weight))
+
+  expected_coefficient_of_variation <- 0.0
+  expect_true(zero_cov$cov_transition_risk ==
+                expected_coefficient_of_variation)
+  expect_false(non_zero_cov$cov_transition_risk ==
+                expected_coefficient_of_variation)
+})

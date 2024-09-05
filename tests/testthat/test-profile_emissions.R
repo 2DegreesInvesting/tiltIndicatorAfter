@@ -525,7 +525,7 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
     filter(benchmark == "all")
 
   expected_value <- round(mean(product$profile_ranking, na.rm = TRUE), 4)
-  expect_equal(unique(company$profile_ranking_avg), expected_value)
+  expect_equal(round(unique(company$profile_ranking_avg), 4), expected_value)
 })
 
 test_that("if `*profile$` column has NA then `tilt_sector` and `tilt_subsector` should always have NA", {

@@ -92,7 +92,7 @@ add_profile_ranking_average <- function(data, product) {
   profile_ranking_average <- product |>
     select("companies_id", "grouped_by", "profile_ranking") |>
     mutate(
-      profile_ranking_avg = round(mean(.data$profile_ranking, na.rm = TRUE), 4),
+      profile_ranking_avg = mean(.data$profile_ranking, na.rm = TRUE),
       .by = c("companies_id", "grouped_by")
     ) |>
     select(-c("profile_ranking")) |>

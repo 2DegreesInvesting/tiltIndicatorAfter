@@ -113,7 +113,7 @@ create_tr_benchmarks_tr_score <- function(data) {
 create_trs_average <- function(data) {
   mutate(
     data,
-    transition_risk_score_avg = round(mean(.data$transition_risk_score, na.rm = TRUE), 4),
+    transition_risk_score_avg = mean(.data$transition_risk_score, na.rm = TRUE),
     .by = c("companies_id", "benchmark_tr_score")
   )
 }
