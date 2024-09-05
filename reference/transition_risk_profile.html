@@ -48,7 +48,6 @@ emission profile and sector profile indicator.</p>
 <span>  <span class="va">co2</span>,</span>
 <span>  <span class="va">all_activities_scenario_sectors</span>,</span>
 <span>  <span class="va">scenarios</span>,</span>
-<span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  for_webtool <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -76,11 +75,6 @@ emission profile and sector profile indicator.</p>
 
 <dt id="arg-scenarios">scenarios<a class="anchor" aria-label="anchor" href="#arg-scenarios"></a></dt>
 <dd><p>A dataframe</p></dd>
-
-
-<dt id="arg-pivot-wider">pivot_wider<a class="anchor" aria-label="anchor" href="#arg-pivot-wider"></a></dt>
-<dd><p>Logical. Pivot the output at company level to a wide
-format?</p></dd>
 
 
 <dt id="arg-for-webtool">for_webtool<a class="anchor" aria-label="anchor" href="#arg-for-webtool"></a></dt>
@@ -153,7 +147,6 @@ level.</p>
 <span class="r-in"><span>  co2 <span class="op">=</span> <span class="va">toy_emissions_profile_products_ecoinvent</span>,</span></span>
 <span class="r-in"><span>  all_activities_scenario_sectors <span class="op">=</span> <span class="va">toy_all_activities_scenario_sectors</span>,</span></span>
 <span class="r-in"><span>  scenarios <span class="op">=</span> <span class="va">toy_sector_profile_any_scenarios</span>,</span></span>
-<span class="r-in"><span>  pivot_wider <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>  for_webtool <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -180,26 +173,26 @@ level.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emissions_profile_equal_weight &lt;dbl&gt;, emissions_profile_best_case &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">output</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27,648 × 32</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,728 × 38</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    companies_id                  company_name country co2e_avg grouping_emission</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. all              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27,638 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27 more variables: emission_rank_avg_equal_weight &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. isic_4digit      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. isic_4digit      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. isic_4digit      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. isic_4digit      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. tilt_subsector   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> asteria_megalotomusquinquesp… asteria_meg… austria     303. tilt_subsector   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,718 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 33 more variables: emission_rank_avg_equal_weight &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_rank_avg_best_case &lt;dbl&gt;, emission_rank_avg_worst_case &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_profile &lt;chr&gt;, emission_profile_share &lt;dbl&gt;, scenario &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_category_low &lt;dbl&gt;, emission_category_medium &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   emission_category_high &lt;dbl&gt;, emission_category_NA &lt;dbl&gt;, scenario &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   year &lt;dbl&gt;, sector_target_avg_equal_weight &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_target_avg_best_case &lt;dbl&gt;, sector_target_avg_worst_case &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_profile &lt;chr&gt;, sector_profile_share &lt;dbl&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sector_target_avg_best_case &lt;dbl&gt;, sector_target_avg_worst_case &lt;dbl&gt;, …</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
