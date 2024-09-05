@@ -524,7 +524,7 @@ test_that("`profile_ranking_avg` is calculated correctly for benchmark `all`", {
   company <- unnest_company(out) |>
     filter(benchmark == "all")
 
-  expected_value <- round(mean(product$profile_ranking, na.rm = TRUE), 3)
+  expected_value <- round(mean(product$profile_ranking, na.rm = TRUE), 4)
   expect_equal(unique(company$profile_ranking_avg), expected_value)
 })
 

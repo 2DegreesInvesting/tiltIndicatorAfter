@@ -729,3 +729,18 @@ test_that("case 3 companies are identified correctly", {
   expected_case3_company <- "case_3_comp"
   expect_true(unique(result$companies_id) == expected_case3_company)
 })
+
+test_that("All columns are rounded off to 4 decimal places", {
+  round_cols <- tribble(
+    # styler: off
+    ~character_col, ~logical_col, ~numerical_col,
+            "comp",        TRUE,       2.9393876,
+            "comp",       FALSE,        NA_real_,
+            "comp",        TRUE,       4.5895959
+    # styler: on
+  )
+
+  result <- round_off_to_4_decimal_places_impl(round_cols)
+  expect_true(all(result$numerical_col == round(result$numerical_col, 4), na.rm = TRUE))
+})
+
