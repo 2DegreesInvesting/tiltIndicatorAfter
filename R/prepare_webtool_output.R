@@ -1,8 +1,7 @@
 prepare_webtool_output <- function(data,
-                                   pivot_wider = FALSE,
                                    for_webtool = FALSE,
                                    include_co2 = FALSE) {
-  if (pivot_wider & for_webtool) {
+  if (for_webtool) {
     prepare_webtool_output_impl(data, include_co2 = include_co2)
   }
   else {

@@ -6,8 +6,6 @@
 #' @param emissions_profile Nested data frame. The output of
 #'   `profile_emissions()`.
 #' @param sector_profile Nested data frame. The output of `profile_sector()`.
-#' @param pivot_wider Logical. Pivot the output at company level to a wide
-#'   format?
 #' @param co2 A dataframe
 #' @param all_activities_scenario_sectors A dataframe
 #' @param scenarios A dataframe
@@ -68,7 +66,6 @@
 #'   co2 = toy_emissions_profile_products_ecoinvent,
 #'   all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
 #'   scenarios = toy_sector_profile_any_scenarios,
-#'   pivot_wider = FALSE,
 #'   for_webtool = FALSE
 #' )
 #'
@@ -80,7 +77,6 @@ transition_risk_profile <- function(emissions_profile,
                                     co2,
                                     all_activities_scenario_sectors,
                                     scenarios,
-                                    pivot_wider = FALSE,
                                     for_webtool = FALSE) {
   transition_risk_profile_impl(
     emissions_profile,
@@ -92,20 +88,17 @@ transition_risk_profile <- function(emissions_profile,
     add_transition_risk_category_at_company_level() |>
     best_case_worst_case_transition_risk_profile_at_company_level() |>
     pivot_wider_transition_risk_profile(
-      pivot_wider = pivot_wider,
       include_co2 = option_output_co2_footprint()
     ) |>
     best_case_worst_case_avg_profile_ranking() |>
     best_case_worst_case_avg_reduction_targets() |>
     add_transition_risk_NA_share() |>
     relocate_transition_risk_profile_cols(
-      pivot_wider = pivot_wider,
       include_co2 = option_output_co2_footprint()
     ) |>
     coefficient_of_variation_transition_risk_profile() |>
     polish_transition_risk_profile() |>
     prepare_webtool_output(
-      pivot_wider = pivot_wider,
       for_webtool = for_webtool,
       include_co2 = option_output_co2_footprint()
     ) |>
