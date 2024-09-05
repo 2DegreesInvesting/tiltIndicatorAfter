@@ -26,6 +26,7 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr summarise
 #' @importFrom dplyr ungroup
+#' @importFrom dplyr where
 #' @importFrom glue glue
 #' @importFrom memoise memoise
 #' @importFrom purrr walk

@@ -32,9 +32,9 @@ select_and_join_transition_risk_NA_share_at_company_level <- function(data, prod
   data |>
     left_join(
       join_table,
-      by = all_of(c("companies_id",
+      by = c("companies_id",
         "benchmark_tr_score_avg" = "benchmark_tr_score"
-      ))
+      )
     )
 }
 
