@@ -1,7 +1,6 @@
 relocate_transition_risk_profile_cols <- function(
     data,
-    include_co2 = FALSE,
-    pivot_wider = FALSE) {
+    include_co2 = FALSE) {
   product <- data |>
     unnest_product() |>
     relocate_transition_risk_profile_cols_at_product_level(
@@ -11,8 +10,7 @@ relocate_transition_risk_profile_cols <- function(
   company <- data |>
     unnest_company() |>
     relocate_transition_risk_profile_cols_at_company_level(
-      include_co2 = include_co2,
-      pivot_wider = pivot_wider
+      include_co2 = include_co2
     )
 
   tilt_profile(nest_levels(product, company))
@@ -69,73 +67,39 @@ relocate_transition_risk_profile_cols_at_product_level <- function(
 
 relocate_transition_risk_profile_cols_at_company_level <- function(
     data,
-    pivot_wider = FALSE,
     include_co2 = FALSE) {
-  if (pivot_wider) {
-    data |>
-      relocate(
-        "companies_id",
-        "company_name",
-        "country",
-        if (include_co2) "co2_avg",
-        "benchmark",
-        "profile_ranking_avg",
-        "avg_profile_ranking_best_case",
-        "avg_profile_ranking_worst_case",
-        "emission_category_low",
-        "emission_category_medium",
-        "emission_category_high",
-        "emission_category_NA",
-        "scenario",
-        "year",
-        "reduction_targets_avg",
-        "avg_reduction_targets_best_case",
-        "avg_reduction_targets_worst_case",
-        "sector_category_low",
-        "sector_category_medium",
-        "sector_category_high",
-        "sector_category_NA",
-        "benchmark_tr_score_avg",
-        "avg_transition_risk_equal_weight",
-        "avg_transition_risk_best_case",
-        "avg_transition_risk_worst_case",
-        "transition_risk_NA_share",
-        "postcode",
-        "address",
-        "main_activity",
-        "min_headcount",
-        "max_headcount"
-      )
-  } else {
-    data |>
-      relocate(
-        "companies_id",
-        "company_name",
-        "country",
-        if (include_co2) "co2_avg",
-        "benchmark",
-        "profile_ranking_avg",
-        "avg_profile_ranking_best_case",
-        "avg_profile_ranking_worst_case",
-        "emission_profile",
-        "emission_profile_share",
-        "scenario",
-        "year",
-        "reduction_targets_avg",
-        "avg_reduction_targets_best_case",
-        "avg_reduction_targets_worst_case",
-        "sector_profile",
-        "sector_profile_share",
-        "benchmark_tr_score_avg",
-        "avg_transition_risk_equal_weight",
-        "avg_transition_risk_best_case",
-        "avg_transition_risk_worst_case",
-        "transition_risk_NA_share",
-        "postcode",
-        "address",
-        "main_activity",
-        "min_headcount",
-        "max_headcount"
-      )
-  }
+  data |>
+    relocate(
+      "companies_id",
+      "company_name",
+      "country",
+      if (include_co2) "co2_avg",
+      "benchmark",
+      "profile_ranking_avg",
+      "avg_profile_ranking_best_case",
+      "avg_profile_ranking_worst_case",
+      "emission_category_low",
+      "emission_category_medium",
+      "emission_category_high",
+      "emission_category_NA",
+      "scenario",
+      "year",
+      "reduction_targets_avg",
+      "avg_reduction_targets_best_case",
+      "avg_reduction_targets_worst_case",
+      "sector_category_low",
+      "sector_category_medium",
+      "sector_category_high",
+      "sector_category_NA",
+      "benchmark_tr_score_avg",
+      "avg_transition_risk_equal_weight",
+      "avg_transition_risk_best_case",
+      "avg_transition_risk_worst_case",
+      "transition_risk_NA_share",
+      "postcode",
+      "address",
+      "main_activity",
+      "min_headcount",
+      "max_headcount"
+    )
 }

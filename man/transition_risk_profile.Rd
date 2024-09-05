@@ -10,7 +10,6 @@ transition_risk_profile(
   co2,
   all_activities_scenario_sectors,
   scenarios,
-  pivot_wider = FALSE,
   for_webtool = FALSE
 )
 }
@@ -25,9 +24,6 @@ transition_risk_profile(
 \item{all_activities_scenario_sectors}{A dataframe}
 
 \item{scenarios}{A dataframe}
-
-\item{pivot_wider}{Logical. Pivot the output at company level to a wide
-format?}
 
 \item{for_webtool}{Logical. Is it output for webtool or not?}
 }
@@ -87,7 +83,6 @@ output <- transition_risk_profile(
   co2 = toy_emissions_profile_products_ecoinvent,
   all_activities_scenario_sectors = toy_all_activities_scenario_sectors,
   scenarios = toy_sector_profile_any_scenarios,
-  pivot_wider = FALSE,
   for_webtool = FALSE
 )
 

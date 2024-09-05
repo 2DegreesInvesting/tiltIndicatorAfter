@@ -1,7 +1,5 @@
-#' Calculate the indicator "transition risk profile"
+#' Pivot company-level columns to wide format for indicator "transition risk profile"
 #'
-#' @param pivot_wider Logical. Pivot the output at company level to a wide
-#'   format?
 #' @param include_co2 Logical. Include `co2_*` columns ?
 #'
 #' @return `r document_tilt_profile()`
@@ -49,109 +47,78 @@
 #'   isic = toy_isic_name
 #' )
 #'
-#' # Most banks need company-level results in long format
-#' pivot_wider <- FALSE
-#'
-#' long <- transition_risk_profile_impl(
+#' wide_format <- transition_risk_profile_impl(
 #'   emissions_profile,
 #'   sector_profile,
 #'   co2,
 #'   all_activities_scenario_sectors,
-#'   scenarios,
-#'   exclude_co2 = pivot_wider
+#'   scenarios
 #' ) |>
 #'   add_transition_risk_category_at_company_level() |>
 #'   best_case_worst_case_transition_risk_profile_at_company_level() |>
-#'   pivot_wider_transition_risk_profile(
-#'     pivot_wider = pivot_wider,
-#'     include_co2 = TRUE
-#'   ) |>
+#'   pivot_wider_transition_risk_profile(include_co2 = TRUE) |>
 #'   unnest_company()
-#' long
-#'
-#' # Some banks need company-level results in wide format
-#' pivot_wider <- TRUE
-#'
-#' wide <- transition_risk_profile_impl(
-#'   emissions_profile,
-#'   sector_profile,
-#'   co2,
-#'   all_activities_scenario_sectors,
-#'   scenarios,
-#'   exclude_co2 = pivot_wider
-#' ) |>
-#'   add_transition_risk_category_at_company_level() |>
-#'   best_case_worst_case_transition_risk_profile_at_company_level() |>
-#'   pivot_wider_transition_risk_profile(
-#'     pivot_wider = pivot_wider,
-#'     include_co2 = TRUE
-#'   ) |>
-#'   unnest_company()
-#' wide
+#' wide_format
 #'
 #' # Cleanup
 #' options(restore)
 #' }
-pivot_wider_transition_risk_profile <- function(data,
-                                                pivot_wider = FALSE,
-                                                include_co2 = FALSE) {
+pivot_wider_transition_risk_profile <- function(data, include_co2 = FALSE) {
   product <- data |>
     unnest_product()
 
   company <- data |>
     unnest_company()
 
-  if (pivot_wider) {
-    emission_profile_company <- company |>
-      select_emissions_profile_pivot_cols(include_co2 = include_co2) |>
-      exclude_subset_cols_then_pivot_wider(
-        subset_cols = select_subset_emissions_profile_id_cols(
-          include_co2 = include_co2
-        ),
-        names_from = "emission_profile",
-        names_prefix = "emission_category_",
-        values_from = "emission_profile_share"
-      )
+  emission_profile_company <- company |>
+    select_emissions_profile_pivot_cols(include_co2 = include_co2) |>
+    exclude_subset_cols_then_pivot_wider(
+      subset_cols = select_subset_emissions_profile_id_cols(
+        include_co2 = include_co2
+      ),
+      names_from = "emission_profile",
+      names_prefix = "emission_category_",
+      values_from = "emission_profile_share"
+    )
 
-    sector_profile_company <- company |>
-      select_sector_profile_pivot_cols() |>
-      exclude_subset_cols_then_pivot_wider(
-        subset_cols = select_subset_sector_profile_id_cols(),
-        names_from = "sector_profile",
-        names_prefix = "sector_category_",
-        values_from = "sector_profile_share"
-      )
+  sector_profile_company <- company |>
+    select_sector_profile_pivot_cols() |>
+    exclude_subset_cols_then_pivot_wider(
+      subset_cols = select_subset_sector_profile_id_cols(),
+      names_from = "sector_profile",
+      names_prefix = "sector_category_",
+      values_from = "sector_profile_share"
+    )
 
-    transition_risk_profile_company <- company |>
-      select_transition_risk_profile_pivot_cols() |>
-      exclude_subset_cols_then_pivot_wider(
-        subset_cols = select_subset_transition_risk_profile_id_cols(),
-        names_from = "transition_risk_category",
-        names_prefix = "transition_risk_category_",
-        values_from = "transition_risk_category_share"
-      )
+  transition_risk_profile_company <- company |>
+    select_transition_risk_profile_pivot_cols() |>
+    exclude_subset_cols_then_pivot_wider(
+      subset_cols = select_subset_transition_risk_profile_id_cols(),
+      names_from = "transition_risk_category",
+      names_prefix = "transition_risk_category_",
+      values_from = "transition_risk_category_share"
+    )
 
-    company <- full_join(emission_profile_company,
-      sector_profile_company,
+  company <- full_join(emission_profile_company,
+    sector_profile_company,
+    by = c(
+      "companies_id",
+      "country",
+      "main_activity"
+    ),
+    relationship = "many-to-many"
+  ) |>
+    add_benchmark_tr_score_avg() |>
+    full_join(transition_risk_profile_company,
       by = c(
         "companies_id",
         "country",
-        "main_activity"
+        "main_activity",
+        "benchmark_tr_score_avg"
       ),
       relationship = "many-to-many"
     ) |>
-      add_benchmark_tr_score_avg() |>
-      full_join(transition_risk_profile_company,
-        by = c(
-          "companies_id",
-          "country",
-          "main_activity",
-          "benchmark_tr_score_avg"
-        ),
-        relationship = "many-to-many"
-      ) |>
-      distinct()
-  }
+    distinct()
 
   tilt_profile(nest_levels(product, company))
 }

@@ -2,25 +2,18 @@
 % Please edit documentation in R/pivot_wider_transition_risk_profile.R
 \name{pivot_wider_transition_risk_profile}
 \alias{pivot_wider_transition_risk_profile}
-\title{Calculate the indicator "transition risk profile"}
+\title{Pivot company-level columns to wide format for indicator "transition risk profile"}
 \usage{
-pivot_wider_transition_risk_profile(
-  data,
-  pivot_wider = FALSE,
-  include_co2 = FALSE
-)
+pivot_wider_transition_risk_profile(data, include_co2 = FALSE)
 }
 \arguments{
-\item{pivot_wider}{Logical. Pivot the output at company level to a wide
-format?}
-
 \item{include_co2}{Logical. Include \verb{co2_*} columns ?}
 }
 \value{
 A data frame with the column \code{companies_id}, and the list columns \code{product} and \code{company} holding the outputs at product and company level.
 }
 \description{
-Calculate the indicator "transition risk profile"
+Pivot company-level columns to wide format for indicator "transition risk profile"
 }
 \examples{
 \dontrun{
@@ -63,45 +56,18 @@ toy_sector_profile <- profile_sector(
   isic = toy_isic_name
 )
 
-# Most banks need company-level results in long format
-pivot_wider <- FALSE
-
-long <- transition_risk_profile_impl(
+wide_format <- transition_risk_profile_impl(
   emissions_profile,
   sector_profile,
   co2,
   all_activities_scenario_sectors,
-  scenarios,
-  exclude_co2 = pivot_wider
+  scenarios
 ) |>
   add_transition_risk_category_at_company_level() |>
   best_case_worst_case_transition_risk_profile_at_company_level() |>
-  pivot_wider_transition_risk_profile(
-    pivot_wider = pivot_wider,
-    include_co2 = TRUE
-  ) |>
+  pivot_wider_transition_risk_profile(include_co2 = TRUE) |>
   unnest_company()
-long
-
-# Some banks need company-level results in wide format
-pivot_wider <- TRUE
-
-wide <- transition_risk_profile_impl(
-  emissions_profile,
-  sector_profile,
-  co2,
-  all_activities_scenario_sectors,
-  scenarios,
-  exclude_co2 = pivot_wider
-) |>
-  add_transition_risk_category_at_company_level() |>
-  best_case_worst_case_transition_risk_profile_at_company_level() |>
-  pivot_wider_transition_risk_profile(
-    pivot_wider = pivot_wider,
-    include_co2 = TRUE
-  ) |>
-  unnest_company()
-wide
+wide_format
 
 # Cleanup
 options(restore)
