@@ -1,8 +1,15 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9059 (2024-09-09)
+
+* `transition_risk_profile()` incorporates the following changes:
+
+- Remove long format option for company level columns (#311).
+- Round-off all column values to 4 decimal places (#312).
+
 # tiltIndicatorAfter 0.0.0.9058 (2024-09-02)
 
-* `transition_risk_profile()` incorporates these following changes:
+* `transition_risk_profile()` incorporates the following changes:
 
 - Remove case 3 companies for the base output of tiltIndicatorAfter (#308).
 - Remove `co2_footprint` on product level and `co2e_avg` on company level 
