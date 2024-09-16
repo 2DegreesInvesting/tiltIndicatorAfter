@@ -38,9 +38,7 @@ library(tiltToyData)
 library(readr)
 library(dplyr)
 library(knitr)
-library(tidyselect)
 library(kableExtra)
-library(stringr)
 options(readr.show_col_types = FALSE)
 ```
 
