@@ -198,5 +198,12 @@ suppliers, the following approach is used in our Supply Chain Risk Model:
 3. Then, we show the results in a heatmap to show insights on the suppliers’ 
   climate impact and risks at one glance. 
 
-Below, we show the code used to apply the relative emission indicator to an 
+Below, we show the heatmap after applying the relative emission indicator to an 
 example set of suppliers. 
+
+```{r, echo=FALSE, fig.align='center'}
+knitr::include_graphics(system.file("extdata", "heatmap.png", package = "tiltIndicatorAfter")) 
+```
+
+Please check out the [documentation](https://github.com/2DegreesInvesting/tiltHeatmap#supply-chain-analysis-based-on-input-data) 
+for creating the above heatmap.
