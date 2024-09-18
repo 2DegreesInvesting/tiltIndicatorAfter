@@ -174,9 +174,10 @@ company-level results.</p>
 <code class="sourceCode R"><span><span class="va">input_sector_decarbonisation_indicator_at_product_level</span> <span class="op">&lt;-</span> <span class="va">input_sector_decarbonisation_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_sector_decarbonisation_indicator_at_product_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_sector_decarbonisation_indicator_at_product_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">kable_styling</span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
 companies_id
@@ -1267,9 +1268,10 @@ tilt_world
 <code class="sourceCode R"><span><span class="va">input_sector_decarbonisation_indicator_at_company_level</span> <span class="op">&lt;-</span> <span class="va">input_sector_decarbonisation_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_sector_decarbonisation_indicator_at_company_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_sector_decarbonisation_indicator_at_company_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">kable_styling</span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
 companies_id
@@ -1784,9 +1786,10 @@ company-level results.</p>
 <code class="sourceCode R"><span><span class="va">input_relative_emission_indicator_at_product_level</span> <span class="op">&lt;-</span> <span class="va">input_relative_emission_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_relative_emission_indicator_at_product_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_relative_emission_indicator_at_product_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">kable_styling</span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">31</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
 companies_id
@@ -2844,9 +2847,10 @@ tilt_world
 <code class="sourceCode R"><span><span class="va">input_relative_emission_indicator_at_company_level</span> <span class="op">&lt;-</span> <span class="va">input_relative_emission_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_relative_emission_indicator_at_company_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu">kable</span><span class="op">(</span><span class="va">input_relative_emission_indicator_at_company_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">kable_styling</span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
 companies_id
@@ -3324,7 +3328,7 @@ suppliers’ climate impact and risks at one glance.</li>
 </ol>
 <p>Below, we show the heatmap after applying the relative emission
 indicator to an example set of suppliers.</p>
-<p><img src="../../../../_temp/Library/tiltIndicatorAfter/extdata/heatmap.png" style="display: block; margin: auto;"></p>
+<p><img src="heatmap.png" style="display: block; margin: auto;"></p>
 <p>Please check out the <a href="https://github.com/2DegreesInvesting/tiltHeatmap#supply-chain-analysis-based-on-input-data" class="external-link">documentation</a>
 for creating the above heatmap.</p>
 </div>
