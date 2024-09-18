@@ -127,7 +127,8 @@ input_sector_decarbonisation_indicator <- profile_sector_upstream(
 input_sector_decarbonisation_indicator_at_product_level <- input_sector_decarbonisation_indicator |>
   unnest_product()
 
-kable(input_sector_decarbonisation_indicator_at_product_level |> head(10), format = "html", escape = FALSE) %>%
+kable(input_sector_decarbonisation_indicator_at_product_level |> head(10), format = "html", escape = FALSE) |>
+  kable_styling(full_width = FALSE) |>
   column_spec(1:32, width = "auto", extra_css = "white-space: nowrap;")
 ```
 
@@ -139,7 +140,8 @@ kable(input_sector_decarbonisation_indicator_at_product_level |> head(10), forma
 input_sector_decarbonisation_indicator_at_company_level <- input_sector_decarbonisation_indicator |>
   unnest_company()
 
-kable(input_sector_decarbonisation_indicator_at_company_level |> head(10), format = "html", escape = FALSE) %>%
+kable(input_sector_decarbonisation_indicator_at_company_level |> head(10), format = "html", escape = FALSE) |>
+  kable_styling(full_width = FALSE) |>
   column_spec(1:13, width = "auto", extra_css = "white-space: nowrap;")
 ```
 
@@ -205,7 +207,8 @@ input_relative_emission_indicator <- profile_emissions_upstream(
 input_relative_emission_indicator_at_product_level <- input_relative_emission_indicator |>
   unnest_product()
 
-kable(input_relative_emission_indicator_at_product_level |> head(10), format = "html", escape = FALSE) %>%
+kable(input_relative_emission_indicator_at_product_level |> head(10), format = "html", escape = FALSE) |>
+  kable_styling(full_width = FALSE) |>
   column_spec(1:31, width = "auto", extra_css = "white-space: nowrap;")
 ```
 
@@ -217,7 +220,8 @@ kable(input_relative_emission_indicator_at_product_level |> head(10), format = "
 input_relative_emission_indicator_at_company_level <- input_relative_emission_indicator |>
   unnest_company()
 
-kable(input_relative_emission_indicator_at_company_level |> head(10), format = "html", escape = FALSE) %>%
+kable(input_relative_emission_indicator_at_company_level |> head(10), format = "html", escape = FALSE) |>
+  kable_styling(full_width = FALSE) |>
   column_spec(1:13, width = "auto", extra_css = "white-space: nowrap;")
 ```
 
@@ -243,9 +247,8 @@ example set of suppliers.
 
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics(system.file("extdata", "heatmap.png", package = "tiltIndicatorAfter"))
+knitr::include_graphics("heatmap.png")
 ```
-
 
 Please check out the [documentation](https://github.com/2DegreesInvesting/tiltHeatmap#supply-chain-analysis-based-on-input-data) 
 for creating the above heatmap.
