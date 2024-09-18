@@ -89,9 +89,10 @@ data, this code can be used to calculate real results.
 Below, the code first loads the input data, and then passes the input data to the
 [profile_sector_upstream](https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_sector_upstream.html) 
 function (from [tiltIndicatorAfter](https://github.com/2DegreesInvesting/tiltIndicatorAfter)).
-At last, this function calculates the input sector decarbonisation indicator's 
-product and company level results.
+At last, this function calculates the indicator's product and company-level 
+results.
 
+<br>
 
 ```{r}
 # Load input data
@@ -118,6 +119,8 @@ input_sector_decarbonisation_indicator <- profile_sector_upstream(
 )
 ```
 
+<br>
+
 #### Input Sector Decarbonisation Indicator at product level
 
 ```{r}
@@ -127,6 +130,8 @@ input_sector_decarbonisation_indicator_at_product_level <- input_sector_decarbon
 kable(input_sector_decarbonisation_indicator_at_product_level |> head(10), format = "html", escape = FALSE) %>%
   column_spec(1:32, extra_css = "white-space: nowrap;")
 ```
+
+<br>
 
 #### Input Sector Decarbonisation Indicator at company level
 
@@ -138,7 +143,7 @@ kable(input_sector_decarbonisation_indicator_at_company_level |> head(10), forma
   column_spec(1:13, extra_css = "white-space: nowrap;")
 ```
 
-
+<br><br>
 
 ### Input Relative Emission Indicator 
 
@@ -164,9 +169,10 @@ calculate real results.
 Below, the code first loads the input data, and then passes the input data to the
 [profile_emissions_upstream](https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_emissions_upstream.html) 
 function (from [tiltIndicatorAfter](https://github.com/2DegreesInvesting/tiltIndicatorAfter)). 
-At last, this function calculates the input relative emission indicator's product and company 
-level results.
+At last, this function calculates the indicator's product and company-level 
+results.
 
+<br>
 
 ```{r}
 # Load input data
@@ -191,6 +197,8 @@ input_relative_emission_indicator <- profile_emissions_upstream(
 )
 ```
 
+<br>
+
 #### Input Relative Emission Indicator at product level
 
 ```{r}
@@ -200,6 +208,8 @@ input_relative_emission_indicator_at_product_level <- input_relative_emission_in
 kable(input_relative_emission_indicator_at_product_level |> head(10), format = "html", escape = FALSE) %>%
   column_spec(1:31, extra_css = "white-space: nowrap;")
 ```
+
+<br>
 
 #### Input Relative Emission Indicator at company level
 
@@ -211,7 +221,7 @@ kable(input_relative_emission_indicator_at_company_level |> head(10), format = "
   column_spec(1:13, extra_css = "white-space: nowrap;")
 ```
 
-
+<br><br>
 
 ## Supply Chain Analysis
 
