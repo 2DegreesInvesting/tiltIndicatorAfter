@@ -66,7 +66,7 @@
     
     
 <p>This article is a brief documentation of the methodology and tools
-that tilt provides to analyse the inputs of a company and their supply
+that tilt provides to analyse the inputs of a company and its supply
 chain risk.</p>
 <p>The tilt input and supply chain risk analysis is based on the two
 main indicators provided by the tilt methodology and can be either
@@ -90,8 +90,26 @@ please refer to our detailed documentation provided on our online
 platform which you can access via <a href="https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant" class="external-link">this
 link</a>.</p>
 <div class="section level2">
-<h2 id="input-sector-decarbonisation-indicator">Input Sector Decarbonisation Indicator<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator"></a>
+<h2 id="input-analysis">Input Analysis<a class="anchor" aria-label="anchor" href="#input-analysis"></a>
 </h2>
+<p>These two indicators cannot only be applied to the products of a
+company, but also to its inputs, to better understand input-related
+climate impact and risks. For applying it to inputs, we follow the
+following two steps:</p>
+<ol style="list-style-type: decimal">
+<li>We source the input data needed to produce a product in an automated
+way from Ecoinvent, our LCA data provider.</li>
+<li>As a next step, we then apply the indicators to the inputs to
+receive results for the inputs’ relative emission and sector
+decarbonisation indicator.</li>
+<li>We show results on product-level and aggregate them on
+company-level.</li>
+</ol>
+<p>Below, we show the code used to apply these indicators and a more
+detailed description of each input-level indicator:</p>
+<div class="section level3">
+<h3 id="input-sector-decarbonisation-indicator">Input Sector Decarbonisation Indicator<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator"></a>
+</h3>
 <p>The Input Sector Decarbonisation Indicator assesses the transition
 pressure of the input products based on the sector’s decarbonisation
 targets the input product belongs to. This indicator can be aggregated
@@ -119,6 +137,12 @@ ecoinvent are licensed and can therefore not be shown below. Therefore,
 the calculations are based on fake data. If a user has an ecoinvent
 license to access the real data, this code can be used to calculate real
 results.</p>
+<p>Below, the code first loads the input data, and then passes the input
+data to the <a href="https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_sector_upstream.html">profile_sector_upstream</a>
+function (from <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter" class="external-link">tiltIndicatorAfter</a>).
+At last, this function calculates the indicator’s product and
+company-level results.</p>
+<p><br></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load input data</span></span>
 <span><span class="va">sector_companies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_sector_profile_upstream_companies</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -130,7 +154,7 @@ results.</p>
 <span><span class="va">isic_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_isic_name</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ecoinvent_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_inputs</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># `profile_sector_upstream()` creates product and company level outputs for </span></span>
+<span><span class="co"># `profile_sector_upstream()` creates product and company level outputs for</span></span>
 <span><span class="co"># Input Sector Decarbonisation Indicator</span></span>
 <span><span class="va">input_sector_decarbonisation_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/profile_sector_upstream.html">profile_sector_upstream</a></span><span class="op">(</span></span>
 <span>  <span class="va">sector_companies</span>,</span>
@@ -142,15 +166,16 @@ results.</p>
 <span>  ecoinvent_europages <span class="op">=</span> <span class="va">ecoinvent_europages</span>,</span>
 <span>  isic <span class="op">=</span> <span class="va">isic_name</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="input-sector-decarbonisation-indicator-at-product-level">Input Sector Decarbonisation Indicator at product level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-product-level"></a>
-</h3>
+<p><br></p>
+<div class="section level4">
+<h4 id="input-sector-decarbonisation-indicator-at-product-level">Input Sector Decarbonisation Indicator at product level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-product-level"></a>
+</h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_sector_decarbonisation_indicator_at_product_level</span> <span class="op">&lt;-</span> <span class="va">input_sector_decarbonisation_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">kable</span><span class="op">(</span><span class="va">input_sector_decarbonisation_indicator_at_product_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -252,997 +277,998 @@ ei_geography
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.40
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NZ 2050
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 total
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.97
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NZ 2050
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 total
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.40
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NZ 2050
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 total
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.97
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NZ 2050
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 total
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 psychodelic_airedale
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 psychodelic_airedale
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 neustift im stubaital
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 6167
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 neugasteig 76 | 6167 neustift im stubaital
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 distributor
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 psychodelic_airedale
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 psychodelic_airedale
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 neustift im stubaital
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 6167
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 neugasteig 76 | 6167 neustift im stubaital
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 distributor
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
 </tr>
 </tbody>
 </table>
+<p><br></p>
 </div>
-<div class="section level3">
-<h3 id="input-sector-decarbonisation-indicator-at-company-level">Input Sector Decarbonisation Indicator at company level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-company-level"></a>
-</h3>
+<div class="section level4">
+<h4 id="input-sector-decarbonisation-indicator-at-company-level">Input Sector Decarbonisation Indicator at company level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-company-level"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_sector_decarbonisation_indicator_at_company_level</span> <span class="op">&lt;-</span> <span class="va">input_sector_decarbonisation_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">kable</span><span class="op">(</span><span class="va">input_sector_decarbonisation_indicator_at_company_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1287,428 +1313,429 @@ reduction_targets_avg
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.18
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 1.5C RPS
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2050
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.98
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NZ 2050
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.40
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NZ 2050
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 2030
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.40
 </td>
 </tr>
 </tbody>
 </table>
+<p><br><br></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="input-relative-emission-indicator">Input Relative Emission Indicator<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator"></a>
-</h2>
+<div class="section level3">
+<h3 id="input-relative-emission-indicator">Input Relative Emission Indicator<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator"></a>
+</h3>
 <p>The Input Relative Emission Indicator assesses the relative emission
 intensity of the input products based on their relative GHG emission
-footprint in comparison to groups other products (for more information
-on the different groups at disposal, please refer to our detailed
-documentation on our <a href="https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant" class="external-link">online
-platform</a>. Input products with a higher emission intensity also face
+footprint in comparison to groups of other products (for more
+information on the different groups at disposal, please refer to our
+detailed documentation on our <a href="https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant" class="external-link">online
+platform</a>). Input products with a higher emission intensity also face
 a higher risk from climate policy interventions or low-carbon market
 changes. The input products are sourced from the LCA data provider
 Ecoinvent and consist, for example, of resources, packaging materials,
@@ -1718,12 +1745,16 @@ the product.</p>
 emission intensity, they are aggregated at the company-level. We derive
 what percentage of the input products have a high, medium and low
 emission intensity.</p>
-<p>The sample data set below includes inputs and GHG emission footprints
-for each product from Ecoinvent and sectors from Europages. NOTE: GHG
-emission and input data from ecoinvent are licensed and can therefore
-not be shown below. Therefore, the calculations are based on fake data.
-If a user has an ecoinvent license to access the real data, this code
-can be used to calculate real results.</p>
+<p>NOTE: GHG emission and input data from ecoinvent are licensed and can
+therefore not be shown below. Therefore, the calculations are based on
+fake data. If a user has an ecoinvent license to access the real data,
+this code can be used to calculate real results.</p>
+<p>Below, the code first loads the input data, and then passes the input
+data to the <a href="https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_emissions_upstream.html">profile_emissions_upstream</a>
+function (from <a href="https://github.com/2DegreesInvesting/tiltIndicatorAfter" class="external-link">tiltIndicatorAfter</a>).
+At last, this function calculates the indicator’s product and
+company-level results.</p>
+<p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load input data</span></span>
 <span><span class="va">emissions_companies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_emissions_profile_any_companies</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -1734,8 +1765,8 @@ can be used to calculate real results.</p>
 <span><span class="va">isic_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_isic_name</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ecoinvent_inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://2degreesinvesting.github.io/tiltToyData/reference/toy_files.html" class="external-link">toy_ecoinvent_inputs</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># `profile_emissions_upstream()` creates product and company level outputs for </span></span>
-<span><span class="co"># Input Relative Emission Indicator </span></span>
+<span><span class="co"># `profile_emissions_upstream()` creates product and company level outputs for</span></span>
+<span><span class="co"># Input Relative Emission Indicator</span></span>
 <span><span class="va">input_relative_emission_indicator</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/profile_emissions_upstream.html">profile_emissions_upstream</a></span><span class="op">(</span></span>
 <span>  <span class="va">emissions_companies</span>,</span>
 <span>  <span class="va">emission_inputs</span>,</span>
@@ -1745,15 +1776,16 @@ can be used to calculate real results.</p>
 <span>  ecoinvent_europages <span class="op">=</span> <span class="va">ecoinvent_europages</span>,</span>
 <span>  isic <span class="op">=</span> <span class="va">isic_name</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="input-relative-emission-indicator-at-product-level">Input Relative Emission Indicator at product level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-product-level"></a>
-</h3>
+<p><br></p>
+<div class="section level4">
+<h4 id="input-relative-emission-indicator-at-product-level">Input Relative Emission Indicator at product level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-product-level"></a>
+</h4>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_relative_emission_indicator_at_product_level</span> <span class="op">&lt;-</span> <span class="va">input_relative_emission_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_product</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">kable</span><span class="op">(</span><span class="va">input_relative_emission_indicator_at_product_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">31</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">31</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1852,967 +1884,968 @@ co2e_upper
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 all
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.9375
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 -0.0161997
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 8.766183e+08
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 295.1030659
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 5.780160e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_tilt_subsector
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 -82.9665824
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 5.177974e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_unit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 183.1011401
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 4.507805e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_unit_input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 -127.5366357
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 5.577096e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_unit_input_tilt_subsector
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tent
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 49.0916694
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 7.352646e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 all
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.9375
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 -0.0161997
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 8.766183e+08
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 295.1030659
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 5.780160e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_tilt_subsector
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 -82.9665824
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 5.177974e+02
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 skarn_gallinule
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_unit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 sheds, construction site
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 market for shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 FALSE
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 shed, large, wood, non-insulated, fire-unprotected
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 m2
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 construction residential
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 ‘4100’
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 Construction of buildings
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 2355
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 iz nö-süd, strasse 14, objekt 15 | 2355 wiener neudorf
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 76269c17-78d6-420b-991a-aa38c51b45b7
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_land
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 10
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 tilt_world
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 44e5e288-4f81-40d0-88b4-e79eaea6574c
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 183.1011401
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 4.507805e+02
 </td>
 </tr>
 </tbody>
 </table>
+<p><br></p>
 </div>
-<div class="section level3">
-<h3 id="input-relative-emission-indicator-at-company-level">Input Relative Emission Indicator at company level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-company-level"></a>
-</h3>
+<div class="section level4">
+<h4 id="input-relative-emission-indicator-at-company-level">Input Relative Emission Indicator at company level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-company-level"></a>
+</h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_relative_emission_indicator_at_company_level</span> <span class="op">&lt;-</span> <span class="va">input_relative_emission_indicator</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tiltIndicator/man/unnest_product.html" class="external-link">unnest_company</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">kable</span><span class="op">(</span><span class="va">input_relative_emission_indicator_at_company_level</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"html"</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">column_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, width <span class="op">=</span> <span class="st">"auto"</span>, extra_css <span class="op">=</span> <span class="st">"white-space: nowrap;"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -2857,417 +2890,419 @@ co2_avg
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 all
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.9375
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 all
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.9375
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 all
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.9375
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 all
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0.9375
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 NA
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_isic_4digit
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 high
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_tilt_subsector
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 asteria_megalotomusquinquespinosus
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 austria
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 0
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 medium
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 input_tilt_subsector
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 low
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 3150
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 fleschplatz 2, top 5 | 3150 wilhelmsburg
 </td>
-<td style="text-align:left;white-space: nowrap;">
+<td style="text-align:left;width: auto; white-space: nowrap;">
 wholesaler
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 1.0000
 </td>
-<td style="text-align:right;white-space: nowrap;">
+<td style="text-align:right;width: auto; white-space: nowrap;">
 297.75
 </td>
 </tr>
 </tbody>
 </table>
+<p><br><br></p>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -3287,8 +3322,11 @@ on the collected information.</li>
 <li>Then, we show the results in a heatmap to show insights on the
 suppliers’ climate impact and risks at one glance.</li>
 </ol>
-<p>Below, we show the code used to apply the relative emission indicator
-to an example set of suppliers.</p>
+<p>Below, we show the heatmap after applying the relative emission
+indicator to an example set of suppliers.</p>
+<p><img src="../../../../_temp/Library/tiltIndicatorAfter/extdata/heatmap.png" style="display: block; margin: auto;"></p>
+<p>Please check out the <a href="https://github.com/2DegreesInvesting/tiltHeatmap#supply-chain-analysis-based-on-input-data" class="external-link">documentation</a>
+for creating the above heatmap.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
