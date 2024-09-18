@@ -128,8 +128,8 @@ input_sector_decarbonisation_indicator_at_product_level <- input_sector_decarbon
   unnest_product()
 
 kable(input_sector_decarbonisation_indicator_at_product_level |> head(10), format = "html", escape = FALSE) |>
-  kable_styling(full_width = FALSE) |>
-  column_spec(1:32, width = "auto", extra_css = "white-space: nowrap;")
+  column_spec(1:32, width = "auto", extra_css = "white-space: nowrap;") |>
+  row_spec(0, extra_css = "white-space: nowrap;")
 ```
 
 <br>
@@ -141,8 +141,8 @@ input_sector_decarbonisation_indicator_at_company_level <- input_sector_decarbon
   unnest_company()
 
 kable(input_sector_decarbonisation_indicator_at_company_level |> head(10), format = "html", escape = FALSE) |>
-  kable_styling(full_width = FALSE) |>
-  column_spec(1:13, width = "auto", extra_css = "white-space: nowrap;")
+  column_spec(1:13, width = "auto", extra_css = "white-space: nowrap;") |>
+  row_spec(0, extra_css = "white-space: nowrap;")
 ```
 
 <br><br>
@@ -208,8 +208,8 @@ input_relative_emission_indicator_at_product_level <- input_relative_emission_in
   unnest_product()
 
 kable(input_relative_emission_indicator_at_product_level |> head(10), format = "html", escape = FALSE) |>
-  kable_styling(full_width = FALSE) |>
-  column_spec(1:31, width = "auto", extra_css = "white-space: nowrap;")
+  column_spec(1:31, width = "auto", extra_css = "white-space: nowrap;") |>
+  row_spec(0, extra_css = "white-space: nowrap;")
 ```
 
 <br>
@@ -221,8 +221,8 @@ input_relative_emission_indicator_at_company_level <- input_relative_emission_in
   unnest_company()
 
 kable(input_relative_emission_indicator_at_company_level |> head(10), format = "html", escape = FALSE) |>
-  kable_styling(full_width = FALSE) |>
-  column_spec(1:13, width = "auto", extra_css = "white-space: nowrap;")
+  column_spec(1:13, width = "auto", extra_css = "white-space: nowrap;") |>
+  row_spec(0, extra_css = "white-space: nowrap;")
 ```
 
 <br><br>
