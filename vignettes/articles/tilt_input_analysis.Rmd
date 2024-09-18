@@ -9,8 +9,17 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r setup, warning=FALSE, echo = FALSE, message=FALSE}
+library(tiltIndicatorAfter)
+library(tiltToyData)
+library(readr)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+options(readr.show_col_types = FALSE)
+```
 This article is a brief documentation of the methodology and tools that tilt 
-provides to analyse the inputs of a company and their supply chain risk. 
+provides to analyse the inputs of a company and its supply chain risk. 
 
 The tilt input and supply chain risk analysis is based on the two main 
 indicators provided by the tilt methodology and can be either applied to the 
@@ -32,17 +41,22 @@ For more details on the methodology of these two indicators, please refer to our
 detailed documentation provided on our online platform which you can access via
 [this link](https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant).
 
-```{r setup, warning=FALSE, echo = FALSE, message=FALSE}
-library(tiltIndicatorAfter)
-library(tiltToyData)
-library(readr)
-library(dplyr)
-library(knitr)
-library(kableExtra)
-options(readr.show_col_types = FALSE)
-```
+## Input Analysis
 
-## Input Sector Decarbonisation Indicator
+These two indicators cannot only be applied to the products of a company, but 
+also to its inputs, to better understand input-related climate impact and risks. 
+For applying it to inputs, we follow the following two steps:
+
+1. We source the input data needed to produce a product in an automated way from 
+  Ecoinvent, our LCA data provider. 
+2. As a next step, we then apply the indicators to the inputs to receive results 
+  for the inputs’ relative emission and sector decarbonisation indicator. 
+3. We show results on product-level and aggregate them on company-level.
+
+Below, we show the code used to apply these indicators and a more detailed 
+description of each input-level indicator: 
+
+### Input Sector Decarbonisation Indicator
 
 The Input Sector Decarbonisation Indicator assesses the transition pressure of 
 the input products based on the sector's decarbonisation targets the input 
@@ -72,6 +86,12 @@ are licensed and can therefore not be shown below. Therefore, the calculations
 are based on fake data. If a user has an ecoinvent license to access the real 
 data, this code can be used to calculate real results.
 
+Below, the code first loads the input data, and then passes the input data to the
+[profile_sector_upstream](https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_sector_upstream.html) 
+function (from [tiltIndicatorAfter](https://github.com/2DegreesInvesting/tiltIndicatorAfter)).
+At last, this function calculates the input sector decarbonisation indicator's 
+product and company level results.
+
 
 ```{r}
 # Load input data
@@ -84,7 +104,7 @@ ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 isic_name <- read_csv(toy_isic_name())
 ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
 
-# `profile_sector_upstream()` creates product and company level outputs for 
+# `profile_sector_upstream()` creates product and company level outputs for
 # Input Sector Decarbonisation Indicator
 input_sector_decarbonisation_indicator <- profile_sector_upstream(
   sector_companies,
@@ -98,7 +118,7 @@ input_sector_decarbonisation_indicator <- profile_sector_upstream(
 )
 ```
 
-### Input Sector Decarbonisation Indicator at product level
+#### Input Sector Decarbonisation Indicator at product level
 
 ```{r}
 input_sector_decarbonisation_indicator_at_product_level <- input_sector_decarbonisation_indicator |>
@@ -108,7 +128,7 @@ kable(input_sector_decarbonisation_indicator_at_product_level |> head(10), forma
   column_spec(1:32, extra_css = "white-space: nowrap;")
 ```
 
-### Input Sector Decarbonisation Indicator at company level
+#### Input Sector Decarbonisation Indicator at company level
 
 ```{r}
 input_sector_decarbonisation_indicator_at_company_level <- input_sector_decarbonisation_indicator |>
@@ -118,15 +138,17 @@ kable(input_sector_decarbonisation_indicator_at_company_level |> head(10), forma
   column_spec(1:13, extra_css = "white-space: nowrap;")
 ```
 
-## Input Relative Emission Indicator 
+
+
+### Input Relative Emission Indicator 
 
 The Input Relative Emission Indicator assesses the relative emission intensity 
 of the input products based on their relative GHG emission footprint in 
-comparison to groups other products (for more information on the different 
-groups at disposal, please refer to our detailed documentation on our [online platform](https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant). Input 
-products with a higher emission intensity also face a higher risk from climate 
-policy interventions or low-carbon market changes. The input products are 
-sourced from the LCA data provider Ecoinvent and consist, for example, of 
+comparison to groups of other products (for more information on the different 
+groups at disposal, please refer to our detailed documentation on our [online platform](https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant)). 
+Input products with a higher emission intensity also face a higher risk from 
+climate policy interventions or low-carbon market changes. The input products 
+are sourced from the LCA data provider Ecoinvent and consist, for example, of 
 resources, packaging materials, energy and enabling services (such as tractor 
 use on farm) to produce the product.
 
@@ -134,11 +156,17 @@ After assessing the input products' climate impact based on their emission
 intensity, they are aggregated at the company-level. We derive what percentage 
 of the input products have a high, medium and low emission intensity.
 
-The sample data set below includes inputs and GHG emission footprints for each 
-product from Ecoinvent and sectors from Europages. NOTE: GHG emission and input 
-data from ecoinvent are licensed and can therefore not be shown below. 
-Therefore, the calculations are based on fake data. If a user has an ecoinvent 
-license to access the real data, this code can be used to calculate real results. 
+NOTE: GHG emission and input data from ecoinvent are licensed and can therefore 
+not be shown below. Therefore, the calculations are based on fake data. If a user 
+has an ecoinvent license to access the real data, this code can be used to 
+calculate real results. 
+
+Below, the code first loads the input data, and then passes the input data to the
+[profile_emissions_upstream](https://2degreesinvesting.github.io/tiltIndicatorAfter/reference/profile_emissions_upstream.html) 
+function (from [tiltIndicatorAfter](https://github.com/2DegreesInvesting/tiltIndicatorAfter)). 
+At last, this function calculates the input relative emission indicator's product and company 
+level results.
+
 
 ```{r}
 # Load input data
@@ -150,8 +178,8 @@ ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
 isic_name <- read_csv(toy_isic_name())
 ecoinvent_inputs <- read_csv(toy_ecoinvent_inputs())
 
-# `profile_emissions_upstream()` creates product and company level outputs for 
-# Input Relative Emission Indicator 
+# `profile_emissions_upstream()` creates product and company level outputs for
+# Input Relative Emission Indicator
 input_relative_emission_indicator <- profile_emissions_upstream(
   emissions_companies,
   emission_inputs,
@@ -163,7 +191,7 @@ input_relative_emission_indicator <- profile_emissions_upstream(
 )
 ```
 
-### Input Relative Emission Indicator at product level
+#### Input Relative Emission Indicator at product level
 
 ```{r}
 input_relative_emission_indicator_at_product_level <- input_relative_emission_indicator |>
@@ -173,7 +201,7 @@ kable(input_relative_emission_indicator_at_product_level |> head(10), format = "
   column_spec(1:31, extra_css = "white-space: nowrap;")
 ```
 
-### Input Relative Emission Indicator at company level
+#### Input Relative Emission Indicator at company level
 
 ```{r}
 input_relative_emission_indicator_at_company_level <- input_relative_emission_indicator |>
@@ -182,6 +210,8 @@ input_relative_emission_indicator_at_company_level <- input_relative_emission_in
 kable(input_relative_emission_indicator_at_company_level |> head(10), format = "html", escape = FALSE) %>%
   column_spec(1:13, extra_css = "white-space: nowrap;")
 ```
+
+
 
 ## Supply Chain Analysis
 
@@ -201,9 +231,11 @@ suppliers, the following approach is used in our Supply Chain Risk Model:
 Below, we show the heatmap after applying the relative emission indicator to an 
 example set of suppliers. 
 
+
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics(system.file("extdata", "heatmap.png", package = "tiltIndicatorAfter")) 
+knitr::include_graphics(system.file("extdata", "heatmap.png", package = "tiltIndicatorAfter"))
 ```
+
 
 Please check out the [documentation](https://github.com/2DegreesInvesting/tiltHeatmap#supply-chain-analysis-based-on-input-data) 
 for creating the above heatmap.
