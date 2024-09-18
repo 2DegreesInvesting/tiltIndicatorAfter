@@ -243,9 +243,8 @@ example set of suppliers.
 
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics(system.file("extdata", "heatmap.png", package = "tiltIndicatorAfter"))
+knitr::include_graphics("heatmap.png")
 ```
-
 
 Please check out the [documentation](https://github.com/2DegreesInvesting/tiltHeatmap#supply-chain-analysis-based-on-input-data) 
 for creating the above heatmap.
