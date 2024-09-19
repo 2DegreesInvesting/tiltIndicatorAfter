@@ -90,7 +90,7 @@ please refer to our detailed documentation provided on our online
 platform which you can access via <a href="https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant" class="external-link">this
 link</a>.</p>
 <div class="section level2">
-<h2 id="input-analysis">Input Analysis<a class="anchor" aria-label="anchor" href="#input-analysis"></a>
+<h2 id="input-analysis">1 Input Analysis<a class="anchor" aria-label="anchor" href="#input-analysis"></a>
 </h2>
 <p>These two indicators cannot only be applied to the products of a
 company, but also to its inputs, to better understand input-related
@@ -108,7 +108,7 @@ company-level.</li>
 <p>Below, we show the code used to apply these indicators and a more
 detailed description of each input-level indicator:</p>
 <div class="section level3">
-<h3 id="input-sector-decarbonisation-indicator">Input Sector Decarbonisation Indicator<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator"></a>
+<h3 id="input-sector-decarbonisation-indicator">1.1 Input Sector Decarbonisation Indicator<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator"></a>
 </h3>
 <p>The Input Sector Decarbonisation Indicator assesses the transition
 pressure of the input products based on the sector’s decarbonisation
@@ -168,7 +168,7 @@ company-level results.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <div class="section level4">
-<h4 id="input-sector-decarbonisation-indicator-at-product-level">Input Sector Decarbonisation Indicator at product level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-product-level"></a>
+<h4 id="input-sector-decarbonisation-indicator-at-product-level">1.1.1 Input Sector Decarbonisation Indicator at product level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-product-level"></a>
 </h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_sector_decarbonisation_indicator_at_product_level</span> <span class="op">&lt;-</span> <span class="va">input_sector_decarbonisation_indicator</span> <span class="op">|&gt;</span></span>
@@ -1262,7 +1262,7 @@ tilt_world
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="input-sector-decarbonisation-indicator-at-company-level">Input Sector Decarbonisation Indicator at company level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-company-level"></a>
+<h4 id="input-sector-decarbonisation-indicator-at-company-level">1.1.2 Input Sector Decarbonisation Indicator at company level<a class="anchor" aria-label="anchor" href="#input-sector-decarbonisation-indicator-at-company-level"></a>
 </h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_sector_decarbonisation_indicator_at_company_level</span> <span class="op">&lt;-</span> <span class="va">input_sector_decarbonisation_indicator</span> <span class="op">|&gt;</span></span>
@@ -1730,7 +1730,7 @@ wholesaler
 </div>
 </div>
 <div class="section level3">
-<h3 id="input-relative-emission-indicator">Input Relative Emission Indicator<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator"></a>
+<h3 id="input-relative-emission-indicator">1.2 Input Relative Emission Indicator<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator"></a>
 </h3>
 <p>The Input Relative Emission Indicator assesses the relative emission
 intensity of the input products based on their relative GHG emission
@@ -1780,7 +1780,7 @@ company-level results.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <div class="section level4">
-<h4 id="input-relative-emission-indicator-at-product-level">Input Relative Emission Indicator at product level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-product-level"></a>
+<h4 id="input-relative-emission-indicator-at-product-level">1.2.1 Input Relative Emission Indicator at product level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-product-level"></a>
 </h4>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_relative_emission_indicator_at_product_level</span> <span class="op">&lt;-</span> <span class="va">input_relative_emission_indicator</span> <span class="op">|&gt;</span></span>
@@ -2841,7 +2841,7 @@ tilt_world
 <p><br></p>
 </div>
 <div class="section level4">
-<h4 id="input-relative-emission-indicator-at-company-level">Input Relative Emission Indicator at company level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-company-level"></a>
+<h4 id="input-relative-emission-indicator-at-company-level">1.2.2 Input Relative Emission Indicator at company level<a class="anchor" aria-label="anchor" href="#input-relative-emission-indicator-at-company-level"></a>
 </h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_relative_emission_indicator_at_company_level</span> <span class="op">&lt;-</span> <span class="va">input_relative_emission_indicator</span> <span class="op">|&gt;</span></span>
@@ -3310,7 +3310,7 @@ wholesaler
 </div>
 </div>
 <div class="section level2">
-<h2 id="supply-chain-analysis">Supply Chain Analysis<a class="anchor" aria-label="anchor" href="#supply-chain-analysis"></a>
+<h2 id="supply-chain-analysis">2 Supply Chain Analysis<a class="anchor" aria-label="anchor" href="#supply-chain-analysis"></a>
 </h2>
 <p>In addition to the input-level analysis, the tilt methodology can
 also be applied to the supply chain of a company, to better understand
@@ -3343,7 +3343,7 @@ for creating the above heatmap.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
