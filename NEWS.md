@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9060 (2024-09-19)
+
+* Add article `Input and Supply Chain Analysis Model` (#309).
+
 # tiltIndicatorAfter 0.0.0.9059 (2024-09-09)
 
 * `transition_risk_profile()` incorporates the following changes:
