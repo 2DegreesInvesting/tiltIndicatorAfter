@@ -42,7 +42,7 @@ For more details on the methodology of these two indicators, please refer to our
 detailed documentation provided on our online platform which you can access via
 [this link](https://www.tiltsmes.org/tilt-under-the-cb-pastax-grant).
 
-## 1. Input Analysis
+## 1 Input Analysis
 
 These two indicators cannot only be applied to the products of a company, but 
 also to its inputs, to better understand input-related climate impact and risks. 
@@ -228,7 +228,7 @@ kable(input_relative_emission_indicator_at_company_level |> head(10), format = "
 
 <br><br>
 
-## 2. Supply Chain Analysis
+## 2 Supply Chain Analysis
 
 In addition to the input-level analysis, the tilt methodology can also be 
 applied to the supply chain of a company, to better understand the supply 
