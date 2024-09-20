@@ -3,9 +3,7 @@ best_case_worst_case_avg_reduction_targets <- function(data) {
     unnest_product()
 
   avg_best_case_worst_case_at_product_level <- product |>
-    prepare_for_join_at_company_level_reduction_targets() |>
-    rename("avg_reduction_targets_best_case" = "sector_profile_best_case",
-           "avg_reduction_targets_worst_case" = "sector_profile_worst_case")
+    prepare_for_join_at_company_level_reduction_targets()
 
   avg_best_case <- prepare_avg_best_case_join_table_reduction_targets(
     avg_best_case_worst_case_at_product_level
@@ -39,7 +37,9 @@ prepare_for_join_at_company_level_reduction_targets <- function(data) {
       "sector_profile_best_case",
       "sector_profile_worst_case"
     ))) |>
-    distinct()
+    distinct() |>
+    rename("avg_reduction_targets_best_case" = "sector_profile_best_case",
+           "avg_reduction_targets_worst_case" = "sector_profile_worst_case")
 }
 
 prepare_avg_worst_case_join_table_reduction_targets <- function(data) {

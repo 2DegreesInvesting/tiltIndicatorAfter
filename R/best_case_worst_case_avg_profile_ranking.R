@@ -3,9 +3,7 @@ best_case_worst_case_avg_profile_ranking <- function(data) {
     unnest_product()
 
   avg_best_case_worst_case_at_product_level <- product |>
-    prepare_for_join_at_company_level_profile_ranking() |>
-    rename("avg_profile_ranking_best_case" = "emissions_profile_best_case",
-           "avg_profile_ranking_worst_case" = "emissions_profile_worst_case")
+    prepare_for_join_at_company_level_profile_ranking()
 
   avg_best_case <- prepare_avg_best_case_join_table_profile_ranking(
     avg_best_case_worst_case_at_product_level
@@ -36,7 +34,9 @@ prepare_for_join_at_company_level_profile_ranking <- function(data) {
       "emissions_profile_best_case",
       "emissions_profile_worst_case"
     ))) |>
-    distinct()
+    distinct() |>
+    rename("avg_profile_ranking_best_case" = "emissions_profile_best_case",
+           "avg_profile_ranking_worst_case" = "emissions_profile_worst_case")
 }
 
 prepare_avg_worst_case_join_table_profile_ranking <- function(data) {

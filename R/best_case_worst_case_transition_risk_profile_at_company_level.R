@@ -3,9 +3,7 @@ best_case_worst_case_transition_risk_profile_at_company_level <- function(data) 
     unnest_product()
 
   avg_best_case_worst_case_at_product_level <- product |>
-    prepare_for_join_at_company_level_transition_risk() |>
-    rename("avg_transition_risk_best_case" = "transition_risk_profile_best_case",
-           "avg_transition_risk_worst_case" = "transition_risk_profile_worst_case")
+    prepare_for_join_at_company_level_transition_risk()
 
   avg_best_case <- prepare_avg_best_case_join_table_transition_risk(
     avg_best_case_worst_case_at_product_level
@@ -35,7 +33,9 @@ prepare_for_join_at_company_level_transition_risk <- function(data) {
       "transition_risk_profile_best_case",
       "transition_risk_profile_worst_case"
     ))) |>
-    distinct()
+    distinct() |>
+    rename("avg_transition_risk_best_case" = "transition_risk_profile_best_case",
+           "avg_transition_risk_worst_case" = "transition_risk_profile_worst_case")
 }
 
 prepare_avg_worst_case_join_table_transition_risk <- function(data) {
