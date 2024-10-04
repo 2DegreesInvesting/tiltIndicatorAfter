@@ -33,7 +33,7 @@ test_that("rename_118() function is applied if issue #118 is addressed", {
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(1)
   isic_name <- read_csv(toy_isic_name()) |> head(1)
 
-  result <- profile_sector(
+  result <- profile_sector_impl(
     companies,
     scenarios,
     europages_companies = europages_companies,
@@ -58,7 +58,7 @@ test_that("rename_118() function is not applied if issue #118 is not addressed",
   ecoinvent_europages <- read_csv(toy_ecoinvent_europages()) |> head(1)
   isic_name <- read_csv(toy_isic_name()) |> head(1)
 
-  result <- profile_sector(
+  result <- profile_sector_impl(
     companies,
     scenarios,
     europages_companies = europages_companies,
