@@ -31,7 +31,8 @@ system.time(toy_sector_profile_output())
 }
 \seealso{
 Other toy outputs: 
-\code{\link{toy_profile_emissions_impl_output}()}
+\code{\link{toy_profile_emissions_impl_output}()},
+\code{\link{toy_profile_sector_impl_output}()}
 }
 \concept{toy outputs}
 \keyword{internal}

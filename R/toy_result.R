@@ -98,3 +98,25 @@ toy_profile_emissions_impl_output <- function() {
     )
   )
 }
+
+#' Toy output of `profile_sector_impl()`
+#' @export
+#' @keywords internal
+#' @family toy outputs
+#'
+#' @examples
+#'
+#' toy_profile_sector_impl_output()
+toy_profile_sector_impl_output <- function() {
+  toy_output(
+    profile_sector_impl,
+    list(
+      toy_sector_profile_companies(),
+      toy_sector_profile_any_scenarios(),
+      toy_europages_companies(),
+      toy_ecoinvent_activities(),
+      toy_ecoinvent_europages(),
+      toy_isic_name()
+    )
+  )
+}

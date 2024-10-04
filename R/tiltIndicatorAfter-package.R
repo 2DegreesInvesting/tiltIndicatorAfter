@@ -34,6 +34,7 @@
 #' @importFrom rlang :=
 #' @importFrom rlang .data
 #' @importFrom rlang abort
+#' @importFrom rlang as_name
 #' @importFrom rlang ensym
 #' @importFrom rlang exec
 #' @importFrom stats na.omit
