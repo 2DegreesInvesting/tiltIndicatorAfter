@@ -28,7 +28,7 @@ add_min_or_max_rank_per_company_benchmark <- function(data,
                                                       col_rank,
                                                       agg_func = min) {
   mutate(data,
-    {{ rank_per_company_benchmark }} := ifelse(is.na(unique(.data[[col_rank]])),
+    {{ rank_per_company_benchmark }} := ifelse(is.na(.data[[col_rank]]),
       NA_real_,
       agg_func(.data[[col_rank]], na.rm = TRUE)
     ),
