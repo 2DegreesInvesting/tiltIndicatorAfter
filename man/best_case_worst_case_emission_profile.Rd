@@ -7,7 +7,7 @@
 best_case_worst_case_emission_profile(data)
 }
 \arguments{
-\item{data}{Dataframe. Emissions profile product level output}
+\item{data}{Dataframe. Emissions profile nested output}
 }
 \value{
 A dataframe
@@ -16,8 +16,8 @@ A dataframe
 Calculates best case and worst case for emission profile at product level
 }
 \examples{
-product <- unnest_product(toy_profile_emissions_impl_output())
+out <- toy_profile_emissions_impl_output()
 
-product |> best_case_worst_case_emission_profile()
+out |> best_case_worst_case_emission_profile()
 }
 \keyword{internal}

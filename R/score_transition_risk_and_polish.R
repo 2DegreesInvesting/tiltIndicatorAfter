@@ -116,7 +116,10 @@ score_transition_risk_and_polish <- function(emissions_profile,
         "reduction_targets",
         "tilt_sector",
         "tilt_subsector",
-        "isic_4digit"
+        "isic_4digit",
+        "sector_profile_best_case",
+        "sector_profile_worst_case",
+        "sector_profile_equal_weight"
       )
     )
 

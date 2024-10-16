@@ -19,7 +19,8 @@ profile_sector <- function(companies,
     isic_tilt = isic_tilt,
     low_threshold = low_threshold,
     high_threshold = high_threshold
-  )
+  ) |>
+    best_case_worst_case_sector_profile()
 }
 
 #' @rdname profile_impl
