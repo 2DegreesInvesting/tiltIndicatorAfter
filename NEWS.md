@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tiltIndicatorAfter 0.0.0.9061 (2024-10-16)
+
+* Enhance best case and worst case methodology at both product and company level (#320).
+
 # tiltIndicatorAfter 0.0.0.9060 (2024-09-19)
 
 * Add article `Input and Supply Chain Analysis Model` (#309).
