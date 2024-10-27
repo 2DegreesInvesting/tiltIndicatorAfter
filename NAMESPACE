@@ -2,8 +2,6 @@
 
 export(best_case_worst_case_emission_profile)
 export(best_case_worst_case_sector_profile)
-export(example_emissions_profile_at_product_level)
-export(example_sector_profile_at_product_level)
 export(profile_emissions)
 export(profile_emissions_impl)
 export(profile_emissions_upstream)
