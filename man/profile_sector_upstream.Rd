@@ -116,14 +116,11 @@ options(restore)
 }
 \seealso{
 Other top-level functions: 
-\code{\link{profile_emissions}()},
-\code{\link{score_transition_risk}()},
-\code{\link{transition_risk_profile}()}
+\code{\link{profile_emissions}()}
 
 Other profile functions: 
 \code{\link{profile_emissions}()},
-\code{\link{profile_emissions_impl}()},
-\code{\link{transition_risk_profile}()}
+\code{\link{profile_emissions_impl}()}
 }
 \concept{profile functions}
 \concept{top-level functions}
