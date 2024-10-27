@@ -1,3 +1,11 @@
+#' Calculate preliminary best case worst case results
+#'
+#' @param data Dataframe.
+#' @param col_group_by Dataframe column.
+#' @param col_risk Dataframe column.
+#' @param col_rank Dataframe column.
+#' @keywords internal
+#' @export
 best_case_worst_case_impl <- function(data, col_group_by, col_risk, col_rank) {
   data |>
     compute_n_distinct_products() |>
