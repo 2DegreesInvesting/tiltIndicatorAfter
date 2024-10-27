@@ -35,9 +35,7 @@ Imports:
     tidyselect,
     tiltAddCO2 (>= 0.0.0.9000),
     tiltIndicator (>= 0.0.0.9094),
-    tiltPolish (>= 0.0.0.9006),
     tiltToyData (>= 0.0.0.9002),
-    tiltTransitionRisk (>= 0.0.0.9003),
     utils,
     withr
 Suggests: 
@@ -50,9 +48,7 @@ VignetteBuilder:
 Remotes: 
     2DegreesInvesting/tiltAddCO2,
     2DegreesInvesting/tiltIndicator,
-    2degreesinvesting/tiltPolish,
-    2degreesinvesting/tiltToyData,
-    2degreesinvesting/tiltTransitionRisk
+    2degreesinvesting/tiltToyData
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

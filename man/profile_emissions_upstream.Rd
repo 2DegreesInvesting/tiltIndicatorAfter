@@ -117,14 +117,11 @@ options(restore)
 }
 \seealso{
 Other top-level functions: 
-\code{\link{profile_sector}()},
-\code{\link{score_transition_risk}()},
-\code{\link{transition_risk_profile}()}
+\code{\link{profile_sector}()}
 
 Other profile functions: 
 \code{\link{profile_emissions_impl}()},
-\code{\link{profile_sector}()},
-\code{\link{transition_risk_profile}()}
+\code{\link{profile_sector}()}
 }
 \concept{profile functions}
 \concept{top-level functions}
