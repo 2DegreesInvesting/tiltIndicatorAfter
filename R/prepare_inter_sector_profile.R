@@ -8,6 +8,5 @@ prepare_inter_sector_profile <- function(sp_prod, europages_companies, ecoinvent
     left_join(ecoinvent_activities, by = "activity_uuid_product_uuid") |>
     left_join(ecoinvent_europages, by = c("country", "main_activity", "clustered", "activity_uuid_product_uuid")) |>
     left_join(isic, by = "isic_4digit") |>
-    add_avg_matching_certainty("completion") |>
-    exclude_rows("risk_category")
+    add_avg_matching_certainty("completion")
 }
