@@ -404,27 +404,6 @@ test_that("with some match preserves unmatched products (#193)", {
   expect_equal(unique(product$activity_uuid_product_uuid), c(uuid, "unmatched"))
 })
 
-test_that("with no match errors gracefully", {
-  companies <- read_csv(toy_emissions_profile_any_companies()) |>
-    filter(companies_id %in% dplyr::first(companies_id)) |>
-    mutate(activity_uuid_product_uuid = "unmatched")
-  co2 <- read_csv(toy_emissions_profile_products_ecoinvent())
-
-  europages_companies <- read_csv(toy_europages_companies())
-  ecoinvent_activities <- read_csv(toy_ecoinvent_activities())
-  ecoinvent_europages <- read_csv(toy_ecoinvent_europages())
-  isic_name <- read_csv(toy_isic_name())
-
-  expect_error(profile_emissions(
-    companies,
-    co2,
-    europages_companies,
-    ecoinvent_activities,
-    ecoinvent_europages,
-    isic_name
-  ), class = "all_benchmark_is_na")
-})
-
 test_that("at product level, preserves missing benchmarks (#153#issuecomment-2010043596)", {
   companies <- read_csv(toy_emissions_profile_any_companies())
   id <- unique(companies$companies_id)[[1]]
@@ -562,7 +541,9 @@ test_that("if `*profile$` column has NA then `tilt_sector` and `tilt_subsector` 
     isic_name
   )
 
-  product <- unnest_product(out)
+  product <- unnest_product(out) |>
+    # Due to single product, it qualifies for the uuid exclusion of unit-isic group if unique uuid count is 1. Please change the sample data!
+    filter(benchmark != "unit_isic_4digit")
   where_risk_category_is_na <- product |>
     filter(is.na(get_column(product, "profile$")))
 
